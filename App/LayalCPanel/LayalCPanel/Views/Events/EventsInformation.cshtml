@@ -1,0 +1,241 @@
+﻿@{
+    ViewBag.Title = Token.EventInformation;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    UsersPrivilegeVM
+     Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.Events);
+
+}
+
+<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" ng-controller="eventsCtrl">
+    <!-- begin:: Subheader -->
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <span class="kt-subheader__separator kt-hidden"></span>
+            <div class="kt-subheader__breadcrumbs">
+                <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link"> @Token.HomePage </a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="~/Events" class="kt-subheader__breadcrumbs-link"> @Token.Events </a>
+
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" ng-if="event.State!=state.update">@Token.AddNewEvent</a>
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" ng-if="event.State==state.update">@Token.UpdateEvent</a>
+
+                <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+            </div>
+        </div>
+
+    </div>
+    <!-- end:: Subheader -->
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--AddEvent-->
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <span class="kt-portlet__head-icon">
+                                <i class="kt-font-brand flaticon-add"></i>
+                            </span>
+                            <h3 class="kt-portlet__head-title" >@Token.EventInformation</h3>
+                        </div>
+
+                    </div>
+                    <!--AddEvent Form-->
+                    <form novalidate name="eventFrm" class="kt-form kt-form--label-right" ng-submit="saveChange(eventFrm,Event)">
+                        <div class="kt-portlet__body">
+                            <!--R O W 1-->
+                            <div class="form-group  row">
+                                <!--Package-->
+                                <label class="col-form-label col-lg-2">@Token.Package</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text"
+                                           class="form-control input-disabled"
+                                           ng-model="event.Package.PackageName"
+                                           ng-disabled="true" />
+                                </div>
+
+                                <!--IsClinetCustomLogo-->
+                                <label class="col-form-label col-lg-2">@Token.IsClinetCustomLogo</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                        <label>
+                                            <input type="checkbox" checked="checked" ng-model="event.IsClinetCustomLogo" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty" ng-disabled="true">
+                                            <span></span>
+                                        </label>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!--R O W 2-->
+                            <div class="form-group  row" ng-if="event.IsClinetCustomLogo">
+                                <!--IsLogoAr-->
+                                <label class="col-form-label col-lg-2">@Token.IsLogoAr</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                        <label>
+                                            <input type="checkbox" checked="checked" ng-model="event.IsLogoAr" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty" ng-disabled="true">
+                                            <span></span>
+                                        </label>
+                                    </span>
+                                </div>
+
+                                <!--Upload Logo -->
+                                <label class="col-form-label col-lg-2">@Token.UploadLogo</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <p style="display:inline"><a href="{{event.LogoFilePath}}" ng-if="event.LogoFilePath" class="kt-link kt-font-boldest">@Token.Review</a></p>
+                                </div>
+                            </div>
+
+                            <!--R O W 3-->
+                            <div class="form-group  row" ng-if="event.Package.IsAllowPrintNames">
+                                <!--PrintNameType-->
+                                <label class="col-form-label col-lg-2">@Token.PrintNameType</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text"
+                                           class="form-control input-disabled"
+                                           ng-model="event.PrintNameType.PrintNamesTypeName"
+                                           ng-disabled="true" />
+                                </div>
+
+
+                                <!--IsNamesAr-->
+                                <label class="col-form-label col-lg-2">@Token.IsNamesAr</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                        <label>
+                                            <input type="checkbox" checked="checked" ng-model="event.IsNamesAr" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty"
+                                                   ng-change="event.NameGroom=null;event.NameBride=null"
+                                                   ng-disabled="true" />
+                                            <span></span>
+                                        </label>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!--R O W 4-->
+                            <div class="form-group  row" ng-if="event.Package.IsAllowPrintNames||event.IsClinetCustomLogo">
+                                <!--NameGroom-->
+                                <label class="col-form-label col-lg-2">@Token.NameGroom</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text"
+                                           class="form-control input-disabled"
+                                           ng-model="event.NameGroom"
+                                           ng-disabled="true" />
+
+                                </div>
+                                <!--NameBride-->
+                                <label class="col-form-label col-lg-2">@Token.NameBride</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text"
+                                           class="form-control input-disabled"
+                                           ng-model="event.NameBride"
+                                           ng-disabled="true" />
+                                </div>
+                            </div>
+
+
+                            <!--R O W 5-->
+                            <div class="form-group  row">
+                                <!--EventDateTime-->
+                                <label class="col-form-label col-lg-2">@Token.EventDateTime</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input class="form-control input-disabled"
+                                           type="datetime-local"
+                                           ng-model="event.EventDateTime"
+                                           ng-disabled="true" />
+                                </div>
+                                <!--Branch-->
+                                <label class="col-form-label col-lg-2">@Token.Branch</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input class="form-control input-disabled"
+                                           type="text"
+                                           ng-model="event.Branch.BranchName"
+                                           ng-disabled="true" />
+                                </div>
+                            </div>
+
+                            <!--R O W 6-->
+                            <div class="form-group  row">
+                                <!--UserCreated-->
+                                <label class="col-form-label col-lg-2">@Token.UserCreated</label>
+                                <div class="col-lg-4 form-group-sub ">
+                                    <div class="input-group">
+                                        <input type="text"
+                                               name="lastName "
+                                               class="form-control input-disabled"
+                                               ng-model="event.UserCreatedUserName"
+                                               disabled />
+                                        <div class="input-group-append">
+                                            <a class="btn btn-default" href="/Users/UserInformation?id={{event.UserCreaedId}}">
+                                                @Token.Opene
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Clinet-->
+                                <label class="col-form-label col-lg-2">@Token.Clinet</label>
+                                <div class="col-lg-4 form-group-sub ">
+                                    <div class="input-group">
+                                        <input type="text"
+                                               name="lastName "
+                                               class="form-control input-disabled"
+                                               ng-model="event.ClinetUserName"
+                                               disabled />
+                                        <div class="input-group-append">
+                                            <a class="btn btn-default" href="/Users/UserInformation?id={{event.ClinetId}}">
+                                                @Token.Opene
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!--R O W 5-->
+                            <div class="form-group  row">
+                                <!--Notes
+                                    هنا يضيف ملحوظة جديدة على الملحوظات القدية-->
+                                <label class="col-form-label col-lg-2">@Token.Notes</label>
+                                <div class="col-lg-10 form-group-sub">
+                                    <textarea class="form-control input-disabled"
+                                              ng-model="event.Notes"
+                                              ng-disabled="true"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-7"></div>
+                                    <div class="col-lg-5">
+                                        <a href="/Enquires/EnquiryInformation?id={{event.EnquiryId}}" class="btn btn-brand btn-elevate btn-elevate-air">
+                                            <i class="fab fa-wpforms">@Token.EnquiryInformation</i>
+                                        </a>
+                                        <a href="/Packages/PackageInformtion?id={{event.PackageId}}" class="btn btn-brand btn-elevate btn-elevate-air">
+                                            <i class="fab fa-wpforms">@Token.PackageInformation</i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!--end::Portlet-->
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/events/eventsInformation/service.js"></script>
+    <script src="~/Scripts/angularJS/views/events/eventsInformation/contoller.js"></script>
+}

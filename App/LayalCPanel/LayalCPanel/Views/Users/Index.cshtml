@@ -1,0 +1,262 @@
+﻿@{
+    ViewBag.Title = Token.Users;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    UsersPrivilegeVM Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.Users);
+
+}
+
+<!-- begin:: Content Head -->
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+
+        <span class="kt-subheader__separator kt-hidden"></span>
+        <div class="kt-subheader__breadcrumbs">
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link">
+                @Token.HomePage
+            </a>
+
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">
+                @Token.Users
+            </a>
+
+            <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+        </div>
+    </div>
+
+</div>
+
+<!-- end:: Content Head -->
+<!--Page Body-->
+<div ng-controller="usersCtrl">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        @Token.Users
+                    </h3>
+                </div>
+                <div class="kt-portlet__head-toolbar"  >
+                    <div class="kt-portlet__head-wrapper">
+                        <div class="kt-portlet__head-actions">
+                            @if (Priv.CanAdd)
+                            {
+                                <a href="/Users/AddAndUpdate" class="btn btn-brand btn-elevate btn-icon-sm">
+                                    <i class="la la-plus"></i>@Token.AddNewUser
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="kt-portlet__body">
+
+                <form class="kt-form kt-form--label-right" novalidate name="userFrm" ng-submit="userFrm.$valid?getUsers(true):null">
+                    <div class="kt-portlet__body">
+                        <!--R O W 1-->
+                        <div class="form-group  row">
+                            <!--AccountTypes-->
+                            <div class="col-lg-3 form-group-sub">
+                            <label class="col-form-label ">@Token.AccountType</label>
+                                <select class="form-control"
+                                        serchbale
+                                        ng-model="userFilter.accounTypeId"
+                                        ng-options="c.Id as c.AccountTypeName for c in accountTypes"
+                                        ng-change="users=[]"></select>
+                            </div>
+                            <!--Language-->
+                            <div class="col-lg-3 form-group-sub">
+                            <label class="col-form-label ">@Token.Language</label>
+                                <select class="form-control"
+                                        serchbale
+                                        ng-model="userFilter.languageId"
+                                        ng-options="c.Id as c.LanguageName for c in languages"
+                                        ng-change="users=[]"></select>
+                            </div>
+                            <!--Country-->
+                            <div class="col-lg-3 form-group-sub">
+                            <label class="col-form-label ">@Token.Country</label>
+                                <select class="form-control"
+                                        serchbale
+                                        ng-model="userFilter.countryId"
+                                        ng-options="c.Id as c.CountryName for c in countries"
+                                        ng-change="users=[]"></select>
+                            </div>
+                            <!--City-->
+                            <div class="col-lg-3 form-group-sub">
+                            <label class="col-form-label ">@Token.City</label>
+                                <select class="form-control"
+                                        serchbale
+                                        ng-model="userFilter.cityId"
+                                        ng-options="c.Id as c.CityName for c in cities|filterWithoutStaticItems:{'CountryId':userFilter.countryId}"
+                                        ng-change="users=[]"></select>
+                            </div>
+                        </div>
+
+                        <!--R O W 2-->
+                        <div class="form-group  row">
+                            <!--CreateDateFrom-->
+                            <div class="col-lg-3 form-group-sub">
+                            <label class="col-form-label ">@Token.CreateDateFrom</label>
+                                <input type="date"
+                                       class="form-control"
+                                       id="createDateFrom"
+                                       ng-model="userFilter.createDateFrom"
+                                       ng-change="users=[]" />
+                            </div>
+                            <!--CreateDateTo-->
+                            <div class="col-lg-3 form-group-sub">
+                            <label class="col-form-label ">@Token.CreateDateTo</label>
+                                <input type="date"
+                                       class="form-control"
+                                       id="createDateTo"
+                                       ng-model="userFilter.createDateTo"
+                                       ng-change="users=[]" />
+                            </div>
+                            <!--UerName-->
+                            <div class="col-lg-3 form-group-sub">
+                            <label class="col-form-label ">@Token.UserName</label>
+                                <input type="text"
+                                       class="form-control"
+                                       ng-model="userFilter.userName"
+                                       ng-change="users=[]" />
+                            </div>
+                            <!--Email-->
+                            <div class="col-lg-3 form-group-sub">
+                            <label class="col-form-label ">@Token.Email</label>
+                                <input type="text"
+                                       class="form-control"
+                                       ng-model="userFilter.email"
+                                       ng-change="users=[]" />
+                            </div>
+                        </div>
+
+                        <!--R O W 3-->
+                        <div class="form-group  row">
+                            <!--PhoneNumber-->
+                            <div class="col-lg-3 form-group-sub">
+                            <label class="col-form-label ">@Token.PhoneNumber</label>
+                                <input type="text"
+                                       class="form-control"
+                                       ng-model="userFilter.phoneNumber"
+                                       ng-change="users=[]" />
+                            </div>
+                            <!--Address-->
+                            <div class="col-lg-3 form-group-sub">
+                            <label class="col-form-label ">@Token.Address</label>
+                                <input type="text"
+                                       class="form-control"
+                                       ng-model="userFilter.adddress"
+                                       ng-change="users=[]" />
+                            </div>
+                        </div>
+
+                        <!--R O W 6-->
+                        <div class="row">
+                            <div class="col-lg-10"></div>
+                            <div class="col-lg-2">
+                                <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                                    <i class="la la-search">@Token.Show</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+            <div class="kt-portlet__body">
+                <div class="kt-portlet__body">
+                    @if (Priv.CanDisplay)
+                    {
+                        <table class="table sms-table  "
+                               datatable="ng"
+                               dt-options="vm.dtOptions"
+                               dt-instance="vm.dtInstance"
+                               dt-column-defs="vm.dtColumnDefs"
+                               id="ng_table_1">
+                            <thead class=" ">
+                                <tr class=" ">
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="userFOP"
+                                                  ng-sms-field-name="UserName"
+                                                  ng-sms-resource="@Token.UserName"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="userFOP"
+                                                  ng-sms-field-name="Email"
+                                                  ng-sms-resource="@Token.Email"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="userFOP"
+                                                  ng-sms-field-name="PhoneNo"
+                                                  ng-sms-resource="@Token.PhoneNumber"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="userFOP"
+                                                  ng-sms-field-name="Address"
+                                                  ng-sms-resource="@Token.Address"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="userFOP"
+                                                  ng-sms-field-name="CountryName"
+                                                  ng-sms-resource="@Token.Country"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="userFOP"
+                                                  ng-sms-field-name="CityName"
+                                                  ng-sms-resource="@Token.City"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="userFOP"
+                                                  ng-sms-field-name="AccountTypeName"
+                                                  ng-sms-resource="@Token.AccountType"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        @Token.Operations
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in users|filter:usersSearch |orderBy:userFOP.sort.propName:userFOP.sort.reverse | limitTo:userFOP.paging.pagingLimt.take:userFOP.paging.pagingLimt.skip track by $index">
+                                    <td>{{x.UserName}}</td>
+                                    <td>{{x.Email}}</td>
+                                    <td>{{x.PhoneNo}}</td>
+                                    <td>{{x.Address}}</td>
+                                    <td>{{x.Country.CountryName}}</td>
+                                    <td>{{x.City.CityName}}</td>
+                                    <td>{{x.AccountType.AccountTypeName}}</td>
+                                    <td>
+                                        <!--Btn:Edit-->
+                                        @if (Priv.CanEdit)
+                                        {
+                                            <a href="/Users/AddAndUpdate?id={{x.Id}}" title="Edit" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    }
+                    <!--Paging -->
+                    <sms-paging ng-sms-fop="userFOP" ng-sms-display-m-func="getUsers()"></sms-paging>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/users/index/service.js"></script>
+    <script src="~/Scripts/angularJS/views/users/index/contoller.js"></script>
+}

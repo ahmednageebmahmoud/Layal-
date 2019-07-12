@@ -1,0 +1,16 @@
+﻿using Microsoft.Owin;
+using Owin;
+
+[assembly: OwinStartupAttribute(typeof(LayalCPanel.Startup))]
+namespace LayalCPanel
+{
+    public partial class Startup
+    {
+        public void Configuration(IAppBuilder app)
+        {
+            ConfigureAuth(app);
+            app.MapSignalR();
+
+        }
+    }
+}

@@ -1,0 +1,51 @@
+{
+    "Enquiries": {
+        "Id": null,
+        "FirstName": null,
+        "LastName": null,
+        "FkCountry_Id": null,
+        "FkCity_Id": null,
+        "PhoneNo": null,
+        "Day": null,
+        "Month": null,
+        "Year": null,
+        "FKEnquiryType_Id": null,
+        "FKUserCreated_Id": null,
+        "FKBranch_Id": null,
+        "IsFromClinet": null,
+        "IsClosed": null, //اذا تم اغلاق الملف
+        "DateTimeClosed": null, //تاريخ الاغلاق
+        "IFWithBranch": null, //اذا هوا الان مع الشركة وليس مع الادارة
+        "ClendarEventId": null, //معرف النتيجة فى جوجل لكي يتم حذفها فيما بعد
+        "FkClinet_Id": null, //معرف العميل الذى انشىء من منطلق هذا الاستفسار
+        "IsLinkedClinet": null,
+        "IsCreatedEvent":true
+    },
+    "EnquiryTypes": {
+        "Id": null,
+        "FkWord_Id": null
+    },
+    "EnquiryFormNotes": {
+        "Id": null,
+        "FKEnquiryForm_Id": null,
+        "Notes": null,
+        "CreateDateTime": null,
+        "FKUserCreated_Id": null
+    },
+    //  جدول الحالات : وهناك بعض الحالات التى يجب عند اتخاذها ان نعود بـ رسالة للمدير
+    "EnquiryStatusTypes": {
+        "Id": null,
+        "FKWord_Id": null
+    },
+    //   جدول حالات الاستفسار : "Id",
+    "EnquiryStatus": {
+        "Notes": null,
+        "DateTime": null,
+        "ScheduleVisitDateTime": null,
+        "IsBankTransferDeposit": null,
+        "Amount": null,
+        "FKEnquiry_Id": null,
+        "FKEnquiryStatus_Id": null,
+        "FKUserCreated_Id": null
+    }
+}

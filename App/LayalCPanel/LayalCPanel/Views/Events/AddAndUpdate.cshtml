@@ -1,0 +1,249 @@
+﻿@{
+    ViewBag.Title = Token.AddAndUpdateEvent;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    UsersPrivilegeVM
+     Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.Events);
+
+}
+
+<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" ng-controller="eventsCtrl">
+    <!-- begin:: Subheader -->
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <span class="kt-subheader__separator kt-hidden"></span>
+            <div class="kt-subheader__breadcrumbs">
+                <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link"> @Token.HomePage </a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="~/Events" class="kt-subheader__breadcrumbs-link"> @Token.Events </a>
+
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" ng-if="event.State!=state.update">@Token.AddNewEvent</a>
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" ng-if="event.State==state.update">@Token.UpdateEvent</a>
+
+                <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+            </div>
+        </div>
+
+    </div>
+    <!-- end:: Subheader -->
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--AddEvent-->
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <span class="kt-portlet__head-icon">
+                                <i class="kt-font-brand flaticon-add"></i>
+                            </span>
+                            <h3 class="kt-portlet__head-title" ng-if="event.State!=state.update">@Token.AddNewEvent</h3>
+                            <h3 class="kt-portlet__head-title" ng-if="event.State==state.update">@Token.UpdateEvent</h3>
+                        </div>
+
+                    </div>
+                    <!--AddEvent Form-->
+                    <form novalidate name="eventFrm" class="kt-form kt-form--label-right" ng-submit="saveChange(eventFrm,Event)">
+                        <div class="kt-portlet__body">
+                            <!--R O W 1-->
+                            <div class="form-group  row">
+                                <!--Package-->
+                                <label class="col-form-label col-lg-2">@Token.Package</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <select class="form-control"
+                                            serchbale
+                                            name="package"
+                                            ng-class="{'is-invalid':eventFrm.package.$invalid&&eventFormSubmitErro}"
+                                            ng-model="event.PackageId"
+                                            ng-options="c.Id as c.PackageName for c in packages"
+                                            ng-change="fillPackage()"
+                                            ng-required="true"></select>
+                                    <!--Errors:-->
+                                    <small class="error invalid-feedback" ng-if="eventFrm.package.$error.required&&eventFormSubmitErro">@Token.FieldIsRequierd</small>
+                                </div>
+
+                                <!--IsClinetCustomLogo-->
+                                <label class="col-form-label col-lg-2">@Token.IsClinetCustomLogo</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                        <label>
+                                            <input type="checkbox" checked="checked" ng-model="event.IsClinetCustomLogo" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                            <span></span>
+                                        </label>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!--R O W 2-->
+                            <div class="form-group  row" ng-if="event.IsClinetCustomLogo">
+                                <!--IsLogoAr-->
+                                <label class="col-form-label col-lg-2">@Token.IsLogoAr</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                        <label>
+                                            <input type="checkbox" checked="checked" ng-model="event.IsLogoAr" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                            <span></span>
+                                        </label>
+                                    </span>
+                                </div>
+
+                                <!--Upload Logo -->
+                                <label class="col-form-label col-lg-2">@Token.UploadLogo</label>
+                                <div class="col-lg-4 form-group-sub">
+                                        <input type="file"   accept=".pdf,.ai"
+                                                onchange="angular.element(this).scope().uplaodLogo(this.files[0])">
+                                    <p style="display:inline"><a href="{{event.LogoFilePath}}" ng-if="event.LogoFilePath" class="kt-link kt-font-boldest">@Token.Review</a></p>
+                                    <br />
+                                    <br />
+                                    <p class="alert-outline-info">@Token.Note: {{UploadLogoNotes}}</p>
+                                </div>
+                            </div>
+
+                            <!--R O W 3-->
+                            <div class="form-group  row" ng-if="event.Package.IsAllowPrintNames">
+                                <!--PrintNameType-->
+                                <label class="col-form-label col-lg-2">@Token.PrintNameType</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <select class="form-control"
+                                            serchbale
+                                            name="printNameType"
+                                            ng-class="{'is-invalid':eventFrm.printNameType.$invalid&&eventFormSubmitErro}"
+                                            ng-model="event.PrintNameTypeId"
+                                            ng-options="c.Id as c.PrintNamesTypeName for c in printNameTypes"
+                                            ng-required="true"></select>
+                                    <!--Errors:-->
+                                    <small class="error invalid-feedback" ng-if="eventFrm.printNameType.$error.required&&eventFormSubmitErro">@Token.FieldIsRequierd</small>
+                                </div>
+
+                                
+                                <!--IsNamesAr-->
+                                <label class="col-form-label col-lg-2" >@Token.IsNamesAr</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                        <label>
+                                            <input type="checkbox" checked="checked" ng-model="event.IsNamesAr" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty"
+                                                   ng-change="event.NameGroom=null;event.NameBride=null"
+                                                   />
+                                            <span></span>
+                                        </label>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!--R O W 4-->
+                            <div class="form-group  row"  ng-if="event.Package.IsAllowPrintNames||event.IsClinetCustomLogo"    >
+                                <!--NameGroom-->
+                                <label class="col-form-label col-lg-2">@Token.NameGroom</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text"
+                                           name="nameGroom"
+                                           class="form-control"
+                                           ng-class="{'is-invalid':eventFrm.nameGroom.$invalid&&eventFormSubmitErro}"
+                                           ng-model="event.NameGroom"
+                                           maxlength="50"
+                                           ng-required="true"
+                                           />
+
+                                    <!--Errors:-->
+                                    <small class="error invalid-feedback" ng-if="eventFrm.nameGroom.$error.required&&eventFormSubmitErro">@Token.FieldIsRequierd</small>
+                                    <small class="error invalid-feedback" ng-if="eventFrm.nameGroom.$error.maxlength&&eventFormSubmitErro">@Token.MaxLengthCharIs 50</small>
+                                </div>
+                                <!--NameBride-->
+                                <label class="col-form-label col-lg-2">@Token.NameBride</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text"
+                                           name="nameBride"
+                                           class="form-control"
+                                           ng-class="{'is-invalid':eventFrm.nameBride.$invalid&&eventFormSubmitErro}"
+                                           ng-model="event.NameBride"
+                                           maxlength="50"
+                                           ng-required="true"
+                                           />
+
+                                    <!--Errors:-->
+                                    <small class="error invalid-feedback" ng-if="eventFrm.nameBride.$error.required&&eventFormSubmitErro">@Token.FieldIsRequierd</small>
+                                    <small class="error invalid-feedback" ng-if="eventFrm.nameBride.$error.maxlength&&eventFormSubmitErro">@Token.MaxLengthCharIs 50</small>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group  row">
+                                <!--EventDateTime-->
+                                <label class="col-form-label col-lg-2">@Token.EventDateTime</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input class="form-control"
+                                           type="datetime-local"
+                                           name="eventDateTime"
+                                           ng-class="{'is-invalid':eventFrm.eventDateTime.$invalid&&eventFormSubmitErro}"
+                                           ng-model="event.EventDateTime"
+                                           ng-required="true" />
+                                    <!--Errors:-->
+                                    <small class="error invalid-feedback" ng-if="eventFrm.eventDateTime.$error.required&&eventFormSubmitErro">@Token.FieldIsRequierd</small>
+                                </div>
+
+                                                         </div>
+                            
+                            <!--R O W 5-->
+                            <div class="form-group  row">
+                                <!--Notes
+                                    هنا يضيف ملحوظة جديدة على الملحوظات القدية-->
+                                <label class="col-form-label col-lg-2">@Token.Notes</label>
+                                <div class="col-lg-10 form-group-sub">
+                                    <textarea class="form-control"
+                                              name="notes"
+                                              ng-class="{'is-invalid':eventFrm.notes.$invalid&&eventFormSubmitErro}"
+                                              ng-model="event.Notes"
+                                              ng-maxlength="4000"
+                                              maxlength="4000"
+                                              rows="4"></textarea>
+                                    <!--Errors:-->
+                                    <small class="error invalid-feedback" ng-if="eventFrm.phoneNo.$error.maxlength&&eventFormSubmitErro">@Token.MaxLengthCharIs 4000</small>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-9"></div>
+                                    <div class="col-lg-3">
+                                        @if (Priv.CanEdit)
+                                        {
+
+                                            <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"
+                                                    ng-if="event.State==state.update&&!event.IsCanNotUpdate&&!event.EnquiryIsClosed&&event.IsActive">
+                                                <i class="la la-save">@Token.Save</i>
+                                            </button>
+                                        }
+                                        @if (Priv.CanAdd)
+                                        {
+                                            <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"
+                                                    ng-if="event.State!=state.update">
+                                                <i class="la la-save">@Token.Add</i>
+                                            </button>
+                                        }
+                                        <button type="reset" class="btn btn-warning btn-elevate btn-elevate-air" ng-if="event.State!=state.update" ng-click="reSelect()"><i class="la la-file">@Token.Cancel</i></button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!--end::Portlet-->
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/events/addAndUpdate/service.js"></script>
+    <script src="~/Scripts/angularJS/views/events/addAndUpdate/contoller.js"></script>
+}

@@ -1,0 +1,228 @@
+﻿@media (max-width: 1024px) {
+    .kt-header-mobile__logo a img {
+        width: 125px !important;
+        height: 77px !important;
+    }
+    /*.kt-subheader {
+        z-index: 200
+    }*/
+
+    .kt-header-mobile__logo {
+        background: #f2f3f8 !important;
+    }
+}
+
+
+.invalid-feedback {
+    width: 100%;
+    position: absolute;
+    top: 43px;
+    margin-bottom: 2px
+}
+
+
+.is-invalid > .select2-container--default .select2-selection--multiple, .is-invalid > .select2-container--default .select2-selection--single {
+    border: 1px solid #fc397a;
+}
+
+@media (min-width: 1024px) {
+    .modal-lg, .modal-xl {
+        max-width: 1200px !important;
+    }
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+
+
+.th-5 {
+    width: 5% !important;
+    max-width: 5% !important;
+    min-width: 5% !important;
+}
+
+.th-10 {
+    width: 10% !important;
+    max-width: 10% !important;
+    min-width: 10% !important;
+}
+
+.th-15 {
+    width: 15% !important;
+    max-width: 15% !important;
+    min-width: 15% !important;
+}
+
+.th-20 {
+    width: 20% !important;
+    max-width: 20% !important;
+    min-width: 20% !important;
+}
+
+.th-25 {
+    width: 25% !important;
+    max-width: 25% !important;
+    min-width: 25% !important;
+}
+
+.th-30 {
+    width: 30% !important;
+    max-width: 30% !important;
+    min-width: 30% !important;
+}
+
+.th-40 {
+    width: 40% !important;
+    max-width: 40% !important;
+    min-width: 40% !important;
+}
+
+.th-45 {
+    width: 45% !important;
+    max-width: 45% !important;
+    min-width: 45% !important;
+}
+
+.th-50 {
+    width: 50% !important;
+    max-width: 50% !important;
+    min-width: 50% !important;
+}
+
+.th-55 {
+    width: 55% !important;
+    max-width: 55% !important;
+    min-width: 55% !important;
+}
+
+
+.th-60 {
+    width: 60% !important;
+    max-width: 60% !important;
+    min-width: 60% !important;
+}
+
+.th-65 {
+    width: 65% !important;
+    max-width: 65% !important;
+    min-width: 65% !important;
+}
+
+.th-70 {
+    width: 70% !important;
+    max-width: 70% !important;
+    min-width: 70% !important;
+}
+
+.th-75 {
+    width: 70% !important;
+    max-width: 70% !important;
+    min-width: 70% !important;
+}
+
+.th-80 {
+    width: 80% !important;
+    max-width: 80% !important;
+    min-width: 80% !important;
+}
+
+.th-85 {
+    width: 85% !important;
+    max-width: 85% !important;
+    min-width: 85% !important;
+}
+
+.th-90 {
+    width: 90% !important;
+    max-width: 90% !important;
+    min-width: 90% !important;
+}
+
+.th-95 {
+    width: 95% !important;
+    max-width: 95% !important;
+    min-width: 95% !important;
+}
+
+
+.fa-sort {
+    float: right;
+}
+
+.fa-sort-up {
+    float: right;
+}
+
+.fa-sort-down {
+    float: right;
+}
+
+
+*.input-disabled:disabled {
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    cursor: auto;
+}
+
+select.input-disabled:disabled {
+    cursor: default;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+.sms-table {
+}
+
+    .sms-table tbody tr td span {
+        color: #6c7293;
+    }
+
+    .sms-table .sms-sort-arrow {
+        font-size: 0.6rem;
+        color: #5d78ff;
+        position: relative;
+        float: right;
+    }
+
+    .sms-table .sms-sort-field {
+        color: #6c7293;
+        cursor: pointer
+    }
+
+form-control:disabled, .form-control[readonly] {
+    background-color: #ffffff !important;
+    opacity: 1;
+    border: none;
+}
+
+.error-items {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #fd397a;
+    font-weight: 400;
+}
+
+.sms-table-error {
+    border: 2px solid #fd397a;
+}
+
+div#ng_table_1_filter {
+    float: left;
+}
+
+.dt-buttons.btn-group {
+    float: right
+}
+
+.tree-actions {
+    float: right
+}
+
+ small.error{
+         display:block !important
+
+ }

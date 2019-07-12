@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = Token.DistributionOfWork;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    UsersPrivilegeVM Priv =
+        new UsersPrivilegesBLL().SelectByUserId(PagesEnum.Packages);
+
+}
+<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" ng-controller="distributionOfWorkCtrl">
+    <!-- begin:: Subheader -->
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <span class="kt-subheader__separator kt-hidden"></span>
+            <div class="kt-subheader__breadcrumbs">
+                <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link"> @Token.HomePage </a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="~/Packages" class="kt-subheader__breadcrumbs-link"> @Token.Packages </a>
+
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" >@Token.DistributionOfWork</a>
+                <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active </span> -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- end:: Subheader -->
+
+
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">@Token.PackageDetails</h3>
+                        </div>
+                    </div>
+
+                    <!--PackageDeail Form-->
+                    <form novalidate name="addPackageDeailFrm" ng-if="newPackage.State==state.update">
+                        <!--Package Items-->
+                        <div class="kt-portlet__body">
+
+                            <div class="form-group  row">
+                                <table class="table sms-table">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="th-30 ">
+                                                <label class="sms-sort-field">
+                                                    @Token.Input
+                                                </label>
+                                            </th>
+                                            <th class="th-30">
+                                                <label class="sms-sort-field">
+                                                    @Token.ValueAr
+                                                </label>
+                                            </th>
+                                            <th class="th-10">
+                                                <label class="sms-sort-field">
+                                                    @Token.Operations
+                                                </label>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--Create-->
+                                        @if (Priv.CanAdd)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <select class="form-control"
+                                                            serchbale
+                                                            name="albumTypeId"
+                                                            ng-class="{'is-invalid':addPackageFrm.albumTypeId.$invalid&&packageFrmErrorSubmit}"
+                                                            ng-model="newPackageDeail.PackageInputTypeId"
+                                                            ng-options="c.Id as c.PackageInputTypeName for c in packageInputTypes"
+                                                            ng-required="true"></select>
+                                                    <!--Errors-->
+                                                        <small class="help-block" ng-if="newPackageDeail.PackageInputTypeIdIsRequired&&erroAddNewItem">@Token.FieldIsRequierd</small>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control input-disabled"
+                                                           ng-model="newPackageDeail.ValueAr">
+                                                    <!--Errors: -->
+                                                    <div>
+                                                        <small class="help-block" ng-if="newPackageDeail.ValueArIsRequired&&propertyIsFalthy(newPackageDeail.ValueAr,newPackageDeail.ValueArIsRequired)&&erroAddNewItem">@Token.FieldIsRequierd</small>
+                                                        <small class="help-block" ng-if="newPackageDeail.ValueArIsMaxlength||propertyIsMaxLength(newPackageDeail.ValueAr,50)&&erroAddNewItem">@Token.MaxLengthCharIs 50</small>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <!--Btn:Added New-->
+                                                    <a href="javascript:void(0);" title="@Token.Add"
+                                                       class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="packageItemOpration.addNew(newPackageDeail,newPackage)"><i class="la la-plus-square"></i></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                        <tr ng-repeat="gp in newPackage.PackageDetails">
+                                            <td>
+                                                <select class="form-control input-disabled"
+                                                        ng-model="gp.PackageInputTypeId"
+                                                        ng-options="c.Id as c.PackageInputTypeName for c in packageInputTypes"
+                                                        ng-disabled="true"></select>
+                                            </td>
+                                            <td>
+                                                {{gp.ValueAr}}
+                                            </td>
+                                            <td>
+                                                <!--Btn:Delete-->
+                                                @if (Priv.CanDelete)
+                                                {
+                                                    <a href="javascript:void(0);" ng-click="packageItemOpration.delete(gp)" ng-if="gp.Id!=itemEditId" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/packages/distributionOfWork/service.js"></script>
+    <script src="~/Scripts/angularJS/views/packages/distributionOfWork/contoller.js"></script>
+}

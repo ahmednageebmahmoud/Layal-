@@ -1,0 +1,720 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Ago" xml:space="preserve">
+    <value>منذ</value>
+  </data>
+  <data name="AppName" xml:space="preserve">
+    <value>ليال</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>ايام</value>
+  </data>
+  <data name="Hi" xml:space="preserve">
+    <value>مرحبا</value>
+  </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>الصفحة الرئيسية</value>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>ساعة</value>
+  </data>
+  <data name="InvalidUserNameOrPassword" xml:space="preserve">
+    <value>اسم المستخدم او كلمة السر غير صالحة</value>
+  </data>
+  <data name="JustNow" xml:space="preserve">
+    <value>الان</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+  <data name="Minute" xml:space="preserve">
+    <value>دقيقة</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>شهر</value>
+  </data>
+  <data name="Months" xml:space="preserve">
+    <value>شهور</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>حسابى</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>جديد</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>اشعرات</value>
+  </data>
+  <data name="OneDay" xml:space="preserve">
+    <value>يوم واحد</value>
+  </data>
+  <data name="OneHour" xml:space="preserve">
+    <value>ساعة واحدة</value>
+  </data>
+  <data name="OneMinute" xml:space="preserve">
+    <value>دقيقة واحدة</value>
+  </data>
+  <data name="OneMonth" xml:space="preserve">
+    <value>شهر واجد</value>
+  </data>
+  <data name="OneYear" xml:space="preserve">
+    <value>عام واحد</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>تذكرنى</value>
+  </data>
+  <data name="ShowMore" xml:space="preserve">
+    <value>مشاهدة المزيد</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>نجاح</value>
+  </data>
+  <data name="TwoDays" xml:space="preserve">
+    <value>يومين</value>
+  </data>
+  <data name="TwoHour" xml:space="preserve">
+    <value>ساعتين</value>
+  </data>
+  <data name="TwoMinute" xml:space="preserve">
+    <value>دقيقتين</value>
+  </data>
+  <data name="TwoMonths" xml:space="preserve">
+    <value>شهرين</value>
+  </data>
+  <data name="TwoYears" xml:space="preserve">
+    <value>عامين</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>اسم المستخدك</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>عام</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>اعوام</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>الاميل</value>
+  </data>
+  <data name="FieldIsRequierd" xml:space="preserve">
+    <value>هذا الحقل مطلوب</value>
+  </data>
+  <data name="ForgetPassword" xml:space="preserve">
+    <value>استرجاع كلمة السر</value>
+  </data>
+  <data name="LoginToYourAccount" xml:space="preserve">
+    <value>تسجيل الدخول الى حسابك </value>
+  </data>
+  <data name="MyTasks" xml:space="preserve">
+    <value>المهمات</value>
+  </data>
+  <data name="UsersPagesPrivileges" xml:space="preserve">
+    <value>امتيازات صفحات المستخدمين</value>
+  </data>
+  <data name="SomeErrorHasBeen" xml:space="preserve">
+    <value>لقد حدث خطاء غير متوقع</value>
+  </data>
+  <data name="CanAdd" xml:space="preserve">
+    <value>السماح بـ الاضافة </value>
+  </data>
+  <data name="CanDelete" xml:space="preserve">
+    <value>السماح بـ الحذف</value>
+  </data>
+  <data name="CanDisplay" xml:space="preserve">
+    <value>السماح بـ المشاهدة</value>
+  </data>
+  <data name="CanEdit" xml:space="preserve">
+    <value>السماح بـ  التعديل</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>القائمة</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>الصفحة</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>عرض</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>تم التحديث</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>مستخدم</value>
+  </data>
+  <data name="Employee" xml:space="preserve">
+    <value>موظف</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>المستخدمين</value>
+  </data>
+  <data name="AccountType" xml:space="preserve">
+    <value>نوع الحساب</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>العنوان</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>المدينة</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>الدولة</value>
+  </data>
+  <data name="CreateDateFrom" xml:space="preserve">
+    <value>تاريخ الانشاء من</value>
+  </data>
+  <data name="CreateDateTo" xml:space="preserve">
+    <value>تاريخ الانشاء الى </value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>اللغة</value>
+  </data>
+  <data name="NoMoreResult" xml:space="preserve">
+    <value>لا مزيد من النتائج</value>
+  </data>
+  <data name="NoResult" xml:space="preserve">
+    <value>لا نتائج</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
+  <data name="AddNewUser" xml:space="preserve">
+    <value>اضافة مستخدم جديد</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>اضافة مستخدم</value>
+  </data>
+  <data name="Operations" xml:space="preserve">
+    <value>العمليات</value>
+  </data>
+  <data name="UpdateUser" xml:space="preserve">
+    <value>تحديث المستخدم</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>اضافة</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>الغاء</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>تمت الاضافة </value>
+  </data>
+  <data name="EmailItIsAlreadyUsed" xml:space="preserve">
+    <value>الاميل مستخدم بـ الفعل مع حساب آخر</value>
+  </data>
+  <data name="InvalidData" xml:space="preserve">
+    <value>بيانات غير صحيحة</value>
+  </data>
+  <data name="MinLengthCharIs" xml:space="preserve">
+    <value>اقل عدد احرف هوا</value>
+  </data>
+  <data name="PhoneItIsAlreadyUsed" xml:space="preserve">
+    <value>رقم الهاتف مستخدم بـ الفعل مع حساب آخر</value>
+  </data>
+  <data name="StateNotFound" xml:space="preserve">
+    <value>الحالة ليست موجودة</value>
+  </data>
+  <data name="UserNameItIsAlreadyUsed" xml:space="preserve">
+    <value>اسم المستخدم مستخدم بـ الفعل مع حساب آخر</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>المستخدم ليس موجود</value>
+  </data>
+  <data name="Cities" xml:space="preserve">
+    <value>لا يوجد</value>
+  </data>
+  <data name="CountryNotFound" xml:space="preserve">
+    <value>الدولة ليست موجودة</value>
+  </data>
+  <data name="AddNewCountry" xml:space="preserve">
+    <value>اضاقة دولة جديدة</value>
+  </data>
+  <data name="Countries" xml:space="preserve">
+    <value>الدول</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="MaxLengthCharIs" xml:space="preserve">
+    <value>اكبر عدد احرف هوا </value>
+  </data>
+  <data name="NameAr" xml:space="preserve">
+    <value>الاسم بـ العربية</value>
+  </data>
+  <data name="NameEn" xml:space="preserve">
+    <value>الاسم بـ الانجليزية</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="UpdateCountry" xml:space="preserve">
+    <value>تحديث الدولة</value>
+  </data>
+  <data name="CanNotDeleteBecuseIsUsed" xml:space="preserve">
+    <value>لا يمكن حذف لانة مستخدم</value>
+  </data>
+  <data name="Deleted" xml:space="preserve">
+    <value>تم الحذف</value>
+  </data>
+  <data name="IsoCode" xml:space="preserve">
+    <value>مفتاح الدولة</value>
+  </data>
+  <data name="ItIsAlreadyUsed" xml:space="preserve">
+    <value>مستخدم بـ الفعل</value>
+  </data>
+  <data name="AddNewEnquiryType" xml:space="preserve">
+    <value>اضافة نوع استفسار جديد</value>
+  </data>
+  <data name="EnquiryTypes" xml:space="preserve">
+    <value>انواع الاستفسارات</value>
+  </data>
+  <data name="UpdateEnquiryType" xml:space="preserve">
+    <value>تحديث نوع الاستفسار</value>
+  </data>
+  <data name="AddNewEnquiry" xml:space="preserve">
+    <value>اضافة استفسار جديد</value>
+  </data>
+  <data name="CreateDateTime" xml:space="preserve">
+    <value>تاريخ ووقت الانشاء</value>
+  </data>
+  <data name="Enquires" xml:space="preserve">
+    <value>الاستفسارات</value>
+  </data>
+  <data name="Enquiy" xml:space="preserve">
+    <value>الاستفسار</value>
+  </data>
+  <data name="EventDate" xml:space="preserve">
+    <value>تاريخ المناسبة</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>الاسم الاول</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>الاسم الاخير</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>الملحوظات</value>
+  </data>
+  <data name="NotesCount" xml:space="preserve">
+    <value>عدد الملحوظات</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>لم يتم العثور علية</value>
+  </data>
+  <data name="UserCreated" xml:space="preserve">
+    <value>المستخدم المنشىء</value>
+  </data>
+  <data name="AddAndUpdateEnquiry" xml:space="preserve">
+    <value>اضافة وتحديث الاستفسار</value>
+  </data>
+  <data name="EnquiryType" xml:space="preserve">
+    <value>طريقة الاستفسار</value>
+  </data>
+  <data name="UpdateEnquiry" xml:space="preserve">
+    <value>تحديث الاستفسار</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>اليوم</value>
+  </data>
+  <data name="MaxNumberIs" xml:space="preserve">
+    <value>اكبر رقم هوا</value>
+  </data>
+  <data name="MinNumberIs" xml:space="preserve">
+    <value>اقل رقم هوا</value>
+  </data>
+  <data name="AddNewNotes" xml:space="preserve">
+    <value>اضافة ملحوظة جديدة</value>
+  </data>
+  <data name="AddNewBranch" xml:space="preserve">
+    <value>اضافة فرع جديد</value>
+  </data>
+  <data name="Branch" xml:space="preserve">
+    <value>فرع الشركة </value>
+  </data>
+  <data name="Branches" xml:space="preserve">
+    <value>فروع الشركة </value>
+  </data>
+  <data name="UpdateBranch" xml:space="preserve">
+    <value>تحديث فرع الشركة</value>
+  </data>
+  <data name="AddEnquiry" xml:space="preserve">
+    <value>اضافة استفسار</value>
+  </data>
+  <data name="MyEnquires" xml:space="preserve">
+    <value>استفسارتى</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>إغلاق</value>
+  </data>
+  <data name="ShowDetails" xml:space="preserve">
+    <value>مشاهدة التفاصيل</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>التفاصيل</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>ملحوظة</value>
+  </data>
+  <data name="UserInformation" xml:space="preserve">
+    <value>معلومات المستخدم</value>
+  </data>
+  <data name="FromClinet" xml:space="preserve">
+    <value>من العميل</value>
+  </data>
+  <data name="NoBranch" xml:space="preserve">
+    <value>لم يتم تحديد الفرع</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>إختر</value>
+  </data>
+  <data name="CanNotDuplicateBranchManger" xml:space="preserve">
+    <value>لا يمكنك اضافة اكثر من مدير فرع لـ نفس الفرع</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
+  <data name="Opene" xml:space="preserve">
+    <value>فتح</value>
+  </data>
+  <data name="Readed" xml:space="preserve">
+    <value>مقرواءه</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>العنوان</value>
+  </data>
+  <data name="EnquiryInformation" xml:space="preserve">
+    <value>بيانات الاستفسار</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="FromAdmin" xml:space="preserve">
+    <value>من الادمين</value>
+  </data>
+  <data name="AddStatus" xml:space="preserve">
+    <value>اضافة حالة </value>
+  </data>
+  <data name="VisitDateTime" xml:space="preserve">
+    <value>تاريخ ووقت المقابلة </value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>المبلغ</value>
+  </data>
+  <data name="BankTransferDeposit" xml:space="preserve">
+    <value>عربون حوالة بنكية</value>
+  </data>
+  <data name="LinkedWithClinet" xml:space="preserve">
+    <value>مربوط مع عميل</value>
+  </data>
+  <data name="ClinetIsNotPayment" xml:space="preserve">
+    <value>العميل لم يقم بدفع العربون</value>
+  </data>
+  <data name="ThisEnquiryAlreadyLinkedWithClinet" xml:space="preserve">
+    <value>هذا الاستفسار مربوط مع عميل من قبل </value>
+  </data>
+  <data name="YouCanNotAccessToCreateAccont" xml:space="preserve">
+    <value>ليس لديك صلاحية لـ انشاء حساب للعملاء</value>
+  </data>
+  <data name="ActiveCode" xml:space="preserve">
+    <value>كود التفعل</value>
+  </data>
+  <data name="ActiveEmail" xml:space="preserve">
+    <value>تفعيل الاميل</value>
+  </data>
+  <data name="SendActiveCodeToEmail" xml:space="preserve">
+    <value>ارسال كود التفعيل الى الاميل</value>
+  </data>
+  <data name="SendCode" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Activated" xml:space="preserve">
+    <value>تم التفعيل</value>
+  </data>
+  <data name="AndPasteTheCodeInAppication" xml:space="preserve">
+    <value>والصق هذا فى تطبيق</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>تاريخ الميلاد</value>
+  </data>
+  <data name="Dear" xml:space="preserve">
+    <value>عزيزى</value>
+  </data>
+  <data name="NotActivated" xml:space="preserve">
+    <value>لم يتم التفعيل</value>
+  </data>
+  <data name="PleaseCopyThisCode" xml:space="preserve">
+    <value>من فضلك انسخ هذا الكود</value>
+  </data>
+  <data name="ProfileUpdate" xml:space="preserve">
+    <value>تحديث الصفحة الشخصية</value>
+  </data>
+  <data name="InvalidActiveCode" xml:space="preserve">
+    <value>كود التفعيل غير صالح</value>
+  </data>
+  <data name="AddNewPrintNamesType" xml:space="preserve">
+    <value>اضافة نوع اسماء جديد</value>
+  </data>
+  <data name="PrintNamesType" xml:space="preserve">
+    <value>نوع طباعة الاسماء</value>
+  </data>
+  <data name="PrintNamesTypes" xml:space="preserve">
+    <value>انواع طباعة الاسماء</value>
+  </data>
+  <data name="AddEvents" xml:space="preserve">
+    <value>اضافة مناسبة</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>المناسبة</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>المناسبات</value>
+  </data>
+  <data name="AddAndUpdateEvent" xml:space="preserve">
+    <value>اضافة وتحديث المناسبة</value>
+  </data>
+  <data name="AddNewEvent" xml:space="preserve">
+    <value>اضافة مناسبة جديدة</value>
+  </data>
+  <data name="EventInformation" xml:space="preserve">
+    <value>تفاصيل المناسبة</value>
+  </data>
+  <data name="UpdateEvent" xml:space="preserve">
+    <value>تحديث المناسبة </value>
+  </data>
+  <data name="EventDateTime" xml:space="preserve">
+    <value>تاريخ ووقت المناسبة</value>
+  </data>
+  <data name="IsClinetCustomLogo" xml:space="preserve">
+    <value>شعار مخصص</value>
+  </data>
+  <data name="IsLogoAr" xml:space="preserve">
+    <value>شعار بـ العربية </value>
+  </data>
+  <data name="IsNamesAr" xml:space="preserve">
+    <value>الاسماء بـ العربى</value>
+  </data>
+  <data name="NameBride" xml:space="preserve">
+    <value>اسم العروسة</value>
+  </data>
+  <data name="NameGroom" xml:space="preserve">
+    <value>اسم العريس</value>
+  </data>
+  <data name="Package" xml:space="preserve">
+    <value>باكيج</value>
+  </data>
+  <data name="PrintNameType" xml:space="preserve">
+    <value>نوع طباعة الاسم </value>
+  </data>
+  <data name="AddEvent" xml:space="preserve">
+    <value>اضافة مناسبة</value>
+  </data>
+  <data name="CanNotDuplicateEventWithOneEnquiry" xml:space="preserve">
+    <value>لا يمكن تكرار الحدث مع نفس الاستفسار</value>
+  </data>
+  <data name="CanNotsAveCustomLogo" xml:space="preserve">
+    <value>لم اتمكن من حفظ الشعار المخصص</value>
+  </data>
+  <data name="UploadLogo" xml:space="preserve">
+    <value>تحميل الشعار</value>
+  </data>
+  <data name="YouCanNotCreate" xml:space="preserve">
+    <value>لا يمكنك الانشاء </value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>مراجعة</value>
+  </data>
+  <data name="EventDateTo" xml:space="preserve">
+    <value>تاريخ المناسبة الى</value>
+  </data>
+  <data name="EventeFrom" xml:space="preserve">
+    <value>تاريخ المناسبة من</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>مفعل</value>
+  </data>
+  <data name="Clinet" xml:space="preserve">
+    <value>العميل</value>
+  </data>
+  <data name="AddAlbumType" xml:space="preserve">
+    <value>اضافة نوع البوم </value>
+  </data>
+  <data name="AlbumTypes" xml:space="preserve">
+    <value>انوع الالبوم</value>
+  </data>
+  <data name="PackageInputTypes" xml:space="preserve">
+    <value>انواع مدخلات الباكيجات</value>
+  </data>
+  <data name="Packages" xml:space="preserve">
+    <value>الباكيجات</value>
+  </data>
+  <data name="AddNewPackage" xml:space="preserve">
+    <value>اضافة حزمة جديدة</value>
+  </data>
+  <data name="UpdatePackage" xml:space="preserve">
+    <value>تحديث الحزمة</value>
+  </data>
+  <data name="DescriptionAr" xml:space="preserve">
+    <value>وصف بـ العربى</value>
+  </data>
+  <data name="DescriptionEn" xml:space="preserve">
+    <value>وصف بـ الانجليزى</value>
+  </data>
+  <data name="IsAllowPrintNames" xml:space="preserve">
+    <value>السماح بـ طباعة الاسماء </value>
+  </data>
+  <data name="Album" xml:space="preserve">
+    <value>الالبوم</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>الحقل</value>
+  </data>
+  <data name="IsAllowPrintValues" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PackageDetails" xml:space="preserve">
+    <value>تفاصيل الـ باكيج</value>
+  </data>
+  <data name="ValueAr" xml:space="preserve">
+    <value>القيمة بـ العربى </value>
+  </data>
+  <data name="ValueEn" xml:space="preserve">
+    <value>القيمة بـ الانجليزية</value>
+  </data>
+  <data name="PackageInformation" xml:space="preserve">
+    <value>بيانات الباكيج</value>
+  </data>
+  <data name="YouCanNotUpdate" xml:space="preserve">
+    <value>لا يمكنك التحديث</value>
+  </data>
+  <data name="EnquiryIsClosed" xml:space="preserve">
+    <value>لقد تم اغلاق الاستفسار</value>
+  </data>
+  <data name="DistributionOfWork" xml:space="preserve">
+    <value>توزيع اوامر العمل على الموظفين</value>
+  </data>
+</root>

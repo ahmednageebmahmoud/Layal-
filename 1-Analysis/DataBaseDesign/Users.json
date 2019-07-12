@@ -1,0 +1,24 @@
+{
+    "Users": {
+        "Id": null,
+        "UserName": null,
+        "Email": null,
+        "PhoneNo": null,
+        "DateOfBirth": null,
+        "Password": null,
+        "FKAccountType_Id": null,
+        "Address": null,
+        "FkCountry_Id": null,
+        "FkCity_Id": null,
+        "FkBranch_Id": null
+    },
+    "AccountTypes": {
+        "Id": null,
+        "FkWord_Id": null
+    },
+    "UserPrivileges": {
+        "Id": null,
+        "FkUser_Id": null,
+        "FkPage_Id": null
+    }
+}

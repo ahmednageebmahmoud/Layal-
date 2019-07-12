@@ -1,0 +1,269 @@
+﻿\@{
+    ViewBag.Title = Token.Events;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+ }
+
+<!-- begin:: Content Head -->
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+
+        <span class="kt-subheader__separator kt-hidden"></span>
+        <div class="kt-subheader__breadcrumbs">
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link">
+                @Token.HomePage
+            </a>
+
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">
+                @Token.Events
+            </a>
+
+            <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+        </div>
+    </div>
+
+</div>
+
+<!-- end:: Content Head -->
+<!--Page Body-->
+<div ng-controller="eventsCtrl">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        @Token.Events
+                    </h3>
+                </div>
+            </div>
+
+            
+            <div class="kt-portlet__body">
+                <form novalidate name="eventFrm" class="kt-form kt-form--label-right" ng-submit="getEvents(true)">
+                    <div class="kt-portlet__body">
+                        <!--R O W 1-->
+                        <div class="form-group  row">
+                            <!--FirstName-->
+                            <div class="col-lg-3 form-group-sub">
+                                <label class="col-form-label">@Token.NameGroom</label>
+                                <input type="text"
+                                       class="form-control"
+                                       ng-model="eventFilter.NameGroom" />
+                            </div>
+
+                            <!--LastName-->
+                            <div class="col-lg-3 form-group-sub">
+                                <label class="col-form-label">@Token.NameBride</label>
+                                <input type="text"
+                                       class="form-control"
+                                       ng-model="eventFilter.NameBride" />
+                            </div>
+
+                            <!--IsNamesAr-->
+                            <div class="col-lg-3 form-group-sub">
+                                <label class="col-form-label">@Token.IsNamesAr</label>
+                                <select class="form-control"
+                                        serchbale
+                                        ng-model="eventFilter.IsNamesAr"
+                                        ng-options="c.Id as c.Name for c in checkBoxList"></select>
+                            </div>
+
+                            <!--IsClinetCustomLogo-->
+                            <div class="col-lg-3 form-group-sub">
+                                <label class="col-form-label">@Token.IsClinetCustomLogo</label>
+                                <select class="form-control"
+                                        serchbale
+                                        ng-model="eventFilter.IsClinetCustomLogo"
+                                        ng-options="c.Id as c.Name for c in checkBoxList"></select>
+                            </div>
+                        </div>
+                        <!--R o w 2-->
+                        <div class="form-group  row">
+                            <!--IsLogoAr-->
+                            <div class="col-lg-3 form-group-sub">
+                                <label class="col-form-label">@Token.IsLogoAr</label>
+                                <select class="form-control"
+                                        serchbale
+                                        ng-model="eventFilter.IsLogoAr"
+                                        ng-options="c.Id as c.Name for c in checkBoxList"></select>
+                            </div>
+                            <!--IsActive-->
+                            <div class="col-lg-3 form-group-sub">
+                                <label class="col-form-label">@Token.IsActive</label>
+                                <select class="form-control"
+                                        serchbale
+                                        ng-model="eventFilter.IsActive"
+                                        ng-options="c.Id as c.Name for c in checkActiveList"></select>
+                            </div>
+                            <!--PackageId-->
+                            <div class="col-lg-3 form-group-sub">
+                                <label class="col-form-label">@Token.Package</label>
+                                <select class="form-control"
+                                        serchbale
+                                        ng-model="eventFilter.PackageId"
+                                        ng-options="c.Id as c.PackageName for c in packages"></select>
+                            </div>
+                           
+                        </div>
+
+                        <div class="form-group  row">
+                            <!--CreateDateFrom-->
+                            <div class="col-lg-3 form-group-sub">
+                                <label class="col-form-label">@Token.CreateDateFrom</label>
+                                <input type="date"
+                                       class="form-control"
+                                       id="createDateFrom"
+                                       ng-model="eventFilter.CreateDateFrom" />
+                            </div>
+                            <!--CreateDateTo-->
+                            <div class="col-lg-3 form-group-sub">
+                                <label class="col-form-label">@Token.CreateDateTo</label>
+                                <input type="date"
+                                       class="form-control"
+                                       id="createDateTo"
+                                       ng-model="eventFilter.CreateDateTo" />
+                            </div>
+
+                            <!--EventDateTimeFrom-->
+                            <div class="col-lg-3 form-group-sub">
+                                <label class="col-form-label">@Token.EventDateFrom</label>
+                                <input type="date"
+                                       class="form-control"
+                                       id="eventDateTimeFrom"
+                                       ng-model="eventFilter.EventDateTimeFrom" />
+                            </div>
+                            <!--EventDateTimeTo-->
+                            <div class="col-lg-3 form-group-sub">
+                                <label class="col-form-label">@Token.EventDateTo</label>
+                                <input type="date"
+                                       class="form-control"
+                                       id="eventDateTimeTo"
+                                       ng-model="eventFilter.EventDateTimeTo" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--R O W 4-->
+                    <div class="row">
+                        <div class="col-lg-10"></div>
+                        <div class="col-lg-2">
+                            <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                                <i class="la la-search">@Token.Show</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="kt-portlet__body">
+                <div class="kt-portlet__body">
+                        <table class="table sms-table  "
+                               datatable="ng"
+                               dt-options="vm.dtOptions"
+                               dt-instance="vm.dtInstance"
+                               dt-column-defs="vm.dtColumnDefs"
+                               id="ng_table_1">
+                            <thead class="">
+                                <tr class="">
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="NameGroom"
+                                                  ng-sms-resource="@Token.NameGroom"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="NameGroom"
+                                                  ng-sms-resource="@Token.NameGroom"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="IsClinetCustomLogo"
+                                                  ng-sms-resource="@Token.IsClinetCustomLogo"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="IsLogoAr"
+                                                  ng-sms-resource="@Token.IsLogoAr"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="IsNamesAr"
+                                                  ng-sms-resource="@Token.IsNamesAr"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="IsActive"
+                                                  ng-sms-resource="@Token.IsActive"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="PackageName"
+                                                  ng-sms-resource="@Token.Package"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="PrintNamesTypeName"
+                                                  ng-sms-resource="@Token.PrintNamesType"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="BranchName"
+                                                  ng-sms-resource="@Token.Branch"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="EventDateTimeDisplay"
+                                                  ng-sms-resource="@Token.EventDateTime"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="CreateDateTimeDisplay"
+                                                  ng-sms-resource="@Token.CreateDateTime"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        @Token.Operations
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in events|filter:eventsSearch |orderBy:enquiyFOP.sort.propName:enquiyFOP.sort.reverse | limitTo:enquiyFOP.paging.pagingLimt.take:enquiyFOP.paging.pagingLimt.skip track by $index">
+                                    <td>{{x.NameGroom}}</td>
+                                    <td>{{x.NameGroom}}</td>
+                                    <td><i class="fas " ng-class="{'fa-check':x.IsClinetCustomLogo}"></i></td>
+                                    <td><i class="fas " ng-class="{'fa-check':x.IsLogoAr}"></i></td>
+                                    <td><i class="fas " ng-class="{'fa-check':x.IsNamesAr}"></i></td>
+                                    <td><i class="fas " ng-class="{'fa-check':x.IsActive}"></i></td>
+                                    <td>{{x.Package.PackageName}}</td>
+                                    <td>{{x.PrintNameType.PrintNamesTypeName}}</td>
+                                    <td>{{x.Branch.BranchName}}</td>
+                                    <td>{{x.EventDateTimeDisplay}}</td>
+                                    <td>{{x.CreateDateTimeDisplay}}</td>
+                                    <td>
+                                        <!--Btn:Edit-->
+                                            <a href="/MyEvents/AddAndUpdate?id={{x.Id}}" title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                        <a href="/MyEvents/EventInformation?id={{x.Id}}" title="@Token.ShowDetails" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="la la-search"></i> </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <!--Paging -->
+                    <sms-paging ng-sms-fop="enquiyFOP" ng-sms-display-m-func="getEvents()"></sms-paging>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+@section scripts{
+
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/events/index/service.js"></script>
+    <script src="~/Scripts/angularJS/views/events/index/contoller.js"></script>
+}

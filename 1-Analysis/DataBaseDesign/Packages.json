@@ -1,0 +1,26 @@
+{
+    "Packages": {
+        "Id": null,
+        "IsAllowPrintNames": null, //يمكن مع هذة الباكج طباعة الاسماء
+        "FkWordName_Id": null,
+        "FkWordDescription_Id": null,
+        "FKAlbumType_Id": null,
+    },
+    "PackageDetails": {
+        "Id": 0,
+        "FKPackageInputType_Id": 0,
+        "FkWord_Id":0
+    },
+    "PrintNamesTypes": {
+        "Id": null,
+        "FKWordName_Id": null
+    },
+    "AlbumTypes": {
+        "Id": null,
+        "FKWord_Id": null
+    },
+    "PackageInputTypes": {
+        "Id": null,
+        "FKWord_Id": null
+    }
+}

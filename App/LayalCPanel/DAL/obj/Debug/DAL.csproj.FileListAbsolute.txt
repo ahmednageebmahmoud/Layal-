@@ -1,0 +1,10 @@
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\bin\Debug\DAL.dll.config
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\bin\Debug\DAL.dll
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\bin\Debug\DAL.pdb
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\bin\Debug\EntityFramework.dll
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\bin\Debug\EntityFramework.SqlServer.dll
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\bin\Debug\EntityFramework.xml
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\bin\Debug\EntityFramework.SqlServer.xml
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\obj\Debug\DAL.dll
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\obj\Debug\DAL.pdb
