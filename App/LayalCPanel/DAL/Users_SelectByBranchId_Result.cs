@@ -28,5 +28,7 @@ namespace DAL
         public Nullable<int> FKPranch_Id { get; set; }
         public bool IsActiveEmail { get; set; }
         public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public bool IsActive { get; set; }
+        public int FkWorkType_Id { get; set; }
     }
 }

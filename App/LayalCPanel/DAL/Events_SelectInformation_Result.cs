@@ -15,7 +15,6 @@ namespace DAL
     {
         public long Id { get; set; }
         public Nullable<bool> IsClinetCustomLogo { get; set; }
-        public Nullable<bool> IsLogoAr { get; set; }
         public string LogoFilePath { get; set; }
         public Nullable<bool> IsNamesAr { get; set; }
         public string NameGroom { get; set; }
@@ -29,11 +28,13 @@ namespace DAL
         public string Notes { get; set; }
         public long FKUserCreaed_Id { get; set; }
         public int FKBranch_Id { get; set; }
-        public bool IsActive { get; set; }
-        public bool IsCanNotUpdate { get; set; }
         public string ClendarEventId { get; set; }
+        public decimal PackagePrice { get; set; }
+        public decimal PackageNamsArExtraPrice { get; set; }
+        public Nullable<System.DateTime> VistToCoordinationDateTime { get; set; }
+        public string VistToCoordinationClendarEventId { get; set; }
         public string EnquiryName { get; set; }
-        public Nullable<bool> EnquiryIsClosed { get; set; }
+        public Nullable<bool> IsClosed { get; set; }
         public string Package_NameAr { get; set; }
         public string Package_NameEn { get; set; }
         public bool Package_IsAllowPrintNames { get; set; }
@@ -43,5 +44,7 @@ namespace DAL
         public string Branch_NameEn { get; set; }
         public string Clinet_UserName { get; set; }
         public string UserCreated_UserName { get; set; }
+        public Nullable<decimal> TotalPayments { get; set; }
+        public Nullable<decimal> TotalPaymentsActivated { get; set; }
     }
 }

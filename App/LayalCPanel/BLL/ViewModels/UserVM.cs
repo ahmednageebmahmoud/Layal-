@@ -31,5 +31,7 @@ namespace BLL.ViewModels
         public AccountTypeVM AccountType { get; set; }
         public CountryVM Country { get; set; }
         public CityVM City { get; set; }
+        public bool IsActive { get; set; }
+        public List<WorkTypeVM> WorkTypes { get; set; }
     }//endclass
 }

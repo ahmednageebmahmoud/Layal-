@@ -104,6 +104,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\EmployeeDistributionWorksBLL.cs" />
+    <Compile Include="BLL\EmployeesWorksBLL.cs" />
+    <Compile Include="BLL\EnquiryPaymentsBLL.cs" />
+    <Compile Include="BLL\EventCoordinationsBLL.cs" />
     <Compile Include="BLL\PackageInputTypesBLL.cs" />
     <Compile Include="BLL\BasicBLL.cs" />
     <Compile Include="BLL\BranchesBLL.cs" />
@@ -143,6 +147,10 @@
     <Compile Include="ViewModels\CityVM.cs" />
     <Compile Include="ViewModels\ConnectUsVM.cs" />
     <Compile Include="ViewModels\CountryVM.cs" />
+    <Compile Include="ViewModels\EmployeeDiributionWorkVM.cs" />
+    <Compile Include="ViewModels\EmployeeWorkVM.cs" />
+    <Compile Include="ViewModels\EnquiryPaymentVM.cs" />
+    <Compile Include="ViewModels\EventCoordinationVM.cs" />
     <Compile Include="ViewModels\EventVM.cs" />
     <Compile Include="ViewModels\PackageDetailVM.cs" />
     <Compile Include="ViewModels\PackageInputTypeVM.cs" />
@@ -163,6 +171,7 @@
     <Compile Include="ViewModels\UsersPrivilegeVM.cs" />
     <Compile Include="ViewModels\UserVM.cs" />
     <Compile Include="ViewModels\WordVM.cs" />
+    <Compile Include="ViewModels\WorkTypeVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

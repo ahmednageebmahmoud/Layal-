@@ -19,7 +19,7 @@
         "ClendarEventId": null, //معرف النتيجة فى جوجل لكي يتم حذفها فيما بعد
         "FkClinet_Id": null, //معرف العميل الذى انشىء من منطلق هذا الاستفسار
         "IsLinkedClinet": null,
-        "IsCreatedEvent":true
+        "IsCreatedEvent": true
     },
     "EnquiryTypes": {
         "Id": null,
@@ -42,10 +42,19 @@
         "Notes": null,
         "DateTime": null,
         "ScheduleVisitDateTime": null,
-        "IsBankTransferDeposit": null,
-        "Amount": null,
         "FKEnquiry_Id": null,
         "FKEnquiryStatus_Id": null,
         "FKUserCreated_Id": null
+    },
+    "EnquiryPayments": {
+        "Id": 0,
+        "Amount": 0,
+        "IsDeposit": true,
+        "IsBankTransfer": true,
+        "TransferImage": "",
+        "IsAcceptFromManger": true,
+        "DateTime": "datetime",
+        "FKEnquiry_Id" 0,
+        "FKUserCreated_Id" 0
     }
 }

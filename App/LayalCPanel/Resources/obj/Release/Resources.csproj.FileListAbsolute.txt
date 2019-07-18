@@ -1,0 +1,10 @@
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\Resources\bin\Release\Resources.dll
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\Resources\bin\Release\Resources.pdb
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\Resources\bin\Release\ar\Resources.resources.dll
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\Resources\obj\Release\Resources.csprojResolveAssemblyReference.cache
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\Resources\obj\Release\Resources.Token.resources
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\Resources\obj\Release\Resources.Token.ar.resources
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\Resources\obj\Release\Resources.csproj.GenerateResource.Cache
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\Resources\obj\Release\ar\Resources.resources.dll
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\Resources\obj\Release\Resources.dll
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\Resources\obj\Release\Resources.pdb

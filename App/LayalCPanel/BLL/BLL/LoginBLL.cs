@@ -24,11 +24,15 @@ namespace BLL.BLL
                 _IsRemmeberMe = isRemmber,
                 BranchId = c.FKPranch_Id.HasValue ? c.FKPranch_Id.Value : 0,
                 IsActiveEmail = c.IsActiveEmail,
-                Email = c.Email
+                Email = c.Email,
+                IsActive = c.IsActive
             }).FirstOrDefault();
 
             if (User == null)
                 return new ResponseVM(Enums.RequestTypeEnum.Error, Token.InvalidUserNameOrPassword);
+            if(!User.IsActive)
+                return new ResponseVM(Enums.RequestTypeEnum.Error, Token.YourAccountIsNotActive);
+
 
             //Set User In Cookie
             CookieService.SetUserInCookie(User);

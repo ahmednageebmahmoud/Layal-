@@ -1,0 +1,211 @@
+﻿@{
+    ViewBag.Title = Token.UsersPagesPrivileges;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    UsersPrivilegeVM Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.UsersPrivileges);
+
+}
+
+<!-- begin:: Content Head -->
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+
+        <span class="kt-subheader__separator kt-hidden"></span>
+        <div class="kt-subheader__breadcrumbs">
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link">
+                @Token.HomePage
+            </a>
+
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">
+                @Token.UsersPagesPrivileges
+            </a>
+
+            <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+        </div>
+    </div>
+
+</div>
+
+<!-- end:: Content Head -->
+<!--Page Body-->
+<div ng-controller="usersPagesPrivilegesCtrl">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        @Token.UsersPagesPrivileges
+                    </h3>
+                </div>
+            </div>
+
+            <div class="kt-portlet__body">
+
+                <form class="kt-form kt-form--label-right" novalidate name="usersPagesPrivilegeFrm" ng-submit="usersPagesPrivilegeFrm.$valid?getUsersPagesPrivileges(true):nukll">
+                    <div class="kt-portlet__body">
+                        <div class="form-group  row">
+                            <!--Employee-->
+                            <label class="col-form-label col-lg-2">@Token.Employee </label>
+                            <div class="col-lg-4 form-group-sub">
+                                <select class="form-control"
+                                        serchbale
+                                        name="emp"
+                                        ng-class="{'is-invalid':usersPagesPrivilegeFrm.emp.$invalid}"
+                                        ng-model="usersPagesFilter.userId"
+                                        ng-options="c.Id as c.UserName for c in employees"
+                                        ng-required="true" ng-change="usersPagesPrivileges=[]"></select>
+
+                                <!--Errors:Employee-->
+                                <small class="error invalid-feedback" ng-if="usersPagesPrivilegeFrm.emp.$error.required">@Token.FieldIsRequierd</small>
+                            </div>
+
+                            <!--Menu-->
+                            <label class="col-form-label col-lg-2">@Token.Menu</label>
+                            <div class="col-lg-4 form-group-sub">
+                                <select class="form-control"
+                                        serchbale
+                                        name="menu"
+                                        ng-class="{'is-invalid':usersPagesPrivilegeFrm.menu.$invalid}"
+                                        ng-model="usersPagesFilter.menuId"
+                                        ng-options="c.Id as c.MenuName for c in menus"
+                                        ng-required="true" ng-change="usersPagesPrivileges=[]"></select>
+
+                                <small class="error invalid-feedback" ng-if="usersPagesPrivilegeFrm.menu.$error.required">@Token.FieldIsRequierd</small>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-10"></div>
+                            <div class="col-lg-2">
+                                <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                                    <i class="la la-search">@Token.Show</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+            <div class="kt-portlet__body">
+                <div class="kt-portlet__body">
+                    @if (Priv.CanDisplay)
+                    {
+                        <table class="table sms-table  "
+                               datatable="ng"
+                               dt-options="vm.dtOptions"
+                               dt-instance="vm.dtInstance"
+                               dt-column-defs="vm.dtColumnDefs"
+                               id="ng_table_1">
+                            <thead class="">
+                                <tr class="">
+                                    <th>
+                                        <sms-sort ng-sms-fop="usersPagesPrivilegeFOP"
+                                                  ng-sms-field-name="PageName"
+                                                  ng-sms-resource="@Token.Page"></sms-sort>
+                                    </th>
+                                    <th class="th-15">
+                                        <sms-sort ng-sms-fop="usersPagesPrivilegeFOP"
+                                                  ng-sms-field-name="CanAdd"
+                                                  ng-sms-resource="@Token.CanAdd"></sms-sort>
+                                    </th>
+                                    <th class="th-15">
+                                        <sms-sort ng-sms-fop="usersPagesPrivilegeFOP"
+                                                  ng-sms-field-name="CanEdit"
+                                                  ng-sms-resource="@Token.CanEdit"></sms-sort>
+                                    </th>
+                                    <th class="th-15">
+                                        <sms-sort ng-sms-fop="usersPagesPrivilegeFOP"
+                                                  ng-sms-field-name="CanDelete"
+                                                  ng-sms-resource="@Token.CanDelete"></sms-sort>
+                                    </th>
+                                    <th class="th-15">
+                                        <sms-sort ng-sms-fop="usersPagesPrivilegeFOP"
+                                                  ng-sms-field-name="CanDisplay"
+                                                  ng-sms-resource="@Token.CanDisplay"></sms-sort>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="tm in usersPagesPrivileges|filter:usersPagesPrivilegeSearch |orderBy:usersPagesPrivilegeFOP.sort.propName:usersPagesPrivilegeFOP.sort.reverse | limitTo:usersPagesPrivilegeFOP.paging.pagingLimt.take:usersPagesPrivilegeFOP.paging.pagingLimt.skip track by $index"
+                                    ng-class="{'success':tm.CanAdd||tm.CanEdit||tm.CanDelete||tm.CanDisplay}" style=" font-size 20px;">
+                                    <td>
+                                        <p><a href="{{tm.Page.Url}}" class="kt-link kt-font-boldest">{{tm.Page.PageName }}</a></p>
+                                    </td>
+                                    <td>
+                                        <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                            <label>
+                                                <input type="checkbox" checked="checked" ng-model="tm.CanAdd" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                                <span></span>
+                                            </label>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                            <label>
+                                                <input type="checkbox"
+                                                       checked="checked"
+                                                       ng-change="checkAllowDisplay(tm)"
+                                                       ng-model="tm.CanEdit" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                                <span></span>
+                                            </label>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                            <label>
+                                                <input type="checkbox" checked="checked"
+                                                       ng-change="checkAllowDisplay(tm)"
+                                                       ng-model="tm.CanDelete" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                                <span></span>
+                                            </label>
+                                        </span>
+
+                                    </td>
+                                    <td>
+                                        <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                            <label>
+                                                <input type="checkbox" checked="checked"
+                                                       ng-change="tm.CanDelete||tm.CanEdit?tm.CanDisplay=true:null"
+                                                       ng-model="tm.CanDisplay" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                                <span></span>
+                                            </label>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    }
+                    @if (Priv.CanEdit)
+                    {
+                        <div class="form-group row">
+                            <div class="col-lg-10">
+                            </div>
+                            <div class="col-lg-2">
+                                <button type="button" class="btn btn-brand btn-elevate btn-elevate-air" ng-click="saveChange()">
+                                    <i class="la la-save" >@Token.Save</i>
+                                </button>
+                            </div>
+                        </div>
+
+                    }
+                    <!--Paging -->
+                    <sms-paging ng-sms-fop="usersPagesPrivilegeFOP" ng-sms-display-m-func="getDocuments()"></sms-paging>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/usersPagesPrivilege/service.js"></script>
+    <script src="~/Scripts/angularJS/views/usersPagesPrivilege/contoller.js"></script>
+}

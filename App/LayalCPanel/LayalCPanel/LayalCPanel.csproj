@@ -208,6 +208,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EnquiryPaymentsController.cs" />
+    <Compile Include="Controllers\EventCoordinationsController.cs" />
     <Compile Include="Controllers\PackageInputTypesController.cs" />
     <Compile Include="Controllers\BasicController.cs" />
     <Compile Include="Controllers\PackagesController.cs" />
@@ -234,6 +236,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\CheckIsEmilActivedAttribute .cs" />
+    <Compile Include="Models\PageForAdminAttribute.cs" />
     <Compile Include="Models\PagePrivilegeAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -1948,7 +1951,20 @@
     <Content Include="Scripts\angularJS\directives\sms-fop\sms-paging.js" />
     <Content Include="Scripts\angularJS\directives\sms-fop\sms-sort.js" />
     <Content Include="Scripts\angularJS\directives\sms-upload-files.js" />
+    <Content Include="Scripts\angularJS\filters\employeeWorkFilter.js" />
     <Content Include="Scripts\angularJS\filters\filterWithoutStaticItems.js" />
+    <Content Include="Scripts\angularJS\views\enquires\addAndUpdate\contoller.js" />
+    <Content Include="Scripts\angularJS\views\enquires\enquiryInformation\service.js" />
+    <Content Include="Scripts\angularJS\views\enquiryPayments\payments\contoller.js" />
+    <Content Include="Scripts\angularJS\views\enquiryPayments\payments\service.js" />
+    <Content Include="Scripts\angularJS\views\eventCoordination\addAndUpdate\contoller.js" />
+    <Content Include="Scripts\angularJS\views\eventCoordination\addAndUpdate\service.js" />
+    <Content Include="Scripts\angularJS\views\eventCoordination\index\contoller.js" />
+    <Content Include="Scripts\angularJS\views\eventCoordination\index\service.js" />
+    <Content Include="Scripts\angularJS\views\events\distributionOfWork\contoller.js" />
+    <Content Include="Scripts\angularJS\views\events\distributionOfWork\service.js" />
+    <Content Include="Scripts\angularJS\views\home\index\employee\contoller.js" />
+    <Content Include="Scripts\angularJS\views\home\index\employee\service.js" />
     <Content Include="Scripts\angularJS\views\packages\addAndUpdate\contoller.js" />
     <Content Include="Scripts\angularJS\views\packages\addAndUpdate\service.js" />
     <Content Include="Scripts\angularJS\views\packages\index\contoller.js" />
@@ -1979,7 +1995,7 @@
     <Content Include="Scripts\angularJS\views\countries\addAndUpdate\service.js" />
     <Content Include="Scripts\angularJS\views\countries\index\contoller.js" />
     <Content Include="Scripts\angularJS\views\countries\index\service.js" />
-    <Content Include="Scripts\angularJS\views\enquires\addAndUpdate\contoller.js" />
+    <Content Include="Scripts\angularJS\views\enquires\enquiryInformation\contoller.js" />
     <Content Include="Scripts\angularJS\views\enquires\addAndUpdate\service.js" />
     <Content Include="Scripts\angularJS\views\enquires\index\contoller.js" />
     <Content Include="Scripts\angularJS\views\enquires\index\service.js" />
@@ -2183,6 +2199,7 @@
     <Content Include="credentials.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\s.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dataTables\angular-datatables.buttons.min.js" />
     <Content Include="Scripts\dataTables\angular-datatables.min.js" />
@@ -2242,8 +2259,6 @@
     <Content Include="Views\PrintNamesTypes\Index.cshtml" />
     <Content Include="Views\Events\AddAndUpdate.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
-    <Content Include="Views\Events\EventsInformation.cshtml" />
-    <Content Include="Views\MyEvents\EventInformation.cshtml" />
     <Content Include="Views\MyEvents\Index.cshtml" />
     <Content Include="Views\MyEvents\AddAndUpdate.cshtml" />
     <Content Include="Views\AlbumTypes\Index.cshtml" />
@@ -2251,10 +2266,22 @@
     <Content Include="Views\Packages\AddAndUpdate.cshtml" />
     <Content Include="Views\Packages\Index.cshtml" />
     <Content Include="Views\Packages\PackageInformtion.cshtml" />
+    <Content Include="Views\Events\DistributionOfWork.cshtml" />
+    <Content Include="Views\EnquiryPayments\Payments.cshtml" />
+    <Content Include="Views\Shared\_EnquiryInformation.cshtml" />
+    <Content Include="Views\Shared\_EventsInformation.cshtml" />
+    <Content Include="Views\Shared\_PackageInformtion.cshtml" />
+    <Content Include="Views\Shared\_PaymentsInformations.cshtml" />
+    <Content Include="Views\MyEnquires\EnquiryInformation.cshtml" />
+    <Content Include="Views\Shared\EmployeeIndex.cshtml" />
+    <Content Include="Views\EventCoordinations\AddAndUpdate.cshtml" />
+    <Content Include="Views\EventCoordinations\Index.cshtml" />
+    <Content Include="Views\Shared\_EmployeeEventWorks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\css\" />
+    <Folder Include="Files\Enquiries\Payments\" />
     <Folder Include="Files\Events\CustomLogos\" />
     <Folder Include="Views\LogOut\" />
   </ItemGroup>

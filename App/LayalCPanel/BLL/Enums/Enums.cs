@@ -11,7 +11,8 @@ namespace BLL.Enums
         ProjectManager = 1,
         Supervisor = 2,
         BranchManager = 3,
-        Clinet = 4
+        Clinet = 4,
+        Employee=5
     }
 
 
@@ -54,7 +55,8 @@ namespace BLL.Enums
         Events=12,
         Packages=14,
         AlbumTypes=15,
-        PackageInputTypes=16
+        PackageInputTypes=16,
+        PaymentsInformations=17
     }
 
 
@@ -78,4 +80,22 @@ namespace BLL.Enums
 
 
     }
+
+    public enum WorksTypesEnum
+    {
+	Booking                                         =1  ,
+	DataPerfection                                 =2  ,
+	Coordination                                    =3  ,
+	Implementation                                  =4  ,
+	ArchivingAndSaveing                           =5  ,
+	ProductProcessing                              =6  ,
+	Chooseing                                       =7  ,
+	DigitalProcessing                              =8  ,
+	PreparingForPrinting                          =9  ,
+	Manufacturing                                   =10 ,
+	QualityAndReview                              =11 ,
+	Packaging                                       =12 ,
+	TransmissionAndDelivery                       =13 ,
+	Archiving                                       =14 ,
+    }                                               
 }//end class

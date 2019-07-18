@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="bokeh.site" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^G:\\Projects\\MyProjects\\Projects\\2019\\layal\\App\\LayalCPanel\\LayalCPanel\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^G:\\Projects\\MyProjects\\Projects\\2019\\layal\\App\\LayalCPanel\\LayalCPanel\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-LayalCPanel-20190623080339.mdf;Initial Catalog=aspnet-LayalCPanel-20190623080339;Integrated Security=True" tags="">
+    <parameterEntry kind="XmlFile" scope="G:\\Projects\\MyProjects\\Projects\\2019\\layal\\App\\LayalCPanel\\LayalCPanel\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="LayanEntities-Web.config Connection String" description="" value="metadata=res://*/DB.csdl|res://*/DB.ssdl|res://*/DB.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=AHMED\AHMED;initial catalog=Layal;integrated security=True;multipleactiveresultsets=True;application name=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="G:\\Projects\\MyProjects\\Projects\\2019\\layal\\App\\LayalCPanel\\LayalCPanel\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='LayanEntities']/@connectionString" />
+  </parameter>
+</parameters>

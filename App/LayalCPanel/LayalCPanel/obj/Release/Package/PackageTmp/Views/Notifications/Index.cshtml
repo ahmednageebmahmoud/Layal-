@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = Token.Notifications;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- begin:: Content Head -->
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+
+        <span class="kt-subheader__separator kt-hidden"></span>
+        <div class="kt-subheader__breadcrumbs">
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link">
+                @Token.HomePage
+            </a>
+
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">
+                @Token.Notifications
+            </a>
+
+            <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+        </div>
+    </div>
+
+</div>
+
+<!-- end:: Content Head -->
+<!--Page Body-->
+<div ng-controller="notificationsCtrl">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon-list-1"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        @Token.Notifications
+                    </h3>
+                </div>
+                <div class="kt-portlet__head-toolbar">
+                    <div class="kt-portlet__head-wrapper">
+                        <div class="kt-portlet__head-actions">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kt-portlet__body">
+                <form novalidate name="enquiryFrm" class="kt-form kt-form--label-right" ng-submit="getNotifications(true)">
+                    <div class="kt-portlet__body">
+
+                        <!--R O W 1-->
+                        <div class="form-group  row">
+                            <!--Pages-->
+                            <div class="col-lg-4 form-group-sub">
+                                <label class="col-form-label">@Token.Page</label>
+                                <select class="form-control"
+                                        ng-model="notifyFilter.pageId"
+                                        ng-change="notifications=[]"
+                                        ng-options="c.Id as c.PageName for c in pages"></select>
+                            </div>
+                            <!--State-->
+                            <div class="col-lg-4 form-group-sub">
+                                <label class="col-form-label">@Token.Status</label>
+                                <select class="form-control"
+                                        ng-model="notifyFilter.stateId"
+                                        ng-change="notifications=[]"
+                                        ng-options="c.Id as c.StateName for c in states"></select>
+                            </div>
+
+                            <div class="col-lg-4 form-group-sub">
+                                <label class="col-form-label"> </label><br /><br />
+
+                                <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                                    <i class="la la-search">@Token.Show</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="kt-portlet__body">
+                <div class="kt-portlet__body">
+                        <table class="table sms-table  " 
+                            datatable="ng" 
+                               dt-options="vm.dtOptions"
+                               dt-instance="vm.dtInstance"
+                               dt-column-defs="vm.dtColumnDefs"
+                               id="ng_table_1">
+                            <thead>
+                                <tr>
+                                    <th class="th-25 ">
+                                        <sms-sort ng-sms-fop="notifyFOP"
+                                                  ng-sms-field-name="Title"
+                                                  ng-sms-resource="@Token.Title"></sms-sort>
+                                    </th>
+                                    <th class="th-45 ">
+                                        <sms-sort ng-sms-fop="notifyFOP"
+                                                  ng-sms-field-name="Description"
+                                                  ng-sms-resource="@Token.Description"></sms-sort>
+                                    </th>
+                                    <th class="th-20 ">
+                                        <sms-sort ng-sms-fop="notifyFOP"
+                                                  ng-sms-field-name="DateTimeDisplay"
+                                                  ng-sms-resource="@Token.CreateDateTime"></sms-sort>
+                                    </th>
+                                    <th class="th-20 ">
+                                        <sms-sort ng-sms-fop="notifyFOP"
+                                                  ng-sms-field-name="IsRead"
+                                                  ng-sms-resource="@Token.Readed"></sms-sort>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr
+                                    ng-repeat="x in notifications|filter:notifySearch |orderBy:notifyFOP.sort.propName:notifyFOP.sort.reverse | limitTo:notifyFOP.paging.pagingLimt.take:notifyFOP.paging.pagingLimt.skip track by $index"
+                                    ng-class="{'kt-datatable__row--even':$index%2==0}">
+
+                                    <td>
+                                        <p><a href="{{x.FullRedirectUrl}}&isRead={{x.IsRead}}" class="kt-link kt-font-boldest">{{x.Title}}</a></p>
+                                    </td>
+                                    <td><span>{{x.Description}}</span></td>
+                                    <td><span>{{x.DateTimeDisplay}}</span></td>
+                                    <td>
+                                    <i class="fa" ng-class="{'fa-check':x.IsRead}"></i>
+                                    </td>
+
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                             <!--Paging -->
+                        <sms-paging-select ng-sms-fop="notifyFOP"></sms-paging-select>
+                        <sms-paging ng-sms-fop="notifyFOP" ng-sms-display-m-func="getNotifications()"></sms-paging>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/notifications/index/service.js"></script>
+    <script src="~/Scripts/angularJS/views/notifications/index/contoller.js"></script>
+}

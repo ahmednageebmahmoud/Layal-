@@ -15,6 +15,7 @@ namespace UI.Controllers
     public class EventsController : BasicController
     {
         EventsBLL EventsBLL = new EventsBLL();
+        EmployeeDistributionWorksBLL EmployeeDistributionWorkBLL = new EmployeeDistributionWorksBLL();
 
         [PagePrivilege(PagesEnum.Events, true, true, true, true)]
         public ActionResult Index()
@@ -48,25 +49,46 @@ namespace UI.Controllers
             }), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult GetDistributionOfWorkItems(int branchId)
+        {
+            return Json(new ResponseVM(RequestTypeEnum.Success, Token.Success, new
+            {
+              Employees= FillItems.UsersWithCurrentBranchWithWorkTypes(branchId,AccountTypeEnum.Employee),
+
+            }), JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult GetEvents(EventVM even)
         {
             return Json(EventsBLL.GetEvents(even), JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetEmployeeDistributionWorks(long eventId)
+        {
+            return Json(EmployeeDistributionWorkBLL.GetByEventId(eventId), JsonRequestBehavior.AllowGet);
+        }
+
+
         public ActionResult GetEvent(long id)
         {
             return Json(EventsBLL.SelectById(id), JsonRequestBehavior.AllowGet);
         }
-
-        public ActionResult GetEventInformation(long id)
-        {
-            return Json(EventsBLL.SelectInformation(id), JsonRequestBehavior.AllowGet);
-        }
+ 
 
         [HttpPost]
         public JsonResult SaveChange(EventVM enquiryType)
         {
             return Json(EventsBLL.SaveChange(enquiryType), JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult SaveChangeDistributionOfWork(EmployeeDiributionWorkVM  dis)
+        {
+            return Json(EmployeeDistributionWorkBLL.SaveChange(dis), JsonRequestBehavior.AllowGet);
+        }
+
+        
+            
+
     }//end class
 }

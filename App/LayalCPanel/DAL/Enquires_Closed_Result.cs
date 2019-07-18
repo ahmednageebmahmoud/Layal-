@@ -15,5 +15,6 @@ namespace DAL
     {
         public string Enquiry_ClendarEventId { get; set; }
         public string Event_ClendarEventId { get; set; }
+        public string VistToCoordinationClendarEventId { get; set; }
     }
 }

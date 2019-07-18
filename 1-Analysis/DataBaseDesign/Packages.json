@@ -5,6 +5,8 @@
         "FkWordName_Id": null,
         "FkWordDescription_Id": null,
         "FKAlbumType_Id": null,
+        "Price":5.5, //سعر المنتج
+        "NamsArExtraPrice":5.5,//سعر اضافة لطابعة الاسماء بـ العربى 
     },
     "PackageDetails": {
         "Id": 0,

@@ -31,7 +31,7 @@ namespace DAL
         public Nullable<System.DateTime> ClosedDateTime { get; set; }
         public bool IsWithBranch { get; set; }
         public string ClendarEventId { get; set; }
-        public Nullable<bool> IsPaymented { get; set; }
+        public Nullable<bool> IsDepositPaymented { get; set; }
         public Nullable<long> FkClinet_Id { get; set; }
         public bool IsCreatedEvent { get; set; }
         public string CountryNameAr { get; set; }

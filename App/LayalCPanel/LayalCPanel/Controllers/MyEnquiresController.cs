@@ -27,6 +27,15 @@ namespace UI.Controllers
             return View();
         }
 
+        public ActionResult EnquiryInformation(long id)
+        {
+            if (!EnquiyBLL.CheckIfMyEnquiry(id))
+                return HttpNotFound();
+
+            return View();
+        }
+
+
 
         public ActionResult GetEnquiy(int id)
         {

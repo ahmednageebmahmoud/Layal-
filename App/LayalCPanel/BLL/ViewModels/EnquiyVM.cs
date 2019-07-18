@@ -28,7 +28,7 @@ namespace BLL.ViewModels
         public int? BranchId { get; set; }
         public bool? IsClosed { get; set; }
         public object Status { get; set; }
-        public bool? IsPaymented { get;   set; }
+        public bool? IsDepositPaymented { get;   set; }
         public string ClendarEventId { get; set; }
         public bool? IsLinkedClinet { get; set; } 
         public DateTime CreateDateTime { get; set; }
@@ -36,6 +36,7 @@ namespace BLL.ViewModels
         public string CreateDateTimeDisplay => DateService.GetDateTimeEn(this.CreateDateTime);
         public string ClosedDateTimeDisplay => DateService.GetDateTimeEn(this.ClosedDateTime);
         public string Note { get; set; }
+        public long? ClinetId { get; set; }
         public string EventDate
         {
             get

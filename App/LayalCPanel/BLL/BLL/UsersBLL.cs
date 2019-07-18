@@ -86,7 +86,7 @@ namespace BLL.BLL
             catch (Exception ex)
             {
 
-               
+
                 return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
 
             }
@@ -108,8 +108,8 @@ namespace BLL.BLL
                     Email = c.Email
                 }).FirstOrDefault();
 
-                if(!User.IsActiveEmail)
-                return new ResponseVM(RequestTypeEnum.Error, Token.NotActivated);
+                if (!User.IsActiveEmail)
+                    return new ResponseVM(RequestTypeEnum.Error, Token.NotActivated);
                 return new ResponseVM(RequestTypeEnum.Success, Token.Activated, User);
             }
             catch (Exception ex)
@@ -196,11 +196,29 @@ namespace BLL.BLL
                 return new ResponseVM(RequestTypeEnum.Error, Token.PhoneItIsAlreadyUsed, c);
 
             //check from active code 
-            int Valid = db.Users_CheckFromActiveCode(c.Id, c.ActiveCode).First().Value;
-            if (Valid == 0)
-                return new ResponseVM(RequestTypeEnum.Error, Token.InvalidActiveCode, c);
+            if (c.ActiveCode != null)
+            {
+                int Valid = db.Users_CheckFromActiveCode(c.Id, c.ActiveCode).First().Value;
+                if (Valid == 0)
+                    return new ResponseVM(RequestTypeEnum.Error, Token.InvalidActiveCode, c);
+            }
 
-            db.Users_Update(c.Id, c.UserName, c.Email, c.PhoneNo, c.Address, c.CountryId, c.CityId, c.Password, c.LanguageId, c.DateOfBirth);
+            db.Users_Update(c.Id, c.UserName, c.Email, c.PhoneNo, c.Address, c.CountryId, c.CityId, c.Password, c.LanguageId, c.DateOfBirth, c.IsActive);
+
+
+
+            //Add WorksTypes if employee
+            if (c.AccountTypeId == (int)AccountTypeEnum.Employee && c.WorkTypes!=null&& c.WorkTypes.Count > 0)
+            {
+                //delete old works
+                db.EmployeesWorks_Delete(c.Id);
+                //add new 
+                c.WorkTypes.Where(v => v.Selected).ToList().ForEach(v =>
+                {
+                    db.EmployeesWorks_Insert(v.Id, c.Id);
+                });
+            }
+
             return new ResponseVM(RequestTypeEnum.Success, Token.Updated, c);
         }
 
@@ -211,9 +229,9 @@ namespace BLL.BLL
             {
                 var Enquiry = db.Enquires_SelectByPk_SimpleData(c.EnquiryId.Value).FirstOrDefault();
                 if (Enquiry == null)
-                    return new ResponseVM(RequestTypeEnum.Error, $"{Token.Enquiy}: {Token.UserNotFound}");
+                    return new ResponseVM(RequestTypeEnum.Error, $"{Token.Enquiry}: {Token.UserNotFound}");
 
-                if (Enquiry.IsPaymented.HasValue && !Enquiry.IsPaymented.Value)
+                if (Enquiry.IsDepositPaymented.HasValue && !Enquiry.IsDepositPaymented.Value)
                     return new ResponseVM(RequestTypeEnum.Error, Token.ClinetIsNotPayment);
 
 
@@ -240,8 +258,18 @@ namespace BLL.BLL
 
 
             ObjectParameter ID = new ObjectParameter("Id", typeof(long));
-            db.Users_Insert(ID, c.UserName, c.Email, c.PhoneNo, c.AccountTypeId, c.Address, c.CountryId, c.CityId, c.Password, null, DateTime.Now, c.LanguageId, c.BranchId, c.EnquiryId,c.DateOfBirth);
+            db.Users_Insert(ID, c.UserName, c.Email, c.PhoneNo, c.AccountTypeId, c.Address, c.CountryId, c.CityId, c.Password, null, DateTime.Now, c.LanguageId, c.BranchId, c.EnquiryId, c.DateOfBirth);
             c.Id = (long)ID.Value;
+
+            //Add WorksTypes if employee
+            if (c.AccountTypeId == (int)AccountTypeEnum.Employee && c.WorkTypes.Count > 0)
+            {
+                c.WorkTypes.Where(v => v.Selected).ToList().ForEach(v =>
+                 {
+                     db.EmployeesWorks_Insert(v.Id, c.Id);
+                 });
+            }
+
             return new ResponseVM(RequestTypeEnum.Success, Token.Added, c);
         }
 
@@ -260,7 +288,7 @@ namespace BLL.BLL
                 CityId = c.FkCity_Id,
                 CountryId = c.FkCountry_Id,
                 LanguageId = c.FKLanguage_Id,
-                DateOfBirth=c.DateOfBirth,
+                DateOfBirth = c.DateOfBirth,
 
                 City = new CityVM
                 {
@@ -282,7 +310,11 @@ namespace BLL.BLL
                 },
 
                 _Language = (LanguageEnum)c.FKLanguage_Id,
-           
+                WorkTypes=db.EmployeesWorks_SelectByUserId(id).Select(v=> new WorkTypeVM
+                {
+                    Id=v.FkWorkType_Id,
+                    Selected=true,
+                }).ToList()
 
 
             }).FirstOrDefault();

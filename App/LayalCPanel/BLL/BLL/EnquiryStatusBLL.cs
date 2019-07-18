@@ -1,4 +1,5 @@
-﻿using BLL.Enums;
+﻿using BLL.BLL;
+using BLL.Enums;
 using BLL.Services;
 using BLL.SignalAr;
 using BLL.ViewModels;
@@ -16,13 +17,33 @@ namespace BLL.BLL
     public class EnquiryStatusBLL : BasicBLL
     {
         NotificationsBLL NotificationsBLL = new NotificationsBLL();
+        private bool CheckIfEnquiryClosed(long enquiryId)
+        {
+            return db.Enquires_IsClosed(enquiryId).First().Value > 0;
+        }
+
         public object AddNewStatus(EnquiryStatusVM c)
         {
             try
             {
+
+                //check if closed
+                if (CheckIfEnquiryClosed(c.EnquiryId))
+                    return new ResponseVM(RequestTypeEnum.Error, Token.EnquiryIsClosed);
+
                 c = GetEnquiyStatusPure(c);
 
-                db.EnquiryStatus_Insert(c.Notes, c.DateTime, c.EnquiryId, (int)c.StatusId, c.ScheduleVisitDateTime,  this.UserLoggad.Id, c.IsWithBranch, c.IsBankTransferDeposit, c.Amount);
+                /*
+                 
+                اذا كانت هناك عملية  حجز بـحوالة بنكية فيجب حفظ صورة الحوالة   
+                نقوم بـ حفظ عملية لدفع بدام هناك عملية حجز بعربون
+                 */
+                var ObjReturn = AddNewPayment(c);
+                if (ObjReturn != null) return ObjReturn;
+
+
+
+                db.EnquiryStatus_Insert(c.Notes, c.DateTime, c.EnquiryId, (int)c.StatusId, c.ScheduleVisitDateTime, this.UserLoggad.Id, c.IsWithBranch, c.EnquiryPaymentId);
 
                 //هنا يتم اتمام العمليات المعتمدة على ذالك  بـ الاضافة الى الاشعارات
                 if (this.UserLoggad.AccountTypeId == (int)AccountTypeEnum.BranchManager)
@@ -47,6 +68,53 @@ namespace BLL.BLL
             {
                 return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
             }
+        }
+
+        /// <summary>
+        /// اضافة عملية دفع جديدة اذا كان قد دفع عربون
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        private object AddNewPayment(EnquiryStatusVM c)
+        {
+            if (c.StatusId == EnquiryStatusTypesEnum.BankTransferDeposit || c.IsBankTransferDeposit)
+            {
+                //اذا هى عملية حجز عن طريق حوالة بنكية
+                string ImagePath = null;
+                var FileSave = FileService.SaveFile(new FileSaveVM
+                {
+                    FileName = c.BankTransferImageName,
+                    FileBase64 = c.BankTransferImage,
+                    ServerPathSave = "/Files/Enquiries/Payments/"
+                });
+                if (!FileSave.IsSaved)
+                    return new ResponseVM(RequestTypeEnum.Error, Token.CanNotSaveBankTransferPhoto);
+                ImagePath = FileSave.SavedPath;
+                c.EnquiryPaymentId = new EnquiryPaymentsBLL().Add(new EnquiryPaymentVM
+                {
+                    Amount = c.Amount,
+                    IsDeposit = true,
+                    IsBankTransfer = true,
+                    EnquiryId = c.EnquiryId,
+                    IsAcceptFromManger = false,
+                    BranchId=c.EnquiryBranchId
+                }, ImagePath);
+
+            }
+            else if (c.StatusId == EnquiryStatusTypesEnum.DesireToBook)
+            {
+                c.EnquiryPaymentId = new EnquiryPaymentsBLL().Add(new EnquiryPaymentVM
+                {
+                    Amount = c.Amount,
+                    IsDeposit = true,
+                    IsBankTransfer = false,
+                    EnquiryId = c.EnquiryId,
+                    IsAcceptFromManger = false,
+                    BranchId = c.EnquiryBranchId
+
+                }, null);
+            }
+            return null;
         }
 
         private void MakeDecision(EnquiryStatusVM c)
@@ -144,12 +212,14 @@ namespace BLL.BLL
                 case EnquiryStatusTypesEnum.DesireToBook:
                     {
                         ObjectReturn.Amount = c.Amount;
-                        ObjectReturn.IsBankTransferDeposit = c.IsBankTransferDeposit;
                     }
                     break;
                 case EnquiryStatusTypesEnum.BankTransferDeposit:
                     {
                         ObjectReturn.Amount = c.Amount;
+                        ObjectReturn.BankTransferImageName = c.BankTransferImageName;
+                        ObjectReturn.BankTransferImage = c.BankTransferImage;
+                        ObjectReturn.IsBankTransferDeposit = true;
                     }
                     break;
             }

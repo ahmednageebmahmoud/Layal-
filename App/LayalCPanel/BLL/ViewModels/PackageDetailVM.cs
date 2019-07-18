@@ -13,5 +13,7 @@ namespace BLL.ViewModels
         public string ValueEn { get; set; }
         public int? PackageInputTypeId { get; set; }
         public int PackageId { get; set; }
+        public PackageInputTypeVM PackageInputType { get; set; }
+
     }//end class
 }

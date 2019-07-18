@@ -96,6 +96,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeDistributionWorks_SelectByEventId_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeesWorks_SelectByUserId_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employees_SelectWorks_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Enquires_Closed_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -108,10 +117,25 @@
     <Compile Include="Enquires_SelectByPk_SimpleData_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EnquiryNotes_SelectByEnquiryId_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EnquiryPayments_SelectByEnquiryId_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EnquiryStatusTypes_SelectByEnquiryId_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EnquiryTypes_SelectAll_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="EnquiryTypes_SelectByFilter_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventCoordinations_SelectByEventId_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Events_SelectByFilterForEmployee_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Events_SelectByFilter_Result.cs">

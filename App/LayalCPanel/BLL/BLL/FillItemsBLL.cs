@@ -56,6 +56,26 @@ namespace BLL.BLL
             return Result;
         }
 
+        public List<UserVM> UsersWithCurrentBranchWithWorkTypes(int branchId, AccountTypeEnum employee)
+        {
+            var Result = db.Users_SelectByBranchId(branchId,(int)employee)
+                .GroupBy(c=>new
+                {
+                    c.Id,
+                    c.UserName
+                })
+                .Select(c => new UserVM
+            {
+                Id = c.Key.Id,
+                UserName=c.Key.UserName,
+                WorkTypes= c.Select(v=> new WorkTypeVM
+                {
+                    Id=v.FkWorkType_Id
+                }).ToList()
+            }).ToList();
+            return Result;
+        }
+
         public object GetPrintNameTypes()
         {
             var Result = db.PrintNameTypes_SelectAll().Select(c => new PrintNamesTypeVM
@@ -74,7 +94,9 @@ namespace BLL.BLL
                 Id = c.Id,
                 NameAr = c.NameAr,
                 NameEn = c.NameEn,
-                IsAllowPrintNames=c.IsAllowPrintNames
+                IsAllowPrintNames=c.IsAllowPrintNames,
+                Price=c.Price,
+                NamsArExtraPrice=c.NamsArExtraPrice
             });
             return Result;
         }

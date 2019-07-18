@@ -28,19 +28,32 @@ namespace UI.Controllers
             return View();
         }
 
-        [PagePrivilege(PagesEnum.Enquires, true, false, false, false)]
+        [PagePrivilege(PagesEnum.Enquires, true, true, true, true)]
         public ActionResult EnquiryInformation()
         {
             return View();
         }
+
+
+
         
-
-
-
-        public ActionResult GetEnquiy(int id)
+                 public ActionResult GetFullEnquiy(long id)
         {
+            return Json(EnquiyBLL.GetFullEnquiyInformation(id), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetEnquiy(long id)
+   
+     {
             return Json(EnquiyBLL.SelectById(id), JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult CloseEnquiry(long id)
+
+        {
+            return Json(EnquiyBLL.CloseEnquiry(id), JsonRequestBehavior.AllowGet);
+        }
+        
 
 
         public JsonResult GetItems()

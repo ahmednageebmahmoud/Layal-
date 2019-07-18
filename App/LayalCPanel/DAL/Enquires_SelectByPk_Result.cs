@@ -31,7 +31,7 @@ namespace DAL
         public Nullable<System.DateTime> ClosedDateTime { get; set; }
         public bool IsWithBranch { get; set; }
         public string ClendarEventId { get; set; }
-        public Nullable<bool> IsPaymented { get; set; }
+        public Nullable<bool> IsDepositPaymented { get; set; }
         public Nullable<long> FkClinet_Id { get; set; }
         public bool IsCreatedEvent { get; set; }
         public string CountryNameAr { get; set; }
@@ -43,21 +43,6 @@ namespace DAL
         public string BranchNameAR { get; set; }
         public string BranchNameEn { get; set; }
         public string EnquiryCreatedUserName { get; set; }
-        public Nullable<int> Notes_Id { get; set; }
-        public string Notes_Notes { get; set; }
-        public Nullable<System.DateTime> Notes_CreateDateTime { get; set; }
-        public Nullable<long> Notes_UserCreatedId { get; set; }
-        public string Notes_CreatedUserName { get; set; }
-        public Nullable<long> Status_Id { get; set; }
-        public string Status_NameAr { get; set; }
-        public string Status_NameEn { get; set; }
-        public string Status_Notes { get; set; }
-        public Nullable<System.DateTime> Status_CreateDateTime { get; set; }
-        public Nullable<System.DateTime> Status_ScheduleVisitDateTime { get; set; }
-        public Nullable<long> Status_UserCreatedId { get; set; }
-        public Nullable<bool> Status_IsBankTransferDeposit { get; set; }
-        public Nullable<decimal> Status_Amount { get; set; }
-        public string Status_CreatedUserName { get; set; }
         public Nullable<long> EventId { get; set; }
     }
 }

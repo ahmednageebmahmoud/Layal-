@@ -22,10 +22,12 @@ namespace UI.Controllers
             return View();
         }
 
-        public ActionResult EventInformation()
+        public ActionResult AddAndUpdate()
         {
             return View();
         }
+
+
 
         public ActionResult GetEventInformation(long id)
         {

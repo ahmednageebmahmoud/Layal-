@@ -115,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add And Update Coordinations.
+        /// </summary>
+        public static string AddAndUpdateCoordinations {
+            get {
+                return ResourceManager.GetString("AddAndUpdateCoordinations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add And Update Enquiry.
         /// </summary>
         public static string AddAndUpdateEnquiry {
@@ -331,11 +340,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Approve.
+        /// </summary>
+        public static string Approve {
+            get {
+                return ResourceManager.GetString("Approve", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bank Transfer Deposit.
         /// </summary>
         public static string BankTransferDeposit {
             get {
                 return ResourceManager.GetString("BankTransferDeposit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank Transfer Photo.
+        /// </summary>
+        public static string BankTransferPhoto {
+            get {
+                return ResourceManager.GetString("BankTransferPhoto", resourceCulture);
             }
         }
         
@@ -412,6 +439,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can Not Duplicate.
+        /// </summary>
+        public static string CanNotDuplicate {
+            get {
+                return ResourceManager.GetString("CanNotDuplicate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can Not Duplicate Branch Manger.
         /// </summary>
         public static string CanNotDuplicateBranchManger {
@@ -426,6 +462,24 @@ namespace Resources {
         public static string CanNotDuplicateEventWithOneEnquiry {
             get {
                 return ResourceManager.GetString("CanNotDuplicateEventWithOneEnquiry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can Not Save Attachment.
+        /// </summary>
+        public static string CanNotSaveAttachment {
+            get {
+                return ResourceManager.GetString("CanNotSaveAttachment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can Not Save Bank Transfer Photo.
+        /// </summary>
+        public static string CanNotSaveBankTransferPhoto {
+            get {
+                return ResourceManager.GetString("CanNotSaveBankTransferPhoto", resourceCulture);
             }
         }
         
@@ -480,6 +534,24 @@ namespace Resources {
         public static string Close {
             get {
                 return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Closed Date Time.
+        /// </summary>
+        public static string ClosedDatetime {
+            get {
+                return ResourceManager.GetString("ClosedDatetime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close Enquiry.
+        /// </summary>
+        public static string CloseEnquiry {
+            get {
+                return ResourceManager.GetString("CloseEnquiry", resourceCulture);
             }
         }
         
@@ -664,11 +736,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to End Time.
+        /// </summary>
+        public static string EndTime {
+            get {
+                return ResourceManager.GetString("EndTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enquires.
         /// </summary>
         public static string Enquires {
             get {
                 return ResourceManager.GetString("Enquires", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enquiry.
+        /// </summary>
+        public static string Enquiry {
+            get {
+                return ResourceManager.GetString("Enquiry", resourceCulture);
             }
         }
         
@@ -709,20 +799,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enquiy.
-        /// </summary>
-        public static string Enquiy {
-            get {
-                return ResourceManager.GetString("Enquiy", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Event.
         /// </summary>
         public static string Event {
             get {
                 return ResourceManager.GetString("Event", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Event Coordinations.
+        /// </summary>
+        public static string EventCoordinations {
+            get {
+                return ResourceManager.GetString("EventCoordinations", resourceCulture);
             }
         }
         
@@ -826,6 +916,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go To Finsh Youre Tasks.
+        /// </summary>
+        public static string GoToFinsh {
+            get {
+                return ResourceManager.GetString("GoToFinsh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hi.
         /// </summary>
         public static string Hi {
@@ -889,6 +988,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accept From Manger.
+        /// </summary>
+        public static string IsAcceptFromManger {
+            get {
+                return ResourceManager.GetString("IsAcceptFromManger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active.
         /// </summary>
         public static string IsActive {
@@ -907,11 +1015,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bank Transfer.
+        /// </summary>
+        public static string IsBankTransfer {
+            get {
+                return ResourceManager.GetString("IsBankTransfer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Logo.
         /// </summary>
         public static string IsClinetCustomLogo {
             get {
                 return ResourceManager.GetString("IsClinetCustomLogo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deposit.
+        /// </summary>
+        public static string IsDeposit {
+            get {
+                return ResourceManager.GetString("IsDeposit", resourceCulture);
             }
         }
         
@@ -1150,6 +1276,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Arabic Nams Extra Price.
+        /// </summary>
+        public static string NamsArExtraPrice {
+            get {
+                return ResourceManager.GetString("NamsArExtraPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
         public static string New {
@@ -1339,6 +1474,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Package Price.
+        /// </summary>
+        public static string PackagePrice {
+            get {
+                return ResourceManager.GetString("PackagePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Packages.
         /// </summary>
         public static string Packages {
@@ -1366,6 +1510,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payments.
+        /// </summary>
+        public static string Payments {
+            get {
+                return ResourceManager.GetString("Payments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payments Informations.
+        /// </summary>
+        public static string PaymentsInformations {
+            get {
+                return ResourceManager.GetString("PaymentsInformations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Phone It Is Already Used With Another Account.
         /// </summary>
         public static string PhoneItIsAlreadyUsed {
@@ -1389,6 +1551,15 @@ namespace Resources {
         public static string PleaseCopyThisCode {
             get {
                 return ResourceManager.GetString("PleaseCopyThisCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pricing.
+        /// </summary>
+        public static string Pricing {
+            get {
+                return ResourceManager.GetString("Pricing", resourceCulture);
             }
         }
         
@@ -1434,6 +1605,15 @@ namespace Resources {
         public static string Readed {
             get {
                 return ResourceManager.GetString("Readed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remaining Amount.
+        /// </summary>
+        public static string RemainingAmount {
+            get {
+                return ResourceManager.GetString("RemainingAmount", resourceCulture);
             }
         }
         
@@ -1519,6 +1699,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start Time.
+        /// </summary>
+        public static string StartTime {
+            get {
+                return ResourceManager.GetString("StartTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to State Not Found.
         /// </summary>
         public static string StateNotFound {
@@ -1546,6 +1735,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Task.
+        /// </summary>
+        public static string Task {
+            get {
+                return ResourceManager.GetString("Task", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task Number.
+        /// </summary>
+        public static string TaskNumber {
+            get {
+                return ResourceManager.GetString("TaskNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Terms.
+        /// </summary>
+        public static string Terms {
+            get {
+                return ResourceManager.GetString("Terms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This Enquiry Already Linked With Clinet.
         /// </summary>
         public static string ThisEnquiryAlreadyLinkedWithClinet {
@@ -1560,6 +1776,33 @@ namespace Resources {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Payments.
+        /// </summary>
+        public static string TotalPayments {
+            get {
+                return ResourceManager.GetString("TotalPayments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Payments Activated.
+        /// </summary>
+        public static string TotalPaymentsActivated {
+            get {
+                return ResourceManager.GetString("TotalPaymentsActivated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Price.
+        /// </summary>
+        public static string TotalPrice {
+            get {
+                return ResourceManager.GetString("TotalPrice", resourceCulture);
             }
         }
         
@@ -1798,6 +2041,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vist To Coordination Date Time.
+        /// </summary>
+        public static string VistToCoordinationDateTime {
+            get {
+                return ResourceManager.GetString("VistToCoordinationDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Works.
+        /// </summary>
+        public static string Works {
+            get {
+                return ResourceManager.GetString("Works", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work Type.
+        /// </summary>
+        public static string WorkType {
+            get {
+                return ResourceManager.GetString("WorkType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Year.
         /// </summary>
         public static string Year {
@@ -1825,6 +2095,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You Can Not Access To This Event.
+        /// </summary>
+        public static string YouCanNotAccessToThisEvent {
+            get {
+                return ResourceManager.GetString("YouCanNotAccessToThisEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You Can Not Create.
         /// </summary>
         public static string YouCanNotCreate {
@@ -1839,6 +2118,15 @@ namespace Resources {
         public static string YouCanNotUpdate {
             get {
                 return ResourceManager.GetString("YouCanNotUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Account Is Not Disabled.
+        /// </summary>
+        public static string YourAccountIsNotActive {
+            get {
+                return ResourceManager.GetString("YourAccountIsNotActive", resourceCulture);
             }
         }
     }

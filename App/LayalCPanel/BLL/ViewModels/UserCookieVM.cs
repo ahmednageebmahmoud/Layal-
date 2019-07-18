@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.Enums;
+using BLL.Services;
 
 namespace BLL.ViewModels
 {
@@ -18,7 +19,11 @@ namespace BLL.ViewModels
         public LanguageEnum _Language { get;   set; }
         public int AccountTypeId { get;   set; }
         public bool IsClinet => this.AccountTypeId == (int)AccountTypeEnum.Clinet;
+        public bool IsAdmin => this.Id ==WebConfigService.AdminId;
+        public bool IsEmployee=> this.AccountTypeId==(int)AccountTypeEnum.Employee;
+
         public string UserName { get;   set; }
         public int BranchId { get; set; }
+        public bool IsActive { get; internal set; }
     }
 }

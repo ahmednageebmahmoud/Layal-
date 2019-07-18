@@ -30,13 +30,12 @@ namespace BLL.BLL
             }
 
             var Events = db.Events_SelectByFilter
-                (skip, take, isClinetCustomLogo, isLogoAr, isNamesAr, nameGroom, nameBride, eventDateTimeTo, eventDateTimeFrom, createDateTimeTo,
-            createDateTimeFrom, packageId, printNameTypeId, branchId, isActive,true,this.UserLoggad.Id)
+                (skip, take, isClinetCustomLogo, isNamesAr, nameGroom, nameBride, eventDateTimeTo, eventDateTimeFrom, createDateTimeTo,
+            createDateTimeFrom, packageId, printNameTypeId, branchId, true, this.UserLoggad.Id)
                 .Select(c => new EventVM
                 {
                     Id = c.Id,
                     IsClinetCustomLogo = c.IsClinetCustomLogo,
-                    IsLogoAr = c.IsLogoAr,
                     LogoFilePath = c.LogoFilePath,
                     IsNamesAr = c.IsNamesAr,
                     NameGroom = c.NameGroom,
@@ -50,9 +49,10 @@ namespace BLL.BLL
                     Notes = c.Notes,
                     UserCreaedId = c.FKUserCreaed_Id,
                     BranchId = c.FKBranch_Id,
-                    IsActive = c.IsActive,
-                    IsCanNotUpdate = c.IsCanNotUpdate,
+                    IsClosed = c.IsClosed,
                     EnquiryName = c.EnquiryName,
+                    PackagePrice = c.PackagePrice,
+                    PackageNamsArExtraPrice = c.PackageNamsArExtraPrice,
                     Package = new PackageVM
                     {
                         NameAr = c.Package_NameAr,
@@ -85,7 +85,6 @@ namespace BLL.BLL
             {
                 Id = c.Id,
                 IsClinetCustomLogo = c.IsClinetCustomLogo,
-                IsLogoAr = c.IsLogoAr,
                 LogoFilePath = c.LogoFilePath,
                 IsNamesAr = c.IsNamesAr,
                 NameGroom = c.NameGroom,
@@ -99,10 +98,11 @@ namespace BLL.BLL
                 Notes = c.Notes,
                 UserCreaedId = c.FKUserCreaed_Id,
                 BranchId = c.FKBranch_Id,
-                IsActive = c.IsActive,
-                IsCanNotUpdate = c.IsCanNotUpdate,
+                IsClosed = c.IsClosed,
                 ClinetUserName = c.Clinet_UserName,
                 UserCreatedUserName = c.UserCreated_UserName,
+                PackagePrice = c.PackagePrice,
+                PackageNamsArExtraPrice = c.PackageNamsArExtraPrice,
                 Branch = new BranchVM
                 {
                     NameAr = c.Branch_NameAr,
@@ -128,8 +128,15 @@ namespace BLL.BLL
             return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, Event);
         }
 
+        private bool CheckIfEnquiryClosed(long enquiryId)
+        {
+            return db.Enquires_IsClosed(enquiryId).First().Value > 0;
+        }
         private object Update(EventVM c)
         {
+            //check if closed
+            if (CheckIfEnquiryClosed(c.EnquiryId.Value))
+                return new ResponseVM(RequestTypeEnum.Error, Token.EnquiryIsClosed);
 
             c = GetPureEvent(c);
 
@@ -149,8 +156,18 @@ namespace BLL.BLL
                 c.LogoFilePath = FileSave.SavedPath;
             }
 
-            db.Events_Update(c.Id, c.IsClinetCustomLogo, c.IsLogoAr, c.LogoFilePath, c.IsNamesAr, c.NameGroom, c.NameBride, c.EventDateTime,
-                c.Package.Id, c.PrintNameTypeId, c.Notes);
+            //تحديث الاسعار
+            var OldEvent = db.Events_SelectByPK(c.Id).First();
+            var Package = db.Packages_SelectByPK(c.PackageId).First();
+            if (OldEvent.IsNamesAr != c.IsNamesAr)
+            {
+                if (c.IsNamesAr == true)
+                    c.PackageNamsArExtraPrice = Package.NamsArExtraPrice;
+                else
+                    c.PackageNamsArExtraPrice = 0;
+            }
+
+            db.Events_Update2(c.Id, c.IsClinetCustomLogo, c.LogoFilePath, c.IsNamesAr, c.NameGroom, c.NameBride, c.PrintNameTypeId,  c.PackagePrice, c.PackageNamsArExtraPrice);
 
             return new ResponseVM(RequestTypeEnum.Success, Token.Updated, c);
         }
@@ -180,13 +197,13 @@ namespace BLL.BLL
                 }
             }
         }
-      public object SelectById(long id)
+        public object SelectById(long id)
         {
             var Event = db.Events_SelectByPK(id).Select(c => new EventVM
             {
                 Id = c.Id,
                 IsClinetCustomLogo = c.IsClinetCustomLogo,
-                IsLogoAr = c.IsLogoAr,
+
                 LogoFilePath = c.LogoFilePath,
                 IsNamesAr = c.IsNamesAr,
                 NameGroom = c.NameGroom,
@@ -200,8 +217,6 @@ namespace BLL.BLL
                 Notes = c.Notes,
                 UserCreaedId = c.FKUserCreaed_Id,
                 BranchId = c.FKBranch_Id,
-                IsActive = c.IsActive,
-                IsCanNotUpdate = c.IsCanNotUpdate,
             }).FirstOrDefault();
 
             //اذا ان المستخدم الحالى عميل فيجب ان يكون هوا الذى قد انشاء تلك الاستفسار
@@ -215,7 +230,7 @@ namespace BLL.BLL
         {
             if (!c.IsClinetCustomLogo.HasValue || !c.IsClinetCustomLogo.Value)
             {
-                c.IsLogoAr = null;
+
                 c.CustomLogo = null;
             }
             if (!c.Package.IsAllowPrintNames)

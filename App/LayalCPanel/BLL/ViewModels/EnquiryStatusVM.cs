@@ -26,5 +26,8 @@ namespace BLL.ViewModels
         public decimal Amount { get; set; }
         public bool IsWithBranch { get; set; }
         public string ClinetName { get; set; }
+        public string BankTransferImage { get;  set; }
+        public string BankTransferImageName { get;   set; }
+        public long? EnquiryPaymentId { get;   set; }
     }
 }

@@ -405,7 +405,7 @@
   <data name="Enquires" xml:space="preserve">
     <value>الاستفسارات</value>
   </data>
-  <data name="Enquiy" xml:space="preserve">
+  <data name="Enquiry" xml:space="preserve">
     <value>الاستفسار</value>
   </data>
   <data name="EventDate" xml:space="preserve">
@@ -601,7 +601,7 @@
     <value>اضافة مناسبة جديدة</value>
   </data>
   <data name="EventInformation" xml:space="preserve">
-    <value>تفاصيل المناسبة</value>
+    <value>بيانات المناسبة</value>
   </data>
   <data name="UpdateEvent" xml:space="preserve">
     <value>تحديث المناسبة </value>
@@ -716,5 +716,104 @@
   </data>
   <data name="DistributionOfWork" xml:space="preserve">
     <value>توزيع اوامر العمل على الموظفين</value>
+  </data>
+  <data name="WorkType" xml:space="preserve">
+    <value>نوع العمل</value>
+  </data>
+  <data name="CanNotDuplicate" xml:space="preserve">
+    <value>لا يمكنك التكرار</value>
+  </data>
+  <data name="CanNotSaveAttachment" xml:space="preserve">
+    <value>لم اتمكن من حفظ المرفق</value>
+  </data>
+  <data name="BankTransferPhoto" xml:space="preserve">
+    <value>صورة الحوالة البنكية </value>
+  </data>
+  <data name="CanNotSaveBankTransferPhoto" xml:space="preserve">
+    <value>لم اتمكن من حفظ صورة الحوالة البنكية</value>
+  </data>
+  <data name="PaymentsInformations" xml:space="preserve">
+    <value>بيانات المدفوعات</value>
+  </data>
+  <data name="IsAcceptFromManger" xml:space="preserve">
+    <value>تم اعتمادة من المدير</value>
+  </data>
+  <data name="IsBankTransfer" xml:space="preserve">
+    <value>حوالة بنكية</value>
+  </data>
+  <data name="IsDeposit" xml:space="preserve">
+    <value>عربون</value>
+  </data>
+  <data name="TotalPayments" xml:space="preserve">
+    <value>اجمالى المدفوعات</value>
+  </data>
+  <data name="TotalPaymentsActivated" xml:space="preserve">
+    <value>اجمالى المدفوعات النشطة</value>
+  </data>
+  <data name="Payments" xml:space="preserve">
+    <value>المدفوعات</value>
+  </data>
+  <data name="NamsArExtraPrice" xml:space="preserve">
+    <value>سعر اضافة للطباعة بـ العربى</value>
+  </data>
+  <data name="PackagePrice" xml:space="preserve">
+    <value>سعر الباكج</value>
+  </data>
+  <data name="Pricing" xml:space="preserve">
+    <value>الاسعار</value>
+  </data>
+  <data name="RemainingAmount" xml:space="preserve">
+    <value>المبلغ المتبقى</value>
+  </data>
+  <data name="TotalPrice" xml:space="preserve">
+    <value>مجموع الاسعار</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>الموافقة</value>
+  </data>
+  <data name="Terms" xml:space="preserve">
+    <value>الشروط والاحكام</value>
+  </data>
+  <data name="CloseEnquiry" xml:space="preserve">
+    <value>اغلاق الاستفسار</value>
+  </data>
+  <data name="YourAccountIsNotActive" xml:space="preserve">
+    <value>الحساب الخاص بك معلق</value>
+  </data>
+  <data name="Works" xml:space="preserve">
+    <value>الاعمال</value>
+  </data>
+  <data name="GoToFinsh" xml:space="preserve">
+    <value>اذهب لـ انجاز المهام</value>
+  </data>
+  <data name="ClosedDatetime" xml:space="preserve">
+    <value>تاريخ ووقت الاغلاق</value>
+  </data>
+  <data name="VistToCoordinationDateTime" xml:space="preserve">
+    <value>وقت وتاريخ موعد تنسيق المناسبة</value>
+  </data>
+  <data name="AddAndUpdateCoordinations" xml:space="preserve">
+    <value>اضافة وتحديث الاعداد والتنسيق</value>
+  </data>
+  <data name="Coordinations" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EventCoordinations" xml:space="preserve">
+    <value>اعداد وتنسيق المناسبات</value>
+  </data>
+  <data name="Task" xml:space="preserve">
+    <value>الهمة</value>
+  </data>
+  <data name="TaskNumber" xml:space="preserve">
+    <value>رقم المهمة</value>
+  </data>
+  <data name="EndTime" xml:space="preserve">
+    <value>الى الوقت </value>
+  </data>
+  <data name="StartTime" xml:space="preserve">
+    <value>من الوقت</value>
+  </data>
+  <data name="YouCanNotAccessToThisEvent" xml:space="preserve">
+    <value>لا يمكنك الوصول الى هذا المناسبة </value>
   </data>
 </root>

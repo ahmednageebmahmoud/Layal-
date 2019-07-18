@@ -23,7 +23,9 @@ namespace BLL.BLL
                 DescriptionEn = c.DescriptionEn,
                 IsAllowPrintNames = c.IsAllowPrintNames,
                 WordDescriptionId = c.FkWordDescription_Id,
-                WordNameId = c.FkWordName_Id
+                WordNameId = c.FkWordName_Id,
+                Price=c.Price,
+                NamsArExtraPrice=c.NamsArExtraPrice
             }).ToList();
             if (Packages.Count == 0)
             {
@@ -95,7 +97,10 @@ namespace BLL.BLL
         {
             try
             {
-                db.Packages_Update(c.Id, c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.IsAllowPrintNames, c.AlbumTypeId, c.WordNameId, c.WordDescriptionId);
+                if (!c.IsAllowPrintNames)
+                    c.NamsArExtraPrice = 0;
+
+                db.Packages_Update(c.Id, c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.IsAllowPrintNames, c.AlbumTypeId, c.WordNameId, c.WordDescriptionId,c.Price,c.NamsArExtraPrice);
                 return new ResponseVM(RequestTypeEnum.Success, Token.Updated, c);
             }
             catch (Exception ex)
@@ -108,8 +113,10 @@ namespace BLL.BLL
         {
             try
             {
+                if (!c.IsAllowPrintNames)
+                    c.NamsArExtraPrice = 0;
                 ObjectParameter ID = new ObjectParameter("Id", typeof(int));
-                db.Packages_Insert(ID, c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.IsAllowPrintNames, c.AlbumTypeId);
+                db.Packages_Insert(ID, c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.IsAllowPrintNames, c.AlbumTypeId,c.Price,c.NamsArExtraPrice);
 
                 c.Id = (int)ID.Value;
                 return new ResponseVM(RequestTypeEnum.Success, Token.Added, c);
@@ -118,6 +125,55 @@ namespace BLL.BLL
             {
                 return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
             }
+        }
+
+        internal PackageVM GetPackageInformation(int packageId)
+        {
+        return    db.Packages_SelectByPK(packageId).GroupBy(c => new
+            {
+                c.Id,
+                c.DescriptionAr,
+                c.DescriptionEn,
+                c.FKAlbumType_Id,
+                c.FkWordDescription_Id,
+                c.FkWordName_Id,
+                c.IsAllowPrintNames,
+                c.NameAr,
+                c.NameEn,
+                c.AlbumType_NameAr,
+                c.AlbumType_NameEn,
+            }).Select(c => new PackageVM
+            {
+                Id = c.Key.Id,
+                AlbumTypeId = c.Key.FKAlbumType_Id,
+                DescriptionAr = c.Key.DescriptionAr,
+                DescriptionEn = c.Key.DescriptionEn,
+                NameAr = c.Key.NameAr,
+                NameEn = c.Key.NameEn,
+                IsAllowPrintNames = c.Key.IsAllowPrintNames,
+                WordDescriptionId = c.Key.FkWordDescription_Id,
+                WordNameId = c.Key.FkWordName_Id,
+                AlbumType = new AlbumTypeVM
+                {
+                    NameAr = c.Key.AlbumType_NameAr,
+                    NameEn = c.Key.AlbumType_NameEn,
+                },
+
+                PackageDetails = c.Where(x => x.PackageDetailsId.HasValue).Select(v => new PackageDetailVM
+                {
+                    Id = v.PackageDetailsId,
+                    ValueAr = v.PackageDetailValueAr,
+                    ValueEn = v.PackageDetailValueEn,
+                    PackageInputTypeId = v.FKPackageInputType_Id,
+                    PackageInputType = new PackageInputTypeVM
+                    {
+                        NameAr = v.PackageInputTypeAr,
+                        NameEn = v.PackageInputTypeEn,
+                    },
+                }).ToList()
+
+            }).FirstOrDefault();
+
         }
 
         public object SelectById(int id)
@@ -133,6 +189,7 @@ namespace BLL.BLL
                 c.IsAllowPrintNames,
                 c.NameAr,
                 c.NameEn,
+                c.Price,c.NamsArExtraPrice
             }).Select(c => new PackageVM
             {
                 Id = c.Key.Id,
@@ -144,7 +201,8 @@ namespace BLL.BLL
                 IsAllowPrintNames = c.Key.IsAllowPrintNames,
                 WordDescriptionId = c.Key.FkWordDescription_Id,
                 WordNameId = c.Key.FkWordName_Id,
-
+                Price = c.Key.Price,
+                NamsArExtraPrice = c.Key.NamsArExtraPrice,
                 PackageDetails = c.Where(x => x.PackageDetailsId.HasValue).Select(v => new PackageDetailVM
                 {
                     Id = v.PackageDetailsId,

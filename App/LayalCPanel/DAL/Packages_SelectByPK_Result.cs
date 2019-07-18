@@ -18,6 +18,8 @@ namespace DAL
         public bool IsAllowPrintNames { get; set; }
         public long FkWordDescription_Id { get; set; }
         public int FKAlbumType_Id { get; set; }
+        public decimal Price { get; set; }
+        public decimal NamsArExtraPrice { get; set; }
         public string NameAr { get; set; }
         public string NameEn { get; set; }
         public string DescriptionAr { get; set; }
@@ -28,5 +30,7 @@ namespace DAL
         public Nullable<int> FKPackageInputType_Id { get; set; }
         public string PackageInputTypeAr { get; set; }
         public string PackageInputTypeEn { get; set; }
+        public string AlbumType_NameAr { get; set; }
+        public string AlbumType_NameEn { get; set; }
     }
 }

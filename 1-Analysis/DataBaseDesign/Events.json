@@ -2,22 +2,34 @@
     "Events": {
         "Id": null,
         "IsClinetCustomLogo": null, //اذا يريد العميل لوجو بتصميمة
-        "IsLogoAr": null,//اذا سوف يرفع اللوجو باللغة العربية
-        "LogoFilePath": null,//مسار حفظ اللوجو
-        "IsNamesAr": null,//اذا سوف يريد طباعة اسماء بالعربية وطبعا يجب ان يكون مسومح بطباعة الاسماء فى الباكج
-        "NameGroom": null,//اسم العربس
-        "NameBride": null,//اسم العرسة
+        "LogoFilePath": null, //مسار حفظ اللوجو
+        "IsNamesAr": null, //اذا سوف يريد طباعة اسماء بالعربية وطبعا يجب ان يكون مسومح بطباعة الاسماء فى الباكج
+        "NameGroom": null, //اسم العربس
+        "NameBride": null, //اسم العرسة
         "EventDateTime": null,
         "CreateDateTime": null,
         "FkEnquiryForm_Id": null,
         "FKPackage_Id": null,
         "FKPrintNameType_Id": null,
         "FkLanguagePrintName_Id": null,
-        "FKClinet_Id":0,
-        "Notes":0,
-        "IsActive":true,
-        "IsCanNotUpdate":true,//اى لا يمكن لصاحب الحدث ان يقوم بـ التعديل بة 
- "ClendarEventId" : "id",
- 
+        "FKClinet_Id": 0,
+        "Notes": 0,
+        "IsActive": true,
+        "IsCanNotUpdate": true, //اى لا يمكن لصاحب الحدث ان يقوم بـ التعديل بة 
+        "ClendarEventId": "id",
+        "PackagePrice": 5.5, //سعر المنتج
+        "PackageNamsArExtraPrice": 5.5, //سعر اضافة لطابعة الاسماء بـ العربى ,
+        "VistToCoordinationDateTime": "موعد مقابلة لتحديد وتنسيق",
+        "VistToCoordinationClendarEventId": "id"
+    },
+    "EventCoordination": {
+        "Id": 0,
+        "WorkNumber": 0,
+        "Task": "",
+        "StartTime": "",
+        "EndTime": "",
+        "Notes": "",
+        "FKEvent_Id":"",
+        "FKUserCreated_Id":""
     }
 }

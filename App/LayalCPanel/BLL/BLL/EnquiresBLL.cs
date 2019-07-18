@@ -49,10 +49,10 @@ namespace BLL.BLL
                     BranchId = c.FKBranch_Id,
                     IsClosed = c.IsClosed,
                     ClosedDateTime = c.ClosedDateTime,
-                    ClendarEventId=c.ClendarEventId,
-                    IsLinkedClinet=c.IsLinkedClinet,
-                    IsPaymented=c.IsPaymented,
-                    EventId=c.EventId,
+                    ClendarEventId = c.ClendarEventId,
+                    IsLinkedClinet = c.IsLinkedClinet,
+                    IsDepositPaymented = c.IsDepositPaymented,
+                    EventId = c.EventId,
                     IsCreatedEvent = c.IsCreatedEvent,
 
                     Branch = new BranchVM
@@ -91,7 +91,75 @@ namespace BLL.BLL
             return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, Enquires);
         }
 
+        public object CloseEnquiry(long id)
+        {
+            try
+            {
+                //check if closed
+                if (CheckIfEnquiryClosed(id))
+                    return new ResponseVM(RequestTypeEnum.Success, Token.EnquiryIsClosed);
 
+                db.Enquires_Closed(id, DateTime.Now).Select(v => new
+                {
+                    v.Enquiry_ClendarEventId,
+                    v.Event_ClendarEventId
+                }).ToList().ForEach(v =>
+                {
+                    GoggelApiCalendarService.DeleteEvent(v.Enquiry_ClendarEventId);
+                    GoggelApiCalendarService.DeleteEvent(v.Event_ClendarEventId);
+                });
+
+                return new ResponseVM(RequestTypeEnum.Success, Token.EnquiryIsClosed);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
+            }
+        }
+
+        /// <summary>
+        /// التحقق ان المسخدم الحالى هوا صاحب هذا الاستفسار
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool CheckIfMyEnquiry(long id)
+        {
+            var Enquiry = GetInformation(id);
+            if (Enquiry == null)
+                return false;
+
+            return Enquiry.ClinetId == this.UserLoggad.Id;
+        }
+
+        public object GetFullEnquiyInformation(long id)
+        {
+            var Enquiry = GetInformation(id);
+            //اذا ان المستخدم الحالى عميل فيجب ان يكون هوا الذى قد انشاء تلك الاستفسار
+            if (Enquiry == null || (this.UserLoggad.IsClinet && Enquiry.ClinetId != this.UserLoggad.Id))
+                return new ResponseVM(Enums.RequestTypeEnum.Error, $"{Token.Event} : {Token.NotFound}");
+
+            var Package = new PackageVM();
+            var Event = new EventVM();
+
+            //Fill Enquiry Payments
+            var PaymentsInformations = new EnquiryPaymentsBLL().GetPaymentsInformations(id);
+
+            //Fill Event And Package
+            if (Enquiry.EventId.HasValue)
+            {
+                Event = new EventsBLL().GetEventInformation(Enquiry.EventId.Value);
+                if (Event != null)
+                    Package = new PackagesBLL().GetPackageInformation(Event.PackageId.Value);
+            }
+
+            return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, new
+            {
+                Event,
+                Enquiry,
+                Package,
+                PaymentsInformations
+            });
+        }
 
         public object SaveChange(EnquiyVM c)
         {
@@ -131,9 +199,18 @@ namespace BLL.BLL
             GoggelApiCalendarService.DeleteEvent(c.ClendarEventId);
             return new ResponseVM(RequestTypeEnum.Success, Token.Deleted);
         }
+        private bool CheckIfEnquiryClosed(long enquiryId)
+        {
+            return db.Enquires_IsClosed(enquiryId).First().Value > 0;
+        }
 
         private object Update(EnquiyVM c)
         {
+            //check if closed
+            if (CheckIfEnquiryClosed(c.Id))
+                return new ResponseVM(RequestTypeEnum.Error, Token.EnquiryIsClosed);
+
+
             var OldBranchId = db.Enquires_SelectByPk(c.Id).First().FKBranch_Id;
             //نقوم بـ التحويل فقط فى اول مرة
             bool IsWithBranch = false;
@@ -227,112 +304,178 @@ namespace BLL.BLL
             return new ResponseVM(RequestTypeEnum.Success, Token.Added, c);
         }
 
+        internal EnquiyVM GetInformation(long enquiryId)
+        {
+            return db.Enquires_SelectByPk(enquiryId)
+              .Select(c => new EnquiyVM
+              {
+                  Id = c.Id,
+                  FirstName = c.FirstName,
+                  LastName = c.LastName,
+
+                  PhoneNo = c.PhoneNo,
+                  CreateDateTime = c.CreateDateTime,
+                  Day = c.Day,
+                  Month = c.Month,
+                  Year = c.Year,
+                  UserCreatedName = c.EnquiryCreatedUserName,
+                  UserCreatedId = c.FKUserCreated_Id,
+                  CountryId = c.FkCountry_Id,
+                  CityId = c.FkCity_Id,
+                  BranchId = c.FKBranch_Id,
+                  EnquiryTypeId = c.FKEnquiryType_Id,
+                  ClendarEventId = c.ClendarEventId,
+                  IsLinkedClinet = c.IsLinkedClinet,
+                  IsDepositPaymented = c.IsDepositPaymented,
+                  IsCreatedEvent = c.IsCreatedEvent,
+                  EventId = c.EventId,
+                  ClinetId = c.FkClinet_Id,
+                  IsClosed=c.IsClosed,
+                  ClosedDateTime=c.ClosedDateTime,
+
+                  Branch = new BranchVM
+                  {
+                      NameAr = c.BranchNameAR,
+                      NameEn = c.BranchNameEn
+                  },
+                  City = new CityVM
+                  {
+                      Id = c.FkCity_Id,
+                      NameAr = c.CityNameAr,
+                      NameEn = c.CityNameEn
+                  },
+                  Country = new CountryVM
+                  {
+                      Id = c.FkCountry_Id,
+                      NameAr = c.CountryNameAr,
+                      NameEn = c.CountryNameEn
+                  },
+                  EnquiryType = new EnquiryTypeVM
+                  {
+                      NameAr = c.EnquiryTypeNameAr,
+                      NameEn = c.EnquiryTypeNameEn
+                  },
+                  Notes = db.EnquiryNotes_SelectByEnquiryId(c.Id).Select(b => new NoteVM
+                  {
+                      Id = b.Id,
+                      Notes = b.Notes,
+                      CreateDateTime = b.CreateDateTime,
+                      UserCreatedId = b.FKUserCreated_Id,
+                      UserCreatedName = b.UserName
+                  }).ToList(),
+                  Status = db.EnquiryStatusTypes_SelectByEnquiryId(c.Id).Select(b => new EnquiryStatusVM
+                  {
+                      Id = b.Status_Id,
+                      Notes = b.Status_Notes,
+                      DateTime = b.Status_CreateDateTime,
+                      UserCreatedId = b.Status_UserCreatedId,
+                      UserCreatedName = b.Status_CreatedUserName,
+                      ScheduleVisitDateTime = b.Status_ScheduleVisitDateTime,
+                      EnquiryPaymentId = b.Status_EnquiryPaymentId,
+                      EnquiryType = new EnquiryTypeVM
+                      {
+                          NameAr = b.Status_NameAr,
+                          NameEn = b.Status_NameEn,
+                      }
+                  }).ToList()
+
+              }).FirstOrDefault();
+        }
+
         public object SelectById(long id)
         {
-            var Enquiy = db.Enquires_SelectByPk(id).GroupBy(c => new
+            var EnquiryPayments = db.EnquiryPayments_SelectByEnquiryId(id).Select(c => new EnquiryPaymentVM
             {
-                c.Id,
-                c.CityNameAr,
-                c.CityNameEn,
-                c.CountryNameAr,
-                c.CountryNameEn,
-                c.CreateDateTime,
-                c.EnquiryTypeNameAr,
-                c.EnquiryTypeNameEn,
-                c.FirstName,
-                c.Day,
-                c.Month,
-                c.Year,
-                c.FkCity_Id,
-                c.FkCountry_Id,
-                c.FKEnquiryType_Id,
-                c.FKUserCreated_Id,
-                c.FKBranch_Id,
-                c.LastName,
-                c.PhoneNo,
-                c.BranchNameAR,
-                c.BranchNameEn,
-                c.EnquiryCreatedUserName,
-                c.ClendarEventId,
-                c.IsLinkedClinet,
-                c.IsPaymented,
-                c.EventId,
-                c.IsCreatedEvent
-            })
+                Amount = c.Amount,
+                DateTime = c.DateTime,
+                EnquiryId = c.FKEnquiry_Id,
+                Id = c.Id,
+                IsAcceptFromManger = c.IsAcceptFromManger,
+                IsBankTransfer = c.IsBankTransfer,
+                IsDeposit = c.IsDeposit,
+                BankTransferImage = c.TransferImage,
+                UserCreatedId = c.FKUserCreated_Id,
+                UserCreatedName = c.UserCreatedName,
+            }).ToList();
+
+            var Enquiy = db.Enquires_SelectByPk(id)
                 .Select(c => new EnquiyVM
                 {
-                    Id = c.Key.Id,
-                    FirstName = c.Key.FirstName,
-                    LastName = c.Key.LastName,
+                    Id = c.Id,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
 
-                    PhoneNo = c.Key.PhoneNo,
-                    CreateDateTime = c.Key.CreateDateTime,
-                    Day = c.Key.Day,
-                    Month = c.Key.Month,
-                    Year = c.Key.Year,
-                    UserCreatedName = c.Key.EnquiryCreatedUserName,
-                    UserCreatedId = c.Key.FKUserCreated_Id,
-                    CountryId = c.Key.FkCountry_Id,
-                    CityId = c.Key.FkCity_Id,
-                    BranchId = c.Key.FKBranch_Id,
-                    EnquiryTypeId = c.Key.FKEnquiryType_Id,
-                    ClendarEventId=c.Key.ClendarEventId,
-                    IsLinkedClinet = c.Key.IsLinkedClinet,
-                    IsPaymented=c.Key.IsPaymented,
-                    IsCreatedEvent = c.Key.IsCreatedEvent,
-                    EventId = c.Key.EventId,
+                    PhoneNo = c.PhoneNo,
+                    CreateDateTime = c.CreateDateTime,
+                    Day = c.Day,
+                    Month = c.Month,
+                    Year = c.Year,
+                    UserCreatedName = c.EnquiryCreatedUserName,
+                    UserCreatedId = c.FKUserCreated_Id,
+                    CountryId = c.FkCountry_Id,
+                    CityId = c.FkCity_Id,
+                    BranchId = c.FKBranch_Id,
+                    EnquiryTypeId = c.FKEnquiryType_Id,
+                    ClendarEventId = c.ClendarEventId,
+                    IsLinkedClinet = c.IsLinkedClinet,
+                    IsDepositPaymented = c.IsDepositPaymented,
+                    IsCreatedEvent = c.IsCreatedEvent,
+                    EventId = c.EventId,
 
                     Branch = new BranchVM
                     {
-                        NameAr = c.Key.BranchNameAR,
-                        NameEn = c.Key.BranchNameEn
+                        NameAr = c.BranchNameAR,
+                        NameEn = c.BranchNameEn
                     },
                     City = new CityVM
                     {
-                        Id = c.Key.FkCity_Id,
-                        NameAr = c.Key.CityNameAr,
-                        NameEn = c.Key.CityNameEn
+                        Id = c.FkCity_Id,
+                        NameAr = c.CityNameAr,
+                        NameEn = c.CityNameEn
                     },
                     Country = new CountryVM
                     {
-                        Id = c.Key.FkCountry_Id,
-                        NameAr = c.Key.CountryNameAr,
-                        NameEn = c.Key.CountryNameEn
+                        Id = c.FkCountry_Id,
+                        NameAr = c.CountryNameAr,
+                        NameEn = c.CountryNameEn
                     },
                     EnquiryType = new EnquiryTypeVM
                     {
-                        NameAr = c.Key.EnquiryTypeNameAr,
-                        NameEn = c.Key.EnquiryTypeNameEn
+                        NameAr = c.EnquiryTypeNameAr,
+                        NameEn = c.EnquiryTypeNameEn
                     },
-                    Notes = c.Where(b => b.Notes_Id.HasValue).OrderByDescending(b => b.Id).Select(b => new NoteVM
+                    Notes = db.EnquiryNotes_SelectByEnquiryId(c.Id).Select(b => new NoteVM
                     {
-                        Id = b.Notes_Id,
-                        Notes = b.Notes_Notes,
-                        CreateDateTime = b.Notes_CreateDateTime,
-                        UserCreatedId = b.Notes_UserCreatedId,
-                        UserCreatedName = b.Notes_CreatedUserName
+                        Id = b.Id,
+                        Notes = b.Notes,
+                        CreateDateTime = b.CreateDateTime,
+                        UserCreatedId = b.FKUserCreated_Id,
+                        UserCreatedName = b.UserName
                     }).ToList(),
-                    Status = c.Where(b=> b.Status_Id.HasValue).OrderByDescending(b => b.Id).Select(b => new EnquiryStatusVM
+                    Status = db.EnquiryStatusTypes_SelectByEnquiryId(c.Id).Select(b => new EnquiryStatusVM
                     {
                         Id = b.Status_Id,
                         Notes = b.Status_Notes,
                         DateTime = b.Status_CreateDateTime,
                         UserCreatedId = b.Status_UserCreatedId,
                         UserCreatedName = b.Status_CreatedUserName,
-                        ScheduleVisitDateTime=b.Status_ScheduleVisitDateTime,
+                        ScheduleVisitDateTime = b.Status_ScheduleVisitDateTime,
+                        EnquiryPaymentId = b.Status_EnquiryPaymentId,
+                        IsBankTransferDeposit = b.Status_EnquiryPaymentId.HasValue ? EnquiryPayments.Single(w => w.Id == b.Status_EnquiryPaymentId.Value).IsBankTransfer : false,
+                        Amount = b.Status_EnquiryPaymentId.HasValue ? EnquiryPayments.Single(w => w.Id == b.Status_EnquiryPaymentId.Value).Amount : 0,
                         EnquiryType = new EnquiryTypeVM
                         {
                             NameAr = b.Status_NameAr,
                             NameEn = b.Status_NameEn,
                         }
-                    }).ToList(),
+                    }).ToList()
 
 
                 }).FirstOrDefault();
 
             //اذا ان المستخدم الحالى عميل فيجب ان يكون هوا الذى قد انشاء تلك الاستفسار
             if (Enquiy == null || (this.UserLoggad.IsClinet && Enquiy.UserCreatedId != this.UserLoggad.Id))
-                return new ResponseVM(Enums.RequestTypeEnum.Error, $"{Token.Enquiy} : {Token.NotFound}");
+                return new ResponseVM(Enums.RequestTypeEnum.Error, $"{Token.Enquiry} : {Token.NotFound}");
 
             return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, Enquiy);
         }

@@ -28,6 +28,7 @@ namespace DAL
         public Nullable<int> FKPranch_Id { get; set; }
         public bool IsActiveEmail { get; set; }
         public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public bool IsActive { get; set; }
         public string AccountTypeNameAr { get; set; }
         public string AccountTypeNameEn { get; set; }
         public string CountryNameAr { get; set; }
