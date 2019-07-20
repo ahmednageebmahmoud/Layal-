@@ -51,10 +51,10 @@ namespace BLL.BLL
                     ClosedDateTime = c.ClosedDateTime,
                     ClendarEventId = c.ClendarEventId,
                     IsLinkedClinet = c.IsLinkedClinet,
-                    IsDepositPaymented = c.IsDepositPaymented,
-                    EventId = c.EventId,
+                    CountIsDepositPaymented = c.CountIsDepositPaymented.Value,
                     IsCreatedEvent = c.IsCreatedEvent,
-
+                    CountryId=c.FkCountry_Id,
+                    CityId=c.FkCity_Id,
                     Branch = new BranchVM
                     {
                         NameAr = c.BranchNameAR,
@@ -145,12 +145,9 @@ namespace BLL.BLL
             var PaymentsInformations = new EnquiryPaymentsBLL().GetPaymentsInformations(id);
 
             //Fill Event And Package
-            if (Enquiry.EventId.HasValue)
-            {
-                Event = new EventsBLL().GetEventInformation(Enquiry.EventId.Value);
+                Event = new EventsBLL().GetEventInformation(Enquiry.Id);
                 if (Event != null)
                     Package = new PackagesBLL().GetPackageInformation(Event.PackageId.Value);
-            }
 
             return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, new
             {
@@ -280,6 +277,7 @@ namespace BLL.BLL
             }
             else
             {
+                //ارسال الاشعار للفعر اذا اكان المستخدم الحالى هوا المدير
                 var Notify = new NotifyVM
                 {
                     TitleAr = " استفسار جدبد",
@@ -291,7 +289,6 @@ namespace BLL.BLL
                     PageId = (int)PagesEnum.Enquires,
                     RedirectUrl = $"/Enquires/EnquiryInformation?id={c.Id}&notifyId=",
                 };
-                //ارسال اشعار لـ الفرع اذا قام المستخدم الحالى 
                 var UserMangerBranch = db.Users_SelectByBranchId(c.BranchId, (int)AccountTypeEnum.BranchManager).FirstOrDefault();
                 if (UserMangerBranch != null)
                 {
@@ -326,9 +323,8 @@ namespace BLL.BLL
                   EnquiryTypeId = c.FKEnquiryType_Id,
                   ClendarEventId = c.ClendarEventId,
                   IsLinkedClinet = c.IsLinkedClinet,
-                  IsDepositPaymented = c.IsDepositPaymented,
+                  CountIsDepositPaymented = c.CountIsDepositPaymented.Value,
                   IsCreatedEvent = c.IsCreatedEvent,
-                  EventId = c.EventId,
                   ClinetId = c.FkClinet_Id,
                   IsClosed=c.IsClosed,
                   ClosedDateTime=c.ClosedDateTime,
@@ -372,6 +368,7 @@ namespace BLL.BLL
                       UserCreatedName = b.Status_CreatedUserName,
                       ScheduleVisitDateTime = b.Status_ScheduleVisitDateTime,
                       EnquiryPaymentId = b.Status_EnquiryPaymentId,
+                      Amount=b.Amount,
                       EnquiryType = new EnquiryTypeVM
                       {
                           NameAr = b.Status_NameAr,
@@ -418,9 +415,8 @@ namespace BLL.BLL
                     EnquiryTypeId = c.FKEnquiryType_Id,
                     ClendarEventId = c.ClendarEventId,
                     IsLinkedClinet = c.IsLinkedClinet,
-                    IsDepositPaymented = c.IsDepositPaymented,
+                    CountIsDepositPaymented = c.CountIsDepositPaymented.Value,
                     IsCreatedEvent = c.IsCreatedEvent,
-                    EventId = c.EventId,
 
                     Branch = new BranchVM
                     {

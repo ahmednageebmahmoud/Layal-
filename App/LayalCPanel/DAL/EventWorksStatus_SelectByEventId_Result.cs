@@ -11,12 +11,17 @@ namespace DAL
 {
     using System;
     
-    public partial class EmployeeDistributionWorks_SelectByEventId_Result
+    public partial class EventWorksStatus_SelectByEventId_Result
     {
         public long Id { get; set; }
-        public int FKWorkType_Id { get; set; }
-        public long FKEmployee_Id { get; set; }
-        public long FKEvent_Id { get; set; }
         public bool IsFinshed { get; set; }
+        public System.DateTime DateTime { get; set; }
+        public long FKEvent_Id { get; set; }
+        public int FKWorkType_Id { get; set; }
+        public long FKUsre_Id { get; set; }
+        public int FKAccountType_Id { get; set; }
+        public string UserName { get; set; }
+        public string AccountTypeAr { get; set; }
+        public string AccountTypeEn { get; set; }
     }
 }

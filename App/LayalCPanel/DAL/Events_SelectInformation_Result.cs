@@ -22,7 +22,6 @@ namespace DAL
         public Nullable<int> FKPrintNameType_Id { get; set; }
         public System.DateTime EventDateTime { get; set; }
         public System.DateTime CreateDateTime { get; set; }
-        public Nullable<long> FkEnquiryForm_Id { get; set; }
         public int FKPackage_Id { get; set; }
         public long FKClinet_Id { get; set; }
         public string Notes { get; set; }
@@ -45,6 +44,7 @@ namespace DAL
         public string Clinet_UserName { get; set; }
         public string UserCreated_UserName { get; set; }
         public Nullable<decimal> TotalPayments { get; set; }
+        public Nullable<bool> IsPayment { get; set; }
         public Nullable<decimal> TotalPaymentsActivated { get; set; }
     }
 }

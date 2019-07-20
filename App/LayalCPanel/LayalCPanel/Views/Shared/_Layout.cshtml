@@ -149,7 +149,7 @@
     <!-- begin:: Header Mobile -->
     <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
         <div class="kt-header-mobile__logo">
-            <a href="~/Home/Index">
+            <a href="/">
                 <img alt="Logo" src="/assets/media/logos/logo-light.png" />
             </a>
         </div>
@@ -172,7 +172,7 @@
                 <!-- begin:: Aside -->
                 <div class="kt-aside__brand kt-grid__item" id="kt_aside_brand">
                     <div class="kt-aside__brand-logo">
-                        <a href="~/Home/Index">
+                        <a href="/">
                             <img alt="Logo" src="/assets/media/logos/logo-light.png" style="width:181px!important" />
                         </a>
                     </div>
@@ -242,6 +242,19 @@
                                     </ul>
                                 </div>
                             </li>
+
+                            
+                            <li class="kt-menu__item" ng-class="{'kt-menu__item--active':checkIsCrrentPageEquals(null,m.WorkType.PageUrl)}" aria-haspopup="true" 
+                                ng-repeat="m in employeeWorks">
+                                <a href="{{m.WorkType.PageUrl}}" class="kt-menu__link ">
+                                    <span class="kt-menu__link-icon">
+                                        <i class="fa fa-tasks"></i>
+                                    </span><span class="kt-menu__link-text">{{m.WorkType.WorkTypeName}}</span>
+                                    <span class="kt-menu__link-badge"><span class="kt-badge kt-badge--rounded kt-badge--brand">{{m.WorksCount}}</span></span>
+                                </a>
+                            </li>
+
+                             
 
                         </ul>
                     </div>

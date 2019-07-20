@@ -169,12 +169,8 @@
                              bootstrapModelHide("addStatus");
 
                 } break;
-                case RequestTypeEnum.error:
-                case RequestTypeEnum.warning:
-                case RequestTypeEnum.info:
-                    SMSSweet.alert(d.data.Message, d.data.RequestType);
-                    break;
             }
+                    SMSSweet.alert(d.data.Message, d.data.RequestType);
             BlockingService.unBlock();
             co("P O S T - addNewStatus", d);
         }).catch(err => {

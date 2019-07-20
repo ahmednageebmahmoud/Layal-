@@ -147,6 +147,9 @@
     <Compile Include="Events_SelectInformation_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EventWorksStatus_SelectByEventId_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Menus_SelectAllForUserCanBeAccess_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>

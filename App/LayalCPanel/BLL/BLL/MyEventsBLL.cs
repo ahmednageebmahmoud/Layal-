@@ -42,7 +42,6 @@ namespace BLL.BLL
                     NameBride = c.NameBride,
                     EventDateTime = c.EventDateTime,
                     CreateDateTime = c.CreateDateTime,
-                    EnquiryId = c.FkEnquiryForm_Id,
                     PackageId = c.FKPackage_Id,
                     PrintNameTypeId = c.FKPrintNameType_Id,
                     ClinetId = c.FKClinet_Id,
@@ -91,7 +90,6 @@ namespace BLL.BLL
                 NameBride = c.NameBride,
                 EventDateTime = c.EventDateTime,
                 CreateDateTime = c.CreateDateTime,
-                EnquiryId = c.FkEnquiryForm_Id,
                 PackageId = c.FKPackage_Id,
                 PrintNameTypeId = c.FKPrintNameType_Id,
                 ClinetId = c.FKClinet_Id,
@@ -135,7 +133,7 @@ namespace BLL.BLL
         private object Update(EventVM c)
         {
             //check if closed
-            if (CheckIfEnquiryClosed(c.EnquiryId.Value))
+            if (CheckIfEnquiryClosed(c.Id))
                 return new ResponseVM(RequestTypeEnum.Error, Token.EnquiryIsClosed);
 
             c = GetPureEvent(c);
@@ -210,7 +208,6 @@ namespace BLL.BLL
                 NameBride = c.NameBride,
                 EventDateTime = c.EventDateTime,
                 CreateDateTime = c.CreateDateTime,
-                EnquiryId = c.FkEnquiryForm_Id,
                 PackageId = c.FKPackage_Id,
                 PrintNameTypeId = c.FKPrintNameType_Id,
                 ClinetId = c.FKClinet_Id,

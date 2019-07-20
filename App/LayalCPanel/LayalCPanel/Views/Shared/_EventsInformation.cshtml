@@ -1,9 +1,10 @@
 ﻿@{
     bool IsCurrentClinet = CookieService.UserInfo.IsClinet;
+    bool IsCurrentEmployee = CookieService.UserInfo.IsEmployee;
 }
 
 <!--AddEvent-->
-<div class="kt-portlet">
+<div class="kt-portlet" ng-if="event">
     <div class="kt-portlet__head">
         <div class="kt-portlet__head-label">
             <span class="kt-portlet__head-icon">
@@ -14,7 +15,7 @@
 
     </div>
     <!--AddEvent Form-->
-    <form novalidate name="eventFrm" class="kt-form kt-form--label-right" ng-submit="saveChange(eventFrm,Event)">
+    <form novalidate name="eventFrm" class="kt-form kt-form--label-right">
         <div class="kt-portlet__body">
             <!--R O W 1-->
             <div class="form-group  row">
@@ -53,7 +54,7 @@
                 </div>
                     -->
                 <!--Upload Logo -->
-                <label class="col-form-label col-lg-2">@Token.UploadLogo</label>
+                <label class="col-form-label col-lg-2">@Token.Logo</label>
                 <div class="col-lg-4 form-group-sub">
                     <p style="display:inline"><a href="{{event.LogoFilePath}}" ng-if="event.LogoFilePath" class="kt-link kt-font-boldest">@Token.Review</a></p>
                 </div>
@@ -116,64 +117,66 @@
                            ng-model="event.EventDateTimeDisplay"
                            ng-disabled="true" />
                 </div>
-                <!--Branch-->
+                <!--Branch
                 <label class="col-form-label col-lg-2">@Token.Branch</label>
                 <div class="col-lg-4 form-group-sub">
                     <input class="form-control input-disabled"
                            type="text"
                            ng-model="event.Branch.BranchName"
                            ng-disabled="true" />
-                </div>
-            </div>
-            <!--R O W 6-->
-            <div class="form-group  row">
+                </div>-->
                 <!--EventDateTime-->
-                <label class="col-form-label col-lg-2">@Token.VistToCoordinationDateTime</label>
-                <div class="col-lg-4 form-group-sub">
-                    <input class="form-control input-disabled"
-                           type="text"
-                           ng-model="event.VistToCoordinationDateTimeDisplay"
-                           ng-disabled="true" />
-                </div>
-            </div>
-            
-
-            <!--R O W 7-->
-            <div class="form-group  row">
-
-                <!--PackagePrice-->
-                <label class="col-form-label col-lg-2">@Token.Pricing</label>
-                <div class="col-lg-10 form-group-sub">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>@Token.PackagePrice</th>
-                                <th>@Token.NamsArExtraPrice</th>
-                                <th>@Token.TotalPrice</th>
-                                <th>@Token.TotalPayments</th>
-                                <th>@Token.TotalPaymentsActivated</th>
-                                <th>@Token.RemainingAmount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{event.PackagePrice|currency:' SAR '}}</td>
-                                <td>{{event.PackageNamsArExtraPrice|currency:' SAR '}}</td>
-                                <td>{{event.PackagePrice+event.PackageNamsArExtraPrice|currency:' SAR '}}</td>
-                                <td>{{event.TotalPayments|currency:' SAR '}}</td>
-                                <td>{{event.TotalPaymentsActivated|currency:' SAR '}}</td>
-                                <td>{{event.RemainingAmount|currency:' SAR '}}</td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
+                @if (!IsCurrentEmployee)
+                {
+                    <label class="col-form-label col-lg-2">@Token.VistToCoordinationDateTime</label>
+                    <div class="col-lg-4 form-group-sub">
+                        <input class="form-control input-disabled"
+                               type="text"
+                               ng-model="event.VistToCoordinationDateTimeDisplay"
+                               ng-disabled="true" />
+                    </div>}
             </div>
 
-            @if (!IsCurrentClinet)
+            @if (!IsCurrentEmployee)
             {
-                        <!--R O W 8-->
+
+            <!--R O W 6-->
+                <div class="form-group  row">
+
+                    <!--PackagePrice-->
+                    <label class="col-form-label col-lg-2">@Token.Pricing</label>
+                    <div class="col-lg-10 form-group-sub">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>@Token.PackagePrice</th>
+                                    <th>@Token.NamsArExtraPrice</th>
+                                    <th>@Token.TotalPrice</th>
+                                    <th>@Token.TotalPayments</th>
+                                    <th>@Token.TotalPaymentsActivated</th>
+                                    <th>@Token.RemainingAmount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{event.PackagePrice|currency:' SAR '}}</td>
+                                    <td>{{event.PackageNamsArExtraPrice|currency:' SAR '}}</td>
+                                    <td>{{event.PackagePrice+event.PackageNamsArExtraPrice|currency:' SAR '}}</td>
+                                    <td>{{event.TotalPayments|currency:' SAR '}}</td>
+                                    <td>{{event.TotalPaymentsActivated|currency:' SAR '}}</td>
+                                    <td>{{event.RemainingAmount|currency:' SAR '}}</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            }
+
+            @if (!IsCurrentClinet && !IsCurrentEmployee)
+            {
+                        <!--R O W 7-->
                 <div class="form-group  row">
                     <!--UserCreated-->
                     <label class="col-form-label col-lg-2">@Token.UserCreated</label>
@@ -210,7 +213,7 @@
                 </div>
             }
 
-            <!--R O W 9-->
+            <!--R O W 8-->
             <div class="form-group  row">
                 <!--Notes
                     هنا يضيف ملحوظة جديدة على الملحوظات القدية-->

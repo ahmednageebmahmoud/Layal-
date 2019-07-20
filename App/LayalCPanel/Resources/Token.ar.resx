@@ -208,7 +208,7 @@
     <value>عامين</value>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>اسم المستخدك</value>
+    <value>اسم المستخدم</value>
   </data>
   <data name="Year" xml:space="preserve">
     <value>عام</value>
@@ -793,7 +793,7 @@
     <value>وقت وتاريخ موعد تنسيق المناسبة</value>
   </data>
   <data name="AddAndUpdateCoordinations" xml:space="preserve">
-    <value>اضافة وتحديث الاعداد والتنسيق</value>
+    <value>اضافة وتحديث مهام الاعداد والتنسيق</value>
   </data>
   <data name="Coordinations" xml:space="preserve">
     <value />
@@ -815,5 +815,38 @@
   </data>
   <data name="YouCanNotAccessToThisEvent" xml:space="preserve">
     <value>لا يمكنك الوصول الى هذا المناسبة </value>
+  </data>
+  <data name="AddedWithTaskumber" xml:space="preserve">
+    <value>تمت الاضافة مع رقم المهمة</value>
+  </data>
+  <data name="AddNewTask" xml:space="preserve">
+    <value>اضافة مهمة جديدة</value>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>المهام</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="Finshed" xml:space="preserve">
+    <value>تم الانتهاء</value>
+  </data>
+  <data name="ThisTaskIsFinshed" xml:space="preserve">
+    <value>هذا المهمة قد انتهت</value>
+  </data>
+  <data name="FinshedAccountType" xml:space="preserve">
+    <value>نوع المستخدم الذى قام بـ الانتهاء</value>
+  </data>
+  <data name="FinshedDateTime" xml:space="preserve">
+    <value>تاريخ ووقت الانتهاء</value>
+  </data>
+  <data name="FinshedUserName" xml:space="preserve">
+    <value>اسم المستخدم الذى قام بـ الانتهاء</value>
+  </data>
+  <data name="DistributionOfWorkDetails" xml:space="preserve">
+    <value>تفاصيل اوامر العمل</value>
+  </data>
+  <data name="Logo" xml:space="preserve">
+    <value>اللوجو</value>
   </data>
 </root>

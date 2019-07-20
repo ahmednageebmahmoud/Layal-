@@ -175,7 +175,7 @@ namespace BLL.BLL
         {
             var PaymentsInformations = GetPaymentsInformations(enquiryId);
             var Enquiry = new EnquiresBLL().GetInformation(enquiryId);
-            var Event = new EventsBLL().GetEventInformation(Enquiry.EventId);
+            var Event = new EventsBLL().GetEventInformation(Enquiry.Id);
 
             //اذا ان المستخدم الحالى عميل فيجب ان يكون هوا الذى قد انشاء تلك الاستفسار
             if (Enquiry == null || (this.UserLoggad.IsClinet && Enquiry.UserCreatedId != this.UserLoggad.Id))

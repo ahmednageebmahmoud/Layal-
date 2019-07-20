@@ -232,10 +232,17 @@
                                 <td>
                                     <!--Btn:Edit-->
                                     <a href="/MyEvents/AddAndUpdate?id={{x.Id}}" title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                   <!--EventCoordinations-->
+                                     <a href="/EventCoordinations/AddAndUpdate?id={{x.Id}}"
+                                                        ng-hide="x.IsClosed||!x.IsPayment"
+                                         title="@Token.AddAndUpdateCoordinations" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fa fa-tasks"></i></a>
 
                                     <!--Show Details-->
-                                    <a href="/MyEnquires/EnquiryInformation?id={{x.EnquiryId}}" title="@Token.ShowDetails" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="la la-search"></i> </a>
-                                </td>
+                                    <a href="/MyEnquires/EnquiryInformation?id={{x.Id}}" title="@Token.ShowDetails" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="la la-search"></i> </a>
+                              
+                                   
+                                
+                                  </td>
                             </tr>
                         </tbody>
                     </table>

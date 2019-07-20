@@ -123,6 +123,8 @@
             return window.location.pathname == url; //|| ('/' + s.currentControler).includes(url);
         };
 
+
+
         //call read notification
         if (s.notifyId)
             rs.readNotification(s.notifyId);
@@ -160,7 +162,34 @@
             });
         };
 
+        s.getItems = reset => {
+            let loading = BlockingService.generateLoding();
+            loading.show();
+
+            sharedServ.getItems().then(d => {
+                loading.hide();
+                if (reset)
+                    s.home = [];
+
+                switch (d.data.RequestType) {
+                    case RequestTypeEnum.sucess: {
+                        s.employeeWorks = d.data.Result.EmployeeWorks;
+                    } break;
+                    case RequestTypeEnum.error:
+                    case RequestTypeEnum.warning:
+                    case RequestTypeEnum.info:
+                        SMSSweet.alert(d.data.Message, d.data.RequestType);
+                        break;
+                }
+                co("G E T - getItems", d);
+            }).catch(err => {
+                loading.hide();
+                SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+                co("E R R O R - getItems", err);
+            })
+        };
 
         s.getNotifications();
         s.getMenus();
+        s.getItems();
     }]);

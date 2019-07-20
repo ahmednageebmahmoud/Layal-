@@ -91,7 +91,6 @@
                     s.newPayment = {};
                     $('[type="file"').val(null)
                     s.paymentsInformations.push(d.data.Result);
-                    s.enquiry.PaymentsInformations.push(d.data.Result);
                 } break;
             }
             SMSSweet.alert(d.data.Message, d.data.RequestType);

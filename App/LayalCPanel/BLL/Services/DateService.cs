@@ -27,7 +27,13 @@ namespace BLL.Services
             }
             return date.Value.ToString(Format, new CultureInfo("en"));
         }
-       private  static string GetDateTimeByCulture(DateTime date)
+
+        internal static string GetTimeEn(TimeSpan time)
+        {
+            return time.ToString();
+        }
+
+        private  static string GetDateTimeByCulture(DateTime date)
         {
             string Format = "dd/MM/yyyy hh:mm:ss tt";
                 /*

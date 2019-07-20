@@ -28,7 +28,8 @@ namespace BLL.ViewModels
         public int? BranchId { get; set; }
         public bool? IsClosed { get; set; }
         public object Status { get; set; }
-        public bool? IsDepositPaymented { get;   set; }
+        public int CountIsDepositPaymented { get;   set; }
+        public bool IsDepositPaymented => this.CountIsDepositPaymented > 0;
         public string ClendarEventId { get; set; }
         public bool? IsLinkedClinet { get; set; } 
         public DateTime CreateDateTime { get; set; }
@@ -50,7 +51,6 @@ namespace BLL.ViewModels
         public EnquiryTypeVM EnquiryType { get; set; }
         public List<NoteVM> Notes { get; set; }
         public BranchVM Branch { get; set; }
-        public long? EventId { get;   set; }
         public bool IsCreatedEvent { get;   set; }
     }//endclass
 }

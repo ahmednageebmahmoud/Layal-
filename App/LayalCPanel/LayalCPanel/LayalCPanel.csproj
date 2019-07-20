@@ -2199,7 +2199,6 @@
     <Content Include="credentials.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Properties\PublishProfiles\s.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dataTables\angular-datatables.buttons.min.js" />
     <Content Include="Scripts\dataTables\angular-datatables.min.js" />
@@ -2231,7 +2230,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -2272,7 +2273,6 @@
     <Content Include="Views\Shared\_EventsInformation.cshtml" />
     <Content Include="Views\Shared\_PackageInformtion.cshtml" />
     <Content Include="Views\Shared\_PaymentsInformations.cshtml" />
-    <Content Include="Views\MyEnquires\EnquiryInformation.cshtml" />
     <Content Include="Views\Shared\EmployeeIndex.cshtml" />
     <Content Include="Views\EventCoordinations\AddAndUpdate.cshtml" />
     <Content Include="Views\EventCoordinations\Index.cshtml" />

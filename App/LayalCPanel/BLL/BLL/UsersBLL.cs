@@ -231,7 +231,7 @@ namespace BLL.BLL
                 if (Enquiry == null)
                     return new ResponseVM(RequestTypeEnum.Error, $"{Token.Enquiry}: {Token.UserNotFound}");
 
-                if (Enquiry.IsDepositPaymented.HasValue && !Enquiry.IsDepositPaymented.Value)
+                if (Enquiry.CountIsDepositPaymented<=0 )
                     return new ResponseVM(RequestTypeEnum.Error, Token.ClinetIsNotPayment);
 
 

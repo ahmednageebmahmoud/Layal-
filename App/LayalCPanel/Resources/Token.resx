@@ -787,7 +787,7 @@
     <value>Vist To Coordination Date Time</value>
   </data>
   <data name="AddAndUpdateCoordinations" xml:space="preserve">
-    <value>Add And Update Coordinations</value>
+    <value>Add And Update Task Coordinations</value>
   </data>
   <data name="EventCoordinations" xml:space="preserve">
     <value>Event Coordinations</value>
@@ -806,5 +806,38 @@
   </data>
   <data name="YouCanNotAccessToThisEvent" xml:space="preserve">
     <value>You Can Not Access To This Event</value>
+  </data>
+  <data name="AddedWithTaskumber" xml:space="preserve">
+    <value>Added With Task Nmber</value>
+  </data>
+  <data name="AddNewTask" xml:space="preserve">
+    <value>Add New Task</value>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>Tasks</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Finshed" xml:space="preserve">
+    <value>Finshed</value>
+  </data>
+  <data name="ThisTaskIsFinshed" xml:space="preserve">
+    <value>This Task Is Finshed</value>
+  </data>
+  <data name="FinshedAccountType" xml:space="preserve">
+    <value>Finshed Account Type</value>
+  </data>
+  <data name="FinshedDateTime" xml:space="preserve">
+    <value>Finshed Date Time</value>
+  </data>
+  <data name="FinshedUserName" xml:space="preserve">
+    <value>Finshed User Name</value>
+  </data>
+  <data name="DistributionOfWorkDetails" xml:space="preserve">
+    <value>Distribution Of Work Details</value>
+  </data>
+  <data name="Logo" xml:space="preserve">
+    <value>Logo</value>
   </data>
 </root>

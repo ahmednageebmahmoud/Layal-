@@ -92,8 +92,8 @@
                                            class="form-control"
                                            maxlength="50"
                                            ng-model="user.Email"
-                                           ng-change="allowActiveCode=!(OldMail!=user.Email)" 
-                                           ng-disabled="disapledEmail"/>
+                                           ng-change="allowActiveCode=!(OldMail!=user.Email)"
+                                           ng-disabled="disapledEmail" />
                                     <!--Errors:-->
                                     <small class="error invalid-feedback" ng-if="userFrm.email.$invalid&&!userFrm.email.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
 
@@ -128,15 +128,15 @@
                                     <!--Errors:-->
                                     <small class="error invalid-feedback" ng-if="userFrm.address.$invalid&&!userFrm.address.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
                                 </div>
-                             
-                                   <!--DateOfBirth-->
+
+                                <!--DateOfBirth-->
                                 <label class="col-form-label col-lg-2">@Token.DateOfBirth</label>
                                 <div class="form-group-sub col-lg-4">
                                     <input type="date"
-                                              name="dateOfBirth"
-                                              ng-class="{'is-invalid':userFrm.dateOfBirth.$invalid&&userFormSubmitErro}"
-                                              class="form-control "
-                                              ng-model="user.DateOfBirth"/>
+                                           name="dateOfBirth"
+                                           ng-class="{'is-invalid':userFrm.dateOfBirth.$invalid&&userFormSubmitErro}"
+                                           class="form-control "
+                                           ng-model="user.DateOfBirth" />
                                     <!--Errors:-->
                                     <small class="error invalid-feedback" ng-if="userFrm.dateOfBirth.$invalid&&userFormSubmitErro">@Token.InvalidData</small>
                                 </div>
@@ -197,23 +197,22 @@
                                     <small class="error invalid-feedback" ng-if="userFrm.dateOfBirth.$invalid&&userFormSubmitErro">@Token.InvalidData</small>
                                 </div>
                             </div>
-                                </div>
-                            <div class="form-group  row">
+                        </div>
+                        <div class="form-group  row">
 
-                                <!--ActiveCode-->
-                                <label class="col-form-label col-lg-2" ng-if="disapledEmail">@Token.ActiveCode</label>
-                                <div class="form-group-sub col-lg-4" ng-if="disapledEmail">
-                                    <input type="text"
-                                           class="form-control "
-                                           ng-model="user.ActiveCode" />
-                                </div>
+                            <!--ActiveCode-->
+                            <label class="col-form-label col-lg-2" ng-if="disapledEmail">@Token.ActiveCode</label>
+                            <div class="form-group-sub col-lg-4" ng-if="disapledEmail">
+                                <input type="text"
+                                       class="form-control "
+                                       ng-model="user.ActiveCode" />
                             </div>
                         </div>
                         <div class="kt-portlet__foot">
                             <div class="kt-form__actions">
                                 <div class="row">
-                                    <div  ng-class="{'col-lg-8':!allowActiveCode||disapledEmail,'col-lg-9':allowActiveCode&&!disapledEmail}"></div>
-                                    <div   ng-class="{'col-lg-4':!allowActiveCode||disapledEmail,'col-lg-3':allowActiveCode&&!disapledEmail}">
+                                    <div ng-class="{'col-lg-8':!allowActiveCode||disapledEmail,'col-lg-9':allowActiveCode&&!disapledEmail}"></div>
+                                    <div ng-class="{'col-lg-4':!allowActiveCode||disapledEmail,'col-lg-3':allowActiveCode&&!disapledEmail}">
                                         <button type="button" class="btn btn-brand btn-elevate btn-elevate-air"
                                                 ng-if="!allowActiveCode&&!disapledEmail"
                                                 ng-click="sendActiveCodeToEmail(userFrm)">
@@ -226,20 +225,23 @@
 
                                             <i class="la la-save">@Token.Save</i>
                                         </button>
-                                     
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
+            </div>
 
                 <!--end::Portlet-->
             </div>
         </div>
     </div>
 
-</div>
+
+
+
 @section scripts{
     <!--(ANageeb) link angualr files for thsis  view -->
     <script src="~/Scripts/angularJS/views/users/profileUpdate/service.js"></script>

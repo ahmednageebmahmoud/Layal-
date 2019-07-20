@@ -20,6 +20,13 @@
                 method: 'get',
             });
         };
+        //Get Items
+        getItems() {
+            return h({
+                url: `${this.hmoePath}getEmployeeItems`,
+                method: 'get',
+            });
+        };
 
         
         //Read Notification

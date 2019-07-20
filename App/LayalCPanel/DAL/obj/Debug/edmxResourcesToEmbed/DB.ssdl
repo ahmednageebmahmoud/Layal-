@@ -126,10 +126,15 @@
   <Function Name="EmployeeDistributionWorks_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EventId" Type="bigint" Mode="In" />
   </Function>
-  <Function Name="Employees_CheckAllowAccessToEventByWorkTypeId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="Employees_CheckAllowAccessToEventForUpdateWorks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IsAdmin" Type="bit" Mode="In" />
+    <Parameter Name="IsClint" Type="bit" Mode="In" />
+    <Parameter Name="IsEmployee" Type="bit" Mode="In" />
+    <Parameter Name="IsBranchManger" Type="bit" Mode="In" />
     <Parameter Name="eventId" Type="bigint" Mode="In" />
     <Parameter Name="workTypeId" Type="int" Mode="In" />
-    <Parameter Name="employeeId" Type="bigint" Mode="In" />
+    <Parameter Name="userLoggedId" Type="bigint" Mode="In" />
+    <Parameter Name="BranchId" Type="int" Mode="In" />
   </Function>
   <Function Name="Employees_SelectWorks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EmpId" Type="bigint" Mode="In" />
@@ -241,6 +246,12 @@
     <Parameter Name="IsDeposit" Type="bit" Mode="In" />
     <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
   </Function>
+  <Function Name="EnquiryPayments_CheckIfClinetPaymentEventPricing" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EnquiryPayments_CheckIfClinetPaymentPricing" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+    <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
+  </Function>
   <Function Name="EnquiryPayments_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="InOut" />
     <Parameter Name="Amount" Type="decimal" Mode="In" />
@@ -294,7 +305,7 @@
     <Parameter Name="Id" Type="bigint" Mode="In" />
   </Function>
   <Function Name="EventCoordinations_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="WorkNumber" Type="int" Mode="In" />
+    <Parameter Name="TaskNumber" Type="int" Mode="In" />
     <Parameter Name="Task" Type="nvarchar" Mode="In" />
     <Parameter Name="StartTime" Type="time" Mode="In" />
     <Parameter Name="EndTime" Type="time" Mode="In" />
@@ -305,8 +316,11 @@
   <Function Name="EventCoordinations_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EventId" Type="bigint" Mode="In" />
   </Function>
+  <Function Name="EventCoordinations_SelectTasksNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventId" Type="bigint" Mode="In" />
+  </Function>
   <Function Name="Events_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Id" Type="bigint" Mode="InOut" />
+    <Parameter Name="Id" Type="bigint" Mode="In" />
     <Parameter Name="IsClinetCustomLogo" Type="bit" Mode="In" />
     <Parameter Name="LogoFilePath" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="IsNamesAr" Type="bit" Mode="In" />
@@ -314,7 +328,6 @@
     <Parameter Name="NameBride" Type="nvarchar" Mode="In" />
     <Parameter Name="EventDateTime" Type="datetime" Mode="In" />
     <Parameter Name="CreateDateTime" Type="datetime" Mode="In" />
-    <Parameter Name="FkEnquiryForm_Id" Type="bigint" Mode="In" />
     <Parameter Name="FKPackage_Id" Type="int" Mode="In" />
     <Parameter Name="FKPrintNameType_Id" Type="int" Mode="In" />
     <Parameter Name="FKClinet_Id" Type="bigint" Mode="In" />
@@ -394,6 +407,20 @@
     <Parameter Name="VistToCoordinationClendarEventId" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="IsUpdateVistClendar" Type="bit" Mode="In" />
     <Parameter Name="IsUpdateClendar" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="EventWorksStatus_CheckIfFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="eventId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EventWorksStatus_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IsFinshed" Type="bit" Mode="In" />
+    <Parameter Name="DateTime" Type="datetime" Mode="In" />
+    <Parameter Name="FKEvent_Id" Type="bigint" Mode="In" />
+    <Parameter Name="FKWorkType_Id" Type="int" Mode="In" />
+    <Parameter Name="FKUsre_Id" Type="bigint" Mode="In" />
+    <Parameter Name="FKAccountType_Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EventWorksStatus_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="eventId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="GetNotificationsCountIsNotRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
     <Parameter Name="CuurentUserLoggadId" Type="bigint" Mode="In" />

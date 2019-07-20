@@ -115,7 +115,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add And Update Coordinations.
+        ///   Looks up a localized string similar to Add And Update Task Coordinations.
         /// </summary>
         public static string AddAndUpdateCoordinations {
             get {
@@ -147,6 +147,15 @@ namespace Resources {
         public static string Added {
             get {
                 return ResourceManager.GetString("Added", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Added With Task Nmber.
+        /// </summary>
+        public static string AddedWithTaskumber {
+            get {
+                return ResourceManager.GetString("AddedWithTaskumber", resourceCulture);
             }
         }
         
@@ -246,6 +255,15 @@ namespace Resources {
         public static string AddNewPrintNamesType {
             get {
                 return ResourceManager.GetString("AddNewPrintNamesType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Task.
+        /// </summary>
+        public static string AddNewTask {
+            get {
+                return ResourceManager.GetString("AddNewTask", resourceCulture);
             }
         }
         
@@ -709,6 +727,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Distribution Of Work Details.
+        /// </summary>
+        public static string DistributionOfWorkDetails {
+            get {
+                return ResourceManager.GetString("DistributionOfWorkDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {
@@ -876,6 +912,42 @@ namespace Resources {
         public static string FieldIsRequierd {
             get {
                 return ResourceManager.GetString("FieldIsRequierd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finshed.
+        /// </summary>
+        public static string Finshed {
+            get {
+                return ResourceManager.GetString("Finshed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finshed Account Type.
+        /// </summary>
+        public static string FinshedAccountType {
+            get {
+                return ResourceManager.GetString("FinshedAccountType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finshed Date Time.
+        /// </summary>
+        public static string FinshedDateTime {
+            get {
+                return ResourceManager.GetString("FinshedDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finshed User Name.
+        /// </summary>
+        public static string FinshedUserName {
+            get {
+                return ResourceManager.GetString("FinshedUserName", resourceCulture);
             }
         }
         
@@ -1128,6 +1200,15 @@ namespace Resources {
         public static string LoginToYourAccount {
             get {
                 return ResourceManager.GetString("LoginToYourAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logo.
+        /// </summary>
+        public static string Logo {
+            get {
+                return ResourceManager.GetString("Logo", resourceCulture);
             }
         }
         
@@ -1753,6 +1834,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tasks.
+        /// </summary>
+        public static string Tasks {
+            get {
+                return ResourceManager.GetString("Tasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Terms.
         /// </summary>
         public static string Terms {
@@ -1767,6 +1857,15 @@ namespace Resources {
         public static string ThisEnquiryAlreadyLinkedWithClinet {
             get {
                 return ResourceManager.GetString("ThisEnquiryAlreadyLinkedWithClinet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This Task Is Finshed.
+        /// </summary>
+        public static string ThisTaskIsFinshed {
+            get {
+                return ResourceManager.GetString("ThisTaskIsFinshed", resourceCulture);
             }
         }
         

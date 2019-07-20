@@ -22,7 +22,6 @@ namespace DAL
         public Nullable<int> FKPrintNameType_Id { get; set; }
         public System.DateTime EventDateTime { get; set; }
         public System.DateTime CreateDateTime { get; set; }
-        public Nullable<long> FkEnquiryForm_Id { get; set; }
         public int FKPackage_Id { get; set; }
         public long FKClinet_Id { get; set; }
         public string Notes { get; set; }
@@ -41,5 +40,6 @@ namespace DAL
         public string Package_NameEn { get; set; }
         public string WordPrintNamesType_NameAr { get; set; }
         public string WordPrintNamesType_NameEn { get; set; }
+        public Nullable<bool> IsPayment { get; set; }
     }
 }

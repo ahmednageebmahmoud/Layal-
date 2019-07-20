@@ -6,9 +6,8 @@
 
     var eventId = getQueryStringValue("id");
     s.event = {
-        Id: eventId,
+        Id: getQueryStringValue("enquiryId"),
         State: eventId ? StateEnum.update : StateEnum.create,
-        EnquiryId: getQueryStringValue("enquiryId"),
         PrintNameTypeId: null,
         Package: null,
         IsActive:true

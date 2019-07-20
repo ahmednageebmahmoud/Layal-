@@ -21,8 +21,22 @@
                 method: 'get',
             });
         };
-	    
+
+        getTasks(eventId) {
+            return h({
+                url: `${this.basePath}getTaks?eventId=${eventId}`,
+                method: 'get',
+            });
+        };
  
+        finshedTask(eventId) {
+            return h({
+                url: `${this.basePath}finshedTask?eventId=${eventId}`,
+                method: 'get',
+            });
+        };
+
+	    
 		//save event  
         saveChange(newTask) {
 			return h({

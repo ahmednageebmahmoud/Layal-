@@ -18,18 +18,17 @@ namespace UI.Controllers
         EventsBLL EventsBLL = new EventsBLL();
         public ActionResult Index()
         {
-            if (!EventCoordinationsBLL.ChakIfEmployeeAllowAccess(false))
+            if (!EventCoordinationsBLL.ChakIfEmployeeAllowAccess())
                 return HttpNotFound();
             return View();
         }
 
-        public ActionResult AddAndUpdate()
+        public ActionResult AddAndUpdate(long id)
         {
-            if (!EventCoordinationsBLL.ChakIfEmployeeAllowAccess(true))
+            if (!EventCoordinationsBLL.CheckAlloweAccess(id))
                 return HttpNotFound();
             return View();
         }
-
         
         public ActionResult EventCoordinationsInformation()
         {
@@ -67,10 +66,17 @@ namespace UI.Controllers
         }
         public ActionResult GetEvent(long eventId)
         {
-            return Json(EventsBLL.GetEventForCurrretnEmployee(eventId, WorksTypesEnum.Coordination), JsonRequestBehavior.AllowGet);
+            return Json(EventCoordinationsBLL.GetEventForCurrretnEmployee(eventId), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetTaks(long eventId)
+        {
+            return Json(EventCoordinationsBLL.GetEventCoordinations(eventId), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult FinshedTask(long eventId)
+        {
+            return Json(EventCoordinationsBLL.FinshedTask(eventId), JsonRequestBehavior.AllowGet);
         }
         
-
         [HttpPost]
         public JsonResult SaveChange(EventCoordinationVM enquiryType)
         {

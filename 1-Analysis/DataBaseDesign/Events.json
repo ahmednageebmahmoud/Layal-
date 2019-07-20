@@ -8,7 +8,6 @@
         "NameBride": null, //اسم العرسة
         "EventDateTime": null,
         "CreateDateTime": null,
-        "FkEnquiryForm_Id": null,
         "FKPackage_Id": null,
         "FKPrintNameType_Id": null,
         "FkLanguagePrintName_Id": null,
@@ -31,5 +30,15 @@
         "Notes": "",
         "FKEvent_Id":"",
         "FKUserCreated_Id":""
-    }
+    },
+"EventWorksStatus":{
+    "Id":0,
+    "IsFinshed":true,
+    "DateTime":0,
+    "FKEvent_Id":0,
+    "FKWorkType_Id":0,
+    "FKUsre_Id":0,
+    "FKAccountType_Id":0,
+}
+
 }

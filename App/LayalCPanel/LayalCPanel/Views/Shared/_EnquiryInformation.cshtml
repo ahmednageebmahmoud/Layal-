@@ -243,12 +243,15 @@
                                 <div class="row">
                                     <div class="col-lg-9"></div>
                                     <div class="col-lg-3">
+                                        @if (IsCurrentUserAdmin)
+                                        {
                                             <button class="btn btn-danger btn-elevate btn-elevate-air  "
                                                     ng-if="!enquiry.IsClosed"
                                                     ng-click="closeEnquiry(enquiry.Id)">
                                                 <i class="la la-lock" >@Token.CloseEnquiry</i>
                                             </button>
-                                        <p>@Token.ClosedDatetime : {{enquiry.ClosedDateTimeDisplay}}</p>
+                                        }
+                                        <p ng-if="enquiry.ClosedDateTimeDisplay">@Token.ClosedDatetime : {{enquiry.ClosedDateTimeDisplay}}</p>
                                        
                                     </div>
                                 </div>

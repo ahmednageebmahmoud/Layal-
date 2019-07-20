@@ -12,6 +12,7 @@ public    class EmployeeDiributionWorkVM:BasicVM
         public long EventId { get; set; }
         public long EmployeeId { get; set; }
         public int WorkTypeId { get; set; }
+        public bool IsFinshed { get;  set; }
 
     }//End Class
 }

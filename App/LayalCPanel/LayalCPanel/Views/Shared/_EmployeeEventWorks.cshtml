@@ -101,6 +101,28 @@
                                   ng-sms-field-name="PrintNamesTypeName"
                                   ng-sms-resource="@Token.PrintNamesType"></sms-sort>
                     </th>
+
+                    <th class="th-10">
+                        <sms-sort ng-sms-fop="enquiyFOP"
+                                  ng-sms-field-name="IsFinshed"
+                                  ng-sms-resource="@Token.Finshed"></sms-sort>
+                    </th>
+                    <th class="th-10">
+                        <sms-sort ng-sms-fop="enquiyFOP"
+                                  ng-sms-field-name="DateTimeDisplay"
+                                  ng-sms-resource="@Token.FinshedDateTime"></sms-sort>
+                    </th>
+                    <th class="th-10">
+                        <sms-sort ng-sms-fop="enquiyFOP"
+                                  ng-sms-field-name="FinshedUserName"
+                                  ng-sms-resource="@Token.FinshedUserName"></sms-sort>
+                    </th>
+                    <th class="th-10">
+                        <sms-sort ng-sms-fop="enquiyFOP"
+                                  ng-sms-field-name="FinshedAccountTypeName"
+                                  ng-sms-resource="@Token.FinshedAccountType"></sms-sort>
+                    </th>
+                    
                     <th class="th-10">
                         @Token.Operations
                     </th>
@@ -113,14 +135,22 @@
                     <td><i class="fas " ng-class="{'fa-check':x.IsClinetCustomLogo}"></i></td>
                     <td>{{x.Package.PackageName}}</td>
                     <td>{{x.PrintNameType.PrintNamesTypeName}}</td>
+
+                    <!--Coordination Work Status-->
+                    <td ng-show="x.WorkTypeId==worksTypesEnum.Coordination"><i class="fas " ng-class="{'fa-check':x.CoordinationWorkStatus.IsFinshed}"></i></td>
+                    <td ng-show="x.WorkTypeId==worksTypesEnum.Coordination">{{x.CoordinationWorkStatus.DateTimeDisplay}}</td>
+                    <td ng-show="x.WorkTypeId==worksTypesEnum.Coordination">{{x.CoordinationWorkStatus.FinshedUserName}}</td>
+                    <td ng-show="x.WorkTypeId==worksTypesEnum.Coordination">{{x.CoordinationWorkStatus.FinshedAccountTypeName}}</td>
                     <td>
                         <!--Btn:Edit-->
-                        <a href="/EventCoordinations/AddAndUpdate?id={{x.Id}}" title="@Token.Update" 
-                           ng-if="x.WorkTypeId==worksTypesEnnum.Coordination"
-                            class="btn btn-sm btn-clean btn-icon btn-icon-md"
-                          ><i class="la la-edit"></i></a>
-                        
+                        <a href="/EventCoordinations/AddAndUpdate?id={{x.Id}}" title="@Token.Update"  ng-if="x.WorkTypeId==worksTypesEnum.Coordination"
+                            class="btn btn-sm btn-clean btn-icon btn-icon-md" ><i class="la la-edit"></i></a>
                     </td>
+
+
+                    <!--Another Here-->
+
+
                 </tr>
             </tbody>
         </table>

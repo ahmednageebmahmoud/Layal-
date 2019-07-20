@@ -1,4 +1,4 @@
-﻿ngApp.controller('homeCtrl', ['$scope', '$http', 'homeServ', function (s, h, homeServ) {
+﻿ngApp.controller('homeCtrl', ['$scope', '$http', 'homeServ','$rootScope', function (s, h, homeServ,rs) {
     //============= G E T =================
     s.getItems = reset => {
         let loading = BlockingService.generateLoding();
@@ -12,6 +12,7 @@
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
                     s.employeeWorks = d.data.Result.EmployeeWorks;
+                
                 } break;
                 case RequestTypeEnum.error:
                 case RequestTypeEnum.warning:

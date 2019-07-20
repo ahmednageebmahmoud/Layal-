@@ -105,7 +105,7 @@
                 <div class="kt-portlet">
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
-                            <h3 class="kt-portlet__head-title">@Token.PackageDetails</h3>
+                            <h3 class="kt-portlet__head-title">@Token.DistributionOfWorkDetails</h3>
                         </div>
                     </div>
 
@@ -123,7 +123,7 @@
                                         </th>
                                         <th class="th-30">
                                             <label class="sms-sort-field">
-                                                @Token.ValueAr
+                                                @Token.WorkType
                                             </label>
                                         </th>
                                         <th class="th-10">
@@ -131,6 +131,12 @@
                                                 @Token.Operations
                                             </label>
                                         </th>
+                                        <th class="th-10">
+                                            <label class="sms-sort-field">
+                                                @Token.Finshed
+                                            </label>
+                                        </th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -147,11 +153,14 @@
                                                     ng-options="c.Id as c.WorkTypeName for c in workTypes"
                                                     ng-disabled="true"></select>
                                         </td>
+                                        <td></td>
                                         <td>
                                             <!--Btn:Delete-->
                                             @if (Priv.CanDelete)
                                             {
-                                                <a href="javascript:void(0);" ng-click="delete(gp)"  title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
+                                                <a href="javascript:void(0);" 
+                                                   ng-if="!gp.IsFinshed"
+                                                    ng-click="delete(gp)"  title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
                                             }
                                         </td>
                                     </tr>

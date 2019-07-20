@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLL.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,11 @@ namespace BLL.ViewModels
         public string Task { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
-        public string Notes { get; set; }
 
+        public string StartTimeDisplay => DateService.GetTimeEn(StartTime);
+        public string EndTimeDisplay => DateService.GetTimeEn(EndTime);
+
+        public string Notes { get; set; }
+        public string CreatedUserName { get;   set; }
     }//end class
 }

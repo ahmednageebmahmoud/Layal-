@@ -1,4 +1,5 @@
-﻿using BLL.Services;
+﻿using BLL.Enums;
+using BLL.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,13 +20,12 @@ namespace BLL.ViewModels
         public string NameBride { get; set; }
         public DateTime EventDateTime { get; set; }
         public DateTime CreateDateTime { get; set; }
-        public DateTime? VistToCoordinationDateTime{ get; set; }
+        public DateTime? VistToCoordinationDateTime { get; set; }
 
-        
+
         public string VistToCoordinationDateTimeDisplay => DateService.GetDateTimeEn(this.VistToCoordinationDateTime);
         public string EventDateTimeDisplay => DateService.GetDateTimeEn(this.EventDateTime);
         public string CreateDateTimeDisplay => DateService.GetDateTimeEn(this.CreateDateTime);
-        public long? EnquiryId { get; set; }
         public int? PackageId { get; set; }
         public int? PrintNameTypeId { get; set; }
         public long ClinetId { get; set; }
@@ -43,7 +43,7 @@ namespace BLL.ViewModels
         public PackageVM Package { get; set; }
         public BranchVM Branch { get; set; }
         public PrintNamesTypeVM PrintNameType { get; set; }
-        public string LogoFileName { get;   set; }
+        public string LogoFileName { get; set; }
         public string ClendarEventId { get; set; }
 
 
@@ -87,8 +87,104 @@ namespace BLL.ViewModels
         /// </summary>
         public decimal RemainingAmount => this.TotalPrice - this.TotalPaymentsActivated.Value;
 
-        public bool? IsClosed { get;   set; }
+        public bool? IsPayment { get; set; }
+
+        public bool? IsClosed { get; set; }
         public string VistToCoordinationClendarEventId { get; internal set; }
-        public int WorkTypeId { get;   set; }
+        public int WorkTypeId { get; set; }
+
+        public List<EventWorkStatusVM> EventWorksStatus { get; set; } = new List<EventWorkStatusVM>();
+        public EventWorkStatusVM CoordinationWorkStatus
+        {
+            get
+            {
+                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
+                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.Coordination);
+            }
+        }  
+        public EventWorkStatusVM ArchivingAndSaveingStatus
+        {
+            get
+            {
+                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
+                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.ArchivingAndSaveing);
+            }
+        }
+        public EventWorkStatusVM ProductProcessingStatus
+        {
+            get
+            {
+                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
+                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.ProductProcessing);
+            }
+        }
+
+        public EventWorkStatusVM ChooseingStatus
+        {
+            get
+            {
+                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
+                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.Chooseing);
+            }
+        }
+        public EventWorkStatusVM DigitalProcessingStatus
+        {
+            get
+            {
+                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
+                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.DigitalProcessing);
+            }
+        }
+        public EventWorkStatusVM PreparingForPrintingStatus
+        {
+            get
+            {
+                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
+                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.PreparingForPrinting);
+            }
+        }
+        public EventWorkStatusVM ManufacturingStatus
+        {
+            get
+            {
+                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
+                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.Manufacturing);
+            }
+        }
+        public EventWorkStatusVM QualityAndReviewStatus
+        {
+            get
+            {
+                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
+                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.QualityAndReview);
+            }
+        }
+        public EventWorkStatusVM PackagingStatus
+        {
+            get
+            {
+                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
+                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.Packaging);
+            }
+        }
+        public EventWorkStatusVM TransmissionAndDeliveryStatus
+        {
+            get
+            {
+                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
+                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.TransmissionAndDelivery);
+            }
+        }
+        public EventWorkStatusVM ArchivingStatus
+        {
+            get
+            {
+                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
+                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.Archiving);
+            }
+        }
+
+
+
     }//end class
 }

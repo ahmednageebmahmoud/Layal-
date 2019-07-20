@@ -70,7 +70,7 @@ namespace BLL.BLL
                 UserName=c.Key.UserName,
                 WorkTypes= c.Select(v=> new WorkTypeVM
                 {
-                    Id=v.FkWorkType_Id
+                    Id=v.FkWorkType_Id.HasValue?v.FkWorkType_Id.Value:0
                 }).ToList()
             }).ToList();
             return Result;

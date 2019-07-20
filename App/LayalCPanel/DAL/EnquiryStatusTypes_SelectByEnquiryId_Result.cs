@@ -21,6 +21,7 @@ namespace DAL
         public Nullable<System.DateTime> Status_ScheduleVisitDateTime { get; set; }
         public long Status_UserCreatedId { get; set; }
         public Nullable<long> Status_EnquiryPaymentId { get; set; }
+        public Nullable<decimal> Amount { get; set; }
         public string Status_CreatedUserName { get; set; }
     }
 }

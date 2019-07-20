@@ -72,42 +72,27 @@ namespace BLL.BLL
 
         private object Delete(CountryVM c)
         {
-            try
-            {
                 //Check Befor Used
                 if (db.Countries_CheckIfUsed(c.Id).FirstOrDefault() > 0)
                     return new ResponseVM(RequestTypeEnum.Error, $"{Token.IsoCode} : {Token.CanNotDeleteBecuseIsUsed}");
 
                 db.Countries_Delete(c.Id);
                 return new ResponseVM(RequestTypeEnum.Success, Token.Deleted, c);
-            }
-            catch (Exception ex)
-            {
-                return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
-            }
+       
         }
 
         private object Update(CountryVM c)
         {
-            try
-            {
                 //check iso codde
                 if (db.Countries_IsoCodeBeforUsed(c.Id, c.IsoCode).FirstOrDefault() > 0)
                     return new ResponseVM(RequestTypeEnum.Error, $"{Token.IsoCode} : {Token.ItIsAlreadyUsed}");
 
                 db.Countries_Update(c.Id, c.NameAr, c.NameEn, c.IsoCode, c.WordId);
                 return new ResponseVM(RequestTypeEnum.Success, Token.Updated, c);
-            }
-            catch (Exception ex)
-            {
-                return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
-            }
         }
 
         private object Add(CountryVM c)
         {
-            try
-            {
                 //check iso codde
                 if (db.Countries_IsoCodeBeforUsed(c.Id, c.IsoCode).FirstOrDefault() > 0)
                     return new ResponseVM(RequestTypeEnum.Error, $"{Token.IsoCode} : {Token.ItIsAlreadyUsed}");
@@ -116,11 +101,6 @@ namespace BLL.BLL
                 db.Countries_Insert(ID, c.NameAr, c.NameEn, c.IsoCode);
                 c.Id = (int)ID.Value;
                 return new ResponseVM(RequestTypeEnum.Success, Token.Added, c);
-            }
-            catch (Exception ex)
-            {
-                return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
-            }
         }
 
         public object SelectById(int id)

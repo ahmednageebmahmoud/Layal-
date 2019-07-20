@@ -18,7 +18,7 @@
         CreateDateFrom: null,
         CreateDateTo: null
     };
-    s.worksTypesEnnum = worksTypesEnnum;
+    s.worksTypesEnum = worksTypesEnnum;
 
     s.checkBoxList = [
     { Id: null, Name: Token.select },

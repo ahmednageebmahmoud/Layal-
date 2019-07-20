@@ -152,6 +152,7 @@
     <Compile Include="ViewModels\EnquiryPaymentVM.cs" />
     <Compile Include="ViewModels\EventCoordinationVM.cs" />
     <Compile Include="ViewModels\EventVM.cs" />
+    <Compile Include="ViewModels\EventWorkStatusVM.cs" />
     <Compile Include="ViewModels\PackageDetailVM.cs" />
     <Compile Include="ViewModels\PackageInputTypeVM.cs" />
     <Compile Include="ViewModels\PackageVM.cs" />

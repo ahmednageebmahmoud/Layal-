@@ -23,7 +23,7 @@ namespace BLL.ViewModels
         public EnquiryTypeVM EnquiryType { get; set; }
         public long? Id { get; internal set; }
         public bool IsBankTransferDeposit { get; set; }
-        public decimal Amount { get; set; }
+        public decimal? Amount { get; set; }
         public bool IsWithBranch { get; set; }
         public string ClinetName { get; set; }
         public string BankTransferImage { get;  set; }

@@ -10,7 +10,7 @@ namespace BLL.ViewModels
  public   class EnquiryPaymentVM:BasicVM
     {
         public long Id { get; set; }
-        public decimal Amount { get; set; }
+        public decimal? Amount { get; set; }
         public bool IsDeposit { get; set; }
         public bool IsBankTransfer { get; set; }
         public bool? IsAcceptFromManger { get; set; }

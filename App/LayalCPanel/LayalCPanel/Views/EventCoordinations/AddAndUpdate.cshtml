@@ -20,7 +20,7 @@
 
 
                 <span class="kt-subheader__breadcrumbs-separator"></span>
-                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">@Token.DistributionOfWork</a>
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">@Token.AddAndUpdateCoordinations</a>
                 <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active </span> -->
             </div>
         </div>
@@ -33,18 +33,32 @@
     <div class="kt-content  kt-grid__item kt-grid__item--fluid">
         <div class="row">
             <div class="col-lg-12">
-                <!--Package-->
-                <div class="kt-portlet">
+                <!--Add New Task-->
+                <div class="kt-portlet" ng-if="!isFinshed">
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
                             <span class="kt-portlet__head-icon">
                                 <i class="kt-font-brand flaticon-add"></i>
                             </span>
-                            <h3 class="kt-portlet__head-title">@Token.EventCoordinations</h3>
+                            <h3 class="kt-portlet__head-title">@Token.AddNewTask</h3>
                         </div>
+
+                        @if (!CookieService.UserInfo.IsClinet)
+                        {
+                        <div class="kt-portlet__head-toolbar" ng-hide="isFinshed">
+                            <div class="kt-portlet__head-wrapper">
+                                <div class="kt-portlet__head-actions">
+                                        <a href="#" class="btn btn-success btn-elevate btn-icon-sm" ng-click="finshedTask()">
+                                            <i class="la la-plus"></i>@Token.Finshed
+                                        </a>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    
                     </div>
                     <!--Package Form-->
-                    <form novalidate name="newTaskFrm" class="kt-form kt-form--label-right"
+                    <form novalidate name="newTaskFrm" class="kt-form kt-form--label-right" 
                           ng-submit="saveChange(newTaskFrm)">
                         <div class="kt-portlet__body">
                             <!--R O W 1-->
@@ -69,8 +83,8 @@
                             <div class="form-group row">
                                 <!--StartTime-->
                                 <label class="col-form-label col-lg-2">@Token.StartTime</label>
-                                <div class="col-lg-4 form-group-sub">{{newTask.StartTime}}
-                                    <input type="time" class="form-control"  ng-model="newTask.StartTime"  name="startTime" 
+                                <div class="col-lg-4 form-group-sub"> 
+                                    <input type="time" class="form-control"  ng-model="newTask.StartTime"  name="startTime" id="startTime" 
                                            ng-class="{'is-invalid':newTaskFrm.startTime.$invalid&&newTaskFrmSubmitError}"
                                            ng-required="true"/>
                                     <small class="error invalid-feedback" ng-if="newTaskFrm.startTime.$error.required&&newTaskFrmSubmitError">@Token.FieldIsRequierd</small>
@@ -80,7 +94,7 @@
                                 <!--EndTime-->
                                 <label class="col-form-label col-lg-2">@Token.EndTime</label>
                                 <div class="col-lg-4 form-group-sub">
-                                    <input type="time" class="form-control" ng-model="newTask.EndTime" name="endTime" 
+                                    <input type="time" class="form-control" ng-model="newTask.EndTime" name="endTime"  id="endTime"
                                            ng-class="{'is-invalid':newTaskFrm.endTime.$invalid&&newTaskFrmSubmitError}"
                                            ng-required="true"/>
                                     <small class="error invalid-feedback" ng-if="newTaskFrm.endTime.$error.required&&newTaskFrmSubmitError">@Token.FieldIsRequierd</small>
@@ -118,10 +132,11 @@
                     </form>
                 </div>
 
+                <!--Tasks-->
                 <div class="kt-portlet">
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
-                            <h3 class="kt-portlet__head-title">@Token.PackageDetails</h3>
+                            <h3 class="kt-portlet__head-title">@Token.Tasks</h3>
                         </div>
                     </div>
 
@@ -132,39 +147,32 @@
                             <table class="table sms-table">
                                 <thead>
                                     <tr role="row">
-                                        <th class="th-30 ">
-                                            <label class="sms-sort-field">
-                                                @Token.Employee
-                                            </label>
-                                        </th>
-                                        <th class="th-30">
-                                            <label class="sms-sort-field">
-                                                @Token.ValueAr
-                                            </label>
-                                        </th>
-                                        <th class="th-10">
-                                            <label class="sms-sort-field">
-                                                @Token.Operations
-                                            </label>
-                                        </th>
+                                        <th class="th-10 "><label class="sms-sort-field">@Token.TaskNumber</label></th>
+                                        <th class="th-25 "><label class="sms-sort-field">@Token.Task</label></th>
+                                        <th class="th-10 "><label class="sms-sort-field">@Token.StartTime</label></th>
+                                        <th class="th-10 "><label class="sms-sort-field">@Token.EndTime</label></th>
+                                        <th class="th-30 "><label class="sms-sort-field">@Token.Notes</label></th>
+                                        <th class="th-10 "><label class="sms-sort-field">@Token.UserName</label></th>
+
+                                        
+                                        <th class="th-15 " ng-if="!isFinshed"><label class="sms-sort-field">@Token.Operations</label></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="gp in employeeDistributionWorks">
-                                        <td>
-                                            <select class="form-control input-disabled"
-                                                    ng-model="gp.EmployeeId"
-                                                    ng-options="c.Id as c.UserName for c in employees"
-                                                    ng-disabled="true"></select>
-                                        </td>
-                                        <td>
-                                            <select class="form-control input-disabled"
-                                                    ng-model="gp.WorkTypeId"
-                                                    ng-options="c.Id as c.WorkTypeName for c in workTypes"
-                                                    ng-disabled="true"></select>
-                                        </td>
-                                        <td>
-                                            <a href="javascript:void(0);" ng-click="delete(gp)" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
+                                    <tr ng-repeat="x in tasks">
+                                        <td>{{x.TaskNumber}}</td>
+                                        <td>{{x.Task}}</td>
+                                        <td>{{x.StartTimeDisplay}}</td>
+                                        <td>{{x.EndTimeDisplay}}</td>
+                                        <td><textarea class="form-control" 
+                                                      ng-model="x.Notes"
+                                                      readonly
+                                                      ></textarea></td>
+                                        
+                                        <td>{{x.CreatedUserName}}</td>
+                                        <td ng-if="!isFinshed">
+                                            <a href="javascript:void(0);" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="delete(x)"><i class="la la-trash"></i> </a>
+
                                         </td>
                                     </tr>
                                 </tbody>
@@ -172,6 +180,10 @@
                         </div>
                     </div>
                 </div>
+
+                <!--Event-->
+                @Html.Partial("~/Views/Shared/_EventsInformation.cshtml")
+
             </div>
         </div>
     </div>

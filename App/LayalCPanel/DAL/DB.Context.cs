@@ -431,6 +431,43 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeeDistributionWorks_SelectByEventId_Result>("EmployeeDistributionWorks_SelectByEventId", eventIdParameter);
         }
     
+        public virtual ObjectResult<Nullable<int>> Employees_CheckAllowAccessToEventForUpdateWorks(Nullable<bool> isAdmin, Nullable<bool> isClint, Nullable<bool> isEmployee, Nullable<bool> isBranchManger, Nullable<long> eventId, Nullable<int> workTypeId, Nullable<long> userLoggedId, Nullable<int> branchId)
+        {
+            var isAdminParameter = isAdmin.HasValue ?
+                new ObjectParameter("IsAdmin", isAdmin) :
+                new ObjectParameter("IsAdmin", typeof(bool));
+    
+            var isClintParameter = isClint.HasValue ?
+                new ObjectParameter("IsClint", isClint) :
+                new ObjectParameter("IsClint", typeof(bool));
+    
+            var isEmployeeParameter = isEmployee.HasValue ?
+                new ObjectParameter("IsEmployee", isEmployee) :
+                new ObjectParameter("IsEmployee", typeof(bool));
+    
+            var isBranchMangerParameter = isBranchManger.HasValue ?
+                new ObjectParameter("IsBranchManger", isBranchManger) :
+                new ObjectParameter("IsBranchManger", typeof(bool));
+    
+            var eventIdParameter = eventId.HasValue ?
+                new ObjectParameter("eventId", eventId) :
+                new ObjectParameter("eventId", typeof(long));
+    
+            var workTypeIdParameter = workTypeId.HasValue ?
+                new ObjectParameter("workTypeId", workTypeId) :
+                new ObjectParameter("workTypeId", typeof(int));
+    
+            var userLoggedIdParameter = userLoggedId.HasValue ?
+                new ObjectParameter("userLoggedId", userLoggedId) :
+                new ObjectParameter("userLoggedId", typeof(long));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Employees_CheckAllowAccessToEventForUpdateWorks", isAdminParameter, isClintParameter, isEmployeeParameter, isBranchMangerParameter, eventIdParameter, workTypeIdParameter, userLoggedIdParameter, branchIdParameter);
+        }
+    
         public virtual ObjectResult<Employees_SelectWorks_Result> Employees_SelectWorks(Nullable<long> empId)
         {
             var empIdParameter = empId.HasValue ?
@@ -482,262 +519,6 @@ namespace DAL
                 new ObjectParameter("UserId", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeesWorks_SelectByUserId_Result>("EmployeesWorks_SelectByUserId", userIdParameter);
-        }
-    
-        public virtual ObjectResult<Enquires_Closed_Result> Enquires_Closed(Nullable<long> enquiryId, Nullable<System.DateTime> dateTime)
-        {
-            var enquiryIdParameter = enquiryId.HasValue ?
-                new ObjectParameter("EnquiryId", enquiryId) :
-                new ObjectParameter("EnquiryId", typeof(long));
-    
-            var dateTimeParameter = dateTime.HasValue ?
-                new ObjectParameter("DateTime", dateTime) :
-                new ObjectParameter("DateTime", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Enquires_Closed_Result>("Enquires_Closed", enquiryIdParameter, dateTimeParameter);
-        }
-    
-        public virtual int Enquires_Delete(Nullable<long> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Enquires_Delete", idParameter);
-        }
-    
-        public virtual int Enquires_Insert(ObjectParameter id, string firstName, string lastName, string phoneNo, Nullable<int> day, Nullable<int> month, Nullable<int> year, Nullable<int> fkCountry_Id, Nullable<int> fkCity_Id, Nullable<int> fKEnquiryType_Id, Nullable<long> fKUserCreated_Id, Nullable<System.DateTime> createDateTime, string notes, Nullable<int> branchId, Nullable<bool> isLinkedClinet, Nullable<bool> iFWithBranch)
-        {
-            var firstNameParameter = firstName != null ?
-                new ObjectParameter("FirstName", firstName) :
-                new ObjectParameter("FirstName", typeof(string));
-    
-            var lastNameParameter = lastName != null ?
-                new ObjectParameter("LastName", lastName) :
-                new ObjectParameter("LastName", typeof(string));
-    
-            var phoneNoParameter = phoneNo != null ?
-                new ObjectParameter("PhoneNo", phoneNo) :
-                new ObjectParameter("PhoneNo", typeof(string));
-    
-            var dayParameter = day.HasValue ?
-                new ObjectParameter("Day", day) :
-                new ObjectParameter("Day", typeof(int));
-    
-            var monthParameter = month.HasValue ?
-                new ObjectParameter("Month", month) :
-                new ObjectParameter("Month", typeof(int));
-    
-            var yearParameter = year.HasValue ?
-                new ObjectParameter("Year", year) :
-                new ObjectParameter("Year", typeof(int));
-    
-            var fkCountry_IdParameter = fkCountry_Id.HasValue ?
-                new ObjectParameter("FkCountry_Id", fkCountry_Id) :
-                new ObjectParameter("FkCountry_Id", typeof(int));
-    
-            var fkCity_IdParameter = fkCity_Id.HasValue ?
-                new ObjectParameter("FkCity_Id", fkCity_Id) :
-                new ObjectParameter("FkCity_Id", typeof(int));
-    
-            var fKEnquiryType_IdParameter = fKEnquiryType_Id.HasValue ?
-                new ObjectParameter("FKEnquiryType_Id", fKEnquiryType_Id) :
-                new ObjectParameter("FKEnquiryType_Id", typeof(int));
-    
-            var fKUserCreated_IdParameter = fKUserCreated_Id.HasValue ?
-                new ObjectParameter("FKUserCreated_Id", fKUserCreated_Id) :
-                new ObjectParameter("FKUserCreated_Id", typeof(long));
-    
-            var createDateTimeParameter = createDateTime.HasValue ?
-                new ObjectParameter("CreateDateTime", createDateTime) :
-                new ObjectParameter("CreateDateTime", typeof(System.DateTime));
-    
-            var notesParameter = notes != null ?
-                new ObjectParameter("Notes", notes) :
-                new ObjectParameter("Notes", typeof(string));
-    
-            var branchIdParameter = branchId.HasValue ?
-                new ObjectParameter("BranchId", branchId) :
-                new ObjectParameter("BranchId", typeof(int));
-    
-            var isLinkedClinetParameter = isLinkedClinet.HasValue ?
-                new ObjectParameter("IsLinkedClinet", isLinkedClinet) :
-                new ObjectParameter("IsLinkedClinet", typeof(bool));
-    
-            var iFWithBranchParameter = iFWithBranch.HasValue ?
-                new ObjectParameter("IFWithBranch", iFWithBranch) :
-                new ObjectParameter("IFWithBranch", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Enquires_Insert", id, firstNameParameter, lastNameParameter, phoneNoParameter, dayParameter, monthParameter, yearParameter, fkCountry_IdParameter, fkCity_IdParameter, fKEnquiryType_IdParameter, fKUserCreated_IdParameter, createDateTimeParameter, notesParameter, branchIdParameter, isLinkedClinetParameter, iFWithBranchParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> Enquires_IsClosed(Nullable<long> enquiryId)
-        {
-            var enquiryIdParameter = enquiryId.HasValue ?
-                new ObjectParameter("EnquiryId", enquiryId) :
-                new ObjectParameter("EnquiryId", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Enquires_IsClosed", enquiryIdParameter);
-        }
-    
-        public virtual ObjectResult<Enquires_SelectByFilter_Result> Enquires_SelectByFilter(Nullable<int> skip, Nullable<int> take, string firstName, string lastName, string phone, Nullable<int> day, Nullable<int> month, Nullable<int> year, Nullable<System.DateTime> createDateTimeFrom, Nullable<System.DateTime> createDateTimeTo, Nullable<int> countryId, Nullable<int> cityId, Nullable<int> enquiryId, Nullable<int> branchId, Nullable<bool> isForCurrentUser, Nullable<long> currentUserLoggadId, Nullable<bool> isLinkedClinet, Nullable<bool> isWithBranch)
-        {
-            var skipParameter = skip.HasValue ?
-                new ObjectParameter("Skip", skip) :
-                new ObjectParameter("Skip", typeof(int));
-    
-            var takeParameter = take.HasValue ?
-                new ObjectParameter("Take", take) :
-                new ObjectParameter("Take", typeof(int));
-    
-            var firstNameParameter = firstName != null ?
-                new ObjectParameter("FirstName", firstName) :
-                new ObjectParameter("FirstName", typeof(string));
-    
-            var lastNameParameter = lastName != null ?
-                new ObjectParameter("LastName", lastName) :
-                new ObjectParameter("LastName", typeof(string));
-    
-            var phoneParameter = phone != null ?
-                new ObjectParameter("Phone", phone) :
-                new ObjectParameter("Phone", typeof(string));
-    
-            var dayParameter = day.HasValue ?
-                new ObjectParameter("Day", day) :
-                new ObjectParameter("Day", typeof(int));
-    
-            var monthParameter = month.HasValue ?
-                new ObjectParameter("Month", month) :
-                new ObjectParameter("Month", typeof(int));
-    
-            var yearParameter = year.HasValue ?
-                new ObjectParameter("Year", year) :
-                new ObjectParameter("Year", typeof(int));
-    
-            var createDateTimeFromParameter = createDateTimeFrom.HasValue ?
-                new ObjectParameter("CreateDateTimeFrom", createDateTimeFrom) :
-                new ObjectParameter("CreateDateTimeFrom", typeof(System.DateTime));
-    
-            var createDateTimeToParameter = createDateTimeTo.HasValue ?
-                new ObjectParameter("CreateDateTimeTo", createDateTimeTo) :
-                new ObjectParameter("CreateDateTimeTo", typeof(System.DateTime));
-    
-            var countryIdParameter = countryId.HasValue ?
-                new ObjectParameter("CountryId", countryId) :
-                new ObjectParameter("CountryId", typeof(int));
-    
-            var cityIdParameter = cityId.HasValue ?
-                new ObjectParameter("CityId", cityId) :
-                new ObjectParameter("CityId", typeof(int));
-    
-            var enquiryIdParameter = enquiryId.HasValue ?
-                new ObjectParameter("EnquiryId", enquiryId) :
-                new ObjectParameter("EnquiryId", typeof(int));
-    
-            var branchIdParameter = branchId.HasValue ?
-                new ObjectParameter("BranchId", branchId) :
-                new ObjectParameter("BranchId", typeof(int));
-    
-            var isForCurrentUserParameter = isForCurrentUser.HasValue ?
-                new ObjectParameter("IsForCurrentUser", isForCurrentUser) :
-                new ObjectParameter("IsForCurrentUser", typeof(bool));
-    
-            var currentUserLoggadIdParameter = currentUserLoggadId.HasValue ?
-                new ObjectParameter("CurrentUserLoggadId", currentUserLoggadId) :
-                new ObjectParameter("CurrentUserLoggadId", typeof(long));
-    
-            var isLinkedClinetParameter = isLinkedClinet.HasValue ?
-                new ObjectParameter("IsLinkedClinet", isLinkedClinet) :
-                new ObjectParameter("IsLinkedClinet", typeof(bool));
-    
-            var isWithBranchParameter = isWithBranch.HasValue ?
-                new ObjectParameter("IsWithBranch", isWithBranch) :
-                new ObjectParameter("IsWithBranch", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Enquires_SelectByFilter_Result>("Enquires_SelectByFilter", skipParameter, takeParameter, firstNameParameter, lastNameParameter, phoneParameter, dayParameter, monthParameter, yearParameter, createDateTimeFromParameter, createDateTimeToParameter, countryIdParameter, cityIdParameter, enquiryIdParameter, branchIdParameter, isForCurrentUserParameter, currentUserLoggadIdParameter, isLinkedClinetParameter, isWithBranchParameter);
-        }
-    
-        public virtual ObjectResult<Enquires_SelectByPk_Result> Enquires_SelectByPk(Nullable<long> enquiyId)
-        {
-            var enquiyIdParameter = enquiyId.HasValue ?
-                new ObjectParameter("EnquiyId", enquiyId) :
-                new ObjectParameter("EnquiyId", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Enquires_SelectByPk_Result>("Enquires_SelectByPk", enquiyIdParameter);
-        }
-    
-        public virtual ObjectResult<Enquires_SelectByPk_SimpleData_Result> Enquires_SelectByPk_SimpleData(Nullable<long> enauiryId)
-        {
-            var enauiryIdParameter = enauiryId.HasValue ?
-                new ObjectParameter("EnauiryId", enauiryId) :
-                new ObjectParameter("EnauiryId", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Enquires_SelectByPk_SimpleData_Result>("Enquires_SelectByPk_SimpleData", enauiryIdParameter);
-        }
-    
-        public virtual int Enquires_Update(Nullable<long> id, string firstName, string lastName, string phoneNo, Nullable<int> day, Nullable<int> month, Nullable<int> year, Nullable<int> fkCountry_Id, Nullable<int> fkCity_Id, Nullable<int> fKEnquiryType_Id, string notes, Nullable<System.DateTime> notesCreateDateTime, Nullable<long> notesFkUsereCreatedId, Nullable<int> branchId, Nullable<bool> isWithBranch)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(long));
-    
-            var firstNameParameter = firstName != null ?
-                new ObjectParameter("FirstName", firstName) :
-                new ObjectParameter("FirstName", typeof(string));
-    
-            var lastNameParameter = lastName != null ?
-                new ObjectParameter("LastName", lastName) :
-                new ObjectParameter("LastName", typeof(string));
-    
-            var phoneNoParameter = phoneNo != null ?
-                new ObjectParameter("PhoneNo", phoneNo) :
-                new ObjectParameter("PhoneNo", typeof(string));
-    
-            var dayParameter = day.HasValue ?
-                new ObjectParameter("Day", day) :
-                new ObjectParameter("Day", typeof(int));
-    
-            var monthParameter = month.HasValue ?
-                new ObjectParameter("Month", month) :
-                new ObjectParameter("Month", typeof(int));
-    
-            var yearParameter = year.HasValue ?
-                new ObjectParameter("Year", year) :
-                new ObjectParameter("Year", typeof(int));
-    
-            var fkCountry_IdParameter = fkCountry_Id.HasValue ?
-                new ObjectParameter("FkCountry_Id", fkCountry_Id) :
-                new ObjectParameter("FkCountry_Id", typeof(int));
-    
-            var fkCity_IdParameter = fkCity_Id.HasValue ?
-                new ObjectParameter("FkCity_Id", fkCity_Id) :
-                new ObjectParameter("FkCity_Id", typeof(int));
-    
-            var fKEnquiryType_IdParameter = fKEnquiryType_Id.HasValue ?
-                new ObjectParameter("FKEnquiryType_Id", fKEnquiryType_Id) :
-                new ObjectParameter("FKEnquiryType_Id", typeof(int));
-    
-            var notesParameter = notes != null ?
-                new ObjectParameter("Notes", notes) :
-                new ObjectParameter("Notes", typeof(string));
-    
-            var notesCreateDateTimeParameter = notesCreateDateTime.HasValue ?
-                new ObjectParameter("NotesCreateDateTime", notesCreateDateTime) :
-                new ObjectParameter("NotesCreateDateTime", typeof(System.DateTime));
-    
-            var notesFkUsereCreatedIdParameter = notesFkUsereCreatedId.HasValue ?
-                new ObjectParameter("NotesFkUsereCreatedId", notesFkUsereCreatedId) :
-                new ObjectParameter("NotesFkUsereCreatedId", typeof(long));
-    
-            var branchIdParameter = branchId.HasValue ?
-                new ObjectParameter("BranchId", branchId) :
-                new ObjectParameter("BranchId", typeof(int));
-    
-            var isWithBranchParameter = isWithBranch.HasValue ?
-                new ObjectParameter("IsWithBranch", isWithBranch) :
-                new ObjectParameter("IsWithBranch", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Enquires_Update", idParameter, firstNameParameter, lastNameParameter, phoneNoParameter, dayParameter, monthParameter, yearParameter, fkCountry_IdParameter, fkCity_IdParameter, fKEnquiryType_IdParameter, notesParameter, notesCreateDateTimeParameter, notesFkUsereCreatedIdParameter, branchIdParameter, isWithBranchParameter);
         }
     
         public virtual int Enquiries_ChangeCreateEventState(Nullable<long> id, Nullable<bool> isCreatedEvent)
@@ -811,6 +592,15 @@ namespace DAL
                 new ObjectParameter("EnquiryId", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EnquiryPayments_AcceptFromManger", idParameter, isDepositParameter, enquiryIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<bool>> EnquiryPayments_CheckIfClinetPaymentEventPricing(Nullable<long> enquiryId)
+        {
+            var enquiryIdParameter = enquiryId.HasValue ?
+                new ObjectParameter("EnquiryId", enquiryId) :
+                new ObjectParameter("EnquiryId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("EnquiryPayments_CheckIfClinetPaymentEventPricing", enquiryIdParameter);
         }
     
         public virtual int EnquiryPayments_Insert(ObjectParameter id, Nullable<decimal> amount, Nullable<bool> isDeposit, Nullable<bool> isBankTransfer, string transferImage, Nullable<bool> isAcceptFromManger, Nullable<System.DateTime> dateTime, Nullable<long> fKEnquiry_Id, Nullable<long> fKUserCreated_Id)
@@ -896,15 +686,6 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EnquiryStatus_Insert", notesParameter, dateTimeParameter, enquiryIdParameter, enquiryStatusIdParameter, scheduleVisitDateTimeParameter, userCreatedIdParameter, iFWithBranchParameter, enquiryPaymentIdParameter);
         }
     
-        public virtual ObjectResult<EnquiryStatusTypes_SelectByEnquiryId_Result> EnquiryStatusTypes_SelectByEnquiryId(Nullable<long> enquiyId)
-        {
-            var enquiyIdParameter = enquiyId.HasValue ?
-                new ObjectParameter("EnquiyId", enquiyId) :
-                new ObjectParameter("EnquiyId", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EnquiryStatusTypes_SelectByEnquiryId_Result>("EnquiryStatusTypes_SelectByEnquiryId", enquiyIdParameter);
-        }
-    
         public virtual ObjectResult<Nullable<int>> EnquiryTypes_CheckIfUsed(Nullable<long> id)
         {
             var idParameter = id.HasValue ?
@@ -984,11 +765,11 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EventCoordinations_Delete", idParameter);
         }
     
-        public virtual int EventCoordinations_Insert(Nullable<int> workNumber, string task, Nullable<System.TimeSpan> startTime, Nullable<System.TimeSpan> endTime, string notes, Nullable<long> fKEvent_Id, Nullable<long> fKUserCreated_Id)
+        public virtual int EventCoordinations_Insert(Nullable<int> taskNumber, string task, Nullable<System.TimeSpan> startTime, Nullable<System.TimeSpan> endTime, string notes, Nullable<long> fKEvent_Id, Nullable<long> fKUserCreated_Id)
         {
-            var workNumberParameter = workNumber.HasValue ?
-                new ObjectParameter("WorkNumber", workNumber) :
-                new ObjectParameter("WorkNumber", typeof(int));
+            var taskNumberParameter = taskNumber.HasValue ?
+                new ObjectParameter("TaskNumber", taskNumber) :
+                new ObjectParameter("TaskNumber", typeof(int));
     
             var taskParameter = task != null ?
                 new ObjectParameter("Task", task) :
@@ -1014,7 +795,7 @@ namespace DAL
                 new ObjectParameter("FKUserCreated_Id", fKUserCreated_Id) :
                 new ObjectParameter("FKUserCreated_Id", typeof(long));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EventCoordinations_Insert", workNumberParameter, taskParameter, startTimeParameter, endTimeParameter, notesParameter, fKEvent_IdParameter, fKUserCreated_IdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EventCoordinations_Insert", taskNumberParameter, taskParameter, startTimeParameter, endTimeParameter, notesParameter, fKEvent_IdParameter, fKUserCreated_IdParameter);
         }
     
         public virtual ObjectResult<EventCoordinations_SelectByEventId_Result> EventCoordinations_SelectByEventId(Nullable<long> eventId)
@@ -1026,8 +807,21 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EventCoordinations_SelectByEventId_Result>("EventCoordinations_SelectByEventId", eventIdParameter);
         }
     
-        public virtual int Events_Insert(ObjectParameter id, Nullable<bool> isClinetCustomLogo, string logoFilePath, Nullable<bool> isNamesAr, string nameGroom, string nameBride, Nullable<System.DateTime> eventDateTime, Nullable<System.DateTime> createDateTime, Nullable<long> fkEnquiryForm_Id, Nullable<int> fKPackage_Id, Nullable<int> fKPrintNameType_Id, Nullable<long> fKClinet_Id, string notes, Nullable<long> fKUserCreaed_Id, Nullable<int> fKBranch_Id, Nullable<decimal> packagePrice, Nullable<decimal> packageNamsArExtraPrice, Nullable<System.DateTime> vistToCoordinationDateTime)
+        public virtual ObjectResult<Nullable<int>> EventCoordinations_SelectTasksNumber(Nullable<long> eventId)
         {
+            var eventIdParameter = eventId.HasValue ?
+                new ObjectParameter("EventId", eventId) :
+                new ObjectParameter("EventId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("EventCoordinations_SelectTasksNumber", eventIdParameter);
+        }
+    
+        public virtual int Events_Insert(Nullable<long> id, Nullable<bool> isClinetCustomLogo, string logoFilePath, Nullable<bool> isNamesAr, string nameGroom, string nameBride, Nullable<System.DateTime> eventDateTime, Nullable<System.DateTime> createDateTime, Nullable<int> fKPackage_Id, Nullable<int> fKPrintNameType_Id, Nullable<long> fKClinet_Id, string notes, Nullable<long> fKUserCreaed_Id, Nullable<int> fKBranch_Id, Nullable<decimal> packagePrice, Nullable<decimal> packageNamsArExtraPrice, Nullable<System.DateTime> vistToCoordinationDateTime)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
             var isClinetCustomLogoParameter = isClinetCustomLogo.HasValue ?
                 new ObjectParameter("IsClinetCustomLogo", isClinetCustomLogo) :
                 new ObjectParameter("IsClinetCustomLogo", typeof(bool));
@@ -1055,10 +849,6 @@ namespace DAL
             var createDateTimeParameter = createDateTime.HasValue ?
                 new ObjectParameter("CreateDateTime", createDateTime) :
                 new ObjectParameter("CreateDateTime", typeof(System.DateTime));
-    
-            var fkEnquiryForm_IdParameter = fkEnquiryForm_Id.HasValue ?
-                new ObjectParameter("FkEnquiryForm_Id", fkEnquiryForm_Id) :
-                new ObjectParameter("FkEnquiryForm_Id", typeof(long));
     
             var fKPackage_IdParameter = fKPackage_Id.HasValue ?
                 new ObjectParameter("FKPackage_Id", fKPackage_Id) :
@@ -1096,7 +886,7 @@ namespace DAL
                 new ObjectParameter("VistToCoordinationDateTime", vistToCoordinationDateTime) :
                 new ObjectParameter("VistToCoordinationDateTime", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Events_Insert", id, isClinetCustomLogoParameter, logoFilePathParameter, isNamesArParameter, nameGroomParameter, nameBrideParameter, eventDateTimeParameter, createDateTimeParameter, fkEnquiryForm_IdParameter, fKPackage_IdParameter, fKPrintNameType_IdParameter, fKClinet_IdParameter, notesParameter, fKUserCreaed_IdParameter, fKBranch_IdParameter, packagePriceParameter, packageNamsArExtraPriceParameter, vistToCoordinationDateTimeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Events_Insert", idParameter, isClinetCustomLogoParameter, logoFilePathParameter, isNamesArParameter, nameGroomParameter, nameBrideParameter, eventDateTimeParameter, createDateTimeParameter, fKPackage_IdParameter, fKPrintNameType_IdParameter, fKClinet_IdParameter, notesParameter, fKUserCreaed_IdParameter, fKBranch_IdParameter, packagePriceParameter, packageNamsArExtraPriceParameter, vistToCoordinationDateTimeParameter);
         }
     
         public virtual ObjectResult<Events_SelectByFilter_Result> Events_SelectByFilter(Nullable<int> skip, Nullable<int> take, Nullable<bool> isClinetCustomLogo, Nullable<bool> isNamesAr, string nameGroom, string nameBride, Nullable<System.DateTime> eventDateTimeTo, Nullable<System.DateTime> eventDateTimeFrom, Nullable<System.DateTime> createDateTimeTo, Nullable<System.DateTime> createDateTimeFrom, Nullable<int> fKPackage_Id, Nullable<int> fKPrintNameType_Id, Nullable<int> fKBranch_Id, Nullable<bool> isForCurrentClinet, Nullable<long> currentClinetId)
@@ -1356,6 +1146,53 @@ namespace DAL
                 new ObjectParameter("IsUpdateClendar", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Events_UpdateCalendarEventId", eventIdParameter, clendarEventIdParameter, vistToCoordinationClendarEventIdParameter, isUpdateVistClendarParameter, isUpdateClendarParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> EventWorksStatus_CheckIfFinshed(Nullable<long> eventId)
+        {
+            var eventIdParameter = eventId.HasValue ?
+                new ObjectParameter("eventId", eventId) :
+                new ObjectParameter("eventId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("EventWorksStatus_CheckIfFinshed", eventIdParameter);
+        }
+    
+        public virtual int EventWorksStatus_Insert(Nullable<bool> isFinshed, Nullable<System.DateTime> dateTime, Nullable<long> fKEvent_Id, Nullable<int> fKWorkType_Id, Nullable<long> fKUsre_Id, Nullable<int> fKAccountType_Id)
+        {
+            var isFinshedParameter = isFinshed.HasValue ?
+                new ObjectParameter("IsFinshed", isFinshed) :
+                new ObjectParameter("IsFinshed", typeof(bool));
+    
+            var dateTimeParameter = dateTime.HasValue ?
+                new ObjectParameter("DateTime", dateTime) :
+                new ObjectParameter("DateTime", typeof(System.DateTime));
+    
+            var fKEvent_IdParameter = fKEvent_Id.HasValue ?
+                new ObjectParameter("FKEvent_Id", fKEvent_Id) :
+                new ObjectParameter("FKEvent_Id", typeof(long));
+    
+            var fKWorkType_IdParameter = fKWorkType_Id.HasValue ?
+                new ObjectParameter("FKWorkType_Id", fKWorkType_Id) :
+                new ObjectParameter("FKWorkType_Id", typeof(int));
+    
+            var fKUsre_IdParameter = fKUsre_Id.HasValue ?
+                new ObjectParameter("FKUsre_Id", fKUsre_Id) :
+                new ObjectParameter("FKUsre_Id", typeof(long));
+    
+            var fKAccountType_IdParameter = fKAccountType_Id.HasValue ?
+                new ObjectParameter("FKAccountType_Id", fKAccountType_Id) :
+                new ObjectParameter("FKAccountType_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EventWorksStatus_Insert", isFinshedParameter, dateTimeParameter, fKEvent_IdParameter, fKWorkType_IdParameter, fKUsre_IdParameter, fKAccountType_IdParameter);
+        }
+    
+        public virtual ObjectResult<EventWorksStatus_SelectByEventId_Result> EventWorksStatus_SelectByEventId(Nullable<long> eventId)
+        {
+            var eventIdParameter = eventId.HasValue ?
+                new ObjectParameter("eventId", eventId) :
+                new ObjectParameter("eventId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EventWorksStatus_SelectByEventId_Result>("EventWorksStatus_SelectByEventId", eventIdParameter);
         }
     
         public virtual ObjectResult<Menus_SelectAll_Result> Menus_SelectAll()
@@ -2235,21 +2072,269 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Words_Update", idParameter, arParameter, enParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> Employees_CheckAllowAccessToEventByWorkTypeId(Nullable<long> eventId, Nullable<int> workTypeId, Nullable<long> employeeId)
+        public virtual ObjectResult<Enquires_Closed_Result> Enquires_Closed(Nullable<long> enquiryId, Nullable<System.DateTime> dateTime)
         {
-            var eventIdParameter = eventId.HasValue ?
-                new ObjectParameter("eventId", eventId) :
-                new ObjectParameter("eventId", typeof(long));
+            var enquiryIdParameter = enquiryId.HasValue ?
+                new ObjectParameter("EnquiryId", enquiryId) :
+                new ObjectParameter("EnquiryId", typeof(long));
     
-            var workTypeIdParameter = workTypeId.HasValue ?
-                new ObjectParameter("workTypeId", workTypeId) :
-                new ObjectParameter("workTypeId", typeof(int));
+            var dateTimeParameter = dateTime.HasValue ?
+                new ObjectParameter("DateTime", dateTime) :
+                new ObjectParameter("DateTime", typeof(System.DateTime));
     
-            var employeeIdParameter = employeeId.HasValue ?
-                new ObjectParameter("employeeId", employeeId) :
-                new ObjectParameter("employeeId", typeof(long));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Enquires_Closed_Result>("Enquires_Closed", enquiryIdParameter, dateTimeParameter);
+        }
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Employees_CheckAllowAccessToEventByWorkTypeId", eventIdParameter, workTypeIdParameter, employeeIdParameter);
+        public virtual int Enquires_Delete(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Enquires_Delete", idParameter);
+        }
+    
+        public virtual int Enquires_Insert(ObjectParameter id, string firstName, string lastName, string phoneNo, Nullable<int> day, Nullable<int> month, Nullable<int> year, Nullable<int> fkCountry_Id, Nullable<int> fkCity_Id, Nullable<int> fKEnquiryType_Id, Nullable<long> fKUserCreated_Id, Nullable<System.DateTime> createDateTime, string notes, Nullable<int> branchId, Nullable<bool> isLinkedClinet, Nullable<bool> iFWithBranch)
+        {
+            var firstNameParameter = firstName != null ?
+                new ObjectParameter("FirstName", firstName) :
+                new ObjectParameter("FirstName", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("LastName", lastName) :
+                new ObjectParameter("LastName", typeof(string));
+    
+            var phoneNoParameter = phoneNo != null ?
+                new ObjectParameter("PhoneNo", phoneNo) :
+                new ObjectParameter("PhoneNo", typeof(string));
+    
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("Day", day) :
+                new ObjectParameter("Day", typeof(int));
+    
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("Month", month) :
+                new ObjectParameter("Month", typeof(int));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(int));
+    
+            var fkCountry_IdParameter = fkCountry_Id.HasValue ?
+                new ObjectParameter("FkCountry_Id", fkCountry_Id) :
+                new ObjectParameter("FkCountry_Id", typeof(int));
+    
+            var fkCity_IdParameter = fkCity_Id.HasValue ?
+                new ObjectParameter("FkCity_Id", fkCity_Id) :
+                new ObjectParameter("FkCity_Id", typeof(int));
+    
+            var fKEnquiryType_IdParameter = fKEnquiryType_Id.HasValue ?
+                new ObjectParameter("FKEnquiryType_Id", fKEnquiryType_Id) :
+                new ObjectParameter("FKEnquiryType_Id", typeof(int));
+    
+            var fKUserCreated_IdParameter = fKUserCreated_Id.HasValue ?
+                new ObjectParameter("FKUserCreated_Id", fKUserCreated_Id) :
+                new ObjectParameter("FKUserCreated_Id", typeof(long));
+    
+            var createDateTimeParameter = createDateTime.HasValue ?
+                new ObjectParameter("CreateDateTime", createDateTime) :
+                new ObjectParameter("CreateDateTime", typeof(System.DateTime));
+    
+            var notesParameter = notes != null ?
+                new ObjectParameter("Notes", notes) :
+                new ObjectParameter("Notes", typeof(string));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            var isLinkedClinetParameter = isLinkedClinet.HasValue ?
+                new ObjectParameter("IsLinkedClinet", isLinkedClinet) :
+                new ObjectParameter("IsLinkedClinet", typeof(bool));
+    
+            var iFWithBranchParameter = iFWithBranch.HasValue ?
+                new ObjectParameter("IFWithBranch", iFWithBranch) :
+                new ObjectParameter("IFWithBranch", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Enquires_Insert", id, firstNameParameter, lastNameParameter, phoneNoParameter, dayParameter, monthParameter, yearParameter, fkCountry_IdParameter, fkCity_IdParameter, fKEnquiryType_IdParameter, fKUserCreated_IdParameter, createDateTimeParameter, notesParameter, branchIdParameter, isLinkedClinetParameter, iFWithBranchParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Enquires_IsClosed(Nullable<long> enquiryId)
+        {
+            var enquiryIdParameter = enquiryId.HasValue ?
+                new ObjectParameter("EnquiryId", enquiryId) :
+                new ObjectParameter("EnquiryId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Enquires_IsClosed", enquiryIdParameter);
+        }
+    
+        public virtual ObjectResult<Enquires_SelectByFilter_Result> Enquires_SelectByFilter(Nullable<int> skip, Nullable<int> take, string firstName, string lastName, string phone, Nullable<int> day, Nullable<int> month, Nullable<int> year, Nullable<System.DateTime> createDateTimeFrom, Nullable<System.DateTime> createDateTimeTo, Nullable<int> countryId, Nullable<int> cityId, Nullable<int> enquiryId, Nullable<int> branchId, Nullable<bool> isForCurrentUser, Nullable<long> currentUserLoggadId, Nullable<bool> isLinkedClinet, Nullable<bool> isWithBranch)
+        {
+            var skipParameter = skip.HasValue ?
+                new ObjectParameter("Skip", skip) :
+                new ObjectParameter("Skip", typeof(int));
+    
+            var takeParameter = take.HasValue ?
+                new ObjectParameter("Take", take) :
+                new ObjectParameter("Take", typeof(int));
+    
+            var firstNameParameter = firstName != null ?
+                new ObjectParameter("FirstName", firstName) :
+                new ObjectParameter("FirstName", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("LastName", lastName) :
+                new ObjectParameter("LastName", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("Day", day) :
+                new ObjectParameter("Day", typeof(int));
+    
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("Month", month) :
+                new ObjectParameter("Month", typeof(int));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(int));
+    
+            var createDateTimeFromParameter = createDateTimeFrom.HasValue ?
+                new ObjectParameter("CreateDateTimeFrom", createDateTimeFrom) :
+                new ObjectParameter("CreateDateTimeFrom", typeof(System.DateTime));
+    
+            var createDateTimeToParameter = createDateTimeTo.HasValue ?
+                new ObjectParameter("CreateDateTimeTo", createDateTimeTo) :
+                new ObjectParameter("CreateDateTimeTo", typeof(System.DateTime));
+    
+            var countryIdParameter = countryId.HasValue ?
+                new ObjectParameter("CountryId", countryId) :
+                new ObjectParameter("CountryId", typeof(int));
+    
+            var cityIdParameter = cityId.HasValue ?
+                new ObjectParameter("CityId", cityId) :
+                new ObjectParameter("CityId", typeof(int));
+    
+            var enquiryIdParameter = enquiryId.HasValue ?
+                new ObjectParameter("EnquiryId", enquiryId) :
+                new ObjectParameter("EnquiryId", typeof(int));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            var isForCurrentUserParameter = isForCurrentUser.HasValue ?
+                new ObjectParameter("IsForCurrentUser", isForCurrentUser) :
+                new ObjectParameter("IsForCurrentUser", typeof(bool));
+    
+            var currentUserLoggadIdParameter = currentUserLoggadId.HasValue ?
+                new ObjectParameter("CurrentUserLoggadId", currentUserLoggadId) :
+                new ObjectParameter("CurrentUserLoggadId", typeof(long));
+    
+            var isLinkedClinetParameter = isLinkedClinet.HasValue ?
+                new ObjectParameter("IsLinkedClinet", isLinkedClinet) :
+                new ObjectParameter("IsLinkedClinet", typeof(bool));
+    
+            var isWithBranchParameter = isWithBranch.HasValue ?
+                new ObjectParameter("IsWithBranch", isWithBranch) :
+                new ObjectParameter("IsWithBranch", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Enquires_SelectByFilter_Result>("Enquires_SelectByFilter", skipParameter, takeParameter, firstNameParameter, lastNameParameter, phoneParameter, dayParameter, monthParameter, yearParameter, createDateTimeFromParameter, createDateTimeToParameter, countryIdParameter, cityIdParameter, enquiryIdParameter, branchIdParameter, isForCurrentUserParameter, currentUserLoggadIdParameter, isLinkedClinetParameter, isWithBranchParameter);
+        }
+    
+        public virtual ObjectResult<Enquires_SelectByPk_Result> Enquires_SelectByPk(Nullable<long> enquiyId)
+        {
+            var enquiyIdParameter = enquiyId.HasValue ?
+                new ObjectParameter("EnquiyId", enquiyId) :
+                new ObjectParameter("EnquiyId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Enquires_SelectByPk_Result>("Enquires_SelectByPk", enquiyIdParameter);
+        }
+    
+        public virtual ObjectResult<Enquires_SelectByPk_SimpleData_Result> Enquires_SelectByPk_SimpleData(Nullable<long> enauiryId)
+        {
+            var enauiryIdParameter = enauiryId.HasValue ?
+                new ObjectParameter("EnauiryId", enauiryId) :
+                new ObjectParameter("EnauiryId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Enquires_SelectByPk_SimpleData_Result>("Enquires_SelectByPk_SimpleData", enauiryIdParameter);
+        }
+    
+        public virtual int Enquires_Update(Nullable<long> id, string firstName, string lastName, string phoneNo, Nullable<int> day, Nullable<int> month, Nullable<int> year, Nullable<int> fkCountry_Id, Nullable<int> fkCity_Id, Nullable<int> fKEnquiryType_Id, string notes, Nullable<System.DateTime> notesCreateDateTime, Nullable<long> notesFkUsereCreatedId, Nullable<int> branchId, Nullable<bool> isWithBranch)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            var firstNameParameter = firstName != null ?
+                new ObjectParameter("FirstName", firstName) :
+                new ObjectParameter("FirstName", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("LastName", lastName) :
+                new ObjectParameter("LastName", typeof(string));
+    
+            var phoneNoParameter = phoneNo != null ?
+                new ObjectParameter("PhoneNo", phoneNo) :
+                new ObjectParameter("PhoneNo", typeof(string));
+    
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("Day", day) :
+                new ObjectParameter("Day", typeof(int));
+    
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("Month", month) :
+                new ObjectParameter("Month", typeof(int));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(int));
+    
+            var fkCountry_IdParameter = fkCountry_Id.HasValue ?
+                new ObjectParameter("FkCountry_Id", fkCountry_Id) :
+                new ObjectParameter("FkCountry_Id", typeof(int));
+    
+            var fkCity_IdParameter = fkCity_Id.HasValue ?
+                new ObjectParameter("FkCity_Id", fkCity_Id) :
+                new ObjectParameter("FkCity_Id", typeof(int));
+    
+            var fKEnquiryType_IdParameter = fKEnquiryType_Id.HasValue ?
+                new ObjectParameter("FKEnquiryType_Id", fKEnquiryType_Id) :
+                new ObjectParameter("FKEnquiryType_Id", typeof(int));
+    
+            var notesParameter = notes != null ?
+                new ObjectParameter("Notes", notes) :
+                new ObjectParameter("Notes", typeof(string));
+    
+            var notesCreateDateTimeParameter = notesCreateDateTime.HasValue ?
+                new ObjectParameter("NotesCreateDateTime", notesCreateDateTime) :
+                new ObjectParameter("NotesCreateDateTime", typeof(System.DateTime));
+    
+            var notesFkUsereCreatedIdParameter = notesFkUsereCreatedId.HasValue ?
+                new ObjectParameter("NotesFkUsereCreatedId", notesFkUsereCreatedId) :
+                new ObjectParameter("NotesFkUsereCreatedId", typeof(long));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            var isWithBranchParameter = isWithBranch.HasValue ?
+                new ObjectParameter("IsWithBranch", isWithBranch) :
+                new ObjectParameter("IsWithBranch", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Enquires_Update", idParameter, firstNameParameter, lastNameParameter, phoneNoParameter, dayParameter, monthParameter, yearParameter, fkCountry_IdParameter, fkCity_IdParameter, fKEnquiryType_IdParameter, notesParameter, notesCreateDateTimeParameter, notesFkUsereCreatedIdParameter, branchIdParameter, isWithBranchParameter);
+        }
+    
+        public virtual ObjectResult<EnquiryStatusTypes_SelectByEnquiryId_Result> EnquiryStatusTypes_SelectByEnquiryId(Nullable<long> enquiyId)
+        {
+            var enquiyIdParameter = enquiyId.HasValue ?
+                new ObjectParameter("EnquiyId", enquiyId) :
+                new ObjectParameter("EnquiyId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EnquiryStatusTypes_SelectByEnquiryId_Result>("EnquiryStatusTypes_SelectByEnquiryId", enquiyIdParameter);
         }
     }
 }

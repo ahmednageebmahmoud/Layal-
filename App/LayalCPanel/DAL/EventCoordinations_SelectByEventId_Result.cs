@@ -14,7 +14,7 @@ namespace DAL
     public partial class EventCoordinations_SelectByEventId_Result
     {
         public long Id { get; set; }
-        public int WorkNumber { get; set; }
+        public int TaskNumber { get; set; }
         public string Task { get; set; }
         public System.TimeSpan StartTime { get; set; }
         public System.TimeSpan EndTime { get; set; }

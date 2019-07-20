@@ -19,7 +19,8 @@ namespace BLL.BLL
                 Id = c.Id,
                 EmployeeId = c.FKEmployee_Id,
                 EventId = c.FKEvent_Id,
-                WorkTypeId = c.FKWorkType_Id
+                WorkTypeId = c.FKWorkType_Id,
+                IsFinshed=c.IsFinshed
             }).ToList();
 
             return new ResponseVM(RequestTypeEnum.Success, Token.Success, Emps);
@@ -31,6 +32,10 @@ namespace BLL.BLL
             {
                 try
                 {
+                    //التحقق من انة تم الدفع
+                    if (!CheckIsPayment(c.EventId))
+                        return new ResponseVM(RequestTypeEnum.Error, Token.ClinetIsNotPayment);
+
                     var ObjectReturn = new object();
                     switch (c.State)
                     {
@@ -51,6 +56,16 @@ namespace BLL.BLL
                     return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
                 }
             }
+        }
+
+        /// <summary>
+        /// الحقق من ان الستخد قام بـ دفع كامل المستخقات
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        private bool CheckIsPayment(long eventId)
+        {
+            return db.EnquiryPayments_CheckIfClinetPaymentEventPricing(eventId).First().Value;
         }
 
         private object Delete(EmployeeDiributionWorkVM c)
