@@ -95,7 +95,7 @@
                                            class="form-control"
                                            ng-model="enquiry.PhoneNo"
                                            pattern="[0-9]{10,14}"
-                                           ng-required="true"  />
+                                           ng-required="true" />
                                     <!--Errors:-->
                                     <small class="error invalid-feedback" ng-if="enquiryFrm.phoneNo.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
                                     <small class="error invalid-feedback" ng-if="enquiryFrm.phoneNumber.$invalid&&!enquiryFrm.phoneNo.$error.required&&enquiyFormSubmitErro">@Token.InvalidData</small>
@@ -125,7 +125,7 @@
                                                placeholder="@Token.Day"
                                                ng-model="enquiry.Day"
                                                ng-class="{'is-invalid':enquiryFrm.day.$invalid&&enquiyFormSubmitErro}"
-                                               min="1"
+                                               min="@DateTime.Now.Day"
                                                max="{{fillDayMax(enquiry.Month)}}">
                                         <!--Error-->
                                         <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs {{fillDayMax(enquiry.Month)}}</small>
@@ -191,7 +191,7 @@
 
                                 <!--Branches-->
                                 <label class="col-form-label col-lg-2">@Token.Branch</label>
-                                 
+
                                 <div class="col-lg-4 form-group-sub">
                                     <select class="form-control"
                                             serchbale
@@ -204,7 +204,7 @@
                                     <small class="error invalid-feedback" ng-if="enquiryFrm.branch.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
                                 </div>
                             </div>
-                            
+
                             <!--R O W 5-->
                             <div class="form-group  row">
                                 <!--Notes

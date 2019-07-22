@@ -332,9 +332,6 @@
       <Parameter Name="IsUpdateVistClendar" Mode="In" Type="Boolean" />
       <Parameter Name="IsUpdateClendar" Mode="In" Type="Boolean" />
     </FunctionImport>
-    <FunctionImport Name="EventWorksStatus_CheckIfFinshed" ReturnType="Collection(Int32)">
-      <Parameter Name="eventId" Mode="In" Type="Int64" />
-    </FunctionImport>
     <FunctionImport Name="EventWorksStatus_Insert">
       <Parameter Name="IsFinshed" Mode="In" Type="Boolean" />
       <Parameter Name="DateTime" Mode="In" Type="DateTime" />
@@ -525,23 +522,6 @@
     <FunctionImport Name="Users_CheckIfEmailActivated" ReturnType="Collection(Boolean)">
       <Parameter Name="UserId" Mode="In" Type="Int64" />
     </FunctionImport>
-    <FunctionImport Name="Users_Insert">
-      <Parameter Name="Id" Mode="InOut" Type="Int64" />
-      <Parameter Name="UserName" Mode="In" Type="String" />
-      <Parameter Name="Email" Mode="In" Type="String" />
-      <Parameter Name="PhoneNo" Mode="In" Type="String" />
-      <Parameter Name="FKAccountType_Id" Mode="In" Type="Int32" />
-      <Parameter Name="Address" Mode="In" Type="String" />
-      <Parameter Name="FkCountry_Id" Mode="In" Type="Int32" />
-      <Parameter Name="FkCity_Id" Mode="In" Type="Int32" />
-      <Parameter Name="Password" Mode="In" Type="String" />
-      <Parameter Name="ActiveCode" Mode="In" Type="String" />
-      <Parameter Name="CreateDateTime" Mode="In" Type="DateTime" />
-      <Parameter Name="LanguageId" Mode="In" Type="Int32" />
-      <Parameter Name="BranchId" Mode="In" Type="Int32" />
-      <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
-      <Parameter Name="DateOfBirth" Mode="In" Type="DateTime" />
-    </FunctionImport>
     <FunctionImport Name="Users_SelectAllEmployees" ReturnType="Collection(LayanModel.Users_SelectAllEmployees_Result)" />
     <FunctionImport Name="Users_SelectByBranchId" ReturnType="Collection(LayanModel.Users_SelectByBranchId_Result)">
       <Parameter Name="BranchId" Mode="In" Type="Int32" />
@@ -679,6 +659,28 @@
     </FunctionImport>
     <FunctionImport Name="EnquiryStatusTypes_SelectByEnquiryId" ReturnType="Collection(LayanModel.EnquiryStatusTypes_SelectByEnquiryId_Result)">
       <Parameter Name="EnquiyId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Users_Insert">
+      <Parameter Name="Id" Mode="InOut" Type="Int64" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="PhoneNo" Mode="In" Type="String" />
+      <Parameter Name="FKAccountType_Id" Mode="In" Type="Int32" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="FkCountry_Id" Mode="In" Type="Int32" />
+      <Parameter Name="FkCity_Id" Mode="In" Type="Int32" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="ActiveCode" Mode="In" Type="String" />
+      <Parameter Name="CreateDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="LanguageId" Mode="In" Type="Int32" />
+      <Parameter Name="BranchId" Mode="In" Type="Int32" />
+      <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
+      <Parameter Name="DateOfBirth" Mode="In" Type="DateTime" />
+      <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="EventWorksStatus_CheckIfFinshed" ReturnType="Collection(Int32)">
+      <Parameter Name="eventId" Mode="In" Type="Int64" />
+      <Parameter Name="workTypeId" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="AlbumTypes_SelectAll_Result">

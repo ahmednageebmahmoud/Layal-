@@ -22,7 +22,7 @@ namespace BLL.BLL
                 AccountTypeId = c.FKAccountType_Id,
                 _Language = (LanguageEnum)c.FKLanguage_Id,
                 _IsRemmeberMe = isRemmber,
-                BranchId = c.FKPranch_Id.HasValue ? c.FKPranch_Id.Value : 0,
+                BrId = c.FKPranch_Id.HasValue ? c.FKPranch_Id.Value : 0,
                 IsActiveEmail = c.IsActiveEmail,
                 Email = c.Email,
                 IsActive = c.IsActive

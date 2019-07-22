@@ -12,7 +12,7 @@
         CityId: Number(getQueryStringValue("cityId")) || null,
         BranchId: Number(getQueryStringValue("branchId")) || null,
         PhoneNo: getQueryStringValue("phoneNo") || null,
-        UserName: decodeURI(getQueryStringValue("fName")) || null,
+        UserName:getQueryStringValue("fName")? decodeURI(getQueryStringValue("fName")) : null,
         EnquiryId: getQueryStringValue("enquiryId") || null
     };
     s.accountTypeDisapled = s.user.EnquiryId ? true : false;
@@ -184,7 +184,11 @@
 
     };
 
-
+    //check from input language
+    s.$watch('user.UserName', (newVal, oldVal) => {
+            if (checkInputRTL(newVal[newVal.length - 1]))
+                s.user.UserName = oldVal;
+    });
     //Call Functions
     s.getItems();
     s.getUser();

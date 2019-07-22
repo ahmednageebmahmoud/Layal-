@@ -1148,15 +1148,6 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Events_UpdateCalendarEventId", eventIdParameter, clendarEventIdParameter, vistToCoordinationClendarEventIdParameter, isUpdateVistClendarParameter, isUpdateClendarParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> EventWorksStatus_CheckIfFinshed(Nullable<long> eventId)
-        {
-            var eventIdParameter = eventId.HasValue ?
-                new ObjectParameter("eventId", eventId) :
-                new ObjectParameter("eventId", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("EventWorksStatus_CheckIfFinshed", eventIdParameter);
-        }
-    
         public virtual int EventWorksStatus_Insert(Nullable<bool> isFinshed, Nullable<System.DateTime> dateTime, Nullable<long> fKEvent_Id, Nullable<int> fKWorkType_Id, Nullable<long> fKUsre_Id, Nullable<int> fKAccountType_Id)
         {
             var isFinshedParameter = isFinshed.HasValue ?
@@ -1787,67 +1778,6 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("Users_CheckIfEmailActivated", userIdParameter);
         }
     
-        public virtual int Users_Insert(ObjectParameter id, string userName, string email, string phoneNo, Nullable<int> fKAccountType_Id, string address, Nullable<int> fkCountry_Id, Nullable<int> fkCity_Id, string password, string activeCode, Nullable<System.DateTime> createDateTime, Nullable<int> languageId, Nullable<int> branchId, Nullable<long> enquiryId, Nullable<System.DateTime> dateOfBirth)
-        {
-            var userNameParameter = userName != null ?
-                new ObjectParameter("UserName", userName) :
-                new ObjectParameter("UserName", typeof(string));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
-                new ObjectParameter("Email", typeof(string));
-    
-            var phoneNoParameter = phoneNo != null ?
-                new ObjectParameter("PhoneNo", phoneNo) :
-                new ObjectParameter("PhoneNo", typeof(string));
-    
-            var fKAccountType_IdParameter = fKAccountType_Id.HasValue ?
-                new ObjectParameter("FKAccountType_Id", fKAccountType_Id) :
-                new ObjectParameter("FKAccountType_Id", typeof(int));
-    
-            var addressParameter = address != null ?
-                new ObjectParameter("Address", address) :
-                new ObjectParameter("Address", typeof(string));
-    
-            var fkCountry_IdParameter = fkCountry_Id.HasValue ?
-                new ObjectParameter("FkCountry_Id", fkCountry_Id) :
-                new ObjectParameter("FkCountry_Id", typeof(int));
-    
-            var fkCity_IdParameter = fkCity_Id.HasValue ?
-                new ObjectParameter("FkCity_Id", fkCity_Id) :
-                new ObjectParameter("FkCity_Id", typeof(int));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("Password", password) :
-                new ObjectParameter("Password", typeof(string));
-    
-            var activeCodeParameter = activeCode != null ?
-                new ObjectParameter("ActiveCode", activeCode) :
-                new ObjectParameter("ActiveCode", typeof(string));
-    
-            var createDateTimeParameter = createDateTime.HasValue ?
-                new ObjectParameter("CreateDateTime", createDateTime) :
-                new ObjectParameter("CreateDateTime", typeof(System.DateTime));
-    
-            var languageIdParameter = languageId.HasValue ?
-                new ObjectParameter("LanguageId", languageId) :
-                new ObjectParameter("LanguageId", typeof(int));
-    
-            var branchIdParameter = branchId.HasValue ?
-                new ObjectParameter("BranchId", branchId) :
-                new ObjectParameter("BranchId", typeof(int));
-    
-            var enquiryIdParameter = enquiryId.HasValue ?
-                new ObjectParameter("EnquiryId", enquiryId) :
-                new ObjectParameter("EnquiryId", typeof(long));
-    
-            var dateOfBirthParameter = dateOfBirth.HasValue ?
-                new ObjectParameter("DateOfBirth", dateOfBirth) :
-                new ObjectParameter("DateOfBirth", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Users_Insert", id, userNameParameter, emailParameter, phoneNoParameter, fKAccountType_IdParameter, addressParameter, fkCountry_IdParameter, fkCity_IdParameter, passwordParameter, activeCodeParameter, createDateTimeParameter, languageIdParameter, branchIdParameter, enquiryIdParameter, dateOfBirthParameter);
-        }
-    
         public virtual ObjectResult<Users_SelectAllEmployees_Result> Users_SelectAllEmployees()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Users_SelectAllEmployees_Result>("Users_SelectAllEmployees");
@@ -2335,6 +2265,84 @@ namespace DAL
                 new ObjectParameter("EnquiyId", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EnquiryStatusTypes_SelectByEnquiryId_Result>("EnquiryStatusTypes_SelectByEnquiryId", enquiyIdParameter);
+        }
+    
+        public virtual int Users_Insert(ObjectParameter id, string userName, string email, string phoneNo, Nullable<int> fKAccountType_Id, string address, Nullable<int> fkCountry_Id, Nullable<int> fkCity_Id, string password, string activeCode, Nullable<System.DateTime> createDateTime, Nullable<int> languageId, Nullable<int> branchId, Nullable<long> enquiryId, Nullable<System.DateTime> dateOfBirth, Nullable<bool> isActive)
+        {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var phoneNoParameter = phoneNo != null ?
+                new ObjectParameter("PhoneNo", phoneNo) :
+                new ObjectParameter("PhoneNo", typeof(string));
+    
+            var fKAccountType_IdParameter = fKAccountType_Id.HasValue ?
+                new ObjectParameter("FKAccountType_Id", fKAccountType_Id) :
+                new ObjectParameter("FKAccountType_Id", typeof(int));
+    
+            var addressParameter = address != null ?
+                new ObjectParameter("Address", address) :
+                new ObjectParameter("Address", typeof(string));
+    
+            var fkCountry_IdParameter = fkCountry_Id.HasValue ?
+                new ObjectParameter("FkCountry_Id", fkCountry_Id) :
+                new ObjectParameter("FkCountry_Id", typeof(int));
+    
+            var fkCity_IdParameter = fkCity_Id.HasValue ?
+                new ObjectParameter("FkCity_Id", fkCity_Id) :
+                new ObjectParameter("FkCity_Id", typeof(int));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var activeCodeParameter = activeCode != null ?
+                new ObjectParameter("ActiveCode", activeCode) :
+                new ObjectParameter("ActiveCode", typeof(string));
+    
+            var createDateTimeParameter = createDateTime.HasValue ?
+                new ObjectParameter("CreateDateTime", createDateTime) :
+                new ObjectParameter("CreateDateTime", typeof(System.DateTime));
+    
+            var languageIdParameter = languageId.HasValue ?
+                new ObjectParameter("LanguageId", languageId) :
+                new ObjectParameter("LanguageId", typeof(int));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            var enquiryIdParameter = enquiryId.HasValue ?
+                new ObjectParameter("EnquiryId", enquiryId) :
+                new ObjectParameter("EnquiryId", typeof(long));
+    
+            var dateOfBirthParameter = dateOfBirth.HasValue ?
+                new ObjectParameter("DateOfBirth", dateOfBirth) :
+                new ObjectParameter("DateOfBirth", typeof(System.DateTime));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Users_Insert", id, userNameParameter, emailParameter, phoneNoParameter, fKAccountType_IdParameter, addressParameter, fkCountry_IdParameter, fkCity_IdParameter, passwordParameter, activeCodeParameter, createDateTimeParameter, languageIdParameter, branchIdParameter, enquiryIdParameter, dateOfBirthParameter, isActiveParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> EventWorksStatus_CheckIfFinshed(Nullable<long> eventId, Nullable<int> workTypeId)
+        {
+            var eventIdParameter = eventId.HasValue ?
+                new ObjectParameter("eventId", eventId) :
+                new ObjectParameter("eventId", typeof(long));
+    
+            var workTypeIdParameter = workTypeId.HasValue ?
+                new ObjectParameter("workTypeId", workTypeId) :
+                new ObjectParameter("workTypeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("EventWorksStatus_CheckIfFinshed", eventIdParameter, workTypeIdParameter);
         }
     }
 }

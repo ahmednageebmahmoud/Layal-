@@ -226,7 +226,7 @@
                                     <div class="col-lg-3" ng-show="approve">
 
                                             <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"
-                                                    ng-if="event.State==state.update&&!event.IsCanNotUpdate&&!event.EnquiryIsClosed&&event.IsActive">
+                                                    ng-if="!event.IsClosed">
                                                 <i class="la la-save">@Token.Save</i>
                                             </button>
                                     </div>

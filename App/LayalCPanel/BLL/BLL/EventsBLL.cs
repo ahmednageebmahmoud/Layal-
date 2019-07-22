@@ -23,7 +23,7 @@ namespace BLL.BLL
             //اذا كان الميتخدم الحالى هوا مدير فرع فـ يجب عرض الاستفسارات التى تخصة فقط
             if (this.UserLoggad.AccountTypeId == (int)AccountTypeEnum.BranchManager)
             {
-                even.BranchId = this.UserLoggad.BranchId;
+                even.BranchId = this.UserLoggad.BrId;
                 IsWithBranch = true;
             }
 
@@ -389,7 +389,7 @@ namespace BLL.BLL
                     DateTime = DateTime.Now,
                     TargetId = c.Id,
                     PageId = (int)PagesEnum.Events,
-                    RedirectUrl = $"/Events/EventInformation?id={c.Id}&notifyId=",
+                    RedirectUrl = $"/Enquires/EnquiryInformation?id={c.Id}&notifyId=",
                 };
                 NotificationsBLL.Add(Notify, this.AdminId);
                 new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { this.AdminId.ToString() }, Notify);

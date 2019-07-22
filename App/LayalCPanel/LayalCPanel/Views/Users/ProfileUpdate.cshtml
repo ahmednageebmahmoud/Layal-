@@ -205,7 +205,11 @@
                             <div class="form-group-sub col-lg-4" ng-if="disapledEmail">
                                 <input type="text"
                                        class="form-control "
-                                       ng-model="user.ActiveCode" />
+                                       name="activCode"
+                                       ng-model="user.ActiveCode" 
+                                       ng-required="true"/>
+                                <small class="error invalid-feedback" ng-if="userFrm.activCode.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
+
                             </div>
                         </div>
                         <div class="kt-portlet__foot">

@@ -170,6 +170,6 @@
 
 
     //Call Functions
-   // s.getItems();
+    s.getItems();
     s.getEnquiy();
 }]);

@@ -410,6 +410,7 @@
   </Function>
   <Function Name="EventWorksStatus_CheckIfFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="eventId" Type="bigint" Mode="In" />
+    <Parameter Name="workTypeId" Type="int" Mode="In" />
   </Function>
   <Function Name="EventWorksStatus_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IsFinshed" Type="bit" Mode="In" />
@@ -620,6 +621,7 @@
     <Parameter Name="BranchId" Type="int" Mode="In" />
     <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
     <Parameter Name="DateOfBirth" Type="date" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
   </Function>
   <Function Name="Users_SelectAllEmployees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="Users_SelectByBranchId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

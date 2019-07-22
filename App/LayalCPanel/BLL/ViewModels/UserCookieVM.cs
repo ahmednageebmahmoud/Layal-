@@ -24,7 +24,7 @@ namespace BLL.ViewModels
         public bool IsBranchManager => this.AccountTypeId == (int)AccountTypeEnum.BranchManager;
 
         public string UserName { get;   set; }
-        public int BranchId { get; set; }
-        public bool IsActive { get; internal set; }
+        public int BrId { get; set; }
+        public bool IsActive { get;   set; }
     }
 }

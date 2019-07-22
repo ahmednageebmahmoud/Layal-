@@ -287,7 +287,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="x in enquires|filter:enquiresSearch |orderBy:enquiyFOP.sort.propName:enquiyFOP.sort.reverse | limitTo:enquiyFOP.paging.pagingLimt.take:enquiyFOP.paging.pagingLimt.skip track by $index">
-                                    <td>{{x.LastName}}</td>
+                                    <td>{{x.FirstName}}</td>
                                     <td>{{x.LastName}}</td>
                                     <td>{{x.PhoneNo}}</td>
                                     <td>{{x.EnquiryType.EnquiryTypeName}}</td>
@@ -298,10 +298,10 @@
                                     <td>{{x.CreateDateTimeDisplay}}</td>
                                     <td>
                                         <!--Btn:Edit-->
-                                            <a href="/Enquires/AddAndUpdate?id={{x.Id}}"
+                                            @*<a href="/Enquires/AddAndUpdate?id={{x.Id}}"
                                                 title="@Token.Update"
                                                ng-if="!x.IsClosed"
-                                                class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                                class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>*@
                                         <!--Show Details-->
                                         <a href="/MyEnquires/EnquiryInformation?id={{x.Id}}" title="@Token.ShowDetails" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="la la-search"></i> </a>
                                     </td>

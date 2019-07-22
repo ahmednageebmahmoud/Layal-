@@ -84,14 +84,6 @@
                         </div>
                         <!--R o w 2-->
                         <div class="form-group  row">
-                            <!--IsActive-->
-                            <div class="col-lg-3 form-group-sub">
-                                <label class="col-form-label">@Token.IsActive</label>
-                                <select class="form-control"
-                                        serchbale
-                                        ng-model="eventFilter.IsActive"
-                                        ng-options="c.Id as c.Name for c in checkActiveList"></select>
-                            </div>
                             <!--PackageId-->
                             <div class="col-lg-3 form-group-sub">
                                 <label class="col-form-label">@Token.Package</label>
@@ -184,11 +176,6 @@
                                 </th>
                                 <th class="th-10">
                                     <sms-sort ng-sms-fop="enquiyFOP"
-                                              ng-sms-field-name="IsActive"
-                                              ng-sms-resource="@Token.IsActive"></sms-sort>
-                                </th>
-                                <th class="th-10">
-                                    <sms-sort ng-sms-fop="enquiyFOP"
                                               ng-sms-field-name="PackageName"
                                               ng-sms-resource="@Token.Package"></sms-sort>
                                 </th>
@@ -223,7 +210,6 @@
                                 <td>{{x.NameGroom}}</td>
                                 <td><i class="fas " ng-class="{'fa-check':x.IsClinetCustomLogo}"></i></td>
                                 <td><i class="fas " ng-class="{'fa-check':x.IsNamesAr}"></i></td>
-                                <td><i class="fas " ng-class="{'fa-check':x.IsActive}"></i></td>
                                 <td>{{x.Package.PackageName}}</td>
                                 <td>{{x.PrintNameType.PrintNamesTypeName}}</td>
                                 <td>{{x.Branch.BranchName}}</td>

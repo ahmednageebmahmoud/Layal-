@@ -55,7 +55,7 @@ namespace BLL.BLL
             if (!CheckAlloweAccess(c.EventId))
                 return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEvent);
 
-            if (db.EventWorksStatus_CheckIfFinshed(c.EventId).First().Value > 1)
+            if (db.EventWorksStatus_CheckIfFinshed(c.EventId,(int) WorksTypesEnum.Coordination).First().Value > 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.ThisTaskIsFinshed);
 
             using (var tranc = db.Database.BeginTransaction())
@@ -101,7 +101,7 @@ namespace BLL.BLL
         /// <returns></returns>
         public bool CheckAlloweAccess(long evenId)
         {
-            return db.Employees_CheckAllowAccessToEventForUpdateWorks(this.UserLoggad.IsAdmin, this.UserLoggad.IsClinet, this.UserLoggad.IsEmployee, this.UserLoggad.IsBranchManager, evenId, (int)WorksTypesEnum.Coordination, this.UserLoggad.Id, this.UserLoggad.BranchId).First().Value > 0;
+            return db.Employees_CheckAllowAccessToEventForUpdateWorks(this.UserLoggad.IsAdmin, this.UserLoggad.IsClinet, this.UserLoggad.IsEmployee, this.UserLoggad.IsBranchManager, evenId, (int)WorksTypesEnum.Coordination, this.UserLoggad.Id, this.UserLoggad.BrId).First().Value > 0;
 
         }
 
@@ -127,7 +127,7 @@ namespace BLL.BLL
                         PageId = (int)PagesEnum.Enquires,
                         RedirectUrl = $"/WorkFlow?id={eventId}&notifyId=",
                     };
-                    var UserMangerBranch = db.Users_SelectByBranchId(this.UserLoggad.BranchId, (int)AccountTypeEnum.BranchManager).FirstOrDefault();
+                    var UserMangerBranch = db.Users_SelectByBranchId(this.UserLoggad.BrId, (int)AccountTypeEnum.BranchManager).FirstOrDefault();
                     if (UserMangerBranch != null)
                     {
                         NotificationsBLL.Add(Notify, UserMangerBranch.Id);
@@ -157,6 +157,8 @@ namespace BLL.BLL
 
         private object Add(EventCoordinationVM c)
         {
+             
+
             //Get Task Number
             GetTaskNumber(c);
 

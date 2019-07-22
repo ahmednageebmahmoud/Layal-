@@ -346,7 +346,7 @@
     <value>المستخدم ليس موجود</value>
   </data>
   <data name="Cities" xml:space="preserve">
-    <value>لا يوجد</value>
+    <value>المدن</value>
   </data>
   <data name="CountryNotFound" xml:space="preserve">
     <value>الدولة ليست موجودة</value>
@@ -673,7 +673,7 @@
     <value>الباكيجات</value>
   </data>
   <data name="AddNewPackage" xml:space="preserve">
-    <value>اضافة حزمة جديدة</value>
+    <value>اضافة باكج جديد</value>
   </data>
   <data name="UpdatePackage" xml:space="preserve">
     <value>تحديث الحزمة</value>
@@ -796,7 +796,7 @@
     <value>اضافة وتحديث مهام الاعداد والتنسيق</value>
   </data>
   <data name="Coordinations" xml:space="preserve">
-    <value />
+    <value>الاعداد والتنسيق</value>
   </data>
   <data name="EventCoordinations" xml:space="preserve">
     <value>اعداد وتنسيق المناسبات</value>

@@ -10,7 +10,8 @@
         State: eventId ? StateEnum.update : StateEnum.create,
         PrintNameTypeId: null,
         Package: null,
-        IsActive:true
+        IsActive:true,
+        IsNamesAr:false
     };
 
     s.packages = [];

@@ -103,7 +103,7 @@ namespace BLL.BLL
                     UserName = c.UserName,
                     AccountTypeId = c.FKAccountType_Id,
                     _Language = (LanguageEnum)c.FKLanguage_Id,
-                    BranchId = c.FKPranch_Id.HasValue ? c.FKPranch_Id.Value : 0,
+                    BrId = c.FKPranch_Id.HasValue ? c.FKPranch_Id.Value : 0,
                     IsActiveEmail = c.IsActiveEmail,
                     Email = c.Email
                 }).FirstOrDefault();
@@ -239,7 +239,7 @@ namespace BLL.BLL
                     return new ResponseVM(RequestTypeEnum.Error, Token.ThisEnquiryAlreadyLinkedWithClinet);
 
 
-                if (this.AdminId != this.UserLoggad.Id && Enquiry.FKBranch_Id != this.UserLoggad.BranchId)
+                if (this.AdminId != this.UserLoggad.Id && Enquiry.FKBranch_Id != this.UserLoggad.BrId)
                     return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToCreateAccont);
             }
 
@@ -258,7 +258,7 @@ namespace BLL.BLL
 
 
             ObjectParameter ID = new ObjectParameter("Id", typeof(long));
-            db.Users_Insert(ID, c.UserName, c.Email, c.PhoneNo, c.AccountTypeId, c.Address, c.CountryId, c.CityId, c.Password, null, DateTime.Now, c.LanguageId, c.BranchId, c.EnquiryId, c.DateOfBirth);
+            db.Users_Insert(ID, c.UserName, c.Email, c.PhoneNo, c.AccountTypeId, c.Address, c.CountryId, c.CityId, c.Password, null, DateTime.Now, c.LanguageId, c.BranchId, c.EnquiryId, c.DateOfBirth,c.IsActive);
             c.Id = (long)ID.Value;
 
             //Add WorksTypes if employee
@@ -289,6 +289,7 @@ namespace BLL.BLL
                 CountryId = c.FkCountry_Id,
                 LanguageId = c.FKLanguage_Id,
                 DateOfBirth = c.DateOfBirth,
+                IsActive=c.IsActive,
 
                 City = new CityVM
                 {

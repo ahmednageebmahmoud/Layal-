@@ -25,7 +25,7 @@ namespace BLL.BLL
             //اذا كان الميتخدم الحالى هوا مدير فرع فـ يجب عرض الاستفسارات التى تخصة فقط
             if (this.UserLoggad.AccountTypeId == (int)AccountTypeEnum.BranchManager)
             {
-                branchId = this.UserLoggad.BranchId;
+                branchId = this.UserLoggad.BrId;
                 IsWithBranch = true;
             }
 
