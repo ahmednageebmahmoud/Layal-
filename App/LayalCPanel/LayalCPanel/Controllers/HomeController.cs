@@ -50,7 +50,16 @@ namespace UI.Controllers
                 EmployeeWorks = EmployeesWorksBLL.SelectCurrentEmployeeWorks()
             }), JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetAdminItems()
+        {
 
+            return Json(new ResponseVM(RequestTypeEnum.Success, Token.Success, new
+            {
+                EventSurveiesChart = FillItems.GetEventSurveiesChart(DateTime.Now.Year)
+            }), JsonRequestBehavior.AllowGet);
+        }
+
+        
 
     }//end class 
 }

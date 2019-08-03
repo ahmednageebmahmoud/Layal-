@@ -52,7 +52,7 @@ namespace BLL.BLL
                     ClendarEventId = c.ClendarEventId,
                     PackagePrice = c.PackagePrice,
                     PackageNamsArExtraPrice = c.PackageNamsArExtraPrice,
-                    IsPayment=c.IsPayment,
+                    IsPayment = c.IsPayment,
                     Package = new PackageVM
                     {
                         NameAr = c.Package_NameAr,
@@ -78,50 +78,41 @@ namespace BLL.BLL
             return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, Events);
         }
 
-
         public object GetEventForCurrretnEmployee(long eventId)
         {
             return new ResponseVM(RequestTypeEnum.Success, Token.Success, GetEventInformation(eventId));
         }
 
-        public object GetEventsForCurrretnEmployee(EventVM even, WorksTypesEnum workType)
+        public object GetEventsForCurrretnEmployee(EventVM even, int workTypeId)
         {
 
             var Events = db.Events_SelectByFilterForEmployee
                 (even.Skip, even.Take, even.IsClinetCustomLogo,
-                even.IsNamesAr, even.NameGroom, even.NameBride, even.EventDateTo, even.EventDateFrom, even.PackageId, even.PrintNameTypeId, (int)workType, this.UserLoggad.Id)
+                even.IsNamesAr, even.NameGroom, even.NameBride, even.EventDateTo, even.EventDateFrom, even.PackageId, even.PrintNameTypeId, workTypeId, this.UserLoggad.Id, even.IsFinshed)
                 .Select(c => new EventVM
                 {
                     Id = c.Id,
                     IsClinetCustomLogo = c.IsClinetCustomLogo,
-                    LogoFilePath = c.LogoFilePath,
-                    IsNamesAr = c.IsNamesAr,
+                    //LogoFilePath = c.LogoFilePath,
+                    //IsNamesAr = c.IsNamesAr,
                     NameGroom = c.NameGroom,
                     NameBride = c.NameBride,
-                    EventDateTime = c.EventDateTime,
-                    CreateDateTime = c.CreateDateTime,
-                    PackageId = c.FKPackage_Id,
-                    PrintNameTypeId = c.FKPrintNameType_Id,
-                    ClinetId = c.FKClinet_Id,
-                    Notes = c.Notes,
-                    UserCreaedId = c.FKUserCreaed_Id,
-                    BranchId = c.FKBranch_Id,
+                    //EventDateTime = c.EventDateTime,
+                    //CreateDateTime = c.CreateDateTime,
+                    //PackageId = c.FKPackage_Id,
+                    //PrintNameTypeId = c.FKPrintNameType_Id,
+                    //ClinetId = c.FKClinet_Id,
+                    //Notes = c.Notes,
+                    //UserCreaedId = c.FKUserCreaed_Id,
+                    //BranchId = c.FKBranch_Id,
                     IsClosed = c.IsClosed,
-                    EnquiryName = c.EnquiryName,
-                    ClendarEventId = c.ClendarEventId,
-                    PackagePrice = c.PackagePrice,
-                    PackageNamsArExtraPrice = c.PackageNamsArExtraPrice,
-                    WorkTypeId = (int)workType,
-                    EventWorksStatus = db.EventWorksStatus_SelectByEventId(c.Id).Select(v => new EventWorkStatusVM
-                    {
-                        IsFinshed = v.IsFinshed,
-                        WorkTypeId = (WorksTypesEnum)v.FKWorkType_Id,
-                        DateTime = v.DateTime,
-                        UserId = v.FKUsre_Id,
-                        FinshedUserName = v.UserName,
-                        FinshedAccountTypeNameAr = v.AccountTypeAr,
-                        FinshedAccountTypeNameEn = v.AccountTypeEn
-                    }).ToList(),
+                    //EnquiryName = c.EnquiryName,
+                    //ClendarEventId = c.ClendarEventId,
+                    //PackagePrice = c.PackagePrice,
+                    //PackageNamsArExtraPrice = c.PackageNamsArExtraPrice,
+                    WorkTypeId = workTypeId,
+
+
                     Package = new PackageVM
                     {
                         NameAr = c.Package_NameAr,
@@ -132,10 +123,33 @@ namespace BLL.BLL
                         NameAr = c.WordPrintNamesType_NameAr,
                         NameEn = c.WordPrintNamesType_NameEn
                     },
-                    Branch = new BranchVM
+                    //Branch = new BranchVM
+                    //{
+                    //    NameAr = c.Branch_NameAr,
+                    //    NameEn = c.Branch_NameEn
+                    //},
+                    CurrentWorkStatus=db.EventWorksStatusHistory_SelectLast(c.Id,workTypeId).Select(v=> new EventWorkStatusVM {
+                        FinshedUserName=v.UserName,
+                        DateTime=v.DateTime,
+                        IsFinshed=v.IsFinshed
+                        
+                    }).FirstOrDefault(),
+                    EventWorkStatusIsFinshed = new EventWorksStatusIsFinshedVM
                     {
-                        NameAr = c.Branch_NameAr,
-                        NameEn = c.Branch_NameEn
+                        Booking = c.Booking,
+                        DataPerfection = c.DataPerfection,
+                        Coordination = c.Coordination,
+                        Implementation = c.Implementation,
+                        ArchivingAndSaveing = c.ArchivingAndSaveing,
+                        ProductProcessing = c.ProductProcessing,
+                        Chooseing = c.Chooseing,
+                        DigitalProcessing = c.DigitalProcessing,
+                        PreparingForPrinting = c.PreparingForPrinting,
+                        Manufacturing = c.Manufacturing,
+                        QualityAndReview = c.QualityAndReview,
+                        Packaging = c.Packaging,
+                        TransmissionAndDelivery = c.TransmissionAndDelivery,
+                        Archiving = c.Archiving,
                     }
                 }).ToList();
             if (Events.Count == 0)
@@ -150,7 +164,7 @@ namespace BLL.BLL
         public EventVM GetEventInformation(long? eventId)
         {
             if (!eventId.HasValue) return null;
-            var EventWorkStatus = db.EventWorksStatus_SelectByEventId(eventId).Select(c => new EventWorkStatusVM
+            var EventWorkStatus = db.EventWorksStatusHistory_SelectByEventId(eventId).Select(c => new EventWorkStatusVM
             {
                 IsFinshed = c.IsFinshed,
                 WorkTypeId = (WorksTypesEnum)c.FKWorkType_Id,
@@ -185,9 +199,25 @@ namespace BLL.BLL
                 TotalPayments = c.TotalPayments,
                 TotalPaymentsActivated = c.TotalPaymentsActivated,
                 VistToCoordinationDateTime = c.VistToCoordinationDateTime,
-                EventWorksStatus = EventWorkStatus,
+                //EventWorksStatus = EventWorkStatus,
                 IsPayment = c.IsPayment,
-
+                EventWorkStatusIsFinshed = new EventWorksStatusIsFinshedVM
+                {
+                    Booking = c.Booking,
+                    DataPerfection = c.DataPerfection,
+                    Coordination = c.Coordination,
+                    Implementation = c.Implementation,
+                    ArchivingAndSaveing = c.ArchivingAndSaveing,
+                    ProductProcessing = c.ProductProcessing,
+                    Chooseing = c.Chooseing,
+                    DigitalProcessing = c.DigitalProcessing,
+                    PreparingForPrinting = c.PreparingForPrinting,
+                    Manufacturing = c.Manufacturing,
+                    QualityAndReview = c.QualityAndReview,
+                    Packaging = c.Packaging,
+                    TransmissionAndDelivery = c.TransmissionAndDelivery,
+                    Archiving = c.Archiving,
+                },
 
                 Package = new PackageVM
                 {
@@ -200,6 +230,7 @@ namespace BLL.BLL
                     NameAr = c.PrintNameType_NameAr,
                     NameEn = c.PrintNameType_NameEn
                 },
+
             }).FirstOrDefault();
 
         }
@@ -366,7 +397,7 @@ namespace BLL.BLL
                 this.UserLoggad.Id, c.BranchId, c.PackagePrice, c.PackageNamsArExtraPrice, c.VistToCoordinationDateTime);
 
             db.Enquiries_ChangeCreateEventState(c.Id, true);
-           
+
             //التفريغ بحيث اذا حدث خطاء ما لا يتم حذفة من السيرفر
             c.LogoFilePath = null;
 
@@ -475,9 +506,7 @@ namespace BLL.BLL
             Event Even1 = GoggelApiCalendarService.AddEvent(Title, Description, c.EventDateTime, "Egypt Pyramids Tours, Ad Doqi, Giza District, Giza Governorate 12411, Egypt");
             Event EvenVist = GoggelApiCalendarService.AddEvent(TitleVist, DescriptionVist, c.VistToCoordinationDateTime, "Egypt Pyramids Tours, Ad Doqi, Giza District, Giza Governorate 12411, Egypt");
 
-
             db.Events_UpdateCalendarEventId(c.Id, Even1.Id, EvenVist.Id, true, true);
-
         }
 
 

@@ -45,13 +45,18 @@ namespace BLL.ViewModels
         public PrintNamesTypeVM PrintNameType { get; set; }
         public string LogoFileName { get; set; }
         public string ClendarEventId { get; set; }
+        public bool IsAllowSurvey => DateTime.Now > this.EventDateTime &&
+         DateTime.Now < this.EventDateTime.AddMonths(1);
 
 
 
         public int Skip { get; set; }
         public int Take { get; set; }
 
-
+        /// <summary>
+        /// مثلا هل تم الانتهاء ام لاء
+        /// </summary>
+        public bool? IsFinshed { get; set; }
 
 
         public DateTime? EventDateTo { get; set; }
@@ -92,98 +97,9 @@ namespace BLL.ViewModels
         public bool? IsClosed { get; set; }
         public string VistToCoordinationClendarEventId { get; internal set; }
         public int WorkTypeId { get; set; }
-
+        public EventWorkStatusVM CurrentWorkStatus { get; set; }
         public List<EventWorkStatusVM> EventWorksStatus { get; set; } = new List<EventWorkStatusVM>();
-        public EventWorkStatusVM CoordinationWorkStatus
-        {
-            get
-            {
-                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
-                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.Coordination);
-            }
-        }  
-        public EventWorkStatusVM ArchivingAndSaveingStatus
-        {
-            get
-            {
-                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
-                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.ArchivingAndSaveing);
-            }
-        }
-        public EventWorkStatusVM ProductProcessingStatus
-        {
-            get
-            {
-                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
-                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.ProductProcessing);
-            }
-        }
-
-        public EventWorkStatusVM ChooseingStatus
-        {
-            get
-            {
-                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
-                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.Chooseing);
-            }
-        }
-        public EventWorkStatusVM DigitalProcessingStatus
-        {
-            get
-            {
-                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
-                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.DigitalProcessing);
-            }
-        }
-        public EventWorkStatusVM PreparingForPrintingStatus
-        {
-            get
-            {
-                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
-                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.PreparingForPrinting);
-            }
-        }
-        public EventWorkStatusVM ManufacturingStatus
-        {
-            get
-            {
-                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
-                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.Manufacturing);
-            }
-        }
-        public EventWorkStatusVM QualityAndReviewStatus
-        {
-            get
-            {
-                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
-                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.QualityAndReview);
-            }
-        }
-        public EventWorkStatusVM PackagingStatus
-        {
-            get
-            {
-                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
-                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.Packaging);
-            }
-        }
-        public EventWorkStatusVM TransmissionAndDeliveryStatus
-        {
-            get
-            {
-                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
-                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.TransmissionAndDelivery);
-            }
-        }
-        public EventWorkStatusVM ArchivingStatus
-        {
-            get
-            {
-                if (EventWorksStatus.Count == 0) return new EventWorkStatusVM();
-                return this.EventWorksStatus.LastOrDefault(c => c.WorkTypeId == WorksTypesEnum.Archiving);
-            }
-        }
-
+        public EventWorksStatusIsFinshedVM EventWorkStatusIsFinshed { get; set; }
 
 
     }//end class

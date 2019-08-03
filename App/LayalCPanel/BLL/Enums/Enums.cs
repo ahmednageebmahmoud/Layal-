@@ -12,7 +12,9 @@ namespace BLL.Enums
         Supervisor = 2,
         BranchManager = 3,
         Clinet = 4,
-        Employee=5
+        Employee=5,
+        Helper= 6,
+        Photographer=7
     }
 
 
@@ -56,7 +58,12 @@ namespace BLL.Enums
         Packages=14,
         AlbumTypes=15,
         PackageInputTypes=16,
-        PaymentsInformations=17
+        SocialAccountTypes=17,
+        UserPayments=18,
+        EnquiryPayments=19,
+        EventSurveyQuestionTypes=20,
+        EventSurveyQuestions=21,
+        FilesReceivedTypes=22
     }
 
 
@@ -97,5 +104,9 @@ namespace BLL.Enums
 	Packaging                                       =12 ,
 	TransmissionAndDelivery                       =13 ,
 	Archiving                                       =14 ,
-    }                                               
+    }
+
+
+
+  
 }//end class

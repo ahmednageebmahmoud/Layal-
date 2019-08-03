@@ -3,7 +3,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     UsersPrivilegeVM
-      Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.Events);
+      Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.EnquiryPayments);
+
     bool IsCurrentUserAdmin = CookieService.UserInfo.AccountTypeId == (int)AccountTypeEnum.ProjectManager;
 
 }
@@ -212,8 +213,6 @@
                             </tbody>
                         </table>
                     }
-                    <!--Paging -->
-                    <sms-paging ng-sms-fop="enquiyFOP" ng-sms-display-m-func="getPaymentsInformations()"></sms-paging>
                 </div>
             </div>
         </div>

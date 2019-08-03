@@ -52,11 +52,22 @@ namespace BLL.BLL
 
         public object SaveChange(EventCoordinationVM c)
         {
+            //التحقق من امكانية الوصول الى المناسبة
             if (!CheckAlloweAccess(c.EventId))
                 return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEvent);
 
-            if (db.EventWorksStatus_CheckIfFinshed(c.EventId,(int) WorksTypesEnum.Coordination).First().Value > 0)
+            //التحقق ان هذة المهمة لم تنتهى بعد
+            if (db.EventWorksStatusIsFinsed_CheckIfFinshed(c.EventId, (int)WorksTypesEnum.Coordination).First().Value)
                 return new ResponseVM(RequestTypeEnum.Error, Token.ThisTaskIsFinshed);
+
+            //التحقق لان المناسبة لم تغلق
+            if (CheckIfEnquiryClosed(c.EventId))
+                return new ResponseVM(RequestTypeEnum.Error, Token.EventIsClosed);
+
+            //التحقق ان المناسبة لم تبداء فى حالة الاعداد والتنسيق فقط
+            if ( db.Events_CheckFromDateEventIsFinshed(c.EventId, DateTime.Now).First().Value > 0)
+                return new ResponseVM(RequestTypeEnum.Error, Token.ThisEventDateIsFinshed);
+
 
             using (var tranc = db.Database.BeginTransaction())
             {
@@ -101,47 +112,17 @@ namespace BLL.BLL
         /// <returns></returns>
         public bool CheckAlloweAccess(long evenId)
         {
-            return db.Employees_CheckAllowAccessToEventForUpdateWorks(this.UserLoggad.IsAdmin, this.UserLoggad.IsClinet, this.UserLoggad.IsEmployee, this.UserLoggad.IsBranchManager, evenId, (int)WorksTypesEnum.Coordination, this.UserLoggad.Id, this.UserLoggad.BrId).First().Value > 0;
+            return db.Employees_CheckAllowAccessToEventForUpdateWorks(
+                this.UserLoggad.IsAdmin,
+                this.UserLoggad.IsClinet,
+                this.UserLoggad.IsBranchManager, 
+                evenId,
+                (int)WorksTypesEnum.Coordination,
+                this.UserLoggad.Id,
+                this.UserLoggad.BrId).First().Value > 0;
 
         }
 
-        public object FinshedTask(long eventId)
-        {
-            try
-            {
-                db.EventWorksStatus_Insert(true, DateTime.Now, eventId, (int)WorksTypesEnum.Coordination, this.UserLoggad.Id, this.UserLoggad.AccountTypeId);
-
-
-                //اذا كان الستخدم الحالى ليس هوا مدير الفرع فيجب ارسال اشعار لـ مدير الفرع
-                if (!this.UserLoggad.IsBranchManager)
-                {
-
-                    var Notify = new NotifyVM
-                    {
-                        TitleAr = " الانتهاء من الاعداد والتنسيق",
-                        TitleEn = "Coordinations Finshed",
-                        DescriptionAr = $"لقد قام الموظف { this.UserLoggad.UserName } بـ انهاء مهام الاعداد والتنسيق للمناسبة ",
-                        DescriptionEn = $"{ this.UserLoggad.UserName } Has been finshed coordinations for event",
-                        DateTime = DateTime.Now,
-                        TargetId = eventId,
-                        PageId = (int)PagesEnum.Enquires,
-                        RedirectUrl = $"/WorkFlow?id={eventId}&notifyId=",
-                    };
-                    var UserMangerBranch = db.Users_SelectByBranchId(this.UserLoggad.BrId, (int)AccountTypeEnum.BranchManager).FirstOrDefault();
-                    if (UserMangerBranch != null)
-                    {
-                        NotificationsBLL.Add(Notify, UserMangerBranch.Id);
-                        new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserMangerBranch.Id.ToString() }, Notify);
-                    }
-                }
-
-                return new ResponseVM(RequestTypeEnum.Success, Token.Finshed);
-            }
-            catch (Exception ex)
-            {
-                return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
-            }
-        }
 
         private bool CheckIfEnquiryClosed(long enquiryId)
         {

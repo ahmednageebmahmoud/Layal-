@@ -1,4 +1,6 @@
 ﻿ngApp.controller('homeCtrl', ['$scope', '$http', 'homeServ','$rootScope', function (s, h, homeServ,rs) {
+    //جلب البيانات من اللوكل استورج الى ان يتم جلب المعلومات من السيرفر
+  s.employeeWorks=  LocalStorageService.userHomeInformation;
     //============= G E T =================
     s.getItems = reset => {
         let loading = BlockingService.generateLoding();
@@ -6,13 +8,15 @@
 
         homeServ.getItems().then(d => {
             loading.hide();
-            if (reset)
-                s.home = [];
 
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
+                    debugger;
                     s.employeeWorks = d.data.Result.EmployeeWorks;
-                
+                //Update Local Storage
+                    LocalStorageService.userHomeInformation = s.employeeWorks;
+
+
                 } break;
                 case RequestTypeEnum.error:
                 case RequestTypeEnum.warning:

@@ -95,3 +95,7 @@
     
     Token.active = LangIsEn ? 'Active' : 'مفعل';
     Token.unActive = LangIsEn ? 'Un Active' : 'غير مفعل';
+
+    Token.notFinshed = LangIsEn ? 'Not Finshed' : 'لم يتم الانتهاء';
+    Token.finshed = LangIsEn ? 'Finshed' : 'تم الانتهاء';
+

@@ -64,15 +64,14 @@
 
                                     <!--Errors:-->
                                     <small class="error invalid-feedback" ng-if="userFrm.userName.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
-                                    <small class="error invalid-feedback" ng-if="userFrm.userName.$invalid&&!userFrm.userName.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
                                 </div>
                                 <!--password-->
                                 <label class="col-form-label col-lg-2">@Token.Password</label>
                                 <div class="col-lg-4 form-group-sub">
                                     <input type="password"
-                                           name="password"
+                                           name="popo"
                                            class="form-control"
-                                           ng-class="{'is-invalid':userFrm.password.$invalid&&userFormSubmitErro}"
+                                           ng-class="{'is-invalid':userFrm.popo.$invalid&&userFormSubmitErro}"
                                            ng-model="user.Password"
                                            maxlength="50"
                                            pattern="\w{6,50}"
@@ -80,13 +79,42 @@
                                            autocomplete="off" />
 
                                     <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="userFrm.password.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
-                                    <small class="error invalid-feedback" ng-if="userFrm.password.$invalid&&!userFrm.password.$error.pattern&&!userFrm.password.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
-                                    <small class="error invalid-feedback" ng-if="userFrm.password.$error.pattern&&userFormSubmitErro">@Token.MinLengthCharIs 6</small>
+                                    <small class="error invalid-feedback" ng-if="userFrm.popo.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
+                                    <small class="error invalid-feedback" ng-if="userFrm.popo.$error.pattern&&userFormSubmitErro">@Token.MinLengthCharIs 6</small>
                                 </div>
                             </div>
 
                             <!--R O W 2-->
+                            <div class="form-group  row">
+                                <!--FullName-->
+                                <label class="col-form-label col-lg-2">@Token.FullName</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text"
+                                           name="fullName"
+                                           class="form-control"
+                                           ng-class="{'is-invalid':userFrm.fullName.$invalid&&userFormSubmitErro}"
+                                           ng-model="user.FullName"
+                                           maxlength="150"
+                                            />
+                                </div>
+
+                                <!--NationalityNumber-->
+                                <label class="col-form-label col-lg-2">@Token.NationalityNumber</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text"
+                                           name="nationalityNumber"
+                                           class="form-control"
+                                           ng-class="{'is-invalid':userFrm.nationalityNumber.$invalid&&userFormSubmitErro}"
+                                           ng-model="user.NationalityNumber"
+                                           pattern="\d{14,14}"
+                                           />
+
+                                    <!--Errors:-->
+                                    <small class="error invalid-feedback" ng-if="userFrm.nationalityNumber.$error.pattern&&userFormSubmitErro">@Token.InvalidData , @Token.MustBeInsert 14 @Token.Number</small>
+                                </div>
+                            </div>
+
+                            <!--R O W 3-->
                             <div class="form-group  row">
                                 <!--Email-->
                                 <label class="col-form-label col-lg-2">@Token.Email</label>
@@ -116,7 +144,7 @@
 
                             </div>
 
-                            <!--R O W 3-->
+                            <!--R O W 4-->
                             <div class="form-group  row">
                                 <!--Address-->
                                 <label class="col-form-label col-lg-2">@Token.Address</label>
@@ -131,6 +159,7 @@
                                     <!--Errors:-->
                                     <small class="error invalid-feedback" ng-if="userFrm.address.$invalid&&!userFrm.address.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
                                 </div>
+
                                 <!--AccountTypes-->
                                 <label class="col-form-label col-lg-2" ng-if="user.State==state.create">@Token.AccountType</label>
                                 <div class="col-lg-4 form-group-sub" ng-if="user.State==state.create">
@@ -150,7 +179,7 @@
 
                             </div>
 
-                            <!--R O W 4-->
+                            <!--R O W 5-->
                             <div class="form-group  row">
                                 <!--Country-->
                                 <label class="col-form-label col-lg-2">@Token.Country</label>
@@ -162,7 +191,7 @@
                                             ng-model="user.CountryId"
                                             ng-options="c.Id as c.CountryName for c in countries"></select>
                                     <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="userFrm.country.$invalid&&!userFrm.country.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
+                                    <small class="error invalid-feedback" ng-if="userFrm.country.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
                                 </div>
                                 <!--City-->
                                 <label class="col-form-label col-lg-2">@Token.City</label>
@@ -174,11 +203,26 @@
                                             ng-model="user.CityId"
                                             ng-options="c.Id as c.CityName for c in cities|filterWithoutStaticItems:{'CountryId':user.CountryId}"></select>
                                     <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="userFrm.city.$invalid&&!userFrm.city.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
+                                    <small class="error invalid-feedback" ng-if="userFrm.city.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
                                 </div>
                             </div>
-                            <!--R O W 5-->
+                          
+                              <!--R O W 6-->
                             <div class="form-group  row">
+                                <!--Branch-->
+                                <label class="col-form-label col-lg-2">@Token.Branch</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <select class="form-control"
+                                            serchbale
+                                            name="branch"
+                                            ng-class="{'is-invalid':userFrm.branch.$invalid&&userFormSubmitErro}"
+                                            ng-model="user.BranchId"
+                                            ng-options="c.Id as c.BranchName for c in branches|filterWithoutStaticItems:{'CityId':user.CityId}"
+                                            ng-required="true"></select>
+                                    <!--Errors:-->
+                                    <small class="error invalid-feedback" ng-if="userFrm.branch.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
+                                </div>
+
                                 <!--Language-->
                                 <label class="col-form-label col-lg-2">@Token.Language</label>
                                 <div class="col-lg-4 form-group-sub">
@@ -194,25 +238,12 @@
                                     <small class="error invalid-feedback" ng-if="userFrm.language.$invalid&&!userFrm.language.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
                                 </div>
 
-                                <!--Branch-->
-                                <label class="col-form-label col-lg-2">@Token.Branch</label>
-                                <div class="col-lg-4 form-group-sub">
-                                    <select class="form-control"
-                                            serchbale
-                                            name="branch"
-                                            ng-class="{'is-invalid':userFrm.branch.$invalid&&userFormSubmitErro}"
-                                            ng-model="user.BranchId"
-                                            ng-options="c.Id as c.BranchName for c in branches|filterWithoutStaticItems:{'CityId':user.CityId}"
-                                            ng-required="true"></select>
-                                    <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="userFrm.branch.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
-                                </div>
-
+                                
 
 
                             </div>
 
-                            <!--R O W 6-->
+                            <!--R O W 7-->
                             <div class="form-group  row">
                                 <!--DateOfBirth-->
                                 <label class="col-form-label col-lg-2">@Token.DateOfBirth</label>
@@ -243,13 +274,31 @@
                                 }
                             </div>
 
-                            <!--R O W 7-->
+                            <!--R O W 8-->
                             <div class="form-group  row">
+                                <!--WebSite-->
+                                <label class="col-form-label col-lg-2">@Token.WebSite</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="url"
+                                           name="webSite"
+                                           class="form-control"
+                                           ng-class="{'is-invalid':userFrm.webSite.$invalid&&userFormSubmitErro}"
+                                           ng-model="user.WebSite"
+                                           maxlength="500" />
+                                    <small class="error invalid-feedback" ng-if="userFrm.webSite.$error.pattern&&userFormSubmitErro">@Token.InvalidData</small>
+
+                                </div>
+
+                            </div>
+
+                            <!--R O W 9-->
+                            <div class="form-group  row">
+                           
                                 @if (CookieService.UserInfo.IsAdmin)
                                 {
                                 <!--IsActive-->
-                                    <label class="col-form-label col-lg-2" ng-if="user.AccountTypeId==accountTypeEnum.employee">@Token.Works</label>
-                                    <div class="form-group-sub  col-lg-4" ng-if="user.AccountTypeId==accountTypeEnum.employee">
+                                    <label class="col-form-label col-lg-2" ng-if="user.AccountTypeId==accountTypeEnum.Employee||user.AccountTypeId==accountTypeEnum.Helper">@Token.Works</label>
+                                    <div class="form-group-sub  col-lg-4" ng-if="user.AccountTypeId==accountTypeEnum.Employee||user.AccountTypeId==accountTypeEnum.Helper">
                                         <div class="kt-checkbox-list">
                                             <label class="kt-checkbox" ng-repeat="w in user.WorkTypes">
                                                 <input type="checkbox"  ng-model="w.Selected">{{w.WorkTypeName}}
@@ -294,6 +343,7 @@
             </div>
         </div>
     </div>
+
 
 </div>
 @section scripts{

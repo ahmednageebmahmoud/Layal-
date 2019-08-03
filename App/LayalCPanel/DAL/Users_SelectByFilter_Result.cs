@@ -29,6 +29,9 @@ namespace DAL
         public bool IsActiveEmail { get; set; }
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public bool IsActive { get; set; }
+        public string FullName { get; set; }
+        public string NationalityNumber { get; set; }
+        public string WebSite { get; set; }
         public string AccountTypeNameAr { get; set; }
         public string AccountTypeNameEn { get; set; }
         public string CountryNameAr { get; set; }

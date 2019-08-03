@@ -46,7 +46,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Token.ar.resx</DependentUpon>
     </Compile>
-    <Compile Include="Token.Designer.cs">
+    <Compile Include="Token1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Token.resx</DependentUpon>
@@ -59,7 +59,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Token.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Token.Designer.cs</LastGenOutput>
+      <LastGenOutput>Token1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

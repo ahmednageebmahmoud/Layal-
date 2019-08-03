@@ -13,6 +13,7 @@ public    class EmployeeDiributionWorkVM:BasicVM
         public long EmployeeId { get; set; }
         public int WorkTypeId { get; set; }
         public bool IsFinshed { get;  set; }
-
+        public string UserName { get;   set; }
+        public int UserAccountTypeId { get;   set; }
     }//End Class
 }

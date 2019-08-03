@@ -17,6 +17,8 @@ namespace DAL
         public int FKWorkType_Id { get; set; }
         public long FKEmployee_Id { get; set; }
         public long FKEvent_Id { get; set; }
+        public string UserName { get; set; }
+        public int FKAccountType_Id { get; set; }
         public bool IsFinshed { get; set; }
     }
 }

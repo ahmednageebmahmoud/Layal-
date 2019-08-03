@@ -38,14 +38,25 @@ namespace UI.Controllers
             return View();
         }
 
+        
+
+              public ActionResult GetSurveyQuestionsByEventId(int id)
+        {
+            return null;
+        }
+        public ActionResult GetSurveyQuestionsforUpdateEventSurvey(int id)
+        {
+            EventSurveyQuestionsBLL EventSurveyQuestion = new EventSurveyQuestionsBLL();
+            return Json(EventSurveyQuestion.GetSurveyQuestionsforUpdateEventSurvey(id), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetItems(bool? isForFilter)
         {
             return Json(new ResponseVM(RequestTypeEnum.Success, Token.Success, new
             {
                 Packages = FillItems.GetPackages(),
                 PrintNameTypes = FillItems.GetPrintNameTypes(),
-                Branches= isForFilter.HasValue&&isForFilter.Value?FillItems.GetBranches():null
-
+                Branches= isForFilter.HasValue&&isForFilter.Value?FillItems.GetBranches():null,
+                SurveyQuestions = FillItems.GetSurveyQuestions()
             }), JsonRequestBehavior.AllowGet);
         }
 
@@ -53,7 +64,7 @@ namespace UI.Controllers
         {
             return Json(new ResponseVM(RequestTypeEnum.Success, Token.Success, new
             {
-              Employees= FillItems.UsersWithCurrentBranchWithWorkTypes(branchId,AccountTypeEnum.Employee),
+              Employees= FillItems.UsersWithCurrentBranchWithWorkTypes(branchId),
 
             }), JsonRequestBehavior.AllowGet);
         }
@@ -73,7 +84,12 @@ namespace UI.Controllers
         {
             return Json(EventsBLL.SelectById(id), JsonRequestBehavior.AllowGet);
         }
- 
+
+        public ActionResult GetEventEmployees(long id)
+        {
+            return Json(EmployeeDistributionWorkBLL.GetByEventId(id), JsonRequestBehavior.AllowGet);
+        }
+
 
         [HttpPost]
         public JsonResult SaveChange(EventVM enquiryType)
@@ -87,8 +103,18 @@ namespace UI.Controllers
             return Json(EmployeeDistributionWorkBLL.SaveChange(dis), JsonRequestBehavior.AllowGet);
         }
 
+
+        [HttpPost]
+        public JsonResult SaveChangeEventSurveyQuestions(List<EventSurveyQuestionVM> dis)
+        {
+            EventSurveyQuestionsBLL EventSurveyQuestion = new EventSurveyQuestionsBLL();
+            return Json(EventSurveyQuestion.SaveEventQuestions(dis), JsonRequestBehavior.AllowGet);
+        }
+
+
         
-            
+
+
 
     }//end class
 }

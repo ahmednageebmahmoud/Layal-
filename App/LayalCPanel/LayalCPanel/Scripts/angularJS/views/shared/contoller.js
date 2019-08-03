@@ -47,149 +47,156 @@
                                      s.currentControler = getcurrentController()
                                      s.currentUserInfromation = Auth.userInfromation;
 
-                                     if (s.currentUserInfromation.ReturnUrl) {
-                                         if (!window.location.href.includes('/Users/ActiveEmail'))
-                                             window.location.href = s.currentUserInfromation.ReturnUrl;
-                                         return;
+                                     /*
+                                     التحقق ان المستخدم الحالى حسابة مفعل
+                                     */
+                                     s.checkFromActiveUser = () => {
+                                         if (s.currentUserInfromation.ReturnUrl) {
+                                             //نقوم بـ اعادة التوجية اذا كانت فقط الصفحة مختلفة
+                                             if (!window.location.href.includes(s.currentUserInfromation.ReturnUrl))
+                                                 window.location.href = s.currentUserInfromation.ReturnUrl;
+                                             return;
+                                         }
                                      }
 
-                                  
-        //============= G E T =================
 
-        //get Notifications
-        rs.getNotifications = () => {
-            sharedServ.getNotifications().then(d => {
-                switch (d.data.RequestType) {
-                    case RequestTypeEnum.sucess: {
-                        rs.notifications = d.data.Result;
-                    } break;
-                }
-                co("G E T - Notifications", d);
-            }).catch(err => {
-                SMSSweet.alert(err.statusText, RequestTypeEnum.error);
-                co("E R R O R - Notifications", err);
-            })
-        };
+                                     //============= G E T =================
 
-        //read Notification
-        rs.readNotification = notifyId => {
-            if (!s.notifyIsRead) {
+                                     //get Notifications
+                                     rs.getNotifications = () => {
+                                         sharedServ.getNotifications().then(d => {
+                                             switch (d.data.RequestType) {
+                                                 case RequestTypeEnum.sucess: {
+                                                     rs.notifications = d.data.Result;
+                                                 } break;
+                                             }
+                                             co("G E T - Notifications", d);
+                                         }).catch(err => {
+                                             SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+                                             co("E R R O R - Notifications", err);
+                                         })
+                                     };
 
-                console.log("I Read Notification");
-                sharedServ.readNotification(notifyId).then(d => {
-                    switch (d.data.RequestType) {
-                        case RequestTypeEnum.sucess: {
+                                     //read Notification
+                                     rs.readNotification = notifyId => {
+                                         if (!s.notifyIsRead) {
 
-                        } break;
-                    }
-                    co("G E T - Notifications", d);
-                });
-            }
-        };
+                                             console.log("I Read Notification");
+                                             sharedServ.readNotification(notifyId).then(d => {
+                                                 switch (d.data.RequestType) {
+                                                     case RequestTypeEnum.sucess: {
 
-        s.getMenus = () => {
-            //Get Meun From Local Stoarge
-            s.menus = LocalStorageService.menus;
+                                                     } break;
+                                                 }
+                                                 co("G E T - Notifications", d);
+                                             });
+                                         }
+                                     };
 
-            if (!s.menus)
-                sharedServ.getMenus().then(d => {
-                    switch (d.data.RequestType) {
-                        case RequestTypeEnum.sucess: {
-                            s.menus = d.data.Result;
-                            //Save Menus In Local Storage
-                            LocalStorageService.menus = s.menus;
+                                     s.getMenus = () => {
+                                         //Get Meun From Local Stoarge
+                                         s.menus = LocalStorageService.menus;
 
-                        } break;
-                    }
-                    co("G E T - getMenus", d);
-                }).catch(err => {
-                    SMSSweet.alert(err.statusText, RequestTypeEnum.error);
-                    co("E R R O R - getMenus", err);
-                });
-        };
+                                         if (!s.menus)
+                                             sharedServ.getMenus().then(d => {
+                                                 switch (d.data.RequestType) {
+                                                     case RequestTypeEnum.sucess: {
+                                                         s.menus = d.data.Result;
+                                                         //Save Menus In Local Storage
+                                                         LocalStorageService.menus = s.menus;
 
-
-        //التحقق من ان الكونترولر الحالى هوا موجود فى القائمة الحالية 
-        s.menuOpen = (menu) => {
-            var isOpen = menu.Pages.filter(b => ('/' + s.currentControler).includes(b.Url) || window.location.pathname == b.Url).length > 0;
-            return isOpen;
-        };
+                                                     } break;
+                                                 }
+                                                 co("G E T - getMenus", d);
+                                             }).catch(err => {
+                                                 SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+                                                 co("E R R O R - getMenus", err);
+                                             });
+                                     };
 
 
-        s.checkIsCrrentPageEquals = (chaekForHomePage, url) => {
-            if (chaekForHomePage)
-                return s.currentControler == "";
-
-            return window.location.pathname == url; //|| ('/' + s.currentControler).includes(url);
-        };
-
+                                     //التحقق من ان الكونترولر الحالى هوا موجود فى القائمة الحالية 
+                                     s.menuOpen = (menu) => {
+                                         var isOpen = menu.Pages.filter(b => ('/' + s.currentControler).includes(b.Url) || window.location.pathname == b.Url).length > 0;
+                                         return isOpen;
+                                     };
 
 
-        //call read notification
-        if (s.notifyId)
-            rs.readNotification(s.notifyId);
+                                     s.checkIsCrrentPageEquals = (chaekForHomePage, url) => {
+                                         if (chaekForHomePage)
+                                             return s.currentControler == "";
+
+                                         return window.location.pathname == url; //|| ('/' + s.currentControler).includes(url);
+                                     };
 
 
-        //Re-Select 
-        s.reSelect = () => {
-            setTimeout(() => {
-                $("select[serchbale]").select2();
-            }, 1000)
-        };
 
-        //Log Out
-        s.logOut = () => {
-            localStorage.clear();
-        }
+                                     //call read notification
+                                     if (s.notifyId)
+                                         rs.readNotification(s.notifyId);
 
-        //changeLanguage
-        s.changeLanguage = langId => {
-            BlockingService.block()
-            sharedServ.changeLanguage(langId).then(d => {
-                BlockingService.unBlock()
-                switch (d.data.RequestType) {
-                    case RequestTypeEnum.sucess: {
-                        Auth.addUserInformation(d.data.Result);
-                        LocalStorageService.menus = null;
-                        window.location.reload()
-                    } break;
-                }
-                co("G E T - changeLanguage", d);
-            }).catch(err => {
-                BlockingService.unBlock()
-                SMSSweet.alert(err.statusText, RequestTypeEnum.error);
-                co("E R R O R - changeLanguage", err);
-            });
-        };
 
-        s.getItems = reset => {
-            let loading = BlockingService.generateLoding();
-            loading.show();
+                                     //Re-Select 
+                                     s.reSelect = () => {
+                                         setTimeout(() => {
+                                             $("select[serchbale]").select2();
+                                         }, 1000)
+                                     };
 
-            sharedServ.getItems().then(d => {
-                loading.hide();
-                if (reset)
-                    s.home = [];
+                                     //Log Out
+                                     s.logOut = () => {
+                                         localStorage.clear();
+                                     }
 
-                switch (d.data.RequestType) {
-                    case RequestTypeEnum.sucess: {
-                        s.employeeWorks = d.data.Result.EmployeeWorks;
-                    } break;
-                    case RequestTypeEnum.error:
-                    case RequestTypeEnum.warning:
-                    case RequestTypeEnum.info:
-                        SMSSweet.alert(d.data.Message, d.data.RequestType);
-                        break;
-                }
-                co("G E T - getItems", d);
-            }).catch(err => {
-                loading.hide();
-                SMSSweet.alert(err.statusText, RequestTypeEnum.error);
-                co("E R R O R - getItems", err);
-            })
-        };
+                                     //changeLanguage
+                                     s.changeLanguage = langId => {
+                                         BlockingService.block()
+                                         sharedServ.changeLanguage(langId).then(d => {
+                                             BlockingService.unBlock()
+                                             switch (d.data.RequestType) {
+                                                 case RequestTypeEnum.sucess: {
+                                                     Auth.addUserInformation(d.data.Result);
+                                                     LocalStorageService.menus = null;
+                                                     window.location.reload()
+                                                 } break;
+                                             }
+                                             co("G E T - changeLanguage", d);
+                                         }).catch(err => {
+                                             BlockingService.unBlock()
+                                             SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+                                             co("E R R O R - changeLanguage", err);
+                                         });
+                                     };
 
-        s.getNotifications();
-        s.getMenus();
-        s.getItems();
-    }]);
+                                     s.getItems = reset => {
+                                         let loading = BlockingService.generateLoding();
+                                         loading.show();
+
+                                         sharedServ.getItems().then(d => {
+                                             loading.hide();
+                                             if (reset)
+                                                 s.home = [];
+
+                                             switch (d.data.RequestType) {
+                                                 case RequestTypeEnum.sucess: {
+                                                     s.employeeWorks = d.data.Result.EmployeeWorks;
+                                                 } break;
+                                                 case RequestTypeEnum.error:
+                                                 case RequestTypeEnum.warning:
+                                                 case RequestTypeEnum.info:
+                                                     SMSSweet.alert(d.data.Message, d.data.RequestType);
+                                                     break;
+                                             }
+                                             co("G E T - getItems", d);
+                                         }).catch(err => {
+                                             loading.hide();
+                                             SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+                                             co("E R R O R - getItems", err);
+                                         })
+                                     };
+
+                                     s.checkFromActiveUser();
+                                     s.getNotifications();
+                                     s.getMenus();
+                                     s.getItems();
+                                 }]);

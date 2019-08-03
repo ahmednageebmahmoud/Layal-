@@ -2,38 +2,26 @@
     s.state = StateEnum;
     s.users = [];
     s.userFOP = {};
+    s.accountTypeEnum = AccountTypesEnum;
     s.userFilter = {
-        accounTypeId: null,
-        languageId: null,
-        countryId: null,
-        cityId: null,
-        createDateFrom:null,
-        createDateTo: null,
-        userName:'',
-        email:'',
-        phoneNumber: '',
-        adddress: '',
-        skip:0,
-        take: Defaults.takeFromServer,
+        AccounTypeId: null,
+        LanguageId: null,
+        CountryId: null,
+        CityId: null,
+        BranchId: null,
+        CreateDateFrom:null,
+        CreateDateTo: null,
+        UserName:'',
+        Email:'',
+        PhoneNumber: '',
+        Adddress: '',
+        Skip:0,
+        Take: Defaults.takeFromServer,
 
     };
 
-
-    s.accountTypes = [
-        {
-            Id: null,
-            AccountTypeName: Token.select
-        }, {
-            Id: 2,
-            AccountTypeName: LangIsEn ? "Supervisor" : "مشرف"
-        }, {
-            Id: 3,
-            AccountTypeName: LangIsEn ? "Branch Manager" : "مدير فرع"
-        },
-    {
-        Id: 4,
-        AccountTypeName: LangIsEn ? "Clinet" : "عميل"
-    }];
+    s.accountTypes = accountTypesList;
+    
 
     s.languages = [{
         Id: null,
@@ -54,6 +42,10 @@
         Id: null,
         CityName: Token.select
     }];
+    s.branches = [{
+        Id: null,
+        BranchName: Token.select
+    }];
 
 
     //============= G E T =================
@@ -61,15 +53,16 @@
 
         if (reset) {
             
-            s.userFilter.skip = 0;
+            s.userFilter.Skip = 0;
             s.userFOP = new FOP(lengthWithOutDeleted(s.users));
         }
 
-        s.userFilter.createDateFrom = $("#createDateFrom").val();
-        s.userFilter.createDateTo=$("#createDateTo").val();
+        s.userFilter.CreateDateFrom = $("#createDateFrom").val();
+        s.userFilter.CreateDateTo=$("#createDateTo").val();
 
         let loading = BlockingService.generateLoding();
         loading.show();
+        debugger;
         usersServ.getUsers(s.userFilter).then(d => {
             loading.hide();
             switch (d.data.RequestType) {
@@ -77,7 +70,7 @@
                       if (reset) 
             s.users = [];
                     s.users = s.users.concat(d.data.Result);
-                    s.userFilter.skip += s.userFilter.take;
+                    s.userFilter.Skip += s.userFilter.Take;
 
 
                     if (s.userFOP && s.userFOP.paging)
@@ -114,6 +107,7 @@
                 case RequestTypeEnum.sucess: {
                     s.countries = s.countries.concat(d.data.Result.Countries);
                     s.cities = s.cities.concat(d.data.Result.Cities);
+                    s.branches = s.branches.concat(d.data.Result.Branches);
                 } break;
                 case RequestTypeEnum.error:
                 case RequestTypeEnum.warning:
@@ -156,15 +150,7 @@
         s.userFOP.reFop(length);
     };
 
-    s.checkAllowDisplay = (priv) => {
-
-        if (!priv.CanEdit && !priv.CanDelete)
-            priv.CanDisplay = false;
-        else
-            priv.CanDisplay = true;
-
-
-    };
+  
 
 
     //Call Functions

@@ -23,7 +23,21 @@
             });
         };
 
+        getSurveyQuestionsforUpdateEventSurvey(id) {
+            return h({
+                url: `${this.basePath}getSurveyQuestionsforUpdateEventSurvey?id=${id}`,
+                method: 'get',
+            });
+        };
 
+
+        getEventEmployees(id) {
+            return h({
+                url: `${this.basePath}getEventEmployees?id=${id}`,
+                method: 'get',
+            });
+        };
+        
 		//save event  
         saveChange(event) {
 
@@ -34,13 +48,13 @@
 			});
 		};
 
-        //add New Status
-        addNewStatus(event) {
+	    
+        saveChangeEventSurveyQuestions(qus) {
 
             return h({
-                url: `${this.basePath}addNewStatus`,
+                url: `${this.basePath}saveChangeEventSurveyQuestions`,
                 method: 'post',
-                data:event
+                data: qus
             });
         };
 

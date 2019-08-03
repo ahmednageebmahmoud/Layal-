@@ -1,0 +1,216 @@
+﻿
+@{
+    ViewBag.Title = Token.EventSurveyQuestionsDefult;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    UsersPrivilegeVM Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.EventSurveyQuestions);
+}
+
+<!-- begin:: Content Head -->
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+
+        <span class="kt-subheader__separator kt-hidden"></span>
+        <div class="kt-subheader__breadcrumbs">
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link">
+                @Token.HomePage
+            </a>
+
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">
+                @Token.EventSurveyQuestionsDefult
+            </a>
+
+            <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+        </div>
+    </div>
+
+</div>
+
+<!-- end:: Content Head -->
+<!--Page Body-->
+<div ng-controller="eventSurveyQuestionsCtrl">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon-list-1"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        @Token.EventSurveyQuestionsDefult
+                    </h3>
+                </div>
+
+            </div>
+
+            <!--Create-->
+            @if (Priv.CanAdd)
+            {
+                <div class="kt-portlet__body">
+                    <form novalidate name="addEventSurveyQuestionFrm" class="kt-form kt-form--label-right" ng-submit="addNew(addEventSurveyQuestionFrm)">
+                        <div class="kt-portlet__body">
+
+                            <!--R O W 1-->
+                            <div class="form-group  row">
+                                <!--SurveyQuestionTypeId-->
+                                <label class="col-form-label col-lg-2">@Token.EventSurveyQuestionType</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <select class="form-control"
+                                            serchbale
+                                            name="surveyQuestionTypeId"
+                                            ng-class="{'is-invalid':addEventSurveyQuestionFrm.surveyQuestionTypeId.$invalid&&eventSurveyQuestionFrmErrorSubmit}"
+                                            ng-model="newEventSurveyQuestion.SurveyQuestionTypeId"
+                                            ng-options="c.Id as c.EventSurveyQuestionTypeName for c in eventSurveyQuestionTypes"></select>
+                                    <!--Errors:-->
+                                    <small class="error invalid-feedback" ng-if="addEventSurveyQuestionFrm.surveyQuestionTypeId.$invalid">@Token.FieldIsRequierd</small>
+                                </div>
+
+
+                                <!--IsActive-->
+                                <label class="col-lg-2 col-form-label">@Token.IsActive</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                        <label>
+                                            <input type="checkbox" checked="checked"
+                                                   ng-model="newEventSurveyQuestion.IsActive" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                            <span></span>
+                                        </label>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!--R O W 2-->
+                            <div class="form-group  row" ng-if="false">
+                                <!--Is Default-->
+                                <label class="col-lg-2 col-form-label">@Token.IsDefault</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                        <label>
+                                            <input type="checkbox" checked="checked"
+                                                   ng-model="newEventSurveyQuestion.IsDefault" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                            <span></span>
+                                        </label>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!--R O W 4-->
+                            <div class="kt-portlet__foot">
+                                <div class="kt-form__actions">
+                                    <div class="row">
+                                        <div class="col-lg-9"></div>
+                                        <div class="col-lg-3">
+                                            @if (Priv.CanAdd)
+                                            {
+                                                <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                                                    <i class="la la-save">@Token.Add</i>
+                                                </button>
+                                            }
+                                            <button type="reset" class="btn btn-warning btn-elevate btn-elevate-air" ng-if="enquiry.State!=state.update" ng-click="reSelect()"><i class="la la-file">@Token.Cancel</i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            }
+
+            <div class="kt-portlet__body">
+                <div class="kt-portlet__body">
+                    @if (Priv.CanDisplay)
+                    {
+
+                        <table class="table sms-table  "
+                               datatable="ng"
+                               dt-options="vm.dtOptions"
+                               dt-instance="vm.dtInstance"
+                               dt-column-defs="vm.dtColumnDefs"
+                               id="ng_table_1">
+                            <thead>
+                                <tr>
+                                    <th class="th-30 ">
+                                        <sms-sort ng-sms-fop="eventSurveyQuestionFOP"
+                                                  ng-sms-field-name="SurveyQuestionTypeId"
+                                                  ng-sms-resource="@Token.EventSurveyQuestionType"></sms-sort>
+                                    </th>
+                                 <!--
+                                     
+                                       <th class="th-30 ">
+                                        <sms-sort ng-sms-fop="eventSurveyQuestionFOP"
+                                                  ng-sms-field-name="IsDefault"
+                                                  ng-sms-resource="@Token.IsDefault"></sms-sort>
+                                    </th>
+                                 -->
+                                    <th class="th-30 ">
+                                        <sms-sort ng-sms-fop="eventSurveyQuestionFOP"
+                                                  ng-sms-field-name="IsActive"
+                                                  ng-sms-resource="@Token.IsActive"></sms-sort>
+                                    </th>
+                                    <th class="th-15">
+                                        @Token.Operations
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr ng-repeat="x in eventSurveyQuestions|orderBy:eventSurveyQuestionFOP.sort.propName:eventSurveyQuestionFOP.sort.reverse | limitTo:eventSurveyQuestionFOP.paging.pagingLimt.take:eventSurveyQuestionFOP.paging.pagingLimt.skip track by $index"
+                                    ng-class="{'kt-datatable__row--even':$index%2==0}">
+
+                                    <td>
+                                        <select class="form-control input-disabled"
+                                                disabled
+                                                ng-model="x.SurveyQuestionTypeId"
+                                                ng-options="c.Id as c.EventSurveyQuestionTypeName for c in eventSurveyQuestionTypes"></select>
+
+                                    </td>
+                              <!--      <td>
+                                        <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                            <label>
+                                                <input type="checkbox" disabled
+                                                       ng-model="x.IsDefault" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                                <span></span>
+                                            </label>
+                                        </span>
+                                    </td>
+                               -->     <td>
+                                        <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                            <label>
+                                                <input type="checkbox"
+                                                       ng-model="x.IsActive" name=""
+                                                       @(Priv.CanEdit ? "ng-change=changeActive(x)" : "") />
+                                                <span></span>
+                                            </label>
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <!--Btn:Delete-->
+                                        @if (Priv.CanDelete)
+                                        {
+                                            <a href="javascript:void(0);" ng-click="delete(x)" ng-if="x.Id!=itemEditId" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
+                                        }
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+
+                             <!--Paging -->
+                        <sms-paging-select ng-sms-fop="eventSurveyQuestionFOP"></sms-paging-select>
+                        <sms-paging ng-sms-fop="eventSurveyQuestionFOP" ng-sms-display-m-func="getEventSurveyQuestions()"></sms-paging>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/eventSurveyQuestions/index/service.js"></script>
+    <script src="~/Scripts/angularJS/views/eventSurveyQuestions/index/contoller.js"></script>
+}

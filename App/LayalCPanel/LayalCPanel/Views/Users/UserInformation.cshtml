@@ -72,8 +72,32 @@
                                            ng-model="user.Email" />
                                 </div>
                             </div>
-
                             <!--R O W 2-->
+                            <div class="form-group  row">
+                                <!--FullName-->
+                                <label class="col-form-label col-lg-2">@Token.FullName</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text"
+                                           name="fullName"
+                                           disabled
+                                           class="form-control input-disabled"
+                                           ng-model="user.FullName"
+                                             />
+                                </div>
+
+                                <!--NationalityNumber-->
+                                <label class="col-form-label col-lg-2">@Token.NationalityNumber</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text"
+                                           name="nationalityNumber"
+                                           disabled
+                                           class="form-control input-disabled"
+                                           ng-model="user.NationalityNumber"
+                                            />
+                                </div>
+                            </div>
+
+                            <!--R O W 3-->
                             <div class="form-group  row">
                                 <!--PhoneNumber-->
                                 <label class="col-form-label col-lg-2">@Token.PhoneNumber</label>
@@ -98,7 +122,7 @@
                                 </div>
                             </div>
 
-                            <!--R O W 3-->
+                            <!--R O W 4-->
                             <div class="form-group  row">
                                 <!--AccountTypes-->
                                 <label class="col-form-label col-lg-2">@Token.AccountType</label>
@@ -122,7 +146,7 @@
                                 </div>
                             </div>
 
-                            <!--R O W 4-->
+                            <!--R O W 5-->
                             <div class="form-group  row">
 
                                 <!--Country-->
@@ -146,19 +170,56 @@
                                 </div>
                             </div>
 
-                            <!--R O W 5-->
+                            <!--R O W 6-->
                             <div class="form-group  row">
+                                <!--WebSite-->
+                                <label class="col-form-label col-lg-2">@Token.WebSite</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="url"
+                                           name="webSite"
+                                           disabled
+                                           class="form-control input-disabled"
+                                           ng-model="user.WebSite"
+                                           />
+                                </div>
                                 <!--DateOfBirth-->
                                 <label class="col-form-label col-lg-2">@Token.DateOfBirth</label>
                                 <div class="form-group-sub">
-                                    <input type="date"
+                                    <input type="text"
                                            name="dateOfBirth"
                                            class="form-control   input-disabled"
-                                           ng-model="user.DateOfBirth"
+                                           ng-model="user.DateOfBirthDisplay"
                                            disabled />
                                     <!--Errors:-->
                                 </div>
                             </div>
+
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-2">@Token.SocialMedaiAccounts</label>
+                                <div class="col-lg-10 form-group-sub">
+                                    <table class="table sms-table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="th-45"><span class="sms-sort-field">@Token.SocialAccountType</span></th>
+                                                <th class="th-45"><span class="sms-sort-field">@Token.Link</span></th>
+                                                <th class="th-10"><span class="sms-sort-field">@Token.Operations</span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="n in user.SocialAccounts">
+                                                <td>
+                                              {{n.SocialAccountType.SocialAccountTypeName}}
+                                                </td>
+                                                <td><p><a href="{{n.Link}}" class="kt-link kt-font-boldest ng-binding">{{n.Link}}</a></p></td>
+                                                <td>
+                                                    <a href="javascript:void(0);" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="deleteSocailAccount(n)"><i class="la la-trash"></i> </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </div>
                         </div>
                     </form>
                 </div>

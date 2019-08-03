@@ -13,12 +13,7 @@
 
     };
 
-    s.accountTypes = [
-       { Id: null, AccountTypeName: Token.select },
-       { Id: 2, AccountTypeName: LangIsEn ? "Supervisor" : "مشرف" },
-       { Id: 3, AccountTypeName: LangIsEn ? "Branch Manager" : "مدير فرع" },
-       { Id: 4, AccountTypeName: LangIsEn ? "Clinet" : "عميل" }
-    ];
+    s.accountTypes = accountTypesList;
 
     s.languages = [{
         Id: null,

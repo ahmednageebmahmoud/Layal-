@@ -10,17 +10,19 @@
         IsLogoAr: null,
         IsNamesAr: null,
         IsClinetCustomLogo: null,
-        IsActive:null,
-        PackageId:null,
-        BranchId:null,
+        IsActive: null,
+        PackageId: null,
+        BranchId: null,
         EventDateTo: null,
         EventDateFrom: null,
         CreateDateFrom: null,
         CreateDateTo: null
     };
 
-    
+    s.workTypes = workTypesList;
+    s.accountTypeEnum = AccountTypesEnum;
 
+    s.surveyQuestions = [];
     s.checkBoxList = [
     { Id: null, Name: Token.select },
     { Id: true, Name: Token.checked },
@@ -35,8 +37,8 @@
 { Id: null, PackageName: Token.select }];
     s.branches = [
 { Id: null, BranchName: Token.select }];
-    
-    
+
+
 
     //============= G E T =================
     s.getEvents = reset => {
@@ -56,17 +58,13 @@
 
         eventsServ.getEvents(s.eventFilter).then(d => {
             loading.hide();
-            
+
             if (reset)
                 s.events = [];
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
-                 
-
                     s.events = s.events.concat(d.data.Result);
-
                     s.eventFilter.skip += s.eventFilter.take;
-
                     if (s.eventFOP && s.eventFOP.paging)
                         s.eventFOP = new FOP(lengthWithOutDeleted(s.events), s.eventFOP.paging.currentPage,
                             s.eventFOP.paging.limitPagesTake,
@@ -101,11 +99,11 @@
                 case RequestTypeEnum.sucess: {
                     s.packages = s.packages.concat(d.data.Result.Packages);
                     s.branches = s.branches.concat(d.data.Result.Branches);;
-
+                 
                     setTimeout(() => {
                         $("select[serchbale]").select2();
 
-                    },1200)
+                    }, 1200)
                 } break;
                 case RequestTypeEnum.error:
                 case RequestTypeEnum.warning:
@@ -140,27 +138,25 @@
 
     };
 
-    //add New Status
-    s.addNewStatus = form=> {
-        if (form.$invalid) {
-            s.eventtStusSubmitErro = true;
-            return;
-        }
-        s.eventtStusSubmitErro = false;
-
+    s.updateEventSurveyQuestions = () => {
         BlockingService.block();
-        eventsServ.addNewStatus(s.eventNewStatus).then(d => {
-            SMSSweet.alert(d.data.Message, d.data.RequestType);
-            co("P O S T - addNewStatus", d);
-            BlockingService.unBlock();
-            bootstrapModelHide("addStatus");
+        eventsServ.saveChangeEventSurveyQuestions(s.surveyQuestions).then(d => {
+            switch (d.data.RequestType) {
+                case RequestTypeEnum.sucess: {
+                    bootstrapModelHide("createCustomSurvey");
+                } break;
+            }
 
+            SMSSweet.alert(d.data.Message, d.data.RequestType);
+            co("P O S T - updateEventSurveyQuestions", d);
+            BlockingService.unBlock();
         }).catch(err => {
             BlockingService.unBlock();
             SMSSweet.alert(err.statusText, RequestTypeEnum.error);
-            co("E R R O R - addNewStatus", err);
+            co("E R R O R - updateEventSurveyQuestions", err);
         })
-    };
+    }
+
     //============= Delete ================
     s.delete = event => {
         //show confirm delete
@@ -194,39 +190,64 @@
             priv.CanDisplay = false;
         else
             priv.CanDisplay = true;
-
-
     };
-    s.fillDayMax = month=> {
-        switch (month) {
-            case 2:
-                return 29;
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                return 31;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                return 30;
+
+    //Show Event Employees
+    s.showEventEmployees = event => {
+        s.currentEventEmployees = [];
+        if(event.eventEmployees)
+        {
+            s.currentEventEmployees = event.eventEmployees;
+            bootstrapModelShow("eventEmployees");
+            return;
         }
-    };
+
+        BlockingService.block();
+        eventsServ.getEventEmployees(event.Id).then(d => {
+            switch (d.data.RequestType) {
+                case RequestTypeEnum.sucess: {
+                    event.eventEmployees = d.data.Result;
+                    s.currentEventEmployees = event.eventEmployees;
+                    bootstrapModelShow("eventEmployees");
+                } break;
+                default:
+                    SMSSweet.alert(d.data.Message, d.data.RequestType);
+                    break;
+            }
+            co("P O S T - getEventEmployees", d);
+            BlockingService.unBlock();
+        }).catch(err => {
+            BlockingService.unBlock();
+            SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+            co("E R R O R - getEventEmployees", err);
+        })
+    }
 
     //================= Other ======================
-    s.showAddStatus = event => {
-        s.eventNewStatus = {
-            EnquiryId: event.Id,
-            EnquiryBranchId: event.BranchId,
-            StatusId: null,
-            IsBankTransferDeposit: true,
-            ClinetName: event.FirstName + ' ' + event.LastName,
-        };
-        bootstrapModelShow("addStatus");
+    s.showCreateCustomSurveyModel = eve => {
+        let loading = BlockingService.generateLoding();
+        loading.show();
+        eventsServ.getSurveyQuestionsforUpdateEventSurvey(eve.Id).then(d => {
+            loading.hide();
+            switch (d.data.RequestType) {
+                case RequestTypeEnum.sucess: {
+                    s.surveyQuestions = d.data.Result;
+        bootstrapModelShow("createCustomSurvey");
+
+                } break;
+                case RequestTypeEnum.error:
+                case RequestTypeEnum.warning:
+                case RequestTypeEnum.info:
+                    SMSSweet.alert(d.data.Message, d.data.RequestType);
+                    break;
+            }
+            co("G E T - getItems", d);
+        }).catch(err => {
+            loading.hide();
+            SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+            co("E R R O R - getItems", err);
+        })
+
     };
 
 

@@ -23,6 +23,14 @@
                 method: 'get',
             });
         };
+
+	    addSocialAccount(account) {
+	        return h({
+	            url: `${this.basePath}addSocialAccount`,
+	            method: 'post',
+	            data: account
+	        });
+	    }
  
 		//save user  
         saveChange(user) {

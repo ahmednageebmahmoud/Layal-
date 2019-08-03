@@ -24,15 +24,39 @@
 
 </div>
 <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content" ng-controller="homeCtrl">
+    @if (CookieService.UserInfo.IsAdmin)
+    {
+        @Html.Partial("~/Views/Shared/AdminIndex.cshtml")
 
-    @if (CookieService.UserInfo.IsEmployee)
+        @section scripts{
+            <!--Chart-->
+            <script src="/assets/vendors/general/chart.js/dist/Chart.bundle.js" type="text/javascript"></script>
+            @* <script src="~/assets/app/custom/general/dashboard.js" type="text/javascript"></script>*@
+            <script src="~/Scripts/angularJS/views/home/index/admin/service.js"></script>
+            <script src="~/Scripts/angularJS/views/home/index/admin/contoller.js"></script>
+        }
+    }
+    else
+    if (CookieService.UserInfo.IsEmployee)
     {
         @Html.Partial("~/Views/Shared/EmployeeIndex.cshtml")
         @section scripts{
-            <script src="~/assets/app/custom/general/das"> </script>
+
             <!--(ANageeb) link angualr files for thsis  view -->
             <script src="~/Scripts/angularJS/views/home/index/employee/service.js"></script>
             <script src="~/Scripts/angularJS/views/home/index/employee/contoller.js"></script>
         }
     }
+    else
+    if (CookieService.UserInfo.IsHelper)
+    {
+        @Html.Partial("~/Views/Shared/EmployeeIndex.cshtml")
+        @section scripts{
+            <!--(ANageeb) link angualr files for thsis  view -->
+            <script src="~/Scripts/angularJS/views/home/index/helper/service.js"></script>
+            <script src="~/Scripts/angularJS/views/home/index/helper/contoller.js"></script>
+        }
+    }
+
+
 </div>

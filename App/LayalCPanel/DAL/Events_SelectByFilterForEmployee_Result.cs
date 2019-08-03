@@ -32,6 +32,21 @@ namespace DAL
         public decimal PackageNamsArExtraPrice { get; set; }
         public Nullable<System.DateTime> VistToCoordinationDateTime { get; set; }
         public string VistToCoordinationClendarEventId { get; set; }
+        public long EventId { get; set; }
+        public Nullable<bool> Booking { get; set; }
+        public Nullable<bool> DataPerfection { get; set; }
+        public Nullable<bool> Coordination { get; set; }
+        public Nullable<bool> Implementation { get; set; }
+        public Nullable<bool> ArchivingAndSaveing { get; set; }
+        public Nullable<bool> ProductProcessing { get; set; }
+        public Nullable<bool> Chooseing { get; set; }
+        public Nullable<bool> DigitalProcessing { get; set; }
+        public Nullable<bool> PreparingForPrinting { get; set; }
+        public Nullable<bool> Manufacturing { get; set; }
+        public Nullable<bool> QualityAndReview { get; set; }
+        public Nullable<bool> Packaging { get; set; }
+        public Nullable<bool> TransmissionAndDelivery { get; set; }
+        public Nullable<bool> Archiving { get; set; }
         public string EnquiryName { get; set; }
         public Nullable<bool> IsClosed { get; set; }
         public string Branch_NameAr { get; set; }

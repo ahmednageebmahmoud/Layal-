@@ -22,7 +22,8 @@ namespace BLL.ViewModels
         public bool IsAdmin => this.Id ==WebConfigService.AdminId;
         public bool IsEmployee=> this.AccountTypeId==(int)AccountTypeEnum.Employee;
         public bool IsBranchManager => this.AccountTypeId == (int)AccountTypeEnum.BranchManager;
-
+        public bool IsHelper => this.AccountTypeId == (int)AccountTypeEnum.Helper;
+        
         public string UserName { get;   set; }
         public int BrId { get; set; }
         public bool IsActive { get;   set; }

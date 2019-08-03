@@ -124,11 +124,7 @@ namespace BLL.BLL
         /// <returns></returns>
         public bool CheckIfMyEnquiry(long id)
         {
-            var Enquiry = GetInformation(id);
-            if (Enquiry == null)
-                return false;
-
-            return Enquiry.ClinetId == this.UserLoggad.Id;
+           return db.Enquires_CheckFromOwner(id, this.UserLoggad.Id).First().Value>0;
         }
 
         public object GetFullEnquiyInformation(long id)
@@ -164,6 +160,9 @@ namespace BLL.BLL
             {
                 try
                 {
+                    //check if create event 
+                    if (db.Enquires_CheckIfCreatedEvent(c.Id).First().Value > 0)
+                        return new ResponseVM(RequestTypeEnum.Error, Token.CanNotDoAnyThingBecuseThisEnquiryConvertedToEvent);
                     var ObjectReturn = new object();
                     switch (c.State)
                     {

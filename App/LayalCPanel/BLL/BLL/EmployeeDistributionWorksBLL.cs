@@ -20,7 +20,9 @@ namespace BLL.BLL
                 EmployeeId = c.FKEmployee_Id,
                 EventId = c.FKEvent_Id,
                 WorkTypeId = c.FKWorkType_Id,
-                IsFinshed=c.IsFinshed
+                IsFinshed = c.IsFinshed,
+                UserName = c.UserName,
+                UserAccountTypeId = c.FKAccountType_Id
             }).ToList();
 
             return new ResponseVM(RequestTypeEnum.Success, Token.Success, Emps);

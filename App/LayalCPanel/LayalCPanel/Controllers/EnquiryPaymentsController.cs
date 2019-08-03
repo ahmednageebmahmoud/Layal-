@@ -21,6 +21,7 @@ namespace UI.Controllers
             return View();
         }
 
+        [PagePrivilege(PagesEnum.EnquiryPayments, true, false, true, false)]
         public ActionResult Payments()
         {
             return View();

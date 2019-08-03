@@ -10,7 +10,10 @@
         "Address": null,
         "FkCountry_Id": null,
         "FkCity_Id": null,
-        "FkBranch_Id": null
+        "FkBranch_Id": null,
+        "FullName": null,
+        "NationalityNumber": 12485,
+        "WebSite": "www.ff.com"
     },
     "AccountTypes": {
         "Id": null,
@@ -20,5 +23,26 @@
         "Id": null,
         "FkUser_Id": null,
         "FkPage_Id": null
+    },
+    "UserSocialAccounts": {
+        "Id": 0,
+        "FKSocialAccountType_Id": 0,
+        "Link": "",
+        "FKUser_Id": 1
+    },
+    "SocialAccountTypes": {
+        "Id": 1,
+        "FKWord_Id": 0
+    },
+    "UserPayments": {
+        "Id": 0,
+        "Amount": 0,
+        "DateTime": 0,
+        "IsAcceptFromManger": 0,
+        "Notes":"",
+        "IsBankTransfer": true,
+        "PaymentImage": "",
+        "FKUserTo_Id":0,
+        "FKUserFrom_Id": 0,
     }
 }

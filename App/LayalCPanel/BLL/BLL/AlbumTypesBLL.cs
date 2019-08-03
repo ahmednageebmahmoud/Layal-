@@ -75,7 +75,7 @@ namespace BLL.BLL
             {
                 if (db.AlbumTypes_CheckIfUsed(c.Id).First().Value > 0)
                     return new ResponseVM(RequestTypeEnum.Success, Token.CanNotDeleteBecuseIsUsed);
-                db.AlbumTypes_Delete(c.Id);
+                db.AlbumTypes_Delete(c.Id,c.WordId);
                 return new ResponseVM(RequestTypeEnum.Success, Token.Deleted, c);
             }
             catch (Exception ex)

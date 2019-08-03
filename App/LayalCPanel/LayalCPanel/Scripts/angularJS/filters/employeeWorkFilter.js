@@ -7,7 +7,10 @@ ngApp.filter('employeeWorkFilter', function () {
 	    
 	    if (!items||!Array.isArray(items)) return items;
 	   
-
-	    return items.filter(c=> c.Id==null|| c.WorkTypes.filter(v=> v.Id=workTypeId).length>0);
+	    return items.filter(c=>
+            //For Select
+	        c.Id == null ||
+                //Filter Now
+                c.WorkTypes.filter(v=> v.Id == workTypeId).length > 0);
 	};
 });

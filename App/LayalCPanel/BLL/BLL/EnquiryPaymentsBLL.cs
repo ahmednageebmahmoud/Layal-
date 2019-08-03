@@ -29,7 +29,7 @@ namespace BLL.BLL
                 TitleEn = "New Payment Process",
                 DateTime = DateTime.Now,
                 TargetId = c.EnquiryId,
-                PageId = (int)PagesEnum.Enquires,
+                PageId = (int)PagesEnum.EnquiryPayments,
                 RedirectUrl = $"/EnquiryPayments/Payments?id={c.EnquiryId}&notifyId=",
             };
 

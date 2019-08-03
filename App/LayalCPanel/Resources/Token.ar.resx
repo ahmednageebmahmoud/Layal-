@@ -778,7 +778,7 @@
     <value>اغلاق الاستفسار</value>
   </data>
   <data name="YourAccountIsNotActive" xml:space="preserve">
-    <value>الحساب الخاص بك معلق</value>
+    <value>لقد تم حظر حسابك</value>
   </data>
   <data name="Works" xml:space="preserve">
     <value>الاعمال</value>
@@ -832,7 +832,7 @@
     <value>تم الانتهاء</value>
   </data>
   <data name="ThisTaskIsFinshed" xml:space="preserve">
-    <value>هذا المهمة قد انتهت</value>
+    <value>هذة المهمة قد انتهت</value>
   </data>
   <data name="FinshedAccountType" xml:space="preserve">
     <value>نوع المستخدم الذى قام بـ الانتهاء</value>
@@ -848,5 +848,113 @@
   </data>
   <data name="Logo" xml:space="preserve">
     <value>اللوجو</value>
+  </data>
+  <data name="EnquiryWithAdmin" xml:space="preserve">
+    <value>الاستفسار الان مع المدير</value>
+  </data>
+  <data name="SocialAccountTypes" xml:space="preserve">
+    <value>حسابات التواصل الاجتماعى</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>الاسم بالكامل</value>
+  </data>
+  <data name="MustBeInsert" xml:space="preserve">
+    <value>يجب عليك ادخال</value>
+  </data>
+  <data name="NationalityNumber" xml:space="preserve">
+    <value>الرقم القومى</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>رقم</value>
+  </data>
+  <data name="WebSite" xml:space="preserve">
+    <value>الموقع الخاص بك</value>
+  </data>
+  <data name="NationalityNumberItIsAlreadyUsed" xml:space="preserve">
+    <value>الرقم القومى مستتخدم من قبل</value>
+  </data>
+  <data name="SocialMedaiAccounts" xml:space="preserve">
+    <value>حسابات التواصل الاجتماعى</value>
+  </data>
+  <data name="Link" xml:space="preserve">
+    <value>الرابط</value>
+  </data>
+  <data name="SocialAccountType" xml:space="preserve">
+    <value>نوع حساب التواصل الاجتماعى</value>
+  </data>
+  <data name="ThisEventDateIsFinshed" xml:space="preserve">
+    <value>تاريخ هذة المناسبة قد انتهى</value>
+  </data>
+  <data name="PaymentsForUser" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CanNotPayUserAccountIsNotActive" xml:space="preserve">
+    <value>لا يمكن الدفع لان حساب المستخدم محظور</value>
+  </data>
+  <data name="MyPayments" xml:space="preserve">
+    <value>مدفوعاتى</value>
+  </data>
+  <data name="CanNotSavePaymentPhoto" xml:space="preserve">
+    <value>لم اتمكن من حفظ صورة الدفع</value>
+  </data>
+  <data name="PaymentPhoto" xml:space="preserve">
+    <value>صورة الدفع</value>
+  </data>
+  <data name="ThisPaymentIsClosed" xml:space="preserve">
+    <value>هذة الدفعة تم اغلاقها</value>
+  </data>
+  <data name="CanNotDoAnyThingBecuseThisEnquiryConvertedToEvent" xml:space="preserve">
+    <value>لا يمكنك فعل اى شىء لان هذا الاشتفسار تحول الى مناسبة</value>
+  </data>
+  <data name="EventSurveyQuestionTypes" xml:space="preserve">
+    <value>انواع اسئلة الاستبيان</value>
+  </data>
+  <data name="EventSurveyQuestionsDefult" xml:space="preserve">
+    <value>اسئلة استبيان المناسبة الافتراضية</value>
+  </data>
+  <data name="EventSurveyQuestionType" xml:space="preserve">
+    <value>نوع سوال استبيان المناسبة</value>
+  </data>
+  <data name="IsDefault" xml:space="preserve">
+    <value>افترضى</value>
+  </data>
+  <data name="CreateCustomSurvey" xml:space="preserve">
+    <value>انشاء استبيان مخصص</value>
+  </data>
+  <data name="CanNotUpdateBecuseClinetIsFillSurvey" xml:space="preserve">
+    <value>لا يمكن التحديث الان لان المستخدم قد املىء الاستبيان </value>
+  </data>
+  <data name="AreYouSatisfiedToMyService" xml:space="preserve">
+    <value>هل انت راض عن الخدمة</value>
+  </data>
+  <data name="SurveyValidIn30DaysAffterEventFinshed" xml:space="preserve">
+    <value>الاستبيان متاح فقط فى اول 30 يوم من بعد تاريخ المناسبة</value>
+  </data>
+  <data name="YourAnswerer" xml:space="preserve">
+    <value>اجابتك</value>
+  </data>
+  <data name="CustomersSatisfactionStatistics" xml:space="preserve">
+    <value>إحصائيات رضا العملاء</value>
+  </data>
+  <data name="CountEventsInCurrentYear" xml:space="preserve">
+    <value>عدد المناسبات فى السنة الحالية</value>
+  </data>
+  <data name="EventEmployees" xml:space="preserve">
+    <value>موظفين المناسبة</value>
+  </data>
+  <data name="EventImplementations" xml:space="preserve">
+    <value>مناسبات التنفيذ</value>
+  </data>
+  <data name="Survey" xml:space="preserve">
+    <value>الاستبيان</value>
+  </data>
+  <data name="Finshe" xml:space="preserve">
+    <value>إنهاء</value>
+  </data>
+  <data name="EventIsClosed" xml:space="preserve">
+    <value>المناسبة قد اغلقت</value>
+  </data>
+  <data name="FilesReceivedTypes" xml:space="preserve">
+    <value>انوع تسليم الملفات</value>
   </data>
 </root>

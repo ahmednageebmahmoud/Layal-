@@ -15,12 +15,19 @@ namespace BLL.BLL
     public class UsersBLL : BasicBLL
     {
 
-        public object GetUsers(int? skip, int? take, string userName, string email, string phoneNumber, string adddress,
-            DateTime? createDateTo, DateTime? createDateFrom, int? countryId, int? cityId, int? accountTypeId, int? languageId)
+        public object GetUsers(UserVM user)
 
         {
-            var Users = db.Users_SelectByFilter(skip, take, userName, email, phoneNumber, adddress, createDateTo, createDateFrom,
-                countryId, cityId, accountTypeId, languageId).Select(c => new UserVM
+            /*
+             اذا كان الشخص الحالى هوا مدير فرع فيجب عرض الاشخاص التابعين للفرع الخاص بة فقط
+            if (this.UserLoggad.IsBranchManager)
+            {
+                user.BranchId = this.UserLoggad.BrId;
+            }
+             */
+
+            var Users = db.Users_SelectByFilter(user.Skip, user.Take, user.UserName, user.Email, user.PhoneNo, user.Address, user.CreateDateTo, user.CreateDateFrom,
+                user.CountryId, user.CityId, user.AccountTypeId, user.LanguageId, user.BranchId).Select(c => new UserVM
                 {
                     Id = c.Id,
                     UserName = c.UserName,
@@ -28,6 +35,7 @@ namespace BLL.BLL
                     Address = c.Address,
                     Email = c.Email,
                     PhoneNo = c.PhoneNo,
+                    IsActive = c.IsActive,
                     City = new CityVM
                     {
                         Id = c.FkCity_Id,
@@ -51,7 +59,7 @@ namespace BLL.BLL
 
             if (Users.Count == 0)
             {
-                if (skip == 0)
+                if (user.Skip == 0)
                     return new ResponseVM(Enums.RequestTypeEnum.Info, Token.NoResult);
 
                 return new ResponseVM(Enums.RequestTypeEnum.Info, Token.NoMoreResult);
@@ -65,7 +73,7 @@ namespace BLL.BLL
             try
             {
                 //check if this email befor use
-                if (db.User_EmailBeforUsed(id, email).FirstOrDefault() > 0)
+                if (db.Users_EmailBeforUsed(id, email).FirstOrDefault() > 0)
                     return new ResponseVM(RequestTypeEnum.Error, Token.EmailItIsAlreadyUsed);
 
                 string ActiveCode = $"C-{new Random().Next(9999, 20000)}";
@@ -81,16 +89,58 @@ namespace BLL.BLL
 
 
                 return new ResponseVM(RequestTypeEnum.Success, Token.Success);
-
             }
             catch (Exception ex)
             {
-
-
                 return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
-
             }
+        }
 
+        public object SaveChangeSocialAccount(UserSocialAccountVM c)
+        {
+
+
+            using (var tranc = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var ObjectReturn = new object();
+                    switch (c.State)
+                    {
+                        case StateEnum.Create:
+                            ObjectReturn = AddSocailAccount(c);
+                            break;
+                        case StateEnum.Delete:
+                            ObjectReturn = DeleteSocialaccount(c); break;
+                            break;
+                        default:
+                            return new ResponseVM(RequestTypeEnum.Error, Token.StateNotFound);
+                    }
+                    tranc.Commit();
+                    return ObjectReturn;
+                }
+                catch (Exception ex)
+                {
+                    tranc.Rollback();
+                    return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
+                }
+            }
+        }
+
+        private object DeleteSocialaccount(UserSocialAccountVM c)
+        {
+            db.UserSocialAccounts_Delete(c.Id);
+            return new ResponseVM(RequestTypeEnum.Success, Token.Success, c);
+        }
+
+        private object AddSocailAccount(UserSocialAccountVM c)
+        {
+            ObjectParameter ID = new ObjectParameter("Id", typeof(long));
+
+            db.UserSocialAccounts_Insert(ID, c.AccountTypeId, c.Link, this.UserLoggad.Id);
+
+            c.Id = (long)ID.Value;
+            return new ResponseVM(RequestTypeEnum.Success, Token.Success, c);
         }
 
         public object ActiveEmail(long id, string activeCode)
@@ -186,14 +236,19 @@ namespace BLL.BLL
 
         private object Update(UserVM c)
         {
-            if (db.User_UserNameBeforUsed(c.Id, c.UserName).FirstOrDefault() > 0)
+            if (db.Users_UserNameBeforUsed(c.Id, c.UserName).FirstOrDefault() > 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.UserNameItIsAlreadyUsed, c);
 
-            if (db.User_EmailBeforUsed(c.Id, c.Email).FirstOrDefault() > 0)
+            if (db.Users_EmailBeforUsed(c.Id, c.Email).FirstOrDefault() > 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.EmailItIsAlreadyUsed, c);
 
-            if (db.User_PhoneNumberBeforUsed(c.Id, c.PhoneNo).FirstOrDefault() > 0)
+            if (db.Users_PhoneNumberBeforUsed(c.Id, c.PhoneNo).FirstOrDefault() > 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.PhoneItIsAlreadyUsed, c);
+
+            if (db.Users_NationalityNumberBeforUsed(c.Id, c.NationalityNumber).FirstOrDefault() > 0)
+                return new ResponseVM(RequestTypeEnum.Error, Token.NationalityNumberItIsAlreadyUsed, c);
+
+
 
             //check from active code 
             if (c.ActiveCode != null)
@@ -203,12 +258,13 @@ namespace BLL.BLL
                     return new ResponseVM(RequestTypeEnum.Error, Token.InvalidActiveCode, c);
             }
 
-            db.Users_Update(c.Id, c.UserName, c.Email, c.PhoneNo, c.Address, c.CountryId, c.CityId, c.Password, c.LanguageId, c.DateOfBirth, c.IsActive);
+            //Update Account Now
+            db.Users_Update(c.Id, c.UserName, c.Email, c.PhoneNo, c.Address, c.CountryId, c.CityId, c.Password, c.LanguageId, c.DateOfBirth, c.IsActive, c.FullName, c.NationalityNumber, c.WebSite);
 
 
 
             //Add WorksTypes if employee
-            if (c.AccountTypeId == (int)AccountTypeEnum.Employee && c.WorkTypes!=null&& c.WorkTypes.Count > 0)
+            if (c.AccountTypeId == (int)AccountTypeEnum.Employee && c.WorkTypes != null && c.WorkTypes.Count > 0)
             {
                 //delete old works
                 db.EmployeesWorks_Delete(c.Id);
@@ -217,6 +273,29 @@ namespace BLL.BLL
                 {
                     db.EmployeesWorks_Insert(v.Id, c.Id);
                 });
+            }
+
+            // اذا كان هوا نفسة المستخدم الحالى فمعنى ذالك انة تحديث بيانتة ويجب ايضا تحديثها فى اللوكل استورج
+            if (c.Id == this.UserLoggad.Id)
+            {
+                UserCookieVM User = db.Users_SelectByPk(c.Id).Select(b => new UserCookieVM
+                {
+                    Id = b.Id,
+                    UserName = b.UserName,
+                    AccountTypeId = b.FKAccountType_Id,
+                    _Language = (LanguageEnum)b.FKLanguage_Id,
+                    BrId = b.FKPranch_Id.HasValue ? b.FKPranch_Id.Value : 0,
+                    IsActiveEmail = b.IsActiveEmail,
+                    Email = b.Email,
+                    IsActive = b.IsActive
+                }).FirstOrDefault();
+
+                //اذا كان احد الحسابات التالية ولم يقوم لـ اضافة معلومات حسابة بشكل كامل فيجب توجية الى صفحة تعديل الحساب
+            if(User.Id!=this.AdminId)
+                if (db.Users_CheckCompeleteAccountInformation(User.Id, User.AccountTypeId).First().Value == 1)
+                    User.ReturnUrl = $"/Users/ProfileUpdate";
+                User.Id = 0;
+                return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, User);
             }
 
             return new ResponseVM(RequestTypeEnum.Success, Token.Updated, c);
@@ -231,7 +310,7 @@ namespace BLL.BLL
                 if (Enquiry == null)
                     return new ResponseVM(RequestTypeEnum.Error, $"{Token.Enquiry}: {Token.UserNotFound}");
 
-                if (Enquiry.CountIsDepositPaymented<=0 )
+                if (Enquiry.CountIsDepositPaymented <= 0)
                     return new ResponseVM(RequestTypeEnum.Error, Token.ClinetIsNotPayment);
 
 
@@ -243,14 +322,17 @@ namespace BLL.BLL
                     return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToCreateAccont);
             }
 
-            if (db.User_UserNameBeforUsed(c.Id, c.UserName).FirstOrDefault() > 0)
+            if (db.Users_UserNameBeforUsed(c.Id, c.UserName).FirstOrDefault() > 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.UserNameItIsAlreadyUsed, c);
 
-            if (db.User_EmailBeforUsed(c.Id, c.Email).FirstOrDefault() > 0)
+            if (db.Users_EmailBeforUsed(c.Id, c.Email).FirstOrDefault() > 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.EmailItIsAlreadyUsed, c);
 
-            if (db.User_PhoneNumberBeforUsed(c.Id, c.PhoneNo).FirstOrDefault() > 0)
+            if (db.Users_PhoneNumberBeforUsed(c.Id, c.PhoneNo).FirstOrDefault() > 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.PhoneItIsAlreadyUsed, c);
+
+            if (db.Users_NationalityNumberBeforUsed(c.Id, c.NationalityNumber).FirstOrDefault() > 0)
+                return new ResponseVM(RequestTypeEnum.Error, Token.NationalityNumberItIsAlreadyUsed, c);
 
             //لا يمكن اضافة مديرين فرع لـ نفس الشخص
             if (c.AccountTypeId == (int)AccountTypeEnum.BranchManager && db.Users_SelectByBranchId(c.BranchId, c.AccountTypeId).Count() > 0)
@@ -258,18 +340,22 @@ namespace BLL.BLL
 
 
             ObjectParameter ID = new ObjectParameter("Id", typeof(long));
-            db.Users_Insert(ID, c.UserName, c.Email, c.PhoneNo, c.AccountTypeId, c.Address, c.CountryId, c.CityId, c.Password, null, DateTime.Now, c.LanguageId, c.BranchId, c.EnquiryId, c.DateOfBirth,c.IsActive);
+            db.Users_Insert(ID, c.UserName, c.Email, c.PhoneNo, c.AccountTypeId, c.Address, c.CountryId, c.CityId, c.Password, null, DateTime.Now, c.LanguageId, c.BranchId, c.EnquiryId, c.DateOfBirth, c.IsActive, c.FullName, c.NationalityNumber, c.WebSite);
             c.Id = (long)ID.Value;
 
             //Add WorksTypes if employee
-            if (c.AccountTypeId == (int)AccountTypeEnum.Employee && c.WorkTypes.Count > 0)
+            if ((c.AccountTypeId == (int)AccountTypeEnum.Employee && c.WorkTypes.Count > 0) || c.AccountTypeId == (int)AccountTypeEnum.Helper)
             {
+                if (c.AccountTypeId == (int)AccountTypeEnum.Helper)
+                    if (!c.WorkTypes.Any(n => n.Id == (int)WorksTypesEnum.Coordination && n.Selected))
+                        c.WorkTypes.First(
+                            v => v.Id == (int)WorksTypesEnum.Coordination).Selected = true;
+
                 c.WorkTypes.Where(v => v.Selected).ToList().ForEach(v =>
                  {
                      db.EmployeesWorks_Insert(v.Id, c.Id);
                  });
             }
-
             return new ResponseVM(RequestTypeEnum.Success, Token.Added, c);
         }
 
@@ -289,7 +375,10 @@ namespace BLL.BLL
                 CountryId = c.FkCountry_Id,
                 LanguageId = c.FKLanguage_Id,
                 DateOfBirth = c.DateOfBirth,
-                IsActive=c.IsActive,
+                IsActive = c.IsActive,
+                FullName = c.FullName,
+                WebSite = c.WebSite,
+                NationalityNumber = c.NationalityNumber,
 
                 City = new CityVM
                 {
@@ -311,10 +400,22 @@ namespace BLL.BLL
                 },
 
                 _Language = (LanguageEnum)c.FKLanguage_Id,
-                WorkTypes=db.EmployeesWorks_SelectByUserId(id).Select(v=> new WorkTypeVM
+                WorkTypes = db.EmployeesWorks_SelectByUserId(id).Select(v => new WorkTypeVM
                 {
-                    Id=v.FkWorkType_Id,
-                    Selected=true,
+                    Id = v.FkWorkType_Id,
+                    Selected = true,
+                }).ToList(),
+                SocialAccounts = db.UserSocialAccounts_SelectAllByUserId(c.Id).Select(d => new UserSocialAccountVM
+                {
+                    Id = d.Id,
+                    AccountTypeId = d.FKSocialAccountType_Id,
+                    Link = d.Link,
+                    SocialAccountType = new SocialAccountTypeVM
+                    {
+                        NameAr = d.AccountTypeNameAr,
+                        NameEn = d.AccountTypeNameEn
+                    }
+
                 }).ToList()
 
 
@@ -324,6 +425,11 @@ namespace BLL.BLL
                 return new ResponseVM(Enums.RequestTypeEnum.Error, Token.UserNotFound);
 
             return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, User);
+        }
+
+        public bool CheckIsBlocked()
+        {
+            return db.Users_CheckIfActive(this.UserLoggad.Id).First().Value > 0;
         }
     }//end class
 }

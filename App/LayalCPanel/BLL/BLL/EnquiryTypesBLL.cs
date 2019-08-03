@@ -77,7 +77,7 @@ namespace BLL.BLL
                 if (db.EnquiryTypes_CheckIfUsed(c.Id).First().Value > 0)
                     return new ResponseVM(RequestTypeEnum.Error, $"{Token.IsoCode} : {Token.CanNotDeleteBecuseIsUsed}");
 
-                db.EnquiryTypes_Delete(c.Id);
+                db.EnquiryTypes_Delete(c.Id,c.WordId);
                 return new ResponseVM(RequestTypeEnum.Success, Token.Deleted, c);
             }
             catch (Exception ex)

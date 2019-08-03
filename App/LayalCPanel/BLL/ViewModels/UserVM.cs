@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bll.ViewModels;
 using BLL.Enums;
+using BLL.Services;
 
 namespace BLL.ViewModels
 {
@@ -24,7 +25,19 @@ namespace BLL.ViewModels
         public int? CityId { get; set; }
         public int LanguageId { get; set; }
         public bool _IsRemmeberMe { get;  set; }
+        public string FullName { get; set; }
+        public string WebSite { get; set; }
+        public string NationalityNumber { get; set; }
+        public int Skip { get; set; }
+        public int Take { get; set; }
+
+
+        
+        public DateTime? CreateDateTo { get; set; }
+        public DateTime? CreateDateFrom { get; set; }
         public DateTime? DateOfBirth { get; set; }
+        public string DateOfBirthDisplay => DateService.GetDateEn(this.DateOfBirth);
+        
         public LanguageEnum _Language { get; set; }
         public int BranchId { get; set; }
         public Int64? EnquiryId { get; set; }
@@ -33,5 +46,6 @@ namespace BLL.ViewModels
         public CityVM City { get; set; }
         public bool IsActive { get; set; }
         public List<WorkTypeVM> WorkTypes { get; set; }
+        public List<UserSocialAccountVM> SocialAccounts { get;   set; }
     }//endclass
 }

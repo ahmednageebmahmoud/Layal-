@@ -30,7 +30,8 @@ namespace BLL.BLL
 
             if (User == null)
                 return new ResponseVM(Enums.RequestTypeEnum.Error, Token.InvalidUserNameOrPassword);
-            if(!User.IsActive)
+
+            if (!User.IsActive)
                 return new ResponseVM(Enums.RequestTypeEnum.Error, Token.YourAccountIsNotActive);
 
 
@@ -39,6 +40,13 @@ namespace BLL.BLL
 
             if (!User.IsActiveEmail && User.AccountTypeId == (int)AccountTypeEnum.Clinet)
                 User.ReturnUrl = $"/Users/ActiveEmail?id={User.Id}&email={User.Email}&userName={User.UserName}";
+
+            //اذا كان احد الحسابات التالية ولم يقوم لـ اضافة معلومات حسابة بشكل كامل فيجب توجية الى صفحة تعديل الحساب
+            if(User.Id!=this.AdminId)
+            if (db.Users_CheckCompeleteAccountInformation(User.Id, User.AccountTypeId).First().Value == 1)
+                User.ReturnUrl = $"/Users/ProfileUpdate";
+
+
             User.Id = 0;
             return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, User);
         }

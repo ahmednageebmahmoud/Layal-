@@ -21,6 +21,7 @@
         "VistToCoordinationDateTime": "موعد مقابلة لتحديد وتنسيق",
         "VistToCoordinationClendarEventId": "id"
     },
+    //اعداد وتنسيق المناسبة
     "EventCoordination": {
         "Id": 0,
         "WorkNumber": 0,
@@ -28,17 +29,41 @@
         "StartTime": "",
         "EndTime": "",
         "Notes": "",
-        "FKEvent_Id":"",
-        "FKUserCreated_Id":""
+        "FKEvent_Id": "",
+        "FKUserCreated_Id": ""
     },
-"EventWorksStatus":{
-    "Id":0,
-    "IsFinshed":true,
-    "DateTime":0,
-    "FKEvent_Id":0,
-    "FKWorkType_Id":0,
-    "FKUsre_Id":0,
-    "FKAccountType_Id":0,
-}
+    //هنا يوضع كل الحالات الخاصة بـ اعمال المناسبة ويمكن ان تكرر ولذالك انشئت جدول جديد وهوا التالى
+    "EventWorksStatusHistory": {
+        "Id": 0,
+        "IsFinshed": true,
+        "DateTime": 0,
+        "FKEvent_Id": 0,
+        "FKWorkType_Id": 0,
+        "FKUsre_Id": 0,
+        "FKAccountType_Id": 0,
+    },
+    // يرط المناسبة هنا مرة واحدة ووضع الحالات كلها مرة واحدة
+    //وهذا الجدول هوا الذى نتحقق منة هل المهمة انتهت ام لم تنتهى
+    "EventWorksStatusIsFinshed": {
+        "EventId": 00,
+        "Booking": true,
+        "DataPerfection": true,
+        "Coordination": true,
+        "Implementation": true,
+        "ArchivingAndSaveing": true,
+        "ProductProcessing": true,
+        "Chooseing": true,
+        "DigitalProcessing": true,
+        "PreparingForPrinting": true,
+        "Manufacturing": true,
+        "QualityAndReview": true,
+        "Packaging": true,
+        "TransmissionAndDelivery": true,
+        "Archiving": true
+    },
 
+    "FilesReceivedTypes":{
+        "Id":0,
+        "FKWord_Id":0
+    }
 }

@@ -26,15 +26,24 @@ namespace BLL.BLL
         {
             try
             {
-
+              
                 //check if closed
                 if (CheckIfEnquiryClosed(c.EnquiryId))
                     return new ResponseVM(RequestTypeEnum.Error, Token.EnquiryIsClosed);
 
+                //check if with admin
+                if(this.UserLoggad.IsBranchManager)
+                    if(db.Enquires_CheckIfWithBranch(c.EnquiryId).First().Value<=0)
+                        return new ResponseVM(RequestTypeEnum.Error, Token.EnquiryWithAdmin);
+
+                //check if create event 
+                if (db.Enquires_CheckIfCreatedEvent(c.Id).First().Value > 0)
+                    return new ResponseVM(RequestTypeEnum.Error, Token.CanNotDoAnyThingBecuseThisEnquiryConvertedToEvent);
+
+
                 c = GetEnquiyStatusPure(c);
 
                 /*
-                 
                 اذا كانت هناك عملية  حجز بـحوالة بنكية فيجب حفظ صورة الحوالة   
                 نقوم بـ حفظ عملية لدفع بدام هناك عملية حجز بعربون
                  */
@@ -59,9 +68,6 @@ namespace BLL.BLL
 
                 //اتخاذ قرار ما بناء على كل  حالة
                 MakeDecision(c);
-
-
-
                 return new ResponseVM(RequestTypeEnum.Success, Token.Success);
             }
             catch (Exception ex)

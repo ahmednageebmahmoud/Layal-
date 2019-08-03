@@ -208,8 +208,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EEWController.cs" />
+    <Compile Include="Controllers\EventSurveyQuestionsController.cs" />
+    <Compile Include="Controllers\EventSurveyQuestionTypesController.cs" />
+    <Compile Include="Controllers\FilesReceivedTypesController.cs" />
+    <Compile Include="Controllers\UserPaymentsController.cs" />
     <Compile Include="Controllers\EnquiryPaymentsController.cs" />
-    <Compile Include="Controllers\EventCoordinationsController.cs" />
     <Compile Include="Controllers\PackageInputTypesController.cs" />
     <Compile Include="Controllers\BasicController.cs" />
     <Compile Include="Controllers\PackagesController.cs" />
@@ -217,6 +221,7 @@
     <Compile Include="Controllers\MyEventsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\AlbumTypesController.cs" />
+    <Compile Include="Controllers\SocialAccountTypesController.cs" />
     <Compile Include="Controllers\PrintNamesTypesController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
@@ -276,6 +281,7 @@
     <Content Include="assets\app\custom\general\crud\datatables\extensions\scroller.min.js" />
     <Content Include="assets\app\custom\general\crud\datatables\extensions\select.js" />
     <Content Include="assets\app\custom\general\crud\datatables\extensions\select.min.js" />
+    <Content Include="assets\app\custom\general\dashboard.js" />
     <Content Include="assets\app\custom\login\login-general.js" />
     <Content Include="assets\app\custom\login\login-general.min.js" />
     <Content Include="assets\app\custom\login\login-v4.default.css" />
@@ -1489,6 +1495,7 @@
     <Content Include="assets\vendors\general\bootstrap\dist\js\bootstrap.bundle.min.js" />
     <Content Include="assets\vendors\general\bootstrap\dist\js\bootstrap.js" />
     <Content Include="assets\vendors\general\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="assets\vendors\general\chart.js\dist\Chart.bundle.js" />
     <Content Include="assets\vendors\general\clipboard\dist\clipboard.js" />
     <Content Include="assets\vendors\general\clipboard\dist\clipboard.min.js" />
     <Content Include="assets\vendors\general\dompurify\dist\purify.cjs.js" />
@@ -1957,12 +1964,22 @@
     <Content Include="Scripts\angularJS\views\enquires\enquiryInformation\service.js" />
     <Content Include="Scripts\angularJS\views\enquiryPayments\payments\contoller.js" />
     <Content Include="Scripts\angularJS\views\enquiryPayments\payments\service.js" />
-    <Content Include="Scripts\angularJS\views\eventCoordination\addAndUpdate\contoller.js" />
-    <Content Include="Scripts\angularJS\views\eventCoordination\addAndUpdate\service.js" />
-    <Content Include="Scripts\angularJS\views\eventCoordination\index\contoller.js" />
-    <Content Include="Scripts\angularJS\views\eventCoordination\index\service.js" />
+    <Content Include="Scripts\angularJS\views\eew\implementations\index\contoller.js" />
+    <Content Include="Scripts\angularJS\views\eew\implementations\index\service.js" />
+    <Content Include="Scripts\angularJS\views\eew\coordination\addAndUpdate\contoller.js" />
+    <Content Include="Scripts\angularJS\views\eew\coordination\addAndUpdate\service.js" />
+    <Content Include="Scripts\angularJS\views\eew\coordination\index\contoller.js" />
+    <Content Include="Scripts\angularJS\views\eew\coordination\index\service.js" />
+    <Content Include="Scripts\angularJS\views\eventSurveyQuestions\survey\contoller.js" />
+    <Content Include="Scripts\angularJS\views\eventSurveyQuestions\survey\service.js" />
+    <Content Include="Scripts\angularJS\views\eventSurveyQuestions\index\contoller.js" />
+    <Content Include="Scripts\angularJS\views\eventSurveyQuestions\index\service.js" />
     <Content Include="Scripts\angularJS\views\events\distributionOfWork\contoller.js" />
     <Content Include="Scripts\angularJS\views\events\distributionOfWork\service.js" />
+    <Content Include="Scripts\angularJS\views\home\index\admin\contoller.js" />
+    <Content Include="Scripts\angularJS\views\home\index\admin\service.js" />
+    <Content Include="Scripts\angularJS\views\home\index\helper\contoller.js" />
+    <Content Include="Scripts\angularJS\views\home\index\helper\service.js" />
     <Content Include="Scripts\angularJS\views\home\index\employee\contoller.js" />
     <Content Include="Scripts\angularJS\views\home\index\employee\service.js" />
     <Content Include="Scripts\angularJS\views\packages\addAndUpdate\contoller.js" />
@@ -1983,6 +2000,12 @@
     <Content Include="Scripts\angularJS\views\events\index\service.js" />
     <Content Include="Scripts\angularJS\views\albumTypes\index\contoller.js" />
     <Content Include="Scripts\angularJS\views\albumTypes\index\service.js" />
+    <Content Include="Scripts\angularJS\views\eventSurveyQuestionTypes\index\contoller.js" />
+    <Content Include="Scripts\angularJS\views\eventSurveyQuestionTypes\index\service.js" />
+    <Content Include="Scripts\angularJS\views\filesReceivedTypes\index\contoller.js" />
+    <Content Include="Scripts\angularJS\views\filesReceivedTypes\index\service.js" />
+    <Content Include="Scripts\angularJS\views\socialAccountTypes\index\contoller.js" />
+    <Content Include="Scripts\angularJS\views\socialAccountTypes\index\service.js" />
     <Content Include="Scripts\angularJS\views\printNamsTypes\index\contoller.js" />
     <Content Include="Scripts\angularJS\views\printNamsTypes\index\service.js" />
     <Content Include="Scripts\angularJS\views\myEnquires\addAndUpdate\contoller.js" />
@@ -2006,10 +2029,14 @@
     <Content Include="Scripts\angularJS\views\shared\contoller.js" />
     <Content Include="Scripts\angularJS\views\shared\ngModul.js" />
     <Content Include="Scripts\angularJS\views\shared\service.js" />
+    <Content Include="Scripts\angularJS\views\userPayments\myPayments\contoller.js" />
+    <Content Include="Scripts\angularJS\views\userPayments\myPayments\service.js" />
     <Content Include="Scripts\angularJS\views\usersPagesPrivilege\contoller.js" />
     <Content Include="Scripts\angularJS\views\usersPagesPrivilege\service.js" />
     <Content Include="Scripts\angularJS\views\users\activeEmail\contoller.js" />
     <Content Include="Scripts\angularJS\views\users\activeEmail\service.js" />
+    <Content Include="Scripts\angularJS\views\userPayments\payments\contoller.js" />
+    <Content Include="Scripts\angularJS\views\userPayments\payments\service.js" />
     <Content Include="Scripts\angularJS\views\users\profileUpdate\contoller.js" />
     <Content Include="Scripts\angularJS\views\users\profileUpdate\service.js" />
     <Content Include="Scripts\angularJS\views\users\display\contoller.js" />
@@ -2274,15 +2301,25 @@
     <Content Include="Views\Shared\_PackageInformtion.cshtml" />
     <Content Include="Views\Shared\_PaymentsInformations.cshtml" />
     <Content Include="Views\Shared\EmployeeIndex.cshtml" />
-    <Content Include="Views\EventCoordinations\AddAndUpdate.cshtml" />
-    <Content Include="Views\EventCoordinations\Index.cshtml" />
+    <Content Include="Views\EEW\AddAndUpdateCoordinations.cshtml" />
+    <Content Include="Views\EEW\Coordinations.cshtml" />
     <Content Include="Views\Shared\_EmployeeEventWorks.cshtml" />
+    <Content Include="Views\SocialAccountTypes\Index.cshtml" />
+    <Content Include="Views\UserPayments\Payments.cshtml" />
+    <Content Include="Views\UserPayments\MyPayments.cshtml" />
+    <Content Include="Views\EventSurveyQuestionTypes\Index.cshtml" />
+    <Content Include="Views\EventSurveyQuestions\Index.cshtml" />
+    <Content Include="Views\EventSurveyQuestions\Survey.cshtml" />
+    <Content Include="Views\Shared\AdminIndex.cshtml" />
+    <Content Include="Views\EEW\Implementations.cshtml" />
+    <Content Include="Views\FilesReceivedTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\css\" />
     <Folder Include="Files\Enquiries\Payments\" />
     <Folder Include="Files\Events\CustomLogos\" />
+    <Folder Include="Files\Users\Payments\" />
     <Folder Include="Views\LogOut\" />
   </ItemGroup>
   <ItemGroup>

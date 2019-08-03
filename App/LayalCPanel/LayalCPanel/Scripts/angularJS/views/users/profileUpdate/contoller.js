@@ -1,7 +1,6 @@
 ﻿ngApp.controller('usersCtrl', ['$scope', '$http', 'usersServ', function (s, h, usersServ) {
     s.state = StateEnum;
-    s.users = [];
-    s.userFOP = {};
+    s.userSocialAccount = { AccountTypeId: null };
     var userId = getQueryStringValue("id");
     s.user = {
         Id: userId,
@@ -16,7 +15,10 @@
         EnquiryId:  null,
     };
 
-    s.allowActiveCode=true;
+    s.accountTypeEnum = AccountTypesEnum;
+
+
+    s.allowActiveCode=false;
     s.languages = [{
         Id: null,
         LanguageName: Token.select
@@ -38,6 +40,11 @@
         CountryId: null
     }];
 
+    s.saocialAccountTypes = [{
+        Id: null,
+        SocialAccountTypeName: Token.select,
+    }];
+
  
     
 
@@ -53,6 +60,8 @@
                 case RequestTypeEnum.sucess: {
                     s.countries = s.countries.concat(d.data.Result.Countries);
                     s.cities = s.cities.concat(d.data.Result.Cities);
+                    s.saocialAccountTypes = s.saocialAccountTypes.concat(d.data.Result.SaocialAccountTypes);
+                    
                 } break;
                 case RequestTypeEnum.error:
                 case RequestTypeEnum.warning:
@@ -80,6 +89,7 @@
                 case RequestTypeEnum.sucess: {
                     s.user = d.data.Result;
                     s.OldMail = s.user.Email;
+                    s.user.DateOfBirth=new Date(Date.parse(s.user.DateOfBirthDisplay))
                     s.user.Password = null;
                     s.user.State = StateEnum.update;
 
@@ -87,6 +97,7 @@
                         $("select[serchbale]").select2();
                     }, 500)
 
+                    
 
                 } break;
                 case RequestTypeEnum.error:
@@ -102,31 +113,8 @@
             co("E R R O R - getUser", err);
         })
     }
-    s.getItems = () => {
 
-        let loading = BlockingService.generateLoding();
-        loading.show();
-        usersServ.getItems().then(d => {
-            loading.hide();
-            switch (d.data.RequestType) {
-                case RequestTypeEnum.sucess: {
-                    s.countries = s.countries.concat(d.data.Result.Countries);
-                    s.cities = s.cities.concat(d.data.Result.Cities);
-                } break;
-                case RequestTypeEnum.error:
-                case RequestTypeEnum.warning:
-                case RequestTypeEnum.info:
-                    SMSSweet.alert(d.data.Message, d.data.RequestType);
-                    break;
-            }
-            co("G E T - getItems", d);
-        }).catch(err => {
-            loading.hide();
-            SMSSweet.alert(err.statusText, RequestTypeEnum.error);
-            co("E R R O R - getItems", err);
-        })
-    };
-
+ 
 
 
     //============= Saves =================
@@ -143,9 +131,11 @@
             BlockingService.unBlock();
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
-                    s.user = d.data.Result;
+                    //نحدث بيانات المستخدم فى اللوكل استورج
+                    Auth.addUserInformation(d.data.Result);
+
                     s.disapledEmail=false;
-                    s.allowActiveCode = true;
+                    s.allowActiveCode = false;
                     s.OldMail = s.user.Email;
                     s.user.State = StateEnum.update;
                 } break;
@@ -158,6 +148,54 @@
             co("E R R O R - saveChange", err);
         });
     };
+
+    s.addSocialAccount = (form) => {
+        if (form.$invalid) {
+            s.userFormSubmitErroSoc = true;
+            return;
+        }
+        s.userSocialAccount.State = StateEnum.create;
+        s.userFormSubmitErroSoc = false;
+        BlockingService.block();
+        usersServ.addSocialAccount(s.userSocialAccount).then(d => {
+            BlockingService.unBlock();
+            switch (d.data.RequestType) {
+                case RequestTypeEnum.sucess: {
+                    s.userSocialAccount = { AccountTypeId:null};
+                    if (!s.user.SocialAccounts)
+                        s.user.SocialAccounts = [];
+
+                    s.user.SocialAccounts.push(d.data.Result);
+                } break;
+            }
+            SMSSweet.alert(d.data.Message, d.data.RequestType);
+            co("G E T - addASocialAccount", d);
+        }).catch(err => {
+            BlockingService.unBlock();
+            SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+            co("E R R O R - addASocialAccount", err);
+        });
+    };
+
+    s.deleteSocailAccount = acc => {
+        SMSSweet.delete(() => {
+            //Yes Delete
+            acc.State = StateEnum.delete;
+            BlockingService.block();
+            usersServ.addSocialAccount(acc).then(d => {
+                BlockingService.unBlock();
+                switch (d.data.RequestType) {
+                    case RequestTypeEnum.sucess:
+                        {
+                            s.user.SocialAccounts.splice(s.user.SocialAccounts.findIndex(c => c.Id == acc.Id), 1)
+                        } break;
+                };
+                SMSSweet.alert(d.data.Message, d.data.RequestType);
+                co('res-deleteSocailAccount-del', d.data);
+            });
+        });
+
+    }
 
 
     s.sendActiveCodeToEmail = form=> {

@@ -128,12 +128,12 @@
                                         </th>
                                         <th class="th-10">
                                             <label class="sms-sort-field">
-                                                @Token.Operations
+                                                @Token.Finshed
                                             </label>
                                         </th>
                                         <th class="th-10">
                                             <label class="sms-sort-field">
-                                                @Token.Finshed
+                                                @Token.Operations
                                             </label>
                                         </th>
                                         
@@ -142,10 +142,7 @@
                                 <tbody>
                                     <tr ng-repeat="gp in employeeDistributionWorks">
                                         <td>
-                                            <select class="form-control input-disabled"
-                                                    ng-model="gp.EmployeeId"
-                                                    ng-options="c.Id as c.UserName for c in employees"
-                                                    ng-disabled="true"></select>
+                                            <p><a href="/Users/UserInformation?id={{gp.EmployeeId}}" class="kt-link kt-font-boldest">{{gp.UserName}}</a></p>
                                         </td>
                                         <td>
                                             <select class="form-control input-disabled"
@@ -153,7 +150,7 @@
                                                     ng-options="c.Id as c.WorkTypeName for c in workTypes"
                                                     ng-disabled="true"></select>
                                         </td>
-                                        <td></td>
+                                        <td><i class="fa" ng-class="{'fa-check':gp.IsFinshed}"></i></td>
                                         <td>
                                             <!--Btn:Delete-->
                                             @if (Priv.CanDelete)

@@ -16,31 +16,9 @@
         EnquiryId: getQueryStringValue("enquiryId") || null
     };
     s.accountTypeDisapled = s.user.EnquiryId ? true : false;
-    s.accountTypeEnum = {
-        employee: 5,
-
-    };
-    s.accountTypes = [
-       { Id: null, AccountTypeName: Token.select },
-       { Id: 2, AccountTypeName: LangIsEn ? "Supervisor" : "مشرف" },
-       { Id: 3, AccountTypeName: LangIsEn ? "Branch Manager" : "مدير فرع" },
-       { Id: 4, AccountTypeName: LangIsEn ? "Clinet" : "عميل" },
-    { Id: 5, AccountTypeName: LangIsEn ? "Employee" : "موظف" }
-    ];
-    var WorkTypes = [
-       { Id: 3, WorkTypeName: LangIsEn ? 'Coordination' : 'الاعداد والتنسيق' },
-       { Id: 5, WorkTypeName: LangIsEn ? 'Archiving and Saveing' : 'الأرشفة و الحفظ	' },
-       { Id: 6, WorkTypeName: LangIsEn ? 'Product processing' : 'تجهيز المنتاجات' },
-       { Id: 7, WorkTypeName: LangIsEn ? 'Chooseing' : 'الاختيار' },
-       { Id: 8, WorkTypeName: LangIsEn ? 'Digital processing' : 'المعالجة الرقمية' },
-       { Id: 9, WorkTypeName: LangIsEn ? 'Preparing for printing' : 'الاعداد للطباعة	' },
-       { Id: 10, WorkTypeName: LangIsEn ? 'Manufacturing' : 'التصنيع' },
-       { Id: 11, WorkTypeName: LangIsEn ? 'Quality and review' : 'الجودة و المراجعة' },
-       { Id: 12, WorkTypeName: LangIsEn ? 'Packaging' : 'التغليف' },
-       { Id: 13, WorkTypeName: LangIsEn ? 'Transmission and delivery  ' : 'الارسال و التسليم' },
-       { Id: 14, WorkTypeName: LangIsEn ? 'Archiving' : 'الأرشفة' },
-    ];
-    s.user.WorkTypes = WorkTypes;
+    s.accountTypeEnum = AccountTypesEnum;
+    s.accountTypes = accountTypesList;
+    s.user.WorkTypes = workTypesList;
 
     s.languages = [{
         Id: null,
@@ -151,12 +129,14 @@
         }
 
         s.userFormSubmitErro = false;
+        var vrtialWorkTypes = s.user.WorkTypes;
         BlockingService.block();
         usersServ.saveChange(s.user).then(d => {
             BlockingService.unBlock();
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
                     s.user = d.data.Result;
+                    s.user.WorkTypes = vrtialWorkTypes; 
                     s.user.State = StateEnum.update;
                 } break;
             }

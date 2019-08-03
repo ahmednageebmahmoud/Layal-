@@ -1,0 +1,27 @@
+{
+    "EventSurveies": {
+        "Id": 0,
+        "FKClinet_Id": 0,
+        "IsSatisfied":0
+    },
+    "EventSurveyQuestions": {
+        "Id": 0,
+        "IsDefault": true,
+        "FKSurveyQuestionType_Id": 0,
+        "IsActive":true,//من اجل عرضها فى الاستبيانات وامكانية اضافتها
+        "FKEvent_Id":0,
+    },
+    "EventSurveyQuestionAnswers": {
+        "Id": 0,
+        "FKEventSurveyQuestion_Id": 0,
+        "FKEventSurvey_Id": 0,
+
+        "Answer": "",
+        "DateTime": ""
+    },
+    "EventSurveyQuestionTypes":{
+        "Id":0,
+        "FKWord_Id":0,
+        "InputType":0//نوع الحقل ولاكنة غير مستخدم الان
+    }
+}

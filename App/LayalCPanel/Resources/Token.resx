@@ -117,14 +117,335 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountType" xml:space="preserve">
+    <value>Account Type</value>
+  </data>
+  <data name="Activated" xml:space="preserve">
+    <value>Activated</value>
+  </data>
+  <data name="ActiveCode" xml:space="preserve">
+    <value>Active Code</value>
+  </data>
+  <data name="ActiveEmail" xml:space="preserve">
+    <value>Active Email</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddAlbumType" xml:space="preserve">
+    <value>Add Album Type</value>
+  </data>
+  <data name="AddAndUpdateCoordinations" xml:space="preserve">
+    <value>Add And Update Task Coordinations</value>
+  </data>
+  <data name="AddAndUpdateEnquiry" xml:space="preserve">
+    <value>Add And Update Enquiry</value>
+  </data>
+  <data name="AddAndUpdateEvent" xml:space="preserve">
+    <value>Add And Update Event</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>Added</value>
+  </data>
+  <data name="AddedWithTaskumber" xml:space="preserve">
+    <value>Added With Task Nmber</value>
+  </data>
+  <data name="AddEnquiry" xml:space="preserve">
+    <value>Add Enquiry</value>
+  </data>
+  <data name="AddEvent" xml:space="preserve">
+    <value>Add Event</value>
+  </data>
+  <data name="AddEvents" xml:space="preserve">
+    <value>Add Events</value>
+  </data>
+  <data name="AddNewBranch" xml:space="preserve">
+    <value>Add New Branch</value>
+  </data>
+  <data name="AddNewCountry" xml:space="preserve">
+    <value>Add New Country</value>
+  </data>
+  <data name="AddNewEnquiry" xml:space="preserve">
+    <value>Add New Enquiry</value>
+  </data>
+  <data name="AddNewEnquiryType" xml:space="preserve">
+    <value>Add New Enquiry Type</value>
+  </data>
+  <data name="AddNewEvent" xml:space="preserve">
+    <value>Add New Event</value>
+  </data>
+  <data name="AddNewNotes" xml:space="preserve">
+    <value>Add New Notes</value>
+  </data>
+  <data name="AddNewPackage" xml:space="preserve">
+    <value>Add New Package</value>
+  </data>
+  <data name="AddNewPrintNamesType" xml:space="preserve">
+    <value>Add New PrintNames Type</value>
+  </data>
+  <data name="AddNewTask" xml:space="preserve">
+    <value>Add New Task</value>
+  </data>
+  <data name="AddNewUser" xml:space="preserve">
+    <value>Add New User</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="AddStatus" xml:space="preserve">
+    <value>Add Status</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>Add User</value>
+  </data>
   <data name="Ago" xml:space="preserve">
     <value>Ago</value>
+  </data>
+  <data name="Album" xml:space="preserve">
+    <value>Album</value>
+  </data>
+  <data name="AlbumTypes" xml:space="preserve">
+    <value>Album Types</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="AndPasteTheCodeInAppication" xml:space="preserve">
+    <value>And Paste The Code In Application</value>
   </data>
   <data name="AppName" xml:space="preserve">
     <value>Layan</value>
   </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="BankTransferDeposit" xml:space="preserve">
+    <value>Bank Transfer Deposit</value>
+  </data>
+  <data name="BankTransferPhoto" xml:space="preserve">
+    <value>Bank Transfer Photo</value>
+  </data>
+  <data name="Branch" xml:space="preserve">
+    <value>Branch</value>
+  </data>
+  <data name="Branches" xml:space="preserve">
+    <value>Branches</value>
+  </data>
+  <data name="CanAdd" xml:space="preserve">
+    <value>Can Add</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CanDelete" xml:space="preserve">
+    <value>Can Delete</value>
+  </data>
+  <data name="CanDisplay" xml:space="preserve">
+    <value>Can Display</value>
+  </data>
+  <data name="CanEdit" xml:space="preserve">
+    <value>Can Edit</value>
+  </data>
+  <data name="CanNotDeleteBecuseIsUsed" xml:space="preserve">
+    <value>Can Not Delete him Becuse It Is Used</value>
+  </data>
+  <data name="CanNotDoAnyThingBecuseThisEnquiryConvertedToEvent" xml:space="preserve">
+    <value>Can Not Do Any Thing Becuse This Enquiry Converted To Event</value>
+  </data>
+  <data name="CanNotDuplicate" xml:space="preserve">
+    <value>Can Not Duplicate</value>
+  </data>
+  <data name="CanNotDuplicateBranchManger" xml:space="preserve">
+    <value>Can Not Duplicate Branch Manger</value>
+  </data>
+  <data name="CanNotDuplicateEventWithOneEnquiry" xml:space="preserve">
+    <value>Can Not Duplicate Event With One Enquiry</value>
+  </data>
+  <data name="CanNotPayUserAccountIsNotActive" xml:space="preserve">
+    <value>Can Not Payment User Account Is Not Active</value>
+  </data>
+  <data name="CanNotSaveAttachment" xml:space="preserve">
+    <value>Can Not Save Attachment</value>
+  </data>
+  <data name="CanNotSaveBankTransferPhoto" xml:space="preserve">
+    <value>Can Not Save Bank Transfer Photo</value>
+  </data>
+  <data name="CanNotsAveCustomLogo" xml:space="preserve">
+    <value>Can Not Save Custom Logo</value>
+  </data>
+  <data name="CanNotSavePaymentPhoto" xml:space="preserve">
+    <value>Can Not Save Payment Photo</value>
+  </data>
+  <data name="Cities" xml:space="preserve">
+    <value>Cities</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="Clinet" xml:space="preserve">
+    <value>Clinet</value>
+  </data>
+  <data name="ClinetIsNotPayment" xml:space="preserve">
+    <value>Clinet Is Not Payment</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="ClosedDatetime" xml:space="preserve">
+    <value>Closed Date Time</value>
+  </data>
+  <data name="CloseEnquiry" xml:space="preserve">
+    <value>Close Enquiry</value>
+  </data>
+  <data name="Countries" xml:space="preserve">
+    <value>Countries</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="CountryNotFound" xml:space="preserve">
+    <value>Country Not Found</value>
+  </data>
+  <data name="CreateDateFrom" xml:space="preserve">
+    <value>Create Date From</value>
+  </data>
+  <data name="CreateDateTime" xml:space="preserve">
+    <value>Create Date Time</value>
+  </data>
+  <data name="CreateDateTo" xml:space="preserve">
+    <value>Create Date To</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>Date Of Birth</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
   <data name="Days" xml:space="preserve">
     <value>Days</value>
+  </data>
+  <data name="Dear" xml:space="preserve">
+    <value>Dear</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Deleted" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DescriptionAr" xml:space="preserve">
+    <value>Arabic Description</value>
+  </data>
+  <data name="DescriptionEn" xml:space="preserve">
+    <value>English Description</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="DistributionOfWork" xml:space="preserve">
+    <value>Distribution Of Work</value>
+  </data>
+  <data name="DistributionOfWorkDetails" xml:space="preserve">
+    <value>Distribution Of Work Details</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailItIsAlreadyUsed" xml:space="preserve">
+    <value>Email It Is Already Used With Another Account</value>
+  </data>
+  <data name="Employee" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="EndTime" xml:space="preserve">
+    <value>End Time</value>
+  </data>
+  <data name="Enquires" xml:space="preserve">
+    <value>Enquires</value>
+  </data>
+  <data name="Enquiry" xml:space="preserve">
+    <value>Enquiry</value>
+  </data>
+  <data name="EnquiryInformation" xml:space="preserve">
+    <value>Enquiry Information</value>
+  </data>
+  <data name="EnquiryIsClosed" xml:space="preserve">
+    <value>Enquiry Is Closed</value>
+  </data>
+  <data name="EnquiryType" xml:space="preserve">
+    <value>Enquiry Type</value>
+  </data>
+  <data name="EnquiryTypes" xml:space="preserve">
+    <value>Enquiry Types</value>
+  </data>
+  <data name="EnquiryWithAdmin" xml:space="preserve">
+    <value>Enquiry With Admin</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>Event</value>
+  </data>
+  <data name="EventCoordinations" xml:space="preserve">
+    <value>Event Coordinations</value>
+  </data>
+  <data name="EventDate" xml:space="preserve">
+    <value>Event Date</value>
+  </data>
+  <data name="EventDateFrom" xml:space="preserve">
+    <value>Event Date From</value>
+  </data>
+  <data name="EventDateTime" xml:space="preserve">
+    <value>Event Date Time</value>
+  </data>
+  <data name="EventDateTo" xml:space="preserve">
+    <value>Event Date To</value>
+  </data>
+  <data name="EventInformation" xml:space="preserve">
+    <value>Event Information</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="EventSurveyQuestionTypes" xml:space="preserve">
+    <value>Survey Question Types</value>
+  </data>
+  <data name="FieldIsRequierd" xml:space="preserve">
+    <value>Field Is Requierd</value>
+  </data>
+  <data name="Finshed" xml:space="preserve">
+    <value>Finshed</value>
+  </data>
+  <data name="FinshedAccountType" xml:space="preserve">
+    <value>Finshed Account Type</value>
+  </data>
+  <data name="FinshedDateTime" xml:space="preserve">
+    <value>Finshed Date Time</value>
+  </data>
+  <data name="FinshedUserName" xml:space="preserve">
+    <value>Finshed User Name</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="ForgetPassword" xml:space="preserve">
+    <value>Forget Password</value>
+  </data>
+  <data name="FromAdmin" xml:space="preserve">
+    <value>From Admin</value>
+  </data>
+  <data name="FromClinet" xml:space="preserve">
+    <value>From Clinet</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="GoToFinsh" xml:space="preserve">
+    <value>Go To Finsh Youre Tasks</value>
   </data>
   <data name="Hi" xml:space="preserve">
     <value>Hi</value>
@@ -135,17 +456,89 @@
   <data name="Hour" xml:space="preserve">
     <value>Hour</value>
   </data>
+  <data name="Input" xml:space="preserve">
+    <value>Input</value>
+  </data>
+  <data name="InvalidActiveCode" xml:space="preserve">
+    <value>Invalid Active Code</value>
+  </data>
+  <data name="InvalidData" xml:space="preserve">
+    <value>Invalid Data</value>
+  </data>
   <data name="InvalidUserNameOrPassword" xml:space="preserve">
     <value>Invalid User Name Or Password</value>
+  </data>
+  <data name="IsAcceptFromManger" xml:space="preserve">
+    <value>Accept From Manger</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="IsAllowPrintNames" xml:space="preserve">
+    <value>Allow Print Names</value>
+  </data>
+  <data name="IsBankTransfer" xml:space="preserve">
+    <value>Bank Transfer</value>
+  </data>
+  <data name="IsClinetCustomLogo" xml:space="preserve">
+    <value>Custom Logo</value>
+  </data>
+  <data name="IsDeposit" xml:space="preserve">
+    <value>Deposit</value>
+  </data>
+  <data name="IsLogoAr" xml:space="preserve">
+    <value>Arabic Logo</value>
+  </data>
+  <data name="IsNamesAr" xml:space="preserve">
+    <value>Arabic Names</value>
+  </data>
+  <data name="IsoCode" xml:space="preserve">
+    <value>Iso Code</value>
+  </data>
+  <data name="ItIsAlreadyUsed" xml:space="preserve">
+    <value>It Is Already Used</value>
   </data>
   <data name="JustNow" xml:space="preserve">
     <value>Just Now</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="Link" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="LinkedWithClinet" xml:space="preserve">
+    <value>Linked With Clinet</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="LoginToYourAccount" xml:space="preserve">
+    <value>Login To Your Account</value>
+  </data>
+  <data name="Logo" xml:space="preserve">
+    <value>Logo</value>
+  </data>
   <data name="LogOut" xml:space="preserve">
     <value>Log Out</value>
+  </data>
+  <data name="MaxLengthCharIs" xml:space="preserve">
+    <value>Max Length Char Is</value>
+  </data>
+  <data name="MaxNumberIs" xml:space="preserve">
+    <value>Max Number Is</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="MinLengthCharIs" xml:space="preserve">
+    <value>Min Length Char Is</value>
+  </data>
+  <data name="MinNumberIs" xml:space="preserve">
+    <value>Min Number Is</value>
   </data>
   <data name="Minute" xml:space="preserve">
     <value>Minute</value>
@@ -156,14 +549,74 @@
   <data name="Months" xml:space="preserve">
     <value>Months</value>
   </data>
+  <data name="MustBeInsert" xml:space="preserve">
+    <value>Must be Insert</value>
+  </data>
+  <data name="MyEnquires" xml:space="preserve">
+    <value>My Enquires</value>
+  </data>
+  <data name="MyPayments" xml:space="preserve">
+    <value>My Payments</value>
+  </data>
   <data name="MyProfile" xml:space="preserve">
     <value>My Profile</value>
+  </data>
+  <data name="MyTasks" xml:space="preserve">
+    <value>My Tasks</value>
+  </data>
+  <data name="NameAr" xml:space="preserve">
+    <value>Arabic Name</value>
+  </data>
+  <data name="NameBride" xml:space="preserve">
+    <value>Name Bride</value>
+  </data>
+  <data name="NameEn" xml:space="preserve">
+    <value>English Name</value>
+  </data>
+  <data name="NameGroom" xml:space="preserve">
+    <value>Name Groom</value>
+  </data>
+  <data name="NamsArExtraPrice" xml:space="preserve">
+    <value>Arabic Nams Extra Price</value>
+  </data>
+  <data name="NationalityNumber" xml:space="preserve">
+    <value>Nationality Number</value>
+  </data>
+  <data name="NationalityNumberItIsAlreadyUsed" xml:space="preserve">
+    <value>Nationality NumberIt Is Already Used</value>
   </data>
   <data name="New" xml:space="preserve">
     <value>New</value>
   </data>
+  <data name="NoBranch" xml:space="preserve">
+    <value>No Branch</value>
+  </data>
+  <data name="NoMoreResult" xml:space="preserve">
+    <value>No More Result</value>
+  </data>
+  <data name="NoResult" xml:space="preserve">
+    <value>No Result</value>
+  </data>
+  <data name="NotActivated" xml:space="preserve">
+    <value>Not Activated</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="NotesCount" xml:space="preserve">
+    <value>Notes Count</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>Not Found</value>
+  </data>
   <data name="Notifications" xml:space="preserve">
     <value>Notifications</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Number</value>
   </data>
   <data name="OneDay" xml:space="preserve">
     <value>One Day</value>
@@ -180,17 +633,158 @@
   <data name="OneYear" xml:space="preserve">
     <value>One Year</value>
   </data>
+  <data name="Opene" xml:space="preserve">
+    <value>Opene</value>
+  </data>
+  <data name="Operations" xml:space="preserve">
+    <value>Oprations</value>
+  </data>
+  <data name="Package" xml:space="preserve">
+    <value>Package</value>
+  </data>
+  <data name="PackageDetails" xml:space="preserve">
+    <value>Package Details</value>
+  </data>
+  <data name="PackageInformation" xml:space="preserve">
+    <value>Package Information</value>
+  </data>
+  <data name="PackageInputTypes" xml:space="preserve">
+    <value>Package Input Types</value>
+  </data>
+  <data name="PackagePrice" xml:space="preserve">
+    <value>Package Price</value>
+  </data>
+  <data name="Packages" xml:space="preserve">
+    <value>Packages</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="PaymentPhoto" xml:space="preserve">
+    <value>Payment Photo</value>
+  </data>
+  <data name="Payments" xml:space="preserve">
+    <value>Payments</value>
+  </data>
+  <data name="PaymentsInformations" xml:space="preserve">
+    <value>Payments Informations</value>
+  </data>
+  <data name="PhoneItIsAlreadyUsed" xml:space="preserve">
+    <value>Phone It Is Already Used With Another Account</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="PleaseCopyThisCode" xml:space="preserve">
+    <value>Please Copy This Code</value>
+  </data>
+  <data name="Pricing" xml:space="preserve">
+    <value>Pricing</value>
+  </data>
+  <data name="PrintNamesType" xml:space="preserve">
+    <value>Print Names Type</value>
+  </data>
+  <data name="PrintNamesTypes" xml:space="preserve">
+    <value>Print Names Types</value>
+  </data>
+  <data name="PrintNameType" xml:space="preserve">
+    <value>Print Name Type</value>
+  </data>
+  <data name="ProfileUpdate" xml:space="preserve">
+    <value>Profile Update</value>
+  </data>
+  <data name="Readed" xml:space="preserve">
+    <value>Readed</value>
+  </data>
+  <data name="RemainingAmount" xml:space="preserve">
+    <value>Remaining Amount</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember Me</value>
   </data>
+  <data name="Review" xml:space="preserve">
+    <value>Review</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="SendActiveCodeToEmail" xml:space="preserve">
+    <value>Send Active Code To Email</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="ShowDetails" xml:space="preserve">
+    <value>Show Details</value>
+  </data>
   <data name="ShowMore" xml:space="preserve">
     <value>Show More</value>
   </data>
+  <data name="SocialAccountType" xml:space="preserve">
+    <value>Social Account Type</value>
+  </data>
+  <data name="SocialAccountTypes" xml:space="preserve">
+    <value>Social Media Account Types</value>
+  </data>
+  <data name="SocialMedaiAccounts" xml:space="preserve">
+    <value>Social Medai Accounts</value>
+  </data>
+  <data name="SomeErrorHasBeen" xml:space="preserve">
+    <value>Some Error Has Been</value>
+  </data>
+  <data name="StartTime" xml:space="preserve">
+    <value>Start Time</value>
+  </data>
+  <data name="StateNotFound" xml:space="preserve">
+    <value>State Not Found</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>
+  </data>
+  <data name="Task" xml:space="preserve">
+    <value>Task</value>
+  </data>
+  <data name="TaskNumber" xml:space="preserve">
+    <value>Task Number</value>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>Tasks</value>
+  </data>
+  <data name="Terms" xml:space="preserve">
+    <value>Terms</value>
+  </data>
+  <data name="ThisEnquiryAlreadyLinkedWithClinet" xml:space="preserve">
+    <value>This Enquiry Already Linked With Clinet</value>
+  </data>
+  <data name="ThisEventDateIsFinshed" xml:space="preserve">
+    <value>This Event Date Is Finshed</value>
+  </data>
+  <data name="ThisPaymentIsClosed" xml:space="preserve">
+    <value>This Payment Is Closed</value>
+  </data>
+  <data name="ThisTaskIsFinshed" xml:space="preserve">
+    <value>This Task Is Finshed</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="TotalPayments" xml:space="preserve">
+    <value>Total Payments</value>
+  </data>
+  <data name="TotalPaymentsActivated" xml:space="preserve">
+    <value>Total Payments Activated</value>
+  </data>
+  <data name="TotalPrice" xml:space="preserve">
+    <value>Total Price</value>
   </data>
   <data name="TwoDays" xml:space="preserve">
     <value>Two Days</value>
@@ -207,491 +801,59 @@
   <data name="TwoYears" xml:space="preserve">
     <value>Two Years</value>
   </data>
-  <data name="UserName" xml:space="preserve">
-    <value>User Name</value>
-  </data>
-  <data name="Year" xml:space="preserve">
-    <value>Year</value>
-  </data>
-  <data name="Years" xml:space="preserve">
-    <value>Years</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>Email</value>
-  </data>
-  <data name="FieldIsRequierd" xml:space="preserve">
-    <value>Field Is Requierd</value>
-  </data>
-  <data name="ForgetPassword" xml:space="preserve">
-    <value>Forget Password</value>
-  </data>
-  <data name="LoginToYourAccount" xml:space="preserve">
-    <value>Login To Your Account</value>
-  </data>
-  <data name="MyTasks" xml:space="preserve">
-    <value>My Tasks</value>
-  </data>
-  <data name="UsersPagesPrivileges" xml:space="preserve">
-    <value>Users Pages Privileges</value>
-  </data>
-  <data name="SomeErrorHasBeen" xml:space="preserve">
-    <value>Some Error Has Been</value>
-  </data>
-  <data name="CanAdd" xml:space="preserve">
-    <value>Can Add</value>
-  </data>
-  <data name="CanDelete" xml:space="preserve">
-    <value>Can Delete</value>
-  </data>
-  <data name="CanDisplay" xml:space="preserve">
-    <value>Can Display</value>
-  </data>
-  <data name="CanEdit" xml:space="preserve">
-    <value>Can Edit</value>
-  </data>
-  <data name="Menu" xml:space="preserve">
-    <value>Menu</value>
-  </data>
-  <data name="Page" xml:space="preserve">
-    <value>Page</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="Show" xml:space="preserve">
-    <value>Show</value>
-  </data>
-  <data name="Updated" xml:space="preserve">
-    <value>Updated</value>
-  </data>
-  <data name="User" xml:space="preserve">
-    <value>User</value>
-  </data>
-  <data name="Employee" xml:space="preserve">
-    <value>Employee</value>
-  </data>
-  <data name="Users" xml:space="preserve">
-    <value>Users</value>
-  </data>
-  <data name="AccountType" xml:space="preserve">
-    <value>Account Type</value>
-  </data>
-  <data name="Address" xml:space="preserve">
-    <value>Address</value>
-  </data>
-  <data name="City" xml:space="preserve">
-    <value>City</value>
-  </data>
-  <data name="Country" xml:space="preserve">
-    <value>Country</value>
-  </data>
-  <data name="CreateDateFrom" xml:space="preserve">
-    <value>Create Date From</value>
-  </data>
-  <data name="CreateDateTo" xml:space="preserve">
-    <value>Create Date To</value>
-  </data>
-  <data name="Language" xml:space="preserve">
-    <value>Language</value>
-  </data>
-  <data name="NoMoreResult" xml:space="preserve">
-    <value>No More Result</value>
-  </data>
-  <data name="NoResult" xml:space="preserve">
-    <value>No Result</value>
-  </data>
-  <data name="PhoneNumber" xml:space="preserve">
-    <value>Phone Number</value>
-  </data>
-  <data name="AddNewUser" xml:space="preserve">
-    <value>Add New User</value>
-  </data>
-  <data name="AddUser" xml:space="preserve">
-    <value>Add User</value>
-  </data>
-  <data name="Operations" xml:space="preserve">
-    <value>Oprations</value>
-  </data>
-  <data name="UpdateUser" xml:space="preserve">
-    <value>Update User</value>
-  </data>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
-  </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="InvalidData" xml:space="preserve">
-    <value>Invalid Data</value>
-  </data>
-  <data name="MinLengthCharIs" xml:space="preserve">
-    <value>Min Length Char Is</value>
-  </data>
-  <data name="StateNotFound" xml:space="preserve">
-    <value>State Not Found</value>
-  </data>
-  <data name="UserNotFound" xml:space="preserve">
-    <value>User Not Found</value>
-  </data>
-  <data name="Added" xml:space="preserve">
-    <value>Added</value>
-  </data>
-  <data name="EmailItIsAlreadyUsed" xml:space="preserve">
-    <value>Email It Is Already Used With Another Account</value>
-  </data>
-  <data name="PhoneItIsAlreadyUsed" xml:space="preserve">
-    <value>Phone It Is Already Used With Another Account</value>
-  </data>
-  <data name="UserNameItIsAlreadyUsed" xml:space="preserve">
-    <value>User Name It Is Already Used With Another Account</value>
-  </data>
-  <data name="Cities" xml:space="preserve">
-    <value>Cities</value>
-  </data>
-  <data name="CountryNotFound" xml:space="preserve">
-    <value>Country Not Found</value>
-  </data>
-  <data name="AddNewCountry" xml:space="preserve">
-    <value>Add New Country</value>
-  </data>
-  <data name="Countries" xml:space="preserve">
-    <value>Countries</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="MaxLengthCharIs" xml:space="preserve">
-    <value>Max Length Char Is</value>
-  </data>
-  <data name="NameAr" xml:space="preserve">
-    <value>Arabic Name</value>
-  </data>
-  <data name="NameEn" xml:space="preserve">
-    <value>English Name</value>
-  </data>
   <data name="Update" xml:space="preserve">
     <value>Update</value>
-  </data>
-  <data name="UpdateCountry" xml:space="preserve">
-    <value>Update Country</value>
-  </data>
-  <data name="CanNotDeleteBecuseIsUsed" xml:space="preserve">
-    <value>Can Not Delete him Becuse It Is Used</value>
-  </data>
-  <data name="Deleted" xml:space="preserve">
-    <value>Deleted</value>
-  </data>
-  <data name="IsoCode" xml:space="preserve">
-    <value>Iso Code</value>
-  </data>
-  <data name="ItIsAlreadyUsed" xml:space="preserve">
-    <value>It Is Already Used</value>
-  </data>
-  <data name="AddNewEnquiryType" xml:space="preserve">
-    <value>Add New Enquiry Type</value>
-  </data>
-  <data name="EnquiryTypes" xml:space="preserve">
-    <value>Enquiry Types</value>
-  </data>
-  <data name="UpdateEnquiryType" xml:space="preserve">
-    <value>Update Enquiry Type</value>
-  </data>
-  <data name="AddNewEnquiry" xml:space="preserve">
-    <value>Add New Enquiry</value>
-  </data>
-  <data name="CreateDateTime" xml:space="preserve">
-    <value>Create Date Time</value>
-  </data>
-  <data name="Enquires" xml:space="preserve">
-    <value>Enquires</value>
-  </data>
-  <data name="Enquiry" xml:space="preserve">
-    <value>Enquiry</value>
-  </data>
-  <data name="EventDate" xml:space="preserve">
-    <value>Event Date</value>
-  </data>
-  <data name="FirstName" xml:space="preserve">
-    <value>First Name</value>
-  </data>
-  <data name="LastName" xml:space="preserve">
-    <value>Last Name</value>
-  </data>
-  <data name="Notes" xml:space="preserve">
-    <value>Notes</value>
-  </data>
-  <data name="NotesCount" xml:space="preserve">
-    <value>Notes Count</value>
-  </data>
-  <data name="NotFound" xml:space="preserve">
-    <value>Not Found</value>
-  </data>
-  <data name="UserCreated" xml:space="preserve">
-    <value>User Created</value>
-  </data>
-  <data name="AddAndUpdateEnquiry" xml:space="preserve">
-    <value>Add And Update Enquiry</value>
-  </data>
-  <data name="EnquiryType" xml:space="preserve">
-    <value>Enquiry Type</value>
-  </data>
-  <data name="UpdateEnquiry" xml:space="preserve">
-    <value>Update Enquiry</value>
-  </data>
-  <data name="Day" xml:space="preserve">
-    <value>Day</value>
-  </data>
-  <data name="MaxNumberIs" xml:space="preserve">
-    <value>Max Number Is</value>
-  </data>
-  <data name="MinNumberIs" xml:space="preserve">
-    <value>Min Number Is</value>
-  </data>
-  <data name="AddNewNotes" xml:space="preserve">
-    <value>Add New Notes</value>
-  </data>
-  <data name="AddNewBranch" xml:space="preserve">
-    <value>Add New Branch</value>
-  </data>
-  <data name="Branch" xml:space="preserve">
-    <value>Branch</value>
-  </data>
-  <data name="Branches" xml:space="preserve">
-    <value>Branches</value>
   </data>
   <data name="UpdateBranch" xml:space="preserve">
     <value>Update Branch</value>
   </data>
-  <data name="AddEnquiry" xml:space="preserve">
-    <value>Add Enquiry</value>
+  <data name="UpdateCountry" xml:space="preserve">
+    <value>Update Country</value>
   </data>
-  <data name="MyEnquires" xml:space="preserve">
-    <value>My Enquires</value>
+  <data name="Updated" xml:space="preserve">
+    <value>Updated</value>
   </data>
-  <data name="Close" xml:space="preserve">
-    <value>Close</value>
+  <data name="UpdateEnquiry" xml:space="preserve">
+    <value>Update Enquiry</value>
   </data>
-  <data name="ShowDetails" xml:space="preserve">
-    <value>Show Details</value>
-  </data>
-  <data name="Details" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="Note" xml:space="preserve">
-    <value>Note</value>
-  </data>
-  <data name="UserInformation" xml:space="preserve">
-    <value>User Information</value>
-  </data>
-  <data name="FromClinet" xml:space="preserve">
-    <value>From Clinet</value>
-  </data>
-  <data name="NoBranch" xml:space="preserve">
-    <value>No Branch</value>
-  </data>
-  <data name="Select" xml:space="preserve">
-    <value>Select</value>
-  </data>
-  <data name="CanNotDuplicateBranchManger" xml:space="preserve">
-    <value>Can Not Duplicate Branch Manger</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="Opene" xml:space="preserve">
-    <value>Opene</value>
-  </data>
-  <data name="Readed" xml:space="preserve">
-    <value>Readed</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>Title</value>
-  </data>
-  <data name="EnquiryInformation" xml:space="preserve">
-    <value>Enquiry Information</value>
-  </data>
-  <data name="Status" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="FromAdmin" xml:space="preserve">
-    <value>From Admin</value>
-  </data>
-  <data name="AddStatus" xml:space="preserve">
-    <value>Add Status</value>
-  </data>
-  <data name="VisitDateTime" xml:space="preserve">
-    <value>Visit Date Time</value>
-  </data>
-  <data name="Amount" xml:space="preserve">
-    <value>Amount</value>
-  </data>
-  <data name="BankTransferDeposit" xml:space="preserve">
-    <value>Bank Transfer Deposit</value>
-  </data>
-  <data name="LinkedWithClinet" xml:space="preserve">
-    <value>Linked With Clinet</value>
-  </data>
-  <data name="ClinetIsNotPayment" xml:space="preserve">
-    <value>Clinet Is Not Payment</value>
-  </data>
-  <data name="ThisEnquiryAlreadyLinkedWithClinet" xml:space="preserve">
-    <value>This Enquiry Already Linked With Clinet</value>
-  </data>
-  <data name="YouCanNotAccessToCreateAccont" xml:space="preserve">
-    <value>You Can Not Access To Create Accont</value>
-  </data>
-  <data name="ActiveCode" xml:space="preserve">
-    <value>Active Code</value>
-  </data>
-  <data name="ActiveEmail" xml:space="preserve">
-    <value>Active Email</value>
-  </data>
-  <data name="SendActiveCodeToEmail" xml:space="preserve">
-    <value>Send Active Code To Email</value>
-  </data>
-  <data name="Activated" xml:space="preserve">
-    <value>Activated</value>
-  </data>
-  <data name="AndPasteTheCodeInAppication" xml:space="preserve">
-    <value>And Paste The Code In Application</value>
-  </data>
-  <data name="DateOfBirth" xml:space="preserve">
-    <value>Date Of Birth</value>
-  </data>
-  <data name="Dear" xml:space="preserve">
-    <value>Dear</value>
-  </data>
-  <data name="NotActivated" xml:space="preserve">
-    <value>Not Activated</value>
-  </data>
-  <data name="PleaseCopyThisCode" xml:space="preserve">
-    <value>Please Copy This Code</value>
-  </data>
-  <data name="ProfileUpdate" xml:space="preserve">
-    <value>Profile Update</value>
-  </data>
-  <data name="InvalidActiveCode" xml:space="preserve">
-    <value>Invalid Active Code</value>
-  </data>
-  <data name="AddNewPrintNamesType" xml:space="preserve">
-    <value>Add New PrintNames Type</value>
-  </data>
-  <data name="PrintNamesType" xml:space="preserve">
-    <value>Print Names Type</value>
-  </data>
-  <data name="PrintNamesTypes" xml:space="preserve">
-    <value>Print Names Types</value>
-  </data>
-  <data name="AddEvents" xml:space="preserve">
-    <value>Add Events</value>
-  </data>
-  <data name="Event" xml:space="preserve">
-    <value>Event</value>
-  </data>
-  <data name="Events" xml:space="preserve">
-    <value>Events</value>
-  </data>
-  <data name="AddAndUpdateEvent" xml:space="preserve">
-    <value>Add And Update Event</value>
-  </data>
-  <data name="AddNewEvent" xml:space="preserve">
-    <value>Add New Event</value>
-  </data>
-  <data name="EventInformation" xml:space="preserve">
-    <value>Event Information</value>
+  <data name="UpdateEnquiryType" xml:space="preserve">
+    <value>Update Enquiry Type</value>
   </data>
   <data name="UpdateEvent" xml:space="preserve">
     <value>Update Event</value>
   </data>
-  <data name="EventDateTime" xml:space="preserve">
-    <value>Event Date Time</value>
+  <data name="UpdatePackage" xml:space="preserve">
+    <value>Update Package</value>
   </data>
-  <data name="IsClinetCustomLogo" xml:space="preserve">
-    <value>Custom Logo</value>
-  </data>
-  <data name="IsLogoAr" xml:space="preserve">
-    <value>Arabic Logo</value>
-  </data>
-  <data name="IsNamesAr" xml:space="preserve">
-    <value>Arabic Names</value>
-  </data>
-  <data name="NameBride" xml:space="preserve">
-    <value>Name Bride</value>
-  </data>
-  <data name="NameGroom" xml:space="preserve">
-    <value>Name Groom</value>
-  </data>
-  <data name="Package" xml:space="preserve">
-    <value>Package</value>
-  </data>
-  <data name="PrintNameType" xml:space="preserve">
-    <value>Print Name Type</value>
-  </data>
-  <data name="AddEvent" xml:space="preserve">
-    <value>Add Event</value>
-  </data>
-  <data name="CanNotDuplicateEventWithOneEnquiry" xml:space="preserve">
-    <value>Can Not Duplicate Event With One Enquiry</value>
-  </data>
-  <data name="CanNotsAveCustomLogo" xml:space="preserve">
-    <value>Can Not Save Custom Logo</value>
+  <data name="UpdateUser" xml:space="preserve">
+    <value>Update User</value>
   </data>
   <data name="UploadLogo" xml:space="preserve">
     <value>Upload Logo</value>
   </data>
-  <data name="YouCanNotCreate" xml:space="preserve">
-    <value>You Can Not Create</value>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
   </data>
-  <data name="Review" xml:space="preserve">
-    <value>Review</value>
+  <data name="UserCreated" xml:space="preserve">
+    <value>User Created</value>
   </data>
-  <data name="EventDateFrom" xml:space="preserve">
-    <value>Event Date From</value>
+  <data name="UserInformation" xml:space="preserve">
+    <value>User Information</value>
   </data>
-  <data name="EventDateTo" xml:space="preserve">
-    <value>Event Date To</value>
+  <data name="UserName" xml:space="preserve">
+    <value>User Name</value>
   </data>
-  <data name="IsActive" xml:space="preserve">
-    <value>Active</value>
+  <data name="UserNameItIsAlreadyUsed" xml:space="preserve">
+    <value>User Name It Is Already Used With Another Account</value>
   </data>
-  <data name="Clinet" xml:space="preserve">
-    <value>Clinet</value>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>User Not Found</value>
   </data>
-  <data name="AddAlbumType" xml:space="preserve">
-    <value>Add Album Type</value>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
   </data>
-  <data name="AlbumTypes" xml:space="preserve">
-    <value>Album Types</value>
-  </data>
-  <data name="PackageInputTypes" xml:space="preserve">
-    <value>Package Input Types</value>
-  </data>
-  <data name="Packages" xml:space="preserve">
-    <value>Packages</value>
-  </data>
-  <data name="AddNewPackage" xml:space="preserve">
-    <value>Add New Package</value>
-  </data>
-  <data name="UpdatePackage" xml:space="preserve">
-    <value>Update Package</value>
-  </data>
-  <data name="DescriptionAr" xml:space="preserve">
-    <value>Arabic Description</value>
-  </data>
-  <data name="DescriptionEn" xml:space="preserve">
-    <value>English Description</value>
-  </data>
-  <data name="IsAllowPrintNames" xml:space="preserve">
-    <value>Allow Print Names</value>
-  </data>
-  <data name="Album" xml:space="preserve">
-    <value>Album</value>
-  </data>
-  <data name="Input" xml:space="preserve">
-    <value>Input</value>
-  </data>
-  <data name="PackageDetails" xml:space="preserve">
-    <value>Package Details</value>
+  <data name="UsersPagesPrivileges" xml:space="preserve">
+    <value>Users Pages Privileges</value>
   </data>
   <data name="ValueAr" xml:space="preserve">
     <value>Arabic Value</value>
@@ -699,145 +861,88 @@
   <data name="ValueEn" xml:space="preserve">
     <value>English Value</value>
   </data>
-  <data name="PackageInformation" xml:space="preserve">
-    <value>Package Information</value>
-  </data>
-  <data name="YouCanNotUpdate" xml:space="preserve">
-    <value>You Can Not Update</value>
-  </data>
-  <data name="EnquiryIsClosed" xml:space="preserve">
-    <value>Enquiry Is Closed</value>
-  </data>
-  <data name="DistributionOfWork" xml:space="preserve">
-    <value>Distribution Of Work</value>
-  </data>
-  <data name="WorkType" xml:space="preserve">
-    <value>Work Type</value>
-  </data>
-  <data name="CanNotDuplicate" xml:space="preserve">
-    <value>Can Not Duplicate</value>
-  </data>
-  <data name="CanNotSaveAttachment" xml:space="preserve">
-    <value>Can Not Save Attachment</value>
-  </data>
-  <data name="BankTransferPhoto" xml:space="preserve">
-    <value>Bank Transfer Photo</value>
-  </data>
-  <data name="CanNotSaveBankTransferPhoto" xml:space="preserve">
-    <value>Can Not Save Bank Transfer Photo</value>
-  </data>
-  <data name="PaymentsInformations" xml:space="preserve">
-    <value>Payments Informations</value>
-  </data>
-  <data name="IsAcceptFromManger" xml:space="preserve">
-    <value>Accept From Manger</value>
-  </data>
-  <data name="IsBankTransfer" xml:space="preserve">
-    <value>Bank Transfer</value>
-  </data>
-  <data name="IsDeposit" xml:space="preserve">
-    <value>Deposit</value>
-  </data>
-  <data name="TotalPayments" xml:space="preserve">
-    <value>Total Payments</value>
-  </data>
-  <data name="TotalPaymentsActivated" xml:space="preserve">
-    <value>Total Payments Activated</value>
-  </data>
-  <data name="Payments" xml:space="preserve">
-    <value>Payments</value>
-  </data>
-  <data name="NamsArExtraPrice" xml:space="preserve">
-    <value>Arabic Nams Extra Price</value>
-  </data>
-  <data name="PackagePrice" xml:space="preserve">
-    <value>Package Price</value>
-  </data>
-  <data name="Pricing" xml:space="preserve">
-    <value>Pricing</value>
-  </data>
-  <data name="RemainingAmount" xml:space="preserve">
-    <value>Remaining Amount</value>
-  </data>
-  <data name="TotalPrice" xml:space="preserve">
-    <value>Total Price</value>
-  </data>
-  <data name="Approve" xml:space="preserve">
-    <value>Approve</value>
-  </data>
-  <data name="Terms" xml:space="preserve">
-    <value>Terms</value>
-  </data>
-  <data name="CloseEnquiry" xml:space="preserve">
-    <value>Close Enquiry</value>
-  </data>
-  <data name="YourAccountIsNotActive" xml:space="preserve">
-    <value>Your Account Is Not Disabled</value>
-  </data>
-  <data name="Works" xml:space="preserve">
-    <value>Works</value>
-  </data>
-  <data name="GoToFinsh" xml:space="preserve">
-    <value>Go To Finsh Youre Tasks</value>
-  </data>
-  <data name="ClosedDatetime" xml:space="preserve">
-    <value>Closed Date Time</value>
+  <data name="VisitDateTime" xml:space="preserve">
+    <value>Visit Date Time</value>
   </data>
   <data name="VistToCoordinationDateTime" xml:space="preserve">
     <value>Vist To Coordination Date Time</value>
   </data>
-  <data name="AddAndUpdateCoordinations" xml:space="preserve">
-    <value>Add And Update Task Coordinations</value>
+  <data name="WebSite" xml:space="preserve">
+    <value>Web Site</value>
   </data>
-  <data name="EventCoordinations" xml:space="preserve">
-    <value>Event Coordinations</value>
+  <data name="Works" xml:space="preserve">
+    <value>Works</value>
   </data>
-  <data name="Task" xml:space="preserve">
-    <value>Task</value>
+  <data name="WorkType" xml:space="preserve">
+    <value>Work Type</value>
   </data>
-  <data name="TaskNumber" xml:space="preserve">
-    <value>Task Number</value>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
   </data>
-  <data name="EndTime" xml:space="preserve">
-    <value>End Time</value>
+  <data name="Years" xml:space="preserve">
+    <value>Years</value>
   </data>
-  <data name="StartTime" xml:space="preserve">
-    <value>Start Time</value>
+  <data name="YouCanNotAccessToCreateAccont" xml:space="preserve">
+    <value>You Can Not Access To Create Accont</value>
   </data>
   <data name="YouCanNotAccessToThisEvent" xml:space="preserve">
     <value>You Can Not Access To This Event</value>
   </data>
-  <data name="AddedWithTaskumber" xml:space="preserve">
-    <value>Added With Task Nmber</value>
+  <data name="YouCanNotCreate" xml:space="preserve">
+    <value>You Can Not Create</value>
   </data>
-  <data name="AddNewTask" xml:space="preserve">
-    <value>Add New Task</value>
+  <data name="YouCanNotUpdate" xml:space="preserve">
+    <value>You Can Not Update</value>
   </data>
-  <data name="Tasks" xml:space="preserve">
-    <value>Tasks</value>
+  <data name="YourAccountIsNotActive" xml:space="preserve">
+    <value>Your Account Is Blocked</value>
   </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+  <data name="EventSurveyQuestionsDefult" xml:space="preserve">
+    <value>Event Survey  Default Questions</value>
   </data>
-  <data name="Finshed" xml:space="preserve">
-    <value>Finshed</value>
+  <data name="EventSurveyQuestionType" xml:space="preserve">
+    <value>Event Survey Question Type</value>
   </data>
-  <data name="ThisTaskIsFinshed" xml:space="preserve">
-    <value>This Task Is Finshed</value>
+  <data name="IsDefault" xml:space="preserve">
+    <value>Default</value>
   </data>
-  <data name="FinshedAccountType" xml:space="preserve">
-    <value>Finshed Account Type</value>
+  <data name="CreateCustomSurvey" xml:space="preserve">
+    <value>Create Custom Survey</value>
   </data>
-  <data name="FinshedDateTime" xml:space="preserve">
-    <value>Finshed Date Time</value>
+  <data name="CanNotUpdateBecuseClinetIsFillSurvey" xml:space="preserve">
+    <value>Can Not Update Becuse Clinet Is Fill Survey</value>
   </data>
-  <data name="FinshedUserName" xml:space="preserve">
-    <value>Finshed User Name</value>
+  <data name="AreYouSatisfiedToMyService" xml:space="preserve">
+    <value>Are You Satisfied To My Service</value>
   </data>
-  <data name="DistributionOfWorkDetails" xml:space="preserve">
-    <value>Distribution Of Work Details</value>
+  <data name="SurveyValidIn30DaysAffterEventFinshed" xml:space="preserve">
+    <value>Survey Valid Only In 30 Days Affter Event Date</value>
   </data>
-  <data name="Logo" xml:space="preserve">
-    <value>Logo</value>
+  <data name="YourAnswerer" xml:space="preserve">
+    <value>Your Answerer</value>
+  </data>
+  <data name="CountEventsInCurrentYear" xml:space="preserve">
+    <value>Count Events In Current Year</value>
+  </data>
+  <data name="CustomersSatisfactionStatistics" xml:space="preserve">
+    <value>Customers Satisfaction Statistics</value>
+  </data>
+  <data name="EventEmployees" xml:space="preserve">
+    <value>Event Employees</value>
+  </data>
+  <data name="EventImplementations" xml:space="preserve">
+    <value>Event Implementations</value>
+  </data>
+  <data name="Survey" xml:space="preserve">
+    <value>Survey</value>
+  </data>
+  <data name="Finshe" xml:space="preserve">
+    <value>Finshe</value>
+  </data>
+  <data name="EventIsClosed" xml:space="preserve">
+    <value>Event Is Closed</value>
+  </data>
+  <data name="FilesReceivedTypes" xml:space="preserve">
+    <value>Files Received Types</value>
   </data>
 </root>

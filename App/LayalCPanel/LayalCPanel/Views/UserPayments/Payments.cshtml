@@ -1,0 +1,246 @@
+﻿@{
+    ViewBag.Title = Token.Payments;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    UsersPrivilegeVM
+      Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.UserPayments);
+    bool IsCurrentUserAdmin = CookieService.UserInfo.AccountTypeId == (int)AccountTypeEnum.ProjectManager;
+
+}
+
+<!-- begin:: Content Head -->
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+
+        <span class="kt-subheader__separator kt-hidden"></span>
+        <div class="kt-subheader__breadcrumbs">
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link">
+                @Token.HomePage
+            </a>
+
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">
+                @Token.PaymentsInformations
+            </a>
+
+            <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+        </div>
+    </div>
+
+</div>
+
+<!-- end:: Content Head -->
+<!--Page Body-->
+<div ng-controller="paymentsInformationsCtrl" ng-init="currentAdmin=@CookieService.UserInfo.IsAdmin.ToString().ToLower()">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand fas fa-hand-holding-usd"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        @Token.Payments
+                    </h3>
+                </div>
+            </div>
+
+            <div class="kt-portlet__body">
+                <div class="kt-portlet__body">
+                    <!--AddEnquiry Form-->
+                    <form novalidate name="paymentForm" 
+                          class="kt-form kt-form--label-right" 
+                          ng-submit="saveChange(paymentForm)">
+                        <div class="kt-portlet__body">
+                            <!--R O W 1-->
+                            <div class="form-group  row">
+                                <!--Amount-->
+                                <label class="col-lg-2 col-form-label">@Token.Amount</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="number"
+                                           name="amount"
+
+                                           class="form-control"
+                                           ng-class="{'is-invalid':paymentForm.amount.$invalid&&paymentFormErrorSubmit}"
+                                           ng-model="payment.Amount"
+                                           ng-disabled="payment.State!=state.create" 
+                                           ng-required="true"/>
+                                    <!--Errors-->
+                                    <small class="error " ng-if="paymentForm.amount.$error.required&&paymentFormErrorSubmit">@Token.FieldIsRequierd</small>
+                                </div>
+                                @if (IsCurrentUserAdmin)
+                                {
+                                      <!--IsAcceptFromManger -->
+                                    <label class="col-lg-2 col-form-label">@Token.IsAcceptFromManger </label>
+                                    <div class="col-lg-4 form-group-sub">
+                                        <select class="form-control"
+                                                name="acceptMager"
+                                                ng-model="payment.IsAcceptFromManger"
+                                                ng-options="c.Id as c.Name for c in paymentStatus"
+                                           ng-class="{'is-invalid':paymentForm.acceptMager.$invalid&&paymentFormErrorSubmit}"
+                                                
+                                                 ng-required="true"></select>
+                                        <small class="error " ng-if="paymentForm.acceptMager.$error.required&&paymentFormErrorSubmit">@Token.FieldIsRequierd</small>
+
+                                    </div>
+                                }
+                            </div>
+                            <!--R O W 2-->
+                            <div class="form-group  row" ng-show="payment.IsAcceptFromManger">
+
+                                @if (IsCurrentUserAdmin)
+                                {
+                                     <!--IsBankTransfer -->
+                                    <label class="col-lg-2 col-form-label">@Token.IsBankTransfer </label>
+                                    <div class="col-lg-4 form-group-sub">
+                                        <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                            <label>
+                                                <input type="checkbox"
+                                                       checked="checked"
+                                                       ng-model="payment.IsBankTransfer" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                                <span></span>
+                                            </label>
+                                        </span>
+                                    </div>
+                                }
+
+                                <!--Upload BankTransferPhoto -->
+                                <label class="col-lg-2 col-form-label" ng-if="payment.State==state.update||payment.IsAcceptFromManger">@Token.PaymentPhoto </label>
+                                <div class="col-lg-4 form-group-sub"   ng-if="payment.State==state.update||payment.IsAcceptFromManger">
+                                    <input type="file" accept="image/*"
+                                           onchange="angular.element(this).scope().uplaodBantTrnasferPhoto(this.files[0])">
+                                    <img class="figure-img img-thumbnail" src="{{payment.PaymentImage}}" width="100" height="100" />
+                                </div>
+                            </div>
+
+                            <!--R O W 3-->
+                            <div class="form-group  row">
+                                <!--Notes-->
+                                @if (IsCurrentUserAdmin)
+                                {
+                                    <label class="col-lg-2 col-form-label">@Token.Notes </label>
+                                    <div class="col-lg-10 form-group-sub">
+                                        <textarea class="form-control" name="notes" ng-model="payment.Notes"
+                                                  ng-required="!payment.IsAcceptFromManger"
+                                                  ng-class="{'is-invalid':paymentForm.notes.$invalid&&paymentFormErrorSubmit}"></textarea>
+                                        <small class="error " ng-if="paymentForm.notes.$error.required&&paymentFormErrorSubmit">@Token.FieldIsRequierd</small>
+
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-9"></div>
+                                    <div class="col-lg-3">
+                                        @if (Priv.CanAdd )
+                                        {
+                                            <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"  ng-if="payment.State==state.create">
+                                                <i class="la la-save">@Token.Add</i>
+                                            </button>
+                                        }
+                                        @if (Priv.CanEdit)
+                                        {
+                                            <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air" ng-if="payment.State==state.update">
+                                                <i class="la la-edit">@Token.Edit</i>
+                                            </button>
+                                        }
+                                        <button type="reset" class="btn btn-warning btn-elevate btn-elevate-air" ng-click="payment={State:state.create};paymentFormErrorSubmit=false"><i class="la la-file">@Token.Cancel</i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    @if (Priv.CanDisplay)
+                    {
+                        <table class="table sms-table"
+                               datatable="ng"
+                               dt-options="vm.dtOptions"
+                               dt-instance="vm.dtInstance"
+                               dt-column-defs="vm.dtColumnDefs"
+                               id="ng_table_1">
+                            <thead class="">
+                                <tr class="">
+
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="DateTimeDisplay"
+                                                  ng-sms-resource="@Token.CreateDateTime"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="Amount"
+                                                  ng-sms-resource="@Token.Amount"></sms-sort>
+                                    </th>
+
+                                       <th class="th-10">
+                                           <sms-sort ng-sms-fop="enquiyFOP"
+                                                     ng-sms-field-name="IsBankTransfer"
+                                                     ng-sms-resource="@Token.IsBankTransfer"></sms-sort>
+                                       </th>
+
+                                       <th class="th-10">
+                                           <sms-sort ng-sms-fop="enquiyFOP"
+                                                     ng-sms-field-name="PaymentImage"
+                                                     ng-sms-resource="@Token.PaymentPhoto"></sms-sort>
+                                       </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="IsAcceptFromManger"
+                                                  ng-sms-resource="@Token.IsAcceptFromManger"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="Notes"
+                                                  ng-sms-resource="@Token.Notes"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <span class="sms-sort-field">@Token.Operations</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in paymentsInformations|filter:paymentsInformationsSearch |orderBy:enquiyFOP.sort.propName:enquiyFOP.sort.reverse | limitTo:enquiyFOP.paging.pagingLimt.take:enquiyFOP.paging.pagingLimt.skip track by $index">
+                                    <td>{{x.DateTimeDisplay}}</td>
+                                    <td>{{x.Amount}}</td>
+                                       <td><i class="fas " ng-class="{'fa-check':x.IsBankTransfer}"></i></td>
+                                       <td>
+                                           <a class="kt-link kt-font-boldest" href="{{x.PaymentImage}}" target="_blank" >
+                                               <img class="figure-img img-thumbnail" src="{{x.PaymentImage}}" width="100" height="100" />
+                                           </a>
+                                       </td>
+                                    <td>
+                                            <i class="fas " ng-class="{'fa-check':x.IsAcceptFromManger,'fa-close':x.IsAcceptFromManger==false}"></i>
+                                    </td>
+                                    <td>
+                                        <textarea class="form-control input-disabled" ng-model="x.Notes" disabled></textarea>
+                                    </td>
+                               <td>
+                                   @if (Priv.CanEdit)
+                                   {
+                                       <a href="#" title="@Token.Edit" ng-if="!x.IsClosed" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="paymentUpdate(x)"><i class="la la-edit"></i></a>
+                                   }
+                               </td>
+                                 </tr>
+                            </tbody>
+                        </table>
+                              <!--Paging -->
+                        <sms-paging-select ng-sms-fop="paymentsInformationFOP"></sms-paging-select>
+                        <sms-paging ng-sms-fop="paymentsInformationFOP" ng-sms-display-m-func="getUserPayments()"></sms-paging>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/userPayments/payments/service.js"></script>
+    <script src="~/Scripts/angularJS/views/userPayments/payments/contoller.js"></script>
+}

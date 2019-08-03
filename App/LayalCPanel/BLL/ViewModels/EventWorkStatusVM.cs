@@ -20,5 +20,6 @@ namespace BLL.ViewModels
         public string FinshedAccountTypeNameEn { get;   set; }
         public string FinshedAccountTypeNameAr { get;   set; }
         public string FinshedAccountTypeName => this.IsEn ? this.FinshedAccountTypeNameEn : this.FinshedAccountTypeNameAr;
+ 
     }//           end class
 }

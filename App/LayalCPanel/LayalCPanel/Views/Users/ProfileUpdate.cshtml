@@ -13,24 +13,18 @@
 
                 <span class="kt-subheader__breadcrumbs-separator"></span>
                 <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link"> @Token.HomePage </a>
-
-                <span class="kt-subheader__breadcrumbs-separator"></span>
-                <a href="~/Users" class="kt-subheader__breadcrumbs-link"> @Token.Users </a>
-
-
                 <span class="kt-subheader__breadcrumbs-separator"></span>
 
                 <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">@Token.ProfileUpdate</a>
 
             </div>
         </div>
-
     </div>
     <!-- end:: Subheader -->
     <div class="kt-content  kt-grid__item kt-grid__item--fluid">
         <div class="row">
             <div class="col-lg-12">
-                <!--AddUser-->
+                <!--User Information-->
                 <div class="kt-portlet">
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
@@ -58,8 +52,7 @@
                                            ng-required="true" />
 
                                     <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="userFrm.userName.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
-                                    <small class="error invalid-feedback" ng-if="userFrm.userName.$invalid&&!userFrm.userName.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
+                                    <small class="error " ng-if="userFrm.userName.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
                                 </div>
                                 <!--password-->
                                 <label class="col-form-label col-lg-2">@Token.Password</label>
@@ -75,13 +68,46 @@
                                            autocomplete="off" />
 
                                     <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="userFrm.password.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
-                                    <small class="error invalid-feedback" ng-if="userFrm.password.$invalid&&!userFrm.password.$error.pattern&&!userFrm.password.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
-                                    <small class="error invalid-feedback" ng-if="userFrm.password.$error.pattern&&userFormSubmitErro">@Token.MinLengthCharIs 6</small>
+                                    <small class="error " ng-if="userFrm.password.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
+                                    <small class="error " ng-if="userFrm.password.$invalid&&!userFrm.password.$error.pattern&&!userFrm.password.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
+                                    <small class="error " ng-if="userFrm.password.$error.pattern&&userFormSubmitErro">@Token.MinLengthCharIs 6</small>
                                 </div>
                             </div>
 
                             <!--R O W 2-->
+                            <div class="form-group  row">
+                                <!--FullName-->
+                                <label class="col-form-label col-lg-2">@Token.FullName</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text"
+                                           name="fullName"
+                                           class="form-control"
+                                           ng-class="{'is-invalid':userFrm.fullName.$invalid&&userFormSubmitErro}"
+                                           ng-model="user.FullName"
+                                           maxlength="150"
+                                           ng-required="true" />
+                                    <small class="error " ng-if="userFrm.fullName.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
+                                </div>
+
+                                <!--NationalityNumber-->
+                                <label class="col-form-label col-lg-2">@Token.NationalityNumber</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text"
+                                           name="nationalityNumber"
+                                           class="form-control"
+                                           ng-class="{'is-invalid':userFrm.nationalityNumber.$invalid&&userFormSubmitErro}"
+                                           ng-model="user.NationalityNumber"
+                                           pattern="\d{14,14}"
+                                           ng-required="true" />
+                                    <small class="error " ng-if="userFrm.nationalityNumber.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
+
+
+                                    <!--Errors:-->
+                                    <small class="error " ng-if="userFrm.nationalityNumber.$error.pattern&&userFormSubmitErro">@Token.InvalidData , @Token.MustBeInsert 14 @Token.Number</small>
+                                </div>
+                            </div>
+
+                            <!--R O W 3-->
                             <div class="form-group  row">
                                 <!--Email-->
                                 <label class="col-form-label col-lg-2">@Token.Email</label>
@@ -92,10 +118,9 @@
                                            class="form-control"
                                            maxlength="50"
                                            ng-model="user.Email"
-                                           ng-change="allowActiveCode=!(OldMail!=user.Email)"
-                                           ng-disabled="disapledEmail" />
-                                    <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="userFrm.email.$invalid&&!userFrm.email.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
+                                           ng-change="allowActiveCode=(OldMail!=user.Email)&&true"
+                                           ng-disabled="disapledEmail" ng-required="true" />
+                                    <small class="error " ng-if="userFrm.email.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
 
                                 </div>
                                 <!--PhoneNumber-->
@@ -106,14 +131,17 @@
                                            ng-class="{'is-invalid':userFrm.phoneNo.$invalid&&userFormSubmitErro}"
                                            class="form-control"
                                            ng-model="user.PhoneNo"
-                                           pattern="[0-9]{1,14}" />
+                                           pattern="[0-9]{1,14}"
+                                           ng-required="true" />
+                                    <small class="error " ng-if="userFrm.phoneNo.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
+
                                     <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="userFrm.phoneNumber.$invalid&&userFormSubmitErro">@Token.InvalidData</small>
+                                    <small class="error " ng-if="userFrm.phoneNumber.$invalid&&userFormSubmitErro">@Token.InvalidData</small>
                                 </div>
 
                             </div>
 
-                            <!--R O W 3-->
+                            <!--R O W 4-->
                             <div class="form-group  row">
                                 <!--Address-->
                                 <label class="col-form-label col-lg-2">@Token.Address</label>
@@ -126,7 +154,7 @@
                                               rows="3"
                                               maxlength="250"></textarea>
                                     <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="userFrm.address.$invalid&&!userFrm.address.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
+                                    <small class="error " ng-if="userFrm.address.$invalid&&!userFrm.address.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
                                 </div>
 
                                 <!--DateOfBirth-->
@@ -136,40 +164,42 @@
                                            name="dateOfBirth"
                                            ng-class="{'is-invalid':userFrm.dateOfBirth.$invalid&&userFormSubmitErro}"
                                            class="form-control "
-                                           ng-model="user.DateOfBirth" />
-                                    <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="userFrm.dateOfBirth.$invalid&&userFormSubmitErro">@Token.InvalidData</small>
+                                           ng-model="user.DateOfBirth" ng-required="true" />
+                                    <small class="error " ng-if="userFrm.phoneNo.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
                                 </div>
                             </div>
 
-                            <!--R O W 4-->
+                            <!--R O W 5-->
                             <div class="form-group  row">
                                 <!--Country-->
                                 <label class="col-form-label col-lg-2">@Token.Country</label>
                                 <div class="col-lg-4 form-group-sub">
                                     <select class="form-control"
                                             serchbale
+                                            disabled
                                             name="country"
-                                            ng-class="{'is-invalid':userFrm.emp.$invalid&&userFormSubmitErro}"
+                                            ng-class="{'is-invalid':userFrm.country.$invalid&&userFormSubmitErro}"
                                             ng-model="user.CountryId"
                                             ng-options="c.Id as c.CountryName for c in countries"></select>
                                     <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="userFrm.country.$invalid&&!userFrm.country.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
+                                    <small class="error " ng-if="userFrm.country.$invalid&&!userFrm.country.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
                                 </div>
                                 <!--City-->
                                 <label class="col-form-label col-lg-2">@Token.City</label>
                                 <div class="col-lg-4 form-group-sub">
                                     <select class="form-control"
                                             serchbale
+                                            disabled
                                             name="city"
-                                            ng-class="{'is-invalid':userFrm.emp.$invalid&&userFormSubmitErro}"
+                                            ng-class="{'is-invalid':userFrm.city.$invalid&&userFormSubmitErro}"
                                             ng-model="user.CityId"
                                             ng-options="c.Id as c.CityName for c in cities|filterWithoutStaticItems:{'CountryId':user.CountryId}"></select>
                                     <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="userFrm.city.$invalid&&!userFrm.city.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
+                                    <small class="error " ng-if="userFrm.city.$invalid&&!userFrm.city.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
                                 </div>
                             </div>
-                            <!--R O W 5-->
+
+                            <!--R O W 6-->
                             <div class="form-group  row">
                                 <!--Language-->
                                 <label class="col-form-label col-lg-2">@Token.Language</label>
@@ -182,21 +212,29 @@
                                             ng-options="c.Id as c.LanguageName for c in languages"
                                             ng-required="true"></select>
                                     <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="userFrm.language.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
-                                    <small class="error invalid-feedback" ng-if="userFrm.language.$invalid&&!userFrm.language.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
+                                    <small class="error " ng-if="userFrm.language.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
+                                    <small class="error " ng-if="userFrm.language.$invalid&&!userFrm.language.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
                                 </div>
-                                <!--DateOfBirth-->
-                                <label class="col-form-label col-lg-2">@Token.DateOfBirth</label>
-                                <div class="form-group-sub  col-lg-4">
-                                    <input type="date"
-                                           name="dateOfBirth"
-                                           ng-class="{'is-invalid':userFrm.dateOfBirth.$invalid&&userFormSubmitErro}"
-                                           class="form-control "
-                                           ng-model="user.DateOfBirth" />
-                                    <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="userFrm.dateOfBirth.$invalid&&userFormSubmitErro">@Token.InvalidData</small>
-                                </div>
+
                             </div>
+
+                            <!--R O W 7-->
+                            <div class="form-group  row">
+                                <!--WebSite-->
+                                <label class="col-form-label col-lg-2">@Token.WebSite</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="url"
+                                           name="webSite"
+                                           class="form-control"
+                                           ng-class="{'is-invalid':userFrm.webSite.$invalid&&userFormSubmitErro}"
+                                           ng-model="user.WebSite"
+                                           maxlength="500" />
+                                    <small class="error " ng-if="userFrm.webSite.$invalid&&!userFrm.webSite.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
+
+                                </div>
+
+                            </div>
+
                         </div>
                         <div class="form-group  row">
 
@@ -206,25 +244,25 @@
                                 <input type="text"
                                        class="form-control "
                                        name="activCode"
-                                       ng-model="user.ActiveCode" 
-                                       ng-required="true"/>
-                                <small class="error invalid-feedback" ng-if="userFrm.activCode.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
+                                       ng-model="user.ActiveCode"
+                                       ng-required="true" />
+                                <small class="error " ng-if="userFrm.activCode.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
 
                             </div>
                         </div>
                         <div class="kt-portlet__foot">
                             <div class="kt-form__actions">
                                 <div class="row">
-                                    <div ng-class="{'col-lg-8':!allowActiveCode||disapledEmail,'col-lg-9':allowActiveCode&&!disapledEmail}"></div>
-                                    <div ng-class="{'col-lg-4':!allowActiveCode||disapledEmail,'col-lg-3':allowActiveCode&&!disapledEmail}">
+                                    <div ng-class="{'col-lg-8':allowActiveCode||disapledEmail,'col-lg-9':!allowActiveCode&&!disapledEmail}"></div>
+                                    <div ng-class="{'col-lg-4':allowActiveCode||disapledEmail,'col-lg-3':!allowActiveCode&&!disapledEmail}">
                                         <button type="button" class="btn btn-brand btn-elevate btn-elevate-air"
-                                                ng-if="!allowActiveCode&&!disapledEmail"
+                                                ng-if="allowActiveCode&&!disapledEmail"
                                                 ng-click="sendActiveCodeToEmail(userFrm)">
                                             <i class="la la-save">@Token.SendActiveCodeToEmail</i>
                                         </button>
 
                                         <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"
-                                                ng-if="allowActiveCode||disapledEmail"
+                                                ng-if="!allowActiveCode||disapledEmail"
                                                 ng-click="activeEmail(userFrm)">
 
                                             <i class="la la-save">@Token.Save</i>
@@ -236,12 +274,91 @@
                         </div>
                     </form>
                 </div>
+
+                <!--Socail Links-->
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <span class="kt-portlet__head-icon">
+                                <i class="kt-font-brand flaticon-add"></i>
+                            </span>
+                            <h3 class="kt-portlet__head-title">@Token.SocialMedaiAccounts</h3>
+                        </div>
+
+                    </div>
+                    <!--AddUser Form-->
+                    <form novalidate name="userFrmso" class="kt-form kt-form--label-right" ng-submit="addSocialAccount(userFrmso)">
+                        <div class="kt-portlet__body">
+                            <!--R O W 1-->
+                            <div class="form-group  row">
+                                <!--Country-->
+                                <div class="col-lg-5 form-group-sub">
+                                    <label class="col-form-label ">@Token.SocialAccountType</label>
+                                    <select class="form-control"
+                                            serchbale
+                                            name="socialAccountType"
+                                            ng-class="{'is-invalid':userFrmso.socialAccountType.$invalid&&userFormSubmitErroSoc}"
+                                            ng-model="userSocialAccount.AccountTypeId"
+                                            ng-options="c.Id as c.SocialAccountTypeName for c in saocialAccountTypes"
+                                            ng-required="true"></select>
+                                    <br />
+                                    <!--Errors:-->
+                                    <small class="error " ng-if="userFrmso.socialAccountType.$error.required&&userFormSubmitErroSoc">@Token.FieldIsRequierd</small>
+                                </div>
+
+                                <!--WebSite-->
+                                <div class="col-lg-5 form-group-sub">
+                                    <label class="col-form-label ">@Token.Link</label>
+                                    <input type="url"
+                                           name="webSite"
+                                           class="form-control"
+                                           ng-class="{'is-invalid':userFrmso.webSite.$invalid&&userFormSubmitErroSoc}"
+                                           ng-model="userSocialAccount.Link"
+                                           maxlength="500"
+                                           ng-required="true" />
+                                    <small class="error " ng-if="userFrmso.webSite.$error.required&&userFormSubmitErroSoc">@Token.FieldIsRequierd</small>
+                                    <small class="error " ng-if="userFrmso.webSite.$invalid&&!userFrmso.webSite.$error.required&&userFormSubmitErroSoc">@Token.InvalidData</small>
+                                </div>
+
+                                <!--Add-->
+                                <div class="col-lg-2 form-group-sub">
+                                    <br />
+                                    <br />
+                                    <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+
+                                        <i class="la la-plus">@Token.Add</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="kt-portlet__body">
+
+                        <table class="table sms-table">
+                            <thead>
+                                <tr>
+                                    <th class="th-45"><span class="sms-sort-field">@Token.SocialAccountType</span></th>
+                                    <th class="th-45"><span class="sms-sort-field">@Token.Link</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="n in user.SocialAccounts">
+                                    <td>
+                                        {{n.SocialAccountType.SocialAccountTypeName}}
+                                    </td>
+                                    <td><p><a href="{{n.Link}}" class="kt-link kt-font-boldest ng-binding">{{n.Link}}</a></p></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
-                <!--end::Portlet-->
-            </div>
+            <!--end::Portlet-->
         </div>
     </div>
+</div>
 
 
 

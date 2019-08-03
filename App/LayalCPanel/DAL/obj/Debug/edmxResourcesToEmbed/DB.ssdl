@@ -5,6 +5,7 @@
   </Function>
   <Function Name="AlbumTypes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="WordId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="AlbumTypes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="InOut" />
@@ -129,7 +130,6 @@
   <Function Name="Employees_CheckAllowAccessToEventForUpdateWorks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IsAdmin" Type="bit" Mode="In" />
     <Parameter Name="IsClint" Type="bit" Mode="In" />
-    <Parameter Name="IsEmployee" Type="bit" Mode="In" />
     <Parameter Name="IsBranchManger" Type="bit" Mode="In" />
     <Parameter Name="eventId" Type="bigint" Mode="In" />
     <Parameter Name="workTypeId" Type="int" Mode="In" />
@@ -152,6 +152,16 @@
   </Function>
   <Function Name="EmployeesWorks_SelectByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Enquires_CheckFromOwner" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EnquiryOrEventId" Type="bigint" Mode="In" />
+    <Parameter Name="UsereLoggadId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Enquires_CheckIfCreatedEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Enquires_CheckIfWithBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="Enquires_Closed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
@@ -284,6 +294,7 @@
   </Function>
   <Function Name="EnquiryTypes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="WordId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="EnquiryTypes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="InOut" />
@@ -318,6 +329,17 @@
   </Function>
   <Function Name="EventCoordinations_SelectTasksNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EventId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Events_CheckFromDateEventIsFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventId" Type="bigint" Mode="In" />
+    <Parameter Name="DateTime" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="Events_CheckIfWorkFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+    <Parameter Name="eventId" Type="bigint" Mode="In" />
+    <Parameter Name="workTypeId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Events_CountsByYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Year" Type="int" Mode="In" />
   </Function>
   <Function Name="Events_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
@@ -368,6 +390,7 @@
     <Parameter Name="FKPrintNameType_Id" Type="int" Mode="In" />
     <Parameter Name="WorkTypeId" Type="int" Mode="In" />
     <Parameter Name="EmplolyeeId" Type="bigint" Mode="In" />
+    <Parameter Name="IsFinshed" Type="bit" Mode="In" />
   </Function>
   <Function Name="Events_SelectByPK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
@@ -408,11 +431,96 @@
     <Parameter Name="IsUpdateVistClendar" Type="bit" Mode="In" />
     <Parameter Name="IsUpdateClendar" Type="bit" Mode="In" />
   </Function>
-  <Function Name="EventWorksStatus_CheckIfFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="eventId" Type="bigint" Mode="In" />
-    <Parameter Name="workTypeId" Type="int" Mode="In" />
+  <Function Name="EventSurveies_ChartByYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Year" Type="int" Mode="In" />
   </Function>
-  <Function Name="EventWorksStatus_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="EventSurveies_DeleteByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EventSurveies_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventId" Type="bigint" Mode="In" />
+    <Parameter Name="ClinetId" Type="bigint" Mode="In" />
+    <Parameter Name="IsSatisfied" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="EventSurveies_Insert_DeleteByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EventSurveies_SelectByPK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EventSurvey_CheckIfIsInserted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EventSurveyQuestionAnswerer_DeleteByEventSurveyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventSurveyId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EventSurveyQuestionAnswerer_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventSurveyQuestionId" Type="bigint" Mode="In" />
+    <Parameter Name="Answer" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="DateTime" Type="datetime" Mode="In" />
+    <Parameter Name="SurveyQuestionTypeId" Type="int" Mode="In" />
+    <Parameter Name="EventSurveyId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EventSurveyQuestions_CheckIfInserted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SurveyQuestionTypeId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EventSurveyQuestions_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EventSurveyQuestions_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EventSurveyQuestions_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="InOut" />
+    <Parameter Name="IsDefault" Type="bit" Mode="In" />
+    <Parameter Name="FKSurveyQuestionType_Id" Type="int" Mode="In" />
+    <Parameter Name="FKEvent_Id" Type="bigint" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="EventSurveyQuestions_RemoveByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EventSurveyQuestions_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="EventSurveyQuestions_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EventSurveyQuestions_SelectDefault" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="EventSurveyQuestions_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="IsDefault" Type="bit" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="EventSurveyQuestions_WithEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EventSurveyQuestionTypes_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EventSurveyQuestionTypes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="WordId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EventSurveyQuestionTypes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="InOut" />
+    <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+    <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+    <Parameter Name="InputType" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EventSurveyQuestionTypes_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="EventSurveyQuestionTypes_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Skip" Type="int" Mode="In" />
+    <Parameter Name="Take" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EventSurveyQuestionTypes_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+    <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+    <Parameter Name="WordId" Type="bigint" Mode="In" />
+    <Parameter Name="InputType" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EventWorksStatusHistory_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IsFinshed" Type="bit" Mode="In" />
     <Parameter Name="DateTime" Type="datetime" Mode="In" />
     <Parameter Name="FKEvent_Id" Type="bigint" Mode="In" />
@@ -420,8 +528,48 @@
     <Parameter Name="FKUsre_Id" Type="bigint" Mode="In" />
     <Parameter Name="FKAccountType_Id" Type="int" Mode="In" />
   </Function>
-  <Function Name="EventWorksStatus_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="EventWorksStatusHistory_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="eventId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EventWorksStatusHistory_SelectLast" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="eventId" Type="bigint" Mode="In" />
+    <Parameter Name="WorkTypeId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EventWorksStatusIsFinsed_CheckIfFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="eventId" Type="bigint" Mode="In" />
+    <Parameter Name="workTypeId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EventWorksStatusIsFinsed_CheckIfFinshedFun" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+    <Parameter Name="eventId" Type="bigint" Mode="In" />
+    <Parameter Name="workTypeId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EventWorksStatusIsFinshed_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventId" Type="bigint" Mode="In" />
+    <Parameter Name="IsFinshed" Type="bit" Mode="In" />
+    <Parameter Name="WorkTypeId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="FilesReceivedTypes_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="FilesReceivedTypes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="WordId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="FilesReceivedTypes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="InOut" />
+    <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+    <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="FilesReceivedTypes_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="FilesReceivedTypes_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Skip" Type="int" Mode="In" />
+    <Parameter Name="Take" Type="int" Mode="In" />
+  </Function>
+  <Function Name="FilesReceivedTypes_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+    <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+    <Parameter Name="WordId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="GetNotificationsCountIsNotRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
     <Parameter Name="CuurentUserLoggadId" Type="bigint" Mode="In" />
@@ -549,6 +697,7 @@
   </Function>
   <Function Name="PrintNamesTypes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="WordId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="PrintNamesTypes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="InOut" />
@@ -566,17 +715,55 @@
     <Parameter Name="WordId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="PrintNameTypes_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="User_EmailBeforUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="UserId" Type="bigint" Mode="In" />
-    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+  <Function Name="SocialAccountTypes_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
   </Function>
-  <Function Name="User_PhoneNumberBeforUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="UserId" Type="bigint" Mode="In" />
-    <Parameter Name="PhoneNumber" Type="nvarchar" Mode="In" />
+  <Function Name="SocialAccountTypes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="WordId" Type="bigint" Mode="In" />
   </Function>
-  <Function Name="User_UserNameBeforUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="UserId" Type="bigint" Mode="In" />
-    <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+  <Function Name="SocialAccountTypes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="InOut" />
+    <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+    <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SocialAccountTypes_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SocialAccountTypes_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Skip" Type="int" Mode="In" />
+    <Parameter Name="Take" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SocialAccountTypes_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+    <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+    <Parameter Name="WordId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="UserPayments_CheckIsClosed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+    <Parameter Name="isAcceptFromManger" Type="bit" Mode="In" />
+    <Parameter Name="paymentImage" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UserPayments_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="InOut" />
+    <Parameter Name="Amount" Type="decimal" Mode="In" />
+    <Parameter Name="DateTime" Type="datetime" Mode="In" />
+    <Parameter Name="IsAcceptFromManger" Type="bit" Mode="In" />
+    <Parameter Name="FKUserTo_Id" Type="bigint" Mode="In" />
+    <Parameter Name="FKUserFrom_Id" Type="bigint" Mode="In" />
+    <Parameter Name="Notes" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="IsBankTransfer" Type="bit" Mode="In" />
+    <Parameter Name="PaymentImage" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="UserPayments_SelectByUserToId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="Skip" Type="int" Mode="In" />
+    <Parameter Name="Take" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UserPayments_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="IsAcceptFromManger" Type="bit" Mode="In" />
+    <Parameter Name="Notes" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="IsBankTransfer" Type="bit" Mode="In" />
+    <Parameter Name="PaymentImage" Type="nvarchar(max)" Mode="In" />
   </Function>
   <Function Name="UserPrivileges_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="PageId" Type="int" Mode="In" />
@@ -598,12 +785,23 @@
     <Parameter Name="UserId" Type="bigint" Mode="In" />
     <Parameter Name="ActiveCode" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="Users_CheckCompeleteAccountInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="AccountTypeId" Type="int" Mode="In" />
+  </Function>
   <Function Name="Users_CheckFromActiveCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
     <Parameter Name="ActiveCode" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="Users_CheckIfActive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
   <Function Name="Users_CheckIfEmailActivated" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Users_EmailBeforUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="Users_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="InOut" />
@@ -622,11 +820,26 @@
     <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
     <Parameter Name="DateOfBirth" Type="date" Mode="In" />
     <Parameter Name="IsActive" Type="bit" Mode="In" />
+    <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+    <Parameter Name="NationalityNumber" Type="nvarchar" Mode="In" />
+    <Parameter Name="WebSite" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Users_NationalityNumberBeforUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="NationalityNumber" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Users_PhoneNumberBeforUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="PhoneNumber" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="Users_SelectAllEmployees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Users_SelectAllForUsersPrivileges" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="Users_SelectByBranchId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="BranchId" Type="int" Mode="In" />
     <Parameter Name="AccountTypeId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Users_SelectByBranchIdWithWorkTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="Users_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Skip" Type="int" Mode="In" />
@@ -641,6 +854,7 @@
     <Parameter Name="CityId" Type="int" Mode="In" />
     <Parameter Name="AccountTypeId" Type="int" Mode="In" />
     <Parameter Name="LanguageId" Type="int" Mode="In" />
+    <Parameter Name="BranchId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="Users_SelectByPk" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
@@ -666,10 +880,32 @@
     <Parameter Name="LanguageId" Type="int" Mode="In" />
     <Parameter Name="DateOfBirth" Type="date" Mode="In" />
     <Parameter Name="IsActive" Type="bit" Mode="In" />
+    <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+    <Parameter Name="NationalityNumber" Type="nvarchar" Mode="In" />
+    <Parameter Name="WebSite" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="Users_UpdateLangage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
     <Parameter Name="languageId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Users_UserNameBeforUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="UserSocialAccounts_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="UserSocialAccounts_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="InOut" />
+    <Parameter Name="FKSocialAccountType_Id" Type="int" Mode="In" />
+    <Parameter Name="Link" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="FKUser_Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="UserSocialAccounts_SelectAllByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="UsersPrivileges_ChekcIfIsClosed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
   </Function>
   <Function Name="UsersPrivileges_SelectByMenuId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="menuId" Type="int" Mode="In" />

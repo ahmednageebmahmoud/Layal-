@@ -22,5 +22,20 @@ namespace DAL
         public long FKEvent_Id { get; set; }
         public long FKUserCreated_Id { get; set; }
         public string UserName { get; set; }
+        public long EventId { get; set; }
+        public Nullable<bool> Booking { get; set; }
+        public Nullable<bool> DataPerfection { get; set; }
+        public Nullable<bool> Coordination { get; set; }
+        public Nullable<bool> Implementation { get; set; }
+        public Nullable<bool> ArchivingAndSaveing { get; set; }
+        public Nullable<bool> ProductProcessing { get; set; }
+        public Nullable<bool> Chooseing { get; set; }
+        public Nullable<bool> DigitalProcessing { get; set; }
+        public Nullable<bool> PreparingForPrinting { get; set; }
+        public Nullable<bool> Manufacturing { get; set; }
+        public Nullable<bool> QualityAndReview { get; set; }
+        public Nullable<bool> Packaging { get; set; }
+        public Nullable<bool> TransmissionAndDelivery { get; set; }
+        public Nullable<bool> Archiving { get; set; }
     }
 }

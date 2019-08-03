@@ -1,4 +1,12 @@
-﻿<div class="kt-portlet" ng-if="paymentsInformations.length>0">
+﻿@{ 
+    UsersPrivilegeVM
+      Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.EnquiryPayments);
+}
+
+@if (Priv.CanDisplay)
+{
+
+<div class="kt-portlet" ng-if="paymentsInformations.length>0">
     <div class="kt-portlet__head">
         <div class="kt-portlet__head-label">
             <span class="kt-portlet__head-icon">
@@ -46,3 +54,4 @@
         </div>
     </div>
 </div>
+}

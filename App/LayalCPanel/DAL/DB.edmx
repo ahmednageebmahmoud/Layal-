@@ -10,6 +10,7 @@
         </Function>
         <Function Name="AlbumTypes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="WordId" Type="bigint" Mode="In" />
         </Function>
         <Function Name="AlbumTypes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="InOut" />
@@ -134,7 +135,6 @@
         <Function Name="Employees_CheckAllowAccessToEventForUpdateWorks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IsAdmin" Type="bit" Mode="In" />
           <Parameter Name="IsClint" Type="bit" Mode="In" />
-          <Parameter Name="IsEmployee" Type="bit" Mode="In" />
           <Parameter Name="IsBranchManger" Type="bit" Mode="In" />
           <Parameter Name="eventId" Type="bigint" Mode="In" />
           <Parameter Name="workTypeId" Type="int" Mode="In" />
@@ -157,6 +157,16 @@
         </Function>
         <Function Name="EmployeesWorks_SelectByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Enquires_CheckFromOwner" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EnquiryOrEventId" Type="bigint" Mode="In" />
+          <Parameter Name="UsereLoggadId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Enquires_CheckIfCreatedEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Enquires_CheckIfWithBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
         </Function>
         <Function Name="Enquires_Closed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
@@ -289,6 +299,7 @@
         </Function>
         <Function Name="EnquiryTypes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="WordId" Type="bigint" Mode="In" />
         </Function>
         <Function Name="EnquiryTypes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="InOut" />
@@ -323,6 +334,17 @@
         </Function>
         <Function Name="EventCoordinations_SelectTasksNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EventId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Events_CheckFromDateEventIsFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventId" Type="bigint" Mode="In" />
+          <Parameter Name="DateTime" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Events_CheckIfWorkFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="eventId" Type="bigint" Mode="In" />
+          <Parameter Name="workTypeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Events_CountsByYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
         </Function>
         <Function Name="Events_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="bigint" Mode="In" />
@@ -373,6 +395,7 @@
           <Parameter Name="FKPrintNameType_Id" Type="int" Mode="In" />
           <Parameter Name="WorkTypeId" Type="int" Mode="In" />
           <Parameter Name="EmplolyeeId" Type="bigint" Mode="In" />
+          <Parameter Name="IsFinshed" Type="bit" Mode="In" />
         </Function>
         <Function Name="Events_SelectByPK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="bigint" Mode="In" />
@@ -413,11 +436,96 @@
           <Parameter Name="IsUpdateVistClendar" Type="bit" Mode="In" />
           <Parameter Name="IsUpdateClendar" Type="bit" Mode="In" />
         </Function>
-        <Function Name="EventWorksStatus_CheckIfFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="eventId" Type="bigint" Mode="In" />
-          <Parameter Name="workTypeId" Type="int" Mode="In" />
+        <Function Name="EventSurveies_ChartByYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
         </Function>
-        <Function Name="EventWorksStatus_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="EventSurveies_DeleteByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EventSurveies_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventId" Type="bigint" Mode="In" />
+          <Parameter Name="ClinetId" Type="bigint" Mode="In" />
+          <Parameter Name="IsSatisfied" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="EventSurveies_Insert_DeleteByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EventSurveies_SelectByPK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EventSurvey_CheckIfIsInserted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EventSurveyQuestionAnswerer_DeleteByEventSurveyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventSurveyId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EventSurveyQuestionAnswerer_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventSurveyQuestionId" Type="bigint" Mode="In" />
+          <Parameter Name="Answer" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="DateTime" Type="datetime" Mode="In" />
+          <Parameter Name="SurveyQuestionTypeId" Type="int" Mode="In" />
+          <Parameter Name="EventSurveyId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EventSurveyQuestions_CheckIfInserted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SurveyQuestionTypeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EventSurveyQuestions_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EventSurveyQuestions_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EventSurveyQuestions_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="InOut" />
+          <Parameter Name="IsDefault" Type="bit" Mode="In" />
+          <Parameter Name="FKSurveyQuestionType_Id" Type="int" Mode="In" />
+          <Parameter Name="FKEvent_Id" Type="bigint" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="EventSurveyQuestions_RemoveByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EventSurveyQuestions_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="EventSurveyQuestions_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EventSurveyQuestions_SelectDefault" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="EventSurveyQuestions_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="IsDefault" Type="bit" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="EventSurveyQuestions_WithEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EventSurveyQuestionTypes_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EventSurveyQuestionTypes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="WordId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EventSurveyQuestionTypes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="InOut" />
+          <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+          <Parameter Name="InputType" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EventSurveyQuestionTypes_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="EventSurveyQuestionTypes_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Skip" Type="int" Mode="In" />
+          <Parameter Name="Take" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EventSurveyQuestionTypes_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+          <Parameter Name="WordId" Type="bigint" Mode="In" />
+          <Parameter Name="InputType" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EventWorksStatusHistory_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IsFinshed" Type="bit" Mode="In" />
           <Parameter Name="DateTime" Type="datetime" Mode="In" />
           <Parameter Name="FKEvent_Id" Type="bigint" Mode="In" />
@@ -425,8 +533,48 @@
           <Parameter Name="FKUsre_Id" Type="bigint" Mode="In" />
           <Parameter Name="FKAccountType_Id" Type="int" Mode="In" />
         </Function>
-        <Function Name="EventWorksStatus_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="EventWorksStatusHistory_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="eventId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EventWorksStatusHistory_SelectLast" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eventId" Type="bigint" Mode="In" />
+          <Parameter Name="WorkTypeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EventWorksStatusIsFinsed_CheckIfFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eventId" Type="bigint" Mode="In" />
+          <Parameter Name="workTypeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EventWorksStatusIsFinsed_CheckIfFinshedFun" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="eventId" Type="bigint" Mode="In" />
+          <Parameter Name="workTypeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EventWorksStatusIsFinshed_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventId" Type="bigint" Mode="In" />
+          <Parameter Name="IsFinshed" Type="bit" Mode="In" />
+          <Parameter Name="WorkTypeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="FilesReceivedTypes_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="FilesReceivedTypes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="WordId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="FilesReceivedTypes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="InOut" />
+          <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="FilesReceivedTypes_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="FilesReceivedTypes_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Skip" Type="int" Mode="In" />
+          <Parameter Name="Take" Type="int" Mode="In" />
+        </Function>
+        <Function Name="FilesReceivedTypes_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+          <Parameter Name="WordId" Type="bigint" Mode="In" />
         </Function>
         <Function Name="GetNotificationsCountIsNotRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
           <Parameter Name="CuurentUserLoggadId" Type="bigint" Mode="In" />
@@ -554,6 +702,7 @@
         </Function>
         <Function Name="PrintNamesTypes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="WordId" Type="bigint" Mode="In" />
         </Function>
         <Function Name="PrintNamesTypes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="InOut" />
@@ -571,17 +720,55 @@
           <Parameter Name="WordId" Type="bigint" Mode="In" />
         </Function>
         <Function Name="PrintNameTypes_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="User_EmailBeforUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserId" Type="bigint" Mode="In" />
-          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+        <Function Name="SocialAccountTypes_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
-        <Function Name="User_PhoneNumberBeforUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserId" Type="bigint" Mode="In" />
-          <Parameter Name="PhoneNumber" Type="nvarchar" Mode="In" />
+        <Function Name="SocialAccountTypes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="WordId" Type="bigint" Mode="In" />
         </Function>
-        <Function Name="User_UserNameBeforUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserId" Type="bigint" Mode="In" />
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        <Function Name="SocialAccountTypes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="InOut" />
+          <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SocialAccountTypes_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SocialAccountTypes_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Skip" Type="int" Mode="In" />
+          <Parameter Name="Take" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SocialAccountTypes_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+          <Parameter Name="WordId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="UserPayments_CheckIsClosed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="isAcceptFromManger" Type="bit" Mode="In" />
+          <Parameter Name="paymentImage" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="UserPayments_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="InOut" />
+          <Parameter Name="Amount" Type="decimal" Mode="In" />
+          <Parameter Name="DateTime" Type="datetime" Mode="In" />
+          <Parameter Name="IsAcceptFromManger" Type="bit" Mode="In" />
+          <Parameter Name="FKUserTo_Id" Type="bigint" Mode="In" />
+          <Parameter Name="FKUserFrom_Id" Type="bigint" Mode="In" />
+          <Parameter Name="Notes" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="IsBankTransfer" Type="bit" Mode="In" />
+          <Parameter Name="PaymentImage" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="UserPayments_SelectByUserToId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="Skip" Type="int" Mode="In" />
+          <Parameter Name="Take" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UserPayments_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="IsAcceptFromManger" Type="bit" Mode="In" />
+          <Parameter Name="Notes" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="IsBankTransfer" Type="bit" Mode="In" />
+          <Parameter Name="PaymentImage" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="UserPrivileges_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PageId" Type="int" Mode="In" />
@@ -603,12 +790,23 @@
           <Parameter Name="UserId" Type="bigint" Mode="In" />
           <Parameter Name="ActiveCode" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="Users_CheckCompeleteAccountInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+          <Parameter Name="AccountTypeId" Type="int" Mode="In" />
+        </Function>
         <Function Name="Users_CheckFromActiveCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="bigint" Mode="In" />
           <Parameter Name="ActiveCode" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="Users_CheckIfActive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="Users_CheckIfEmailActivated" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Users_EmailBeforUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="Users_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="bigint" Mode="InOut" />
@@ -627,11 +825,26 @@
           <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
           <Parameter Name="DateOfBirth" Type="date" Mode="In" />
           <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+          <Parameter Name="NationalityNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="WebSite" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Users_NationalityNumberBeforUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+          <Parameter Name="NationalityNumber" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Users_PhoneNumberBeforUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+          <Parameter Name="PhoneNumber" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="Users_SelectAllEmployees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Users_SelectAllForUsersPrivileges" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Users_SelectByBranchId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BranchId" Type="int" Mode="In" />
           <Parameter Name="AccountTypeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Users_SelectByBranchIdWithWorkTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BranchId" Type="bigint" Mode="In" />
         </Function>
         <Function Name="Users_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Skip" Type="int" Mode="In" />
@@ -646,6 +859,7 @@
           <Parameter Name="CityId" Type="int" Mode="In" />
           <Parameter Name="AccountTypeId" Type="int" Mode="In" />
           <Parameter Name="LanguageId" Type="int" Mode="In" />
+          <Parameter Name="BranchId" Type="bigint" Mode="In" />
         </Function>
         <Function Name="Users_SelectByPk" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="bigint" Mode="In" />
@@ -671,10 +885,32 @@
           <Parameter Name="LanguageId" Type="int" Mode="In" />
           <Parameter Name="DateOfBirth" Type="date" Mode="In" />
           <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+          <Parameter Name="NationalityNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="WebSite" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="Users_UpdateLangage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="bigint" Mode="In" />
           <Parameter Name="languageId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Users_UserNameBeforUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UserSocialAccounts_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="UserSocialAccounts_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="InOut" />
+          <Parameter Name="FKSocialAccountType_Id" Type="int" Mode="In" />
+          <Parameter Name="Link" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="FKUser_Id" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="UserSocialAccounts_SelectAllByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="UsersPrivileges_ChekcIfIsClosed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
         </Function>
         <Function Name="UsersPrivileges_SelectByMenuId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="menuId" Type="int" Mode="In" />
@@ -702,7 +938,8 @@
           <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AlbumTypes_Delete">
-          <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="WordId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="AlbumTypes_Insert">
             <Parameter Name="Id" Mode="InOut" Type="Int32" />
@@ -821,13 +1058,9 @@
             <Parameter Name="EmployeeId" Mode="In" Type="Int64" />
             <Parameter Name="EventId" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="EmployeeDistributionWorks_SelectByEventId" ReturnType="Collection(LayanModel.EmployeeDistributionWorks_SelectByEventId_Result)">
-          <Parameter Name="EventId" Mode="In" Type="Int64" />
-          </FunctionImport>
           <FunctionImport Name="Employees_CheckAllowAccessToEventForUpdateWorks" ReturnType="Collection(Int32)">
             <Parameter Name="IsAdmin" Mode="In" Type="Boolean" />
             <Parameter Name="IsClint" Mode="In" Type="Boolean" />
-            <Parameter Name="IsEmployee" Mode="In" Type="Boolean" />
             <Parameter Name="IsBranchManger" Mode="In" Type="Boolean" />
             <Parameter Name="eventId" Mode="In" Type="Int64" />
             <Parameter Name="workTypeId" Mode="In" Type="Int32" />
@@ -850,6 +1083,87 @@
           </FunctionImport>
           <FunctionImport Name="EmployeesWorks_SelectByUserId" ReturnType="Collection(LayanModel.EmployeesWorks_SelectByUserId_Result)">
           <Parameter Name="UserId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Enquires_CheckFromOwner" ReturnType="Collection(Int32)">
+            <Parameter Name="EnquiryOrEventId" Mode="In" Type="Int64" />
+            <Parameter Name="UsereLoggadId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Enquires_CheckIfCreatedEvent" ReturnType="Collection(Int32)">
+          <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Enquires_CheckIfWithBranch" ReturnType="Collection(Int32)">
+          <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Enquires_Closed" ReturnType="Collection(LayanModel.Enquires_Closed_Result)">
+            <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
+            <Parameter Name="DateTime" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Enquires_Delete">
+          <Parameter Name="Id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Enquires_Insert">
+            <Parameter Name="Id" Mode="InOut" Type="Int64" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="PhoneNo" Mode="In" Type="String" />
+            <Parameter Name="Day" Mode="In" Type="Int32" />
+            <Parameter Name="Month" Mode="In" Type="Int32" />
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="FkCountry_Id" Mode="In" Type="Int32" />
+            <Parameter Name="FkCity_Id" Mode="In" Type="Int32" />
+            <Parameter Name="FKEnquiryType_Id" Mode="In" Type="Int32" />
+            <Parameter Name="FKUserCreated_Id" Mode="In" Type="Int64" />
+            <Parameter Name="CreateDateTime" Mode="In" Type="DateTime" />
+            <Parameter Name="Notes" Mode="In" Type="String" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="IsLinkedClinet" Mode="In" Type="Boolean" />
+            <Parameter Name="IFWithBranch" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Enquires_IsClosed" ReturnType="Collection(Int32)">
+          <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Enquires_SelectByFilter" ReturnType="Collection(LayanModel.Enquires_SelectByFilter_Result)">
+            <Parameter Name="Skip" Mode="In" Type="Int32" />
+            <Parameter Name="Take" Mode="In" Type="Int32" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Day" Mode="In" Type="Int32" />
+            <Parameter Name="Month" Mode="In" Type="Int32" />
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="CreateDateTimeFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="CreateDateTimeTo" Mode="In" Type="DateTime" />
+            <Parameter Name="CountryId" Mode="In" Type="Int32" />
+            <Parameter Name="CityId" Mode="In" Type="Int32" />
+            <Parameter Name="EnquiryId" Mode="In" Type="Int32" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="IsForCurrentUser" Mode="In" Type="Boolean" />
+            <Parameter Name="CurrentUserLoggadId" Mode="In" Type="Int64" />
+            <Parameter Name="IsLinkedClinet" Mode="In" Type="Boolean" />
+            <Parameter Name="IsWithBranch" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Enquires_SelectByPk" ReturnType="Collection(LayanModel.Enquires_SelectByPk_Result)">
+          <Parameter Name="EnquiyId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Enquires_SelectByPk_SimpleData" ReturnType="Collection(LayanModel.Enquires_SelectByPk_SimpleData_Result)">
+          <Parameter Name="EnauiryId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Enquires_Update">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="PhoneNo" Mode="In" Type="String" />
+            <Parameter Name="Day" Mode="In" Type="Int32" />
+            <Parameter Name="Month" Mode="In" Type="Int32" />
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="FkCountry_Id" Mode="In" Type="Int32" />
+            <Parameter Name="FkCity_Id" Mode="In" Type="Int32" />
+            <Parameter Name="FKEnquiryType_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Notes" Mode="In" Type="String" />
+            <Parameter Name="NotesCreateDateTime" Mode="In" Type="DateTime" />
+            <Parameter Name="NotesFkUsereCreatedId" Mode="In" Type="Int64" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="IsWithBranch" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Enquiries_ChangeCreateEventState">
             <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -900,11 +1214,15 @@
             <Parameter Name="IFWithBranch" Mode="In" Type="Boolean" />
             <Parameter Name="EnquiryPaymentId" Mode="In" Type="Int64" />
           </FunctionImport>
+          <FunctionImport Name="EnquiryStatusTypes_SelectByEnquiryId" ReturnType="Collection(LayanModel.EnquiryStatusTypes_SelectByEnquiryId_Result)">
+          <Parameter Name="EnquiyId" Mode="In" Type="Int64" />
+          </FunctionImport>
           <FunctionImport Name="EnquiryTypes_CheckIfUsed" ReturnType="Collection(Int32)">
           <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EnquiryTypes_Delete">
-          <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="WordId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EnquiryTypes_Insert">
             <Parameter Name="Id" Mode="InOut" Type="Int32" />
@@ -934,11 +1252,15 @@
             <Parameter Name="FKEvent_Id" Mode="In" Type="Int64" />
             <Parameter Name="FKUserCreated_Id" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="EventCoordinations_SelectByEventId" ReturnType="Collection(LayanModel.EventCoordinations_SelectByEventId_Result)">
-          <Parameter Name="EventId" Mode="In" Type="Int64" />
-          </FunctionImport>
           <FunctionImport Name="EventCoordinations_SelectTasksNumber" ReturnType="Collection(Int32)">
           <Parameter Name="EventId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Events_CheckFromDateEventIsFinshed" ReturnType="Collection(Int32)">
+            <Parameter Name="EventId" Mode="In" Type="Int64" />
+            <Parameter Name="DateTime" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Events_CountsByYear" ReturnType="Collection(Int32)">
+          <Parameter Name="Year" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Events_Insert">
             <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -989,11 +1311,9 @@
             <Parameter Name="FKPrintNameType_Id" Mode="In" Type="Int32" />
             <Parameter Name="WorkTypeId" Mode="In" Type="Int32" />
             <Parameter Name="EmplolyeeId" Mode="In" Type="Int64" />
+            <Parameter Name="IsFinshed" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Events_SelectByPK" ReturnType="Collection(LayanModel.Events_SelectByPK_Result)">
-          <Parameter Name="Id" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="Events_SelectInformation" ReturnType="Collection(LayanModel.Events_SelectInformation_Result)">
           <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Events_Update">
@@ -1029,7 +1349,96 @@
             <Parameter Name="IsUpdateVistClendar" Mode="In" Type="Boolean" />
             <Parameter Name="IsUpdateClendar" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="EventWorksStatus_Insert">
+          <FunctionImport Name="EventSurveies_ChartByYear" ReturnType="Collection(LayanModel.EventSurveies_ChartByYear_Result)">
+          <Parameter Name="Year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveies_DeleteByEventId">
+          <Parameter Name="EventID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveies_Insert">
+            <Parameter Name="EventId" Mode="In" Type="Int64" />
+            <Parameter Name="ClinetId" Mode="In" Type="Int64" />
+            <Parameter Name="IsSatisfied" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveies_Insert_DeleteByEventId">
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveies_SelectByPK" ReturnType="Collection(LayanModel.EventSurveies_SelectByPK_Result)">
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurvey_CheckIfIsInserted" ReturnType="Collection(Int32)">
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveyQuestionAnswerer_DeleteByEventSurveyId">
+          <Parameter Name="EventSurveyId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveyQuestionAnswerer_Insert">
+            <Parameter Name="EventSurveyQuestionId" Mode="In" Type="Int64" />
+            <Parameter Name="Answer" Mode="In" Type="String" />
+            <Parameter Name="DateTime" Mode="In" Type="DateTime" />
+            <Parameter Name="SurveyQuestionTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="EventSurveyId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveyQuestions_CheckIfInserted" ReturnType="Collection(Int32)">
+          <Parameter Name="SurveyQuestionTypeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveyQuestions_CheckIfUsed" ReturnType="Collection(Int32)">
+          <Parameter Name="Id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveyQuestions_Delete">
+          <Parameter Name="Id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveyQuestions_Insert">
+            <Parameter Name="Id" Mode="InOut" Type="Int64" />
+            <Parameter Name="IsDefault" Mode="In" Type="Boolean" />
+            <Parameter Name="FKSurveyQuestionType_Id" Mode="In" Type="Int32" />
+            <Parameter Name="FKEvent_Id" Mode="In" Type="Int64" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveyQuestions_RemoveByEventId">
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveyQuestions_SelectAll" ReturnType="Collection(LayanModel.EventSurveyQuestions_SelectAll_Result)" />
+          <FunctionImport Name="EventSurveyQuestions_SelectByEventId" ReturnType="Collection(LayanModel.EventSurveyQuestions_SelectByEventId_Result)">
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveyQuestions_SelectDefault" ReturnType="Collection(LayanModel.EventSurveyQuestions_SelectDefault_Result)">
+          <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveyQuestions_Update">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="IsDefault" Mode="In" Type="Boolean" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveyQuestions_WithEvent" ReturnType="Collection(LayanModel.EventSurveyQuestions_WithEvent_Result)">
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveyQuestionTypes_CheckIfUsed" ReturnType="Collection(Int32)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveyQuestionTypes_Delete">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="WordId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveyQuestionTypes_Insert">
+            <Parameter Name="Id" Mode="InOut" Type="Int32" />
+            <Parameter Name="NameAr" Mode="In" Type="String" />
+            <Parameter Name="NameEn" Mode="In" Type="String" />
+            <Parameter Name="InputType" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveyQuestionTypes_SelectAll" ReturnType="Collection(LayanModel.EventSurveyQuestionTypes_SelectAll_Result)" />
+          <FunctionImport Name="EventSurveyQuestionTypes_SelectByFilter" ReturnType="Collection(LayanModel.EventSurveyQuestionTypes_SelectByFilter_Result)">
+            <Parameter Name="Skip" Mode="In" Type="Int32" />
+            <Parameter Name="Take" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EventSurveyQuestionTypes_Update">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="NameAr" Mode="In" Type="String" />
+            <Parameter Name="NameEn" Mode="In" Type="String" />
+            <Parameter Name="WordId" Mode="In" Type="Int64" />
+            <Parameter Name="InputType" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EventWorksStatusHistory_Insert">
             <Parameter Name="IsFinshed" Mode="In" Type="Boolean" />
             <Parameter Name="DateTime" Mode="In" Type="DateTime" />
             <Parameter Name="FKEvent_Id" Mode="In" Type="Int64" />
@@ -1037,8 +1446,13 @@
             <Parameter Name="FKUsre_Id" Mode="In" Type="Int64" />
             <Parameter Name="FKAccountType_Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="EventWorksStatus_SelectByEventId" ReturnType="Collection(LayanModel.EventWorksStatus_SelectByEventId_Result)">
+          <FunctionImport Name="EventWorksStatusHistory_SelectByEventId" ReturnType="Collection(LayanModel.EventWorksStatusHistory_SelectByEventId_Result)">
           <Parameter Name="eventId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EventWorksStatusIsFinshed_Update">
+            <Parameter Name="EventId" Mode="In" Type="Int64" />
+            <Parameter Name="IsFinshed" Mode="In" Type="Boolean" />
+            <Parameter Name="WorkTypeId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Menus_SelectAll" ReturnType="Collection(LayanModel.Menus_SelectAll_Result)" />
           <FunctionImport Name="Menus_SelectAllByUser_Id">
@@ -1162,7 +1576,8 @@
           <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="PrintNamesTypes_Delete">
-          <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="WordId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="PrintNamesTypes_Insert">
             <Parameter Name="Id" Mode="InOut" Type="Int32" />
@@ -1180,17 +1595,51 @@
             <Parameter Name="WordId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="PrintNameTypes_SelectAll" ReturnType="Collection(LayanModel.PrintNameTypes_SelectAll_Result)" />
-          <FunctionImport Name="User_EmailBeforUsed" ReturnType="Collection(Int32)">
-            <Parameter Name="UserId" Mode="In" Type="Int64" />
-            <Parameter Name="Email" Mode="In" Type="String" />
+          <FunctionImport Name="SocialAccountTypes_CheckIfUsed" ReturnType="Collection(Int32)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="User_PhoneNumberBeforUsed" ReturnType="Collection(Int32)">
-            <Parameter Name="UserId" Mode="In" Type="Int64" />
-            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+          <FunctionImport Name="SocialAccountTypes_Delete">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="WordId" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="User_UserNameBeforUsed" ReturnType="Collection(Int32)">
-            <Parameter Name="UserId" Mode="In" Type="Int64" />
-            <Parameter Name="UserName" Mode="In" Type="String" />
+          <FunctionImport Name="SocialAccountTypes_Insert">
+            <Parameter Name="Id" Mode="InOut" Type="Int32" />
+            <Parameter Name="NameAr" Mode="In" Type="String" />
+            <Parameter Name="NameEn" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SocialAccountTypes_SelectAll" ReturnType="Collection(LayanModel.SocialAccountTypes_SelectAll_Result)" />
+          <FunctionImport Name="SocialAccountTypes_SelectByFilter" ReturnType="Collection(LayanModel.SocialAccountTypes_SelectByFilter_Result)">
+            <Parameter Name="Skip" Mode="In" Type="Int32" />
+            <Parameter Name="Take" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SocialAccountTypes_Update">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="NameAr" Mode="In" Type="String" />
+            <Parameter Name="NameEn" Mode="In" Type="String" />
+            <Parameter Name="WordId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="UserPayments_Insert">
+            <Parameter Name="Id" Mode="InOut" Type="Int64" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+            <Parameter Name="DateTime" Mode="In" Type="DateTime" />
+            <Parameter Name="IsAcceptFromManger" Mode="In" Type="Boolean" />
+            <Parameter Name="FKUserTo_Id" Mode="In" Type="Int64" />
+            <Parameter Name="FKUserFrom_Id" Mode="In" Type="Int64" />
+            <Parameter Name="Notes" Mode="In" Type="String" />
+            <Parameter Name="IsBankTransfer" Mode="In" Type="Boolean" />
+            <Parameter Name="PaymentImage" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UserPayments_SelectByUserToId" ReturnType="Collection(LayanModel.UserPayments_SelectByUserToId_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="Skip" Mode="In" Type="Int32" />
+            <Parameter Name="Take" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UserPayments_Update">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="IsAcceptFromManger" Mode="In" Type="Boolean" />
+            <Parameter Name="Notes" Mode="In" Type="String" />
+            <Parameter Name="IsBankTransfer" Mode="In" Type="Boolean" />
+            <Parameter Name="PaymentImage" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UserPrivileges_Insert">
             <Parameter Name="PageId" Mode="In" Type="Int32" />
@@ -1212,17 +1661,61 @@
             <Parameter Name="UserId" Mode="In" Type="Int64" />
             <Parameter Name="ActiveCode" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="Users_CheckCompeleteAccountInformation" ReturnType="Collection(Int32)">
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+            <Parameter Name="AccountTypeId" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="Users_CheckFromActiveCode" ReturnType="Collection(Int32)">
             <Parameter Name="Id" Mode="In" Type="Int64" />
             <Parameter Name="ActiveCode" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="Users_CheckIfActive" ReturnType="Collection(Int32)">
+          <Parameter Name="UserId" Mode="In" Type="Int64" />
+          </FunctionImport>
           <FunctionImport Name="Users_CheckIfEmailActivated" ReturnType="Collection(Boolean)">
           <Parameter Name="UserId" Mode="In" Type="Int64" />
           </FunctionImport>
+          <FunctionImport Name="Users_EmailBeforUsed" ReturnType="Collection(Int32)">
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Users_Insert">
+            <Parameter Name="Id" Mode="InOut" Type="Int64" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="PhoneNo" Mode="In" Type="String" />
+            <Parameter Name="FKAccountType_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="FkCountry_Id" Mode="In" Type="Int32" />
+            <Parameter Name="FkCity_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="ActiveCode" Mode="In" Type="String" />
+            <Parameter Name="CreateDateTime" Mode="In" Type="DateTime" />
+            <Parameter Name="LanguageId" Mode="In" Type="Int32" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
+            <Parameter Name="DateOfBirth" Mode="In" Type="DateTime" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="FullName" Mode="In" Type="String" />
+            <Parameter Name="NationalityNumber" Mode="In" Type="String" />
+            <Parameter Name="WebSite" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Users_NationalityNumberBeforUsed" ReturnType="Collection(Int32)">
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+            <Parameter Name="NationalityNumber" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Users_PhoneNumberBeforUsed" ReturnType="Collection(Int32)">
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="Users_SelectAllEmployees" ReturnType="Collection(LayanModel.Users_SelectAllEmployees_Result)" />
+          <FunctionImport Name="Users_SelectAllForUsersPrivileges" ReturnType="Collection(LayanModel.Users_SelectAllForUsersPrivileges_Result)" />
           <FunctionImport Name="Users_SelectByBranchId" ReturnType="Collection(LayanModel.Users_SelectByBranchId_Result)">
             <Parameter Name="BranchId" Mode="In" Type="Int32" />
             <Parameter Name="AccountTypeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Users_SelectByBranchIdWithWorkTypes" ReturnType="Collection(LayanModel.Users_SelectByBranchIdWithWorkTypes_Result)">
+          <Parameter Name="BranchId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Users_SelectByFilter" ReturnType="Collection(LayanModel.Users_SelectByFilter_Result)">
             <Parameter Name="Skip" Mode="In" Type="Int32" />
@@ -1237,6 +1730,7 @@
             <Parameter Name="CityId" Mode="In" Type="Int32" />
             <Parameter Name="AccountTypeId" Mode="In" Type="Int32" />
             <Parameter Name="LanguageId" Mode="In" Type="Int32" />
+            <Parameter Name="BranchId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Users_SelectByPk" ReturnType="Collection(LayanModel.Users_SelectByPk_Result)">
           <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -1262,10 +1756,32 @@
             <Parameter Name="LanguageId" Mode="In" Type="Int32" />
             <Parameter Name="DateOfBirth" Mode="In" Type="DateTime" />
             <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="FullName" Mode="In" Type="String" />
+            <Parameter Name="NationalityNumber" Mode="In" Type="String" />
+            <Parameter Name="WebSite" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Users_UpdateLangage" ReturnType="Collection(LayanModel.Users_UpdateLangage_Result)">
             <Parameter Name="Id" Mode="In" Type="Int64" />
             <Parameter Name="languageId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Users_UserNameBeforUsed" ReturnType="Collection(Int32)">
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UserSocialAccounts_Delete">
+          <Parameter Name="Id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="UserSocialAccounts_Insert">
+            <Parameter Name="Id" Mode="InOut" Type="Int64" />
+            <Parameter Name="FKSocialAccountType_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Link" Mode="In" Type="String" />
+            <Parameter Name="FKUser_Id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="UserSocialAccounts_SelectAllByUserId" ReturnType="Collection(LayanModel.UserSocialAccounts_SelectAllByUserId_Result)">
+          <Parameter Name="UserId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="UsersPrivileges_ChekcIfIsClosed" ReturnType="Collection(Int32)">
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="UsersPrivileges_SelectByMenuId" ReturnType="Collection(LayanModel.UsersPrivileges_SelectByMenuId_Result)">
             <Parameter Name="menuId" Mode="In" Type="Int32" />
@@ -1283,101 +1799,45 @@
             <Parameter Name="Ar" Mode="In" Type="String" />
             <Parameter Name="En" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="Enquires_Closed" ReturnType="Collection(LayanModel.Enquires_Closed_Result)">
-            <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
-            <Parameter Name="DateTime" Mode="In" Type="DateTime" />
+          <FunctionImport Name="EmployeeDistributionWorks_SelectByEventId" ReturnType="Collection(LayanModel.EmployeeDistributionWorks_SelectByEventId_Result)">
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="Enquires_Delete">
-          <Parameter Name="Id" Mode="In" Type="Int64" />
+          <FunctionImport Name="EventWorksStatusHistory_SelectLast" ReturnType="Collection(LayanModel.EventWorksStatusHistory_SelectLast_Result)">
+            <Parameter Name="eventId" Mode="In" Type="Int64" />
+            <Parameter Name="WorkTypeId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="Enquires_Insert">
-            <Parameter Name="Id" Mode="InOut" Type="Int64" />
-            <Parameter Name="FirstName" Mode="In" Type="String" />
-            <Parameter Name="LastName" Mode="In" Type="String" />
-            <Parameter Name="PhoneNo" Mode="In" Type="String" />
-            <Parameter Name="Day" Mode="In" Type="Int32" />
-            <Parameter Name="Month" Mode="In" Type="Int32" />
-            <Parameter Name="Year" Mode="In" Type="Int32" />
-            <Parameter Name="FkCountry_Id" Mode="In" Type="Int32" />
-            <Parameter Name="FkCity_Id" Mode="In" Type="Int32" />
-            <Parameter Name="FKEnquiryType_Id" Mode="In" Type="Int32" />
-            <Parameter Name="FKUserCreated_Id" Mode="In" Type="Int64" />
-            <Parameter Name="CreateDateTime" Mode="In" Type="DateTime" />
-            <Parameter Name="Notes" Mode="In" Type="String" />
-            <Parameter Name="BranchId" Mode="In" Type="Int32" />
-            <Parameter Name="IsLinkedClinet" Mode="In" Type="Boolean" />
-            <Parameter Name="IFWithBranch" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="Enquires_IsClosed" ReturnType="Collection(Int32)">
-          <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="Enquires_SelectByFilter" ReturnType="Collection(LayanModel.Enquires_SelectByFilter_Result)">
-            <Parameter Name="Skip" Mode="In" Type="Int32" />
-            <Parameter Name="Take" Mode="In" Type="Int32" />
-            <Parameter Name="FirstName" Mode="In" Type="String" />
-            <Parameter Name="LastName" Mode="In" Type="String" />
-            <Parameter Name="Phone" Mode="In" Type="String" />
-            <Parameter Name="Day" Mode="In" Type="Int32" />
-            <Parameter Name="Month" Mode="In" Type="Int32" />
-            <Parameter Name="Year" Mode="In" Type="Int32" />
-            <Parameter Name="CreateDateTimeFrom" Mode="In" Type="DateTime" />
-            <Parameter Name="CreateDateTimeTo" Mode="In" Type="DateTime" />
-            <Parameter Name="CountryId" Mode="In" Type="Int32" />
-            <Parameter Name="CityId" Mode="In" Type="Int32" />
-            <Parameter Name="EnquiryId" Mode="In" Type="Int32" />
-            <Parameter Name="BranchId" Mode="In" Type="Int32" />
-            <Parameter Name="IsForCurrentUser" Mode="In" Type="Boolean" />
-            <Parameter Name="CurrentUserLoggadId" Mode="In" Type="Int64" />
-            <Parameter Name="IsLinkedClinet" Mode="In" Type="Boolean" />
-            <Parameter Name="IsWithBranch" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="Enquires_SelectByPk" ReturnType="Collection(LayanModel.Enquires_SelectByPk_Result)">
-          <Parameter Name="EnquiyId" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="Enquires_SelectByPk_SimpleData" ReturnType="Collection(LayanModel.Enquires_SelectByPk_SimpleData_Result)">
-          <Parameter Name="EnauiryId" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="Enquires_Update">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
-            <Parameter Name="FirstName" Mode="In" Type="String" />
-            <Parameter Name="LastName" Mode="In" Type="String" />
-            <Parameter Name="PhoneNo" Mode="In" Type="String" />
-            <Parameter Name="Day" Mode="In" Type="Int32" />
-            <Parameter Name="Month" Mode="In" Type="Int32" />
-            <Parameter Name="Year" Mode="In" Type="Int32" />
-            <Parameter Name="FkCountry_Id" Mode="In" Type="Int32" />
-            <Parameter Name="FkCity_Id" Mode="In" Type="Int32" />
-            <Parameter Name="FKEnquiryType_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Notes" Mode="In" Type="String" />
-            <Parameter Name="NotesCreateDateTime" Mode="In" Type="DateTime" />
-            <Parameter Name="NotesFkUsereCreatedId" Mode="In" Type="Int64" />
-            <Parameter Name="BranchId" Mode="In" Type="Int32" />
-            <Parameter Name="IsWithBranch" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="EnquiryStatusTypes_SelectByEnquiryId" ReturnType="Collection(LayanModel.EnquiryStatusTypes_SelectByEnquiryId_Result)">
-          <Parameter Name="EnquiyId" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="Users_Insert">
-            <Parameter Name="Id" Mode="InOut" Type="Int64" />
-            <Parameter Name="UserName" Mode="In" Type="String" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="PhoneNo" Mode="In" Type="String" />
-            <Parameter Name="FKAccountType_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Address" Mode="In" Type="String" />
-            <Parameter Name="FkCountry_Id" Mode="In" Type="Int32" />
-            <Parameter Name="FkCity_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Password" Mode="In" Type="String" />
-            <Parameter Name="ActiveCode" Mode="In" Type="String" />
-            <Parameter Name="CreateDateTime" Mode="In" Type="DateTime" />
-            <Parameter Name="LanguageId" Mode="In" Type="Int32" />
-            <Parameter Name="BranchId" Mode="In" Type="Int32" />
-            <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
-            <Parameter Name="DateOfBirth" Mode="In" Type="DateTime" />
-            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="EventWorksStatus_CheckIfFinshed" ReturnType="Collection(Int32)">
+          <FunctionImport Name="EventWorksStatusIsFinsed_CheckIfFinshed" ReturnType="Collection(Boolean)">
             <Parameter Name="eventId" Mode="In" Type="Int64" />
             <Parameter Name="workTypeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EventCoordinations_SelectByEventId" ReturnType="Collection(LayanModel.EventCoordinations_SelectByEventId_Result)">
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Events_SelectInformation" ReturnType="Collection(LayanModel.Events_SelectInformation_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="FilesReceivedTypes_CheckIfUsed" ReturnType="Collection(Int32)">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="FilesReceivedTypes_Delete">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="WordId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="FilesReceivedTypes_Insert">
+            <Parameter Name="Id" Mode="InOut" Type="Int32" />
+            <Parameter Name="NameAr" Mode="In" Type="String" />
+            <Parameter Name="NameEn" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FilesReceivedTypes_SelectAll" ReturnType="Collection(LayanModel.FilesReceivedTypes_SelectAll_Result)" />
+          <FunctionImport Name="FilesReceivedTypes_SelectByFilter" ReturnType="Collection(LayanModel.FilesReceivedTypes_SelectByFilter_Result)">
+            <Parameter Name="Skip" Mode="In" Type="Int32" />
+            <Parameter Name="Take" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FilesReceivedTypes_Update">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="NameAr" Mode="In" Type="String" />
+            <Parameter Name="NameEn" Mode="In" Type="String" />
+            <Parameter Name="WordId" Mode="In" Type="Int64" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="AlbumTypes_SelectAll_Result">
@@ -1470,13 +1930,6 @@
           <Property Type="String" Name="CityNameAr" Nullable="true" />
           <Property Type="String" Name="CityNameEn" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="EmployeeDistributionWorks_SelectByEventId_Result">
-          <Property Type="Int64" Name="Id" Nullable="false" />
-          <Property Type="Int32" Name="FKWorkType_Id" Nullable="false" />
-          <Property Type="Int64" Name="FKEmployee_Id" Nullable="false" />
-          <Property Type="Int64" Name="FKEvent_Id" Nullable="false" />
-          <Property Type="Boolean" Name="IsFinshed" Nullable="false" />
-        </ComplexType>
         <ComplexType Name="Employees_SelectWorks_Result">
           <Property Type="Int64" Name="Id" Nullable="false" />
           <Property Type="Int32" Name="FkWorkType_Id" Nullable="false" />
@@ -1490,6 +1943,98 @@
           <Property Type="Int64" Name="Id" Nullable="false" />
           <Property Type="Int32" Name="FkWorkType_Id" Nullable="false" />
           <Property Type="Int64" Name="FKUser_Id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Enquires_Closed_Result">
+          <Property Type="String" Name="Enquiry_ClendarEventId" Nullable="true" />
+          <Property Type="String" Name="Event_ClendarEventId" Nullable="true" />
+          <Property Type="String" Name="VistToCoordinationClendarEventId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Enquires_SelectByFilter_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PhoneNo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="FkCountry_Id" Nullable="false" />
+          <Property Type="Int32" Name="FkCity_Id" Nullable="false" />
+          <Property Type="Int32" Name="FKEnquiryType_Id" Nullable="true" />
+          <Property Type="Int64" Name="FKUserCreated_Id" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Day" Nullable="false" />
+          <Property Type="Int32" Name="Month" Nullable="false" />
+          <Property Type="Int32" Name="Year" Nullable="false" />
+          <Property Type="Int32" Name="FKBranch_Id" Nullable="true" />
+          <Property Type="Boolean" Name="IsLinkedClinet" Nullable="true" />
+          <Property Type="Boolean" Name="IsClosed" Nullable="true" />
+          <Property Type="DateTime" Name="ClosedDateTime" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsWithBranch" Nullable="false" />
+          <Property Type="String" Name="ClendarEventId" Nullable="true" />
+          <Property Type="Int64" Name="FkClinet_Id" Nullable="true" />
+          <Property Type="Boolean" Name="IsCreatedEvent" Nullable="false" />
+          <Property Type="String" Name="CountryNameAr" Nullable="true" />
+          <Property Type="String" Name="CountryNameEn" Nullable="true" />
+          <Property Type="String" Name="CityNameAr" Nullable="true" />
+          <Property Type="String" Name="CityNameEn" Nullable="true" />
+          <Property Type="String" Name="EnquiryTypeNameAr" Nullable="true" />
+          <Property Type="String" Name="EnquiryTypeNameEn" Nullable="true" />
+          <Property Type="String" Name="BranchNameAR" Nullable="true" />
+          <Property Type="String" Name="BranchNameEn" Nullable="true" />
+          <Property Type="String" Name="EnquiryCreatedUserName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="CountIsDepositPaymented" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Enquires_SelectByPk_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PhoneNo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="FkCountry_Id" Nullable="false" />
+          <Property Type="Int32" Name="FkCity_Id" Nullable="false" />
+          <Property Type="Int32" Name="FKEnquiryType_Id" Nullable="true" />
+          <Property Type="Int64" Name="FKUserCreated_Id" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Day" Nullable="false" />
+          <Property Type="Int32" Name="Month" Nullable="false" />
+          <Property Type="Int32" Name="Year" Nullable="false" />
+          <Property Type="Int32" Name="FKBranch_Id" Nullable="true" />
+          <Property Type="Boolean" Name="IsLinkedClinet" Nullable="true" />
+          <Property Type="Boolean" Name="IsClosed" Nullable="true" />
+          <Property Type="DateTime" Name="ClosedDateTime" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsWithBranch" Nullable="false" />
+          <Property Type="String" Name="ClendarEventId" Nullable="true" />
+          <Property Type="Int64" Name="FkClinet_Id" Nullable="true" />
+          <Property Type="Boolean" Name="IsCreatedEvent" Nullable="false" />
+          <Property Type="String" Name="CountryNameAr" Nullable="true" />
+          <Property Type="String" Name="CountryNameEn" Nullable="true" />
+          <Property Type="String" Name="CityNameAr" Nullable="true" />
+          <Property Type="String" Name="CityNameEn" Nullable="true" />
+          <Property Type="String" Name="EnquiryTypeNameAr" Nullable="true" />
+          <Property Type="String" Name="EnquiryTypeNameEn" Nullable="true" />
+          <Property Type="String" Name="BranchNameAR" Nullable="true" />
+          <Property Type="String" Name="BranchNameEn" Nullable="true" />
+          <Property Type="String" Name="EnquiryCreatedUserName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="CountIsDepositPaymented" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Enquires_SelectByPk_SimpleData_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PhoneNo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="FkCountry_Id" Nullable="false" />
+          <Property Type="Int32" Name="FkCity_Id" Nullable="false" />
+          <Property Type="Int32" Name="FKEnquiryType_Id" Nullable="true" />
+          <Property Type="Int64" Name="FKUserCreated_Id" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Day" Nullable="false" />
+          <Property Type="Int32" Name="Month" Nullable="false" />
+          <Property Type="Int32" Name="Year" Nullable="false" />
+          <Property Type="Int32" Name="FKBranch_Id" Nullable="true" />
+          <Property Type="Boolean" Name="IsLinkedClinet" Nullable="true" />
+          <Property Type="Boolean" Name="IsClosed" Nullable="true" />
+          <Property Type="DateTime" Name="ClosedDateTime" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsWithBranch" Nullable="false" />
+          <Property Type="String" Name="ClendarEventId" Nullable="true" />
+          <Property Type="Int64" Name="FkClinet_Id" Nullable="true" />
+          <Property Type="Boolean" Name="IsCreatedEvent" Nullable="false" />
+          <Property Type="Int32" Name="CountIsDepositPaymented" Nullable="true" />
         </ComplexType>
         <ComplexType Name="EnquiryNotes_SelectByEnquiryId_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1511,6 +2056,18 @@
           <Property Type="Int64" Name="FKUserCreated_Id" Nullable="false" />
           <Property Type="String" Name="UserCreatedName" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="EnquiryStatusTypes_SelectByEnquiryId_Result">
+          <Property Type="Int64" Name="Status_Id" Nullable="false" />
+          <Property Type="String" Name="Status_NameAr" Nullable="true" />
+          <Property Type="String" Name="Status_NameEn" Nullable="true" />
+          <Property Type="String" Name="Status_Notes" Nullable="true" />
+          <Property Type="DateTime" Name="Status_CreateDateTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Status_ScheduleVisitDateTime" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="Status_UserCreatedId" Nullable="false" />
+          <Property Type="Int64" Name="Status_EnquiryPaymentId" Nullable="true" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Status_CreatedUserName" Nullable="false" MaxLength="50" />
+        </ComplexType>
         <ComplexType Name="EnquiryTypes_SelectAll_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
@@ -1522,17 +2079,6 @@
           <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
           <Property Type="String" Name="NameAr" Nullable="true" />
           <Property Type="String" Name="NameEn" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="EventCoordinations_SelectByEventId_Result">
-          <Property Type="Int64" Name="Id" Nullable="false" />
-          <Property Type="Int32" Name="TaskNumber" Nullable="false" />
-          <Property Type="String" Name="Task" Nullable="false" MaxLength="50" />
-          <Property Type="Time" Name="StartTime" Nullable="false" />
-          <Property Type="Time" Name="EndTime" Nullable="false" />
-          <Property Type="String" Name="Notes" Nullable="true" />
-          <Property Type="Int64" Name="FKEvent_Id" Nullable="false" />
-          <Property Type="Int64" Name="FKUserCreated_Id" Nullable="false" />
-          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="Events_SelectByFilter_Result">
           <Property Type="Int64" Name="Id" Nullable="false" />
@@ -1584,6 +2130,21 @@
           <Property Type="Decimal" Name="PackageNamsArExtraPrice" Nullable="false" Precision="18" Scale="2" />
           <Property Type="DateTime" Name="VistToCoordinationDateTime" Nullable="true" Precision="23" />
           <Property Type="String" Name="VistToCoordinationClendarEventId" Nullable="true" />
+          <Property Type="Int64" Name="EventId" Nullable="false" />
+          <Property Type="Boolean" Name="Booking" Nullable="true" />
+          <Property Type="Boolean" Name="DataPerfection" Nullable="true" />
+          <Property Type="Boolean" Name="Coordination" Nullable="true" />
+          <Property Type="Boolean" Name="Implementation" Nullable="true" />
+          <Property Type="Boolean" Name="ArchivingAndSaveing" Nullable="true" />
+          <Property Type="Boolean" Name="ProductProcessing" Nullable="true" />
+          <Property Type="Boolean" Name="Chooseing" Nullable="true" />
+          <Property Type="Boolean" Name="DigitalProcessing" Nullable="true" />
+          <Property Type="Boolean" Name="PreparingForPrinting" Nullable="true" />
+          <Property Type="Boolean" Name="Manufacturing" Nullable="true" />
+          <Property Type="Boolean" Name="QualityAndReview" Nullable="true" />
+          <Property Type="Boolean" Name="Packaging" Nullable="true" />
+          <Property Type="Boolean" Name="TransmissionAndDelivery" Nullable="true" />
+          <Property Type="Boolean" Name="Archiving" Nullable="true" />
           <Property Type="String" Name="EnquiryName" Nullable="false" MaxLength="101" />
           <Property Type="Boolean" Name="IsClosed" Nullable="true" />
           <Property Type="String" Name="Branch_NameAr" Nullable="true" />
@@ -1617,42 +2178,62 @@
           <Property Type="Decimal" Name="TotalPaymentsActivated" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Boolean" Name="IsPayment" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="Events_SelectInformation_Result">
-          <Property Type="Int64" Name="Id" Nullable="false" />
-          <Property Type="Boolean" Name="IsClinetCustomLogo" Nullable="true" />
-          <Property Type="String" Name="LogoFilePath" Nullable="true" />
-          <Property Type="Boolean" Name="IsNamesAr" Nullable="true" />
-          <Property Type="String" Name="NameGroom" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="NameBride" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="FKPrintNameType_Id" Nullable="true" />
+        <ComplexType Name="EventSurveies_ChartByYear_Result">
           <Property Type="DateTime" Name="EventDateTime" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="FKPackage_Id" Nullable="false" />
-          <Property Type="Int64" Name="FKClinet_Id" Nullable="false" />
-          <Property Type="String" Name="Notes" Nullable="true" />
-          <Property Type="Int64" Name="FKUserCreaed_Id" Nullable="false" />
-          <Property Type="Int32" Name="FKBranch_Id" Nullable="false" />
-          <Property Type="String" Name="ClendarEventId" Nullable="true" />
-          <Property Type="Decimal" Name="PackagePrice" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="PackageNamsArExtraPrice" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="DateTime" Name="VistToCoordinationDateTime" Nullable="true" Precision="23" />
-          <Property Type="String" Name="VistToCoordinationClendarEventId" Nullable="true" />
-          <Property Type="String" Name="EnquiryName" Nullable="true" MaxLength="101" />
-          <Property Type="Boolean" Name="IsClosed" Nullable="true" />
-          <Property Type="String" Name="Package_NameAr" Nullable="true" />
-          <Property Type="String" Name="Package_NameEn" Nullable="true" />
-          <Property Type="Boolean" Name="Package_IsAllowPrintNames" Nullable="false" />
-          <Property Type="String" Name="PrintNameType_NameAr" Nullable="true" />
-          <Property Type="String" Name="PrintNameType_NameEn" Nullable="true" />
-          <Property Type="String" Name="Branch_NameAr" Nullable="true" />
-          <Property Type="String" Name="Branch_NameEn" Nullable="true" />
-          <Property Type="String" Name="Clinet_UserName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="UserCreated_UserName" Nullable="false" MaxLength="50" />
-          <Property Type="Decimal" Name="TotalPayments" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Boolean" Name="IsPayment" Nullable="true" />
-          <Property Type="Decimal" Name="TotalPaymentsActivated" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="CountIsSatisfied" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="EventWorksStatus_SelectByEventId_Result">
+        <ComplexType Name="EventSurveies_SelectByPK_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKClinet_Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsSatisfied" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="EventSurveyQuestions_SelectAll_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsDefault" Nullable="true" />
+          <Property Type="Int32" Name="FKSurveyQuestionType_Id" Nullable="false" />
+          <Property Type="Int64" Name="FKEvent_Id" Nullable="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="String" Name="SurveyQuestionNameAr" Nullable="true" />
+          <Property Type="String" Name="SurveyQuestionNameEn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="EventSurveyQuestions_SelectByEventId_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="SurveyQuestionTypeId" Nullable="false" />
+          <Property Type="String" Name="SurveyQuestionTypeNameAr" Nullable="true" />
+          <Property Type="String" Name="SurveyQuestionTypeNameEn" Nullable="true" />
+          <Property Type="String" Name="Answerer" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="EventSurveyQuestions_SelectDefault_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsDefault" Nullable="true" />
+          <Property Type="Int32" Name="FKSurveyQuestionType_Id" Nullable="false" />
+          <Property Type="Int64" Name="FKEvent_Id" Nullable="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="String" Name="SurveyQuestionNameAr" Nullable="true" />
+          <Property Type="String" Name="SurveyQuestionNameEn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="EventSurveyQuestions_WithEvent_Result">
+          <Property Type="Int32" Name="SurveyQuestionTypeId" Nullable="false" />
+          <Property Type="Int64" Name="FKEvent_Id" Nullable="true" />
+          <Property Type="Int64" Name="IsSelected" Nullable="false" />
+          <Property Type="String" Name="SurveyQuestionTypeAr" Nullable="true" />
+          <Property Type="String" Name="SurveyQuestionTypeEn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="EventSurveyQuestionTypes_SelectAll_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+          <Property Type="Int32" Name="InputType" Nullable="true" />
+          <Property Type="String" Name="NameAr" Nullable="true" />
+          <Property Type="String" Name="NameEn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="EventSurveyQuestionTypes_SelectByFilter_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+          <Property Type="Int32" Name="InputType" Nullable="true" />
+          <Property Type="String" Name="NameAr" Nullable="true" />
+          <Property Type="String" Name="NameEn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="EventWorksStatusHistory_SelectByEventId_Result">
           <Property Type="Int64" Name="Id" Nullable="false" />
           <Property Type="Boolean" Name="IsFinshed" Nullable="false" />
           <Property Type="DateTime" Name="DateTime" Nullable="false" Precision="23" />
@@ -1779,6 +2360,31 @@
           <Property Type="String" Name="NameAr" Nullable="true" />
           <Property Type="String" Name="NameEn" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="SocialAccountTypes_SelectAll_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+          <Property Type="String" Name="NameAr" Nullable="true" />
+          <Property Type="String" Name="NameEn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SocialAccountTypes_SelectByFilter_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+          <Property Type="String" Name="NameAr" Nullable="true" />
+          <Property Type="String" Name="NameEn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UserPayments_SelectByUserToId_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Decimal" Name="Amount" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="DateTime" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="IsAcceptFromManger" Nullable="true" />
+          <Property Type="Int64" Name="FKUserTo_Id" Nullable="false" />
+          <Property Type="Int64" Name="FKUserFrom_Id" Nullable="false" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+          <Property Type="String" Name="PaymentImage" Nullable="true" />
+          <Property Type="Boolean" Name="IsBankTransfer" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="IsClosed" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="UserPrivileges_SelectByUserId_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Int32" Name="FKPage_Id" Nullable="false" />
@@ -1805,6 +2411,9 @@
           <Property Type="Boolean" Name="IsActiveEmail" Nullable="false" />
           <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NationalityNumber" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="WebSite" Nullable="true" MaxLength="500" />
         </ComplexType>
         <ComplexType Name="Users_SelectAllEmployees_Result">
           <Property Type="Int64" Name="Id" Nullable="false" />
@@ -1823,6 +2432,36 @@
           <Property Type="Boolean" Name="IsActiveEmail" Nullable="false" />
           <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NationalityNumber" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="WebSite" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="AccountTypeNameAr" Nullable="true" />
+          <Property Type="String" Name="AccountTypeNameEn" Nullable="true" />
+          <Property Type="String" Name="CountryNameAr" Nullable="true" />
+          <Property Type="String" Name="CountryNameEn" Nullable="true" />
+          <Property Type="String" Name="CityNameAr" Nullable="true" />
+          <Property Type="String" Name="CityNameEn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Users_SelectAllForUsersPrivileges_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PhoneNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ActiveCode" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="FKAccountType_Id" Nullable="false" />
+          <Property Type="Int32" Name="FkCountry_Id" Nullable="true" />
+          <Property Type="Int32" Name="FkCity_Id" Nullable="true" />
+          <Property Type="Int32" Name="FKLanguage_Id" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="FKPranch_Id" Nullable="true" />
+          <Property Type="Boolean" Name="IsActiveEmail" Nullable="false" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NationalityNumber" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="WebSite" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="AccountTypeNameAr" Nullable="true" />
           <Property Type="String" Name="AccountTypeNameEn" Nullable="true" />
           <Property Type="String" Name="CountryNameAr" Nullable="true" />
@@ -1847,7 +2486,32 @@
           <Property Type="Boolean" Name="IsActiveEmail" Nullable="false" />
           <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NationalityNumber" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="WebSite" Nullable="true" MaxLength="500" />
           <Property Type="Int32" Name="FkWorkType_Id" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Users_SelectByBranchIdWithWorkTypes_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PhoneNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ActiveCode" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="FKAccountType_Id" Nullable="false" />
+          <Property Type="Int32" Name="FkCountry_Id" Nullable="true" />
+          <Property Type="Int32" Name="FkCity_Id" Nullable="true" />
+          <Property Type="Int32" Name="FKLanguage_Id" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="FKPranch_Id" Nullable="true" />
+          <Property Type="Boolean" Name="IsActiveEmail" Nullable="false" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NationalityNumber" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="WebSite" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="FkWorkType_Id" Nullable="false" />
         </ComplexType>
         <ComplexType Name="Users_SelectByFilter_Result">
           <Property Type="Int64" Name="Id" Nullable="false" />
@@ -1866,6 +2530,9 @@
           <Property Type="Boolean" Name="IsActiveEmail" Nullable="false" />
           <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NationalityNumber" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="WebSite" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="AccountTypeNameAr" Nullable="true" />
           <Property Type="String" Name="AccountTypeNameEn" Nullable="true" />
           <Property Type="String" Name="CountryNameAr" Nullable="true" />
@@ -1890,6 +2557,9 @@
           <Property Type="Boolean" Name="IsActiveEmail" Nullable="false" />
           <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NationalityNumber" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="WebSite" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="AccountTypeNameAr" Nullable="true" />
           <Property Type="String" Name="AccountTypeNameEn" Nullable="true" />
           <Property Type="String" Name="CountryNameAr" Nullable="true" />
@@ -1914,6 +2584,9 @@
           <Property Type="Boolean" Name="IsActiveEmail" Nullable="false" />
           <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NationalityNumber" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="WebSite" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="AccountTypeNameAr" Nullable="true" />
           <Property Type="String" Name="AccountTypeNameEn" Nullable="true" />
           <Property Type="String" Name="CountryNameAr" Nullable="true" />
@@ -1938,12 +2611,23 @@
           <Property Type="Boolean" Name="IsActiveEmail" Nullable="false" />
           <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NationalityNumber" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="WebSite" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="AccountTypeNameAr" Nullable="true" />
           <Property Type="String" Name="AccountTypeNameEn" Nullable="true" />
           <Property Type="String" Name="CountryNameAr" Nullable="true" />
           <Property Type="String" Name="CountryNameEn" Nullable="true" />
           <Property Type="String" Name="CityNameAr" Nullable="true" />
           <Property Type="String" Name="CityNameEn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UserSocialAccounts_SelectAllByUserId_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="FKSocialAccountType_Id" Nullable="false" />
+          <Property Type="String" Name="Link" Nullable="false" />
+          <Property Type="Int64" Name="FKUser_Id" Nullable="false" />
+          <Property Type="String" Name="AccountTypeNameAr" Nullable="true" />
+          <Property Type="String" Name="AccountTypeNameEn" Nullable="true" />
         </ComplexType>
         <ComplexType Name="UsersPrivileges_SelectByMenuId_Result">
           <Property Type="Int32" Name="Page_Id" Nullable="false" />
@@ -1957,109 +2641,112 @@
           <Property Type="Boolean" Name="UsersPrivileges_CanDisplay" Nullable="true" />
           <Property Type="Boolean" Name="UsersPrivileges_CanEdit" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="Enquires_Closed_Result">
-          <Property Type="String" Name="Enquiry_ClendarEventId" Nullable="true" />
-          <Property Type="String" Name="Event_ClendarEventId" Nullable="true" />
+        <ComplexType Name="EmployeeDistributionWorks_SelectByEventId_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="FKWorkType_Id" Nullable="false" />
+          <Property Type="Int64" Name="FKEmployee_Id" Nullable="false" />
+          <Property Type="Int64" Name="FKEvent_Id" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="FKAccountType_Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsFinshed" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="EventWorksStatusHistory_SelectLast_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsFinshed" Nullable="false" />
+          <Property Type="DateTime" Name="DateTime" Nullable="false" Precision="23" />
+          <Property Type="Int64" Name="FKEvent_Id" Nullable="false" />
+          <Property Type="Int32" Name="FKWorkType_Id" Nullable="false" />
+          <Property Type="Int64" Name="FKUsre_Id" Nullable="false" />
+          <Property Type="Int32" Name="FKAccountType_Id" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="EventCoordinations_SelectByEventId_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="TaskNumber" Nullable="false" />
+          <Property Type="String" Name="Task" Nullable="false" MaxLength="50" />
+          <Property Type="Time" Name="StartTime" Nullable="false" />
+          <Property Type="Time" Name="EndTime" Nullable="false" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+          <Property Type="Int64" Name="FKEvent_Id" Nullable="false" />
+          <Property Type="Int64" Name="FKUserCreated_Id" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="EventId" Nullable="false" />
+          <Property Type="Boolean" Name="Booking" Nullable="true" />
+          <Property Type="Boolean" Name="DataPerfection" Nullable="true" />
+          <Property Type="Boolean" Name="Coordination" Nullable="true" />
+          <Property Type="Boolean" Name="Implementation" Nullable="true" />
+          <Property Type="Boolean" Name="ArchivingAndSaveing" Nullable="true" />
+          <Property Type="Boolean" Name="ProductProcessing" Nullable="true" />
+          <Property Type="Boolean" Name="Chooseing" Nullable="true" />
+          <Property Type="Boolean" Name="DigitalProcessing" Nullable="true" />
+          <Property Type="Boolean" Name="PreparingForPrinting" Nullable="true" />
+          <Property Type="Boolean" Name="Manufacturing" Nullable="true" />
+          <Property Type="Boolean" Name="QualityAndReview" Nullable="true" />
+          <Property Type="Boolean" Name="Packaging" Nullable="true" />
+          <Property Type="Boolean" Name="TransmissionAndDelivery" Nullable="true" />
+          <Property Type="Boolean" Name="Archiving" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Events_SelectInformation_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsClinetCustomLogo" Nullable="true" />
+          <Property Type="String" Name="LogoFilePath" Nullable="true" />
+          <Property Type="Boolean" Name="IsNamesAr" Nullable="true" />
+          <Property Type="String" Name="NameGroom" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NameBride" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="FKPrintNameType_Id" Nullable="true" />
+          <Property Type="DateTime" Name="EventDateTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="FKPackage_Id" Nullable="false" />
+          <Property Type="Int64" Name="FKClinet_Id" Nullable="false" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+          <Property Type="Int64" Name="FKUserCreaed_Id" Nullable="false" />
+          <Property Type="Int32" Name="FKBranch_Id" Nullable="false" />
+          <Property Type="String" Name="ClendarEventId" Nullable="true" />
+          <Property Type="Decimal" Name="PackagePrice" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PackageNamsArExtraPrice" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="VistToCoordinationDateTime" Nullable="true" Precision="23" />
           <Property Type="String" Name="VistToCoordinationClendarEventId" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="Enquires_SelectByFilter_Result">
-          <Property Type="Int64" Name="Id" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="PhoneNo" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="FkCountry_Id" Nullable="false" />
-          <Property Type="Int32" Name="FkCity_Id" Nullable="false" />
-          <Property Type="Int32" Name="FKEnquiryType_Id" Nullable="true" />
-          <Property Type="Int64" Name="FKUserCreated_Id" Nullable="false" />
-          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="Day" Nullable="false" />
-          <Property Type="Int32" Name="Month" Nullable="false" />
-          <Property Type="Int32" Name="Year" Nullable="false" />
-          <Property Type="Int32" Name="FKBranch_Id" Nullable="true" />
-          <Property Type="Boolean" Name="IsLinkedClinet" Nullable="true" />
+          <Property Type="Int64" Name="EventId" Nullable="false" />
+          <Property Type="Boolean" Name="Booking" Nullable="true" />
+          <Property Type="Boolean" Name="DataPerfection" Nullable="true" />
+          <Property Type="Boolean" Name="Coordination" Nullable="true" />
+          <Property Type="Boolean" Name="Implementation" Nullable="true" />
+          <Property Type="Boolean" Name="ArchivingAndSaveing" Nullable="true" />
+          <Property Type="Boolean" Name="ProductProcessing" Nullable="true" />
+          <Property Type="Boolean" Name="Chooseing" Nullable="true" />
+          <Property Type="Boolean" Name="DigitalProcessing" Nullable="true" />
+          <Property Type="Boolean" Name="PreparingForPrinting" Nullable="true" />
+          <Property Type="Boolean" Name="Manufacturing" Nullable="true" />
+          <Property Type="Boolean" Name="QualityAndReview" Nullable="true" />
+          <Property Type="Boolean" Name="Packaging" Nullable="true" />
+          <Property Type="Boolean" Name="TransmissionAndDelivery" Nullable="true" />
+          <Property Type="Boolean" Name="Archiving" Nullable="true" />
+          <Property Type="String" Name="EnquiryName" Nullable="true" MaxLength="101" />
           <Property Type="Boolean" Name="IsClosed" Nullable="true" />
-          <Property Type="DateTime" Name="ClosedDateTime" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="IsWithBranch" Nullable="false" />
-          <Property Type="String" Name="ClendarEventId" Nullable="true" />
-          <Property Type="Int64" Name="FkClinet_Id" Nullable="true" />
-          <Property Type="Boolean" Name="IsCreatedEvent" Nullable="false" />
-          <Property Type="String" Name="CountryNameAr" Nullable="true" />
-          <Property Type="String" Name="CountryNameEn" Nullable="true" />
-          <Property Type="String" Name="CityNameAr" Nullable="true" />
-          <Property Type="String" Name="CityNameEn" Nullable="true" />
-          <Property Type="String" Name="EnquiryTypeNameAr" Nullable="true" />
-          <Property Type="String" Name="EnquiryTypeNameEn" Nullable="true" />
-          <Property Type="String" Name="BranchNameAR" Nullable="true" />
-          <Property Type="String" Name="BranchNameEn" Nullable="true" />
-          <Property Type="String" Name="EnquiryCreatedUserName" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="CountIsDepositPaymented" Nullable="true" />
+          <Property Type="String" Name="Package_NameAr" Nullable="true" />
+          <Property Type="String" Name="Package_NameEn" Nullable="true" />
+          <Property Type="Boolean" Name="Package_IsAllowPrintNames" Nullable="false" />
+          <Property Type="String" Name="PrintNameType_NameAr" Nullable="true" />
+          <Property Type="String" Name="PrintNameType_NameEn" Nullable="true" />
+          <Property Type="String" Name="Branch_NameAr" Nullable="true" />
+          <Property Type="String" Name="Branch_NameEn" Nullable="true" />
+          <Property Type="String" Name="Clinet_UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="UserCreated_UserName" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="TotalPayments" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Boolean" Name="IsPayment" Nullable="true" />
+          <Property Type="Decimal" Name="TotalPaymentsActivated" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
-        <ComplexType Name="Enquires_SelectByPk_Result">
-          <Property Type="Int64" Name="Id" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="PhoneNo" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="FkCountry_Id" Nullable="false" />
-          <Property Type="Int32" Name="FkCity_Id" Nullable="false" />
-          <Property Type="Int32" Name="FKEnquiryType_Id" Nullable="true" />
-          <Property Type="Int64" Name="FKUserCreated_Id" Nullable="false" />
-          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="Day" Nullable="false" />
-          <Property Type="Int32" Name="Month" Nullable="false" />
-          <Property Type="Int32" Name="Year" Nullable="false" />
-          <Property Type="Int32" Name="FKBranch_Id" Nullable="true" />
-          <Property Type="Boolean" Name="IsLinkedClinet" Nullable="true" />
-          <Property Type="Boolean" Name="IsClosed" Nullable="true" />
-          <Property Type="DateTime" Name="ClosedDateTime" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="IsWithBranch" Nullable="false" />
-          <Property Type="String" Name="ClendarEventId" Nullable="true" />
-          <Property Type="Int64" Name="FkClinet_Id" Nullable="true" />
-          <Property Type="Boolean" Name="IsCreatedEvent" Nullable="false" />
-          <Property Type="String" Name="CountryNameAr" Nullable="true" />
-          <Property Type="String" Name="CountryNameEn" Nullable="true" />
-          <Property Type="String" Name="CityNameAr" Nullable="true" />
-          <Property Type="String" Name="CityNameEn" Nullable="true" />
-          <Property Type="String" Name="EnquiryTypeNameAr" Nullable="true" />
-          <Property Type="String" Name="EnquiryTypeNameEn" Nullable="true" />
-          <Property Type="String" Name="BranchNameAR" Nullable="true" />
-          <Property Type="String" Name="BranchNameEn" Nullable="true" />
-          <Property Type="String" Name="EnquiryCreatedUserName" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="CountIsDepositPaymented" Nullable="true" />
+        <ComplexType Name="FilesReceivedTypes_SelectAll_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+          <Property Type="String" Name="NameAr" Nullable="true" />
+          <Property Type="String" Name="NameEn" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="Enquires_SelectByPk_SimpleData_Result">
-          <Property Type="Int64" Name="Id" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="PhoneNo" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="FkCountry_Id" Nullable="false" />
-          <Property Type="Int32" Name="FkCity_Id" Nullable="false" />
-          <Property Type="Int32" Name="FKEnquiryType_Id" Nullable="true" />
-          <Property Type="Int64" Name="FKUserCreated_Id" Nullable="false" />
-          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="Day" Nullable="false" />
-          <Property Type="Int32" Name="Month" Nullable="false" />
-          <Property Type="Int32" Name="Year" Nullable="false" />
-          <Property Type="Int32" Name="FKBranch_Id" Nullable="true" />
-          <Property Type="Boolean" Name="IsLinkedClinet" Nullable="true" />
-          <Property Type="Boolean" Name="IsClosed" Nullable="true" />
-          <Property Type="DateTime" Name="ClosedDateTime" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="IsWithBranch" Nullable="false" />
-          <Property Type="String" Name="ClendarEventId" Nullable="true" />
-          <Property Type="Int64" Name="FkClinet_Id" Nullable="true" />
-          <Property Type="Boolean" Name="IsCreatedEvent" Nullable="false" />
-          <Property Type="Int32" Name="CountIsDepositPaymented" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="EnquiryStatusTypes_SelectByEnquiryId_Result">
-          <Property Type="Int64" Name="Status_Id" Nullable="false" />
-          <Property Type="String" Name="Status_NameAr" Nullable="true" />
-          <Property Type="String" Name="Status_NameEn" Nullable="true" />
-          <Property Type="String" Name="Status_Notes" Nullable="true" />
-          <Property Type="DateTime" Name="Status_CreateDateTime" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="Status_ScheduleVisitDateTime" Nullable="true" Precision="23" />
-          <Property Type="Int64" Name="Status_UserCreatedId" Nullable="false" />
-          <Property Type="Int64" Name="Status_EnquiryPaymentId" Nullable="true" />
-          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="String" Name="Status_CreatedUserName" Nullable="false" MaxLength="50" />
+        <ComplexType Name="FilesReceivedTypes_SelectByFilter_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+          <Property Type="String" Name="NameAr" Nullable="true" />
+          <Property Type="String" Name="NameEn" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2217,17 +2904,6 @@
           <FunctionImportMapping FunctionImportName="EmployeeDistributionWorks_CheckIfInserted" FunctionName="LayanModel.Store.EmployeeDistributionWorks_CheckIfInserted" />
           <FunctionImportMapping FunctionImportName="EmployeeDistributionWorks_Delete" FunctionName="LayanModel.Store.EmployeeDistributionWorks_Delete" />
           <FunctionImportMapping FunctionImportName="EmployeeDistributionWorks_Insert" FunctionName="LayanModel.Store.EmployeeDistributionWorks_Insert" />
-          <FunctionImportMapping FunctionImportName="EmployeeDistributionWorks_SelectByEventId" FunctionName="LayanModel.Store.EmployeeDistributionWorks_SelectByEventId">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.EmployeeDistributionWorks_SelectByEventId_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FKWorkType_Id" ColumnName="FKWorkType_Id" />
-                <ScalarProperty Name="FKEmployee_Id" ColumnName="FKEmployee_Id" />
-                <ScalarProperty Name="FKEvent_Id" ColumnName="FKEvent_Id" />
-                <ScalarProperty Name="IsFinshed" ColumnName="IsFinshed" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Employees_CheckAllowAccessToEventForUpdateWorks" FunctionName="LayanModel.Store.Employees_CheckAllowAccessToEventForUpdateWorks" />
           <FunctionImportMapping FunctionImportName="Employees_SelectWorks" FunctionName="LayanModel.Store.Employees_SelectWorks">
             <ResultMapping>
@@ -2254,6 +2930,121 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Enquires_CheckFromOwner" FunctionName="LayanModel.Store.Enquires_CheckFromOwner" />
+          <FunctionImportMapping FunctionImportName="Enquires_CheckIfCreatedEvent" FunctionName="LayanModel.Store.Enquires_CheckIfCreatedEvent" />
+          <FunctionImportMapping FunctionImportName="Enquires_CheckIfWithBranch" FunctionName="LayanModel.Store.Enquires_CheckIfWithBranch" />
+          <FunctionImportMapping FunctionImportName="Enquires_Closed" FunctionName="LayanModel.Store.Enquires_Closed">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Enquires_Closed_Result">
+                <ScalarProperty Name="Enquiry_ClendarEventId" ColumnName="Enquiry_ClendarEventId" />
+                <ScalarProperty Name="Event_ClendarEventId" ColumnName="Event_ClendarEventId" />
+                <ScalarProperty Name="VistToCoordinationClendarEventId" ColumnName="VistToCoordinationClendarEventId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Enquires_Delete" FunctionName="LayanModel.Store.Enquires_Delete" />
+          <FunctionImportMapping FunctionImportName="Enquires_Insert" FunctionName="LayanModel.Store.Enquires_Insert" />
+          <FunctionImportMapping FunctionImportName="Enquires_IsClosed" FunctionName="LayanModel.Store.Enquires_IsClosed" />
+          <FunctionImportMapping FunctionImportName="Enquires_SelectByFilter" FunctionName="LayanModel.Store.Enquires_SelectByFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Enquires_SelectByFilter_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="FkCountry_Id" ColumnName="FkCountry_Id" />
+                <ScalarProperty Name="FkCity_Id" ColumnName="FkCity_Id" />
+                <ScalarProperty Name="FKEnquiryType_Id" ColumnName="FKEnquiryType_Id" />
+                <ScalarProperty Name="FKUserCreated_Id" ColumnName="FKUserCreated_Id" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="FKBranch_Id" ColumnName="FKBranch_Id" />
+                <ScalarProperty Name="IsLinkedClinet" ColumnName="IsLinkedClinet" />
+                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+                <ScalarProperty Name="ClosedDateTime" ColumnName="ClosedDateTime" />
+                <ScalarProperty Name="IsWithBranch" ColumnName="IsWithBranch" />
+                <ScalarProperty Name="ClendarEventId" ColumnName="ClendarEventId" />
+                <ScalarProperty Name="FkClinet_Id" ColumnName="FkClinet_Id" />
+                <ScalarProperty Name="IsCreatedEvent" ColumnName="IsCreatedEvent" />
+                <ScalarProperty Name="CountryNameAr" ColumnName="CountryNameAr" />
+                <ScalarProperty Name="CountryNameEn" ColumnName="CountryNameEn" />
+                <ScalarProperty Name="CityNameAr" ColumnName="CityNameAr" />
+                <ScalarProperty Name="CityNameEn" ColumnName="CityNameEn" />
+                <ScalarProperty Name="EnquiryTypeNameAr" ColumnName="EnquiryTypeNameAr" />
+                <ScalarProperty Name="EnquiryTypeNameEn" ColumnName="EnquiryTypeNameEn" />
+                <ScalarProperty Name="BranchNameAR" ColumnName="BranchNameAR" />
+                <ScalarProperty Name="BranchNameEn" ColumnName="BranchNameEn" />
+                <ScalarProperty Name="EnquiryCreatedUserName" ColumnName="EnquiryCreatedUserName" />
+                <ScalarProperty Name="CountIsDepositPaymented" ColumnName="CountIsDepositPaymented" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Enquires_SelectByPk" FunctionName="LayanModel.Store.Enquires_SelectByPk">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Enquires_SelectByPk_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="FkCountry_Id" ColumnName="FkCountry_Id" />
+                <ScalarProperty Name="FkCity_Id" ColumnName="FkCity_Id" />
+                <ScalarProperty Name="FKEnquiryType_Id" ColumnName="FKEnquiryType_Id" />
+                <ScalarProperty Name="FKUserCreated_Id" ColumnName="FKUserCreated_Id" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="FKBranch_Id" ColumnName="FKBranch_Id" />
+                <ScalarProperty Name="IsLinkedClinet" ColumnName="IsLinkedClinet" />
+                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+                <ScalarProperty Name="ClosedDateTime" ColumnName="ClosedDateTime" />
+                <ScalarProperty Name="IsWithBranch" ColumnName="IsWithBranch" />
+                <ScalarProperty Name="ClendarEventId" ColumnName="ClendarEventId" />
+                <ScalarProperty Name="FkClinet_Id" ColumnName="FkClinet_Id" />
+                <ScalarProperty Name="IsCreatedEvent" ColumnName="IsCreatedEvent" />
+                <ScalarProperty Name="CountryNameAr" ColumnName="CountryNameAr" />
+                <ScalarProperty Name="CountryNameEn" ColumnName="CountryNameEn" />
+                <ScalarProperty Name="CityNameAr" ColumnName="CityNameAr" />
+                <ScalarProperty Name="CityNameEn" ColumnName="CityNameEn" />
+                <ScalarProperty Name="EnquiryTypeNameAr" ColumnName="EnquiryTypeNameAr" />
+                <ScalarProperty Name="EnquiryTypeNameEn" ColumnName="EnquiryTypeNameEn" />
+                <ScalarProperty Name="BranchNameAR" ColumnName="BranchNameAR" />
+                <ScalarProperty Name="BranchNameEn" ColumnName="BranchNameEn" />
+                <ScalarProperty Name="EnquiryCreatedUserName" ColumnName="EnquiryCreatedUserName" />
+                <ScalarProperty Name="CountIsDepositPaymented" ColumnName="CountIsDepositPaymented" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Enquires_SelectByPk_SimpleData" FunctionName="LayanModel.Store.Enquires_SelectByPk_SimpleData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Enquires_SelectByPk_SimpleData_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="FkCountry_Id" ColumnName="FkCountry_Id" />
+                <ScalarProperty Name="FkCity_Id" ColumnName="FkCity_Id" />
+                <ScalarProperty Name="FKEnquiryType_Id" ColumnName="FKEnquiryType_Id" />
+                <ScalarProperty Name="FKUserCreated_Id" ColumnName="FKUserCreated_Id" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="FKBranch_Id" ColumnName="FKBranch_Id" />
+                <ScalarProperty Name="IsLinkedClinet" ColumnName="IsLinkedClinet" />
+                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+                <ScalarProperty Name="ClosedDateTime" ColumnName="ClosedDateTime" />
+                <ScalarProperty Name="IsWithBranch" ColumnName="IsWithBranch" />
+                <ScalarProperty Name="ClendarEventId" ColumnName="ClendarEventId" />
+                <ScalarProperty Name="FkClinet_Id" ColumnName="FkClinet_Id" />
+                <ScalarProperty Name="IsCreatedEvent" ColumnName="IsCreatedEvent" />
+                <ScalarProperty Name="CountIsDepositPaymented" ColumnName="CountIsDepositPaymented" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Enquires_Update" FunctionName="LayanModel.Store.Enquires_Update" />
           <FunctionImportMapping FunctionImportName="Enquiries_ChangeCreateEventState" FunctionName="LayanModel.Store.Enquiries_ChangeCreateEventState" />
           <FunctionImportMapping FunctionImportName="Enquiries_UpdateCalendarEventId" FunctionName="LayanModel.Store.Enquiries_UpdateCalendarEventId" />
           <FunctionImportMapping FunctionImportName="EnquiryNote_Insert" FunctionName="LayanModel.Store.EnquiryNote_Insert" />
@@ -2289,6 +3080,22 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="EnquiryStatus_Insert" FunctionName="LayanModel.Store.EnquiryStatus_Insert" />
+          <FunctionImportMapping FunctionImportName="EnquiryStatusTypes_SelectByEnquiryId" FunctionName="LayanModel.Store.EnquiryStatusTypes_SelectByEnquiryId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.EnquiryStatusTypes_SelectByEnquiryId_Result">
+                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
+                <ScalarProperty Name="Status_NameAr" ColumnName="Status_NameAr" />
+                <ScalarProperty Name="Status_NameEn" ColumnName="Status_NameEn" />
+                <ScalarProperty Name="Status_Notes" ColumnName="Status_Notes" />
+                <ScalarProperty Name="Status_CreateDateTime" ColumnName="Status_CreateDateTime" />
+                <ScalarProperty Name="Status_ScheduleVisitDateTime" ColumnName="Status_ScheduleVisitDateTime" />
+                <ScalarProperty Name="Status_UserCreatedId" ColumnName="Status_UserCreatedId" />
+                <ScalarProperty Name="Status_EnquiryPaymentId" ColumnName="Status_EnquiryPaymentId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Status_CreatedUserName" ColumnName="Status_CreatedUserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="EnquiryTypes_CheckIfUsed" FunctionName="LayanModel.Store.EnquiryTypes_CheckIfUsed" />
           <FunctionImportMapping FunctionImportName="EnquiryTypes_Delete" FunctionName="LayanModel.Store.EnquiryTypes_Delete" />
           <FunctionImportMapping FunctionImportName="EnquiryTypes_Insert" FunctionName="LayanModel.Store.EnquiryTypes_Insert" />
@@ -2315,22 +3122,9 @@
           <FunctionImportMapping FunctionImportName="EnquiryTypes_Update" FunctionName="LayanModel.Store.EnquiryTypes_Update" />
           <FunctionImportMapping FunctionImportName="EventCoordinations_Delete" FunctionName="LayanModel.Store.EventCoordinations_Delete" />
           <FunctionImportMapping FunctionImportName="EventCoordinations_Insert" FunctionName="LayanModel.Store.EventCoordinations_Insert" />
-          <FunctionImportMapping FunctionImportName="EventCoordinations_SelectByEventId" FunctionName="LayanModel.Store.EventCoordinations_SelectByEventId">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.EventCoordinations_SelectByEventId_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TaskNumber" ColumnName="TaskNumber" />
-                <ScalarProperty Name="Task" ColumnName="Task" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="FKEvent_Id" ColumnName="FKEvent_Id" />
-                <ScalarProperty Name="FKUserCreated_Id" ColumnName="FKUserCreated_Id" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="EventCoordinations_SelectTasksNumber" FunctionName="LayanModel.Store.EventCoordinations_SelectTasksNumber" />
+          <FunctionImportMapping FunctionImportName="Events_CheckFromDateEventIsFinshed" FunctionName="LayanModel.Store.Events_CheckFromDateEventIsFinshed" />
+          <FunctionImportMapping FunctionImportName="Events_CountsByYear" FunctionName="LayanModel.Store.Events_CountsByYear" />
           <FunctionImportMapping FunctionImportName="Events_Insert" FunctionName="LayanModel.Store.Events_Insert" />
           <FunctionImportMapping FunctionImportName="Events_SelectByFilter" FunctionName="LayanModel.Store.Events_SelectByFilter">
             <ResultMapping>
@@ -2388,6 +3182,21 @@
                 <ScalarProperty Name="PackageNamsArExtraPrice" ColumnName="PackageNamsArExtraPrice" />
                 <ScalarProperty Name="VistToCoordinationDateTime" ColumnName="VistToCoordinationDateTime" />
                 <ScalarProperty Name="VistToCoordinationClendarEventId" ColumnName="VistToCoordinationClendarEventId" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="Booking" ColumnName="Booking" />
+                <ScalarProperty Name="DataPerfection" ColumnName="DataPerfection" />
+                <ScalarProperty Name="Coordination" ColumnName="Coordination" />
+                <ScalarProperty Name="Implementation" ColumnName="Implementation" />
+                <ScalarProperty Name="ArchivingAndSaveing" ColumnName="ArchivingAndSaveing" />
+                <ScalarProperty Name="ProductProcessing" ColumnName="ProductProcessing" />
+                <ScalarProperty Name="Chooseing" ColumnName="Chooseing" />
+                <ScalarProperty Name="DigitalProcessing" ColumnName="DigitalProcessing" />
+                <ScalarProperty Name="PreparingForPrinting" ColumnName="PreparingForPrinting" />
+                <ScalarProperty Name="Manufacturing" ColumnName="Manufacturing" />
+                <ScalarProperty Name="QualityAndReview" ColumnName="QualityAndReview" />
+                <ScalarProperty Name="Packaging" ColumnName="Packaging" />
+                <ScalarProperty Name="TransmissionAndDelivery" ColumnName="TransmissionAndDelivery" />
+                <ScalarProperty Name="Archiving" ColumnName="Archiving" />
                 <ScalarProperty Name="EnquiryName" ColumnName="EnquiryName" />
                 <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
                 <ScalarProperty Name="Branch_NameAr" ColumnName="Branch_NameAr" />
@@ -2427,52 +3236,116 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Events_SelectInformation" FunctionName="LayanModel.Store.Events_SelectInformation">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.Events_SelectInformation_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IsClinetCustomLogo" ColumnName="IsClinetCustomLogo" />
-                <ScalarProperty Name="LogoFilePath" ColumnName="LogoFilePath" />
-                <ScalarProperty Name="IsNamesAr" ColumnName="IsNamesAr" />
-                <ScalarProperty Name="NameGroom" ColumnName="NameGroom" />
-                <ScalarProperty Name="NameBride" ColumnName="NameBride" />
-                <ScalarProperty Name="FKPrintNameType_Id" ColumnName="FKPrintNameType_Id" />
-                <ScalarProperty Name="EventDateTime" ColumnName="EventDateTime" />
-                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
-                <ScalarProperty Name="FKPackage_Id" ColumnName="FKPackage_Id" />
-                <ScalarProperty Name="FKClinet_Id" ColumnName="FKClinet_Id" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="FKUserCreaed_Id" ColumnName="FKUserCreaed_Id" />
-                <ScalarProperty Name="FKBranch_Id" ColumnName="FKBranch_Id" />
-                <ScalarProperty Name="ClendarEventId" ColumnName="ClendarEventId" />
-                <ScalarProperty Name="PackagePrice" ColumnName="PackagePrice" />
-                <ScalarProperty Name="PackageNamsArExtraPrice" ColumnName="PackageNamsArExtraPrice" />
-                <ScalarProperty Name="VistToCoordinationDateTime" ColumnName="VistToCoordinationDateTime" />
-                <ScalarProperty Name="VistToCoordinationClendarEventId" ColumnName="VistToCoordinationClendarEventId" />
-                <ScalarProperty Name="EnquiryName" ColumnName="EnquiryName" />
-                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
-                <ScalarProperty Name="Package_NameAr" ColumnName="Package_NameAr" />
-                <ScalarProperty Name="Package_NameEn" ColumnName="Package_NameEn" />
-                <ScalarProperty Name="Package_IsAllowPrintNames" ColumnName="Package_IsAllowPrintNames" />
-                <ScalarProperty Name="PrintNameType_NameAr" ColumnName="PrintNameType_NameAr" />
-                <ScalarProperty Name="PrintNameType_NameEn" ColumnName="PrintNameType_NameEn" />
-                <ScalarProperty Name="Branch_NameAr" ColumnName="Branch_NameAr" />
-                <ScalarProperty Name="Branch_NameEn" ColumnName="Branch_NameEn" />
-                <ScalarProperty Name="Clinet_UserName" ColumnName="Clinet_UserName" />
-                <ScalarProperty Name="UserCreated_UserName" ColumnName="UserCreated_UserName" />
-                <ScalarProperty Name="TotalPayments" ColumnName="TotalPayments" />
-                <ScalarProperty Name="IsPayment" ColumnName="IsPayment" />
-                <ScalarProperty Name="TotalPaymentsActivated" ColumnName="TotalPaymentsActivated" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Events_Update" FunctionName="LayanModel.Store.Events_Update" />
           <FunctionImportMapping FunctionImportName="Events_Update2" FunctionName="LayanModel.Store.Events_Update2" />
           <FunctionImportMapping FunctionImportName="Events_UpdateCalendarEventId" FunctionName="LayanModel.Store.Events_UpdateCalendarEventId" />
-          <FunctionImportMapping FunctionImportName="EventWorksStatus_Insert" FunctionName="LayanModel.Store.EventWorksStatus_Insert" />
-          <FunctionImportMapping FunctionImportName="EventWorksStatus_SelectByEventId" FunctionName="LayanModel.Store.EventWorksStatus_SelectByEventId">
+          <FunctionImportMapping FunctionImportName="EventSurveies_ChartByYear" FunctionName="LayanModel.Store.EventSurveies_ChartByYear">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.EventWorksStatus_SelectByEventId_Result">
+              <ComplexTypeMapping TypeName="LayanModel.EventSurveies_ChartByYear_Result">
+                <ScalarProperty Name="EventDateTime" ColumnName="EventDateTime" />
+                <ScalarProperty Name="CountIsSatisfied" ColumnName="CountIsSatisfied" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EventSurveies_DeleteByEventId" FunctionName="LayanModel.Store.EventSurveies_DeleteByEventId" />
+          <FunctionImportMapping FunctionImportName="EventSurveies_Insert" FunctionName="LayanModel.Store.EventSurveies_Insert" />
+          <FunctionImportMapping FunctionImportName="EventSurveies_Insert_DeleteByEventId" FunctionName="LayanModel.Store.EventSurveies_Insert_DeleteByEventId" />
+          <FunctionImportMapping FunctionImportName="EventSurveies_SelectByPK" FunctionName="LayanModel.Store.EventSurveies_SelectByPK">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.EventSurveies_SelectByPK_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKClinet_Id" ColumnName="FKClinet_Id" />
+                <ScalarProperty Name="IsSatisfied" ColumnName="IsSatisfied" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EventSurvey_CheckIfIsInserted" FunctionName="LayanModel.Store.EventSurvey_CheckIfIsInserted" />
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestionAnswerer_DeleteByEventSurveyId" FunctionName="LayanModel.Store.EventSurveyQuestionAnswerer_DeleteByEventSurveyId" />
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestionAnswerer_Insert" FunctionName="LayanModel.Store.EventSurveyQuestionAnswerer_Insert" />
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestions_CheckIfInserted" FunctionName="LayanModel.Store.EventSurveyQuestions_CheckIfInserted" />
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestions_CheckIfUsed" FunctionName="LayanModel.Store.EventSurveyQuestions_CheckIfUsed" />
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestions_Delete" FunctionName="LayanModel.Store.EventSurveyQuestions_Delete" />
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestions_Insert" FunctionName="LayanModel.Store.EventSurveyQuestions_Insert" />
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestions_RemoveByEventId" FunctionName="LayanModel.Store.EventSurveyQuestions_RemoveByEventId" />
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestions_SelectAll" FunctionName="LayanModel.Store.EventSurveyQuestions_SelectAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.EventSurveyQuestions_SelectAll_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="FKSurveyQuestionType_Id" ColumnName="FKSurveyQuestionType_Id" />
+                <ScalarProperty Name="FKEvent_Id" ColumnName="FKEvent_Id" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SurveyQuestionNameAr" ColumnName="SurveyQuestionNameAr" />
+                <ScalarProperty Name="SurveyQuestionNameEn" ColumnName="SurveyQuestionNameEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestions_SelectByEventId" FunctionName="LayanModel.Store.EventSurveyQuestions_SelectByEventId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.EventSurveyQuestions_SelectByEventId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SurveyQuestionTypeId" ColumnName="SurveyQuestionTypeId" />
+                <ScalarProperty Name="SurveyQuestionTypeNameAr" ColumnName="SurveyQuestionTypeNameAr" />
+                <ScalarProperty Name="SurveyQuestionTypeNameEn" ColumnName="SurveyQuestionTypeNameEn" />
+                <ScalarProperty Name="Answerer" ColumnName="Answerer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestions_SelectDefault" FunctionName="LayanModel.Store.EventSurveyQuestions_SelectDefault">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.EventSurveyQuestions_SelectDefault_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="FKSurveyQuestionType_Id" ColumnName="FKSurveyQuestionType_Id" />
+                <ScalarProperty Name="FKEvent_Id" ColumnName="FKEvent_Id" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SurveyQuestionNameAr" ColumnName="SurveyQuestionNameAr" />
+                <ScalarProperty Name="SurveyQuestionNameEn" ColumnName="SurveyQuestionNameEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestions_Update" FunctionName="LayanModel.Store.EventSurveyQuestions_Update" />
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestions_WithEvent" FunctionName="LayanModel.Store.EventSurveyQuestions_WithEvent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.EventSurveyQuestions_WithEvent_Result">
+                <ScalarProperty Name="SurveyQuestionTypeId" ColumnName="SurveyQuestionTypeId" />
+                <ScalarProperty Name="FKEvent_Id" ColumnName="FKEvent_Id" />
+                <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+                <ScalarProperty Name="SurveyQuestionTypeAr" ColumnName="SurveyQuestionTypeAr" />
+                <ScalarProperty Name="SurveyQuestionTypeEn" ColumnName="SurveyQuestionTypeEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestionTypes_CheckIfUsed" FunctionName="LayanModel.Store.EventSurveyQuestionTypes_CheckIfUsed" />
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestionTypes_Delete" FunctionName="LayanModel.Store.EventSurveyQuestionTypes_Delete" />
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestionTypes_Insert" FunctionName="LayanModel.Store.EventSurveyQuestionTypes_Insert" />
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestionTypes_SelectAll" FunctionName="LayanModel.Store.EventSurveyQuestionTypes_SelectAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.EventSurveyQuestionTypes_SelectAll_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+                <ScalarProperty Name="InputType" ColumnName="InputType" />
+                <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestionTypes_SelectByFilter" FunctionName="LayanModel.Store.EventSurveyQuestionTypes_SelectByFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.EventSurveyQuestionTypes_SelectByFilter_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+                <ScalarProperty Name="InputType" ColumnName="InputType" />
+                <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EventSurveyQuestionTypes_Update" FunctionName="LayanModel.Store.EventSurveyQuestionTypes_Update" />
+          <FunctionImportMapping FunctionImportName="EventWorksStatusHistory_Insert" FunctionName="LayanModel.Store.EventWorksStatusHistory_Insert" />
+          <FunctionImportMapping FunctionImportName="EventWorksStatusHistory_SelectByEventId" FunctionName="LayanModel.Store.EventWorksStatusHistory_SelectByEventId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.EventWorksStatusHistory_SelectByEventId_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IsFinshed" ColumnName="IsFinshed" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
@@ -2486,6 +3359,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EventWorksStatusIsFinshed_Update" FunctionName="LayanModel.Store.EventWorksStatusIsFinshed_Update" />
           <FunctionImportMapping FunctionImportName="Menus_SelectAll" FunctionName="LayanModel.Store.Menus_SelectAll">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LayanModel.Menus_SelectAll_Result">
@@ -2665,9 +3539,49 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="User_EmailBeforUsed" FunctionName="LayanModel.Store.User_EmailBeforUsed" />
-          <FunctionImportMapping FunctionImportName="User_PhoneNumberBeforUsed" FunctionName="LayanModel.Store.User_PhoneNumberBeforUsed" />
-          <FunctionImportMapping FunctionImportName="User_UserNameBeforUsed" FunctionName="LayanModel.Store.User_UserNameBeforUsed" />
+          <FunctionImportMapping FunctionImportName="SocialAccountTypes_CheckIfUsed" FunctionName="LayanModel.Store.SocialAccountTypes_CheckIfUsed" />
+          <FunctionImportMapping FunctionImportName="SocialAccountTypes_Delete" FunctionName="LayanModel.Store.SocialAccountTypes_Delete" />
+          <FunctionImportMapping FunctionImportName="SocialAccountTypes_Insert" FunctionName="LayanModel.Store.SocialAccountTypes_Insert" />
+          <FunctionImportMapping FunctionImportName="SocialAccountTypes_SelectAll" FunctionName="LayanModel.Store.SocialAccountTypes_SelectAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.SocialAccountTypes_SelectAll_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+                <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SocialAccountTypes_SelectByFilter" FunctionName="LayanModel.Store.SocialAccountTypes_SelectByFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.SocialAccountTypes_SelectByFilter_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+                <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SocialAccountTypes_Update" FunctionName="LayanModel.Store.SocialAccountTypes_Update" />
+          <FunctionImportMapping FunctionImportName="UserPayments_Insert" FunctionName="LayanModel.Store.UserPayments_Insert" />
+          <FunctionImportMapping FunctionImportName="UserPayments_SelectByUserToId" FunctionName="LayanModel.Store.UserPayments_SelectByUserToId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.UserPayments_SelectByUserToId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="IsAcceptFromManger" ColumnName="IsAcceptFromManger" />
+                <ScalarProperty Name="FKUserTo_Id" ColumnName="FKUserTo_Id" />
+                <ScalarProperty Name="FKUserFrom_Id" ColumnName="FKUserFrom_Id" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="PaymentImage" ColumnName="PaymentImage" />
+                <ScalarProperty Name="IsBankTransfer" ColumnName="IsBankTransfer" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UserPayments_Update" FunctionName="LayanModel.Store.UserPayments_Update" />
           <FunctionImportMapping FunctionImportName="UserPrivileges_Insert" FunctionName="LayanModel.Store.UserPrivileges_Insert" />
           <FunctionImportMapping FunctionImportName="UserPrivileges_RemoveByMenuIdAndUserId" FunctionName="LayanModel.Store.UserPrivileges_RemoveByMenuIdAndUserId" />
           <FunctionImportMapping FunctionImportName="UserPrivileges_SelectByUserId" FunctionName="LayanModel.Store.UserPrivileges_SelectByUserId">
@@ -2702,11 +3616,20 @@
                 <ScalarProperty Name="IsActiveEmail" ColumnName="IsActiveEmail" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="NationalityNumber" ColumnName="NationalityNumber" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Users_CheckCompeleteAccountInformation" FunctionName="LayanModel.Store.Users_CheckCompeleteAccountInformation" />
           <FunctionImportMapping FunctionImportName="Users_CheckFromActiveCode" FunctionName="LayanModel.Store.Users_CheckFromActiveCode" />
+          <FunctionImportMapping FunctionImportName="Users_CheckIfActive" FunctionName="LayanModel.Store.Users_CheckIfActive" />
           <FunctionImportMapping FunctionImportName="Users_CheckIfEmailActivated" FunctionName="LayanModel.Store.Users_CheckIfEmailActivated" />
+          <FunctionImportMapping FunctionImportName="Users_EmailBeforUsed" FunctionName="LayanModel.Store.Users_EmailBeforUsed" />
+          <FunctionImportMapping FunctionImportName="Users_Insert" FunctionName="LayanModel.Store.Users_Insert" />
+          <FunctionImportMapping FunctionImportName="Users_NationalityNumberBeforUsed" FunctionName="LayanModel.Store.Users_NationalityNumberBeforUsed" />
+          <FunctionImportMapping FunctionImportName="Users_PhoneNumberBeforUsed" FunctionName="LayanModel.Store.Users_PhoneNumberBeforUsed" />
           <FunctionImportMapping FunctionImportName="Users_SelectAllEmployees" FunctionName="LayanModel.Store.Users_SelectAllEmployees">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LayanModel.Users_SelectAllEmployees_Result">
@@ -2726,6 +3649,40 @@
                 <ScalarProperty Name="IsActiveEmail" ColumnName="IsActiveEmail" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="NationalityNumber" ColumnName="NationalityNumber" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+                <ScalarProperty Name="AccountTypeNameAr" ColumnName="AccountTypeNameAr" />
+                <ScalarProperty Name="AccountTypeNameEn" ColumnName="AccountTypeNameEn" />
+                <ScalarProperty Name="CountryNameAr" ColumnName="CountryNameAr" />
+                <ScalarProperty Name="CountryNameEn" ColumnName="CountryNameEn" />
+                <ScalarProperty Name="CityNameAr" ColumnName="CityNameAr" />
+                <ScalarProperty Name="CityNameEn" ColumnName="CityNameEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Users_SelectAllForUsersPrivileges" FunctionName="LayanModel.Store.Users_SelectAllForUsersPrivileges">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Users_SelectAllForUsersPrivileges_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ActiveCode" ColumnName="ActiveCode" />
+                <ScalarProperty Name="FKAccountType_Id" ColumnName="FKAccountType_Id" />
+                <ScalarProperty Name="FkCountry_Id" ColumnName="FkCountry_Id" />
+                <ScalarProperty Name="FkCity_Id" ColumnName="FkCity_Id" />
+                <ScalarProperty Name="FKLanguage_Id" ColumnName="FKLanguage_Id" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="FKPranch_Id" ColumnName="FKPranch_Id" />
+                <ScalarProperty Name="IsActiveEmail" ColumnName="IsActiveEmail" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="NationalityNumber" ColumnName="NationalityNumber" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
                 <ScalarProperty Name="AccountTypeNameAr" ColumnName="AccountTypeNameAr" />
                 <ScalarProperty Name="AccountTypeNameEn" ColumnName="AccountTypeNameEn" />
                 <ScalarProperty Name="CountryNameAr" ColumnName="CountryNameAr" />
@@ -2754,6 +3711,35 @@
                 <ScalarProperty Name="IsActiveEmail" ColumnName="IsActiveEmail" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="NationalityNumber" ColumnName="NationalityNumber" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+                <ScalarProperty Name="FkWorkType_Id" ColumnName="FkWorkType_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Users_SelectByBranchIdWithWorkTypes" FunctionName="LayanModel.Store.Users_SelectByBranchIdWithWorkTypes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Users_SelectByBranchIdWithWorkTypes_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ActiveCode" ColumnName="ActiveCode" />
+                <ScalarProperty Name="FKAccountType_Id" ColumnName="FKAccountType_Id" />
+                <ScalarProperty Name="FkCountry_Id" ColumnName="FkCountry_Id" />
+                <ScalarProperty Name="FkCity_Id" ColumnName="FkCity_Id" />
+                <ScalarProperty Name="FKLanguage_Id" ColumnName="FKLanguage_Id" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="FKPranch_Id" ColumnName="FKPranch_Id" />
+                <ScalarProperty Name="IsActiveEmail" ColumnName="IsActiveEmail" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="NationalityNumber" ColumnName="NationalityNumber" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
                 <ScalarProperty Name="FkWorkType_Id" ColumnName="FkWorkType_Id" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -2777,6 +3763,9 @@
                 <ScalarProperty Name="IsActiveEmail" ColumnName="IsActiveEmail" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="NationalityNumber" ColumnName="NationalityNumber" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
                 <ScalarProperty Name="AccountTypeNameAr" ColumnName="AccountTypeNameAr" />
                 <ScalarProperty Name="AccountTypeNameEn" ColumnName="AccountTypeNameEn" />
                 <ScalarProperty Name="CountryNameAr" ColumnName="CountryNameAr" />
@@ -2805,6 +3794,9 @@
                 <ScalarProperty Name="IsActiveEmail" ColumnName="IsActiveEmail" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="NationalityNumber" ColumnName="NationalityNumber" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
                 <ScalarProperty Name="AccountTypeNameAr" ColumnName="AccountTypeNameAr" />
                 <ScalarProperty Name="AccountTypeNameEn" ColumnName="AccountTypeNameEn" />
                 <ScalarProperty Name="CountryNameAr" ColumnName="CountryNameAr" />
@@ -2833,6 +3825,9 @@
                 <ScalarProperty Name="IsActiveEmail" ColumnName="IsActiveEmail" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="NationalityNumber" ColumnName="NationalityNumber" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
                 <ScalarProperty Name="AccountTypeNameAr" ColumnName="AccountTypeNameAr" />
                 <ScalarProperty Name="AccountTypeNameEn" ColumnName="AccountTypeNameEn" />
                 <ScalarProperty Name="CountryNameAr" ColumnName="CountryNameAr" />
@@ -2863,6 +3858,9 @@
                 <ScalarProperty Name="IsActiveEmail" ColumnName="IsActiveEmail" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="NationalityNumber" ColumnName="NationalityNumber" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
                 <ScalarProperty Name="AccountTypeNameAr" ColumnName="AccountTypeNameAr" />
                 <ScalarProperty Name="AccountTypeNameEn" ColumnName="AccountTypeNameEn" />
                 <ScalarProperty Name="CountryNameAr" ColumnName="CountryNameAr" />
@@ -2872,6 +3870,22 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Users_UserNameBeforUsed" FunctionName="LayanModel.Store.Users_UserNameBeforUsed" />
+          <FunctionImportMapping FunctionImportName="UserSocialAccounts_Delete" FunctionName="LayanModel.Store.UserSocialAccounts_Delete" />
+          <FunctionImportMapping FunctionImportName="UserSocialAccounts_Insert" FunctionName="LayanModel.Store.UserSocialAccounts_Insert" />
+          <FunctionImportMapping FunctionImportName="UserSocialAccounts_SelectAllByUserId" FunctionName="LayanModel.Store.UserSocialAccounts_SelectAllByUserId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.UserSocialAccounts_SelectAllByUserId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKSocialAccountType_Id" ColumnName="FKSocialAccountType_Id" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="FKUser_Id" ColumnName="FKUser_Id" />
+                <ScalarProperty Name="AccountTypeNameAr" ColumnName="AccountTypeNameAr" />
+                <ScalarProperty Name="AccountTypeNameEn" ColumnName="AccountTypeNameEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UsersPrivileges_ChekcIfIsClosed" FunctionName="LayanModel.Store.UsersPrivileges_ChekcIfIsClosed" />
           <FunctionImportMapping FunctionImportName="UsersPrivileges_SelectByMenuId" FunctionName="LayanModel.Store.UsersPrivileges_SelectByMenuId">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LayanModel.UsersPrivileges_SelectByMenuId_Result">
@@ -2891,136 +3905,142 @@
           <FunctionImportMapping FunctionImportName="Words_Delete" FunctionName="LayanModel.Store.Words_Delete" />
           <FunctionImportMapping FunctionImportName="Words_Insert" FunctionName="LayanModel.Store.Words_Insert" />
           <FunctionImportMapping FunctionImportName="Words_Update" FunctionName="LayanModel.Store.Words_Update" />
-          <FunctionImportMapping FunctionImportName="Enquires_Closed" FunctionName="LayanModel.Store.Enquires_Closed">
+          <FunctionImportMapping FunctionImportName="EmployeeDistributionWorks_SelectByEventId" FunctionName="LayanModel.Store.EmployeeDistributionWorks_SelectByEventId">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.Enquires_Closed_Result">
-                <ScalarProperty Name="Enquiry_ClendarEventId" ColumnName="Enquiry_ClendarEventId" />
-                <ScalarProperty Name="Event_ClendarEventId" ColumnName="Event_ClendarEventId" />
+              <ComplexTypeMapping TypeName="LayanModel.EmployeeDistributionWorks_SelectByEventId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKWorkType_Id" ColumnName="FKWorkType_Id" />
+                <ScalarProperty Name="FKEmployee_Id" ColumnName="FKEmployee_Id" />
+                <ScalarProperty Name="FKEvent_Id" ColumnName="FKEvent_Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FKAccountType_Id" ColumnName="FKAccountType_Id" />
+                <ScalarProperty Name="IsFinshed" ColumnName="IsFinshed" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EventWorksStatusHistory_SelectLast" FunctionName="LayanModel.Store.EventWorksStatusHistory_SelectLast">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.EventWorksStatusHistory_SelectLast_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IsFinshed" ColumnName="IsFinshed" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="FKEvent_Id" ColumnName="FKEvent_Id" />
+                <ScalarProperty Name="FKWorkType_Id" ColumnName="FKWorkType_Id" />
+                <ScalarProperty Name="FKUsre_Id" ColumnName="FKUsre_Id" />
+                <ScalarProperty Name="FKAccountType_Id" ColumnName="FKAccountType_Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EventWorksStatusIsFinsed_CheckIfFinshed" FunctionName="LayanModel.Store.EventWorksStatusIsFinsed_CheckIfFinshed" />
+          <FunctionImportMapping FunctionImportName="EventCoordinations_SelectByEventId" FunctionName="LayanModel.Store.EventCoordinations_SelectByEventId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.EventCoordinations_SelectByEventId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TaskNumber" ColumnName="TaskNumber" />
+                <ScalarProperty Name="Task" ColumnName="Task" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="FKEvent_Id" ColumnName="FKEvent_Id" />
+                <ScalarProperty Name="FKUserCreated_Id" ColumnName="FKUserCreated_Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="Booking" ColumnName="Booking" />
+                <ScalarProperty Name="DataPerfection" ColumnName="DataPerfection" />
+                <ScalarProperty Name="Coordination" ColumnName="Coordination" />
+                <ScalarProperty Name="Implementation" ColumnName="Implementation" />
+                <ScalarProperty Name="ArchivingAndSaveing" ColumnName="ArchivingAndSaveing" />
+                <ScalarProperty Name="ProductProcessing" ColumnName="ProductProcessing" />
+                <ScalarProperty Name="Chooseing" ColumnName="Chooseing" />
+                <ScalarProperty Name="DigitalProcessing" ColumnName="DigitalProcessing" />
+                <ScalarProperty Name="PreparingForPrinting" ColumnName="PreparingForPrinting" />
+                <ScalarProperty Name="Manufacturing" ColumnName="Manufacturing" />
+                <ScalarProperty Name="QualityAndReview" ColumnName="QualityAndReview" />
+                <ScalarProperty Name="Packaging" ColumnName="Packaging" />
+                <ScalarProperty Name="TransmissionAndDelivery" ColumnName="TransmissionAndDelivery" />
+                <ScalarProperty Name="Archiving" ColumnName="Archiving" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Events_SelectInformation" FunctionName="LayanModel.Store.Events_SelectInformation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Events_SelectInformation_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IsClinetCustomLogo" ColumnName="IsClinetCustomLogo" />
+                <ScalarProperty Name="LogoFilePath" ColumnName="LogoFilePath" />
+                <ScalarProperty Name="IsNamesAr" ColumnName="IsNamesAr" />
+                <ScalarProperty Name="NameGroom" ColumnName="NameGroom" />
+                <ScalarProperty Name="NameBride" ColumnName="NameBride" />
+                <ScalarProperty Name="FKPrintNameType_Id" ColumnName="FKPrintNameType_Id" />
+                <ScalarProperty Name="EventDateTime" ColumnName="EventDateTime" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="FKPackage_Id" ColumnName="FKPackage_Id" />
+                <ScalarProperty Name="FKClinet_Id" ColumnName="FKClinet_Id" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="FKUserCreaed_Id" ColumnName="FKUserCreaed_Id" />
+                <ScalarProperty Name="FKBranch_Id" ColumnName="FKBranch_Id" />
+                <ScalarProperty Name="ClendarEventId" ColumnName="ClendarEventId" />
+                <ScalarProperty Name="PackagePrice" ColumnName="PackagePrice" />
+                <ScalarProperty Name="PackageNamsArExtraPrice" ColumnName="PackageNamsArExtraPrice" />
+                <ScalarProperty Name="VistToCoordinationDateTime" ColumnName="VistToCoordinationDateTime" />
                 <ScalarProperty Name="VistToCoordinationClendarEventId" ColumnName="VistToCoordinationClendarEventId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Enquires_Delete" FunctionName="LayanModel.Store.Enquires_Delete" />
-          <FunctionImportMapping FunctionImportName="Enquires_Insert" FunctionName="LayanModel.Store.Enquires_Insert" />
-          <FunctionImportMapping FunctionImportName="Enquires_IsClosed" FunctionName="LayanModel.Store.Enquires_IsClosed" />
-          <FunctionImportMapping FunctionImportName="Enquires_SelectByFilter" FunctionName="LayanModel.Store.Enquires_SelectByFilter">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.Enquires_SelectByFilter_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
-                <ScalarProperty Name="FkCountry_Id" ColumnName="FkCountry_Id" />
-                <ScalarProperty Name="FkCity_Id" ColumnName="FkCity_Id" />
-                <ScalarProperty Name="FKEnquiryType_Id" ColumnName="FKEnquiryType_Id" />
-                <ScalarProperty Name="FKUserCreated_Id" ColumnName="FKUserCreated_Id" />
-                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
-                <ScalarProperty Name="Day" ColumnName="Day" />
-                <ScalarProperty Name="Month" ColumnName="Month" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="FKBranch_Id" ColumnName="FKBranch_Id" />
-                <ScalarProperty Name="IsLinkedClinet" ColumnName="IsLinkedClinet" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="Booking" ColumnName="Booking" />
+                <ScalarProperty Name="DataPerfection" ColumnName="DataPerfection" />
+                <ScalarProperty Name="Coordination" ColumnName="Coordination" />
+                <ScalarProperty Name="Implementation" ColumnName="Implementation" />
+                <ScalarProperty Name="ArchivingAndSaveing" ColumnName="ArchivingAndSaveing" />
+                <ScalarProperty Name="ProductProcessing" ColumnName="ProductProcessing" />
+                <ScalarProperty Name="Chooseing" ColumnName="Chooseing" />
+                <ScalarProperty Name="DigitalProcessing" ColumnName="DigitalProcessing" />
+                <ScalarProperty Name="PreparingForPrinting" ColumnName="PreparingForPrinting" />
+                <ScalarProperty Name="Manufacturing" ColumnName="Manufacturing" />
+                <ScalarProperty Name="QualityAndReview" ColumnName="QualityAndReview" />
+                <ScalarProperty Name="Packaging" ColumnName="Packaging" />
+                <ScalarProperty Name="TransmissionAndDelivery" ColumnName="TransmissionAndDelivery" />
+                <ScalarProperty Name="Archiving" ColumnName="Archiving" />
+                <ScalarProperty Name="EnquiryName" ColumnName="EnquiryName" />
                 <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
-                <ScalarProperty Name="ClosedDateTime" ColumnName="ClosedDateTime" />
-                <ScalarProperty Name="IsWithBranch" ColumnName="IsWithBranch" />
-                <ScalarProperty Name="ClendarEventId" ColumnName="ClendarEventId" />
-                <ScalarProperty Name="FkClinet_Id" ColumnName="FkClinet_Id" />
-                <ScalarProperty Name="IsCreatedEvent" ColumnName="IsCreatedEvent" />
-                <ScalarProperty Name="CountryNameAr" ColumnName="CountryNameAr" />
-                <ScalarProperty Name="CountryNameEn" ColumnName="CountryNameEn" />
-                <ScalarProperty Name="CityNameAr" ColumnName="CityNameAr" />
-                <ScalarProperty Name="CityNameEn" ColumnName="CityNameEn" />
-                <ScalarProperty Name="EnquiryTypeNameAr" ColumnName="EnquiryTypeNameAr" />
-                <ScalarProperty Name="EnquiryTypeNameEn" ColumnName="EnquiryTypeNameEn" />
-                <ScalarProperty Name="BranchNameAR" ColumnName="BranchNameAR" />
-                <ScalarProperty Name="BranchNameEn" ColumnName="BranchNameEn" />
-                <ScalarProperty Name="EnquiryCreatedUserName" ColumnName="EnquiryCreatedUserName" />
-                <ScalarProperty Name="CountIsDepositPaymented" ColumnName="CountIsDepositPaymented" />
+                <ScalarProperty Name="Package_NameAr" ColumnName="Package_NameAr" />
+                <ScalarProperty Name="Package_NameEn" ColumnName="Package_NameEn" />
+                <ScalarProperty Name="Package_IsAllowPrintNames" ColumnName="Package_IsAllowPrintNames" />
+                <ScalarProperty Name="PrintNameType_NameAr" ColumnName="PrintNameType_NameAr" />
+                <ScalarProperty Name="PrintNameType_NameEn" ColumnName="PrintNameType_NameEn" />
+                <ScalarProperty Name="Branch_NameAr" ColumnName="Branch_NameAr" />
+                <ScalarProperty Name="Branch_NameEn" ColumnName="Branch_NameEn" />
+                <ScalarProperty Name="Clinet_UserName" ColumnName="Clinet_UserName" />
+                <ScalarProperty Name="UserCreated_UserName" ColumnName="UserCreated_UserName" />
+                <ScalarProperty Name="TotalPayments" ColumnName="TotalPayments" />
+                <ScalarProperty Name="IsPayment" ColumnName="IsPayment" />
+                <ScalarProperty Name="TotalPaymentsActivated" ColumnName="TotalPaymentsActivated" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Enquires_SelectByPk" FunctionName="LayanModel.Store.Enquires_SelectByPk">
+          <FunctionImportMapping FunctionImportName="FilesReceivedTypes_CheckIfUsed" FunctionName="LayanModel.Store.FilesReceivedTypes_CheckIfUsed" />
+          <FunctionImportMapping FunctionImportName="FilesReceivedTypes_Delete" FunctionName="LayanModel.Store.FilesReceivedTypes_Delete" />
+          <FunctionImportMapping FunctionImportName="FilesReceivedTypes_Insert" FunctionName="LayanModel.Store.FilesReceivedTypes_Insert" />
+          <FunctionImportMapping FunctionImportName="FilesReceivedTypes_SelectAll" FunctionName="LayanModel.Store.FilesReceivedTypes_SelectAll">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.Enquires_SelectByPk_Result">
+              <ComplexTypeMapping TypeName="LayanModel.FilesReceivedTypes_SelectAll_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
-                <ScalarProperty Name="FkCountry_Id" ColumnName="FkCountry_Id" />
-                <ScalarProperty Name="FkCity_Id" ColumnName="FkCity_Id" />
-                <ScalarProperty Name="FKEnquiryType_Id" ColumnName="FKEnquiryType_Id" />
-                <ScalarProperty Name="FKUserCreated_Id" ColumnName="FKUserCreated_Id" />
-                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
-                <ScalarProperty Name="Day" ColumnName="Day" />
-                <ScalarProperty Name="Month" ColumnName="Month" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="FKBranch_Id" ColumnName="FKBranch_Id" />
-                <ScalarProperty Name="IsLinkedClinet" ColumnName="IsLinkedClinet" />
-                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
-                <ScalarProperty Name="ClosedDateTime" ColumnName="ClosedDateTime" />
-                <ScalarProperty Name="IsWithBranch" ColumnName="IsWithBranch" />
-                <ScalarProperty Name="ClendarEventId" ColumnName="ClendarEventId" />
-                <ScalarProperty Name="FkClinet_Id" ColumnName="FkClinet_Id" />
-                <ScalarProperty Name="IsCreatedEvent" ColumnName="IsCreatedEvent" />
-                <ScalarProperty Name="CountryNameAr" ColumnName="CountryNameAr" />
-                <ScalarProperty Name="CountryNameEn" ColumnName="CountryNameEn" />
-                <ScalarProperty Name="CityNameAr" ColumnName="CityNameAr" />
-                <ScalarProperty Name="CityNameEn" ColumnName="CityNameEn" />
-                <ScalarProperty Name="EnquiryTypeNameAr" ColumnName="EnquiryTypeNameAr" />
-                <ScalarProperty Name="EnquiryTypeNameEn" ColumnName="EnquiryTypeNameEn" />
-                <ScalarProperty Name="BranchNameAR" ColumnName="BranchNameAR" />
-                <ScalarProperty Name="BranchNameEn" ColumnName="BranchNameEn" />
-                <ScalarProperty Name="EnquiryCreatedUserName" ColumnName="EnquiryCreatedUserName" />
-                <ScalarProperty Name="CountIsDepositPaymented" ColumnName="CountIsDepositPaymented" />
+                <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+                <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Enquires_SelectByPk_SimpleData" FunctionName="LayanModel.Store.Enquires_SelectByPk_SimpleData">
+          <FunctionImportMapping FunctionImportName="FilesReceivedTypes_SelectByFilter" FunctionName="LayanModel.Store.FilesReceivedTypes_SelectByFilter">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.Enquires_SelectByPk_SimpleData_Result">
+              <ComplexTypeMapping TypeName="LayanModel.FilesReceivedTypes_SelectByFilter_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
-                <ScalarProperty Name="FkCountry_Id" ColumnName="FkCountry_Id" />
-                <ScalarProperty Name="FkCity_Id" ColumnName="FkCity_Id" />
-                <ScalarProperty Name="FKEnquiryType_Id" ColumnName="FKEnquiryType_Id" />
-                <ScalarProperty Name="FKUserCreated_Id" ColumnName="FKUserCreated_Id" />
-                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
-                <ScalarProperty Name="Day" ColumnName="Day" />
-                <ScalarProperty Name="Month" ColumnName="Month" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="FKBranch_Id" ColumnName="FKBranch_Id" />
-                <ScalarProperty Name="IsLinkedClinet" ColumnName="IsLinkedClinet" />
-                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
-                <ScalarProperty Name="ClosedDateTime" ColumnName="ClosedDateTime" />
-                <ScalarProperty Name="IsWithBranch" ColumnName="IsWithBranch" />
-                <ScalarProperty Name="ClendarEventId" ColumnName="ClendarEventId" />
-                <ScalarProperty Name="FkClinet_Id" ColumnName="FkClinet_Id" />
-                <ScalarProperty Name="IsCreatedEvent" ColumnName="IsCreatedEvent" />
-                <ScalarProperty Name="CountIsDepositPaymented" ColumnName="CountIsDepositPaymented" />
+                <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+                <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Enquires_Update" FunctionName="LayanModel.Store.Enquires_Update" />
-          <FunctionImportMapping FunctionImportName="EnquiryStatusTypes_SelectByEnquiryId" FunctionName="LayanModel.Store.EnquiryStatusTypes_SelectByEnquiryId">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.EnquiryStatusTypes_SelectByEnquiryId_Result">
-                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
-                <ScalarProperty Name="Status_NameAr" ColumnName="Status_NameAr" />
-                <ScalarProperty Name="Status_NameEn" ColumnName="Status_NameEn" />
-                <ScalarProperty Name="Status_Notes" ColumnName="Status_Notes" />
-                <ScalarProperty Name="Status_CreateDateTime" ColumnName="Status_CreateDateTime" />
-                <ScalarProperty Name="Status_ScheduleVisitDateTime" ColumnName="Status_ScheduleVisitDateTime" />
-                <ScalarProperty Name="Status_UserCreatedId" ColumnName="Status_UserCreatedId" />
-                <ScalarProperty Name="Status_EnquiryPaymentId" ColumnName="Status_EnquiryPaymentId" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Status_CreatedUserName" ColumnName="Status_CreatedUserName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Users_Insert" FunctionName="LayanModel.Store.Users_Insert" />
-          <FunctionImportMapping FunctionImportName="EventWorksStatus_CheckIfFinshed" FunctionName="LayanModel.Store.EventWorksStatus_CheckIfFinshed" />
+          <FunctionImportMapping FunctionImportName="FilesReceivedTypes_Update" FunctionName="LayanModel.Store.FilesReceivedTypes_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

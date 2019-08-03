@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = Token.EventImplementations;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- begin:: Content Head -->
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+
+        <span class="kt-subheader__separator kt-hidden"></span>
+        <div class="kt-subheader__breadcrumbs">
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link">
+                @Token.HomePage
+            </a>
+
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">
+                @Token.EventImplementations
+            </a>
+
+            <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+        </div>
+    </div>
+
+</div>
+
+<!-- end:: Content Head -->
+<!--Page Body-->
+<div ng-controller="eventCtrl">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        @Token.EventImplementations
+                    </h3>
+                </div>
+            </div>
+
+            @Html.Partial("~/Views/Shared/_EmployeeEventWorks.cshtml")
+
+
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <!--(ANageeb) link angualr files for thsis  view -->
+<script src="~/Scripts/angularJS/views/eew/implementations/index/contoller.js"></script>
+<script src="~/Scripts/angularJS/views/eew/implementations/index/service.js"></script>
+}

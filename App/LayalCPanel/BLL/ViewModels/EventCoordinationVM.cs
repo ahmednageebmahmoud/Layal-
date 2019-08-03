@@ -22,5 +22,6 @@ namespace BLL.ViewModels
 
         public string Notes { get; set; }
         public string CreatedUserName { get;   set; }
+        public EventWorksStatusIsFinshedVM EventWorkStatusIsFinshed { get;   set; }
     }//end class
 }

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BLL.Services;
 
 namespace UI.Controllers
 {
@@ -15,7 +16,6 @@ namespace UI.Controllers
     public class UsersController : BasicController
     {
         UsersBLL UserBLL = new UsersBLL();
-
         [PagePrivilege(PagesEnum.Users, true, false)]
         public ActionResult Index()
         {
@@ -33,14 +33,20 @@ namespace UI.Controllers
             return View();
         }
 
+ 
+
+        
+
+
+
         [CheckIsEmilActived]
         public ActionResult ActiveEmail()
         {
             return View();
         }
 
-        
-               public ActionResult ProfileUpdate()
+
+        public ActionResult ProfileUpdate()
         {
             return View();
         }
@@ -52,36 +58,45 @@ namespace UI.Controllers
         {
             return Json(UserBLL.SelectById(null), JsonRequestBehavior.AllowGet);
         }
-        
 
-        public JsonResult GetItems()
+
+        public JsonResult GetItems(bool userInformaiton = false)
         {
-            return Json(new ResponseVM(RequestTypeEnum.Success, Token.Success, new
+            return Json(userInformaiton ? null : new ResponseVM(RequestTypeEnum.Success, Token.Success, new
             {
                 Countries = FillItems.GetCountries(),
                 Cities = FillItems.GetCities(),
-                Branches = FillItems.GetBranches()
+                Branches = FillItems.GetBranches(),
+                SaocialAccountTypes = FillItems.GetSocialAccountTypes()
 
             }), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetUsers(int? skip, int? take, string userName, string email, string phoneNumber, string adddress,
-            DateTime? createDateTo, DateTime? createDateFrom, int? countryId, int? cityId, int? accountTypeId, int? languageId)
+        public JsonResult GetUsers(UserVM user)
         {
-            return Json(UserBLL.GetUsers(skip, take, userName, email, phoneNumber, adddress,
-            createDateTo, createDateFrom, countryId, cityId, accountTypeId, languageId), JsonRequestBehavior.AllowGet);
+            return Json(UserBLL.GetUsers(user), JsonRequestBehavior.AllowGet);
         }
 
+        
         [HttpPost]
         public JsonResult SaveChange(UserVM user)
         {
             return Json(UserBLL.SaveChange(user), JsonRequestBehavior.AllowGet);
         }
 
+  
 
-        public JsonResult SendActiveCodeToEmail(Int64 id,string email,string userName)
+
+        [HttpPost]
+        public JsonResult AddSocialAccount(UserSocialAccountVM user)
         {
-            return Json(UserBLL.SendActiveCodeToEmail(id,email,userName), JsonRequestBehavior.AllowGet);
+            return Json(UserBLL.SaveChangeSocialAccount(user), JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult SendActiveCodeToEmail(Int64 id, string email, string userName)
+        {
+            return Json(UserBLL.SendActiveCodeToEmail(id, email, userName), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult ActiveEmailByActiveCode(Int64 id, string activeCode)
@@ -89,6 +104,6 @@ namespace UI.Controllers
             return Json(UserBLL.ActiveEmail(id, activeCode), JsonRequestBehavior.AllowGet);
         }
 
-        
+
     }//end class
 }

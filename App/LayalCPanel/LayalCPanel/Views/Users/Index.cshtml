@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     UsersPrivilegeVM Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.Users);
 
+
 }
 
 <!-- begin:: Content Head -->
@@ -42,7 +43,7 @@
                         @Token.Users
                     </h3>
                 </div>
-                <div class="kt-portlet__head-toolbar"  >
+                <div class="kt-portlet__head-toolbar">
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
                             @if (Priv.CanAdd)
@@ -65,37 +66,37 @@
                         <div class="form-group  row">
                             <!--AccountTypes-->
                             <div class="col-lg-3 form-group-sub">
-                            <label class="col-form-label ">@Token.AccountType</label>
+                                <label class="col-form-label ">@Token.AccountType</label>
                                 <select class="form-control"
                                         serchbale
-                                        ng-model="userFilter.accounTypeId"
+                                        ng-model="userFilter.AccounTypeId"
                                         ng-options="c.Id as c.AccountTypeName for c in accountTypes"
                                         ng-change="users=[]"></select>
                             </div>
                             <!--Language-->
                             <div class="col-lg-3 form-group-sub">
-                            <label class="col-form-label ">@Token.Language</label>
+                                <label class="col-form-label ">@Token.Language</label>
                                 <select class="form-control"
                                         serchbale
-                                        ng-model="userFilter.languageId"
+                                        ng-model="userFilter.LanguageId"
                                         ng-options="c.Id as c.LanguageName for c in languages"
                                         ng-change="users=[]"></select>
                             </div>
                             <!--Country-->
                             <div class="col-lg-3 form-group-sub">
-                            <label class="col-form-label ">@Token.Country</label>
+                                <label class="col-form-label ">@Token.Country</label>
                                 <select class="form-control"
                                         serchbale
-                                        ng-model="userFilter.countryId"
+                                        ng-model="userFilter.CountryId"
                                         ng-options="c.Id as c.CountryName for c in countries"
                                         ng-change="users=[]"></select>
                             </div>
                             <!--City-->
                             <div class="col-lg-3 form-group-sub">
-                            <label class="col-form-label ">@Token.City</label>
+                                <label class="col-form-label ">@Token.City</label>
                                 <select class="form-control"
                                         serchbale
-                                        ng-model="userFilter.cityId"
+                                        ng-model="userFilter.CityId"
                                         ng-options="c.Id as c.CityName for c in cities|filterWithoutStaticItems:{'CountryId':userFilter.countryId}"
                                         ng-change="users=[]"></select>
                             </div>
@@ -103,38 +104,48 @@
 
                         <!--R O W 2-->
                         <div class="form-group  row">
+
+                            <!--Branch-->
+                                <label class="col-form-label col-lg-2">@Token.Branch</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <select class="form-control"
+                                            serchbale
+                                            name="branch"
+                                            ng-model="userFilter.BranchId"
+                                            ng-options="c.Id as c.BranchName for c in branches|filterWithoutStaticItems:{'CityId':userFilter.CityId}"></select>
+                                </div>
                             <!--CreateDateFrom-->
                             <div class="col-lg-3 form-group-sub">
-                            <label class="col-form-label ">@Token.CreateDateFrom</label>
+                                <label class="col-form-label ">@Token.CreateDateFrom</label>
                                 <input type="date"
                                        class="form-control"
                                        id="createDateFrom"
-                                       ng-model="userFilter.createDateFrom"
+                                       ng-model="userFilter.CreateDateFrom"
                                        ng-change="users=[]" />
                             </div>
                             <!--CreateDateTo-->
                             <div class="col-lg-3 form-group-sub">
-                            <label class="col-form-label ">@Token.CreateDateTo</label>
+                                <label class="col-form-label ">@Token.CreateDateTo</label>
                                 <input type="date"
                                        class="form-control"
                                        id="createDateTo"
-                                       ng-model="userFilter.createDateTo"
+                                       ng-model="userFilter.CreateDateTo"
                                        ng-change="users=[]" />
                             </div>
                             <!--UerName-->
                             <div class="col-lg-3 form-group-sub">
-                            <label class="col-form-label ">@Token.UserName</label>
+                                <label class="col-form-label ">@Token.UserName</label>
                                 <input type="text"
                                        class="form-control"
-                                       ng-model="userFilter.userName"
+                                       ng-model="userFilter.UserName"
                                        ng-change="users=[]" />
                             </div>
                             <!--Email-->
                             <div class="col-lg-3 form-group-sub">
-                            <label class="col-form-label ">@Token.Email</label>
+                                <label class="col-form-label ">@Token.Email</label>
                                 <input type="text"
                                        class="form-control"
-                                       ng-model="userFilter.email"
+                                       ng-model="userFilter.Email"
                                        ng-change="users=[]" />
                             </div>
                         </div>
@@ -143,18 +154,18 @@
                         <div class="form-group  row">
                             <!--PhoneNumber-->
                             <div class="col-lg-3 form-group-sub">
-                            <label class="col-form-label ">@Token.PhoneNumber</label>
+                                <label class="col-form-label ">@Token.PhoneNumber</label>
                                 <input type="text"
                                        class="form-control"
-                                       ng-model="userFilter.phoneNumber"
+                                       ng-model="userFilter.PhoneNo"
                                        ng-change="users=[]" />
                             </div>
                             <!--Address-->
                             <div class="col-lg-3 form-group-sub">
-                            <label class="col-form-label ">@Token.Address</label>
+                                <label class="col-form-label ">@Token.Address</label>
                                 <input type="text"
                                        class="form-control"
-                                       ng-model="userFilter.adddress"
+                                       ng-model="userFilter.Adddress"
                                        ng-change="users=[]" />
                             </div>
                         </div>
@@ -238,8 +249,10 @@
                                         <!--Btn:Edit-->
                                         @if (Priv.CanEdit)
                                         {
-                                            <a href="/Users/AddAndUpdate?id={{x.Id}}" title="Edit" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                            <a href="/Users/AddAndUpdate?id={{x.Id}}" title="@Token.Edit" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
                                         }
+                                        <a href="/Users/UserInformation?id={{x.Id}}" title="@Token.UserInformation" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-search"></i></a>
+                                   
                                     </td>
                                 </tr>
                             </tbody>

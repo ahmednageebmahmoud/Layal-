@@ -34,6 +34,17 @@ namespace BLL.BLL
             };
         }
 
+        public object GetEventSurveyQuestionTypes()
+        {
+            var Result = db.EventSurveyQuestionTypes_SelectAll().Select(c => new EventSurveyQuestionTypeVM
+            {
+                Id = c.Id,
+                NameAr = c.NameAr,
+                NameEn = c.NameEn,
+            });
+            return Result;
+        }
+
         public object GetPackageInputTypes()
         {
             var Result = db.PackageInputTypes_SelectAll().Select(c => new PackageInputTypeVM
@@ -45,9 +56,85 @@ namespace BLL.BLL
             return Result;
         }
 
+        public object GetEventSurveiesChart(int year)
+        {
+            var Result = db.EventSurveies_ChartByYear(year).Select(c => new  EventSurveyVM
+            {
+                CountIsSatisfied=c.CountIsSatisfied,
+                EventDateTime=c.EventDateTime,
+
+            }).ToList();
+            var EventSurveyChart = new EventSurveyChartVM
+            {
+                CountEvents=db.Events_CountsByYear(year).First().Value,
+                Month1 = Result.Where(c => c.EventDateTime.Month == 1).Sum(v => v.CountIsSatisfied),
+                Month2 = Result.Where(c => c.EventDateTime.Month == 2).Sum(v => v.CountIsSatisfied),
+                Month3 = Result.Where(c => c.EventDateTime.Month == 3).Sum(v => v.CountIsSatisfied),
+                Month4 = Result.Where(c => c.EventDateTime.Month == 4).Sum(v => v.CountIsSatisfied),
+                Month5 = Result.Where(c => c.EventDateTime.Month == 5).Sum(v => v.CountIsSatisfied),
+                Month6 = Result.Where(c => c.EventDateTime.Month == 6).Sum(v => v.CountIsSatisfied),
+                Month7 = Result.Where(c => c.EventDateTime.Month == 7).Sum(v => v.CountIsSatisfied),
+                Month8 = Result.Where(c => c.EventDateTime.Month == 8).Sum(v => v.CountIsSatisfied),
+                Month9 = Result.Where(c => c.EventDateTime.Month == 9).Sum(v => v.CountIsSatisfied),
+                Month10 = Result.Where(c => c.EventDateTime.Month == 10).Sum(v => v.CountIsSatisfied),
+                Month11 = Result.Where(c => c.EventDateTime.Month == 11).Sum(v => v.CountIsSatisfied),
+                Month12 = Result.Where(c => c.EventDateTime.Month == 12).Sum(v => v.CountIsSatisfied),
+            };
+
+            return EventSurveyChart;
+        }
+
+        public object GetSurveyQuestions()
+        {
+            var Result = db.EventSurveyQuestions_SelectAll().Select(c => new EventSurveyQuestionVM
+            {
+                Id = c.Id,
+                IsActive=c.IsActive,
+                IsDefault=c.IsDefault,
+                SurveyQuestionTypeId=c.FKSurveyQuestionType_Id,
+                SurveyQuestion=new EventSurveyQuestionTypeVM
+                {
+                    NameAr=c.SurveyQuestionNameAr,
+                    NameEn=c.SurveyQuestionNameEn,
+                }
+            }).ToList();
+            return Result;
+        }
+
         public object GetAlbumsTypes()
         {
             var Result = db.AlbumTypes_SelectAll().Select(c => new AlbumTypeVM
+            {
+                Id = c.Id,
+                NameAr = c.NameAr,
+                NameEn = c.NameEn,
+            });
+            return Result;
+        }
+
+        public object UsersWithCurrentBranchWithWorkTypes(int branchId)
+        {
+            var Result = db.Users_SelectByBranchIdWithWorkTypes(branchId)
+              .GroupBy(c => new
+              {
+                  c.Id,
+                  c.UserName
+              })
+              .Select(c => new UserVM
+              {
+                  Id = c.Key.Id,
+                  UserName = c.Key.UserName,
+                  WorkTypes = c.Select(v => new WorkTypeVM
+                  {
+                      Id = v.FkWorkType_Id 
+                  }).ToList()
+              }).ToList();
+            return Result;
+        }
+
+        public object GetSocialAccountTypes()
+        {
+            var Result = db.SocialAccountTypes_SelectAll().Select(c => new SocialAccountTypeVM
             {
                 Id = c.Id,
                 NameAr = c.NameAr,
@@ -144,7 +231,7 @@ namespace BLL.BLL
                 {
                     Result.Add(GetMeue(Menus, c));
                 });
-                return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, Menus);
+                return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, Result);
 
             }
             catch (Exception ex)
@@ -212,7 +299,7 @@ namespace BLL.BLL
 
         public object GetEmployees()
         {
-            var Result = db.Users_SelectAllEmployees().Select(c => new UserVM
+            var Result = db.Users_SelectAllForUsersPrivileges().Select(c => new UserVM
             {
                 Id = c.Id,
                 AccountType = new AccountTypeVM

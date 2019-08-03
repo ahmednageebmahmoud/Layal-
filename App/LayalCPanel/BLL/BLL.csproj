@@ -104,10 +104,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\EEWBLL.cs" />
+    <Compile Include="BLL\EventCoordinationsBLL.cs" />
+    <Compile Include="BLL\EventSurveyQuestionsBLL.cs" />
     <Compile Include="BLL\EmployeeDistributionWorksBLL.cs" />
     <Compile Include="BLL\EmployeesWorksBLL.cs" />
+    <Compile Include="BLL\EventSurveyQuestionTypesBLL.cs" />
+    <Compile Include="BLL\FilesReceivedTypesBLL.cs" />
+    <Compile Include="BLL\UserPaymentsBLL.cs" />
     <Compile Include="BLL\EnquiryPaymentsBLL.cs" />
-    <Compile Include="BLL\EventCoordinationsBLL.cs" />
     <Compile Include="BLL\PackageInputTypesBLL.cs" />
     <Compile Include="BLL\BasicBLL.cs" />
     <Compile Include="BLL\BranchesBLL.cs" />
@@ -117,7 +122,8 @@
     <Compile Include="BLL\PackagesDetailBLL.cs" />
     <Compile Include="BLL\PackagesBLL.cs" />
     <Compile Include="BLL\AlbumTypesBLL.cs" />
-    <Compile Include="BLL\PrintNamesTypeBLL.cs" />
+    <Compile Include="BLL\SocialAccountTypesBLL.cs" />
+    <Compile Include="BLL\PrintNamesTypesBLL.cs" />
     <Compile Include="BLL\NotificationsBLL.cs" />
     <Compile Include="BLL\CitiesBLL.cs" />
     <Compile Include="BLL\CountriesBLL.cs" />
@@ -151,11 +157,17 @@
     <Compile Include="ViewModels\EmployeeWorkVM.cs" />
     <Compile Include="ViewModels\EnquiryPaymentVM.cs" />
     <Compile Include="ViewModels\EventCoordinationVM.cs" />
+    <Compile Include="ViewModels\EventSurveyChartVM.cs" />
+    <Compile Include="ViewModels\EventSurveyQuestionTypeVM.cs" />
+    <Compile Include="ViewModels\EventSurveyQuestionVM.cs" />
+    <Compile Include="ViewModels\EventSurveyVM.cs" />
     <Compile Include="ViewModels\EventVM.cs" />
+    <Compile Include="ViewModels\EventWorksStatusIsFinshedVM.cs" />
     <Compile Include="ViewModels\EventWorkStatusVM.cs" />
     <Compile Include="ViewModels\PackageDetailVM.cs" />
     <Compile Include="ViewModels\PackageInputTypeVM.cs" />
     <Compile Include="ViewModels\PackageVM.cs" />
+    <Compile Include="ViewModels\FilesReceivedTypeVM .cs" />
     <Compile Include="ViewModels\PrintNamesTypeVM.cs" />
     <Compile Include="ViewModels\EnquiryTypeVM.cs" />
     <Compile Include="ViewModels\EnquiryStatusVM.cs" />
@@ -168,7 +180,10 @@
     <Compile Include="ViewModels\NotifyVM.cs" />
     <Compile Include="ViewModels\PageVM.cs" />
     <Compile Include="ViewModels\ResponseVM.cs" />
+    <Compile Include="ViewModels\SocialAccountTypeVM.cs" />
     <Compile Include="ViewModels\UserCookieVM.cs" />
+    <Compile Include="ViewModels\UserPaymentVM.cs" />
+    <Compile Include="ViewModels\UserSocialAccountVM.cs" />
     <Compile Include="ViewModels\UsersPrivilegeVM.cs" />
     <Compile Include="ViewModels\UserVM.cs" />
     <Compile Include="ViewModels\WordVM.cs" />

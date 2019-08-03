@@ -1,7 +1,7 @@
 ﻿
 
 <div class="kt-portlet__body">
-    <form novalidate name="eventCoordinationFrm" class="kt-form kt-form--label-right" ng-submit="getEventCoordinations(true)">
+    <form novalidate name="eventCoordinationFrm" class="kt-form kt-form--label-right" ng-submit="getEvents(true)">
         <div class="kt-portlet__body">
             <!--R O W 1-->
             <div class="form-group  row">
@@ -49,8 +49,16 @@
                             ng-model="eventFilter.PackageId"
                             ng-options="c.Id as c.PackageName for c in packages"></select>
                 </div>
-            </div>
 
+                <!--Status-->
+                <div class="col-lg-3 form-group-sub">
+                    <label class="col-form-label">@Token.Status</label>
+                <select class="form-control"
+                        serchbale
+                        ng-model="eventFilter.IsFinshed"
+                        ng-options="c.Id as c.Name for c in finshedStatus"></select>
+            </div>
+        </div>
 
         </div>
 
@@ -117,12 +125,7 @@
                                   ng-sms-field-name="FinshedUserName"
                                   ng-sms-resource="@Token.FinshedUserName"></sms-sort>
                     </th>
-                    <th class="th-10">
-                        <sms-sort ng-sms-fop="enquiyFOP"
-                                  ng-sms-field-name="FinshedAccountTypeName"
-                                  ng-sms-resource="@Token.FinshedAccountType"></sms-sort>
-                    </th>
-                    
+                   
                     <th class="th-10">
                         @Token.Operations
                     </th>
@@ -135,17 +138,27 @@
                     <td><i class="fas " ng-class="{'fa-check':x.IsClinetCustomLogo}"></i></td>
                     <td>{{x.Package.PackageName}}</td>
                     <td>{{x.PrintNameType.PrintNamesTypeName}}</td>
-
-                    <!--Coordination Work Status-->
-                    <td ng-show="x.WorkTypeId==worksTypesEnum.Coordination"><i class="fas " ng-class="{'fa-check':x.CoordinationWorkStatus.IsFinshed}"></i></td>
-                    <td ng-show="x.WorkTypeId==worksTypesEnum.Coordination">{{x.CoordinationWorkStatus.DateTimeDisplay}}</td>
-                    <td ng-show="x.WorkTypeId==worksTypesEnum.Coordination">{{x.CoordinationWorkStatus.FinshedUserName}}</td>
-                    <td ng-show="x.WorkTypeId==worksTypesEnum.Coordination">{{x.CoordinationWorkStatus.FinshedAccountTypeName}}</td>
+                    <td><i class="fas " ng-class="{'fa-check':x.CurrentWorkStatus.IsFinshed}"></i></td>
+                    <td>{{x.CurrentWorkStatus.DateTimeDisplay}}</td>
+                    <td>{{x.CurrentWorkStatus.FinshedUserName}}</td>
                     <td>
-                        <!--Btn:Edit-->
-                        <a href="/EventCoordinations/AddAndUpdate?id={{x.Id}}" title="@Token.Update"  ng-if="x.WorkTypeId==worksTypesEnum.Coordination"
+                        <!--Btn:Coordination-->
+                        <a href="/EEW/AddAndUpdateCoordinations?id={{x.Id}}" 
+                           ng-if="!x.EventWorkStatusIsFinshed.Coordination&&x.WorkTypeId==worksTypesEnum.Coordination"
+                           title="@Token.Update"  
                             class="btn btn-sm btn-clean btn-icon btn-icon-md" ><i class="la la-edit"></i></a>
-                    </td>
+                      
+                        <a href="javascript:void(0)"
+                           ng-if="!x.EventWorkStatusIsFinshed.Implementation&&x.WorkTypeId==worksTypesEnum.Implementation"
+                           title="@Token.Finshe"
+                           ng-click="taskFinsh(x)"
+                           class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="flaticon-interface-10"></i></a>
+
+                    
+                    
+                    
+                    
+                      </td>
 
 
                     <!--Another Here-->

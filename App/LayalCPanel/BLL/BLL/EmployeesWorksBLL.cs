@@ -20,8 +20,6 @@ namespace BLL.BLL
         /// <returns></returns>
         public object SelectCurrentEmployeeWorks()
         {
-            if (!this.UserLoggad.IsEmployee)
-                return null;
             return db.Employees_SelectWorks(this.UserLoggad.Id).Select(c => new EmployeeWorkVM
             {
                 Id = c.Id,

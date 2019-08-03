@@ -1,4 +1,5 @@
-﻿ngApp.controller('distributionOfWorkCtrl', ['$scope', '$http', 'eventsServ', function (s, h, eventsServ) {
+﻿/// <reference path="../../../../_references.js" />
+ngApp.controller('distributionOfWorkCtrl', ['$scope', '$http', 'eventsServ', function (s, h, eventsServ) {
     s.state = StateEnum;
     s.events = [];
     s.eventFOP = {};
@@ -14,20 +15,7 @@
         UserName: Token.select
     }];
     	
-    s.workTypes = [
-        { Id: null,WorkTypeName: Token.select},
-        { Id: 3, WorkTypeName: LangIsEn ? 'Coordination' : 'الاعداد والتنسيق' },
-        { Id: 5, WorkTypeName: LangIsEn ? 'Archiving and Saveing' : 'الأرشفة و الحفظ	' },
-        { Id: 6, WorkTypeName: LangIsEn?'Product processing':'تجهيز المنتاجات'},
-        { Id: 7, WorkTypeName: LangIsEn?'Chooseing':'الاختيار'},
-        { Id: 8, WorkTypeName: LangIsEn?'Digital processing':'المعالجة الرقمية'},
-        { Id: 9, WorkTypeName: LangIsEn?'Preparing for printing':'الاعداد للطباعة	'},
-        { Id: 10, WorkTypeName: LangIsEn?'Manufacturing':'التصنيع'},
-        { Id: 11, WorkTypeName: LangIsEn ? 'Quality and review' : 'الجودة و المراجعة' },
-        { Id: 12, WorkTypeName: LangIsEn?'Packaging':'التغليف'},
-        { Id: 13, WorkTypeName: LangIsEn?'Transmission and delivery  ':'الارسال و التسليم'},
-        { Id: 14, WorkTypeName: LangIsEn?'Archiving':'الأرشفة'},
-    ];
+    s.workTypes =[{Id:null,WorkTypeName:Token.select},...workTypesList];
     s.employeeDistributionWorks = [];
     //============= G E T =================
     //get items
@@ -40,7 +28,6 @@
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
                     s.employees = s.employees.concat(d.data.Result.Employees);
-
                 } break;
                 case RequestTypeEnum.error:
                 case RequestTypeEnum.warning:
