@@ -1,10 +1,13 @@
 ﻿@{
-    ViewBag.Title = Token.AddAndUpdateEnquiry;
+    ViewBag.Title = Token.AddAndUpdateEvent;
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-}  
+    UsersPrivilegeVM
+     Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.Events);
 
-<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" ng-controller="enquiresCtrl">
+}
+
+<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" ng-controller="eventsCtrl">
     <!-- begin:: Subheader -->
     <div class="kt-subheader   kt-grid__item" id="kt_subheader">
         <div class="kt-subheader__main">
@@ -16,14 +19,11 @@
                 <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link"> @Token.HomePage </a>
 
                 <span class="kt-subheader__breadcrumbs-separator"></span>
-                <a href="~/MyEnquires" class="kt-subheader__breadcrumbs-link"> @Token.MyEnquires </a>
+                <a href="~/Events" class="kt-subheader__breadcrumbs-link"> @Token.Events </a>
 
 
                 <span class="kt-subheader__breadcrumbs-separator"></span>
-                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" ng-if="enquiry.State!=state.update">@Token.AddNewEnquiry</a>
-                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" ng-if="enquiry.State==state.update">@Token.UpdateEnquiry</a>
-
-                <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">@Token.UpdateEvent</a>
             </div>
         </div>
 
@@ -32,188 +32,180 @@
     <div class="kt-content  kt-grid__item kt-grid__item--fluid">
         <div class="row">
             <div class="col-lg-12">
-                <!--AddEnquiry-->
+                <!--AddEvent-->
                 <div class="kt-portlet">
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
                             <span class="kt-portlet__head-icon">
                                 <i class="kt-font-brand flaticon-add"></i>
                             </span>
-                            <h3 class="kt-portlet__head-title" ng-if="enquiry.State!=state.update">@Token.AddNewEnquiry</h3>
-                            <h3 class="kt-portlet__head-title" ng-if="enquiry.State==state.update">@Token.UpdateEnquiry</h3>
+                            <h3 class="kt-portlet__head-title">@Token.UpdateEvent</h3>
                         </div>
 
                     </div>
-                    <!--AddEnquiry Form-->
-                    <form novalidate name="enquiryFrm" class="kt-form kt-form--label-right" ng-submit="saveChange(enquiryFrm,Enquiry)">
+                    <!--AddEvent Form-->
+                    <form novalidate name="eventFrm" class="kt-form kt-form--label-right" ng-submit="saveChange(eventFrm,Event)">
                         <div class="kt-portlet__body">
                             <!--R O W 1-->
                             <div class="form-group  row">
-                                <!--FirstName-->
-                                <label class="col-form-label col-lg-2">@Token.FirstName</label>
+                                <!--Package-->
+                                <label class="col-form-label col-lg-2">@Token.Package</label>
                                 <div class="col-lg-4 form-group-sub">
-                                    <input type="text"
-                                           name="firstName"
-                                           class="form-control"
-                                           ng-class="{'is-invalid':enquiryFrm.firstName.$invalid&&enquiyFormSubmitErro}"
-                                           ng-model="enquiry.FirstName"
-                                           maxlength="50"
-                                           ng-required="true" />
-
-                                    <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.firstName.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.firstName.$error.maxlength&&enquiyFormSubmitErro">@Token.MaxLengthCharIs 50</small>
+                                    <select class="form-control input-disabled"
+                                            ng-model="event.PackageId"
+                                            ng-options="c.Id as c.PackageName for c in packages"
+                                            ng-disabled="true"></select>
+                                    <!--Info-->
+                                    <alert-info model="PrintNamesNotes" ng-show="PrintNamesNotes"></alert-info>
                                 </div>
-                                <!--LastName-->
-                                <label class="col-form-label col-lg-2">@Token.LastName</label>
-                                <div class="col-lg-4 form-group-sub">
-                                    <input type="text"
-                                           name="lastName"
-                                           class="form-control"
-                                           ng-class="{'is-invalid':enquiryFrm.lastName.$invalid&&enquiyFormSubmitErro}"
-                                           ng-model="enquiry.LastName"
-                                           maxlength="50"
-                                           ng-required="true" />
 
-                                    <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.lastName.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.firstName.$error.maxlength&&enquiyFormSubmitErro">@Token.MaxLengthCharIs 50</small>
+                                <!--EventDateTime-->
+                                <label class="col-form-label col-lg-2">@Token.EventDate</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input class="form-control input-disabled"
+                                           type="date"
+                                           ng-model="event.EventDateTime"
+                                           ng-disabled="true" />
                                 </div>
                             </div>
 
                             <!--R O W 2-->
                             <div class="form-group  row">
-                                <!--PhoneNumber-->
-                                <label class="col-form-label col-lg-2">@Token.PhoneNumber</label>
+                                <!--IsClinetCustomLogo-->
+                                <label class="col-form-label col-lg-2">@Token.IsClinetCustomLogo</label>
                                 <div class="col-lg-4 form-group-sub">
-                                    <input type="text"
-                                           name="phoneNo"
-                                           ng-class="{'is-invalid':enquiryFrm.phoneNo.$invalid&&enquiyFormSubmitErro}"
-                                           class="form-control"
-                                           ng-model="enquiry.PhoneNo"
-                                           pattern="[0-9]{10,14}"
-                                           ng-required="true" />
-                                    <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.phoneNo.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.phoneNumber.$invalid&&!enquiryFrm.phoneNo.$error.required&&enquiyFormSubmitErro">@Token.InvalidData</small>
+                                    <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                        <label>
+                                            <input type="checkbox" checked="checked" ng-model="event.IsClinetCustomLogo" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                            <span></span>
+                                        </label>
+                                    </span>
                                 </div>
-
-
-                                <!--EventDate-->
-                                <label class="col-form-label col-lg-2">@Token.EventDate</label>
-                                <div class="col-lg-4 form-group-sub">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="">{{enquiry.Month?enquiry.Month:'--'}}/{{enquiry.Day?enquiry.Day:'--'}}/{{enquiry.Year?enquiry.Year:'--'}}</span>
-                                        </div>
-                                        <input type="number" class="form-control"
-                                               name="month"
-                                               placeholder="@Token.Month"
-                                               ng-model="enquiry.Month"
-                                               ng-class="{'is-invalid':enquiryFrm.month.$invalid&&enquiyFormSubmitErro}"
-                                               min="@DateTime.Now.Month"
-                                               max="12">
-                                        <!--Error-->
-                                        <small class="error invalid-feedback" ng-if="enquiryFrm.month.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs 12</small>
-                                        <small class="error invalid-feedback" ng-if="enquiryFrm.month.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs @DateTime.Now.Month</small>
-
-                                        <input type="number" class="form-control"
-                                               name="day"
-                                               placeholder="@Token.Day"
-                                               ng-model="enquiry.Day"
-                                               ng-class="{'is-invalid':enquiryFrm.day.$invalid&&enquiyFormSubmitErro}"
-                                               min="@DateTime.Now.Day"
-                                               max="{{fillDayMax(enquiry.Month)}}">
-                                        <!--Error-->
-                                        <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs {{fillDayMax(enquiry.Month)}}</small>
-                                        <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs 1</small>
-
-                                        <input type="number" class="form-control"
-                                               name="year"
-                                               placeholder="@Token.Year"
-                                               ng-model="enquiry.Year"
-                                               min="@DateTime.Now.Year"
-                                               ng-class="{'is-invalid':enquiryFrm.year.$invalid&&enquiyFormSubmitErro}">
-                                        <!--Error-->
-                                        <small class="error invalid-feedback" ng-if="enquiryFrm.year.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs @DateTime.Now.Year</small>
-                                    </div>
+                                <!--Upload Logo -->
+                                <label class="col-form-label col-lg-2" ng-if="event.IsClinetCustomLogo">@Token.UploadLogo</label>
+                                <div class="col-lg-4 form-group-sub" ng-if="event.IsClinetCustomLogo">
+                                    <input type="file" accept=".pdf,.ai"
+                                           onchange="angular.element(this).scope().uplaodLogo(this.files[0])">
+                                    <p style="display:inline"><a href="{{event.LogoFilePath}}" ng-if="event.LogoFilePath" class="kt-link kt-font-boldest">@Token.Review</a></p>
+                                    <!--Info-->
+                                    <alert-info model="UploadLogoNotes" ng-show="UploadLogoNotes"></alert-info>
                                 </div>
                             </div>
 
                             <!--R O W 3-->
                             <div class="form-group  row">
-                                <!--Country-->
-                                <label class="col-form-label col-lg-2">@Token.Country</label>
+                                <!--PrintNameType-->
+                                <label class="col-form-label col-lg-2">@Token.PrintNameType</label>
                                 <div class="col-lg-4 form-group-sub">
                                     <select class="form-control"
                                             serchbale
-                                            name="country"
-                                            ng-class="{'is-invalid':enquiryFrm.emp.$invalid&&enquiyFormSubmitErro}"
-                                            ng-model="enquiry.CountryId"
-                                            ng-options="c.Id as c.CountryName for c in countries"
-                                            ng-required="true"></select>
-                                    <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.country.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
+                                            name="printNameType"
+                                            ng-class="{'is-invalid':eventFrm.printNameType.$invalid&&eventFormSubmitErro}"
+                                            ng-model="event.PrintNameTypeId"
+                                            ng-options="c.Id as c.PrintNamesTypeName for c in printNameTypes"
+                                            ng-change="fillPrintTypePrice(event.PrintNameTypeId)"></select>
                                 </div>
-                                <!--City-->
-                                <label class="col-form-label col-lg-2">@Token.City</label>
+
+
+                                <!--IsNamesAr-->
+                                <label class="col-form-label col-lg-2">@Token.IsNamesAr</label>
                                 <div class="col-lg-4 form-group-sub">
-                                    <select class="form-control"
-                                            serchbale
-                                            name="city"
-                                            ng-class="{'is-invalid':enquiryFrm.emp.$invalid&&enquiyFormSubmitErro}"
-                                            ng-model="enquiry.CityId"
-                                            ng-options="c.Id as c.CityName for c in cities|filterWithoutStaticItems:{'CountryId':enquiry.CountryId}"
-                                            ng-required="true"></select>
-                                    <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.city.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
+                                    <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                        <label>
+                                            <input type="checkbox" checked="checked" ng-model="event.IsNamesAr" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty"
+                                                   ng-change="changeIsNameAr(event.IsNamesAr)" />
+                                            <span></span>
+                                        </label>
+                                    </span>
+                                    <!--Info-->
+                                    <alert-info model="@Token.IsNameArDescription" ng-show="event.IsNamesAr" is-text="true"></alert-info>
                                 </div>
+
                             </div>
 
-                            <!--R O W 5-->
+                            <!--R O W 4-->
                             <div class="form-group  row">
-                                <!--Notes
-                    هنا يضيف ملحوظة جديدة على الملحوظات القدية-->
-                                <label class="col-form-label col-lg-2">@Token.AddNewNotes</label>
-                                <div class="col-lg-10 form-group-sub">
-                                    <textarea class="form-control"
-                                              name="notes"
-                                              ng-class="{'is-invalid':enquiryFrm.notes.$invalid&&enquiyFormSubmitErro}"
-                                              ng-model="enquiry.Note"
-                                              ng-maxlength="4000"
-                                              maxlength="4000"
-                                              rows="4"></textarea>
+                                <!--NameGroom-->
+                                <label class="col-form-label col-lg-2">@Token.NameGroom</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text"
+                                           name="nameGroom"
+                                           class="form-control"
+                                           ng-class="{'is-invalid':eventFrm.nameGroom.$invalid&&eventFormSubmitErro}"
+                                           ng-model="event.NameGroom"
+                                           maxlength="50"
+                                           ng-required="true" />
+
                                     <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.phoneNo.$error.maxlength&&enquiyFormSubmitErro">@Token.MaxLengthCharIs 4000</small>
+                                    <small class="error invalid-feedback" ng-if="eventFrm.nameGroom.$error.required&&eventFormSubmitErro">@Token.FieldIsRequierd</small>
+                                    <small class="error invalid-feedback" ng-if="eventFrm.nameGroom.$error.maxlength&&eventFormSubmitErro">@Token.MaxLengthCharIs 50</small>
+                                </div>
+                                <!--NameBride-->
+                                <label class="col-form-label col-lg-2">@Token.NameBride</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text"
+                                           name="nameBride"
+                                           class="form-control"
+                                           ng-class="{'is-invalid':eventFrm.nameBride.$invalid&&eventFormSubmitErro}"
+                                           ng-model="event.NameBride"
+                                           maxlength="50"
+                                           ng-required="true" />
+
+                                    <!--Errors:-->
+                                    <small class="error invalid-feedback" ng-if="eventFrm.nameBride.$error.required&&eventFormSubmitErro">@Token.FieldIsRequierd</small>
+                                    <small class="error invalid-feedback" ng-if="eventFrm.nameBride.$error.maxlength&&eventFormSubmitErro">@Token.MaxLengthCharIs 50</small>
                                 </div>
                             </div>
 
+                            <!--R O W 6-->
+                            <div class="form-group  row">
+                                <!--PackagePrice-->
+                                <label class="col-form-label col-lg-2">@Token.Pricing</label>
+                                <div class="col-lg-10 form-group-sub">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>@Token.PackagePrice</th>
+                                                <th>@Token.NamsArExtraPrice</th>
+                                                <th>@Token.NamesPrintingPrice</th>
+                                                <th>@Token.TotalPrice</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{event.PackagePrice|currency}}</td>
+                                                <td>{{event.PackageNamsArExtraPrice|currency}}</td>
+                                                <td>{{event.NamesPrintingPrice|currency}}</td>
+                                                <td>{{event.PackagePrice+event.PackageNamsArExtraPrice+event.NamesPrintingPrice|currency}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                         <div class="kt-portlet__foot">
                             <div class="kt-form__actions">
                                 <div class="row">
                                     <div class="col-lg-9"></div>
                                     <div class="col-lg-3">
-                                            <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"
-                                                    ng-if="enquiry.State!=state.update">
-                                                <i class="la la-save">@Token.Add</i>
-                                            </button>
-                                        <button type="reset" class="btn btn-warning btn-elevate btn-elevate-air" ng-if="enquiry.State!=state.update" ng-click="reSelect()"><i class="la la-file">@Token.Cancel</i></button>
+                                        <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"
+                                                ng-if="event.State==state.update&&!event.IsCanNotUpdate&&!event.EnquiryIsClosed">
+                                            <i class="la la-save">@Token.Save</i>
+                                        </button>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
-
                 <!--end::Portlet-->
             </div>
         </div>
     </div>
-
 </div>
 @section scripts{
     <!--(ANageeb) link angualr files for thsis  view -->
-    <script src="~/Scripts/angularJS/views/myEnquires/addAndUpdate/service.js"></script>
-    <script src="~/Scripts/angularJS/views/myEnquires/addAndUpdate/contoller.js"></script>
+    <script src="~/Scripts/angularJS/views/events/addAndUpdate/service.js"></script>
+    <script src="~/Scripts/angularJS/views/events/addAndUpdate/contoller.js"></script>
 }

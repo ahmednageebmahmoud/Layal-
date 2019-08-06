@@ -20,19 +20,20 @@ namespace DAL
         public int FkCountry_Id { get; set; }
         public int FkCity_Id { get; set; }
         public Nullable<int> FKEnquiryType_Id { get; set; }
-        public long FKUserCreated_Id { get; set; }
+        public Nullable<long> FKUserCreated_Id { get; set; }
         public System.DateTime CreateDateTime { get; set; }
         public int Day { get; set; }
         public int Month { get; set; }
         public int Year { get; set; }
-        public Nullable<int> FKBranch_Id { get; set; }
+        public int FKBranch_Id { get; set; }
         public Nullable<bool> IsLinkedClinet { get; set; }
         public Nullable<bool> IsClosed { get; set; }
         public Nullable<System.DateTime> ClosedDateTime { get; set; }
         public bool IsWithBranch { get; set; }
-        public string ClendarEventId { get; set; }
         public Nullable<long> FkClinet_Id { get; set; }
         public bool IsCreatedEvent { get; set; }
+        public int FKPhoneCountry_Id { get; set; }
+        public string PhoneIsoCode { get; set; }
         public string CountryNameAr { get; set; }
         public string CountryNameEn { get; set; }
         public string CityNameAr { get; set; }
@@ -42,6 +43,6 @@ namespace DAL
         public string BranchNameAR { get; set; }
         public string BranchNameEn { get; set; }
         public string EnquiryCreatedUserName { get; set; }
-        public Nullable<int> CountIsDepositPaymented { get; set; }
+        public Nullable<bool> IsDepositPaymented { get; set; }
     }
 }

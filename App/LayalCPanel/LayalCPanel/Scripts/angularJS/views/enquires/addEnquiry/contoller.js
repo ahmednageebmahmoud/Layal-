@@ -1,39 +1,39 @@
 ﻿ngApp.controller('enquiresCtrl', ['$scope', '$http', 'enquiresServ', function (s, h, enquiresServ) {
+    //Fill Current Date
+    var currentDate = new Date();
+    var currentMonth = currentDate.getMonth() + 1, currentYear = currentDate.getFullYear();
+
     s.state = StateEnum;
     s.enquires = [];
     s.enquiyFOP = {};
-    var enquiyId = getQueryStringValue("id");
+    var accountTypeId = getQueryStringValue("q");
     s.enquiry = {
-        Id: enquiyId,
-        State: enquiyId ? StateEnum.update : StateEnum.create,
-      
-        EnquiryTypeId: null,
+        State: StateEnum.create,
+        EnquiryTypeId: accountTypeId,
         CountryId: null,
         CityId: null,
-        BranchId:null,
-  
+        BranchId: null,
+        PhoneCountryId:null
     };
 
     s.countries = [{
         Id: null,
-        CountryName: Token.select
+        CountryName: Token.select,
+        CountryNameIsoCode: Token.select,
     }];
     s.cities = [{
         Id: null,
         CityName: Token.select,
-        CountryId:null
+        CountryId: null
     }];
-    s.enquiryTypes = [{
-        Id: null,
-        EnquiryTypeName: Token.select
-    }];
+    
 
     s.branches = [{
         Id: null,
         BranchName: Token.select,
-        CityId:null
+        CityId: null
     }];
-    
+
 
     //============= G E T =================
     //get items
@@ -47,9 +47,7 @@
                 case RequestTypeEnum.sucess: {
                     s.countries = s.countries.concat(d.data.Result.Countries);
                     s.cities = s.cities.concat(d.data.Result.Cities);
-                    s.enquiryTypes = s.enquiryTypes.concat(d.data.Result.EnquiryTypes);;
                     s.branches = s.branches.concat(d.data.Result.Branches);;
-                    
                 } break;
                 case RequestTypeEnum.error:
                 case RequestTypeEnum.warning:
@@ -65,39 +63,7 @@
         })
     };
 
-    //Get Enquires
-    s.getEnquiy = () => {
-        if (!enquiyId)
-            return;
 
-        let loading = BlockingService.generateLoding();
-        loading.show();
-        enquiresServ.getEnquiy(enquiyId).then(d => {
-            loading.hide();
-            switch (d.data.RequestType) {
-                case RequestTypeEnum.sucess: {
-                    s.enquiry = d.data.Result;
-                    s.enquiry.State = StateEnum.update;
-                    
-                    setTimeout(() => {
-                        $("select[serchbale]").select2();
-                    }, 500)
-                    
-    
-                } break;
-                case RequestTypeEnum.error:
-                case RequestTypeEnum.warning:
-                case RequestTypeEnum.info:
-                    SMSSweet.alert(d.data.Message, d.data.RequestType);
-                    break;
-            }
-            co("G E T - getEnquiy", d);
-        }).catch(err => {
-            loading.hide();
-            SMSSweet.alert(err.statusText, RequestTypeEnum.error);
-            co("E R R O R - getEnquiy", err);
-        })
-    }
 
     //============= Saves =================
 
@@ -108,20 +74,33 @@
         }
 
         s.enquiyFormSubmitErro = false;
-
-
-
         BlockingService.block();
         enquiresServ.saveChange(s.enquiry).then(d => {
+            s.enquiry = {
+                State: StateEnum.create,
+                EnquiryTypeId: accountTypeId,
+                CountryId: null,
+                CityId: null,
+                BranchId: null,
+                PhoneCountryId: null
+            };
+
+            setTimeout(() => {
+                $("select[serchbale]").select2();
+            }, 1000)
+
             BlockingService.unBlock();
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
-                    s.enquiry = d.data.Result;
-                    s.enquiry.State = StateEnum.update;
-                    s.enquiry.Note = null;
+                    SMSSweet.confirmInfo(LangIsEn ? "Would you like to send another query?" : "هل تود ارسال استفسار آخر؟",
+                        () => {
+                    window.location.reload();
+                    },()=>{
+                        window.close();
+                    })
                 } break;
             }
-                SMSSweet.alert(d.data.Message, d.data.RequestType);
+
             co("G E T - saveChange", d);
         }).catch(err => {
             BlockingService.unBlock();
@@ -143,7 +122,8 @@
             priv.CanDisplay = true;
     };
 
-    s.fillDayMax = month=> {
+    //For Get Max Day User Can Be Insert
+    s.getMaxDay = (month) => {
         switch (month) {
             case 2:
                 return 29;
@@ -160,7 +140,14 @@
             case 9:
             case 11:
                 return 30;
+            default:
+                return 31;
         }
+    };
+    //For Get Min Month User Can Be Inserted
+    s.getMinMonth= (month, year) => {
+        if (year > currentYear) return 1;
+        return currentMonth;
     };
 
 
@@ -171,5 +158,4 @@
 
     //Call Functions
     s.getItems();
-    s.getEnquiy();
 }]);

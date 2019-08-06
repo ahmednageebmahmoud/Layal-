@@ -1,16 +1,21 @@
 ﻿ngApp.controller('enquiresCtrl', ['$scope', '$http', 'enquiresServ', function (s, h, enquiresServ) {
+    //Fill Current Date
+    var currentDate = new Date();
+    var currentMonth = currentDate.getMonth() + 1, currentYear = currentDate.getFullYear();
+
     s.state = StateEnum;
     s.enquires = [];
     s.enquiyFOP = {};
     var enquiyId = getQueryStringValue("id");
+    s.currentUserInfromation = Auth.userInfromation;
     s.enquiry = {
         Id: enquiyId,
         State: enquiyId ? StateEnum.update : StateEnum.create,
-      
         EnquiryTypeId: null,
-        CountryId: null,
-        CityId: null,
-        BranchId:null,
+        CountryId: s.currentUserInfromation.CountryId,
+        CityId:  s.currentUserInfromation.CityId,
+        BranchId: s.currentUserInfromation.BrId,
+        PhoneCountryId: null
     };
 
     s.countries = [{
@@ -142,7 +147,8 @@
             priv.CanDisplay = true;
     };
 
-    s.fillDayMax = month=> {
+    //For Get Max Day User Can Be Insert
+    s.getMaxDay = (month) => {
         switch (month) {
             case 2:
                 return 29;
@@ -159,8 +165,16 @@
             case 9:
             case 11:
                 return 30;
+            default:
+                return 31;
         }
     };
+    //For Get Min Month User Can Be Inserted
+    s.getMinMonth = (month, year) => {
+        if (year > currentYear) return 1;
+        return currentMonth;
+    };
+
 
 
     s.gotoUrl = url=> {

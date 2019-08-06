@@ -47,11 +47,7 @@
     s.cities = [{ Id: null, CityName: Token.select, CountryId: null }];
 
     s.enquiryTypes = [{ Id: null, EnquiryTypeName: Token.select }];
-    s.branches = [{
-        Id: null, BranchName: Token.select, CityId: null
-    },
-        { Id: 0, BranchName: Token.NoBranch, CityId: null }
-    ];
+    s.branches = [{Id: null, BranchName: Token.select, CityId: null}];
 
     s.publisheStatus = [
         { Id: null, Name: Token.select },

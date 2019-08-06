@@ -23,9 +23,9 @@ namespace BLL.ViewModels
         public DateTime? VistToCoordinationDateTime { get; set; }
 
 
-        public string VistToCoordinationDateTimeDisplay => DateService.GetDateTimeEn(this.VistToCoordinationDateTime);
-        public string EventDateTimeDisplay => DateService.GetDateTimeEn(this.EventDateTime);
-        public string CreateDateTimeDisplay => DateService.GetDateTimeEn(this.CreateDateTime);
+        public string VistToCoordinationDateTimeDisplay => DateService.GetDateTimeAr(this.VistToCoordinationDateTime);
+        public string EventDateTimeDisplay => DateService.GetDateAr(this.EventDateTime);
+        public string CreateDateTimeDisplay => DateService.GetDateTimeAr(this.CreateDateTime);
         public int? PackageId { get; set; }
         public int? PrintNameTypeId { get; set; }
         public long ClinetId { get; set; }
@@ -90,9 +90,12 @@ namespace BLL.ViewModels
         /// <summary>
         /// المبلغ المتبقى
         /// </summary>
-        public decimal RemainingAmount => this.TotalPrice - this.TotalPaymentsActivated.Value;
+        public decimal? RemainingAmount => this.TotalPrice - this.TotalPaymentsActivated;
 
-        public bool? IsPayment { get; set; }
+        /// <summary>
+        /// اذا قام بدفع كامل المستحقات
+        /// </summary>
+        public bool? IsPayment => this.TotalPaymentsActivated >= this.TotalPrice;
 
         public bool? IsClosed { get; set; }
         public string VistToCoordinationClendarEventId { get; internal set; }
@@ -100,7 +103,6 @@ namespace BLL.ViewModels
         public EventWorkStatusVM CurrentWorkStatus { get; set; }
         public List<EventWorkStatusVM> EventWorksStatus { get; set; } = new List<EventWorkStatusVM>();
         public EventWorksStatusIsFinshedVM EventWorkStatusIsFinshed { get; set; }
-
-
+        public decimal NamesPrintingPrice { get;   set; }
     }//end class
 }

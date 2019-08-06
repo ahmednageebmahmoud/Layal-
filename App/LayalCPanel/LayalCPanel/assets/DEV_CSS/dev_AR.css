@@ -223,3 +223,7 @@ form-control:disabled, .form-control[readonly] {
      display:block !important;
          color: red;
  }
+
+          .alert .alert-icon i{
+     font-size:10px
+ }

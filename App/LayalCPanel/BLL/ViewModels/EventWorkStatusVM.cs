@@ -15,7 +15,7 @@ namespace BLL.ViewModels
         public WorksTypesEnum WorkTypeId { get; set; }
         public long UserId { get; set; }
         public DateTime DateTime { get; set; }
-        public string DateTimeDisplay => DateService.GetDateTimeEn(this.DateTime);
+        public string DateTimeDisplay => DateService.GetDateTimeAr(this.DateTime);
         public string FinshedUserName { get; set; }
         public string FinshedAccountTypeNameEn { get;   set; }
         public string FinshedAccountTypeNameAr { get;   set; }

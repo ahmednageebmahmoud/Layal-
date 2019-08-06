@@ -43,7 +43,7 @@ namespace BLL.Services
                              TimeZoneInfo.Local.Id, "Arab Standard Time").ToString(Format, new CultureInfo("en"));
         }
 
-        public static string GetDateTimeEn(DateTime? date)
+        public static string GetDateTimeAr(DateTime? date)
         {
             if (!date.HasValue)
                 return "";
@@ -153,11 +153,11 @@ namespace BLL.Services
 
         }
 
-        internal static string GetDateEn(DateTime? date)
+        internal static string GetDateAr(DateTime? date)
         {
             if (!date.HasValue)
                 return "";
-            return date.Value.ToString("MM/dd/yyyy",new CultureInfo("en"));
+            return date.Value.ToString("dd/MM/yyyy", new CultureInfo("en"));
         }
         public static DateTime DateTimeByCulture(DateTime date)
         {

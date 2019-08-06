@@ -238,29 +238,29 @@
                                     <td>{{x.CreateDateTimeDisplay}}</td>
                                     <td>
                                         <!--Event Information-->
-                                        <a href="/Enquires/EnquiryInformation?id={{x.Id}}" title="@Token.ShowDetails" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="la la-search"></i> </a>
+                                        <a href="/Enquires/EnquiryInformation?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.ShowDetails" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="la la-search"></i> </a>
 
                                         <!--Btn:Edit-->
                                         @if (Priv.CanEdit)
                                         {
-                                            <a href="/Events/AddAndUpdate?id={{x.Id}}" title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"
+                                            <a href="/Events/AddAndUpdate?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"
                                                ng-hide="x.IsClosed"><i class="la la-edit"></i></a>
                                         }
 
                                         <!--EventCoordinations-->
-                                        <a href="/EEW/AddAndUpdateCoordinations?id={{x.Id}}" title="@Token.AddAndUpdateCoordinations"
+                                        <a href="/EEW/AddAndUpdateCoordinations?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.AddAndUpdateCoordinations"
                                            ng-hide="x.IsClosed||!x.IsPayment"
                                            class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fa fa-tasks"></i></a>
                                    
                                              <!--توزيع اوامر العمل على الموظفين-->
                                         <a href="/Events/DistributionOfWork?id={{x.Id}}&branchId={{x.BranchId}}"
-                                           title="@Token.DistributionOfWork"
+                                         data-skin="dark" data-toggle="kt-tooltip" data-placement="top"   title="@Token.DistributionOfWork"
                                            class="btn btn-sm btn-clean btn-icon btn-icon-md"
                                            ng-hide="x.IsClosed||!x.IsPayment"><i class="fas fa-users-cog"></i></a>
 
                                         <!--Event Employees-->
                                         <a href="Javascript:void(0)"
-                                           title="@Token.EventEmployees"
+                                         data-skin="dark" data-toggle="kt-tooltip" data-placement="top"   title="@Token.EventEmployees"
                                            class="btn btn-sm btn-clean btn-icon btn-icon-md"
                                            ng-click="showEventEmployees(x)"
                                            ><i class="fa fa-users"></i></a>
@@ -270,13 +270,13 @@
 
                                         @if (PrivPayments.CanAdd || PrivPayments.CanDisplay)
                                         {
-                                            <a href="/EnquiryPayments/Payments?id={{x.Id}}" title="@Token.Payments" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fas fa-hand-holding-usd"></i> </a>
+                                            <a href="/EnquiryPayments/Payments?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.Payments" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fas fa-hand-holding-usd"></i> </a>
                                         }
 
                                         @if (IsCurrentUserAdmin)
                                         {
                                             <!--التعدير فى حقول الاستبيان-->
-                                            <a href="Javascript:void(0)" title="@Token.CreateCustomSurvey"
+                                            <a href="Javascript:void(0)" data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.CreateCustomSurvey"
                                                class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"
                                                ng-if="!x.IsAllowSurvey"
 
@@ -285,7 +285,7 @@
                                               <!--نعرض الاستبيان بدام تمت اضافتها -->
                                             <a href="/EventSurveyQuestions/Survey?eventId={{x.Id}}"
                                                ng-if="x.IsAllowSurvey"
-                                               title="@Token.Survey"
+                                              data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.Survey"
                                                class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fa fa-chart-line"></i></a>
 
                                         }
@@ -307,7 +307,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">@Token.CreateCustomSurvey</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">@Token.EventEmployees</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -363,7 +363,12 @@
                             <table class="table sms-table">
                                 <thead>
                                     <tr role="row">
-                                        <th class="th-30 ">
+                                        <th class="th-10 ">
+                                            <label class="sms-sort-field">
+                                                @Token.Id
+                                            </label>
+                                        </th>
+                                        <th class="th-25 ">
                                             <label class="sms-sort-field">
                                                 @Token.Employee
                                             </label>
@@ -388,6 +393,9 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="gp in currentEventEmployees">
+                                        <td>
+                                            {{gp.EmployeeId}}
+                                        </td>
                                         <td>
                                             <p><a href="/Users/UserInformation?id={{gp.EmployeeId}}" class="kt-link kt-font-boldest">{{gp.UserName}}</a></p>
                                         </td>

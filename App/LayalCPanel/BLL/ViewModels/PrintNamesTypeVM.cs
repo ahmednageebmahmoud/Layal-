@@ -13,7 +13,10 @@ namespace BLL.ViewModels
         public long? WordId { get;   set; }
         public string NameAr { get;   set; }
         public string NameEn { get;   set; }
+        public decimal Price { get;   set; }
 
-         
+        
+
+
     }//end class
 }

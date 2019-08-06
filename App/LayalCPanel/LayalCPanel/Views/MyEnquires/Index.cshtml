@@ -32,6 +32,7 @@
 <!--Page Body-->
 <div ng-controller="enquiresCtrl">
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <!--Filter-->
         <div class="kt-portlet kt-portlet--mobile">
             <div class="kt-portlet__head kt-portlet__head--lg">
                 <div class="kt-portlet__head-label">
@@ -39,7 +40,7 @@
                         <i class="kt-font-brand fab fa-wpforms"></i>
                     </span>
                     <h3 class="kt-portlet__head-title">
-                        @Token.MyEnquires
+                        @Token.Filter
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
@@ -103,13 +104,23 @@
                                 <small class="error invalid-feedback" ng-if="enquiryFrm.phoneNo.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
                                 <small class="error invalid-feedback" ng-if="enquiryFrm.phoneNumber.$invalid&&!enquiryFrm.phoneNo.$error.required&&enquiyFormSubmitErro">@Token.InvalidData</small>
                             </div>
-                            <!--EventDate-->
                             <div class="col-lg-3 form-group-sub">
                                 <label class="col-form-label">@Token.EventDate</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="">{{enquiryFilter.Month?enquiryFilter.Month:'--'}}/{{enquiryFilter.Day?enquiryFilter.Day:'--'}}/{{enquiryFilter.Year?enquiryFilter.Year:'--'}}</span>
+                                        <span class="input-group-text" id="">{{enquiryFilter.Day?enquiryFilter.Day:'--'}}/{{enquiryFilter.Month?enquiryFilter.Month:'--'}}/{{enquiryFilter.Year?enquiryFilter.Year:'--'}}</span>
                                     </div>
+                                    <input type="number" class="form-control"
+                                           name="day"
+                                           placeholder="@Token.Day"
+                                           ng-model="enquiryFilter.Day"
+                                           ng-class="{'is-invalid':enquiryFrm.day.$invalid&&enquiyFormSubmitErro}"
+                                           min="1"
+                                           max="{{fillDayMax(enquiryFilter.Month)}}">
+                                    <!--Error-->
+                                    <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs {{fillDayMax(enquiryFilter.Month)}}</small>
+                                    <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs 1</small>
+
                                     <input type="number" class="form-control"
                                            name="month"
                                            placeholder="@Token.Month"
@@ -121,16 +132,6 @@
                                     <small class="error invalid-feedback" ng-if="enquiryFrm.month.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs 12</small>
                                     <small class="error invalid-feedback" ng-if="enquiryFrm.month.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs 1</small>
 
-                                    <input type="number" class="form-control"
-                                           name="day"
-                                           placeholder="@Token.Day"
-                                           ng-model="enquiryFilter.Day"
-                                           ng-class="{'is-invalid':enquiryFrm.day.$invalid&&enquiyFormSubmitErro}"
-                                           min="1"
-                                           max="{{fillDayMax(enquiryFilter.Month)}}">
-                                    <!--Error-->
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs {{fillDayMax(enquiryFilter.Month)}}</small>
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs 1</small>
 
                                     <input type="number" class="form-control"
                                            name="year"
@@ -173,7 +174,6 @@
                                 <!--Errors:-->
                                 <small class="error invalid-feedback" ng-if="enquiryFrm.city.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
                             </div>
-
                             <!--Branches-->
                             <div class="col-lg-3 form-group-sub">
                                 <label class="col-form-label">@Token.Branch</label>
@@ -225,89 +225,104 @@
                     </div>
                 </form>
             </div>
+        </div>
+
+        <!--Search-->
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand fab fa-wpforms"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        @Token.MyEnquires
+                    </h3>
+                </div>
+            </div>
+             
             <div class="kt-portlet__body">
                 <div class="kt-portlet__body">
-                        <table class="table sms-table  "
-                               datatable="ng"
-                               dt-options="vm.dtOptions"
-                               dt-instance="vm.dtInstance"
-                               dt-column-defs="vm.dtColumnDefs"
-                               id="ng_table_1">
-                            <thead class=" ">
-                                <tr class=" ">
-                                    <th class="th-10">
-                                        <sms-sort ng-sms-fop="enquiyFOP"
-                                                  ng-sms-field-name="FirstName"
-                                                  ng-sms-resource="@Token.FirstName"></sms-sort>
-                                    </th>
-                                    <th class="th-10">
-                                        <sms-sort ng-sms-fop="enquiyFOP"
-                                                  ng-sms-field-name="LastName"
-                                                  ng-sms-resource="@Token.LastName"></sms-sort>
-                                    </th>
-                                    <th class="th-10">
-                                        <sms-sort ng-sms-fop="enquiyFOP"
-                                                  ng-sms-field-name="PhoneNo"
-                                                  ng-sms-resource="@Token.PhoneNumber"></sms-sort>
-                                    </th>
-                                    <th class="th-10">
-                                        <sms-sort ng-sms-fop="enquiyFOP"
-                                                  ng-sms-field-name="EnquiryTypeName"
-                                                  ng-sms-resource="@Token.EnquiryType"></sms-sort>
-                                    </th>
-                                    <th class="th-10">
-                                        <sms-sort ng-sms-fop="enquiyFOP"
-                                                  ng-sms-field-name="CountryName"
-                                                  ng-sms-resource="@Token.Country"></sms-sort>
-                                    </th>
-                                    <th class="th-10">
-                                        <sms-sort ng-sms-fop="enquiyFOP"
-                                                  ng-sms-field-name="CityName"
-                                                  ng-sms-resource="@Token.City"></sms-sort>
-                                    </th>
-                                    <th class="th-10">
-                                        <sms-sort ng-sms-fop="enquiyFOP"
-                                                  ng-sms-field-name="BranchName"
-                                                  ng-sms-resource="@Token.Branch"></sms-sort>
-                                    </th>
-                                    <th class="th-10">
-                                        <sms-sort ng-sms-fop="enquiyFOP"
-                                                  ng-sms-field-name="EventDate"
-                                                  ng-sms-resource="@Token.EventDate"></sms-sort>
-                                    </th>
-                                    <th class="th-10">
-                                        <sms-sort ng-sms-fop="enquiyFOP"
-                                                  ng-sms-field-name="CreateDateTimeDisplay"
-                                                  ng-sms-resource="@Token.CreateDateTime"></sms-sort>
-                                    </th>
-                                    <th class="th-10">
-                                        @Token.Operations
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="x in enquires|filter:enquiresSearch |orderBy:enquiyFOP.sort.propName:enquiyFOP.sort.reverse | limitTo:enquiyFOP.paging.pagingLimt.take:enquiyFOP.paging.pagingLimt.skip track by $index">
-                                    <td>{{x.FirstName}}</td>
-                                    <td>{{x.LastName}}</td>
-                                    <td>{{x.PhoneNo}}</td>
-                                    <td>{{x.EnquiryType.EnquiryTypeName}}</td>
-                                    <td>{{x.Country.CountryName}}</td>
-                                    <td>{{x.City.CityName}}</td>
-                                    <td>{{x.Branch.BranchName}}</td>
-                                    <td>{{x.EventDate}}</td>
-                                    <td>{{x.CreateDateTimeDisplay}}</td>
-                                    <td>
-                                        <!--Btn:Edit-->
-                                            @*<a href="/Enquires/AddAndUpdate?id={{x.Id}}"
-                                                title="@Token.Update"
-                                               ng-if="!x.IsClosed"
-                                                class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>*@
-                                        <!--Show Details-->
-                                        <a href="/MyEnquires/EnquiryInformation?id={{x.Id}}" title="@Token.ShowDetails" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="la la-search"></i> </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <table class="table sms-table  "
+                           datatable="ng"
+                           dt-options="vm.dtOptions"
+                           dt-instance="vm.dtInstance"
+                           dt-column-defs="vm.dtColumnDefs"
+                           id="ng_table_1">
+                        <thead class=" ">
+                            <tr class=" ">
+                                <th class="th-10">
+                                    <sms-sort ng-sms-fop="enquiyFOP"
+                                              ng-sms-field-name="FirstName"
+                                              ng-sms-resource="@Token.FirstName"></sms-sort>
+                                </th>
+                                <th class="th-10">
+                                    <sms-sort ng-sms-fop="enquiyFOP"
+                                              ng-sms-field-name="LastName"
+                                              ng-sms-resource="@Token.LastName"></sms-sort>
+                                </th>
+                                <th class="th-10">
+                                    <sms-sort ng-sms-fop="enquiyFOP"
+                                              ng-sms-field-name="PhoneNo"
+                                              ng-sms-resource="@Token.PhoneNumber"></sms-sort>
+                                </th>
+                                <th class="th-10">
+                                    <sms-sort ng-sms-fop="enquiyFOP"
+                                              ng-sms-field-name="EnquiryTypeName"
+                                              ng-sms-resource="@Token.EnquiryType"></sms-sort>
+                                </th>
+                                <th class="th-10">
+                                    <sms-sort ng-sms-fop="enquiyFOP"
+                                              ng-sms-field-name="CountryName"
+                                              ng-sms-resource="@Token.Country"></sms-sort>
+                                </th>
+                                <th class="th-10">
+                                    <sms-sort ng-sms-fop="enquiyFOP"
+                                              ng-sms-field-name="CityName"
+                                              ng-sms-resource="@Token.City"></sms-sort>
+                                </th>
+                                <th class="th-10">
+                                    <sms-sort ng-sms-fop="enquiyFOP"
+                                              ng-sms-field-name="BranchName"
+                                              ng-sms-resource="@Token.Branch"></sms-sort>
+                                </th>
+                                <th class="th-10">
+                                    <sms-sort ng-sms-fop="enquiyFOP"
+                                              ng-sms-field-name="EventDate"
+                                              ng-sms-resource="@Token.EventDate"></sms-sort>
+                                </th>
+                                <th class="th-10">
+                                    <sms-sort ng-sms-fop="enquiyFOP"
+                                              ng-sms-field-name="CreateDateTimeDisplay"
+                                              ng-sms-resource="@Token.CreateDateTime"></sms-sort>
+                                </th>
+                                <th class="th-10">
+                                    @Token.Operations
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in enquires|filter:enquiresSearch |orderBy:enquiyFOP.sort.propName:enquiyFOP.sort.reverse | limitTo:enquiyFOP.paging.pagingLimt.take:enquiyFOP.paging.pagingLimt.skip track by $index">
+                                <td>{{x.FirstName}}</td>
+                                <td>{{x.LastName}}</td>
+                                <td>{{x.PhoneFull}}</td>
+                                <td>{{x.EnquiryType.EnquiryTypeName}}</td>
+                                <td>{{x.Country.CountryName}}</td>
+                                <td>{{x.City.CityName}}</td>
+                                <td>{{x.Branch.BranchName}}</td>
+                                <td>{{x.EventDate}}</td>
+                                <td>{{x.CreateDateTimeDisplay}}</td>
+                                <td>
+                                    <!--Btn:Edit-->
+                                    @*<a href="/Enquires/AddAndUpdate?id={{x.Id}}"
+                                    data-skin="dark" data-toggle="kt-tooltip" data-placement="top"         title="@Token.Update"
+                                           ng-if="!x.IsClosed"
+                                            class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>*@
+                                    <!--Show Details-->
+                                    <a href="/MyEnquires/EnquiryInformation?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.ShowDetails" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="la la-search"></i> </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <!--Paging -->
                     <sms-paging ng-sms-fop="enquiyFOP" ng-sms-display-m-func="getEnquires()"></sms-paging>
                 </div>

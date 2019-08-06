@@ -116,7 +116,12 @@
                             <table class="table sms-table">
                                 <thead>
                                     <tr role="row">
-                                        <th class="th-30 ">
+                                        <th class="th-10 ">
+                                            <label class="sms-sort-field">
+                                                @Token.Id
+                                            </label>
+                                        </th>
+                                           <th class="th-25 ">
                                             <label class="sms-sort-field">
                                                 @Token.Employee
                                             </label>
@@ -141,6 +146,7 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="gp in employeeDistributionWorks">
+                                        <td>{{gp.EmployeeId}}</td>
                                         <td>
                                             <p><a href="/Users/UserInformation?id={{gp.EmployeeId}}" class="kt-link kt-font-boldest">{{gp.UserName}}</a></p>
                                         </td>
@@ -157,7 +163,7 @@
                                             {
                                                 <a href="javascript:void(0);" 
                                                    ng-if="!gp.IsFinshed"
-                                                    ng-click="delete(gp)"  title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
+                                                    ng-click="delete(gp)"  data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
                                             }
                                         </td>
                                     </tr>

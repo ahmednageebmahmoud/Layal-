@@ -3,7 +3,7 @@
 	class funcs {
 
 		//Getter
-	    get basePath() { return '/MyEnquires/' };
+        get basePath() { return '/Enquires/' };
 
 
 	//Methods
@@ -15,17 +15,10 @@
             });
         };
 
-	    getEnquiy(id) {
-            return h({
-                url: `${this.basePath}getEnquiy?id=${id}`,
-                method: 'get',
-            });
-        };
- 
 		//save enquiy  
         saveChange(enquiy) {
 			return h({
-                url: `${this.basePath}saveChange`,
+                url: `${this.basePath}AddEnqu`,
 				method: 'post',
 				data:enquiy
 			});

@@ -32,6 +32,7 @@ namespace DAL
         public decimal PackageNamsArExtraPrice { get; set; }
         public Nullable<System.DateTime> VistToCoordinationDateTime { get; set; }
         public string VistToCoordinationClendarEventId { get; set; }
+        public Nullable<decimal> NamesPrintingPrice { get; set; }
         public long EventId { get; set; }
         public Nullable<bool> Booking { get; set; }
         public Nullable<bool> DataPerfection { get; set; }
@@ -51,7 +52,7 @@ namespace DAL
         public Nullable<bool> IsClosed { get; set; }
         public string Package_NameAr { get; set; }
         public string Package_NameEn { get; set; }
-        public bool Package_IsAllowPrintNames { get; set; }
+        public bool Package_IsPrintNamesFree { get; set; }
         public string PrintNameType_NameAr { get; set; }
         public string PrintNameType_NameEn { get; set; }
         public string Branch_NameAr { get; set; }
@@ -59,7 +60,6 @@ namespace DAL
         public string Clinet_UserName { get; set; }
         public string UserCreated_UserName { get; set; }
         public Nullable<decimal> TotalPayments { get; set; }
-        public Nullable<bool> IsPayment { get; set; }
         public Nullable<decimal> TotalPaymentsActivated { get; set; }
     }
 }

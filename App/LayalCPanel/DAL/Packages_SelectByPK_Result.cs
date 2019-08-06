@@ -15,7 +15,7 @@ namespace DAL
     {
         public int Id { get; set; }
         public long FkWordName_Id { get; set; }
-        public bool IsAllowPrintNames { get; set; }
+        public bool IsPrintNamesFree { get; set; }
         public long FkWordDescription_Id { get; set; }
         public int FKAlbumType_Id { get; set; }
         public decimal Price { get; set; }

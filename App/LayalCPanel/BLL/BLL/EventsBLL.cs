@@ -52,7 +52,6 @@ namespace BLL.BLL
                     ClendarEventId = c.ClendarEventId,
                     PackagePrice = c.PackagePrice,
                     PackageNamsArExtraPrice = c.PackageNamsArExtraPrice,
-                    IsPayment = c.IsPayment,
                     Package = new PackageVM
                     {
                         NameAr = c.Package_NameAr,
@@ -199,8 +198,6 @@ namespace BLL.BLL
                 TotalPayments = c.TotalPayments,
                 TotalPaymentsActivated = c.TotalPaymentsActivated,
                 VistToCoordinationDateTime = c.VistToCoordinationDateTime,
-                //EventWorksStatus = EventWorkStatus,
-                IsPayment = c.IsPayment,
                 EventWorkStatusIsFinshed = new EventWorksStatusIsFinshedVM
                 {
                     Booking = c.Booking,
@@ -223,7 +220,7 @@ namespace BLL.BLL
                 {
                     NameAr = c.Package_NameAr,
                     NameEn = c.Package_NameEn,
-                    IsAllowPrintNames = c.Package_IsAllowPrintNames
+                    IsPrintNamesFree = c.Package_IsPrintNamesFree
                 },
                 PrintNameType = new PrintNamesTypeVM
                 {
@@ -241,7 +238,7 @@ namespace BLL.BLL
         /// <returns></returns>
         private bool CheckIsPayment(long eventId)
         {
-            return db.EnquiryPayments_CheckIfClinetPaymentEventPricing(eventId).First().Value;
+            return db.EnquiryPayments_CheckIfPaymentedDeposit(eventId).First().Value;
         }
 
         public object SaveChange(EventVM c)
@@ -343,9 +340,15 @@ namespace BLL.BLL
                 else
                     c.PackageNamsArExtraPrice = 0;
             }
+            //اضافة سعر الحفر اذا كان ليس مجانى فى هذة الباكج 
+            if (Package.IsPrintNamesFree)
+                c.NamesPrintingPrice = 0;
+            else if (c.PrintNameTypeId.HasValue && c.PrintNameTypeId.Value > 0)
+                c.NamesPrintingPrice = db.PrintNameTypes_SelectByPK(c.PrintNameTypeId).First().Price;
+
 
             db.Events_Update(c.Id, c.IsClinetCustomLogo, c.LogoFilePath, c.IsNamesAr, c.NameGroom, c.NameBride, c.EventDateTime,
-                c.Package.Id, c.PrintNameTypeId, c.Notes, c.PackagePrice, c.PackageNamsArExtraPrice, c.VistToCoordinationDateTime);
+                c.Package.Id, c.PrintNameTypeId, c.Notes, c.PackagePrice, c.PackageNamsArExtraPrice, c.VistToCoordinationDateTime,c.NamesPrintingPrice);
 
             //التفريغ بحيث اذا حدث خطاء ما لا يتم حذفة من السيرفر
             c.LogoFilePath = null;
@@ -365,8 +368,7 @@ namespace BLL.BLL
                 return new ResponseVM(RequestTypeEnum.Error, Token.CanNotDuplicateEventWithOneEnquiry);
 
             c.ClinetId = Enquiry.FkClinet_Id.Value;
-            c.BranchId = Enquiry.FKBranch_Id.Value;
-
+            c.BranchId = Enquiry.FKBranch_Id;
             c = GetPureEvent(c);
 
             //Save Image Now And Return Path
@@ -386,15 +388,23 @@ namespace BLL.BLL
 
             //اضافة اخر الاسعار
             var Package = db.Packages_SelectByPK(c.PackageId).First();
+            //سعر الباكج
             c.PackagePrice = Package.Price;
+            //سعر طباعة الاسماء بـ العربى الاضافة 
             if (c.IsNamesAr == true)
                 c.PackageNamsArExtraPrice = Package.NamsArExtraPrice;
             else
                 c.PackageNamsArExtraPrice = 0;
+         
+            //اضافة سعر الحفر اذا كان ليس مجانى فى هذة الباكج 
+            if (Package.IsPrintNamesFree)
+                c.NamesPrintingPrice = 0;
+            else if (c.PrintNameTypeId.HasValue && c.PrintNameTypeId.Value > 0)
+                c.NamesPrintingPrice = db.PrintNameTypes_SelectByPK(c.PrintNameTypeId).First().Price;
 
             db.Events_Insert(c.Id, c.IsClinetCustomLogo, c.LogoFilePath, c.IsNamesAr, c.NameGroom, c.NameBride, c.EventDateTime, DateTime.Now,
                 c.Package.Id, c.PrintNameTypeId, c.ClinetId, c.Notes,
-                this.UserLoggad.Id, c.BranchId, c.PackagePrice, c.PackageNamsArExtraPrice, c.VistToCoordinationDateTime);
+                this.UserLoggad.Id, c.BranchId, c.PackagePrice, c.PackageNamsArExtraPrice, c.VistToCoordinationDateTime, c.NamesPrintingPrice);
 
             db.Enquiries_ChangeCreateEventState(c.Id, true);
 
@@ -435,13 +445,13 @@ namespace BLL.BLL
             {
                 c.CustomLogo = null;
             }
-            if (!c.Package.IsAllowPrintNames)
+            if (!c.Package.IsPrintNamesFree)
             {
                 c.PrintNameTypeId = null;
                 c.IsNamesAr = null;
             }
 
-            if ((!c.IsClinetCustomLogo.HasValue || !c.IsClinetCustomLogo.Value) && !c.Package.IsAllowPrintNames)
+            if ((!c.IsClinetCustomLogo.HasValue || !c.IsClinetCustomLogo.Value) && !c.Package.IsPrintNamesFree)
             {
                 c.NameBride = null;
                 c.NameGroom = null;

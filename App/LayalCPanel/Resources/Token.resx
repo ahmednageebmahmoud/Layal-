@@ -399,9 +399,6 @@
   <data name="EventDateFrom" xml:space="preserve">
     <value>Event Date From</value>
   </data>
-  <data name="EventDateTime" xml:space="preserve">
-    <value>Event Date Time</value>
-  </data>
   <data name="EventDateTo" xml:space="preserve">
     <value>Event Date To</value>
   </data>
@@ -944,5 +941,26 @@
   </data>
   <data name="FilesReceivedTypes" xml:space="preserve">
     <value>Files Received Types</value>
+  </data>
+  <data name="ForEmployee" xml:space="preserve">
+    <value>For Employee</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="NamesPrintingPrice" xml:space="preserve">
+    <value>Name Printing Price</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="IsNameArDescription" xml:space="preserve">
+    <value>An extra amount will be added to the bill.</value>
+  </data>
+  <data name="IsNamesPrintingFree" xml:space="preserve">
+    <value>Names Printing Free</value>
   </data>
 </root>

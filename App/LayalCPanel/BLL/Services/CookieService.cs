@@ -31,7 +31,7 @@ namespace BLL.Services
                 return js.Deserialize<UserCookieVM>(Ticek.UserData);
             }
 
-            return new UserCookieVM();
+            return new UserCookieVM() { IsAnonymous=true };
         }
 
 

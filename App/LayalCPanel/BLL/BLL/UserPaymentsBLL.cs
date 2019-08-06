@@ -2,6 +2,7 @@
 using BLL.Services;
 using BLL.SignalAr;
 using BLL.ViewModels;
+using DAL;
 using Resources;
 using System;
 using System.Collections.Generic;
@@ -216,11 +217,15 @@ namespace BLL.BLL
 
         public object GetPayments(long? userToId, int skip, int take)
         {
+            /*
             //التحقق ا ذا كانت فارغة فمعنى ذالك ان هذة صفحة المستخدم الحالى
+            وذالك لان صفحة المستخدم الحالى لا يوضع بها معرف المستخدم
+             */
+            Users_SelectByPk_Result UserTo = new Users_SelectByPk_Result();
             if (!userToId.HasValue)
                 userToId = this.UserLoggad.Id;
-
-
+            else
+              UserTo = db.Users_SelectByPk(userToId.Value).First();
             var Payments = db.UserPayments_SelectByUserToId(userToId, skip, take).Select(c => new UserPaymentVM
             {
                 Id = c.Id,
@@ -240,11 +245,11 @@ namespace BLL.BLL
             if (Payments.Count == 0)
             {
                 if (skip > 0)
-                    return new ResponseVM(RequestTypeEnum.Info, Token.NoMoreResult);
-                return new ResponseVM(RequestTypeEnum.Info, Token.NoResult);
+                    return new ResponseVM(RequestTypeEnum.Info, Token.NoMoreResult, new { UserName = UserTo.UserName, });
+                return new ResponseVM(RequestTypeEnum.Info, Token.NoResult,new { UserName = UserTo.UserName, });
             }
 
-            return new ResponseVM(RequestTypeEnum.Success, Token.Success, Payments);
+            return new ResponseVM(RequestTypeEnum.Success, Token.Success,new {UserName= UserTo.UserName, PaymentsInformations = Payments });
         }
 
 

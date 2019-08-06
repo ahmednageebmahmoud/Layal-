@@ -13,8 +13,8 @@ namespace DAL
     
     public partial class Enquires_Closed_Result
     {
-        public string Enquiry_ClendarEventId { get; set; }
         public string Event_ClendarEventId { get; set; }
         public string VistToCoordinationClendarEventId { get; set; }
+        public string ScheduleVisitDateClendarEventId { get; set; }
     }
 }

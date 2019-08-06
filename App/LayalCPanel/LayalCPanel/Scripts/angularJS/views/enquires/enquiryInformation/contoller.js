@@ -73,6 +73,8 @@
                         $("select[serchbale]").select2();
                     }, 500)
 
+                    if (s.event)
+                        document.title = LangIsEn ? "Event Information" : "بيانات المناسبة";
 
                 } break;
                 case RequestTypeEnum.error:

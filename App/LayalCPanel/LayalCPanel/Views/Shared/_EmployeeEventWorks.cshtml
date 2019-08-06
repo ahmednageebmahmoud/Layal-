@@ -145,12 +145,12 @@
                         <!--Btn:Coordination-->
                         <a href="/EEW/AddAndUpdateCoordinations?id={{x.Id}}" 
                            ng-if="!x.EventWorkStatusIsFinshed.Coordination&&x.WorkTypeId==worksTypesEnum.Coordination"
-                           title="@Token.Update"  
+                        data-skin="dark" data-toggle="kt-tooltip" data-placement="top"    title="@Token.Update"  
                             class="btn btn-sm btn-clean btn-icon btn-icon-md" ><i class="la la-edit"></i></a>
                       
                         <a href="javascript:void(0)"
                            ng-if="!x.EventWorkStatusIsFinshed.Implementation&&x.WorkTypeId==worksTypesEnum.Implementation"
-                           title="@Token.Finshe"
+                        data-skin="dark" data-toggle="kt-tooltip" data-placement="top"    title="@Token.Finshe"
                            ng-click="taskFinsh(x)"
                            class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="flaticon-interface-10"></i></a>
 

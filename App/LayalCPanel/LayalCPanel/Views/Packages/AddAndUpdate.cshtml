@@ -127,12 +127,12 @@
                                     <small class="error invalid-feedback" ng-if="addPackageFrm.albumTypeId.$error.required&&packageFrmErrorSubmit">@Token.FieldIsRequierd</small>
                                 </div>
 
-                                <!--IsAllowPrintNames-->
-                                <label class="col-form-label col-lg-2">@Token.IsAllowPrintNames</label>
+                                <!--IsPrintNamesFree-->
+                                <label class="col-form-label col-lg-2">@Token.IsNamesPrintingFree</label>
                                 <div class="col-lg-4 form-group-sub">
                                     <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
                                         <label>
-                                            <input type="checkbox" checked="checked" ng-model="package.IsAllowPrintNames" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty" />
+                                            <input type="checkbox" checked="checked" ng-model="package.IsPrintNamesFree" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty" />
                                             <span></span>
                                         </label>
                                     </span>
@@ -277,7 +277,7 @@
                                                 </td>
                                                 <td>
                                                     <!--Btn:Added New-->
-                                                    <a href="javascript:void(0);" title="@Token.Add"
+                                                    <a href="javascript:void(0);" data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.Add"
                                                        class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="packageItemOpration.addNew(packageDeail,package)"><i class="la la-plus-square"></i></a>
                                                 </td>
                                             </tr>
@@ -300,7 +300,7 @@
                                                 <!--Btn:Delete-->
                                                 @if (Priv.CanDelete)
                                                 {
-                                                    <a href="javascript:void(0);" ng-click="packageItemOpration.delete(gp)" ng-if="gp.Id!=itemEditId" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
+                                                    <a href="javascript:void(0);" ng-click="packageItemOpration.delete(gp)" ng-if="gp.Id!=itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
                                                 }
                                             </td>
                                         </tr>

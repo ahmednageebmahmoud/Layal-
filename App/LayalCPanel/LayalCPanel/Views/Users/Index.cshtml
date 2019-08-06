@@ -2,8 +2,9 @@
     ViewBag.Title = Token.Users;
     Layout = "~/Views/Shared/_Layout.cshtml";
     UsersPrivilegeVM Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.Users);
+    UsersPrivilegeVM PrivUserPayments = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.UserPayments);
 
-
+    
 }
 
 <!-- begin:: Content Head -->
@@ -104,10 +105,9 @@
 
                         <!--R O W 2-->
                         <div class="form-group  row">
-
                             <!--Branch-->
-                                <label class="col-form-label col-lg-2">@Token.Branch</label>
-                                <div class="col-lg-4 form-group-sub">
+                                <div class="col-lg-3 form-group-sub">
+                                <label class="col-form-label ">@Token.Branch</label>
                                     <select class="form-control"
                                             serchbale
                                             name="branch"
@@ -140,6 +140,10 @@
                                        ng-model="userFilter.UserName"
                                        ng-change="users=[]" />
                             </div>
+                        </div>
+
+                        <!--R O W 3-->
+                        <div class="form-group  row">
                             <!--Email-->
                             <div class="col-lg-3 form-group-sub">
                                 <label class="col-form-label ">@Token.Email</label>
@@ -148,10 +152,6 @@
                                        ng-model="userFilter.Email"
                                        ng-change="users=[]" />
                             </div>
-                        </div>
-
-                        <!--R O W 3-->
-                        <div class="form-group  row">
                             <!--PhoneNumber-->
                             <div class="col-lg-3 form-group-sub">
                                 <label class="col-form-label ">@Token.PhoneNumber</label>
@@ -198,6 +198,11 @@
                                 <tr class=" ">
                                     <th class="th-10">
                                         <sms-sort ng-sms-fop="userFOP"
+                                                  ng-sms-field-name="Id"
+                                                  ng-sms-resource="@Token.Id"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="userFOP"
                                                   ng-sms-field-name="UserName"
                                                   ng-sms-resource="@Token.UserName"></sms-sort>
                                     </th>
@@ -238,6 +243,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="x in users|filter:usersSearch |orderBy:userFOP.sort.propName:userFOP.sort.reverse | limitTo:userFOP.paging.pagingLimt.take:userFOP.paging.pagingLimt.skip track by $index">
+                                    <td>{{x.Id}}</td>
                                     <td>{{x.UserName}}</td>
                                     <td>{{x.Email}}</td>
                                     <td>{{x.PhoneNo}}</td>
@@ -249,10 +255,16 @@
                                         <!--Btn:Edit-->
                                         @if (Priv.CanEdit)
                                         {
-                                            <a href="/Users/AddAndUpdate?id={{x.Id}}" title="@Token.Edit" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                            <a href="/Users/AddAndUpdate?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Edit" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                        }                                             
+                                        <a href="/Users/UserInformation?id={{x.Id}}"  data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.UserInformation" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-search"></i></a>
+                                        @if (PrivUserPayments.CanEdit || PrivUserPayments.CanAdd || PrivUserPayments.CanDisplay)
+                                        {
+                                            <a href="/UserPayments/Payments?id={{x.Id}}"
+                                               ng-if="x.AccountTypeId==accountTypeEnum.Helper"
+                                               title="@Token.Payments"
+                                               data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fas fa-hand-holding-usd"></i></a>
                                         }
-                                        <a href="/Users/UserInformation?id={{x.Id}}" title="@Token.UserInformation" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-search"></i></a>
-                                   
                                     </td>
                                 </tr>
                             </tbody>

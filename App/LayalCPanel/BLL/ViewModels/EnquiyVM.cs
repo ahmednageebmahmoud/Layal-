@@ -18,9 +18,13 @@ namespace BLL.ViewModels
         public string PhoneNo { get; set; }
         public int AccountTypeId { get; set; }
         public int CountryId { get; set; }
+        public int PhoneCountryId { get; set; }
+        public string PhoneIsoCode { get; set; }
+        public string PhoneFull => $"{this.PhoneIsoCode}    {this.PhoneNo}";
+        
         public int CityId { get; set; }
         public int? EnquiryTypeId { get; set; }
-        public long UserCreatedId { get; set; }
+        public long? UserCreatedId { get; set; }
         public string UserCreatedName { get; set; }
         public int Day { get; set; }
         public int Month { get; set; }
@@ -28,14 +32,13 @@ namespace BLL.ViewModels
         public int? BranchId { get; set; }
         public bool? IsClosed { get; set; }
         public object Status { get; set; }
-        public int CountIsDepositPaymented { get;   set; }
-        public bool IsDepositPaymented => this.CountIsDepositPaymented > 0;
+        public bool? IsDepositPaymented { get; set; }
         public string ClendarEventId { get; set; }
         public bool? IsLinkedClinet { get; set; } 
         public DateTime CreateDateTime { get; set; }
         public DateTime? ClosedDateTime { get; set; }
-        public string CreateDateTimeDisplay => DateService.GetDateTimeEn(this.CreateDateTime);
-        public string ClosedDateTimeDisplay => DateService.GetDateTimeEn(this.ClosedDateTime);
+        public string CreateDateTimeDisplay => DateService.GetDateTimeAr(this.CreateDateTime);
+        public string ClosedDateTimeDisplay => DateService.GetDateTimeAr(this.ClosedDateTime);
         public string Note { get; set; }
         public long? ClinetId { get; set; }
         public string EventDate

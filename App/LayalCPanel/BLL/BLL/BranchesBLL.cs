@@ -16,7 +16,6 @@ namespace BLL.BLL
 
         public object GetBranches(int? skip, int? take, string branchName, string email, string phoneNumber, string adddress,
             DateTime? createDateTo, DateTime? createDateFrom, int? countryId, int? cityId, int? accountTypeId, int? languageId)
-
         {
             var Branches = db.Branches_SelectByFilter(skip, take).Select(c => new BranchVM
             {

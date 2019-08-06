@@ -170,6 +170,7 @@ namespace BLL.BLL
                 Id = c.Id,
                 NameAr = c.NameAr,
                 NameEn = c.NameEn,
+                Price=c.Price
             });
             return Result;
         }
@@ -181,7 +182,7 @@ namespace BLL.BLL
                 Id = c.Id,
                 NameAr = c.NameAr,
                 NameEn = c.NameEn,
-                IsAllowPrintNames=c.IsAllowPrintNames,
+                IsPrintNamesFree = c.IsPrintNamesFree,
                 Price=c.Price,
                 NamsArExtraPrice=c.NamsArExtraPrice
             });
@@ -251,14 +252,14 @@ namespace BLL.BLL
             });
             return Result;
         }
-        public object GetEnquiryTypes()
+        public List<EnquiryTypeVM> GetEnquiryTypes()
         {
             var Result = db.EnquiryTypes_SelectAll().Select(c => new EnquiryTypeVM
             {
                 Id = c.Id,
                 NameAr = c. NameAr,
                 NameEn = c.NameEn,
-            });
+            }).ToList();
             return Result;
         }
 
@@ -291,7 +292,8 @@ namespace BLL.BLL
             {
                 Id = c.Id,
                     NameAr = c.Ar,
-                    NameEn = c.En
+                    NameEn = c.En,
+                    IsoCode=c.IsoCode
             });
             return Result;
         }

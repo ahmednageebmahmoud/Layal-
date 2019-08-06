@@ -11,6 +11,7 @@ namespace BLL.ViewModels
 
         public int? Id { get; set; }
         public string CountryName => this.IsEn ? this.NameEn : this.NameAr;
+        public string CountryNameIsoCode => this.IsEn ? $"{this.IsoCode} - {this.NameEn} " : $"{this.IsoCode} - {this.NameAr} ";
 
         public string IsoCode { get; set; }
         public long WordId { get; set; }

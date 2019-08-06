@@ -21,7 +21,7 @@ namespace BLL.BLL
                 NameEn = c.NameEn,
                 DescriptionAr = c.DescriptionAr,
                 DescriptionEn = c.DescriptionEn,
-                IsAllowPrintNames = c.IsAllowPrintNames,
+                IsPrintNamesFree = c.IsPrintNamesFree,
                 WordDescriptionId = c.FkWordDescription_Id,
                 WordNameId = c.FkWordName_Id,
                 Price=c.Price,
@@ -97,10 +97,10 @@ namespace BLL.BLL
         {
             try
             {
-                if (!c.IsAllowPrintNames)
+                if (!c.IsPrintNamesFree)
                     c.NamsArExtraPrice = 0;
 
-                db.Packages_Update(c.Id, c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.IsAllowPrintNames, c.AlbumTypeId, c.WordNameId, c.WordDescriptionId,c.Price,c.NamsArExtraPrice);
+                db.Packages_Update(c.Id, c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.IsPrintNamesFree, c.AlbumTypeId, c.WordNameId, c.WordDescriptionId,c.Price,c.NamsArExtraPrice);
                 return new ResponseVM(RequestTypeEnum.Success, Token.Updated, c);
             }
             catch (Exception ex)
@@ -113,10 +113,10 @@ namespace BLL.BLL
         {
             try
             {
-                if (!c.IsAllowPrintNames)
+                if (!c.IsPrintNamesFree)
                     c.NamsArExtraPrice = 0;
                 ObjectParameter ID = new ObjectParameter("Id", typeof(int));
-                db.Packages_Insert(ID, c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.IsAllowPrintNames, c.AlbumTypeId,c.Price,c.NamsArExtraPrice);
+                db.Packages_Insert(ID, c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.IsPrintNamesFree, c.AlbumTypeId,c.Price,c.NamsArExtraPrice);
 
                 c.Id = (int)ID.Value;
                 return new ResponseVM(RequestTypeEnum.Success, Token.Added, c);
@@ -137,7 +137,7 @@ namespace BLL.BLL
                 c.FKAlbumType_Id,
                 c.FkWordDescription_Id,
                 c.FkWordName_Id,
-                c.IsAllowPrintNames,
+                c.IsPrintNamesFree,
                 c.NameAr,
                 c.NameEn,
                 c.AlbumType_NameAr,
@@ -150,7 +150,7 @@ namespace BLL.BLL
                 DescriptionEn = c.Key.DescriptionEn,
                 NameAr = c.Key.NameAr,
                 NameEn = c.Key.NameEn,
-                IsAllowPrintNames = c.Key.IsAllowPrintNames,
+                IsPrintNamesFree = c.Key.IsPrintNamesFree,
                 WordDescriptionId = c.Key.FkWordDescription_Id,
                 WordNameId = c.Key.FkWordName_Id,
                 AlbumType = new AlbumTypeVM
@@ -186,7 +186,7 @@ namespace BLL.BLL
                 c.FKAlbumType_Id,
                 c.FkWordDescription_Id,
                 c.FkWordName_Id,
-                c.IsAllowPrintNames,
+                c.IsPrintNamesFree,
                 c.NameAr,
                 c.NameEn,
                 c.Price,c.NamsArExtraPrice
@@ -198,7 +198,7 @@ namespace BLL.BLL
                 DescriptionEn = c.Key.DescriptionEn,
                 NameAr = c.Key.NameAr,
                 NameEn = c.Key.NameEn,
-                IsAllowPrintNames = c.Key.IsAllowPrintNames,
+                IsPrintNamesFree = c.Key.IsPrintNamesFree,
                 WordDescriptionId = c.Key.FkWordDescription_Id,
                 WordNameId = c.Key.FkWordName_Id,
                 Price = c.Key.Price,

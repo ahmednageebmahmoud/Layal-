@@ -15,6 +15,7 @@ namespace DAL
     {
         public int Id { get; set; }
         public long FKWord_Id { get; set; }
+        public decimal Price { get; set; }
         public string NameAr { get; set; }
         public string NameEn { get; set; }
     }

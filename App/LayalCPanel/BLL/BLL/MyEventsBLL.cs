@@ -110,7 +110,7 @@ namespace BLL.BLL
                 {
                     NameAr = c.Package_NameAr,
                     NameEn = c.Package_NameEn,
-                    IsAllowPrintNames = c.Package_IsAllowPrintNames
+                    IsPrintNamesFree = c.Package_IsPrintNamesFree
                 },
                 PrintNameType = new PrintNamesTypeVM
                 {
@@ -165,7 +165,14 @@ namespace BLL.BLL
                     c.PackageNamsArExtraPrice = 0;
             }
 
-            db.Events_Update2(c.Id, c.IsClinetCustomLogo, c.LogoFilePath, c.IsNamesAr, c.NameGroom, c.NameBride, c.PrintNameTypeId,  c.PackagePrice, c.PackageNamsArExtraPrice);
+            //اضافة سعر الحفر اذا كان ليس مجانى فى هذة الباكج 
+            if (Package.IsPrintNamesFree)
+                c.NamesPrintingPrice = 0;
+            else if (c.PrintNameTypeId.HasValue && c.PrintNameTypeId.Value > 0)
+                c.NamesPrintingPrice = db.PrintNameTypes_SelectByPK(c.PrintNameTypeId).First().Price;
+
+
+            db.Events_Update2(c.Id, c.IsClinetCustomLogo, c.LogoFilePath, c.IsNamesAr, c.NameGroom, c.NameBride, c.PrintNameTypeId,  c.PackagePrice, c.PackageNamsArExtraPrice,c.NamesPrintingPrice);
 
             return new ResponseVM(RequestTypeEnum.Success, Token.Updated, c);
         }
@@ -230,13 +237,13 @@ namespace BLL.BLL
 
                 c.CustomLogo = null;
             }
-            if (!c.Package.IsAllowPrintNames)
+            if (!c.Package.IsPrintNamesFree)
             {
                 c.PrintNameTypeId = null;
                 c.IsNamesAr = null;
             }
 
-            if ((!c.IsClinetCustomLogo.HasValue || !c.IsClinetCustomLogo.Value) && !c.Package.IsAllowPrintNames)
+            if ((!c.IsClinetCustomLogo.HasValue || !c.IsClinetCustomLogo.Value) && !c.Package.IsPrintNamesFree)
             {
                 c.NameBride = null;
                 c.NameGroom = null;

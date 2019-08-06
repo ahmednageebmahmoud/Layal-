@@ -42,7 +42,7 @@
                         <i class="kt-font-brand fas fa-hand-holding-usd"></i>
                     </span>
                     <h3 class="kt-portlet__head-title">
-                        @Token.Payments
+                        @Token.Payments @Token.ForEmployee <a href="/Users/UserInformation?id={{userToId}}">{{userToName}}</a>
                     </h3>
                 </div>
             </div>
@@ -145,7 +145,7 @@
                                         @if (Priv.CanEdit)
                                         {
                                             <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air" ng-if="payment.State==state.update">
-                                                <i class="la la-edit">@Token.Edit</i>
+                                                <i class="la la-save">@Token.Save</i>
                                             </button>
                                         }
                                         <button type="reset" class="btn btn-warning btn-elevate btn-elevate-air" ng-click="payment={State:state.create};paymentFormErrorSubmit=false"><i class="la la-file">@Token.Cancel</i></button>
@@ -222,7 +222,8 @@
                                <td>
                                    @if (Priv.CanEdit)
                                    {
-                                       <a href="#" title="@Token.Edit" ng-if="!x.IsClosed" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="paymentUpdate(x)"><i class="la la-edit"></i></a>
+                                       <a href="#" title="@Token.Edit"
+                                          data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  ng-if="!x.IsClosed" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="paymentUpdate(x)"><i class="la la-edit"></i></a>
                                    }
                                </td>
                                  </tr>

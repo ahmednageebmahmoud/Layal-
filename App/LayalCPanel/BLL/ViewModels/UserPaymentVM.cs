@@ -12,7 +12,7 @@ namespace BLL.ViewModels
         public long Id { get; set; }
         public decimal Amount { get; set; }
         public DateTime DateTime { get; set; }
-        public string DateTimeDisplay => DateService.GetDateTimeEn(DateTime );
+        public string DateTimeDisplay => DateService.GetDateTimeAr(DateTime );
         public bool? IsAcceptFromManger { get; set; }
         public long UserToId { get; set; }
         public long UserFromId { get; set; }

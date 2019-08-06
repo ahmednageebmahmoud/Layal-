@@ -21,17 +21,17 @@ namespace BLL.BLL
             int? cityId, int? enquiryId,
            int? day, int? month, int? year, int? branchId, bool? isLinkedClinet, bool isForCurrentUser = false)
         {
-            bool? IsWithBranch = null;
+            bool? CurrentUserBranch = null;
             //اذا كان الميتخدم الحالى هوا مدير فرع فـ يجب عرض الاستفسارات التى تخصة فقط
             if (this.UserLoggad.AccountTypeId == (int)AccountTypeEnum.BranchManager)
             {
                 branchId = this.UserLoggad.BrId;
-                IsWithBranch = true;
+                CurrentUserBranch = true;
             }
 
             var Enquires = db.Enquires_SelectByFilter
                 (skip, take, firstName, lastName, phone, day, month, year, createDateTimeFrom, createDateTimeTo,
-                countryId, cityId, enquiryId, branchId, isForCurrentUser, this.UserLoggad.Id, isLinkedClinet, IsWithBranch)
+                countryId, cityId, enquiryId, branchId, isForCurrentUser, this.UserLoggad.Id, isLinkedClinet, CurrentUserBranch)
 
                 .Select(c => new EnquiyVM
                 {
@@ -49,12 +49,12 @@ namespace BLL.BLL
                     BranchId = c.FKBranch_Id,
                     IsClosed = c.IsClosed,
                     ClosedDateTime = c.ClosedDateTime,
-                    ClendarEventId = c.ClendarEventId,
                     IsLinkedClinet = c.IsLinkedClinet,
-                    CountIsDepositPaymented = c.CountIsDepositPaymented.Value,
+                    IsDepositPaymented = c.IsDepositPaymented,
                     IsCreatedEvent = c.IsCreatedEvent,
-                    CountryId=c.FkCountry_Id,
-                    CityId=c.FkCity_Id,
+                    CountryId = c.FkCountry_Id,
+                    CityId = c.FkCity_Id,
+                    PhoneIsoCode = c.PhoneIsoCode,
                     Branch = new BranchVM
                     {
                         NameAr = c.BranchNameAR,
@@ -101,14 +101,18 @@ namespace BLL.BLL
 
                 db.Enquires_Closed(id, DateTime.Now).Select(v => new
                 {
-                    v.Enquiry_ClendarEventId,
+                    v.ScheduleVisitDateClendarEventId,
+                    v.VistToCoordinationClendarEventId,
                     v.Event_ClendarEventId
                 }).ToList().ForEach(v =>
                 {
-                    GoggelApiCalendarService.DeleteEvent(v.Enquiry_ClendarEventId);
+                    GoggelApiCalendarService.DeleteEvent(v.ScheduleVisitDateClendarEventId);
+                    GoggelApiCalendarService.DeleteEvent(v.VistToCoordinationClendarEventId);
                     GoggelApiCalendarService.DeleteEvent(v.Event_ClendarEventId);
                 });
 
+                //Update Befor (ScheduleVisitDateClendarEventId) To Null
+                db.EnquiryStatus_ResetClendersIdsToNull(id);
                 return new ResponseVM(RequestTypeEnum.Success, Token.EnquiryIsClosed);
             }
             catch (Exception ex)
@@ -124,7 +128,7 @@ namespace BLL.BLL
         /// <returns></returns>
         public bool CheckIfMyEnquiry(long id)
         {
-           return db.Enquires_CheckFromOwner(id, this.UserLoggad.Id).First().Value>0;
+            return db.Enquires_CheckFromOwner(id, this.UserLoggad.Id).First().Value > 0;
         }
 
         public object GetFullEnquiyInformation(long id)
@@ -141,9 +145,9 @@ namespace BLL.BLL
             var PaymentsInformations = new EnquiryPaymentsBLL().GetPaymentsInformations(id);
 
             //Fill Event And Package
-                Event = new EventsBLL().GetEventInformation(Enquiry.Id);
-                if (Event != null)
-                    Package = new PackagesBLL().GetPackageInformation(Event.PackageId.Value);
+            Event = new EventsBLL().GetEventInformation(Enquiry.Id);
+            if (Event != null)
+                Package = new PackagesBLL().GetPackageInformation(Event.PackageId.Value);
 
             return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, new
             {
@@ -188,7 +192,6 @@ namespace BLL.BLL
                 }
             }
         }
-
         private object Delete(EnquiyVM c)
         {
             db.Enquires_Delete(c.Id);
@@ -248,55 +251,44 @@ namespace BLL.BLL
             //نقوم بـ التحويل فقط فى اول مرة... لان ممكن المدير قد حدد الفرع الذى سوف يذهب الية هذا الاستفسار
             if (c.BranchId.HasValue)
                 IsWithBranch = true;
-
             ObjectParameter ID = new ObjectParameter("Id", typeof(long));
-            db.Enquires_Insert(ID, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId, this.UserLoggad.Id, DateTime.Now, c.Note, c.BranchId, this.UserLoggad.IsClinet, IsWithBranch);
+            if (this.UserLoggad.Id == 0)
+                db.Enquires_Insert(ID, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId, null, null, DateTime.Now, c.Note, c.BranchId, false, IsWithBranch,c.PhoneCountryId);
+            else db.Enquires_Insert(ID, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId, this.UserLoggad.Id,this.UserLoggad.Id, DateTime.Now, c.Note, c.BranchId, this.UserLoggad.IsClinet, IsWithBranch, c.PhoneCountryId);
+
             c.Id = (long)ID.Value;
+            var UserMangerBranch = db.Users_SelectByBranchId(c.BranchId, (int)AccountTypeEnum.BranchManager).FirstOrDefault();
 
-
-
+            NotifyVM Notify = new NotifyVM()
+            {
+                TitleAr = " استفسار جدبد",
+                TitleEn = "New Enquiry",
+                DateTime = DateTime.Now,
+                TargetId = c.Id,
+                PageId = (int)PagesEnum.Enquires,
+                RedirectUrl = $"/Enquires/EnquiryInformation?id={c.Id}&notifyId=",
+            };
 
             //ارسال اشعار للـ الادمين اذا كان الشخص الحالى هو عميل 
-            if (this.UserLoggad.IsClinet)
+            if (this.UserLoggad.IsAnonymous)
             {
-                var Notify = new NotifyVM
-                {
-                    TitleAr = " استفسار جدبد",
-                    TitleEn = "New Enquiry",
-                    DescriptionAr = $"لقد قام العميل {this.UserLoggad.UserName}  بنشاء استفسار جديد",
-                    DescriptionEn = $"{this.UserLoggad.UserName} Has been created new enqiry",
-                    DateTime = DateTime.Now,
-                    TargetId = c.Id,
-                    PageId = (int)PagesEnum.Enquires,
-                    RedirectUrl = $"/Enquires/EnquiryInformation?id={c.Id}&notifyId=",
-                };
-                NotificationsBLL.Add(Notify, this.AdminId);
-                new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { this.AdminId.ToString() }, Notify);
-
+                Notify.DescriptionAr = $"لقد قام شخص ما بـ انشاء استفسار جديد";
+                Notify.DescriptionEn = $"Some people has been created new enqiry";
             }
-            else
+            else if (this.UserLoggad.IsClinet)
+            {
+                Notify.DescriptionAr = $"لقد قام العميل {this.UserLoggad.UserName}  بـ انشاء استفسار جديد";
+                Notify.DescriptionEn = $"{this.UserLoggad.UserName} Has been created new enqiry";
+            }
+            else if (this.UserLoggad.IsAdmin)
             {
                 //ارسال الاشعار للفعر اذا اكان المستخدم الحالى هوا المدير
-                var Notify = new NotifyVM
-                {
-                    TitleAr = " استفسار جدبد",
-                    TitleEn = "New Enquiry",
-                    DescriptionAr = $"لقد قام المدير بنشاء استفسار جديد",
-                    DescriptionEn = $"Manger Has been created new enqiry",
-                    DateTime = DateTime.Now,
-                    TargetId = c.Id,
-                    PageId = (int)PagesEnum.Enquires,
-                    RedirectUrl = $"/Enquires/EnquiryInformation?id={c.Id}&notifyId=",
-                };
-                var UserMangerBranch = db.Users_SelectByBranchId(c.BranchId, (int)AccountTypeEnum.BranchManager).FirstOrDefault();
-                if (UserMangerBranch != null)
-                {
-
-                    NotificationsBLL.Add(Notify, UserMangerBranch.Id);
-                    new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserMangerBranch.Id.ToString() }, Notify);
-                }
+                Notify.DescriptionAr = $"لقد قام المدير بـ انشاء استفسار جديد";
+                Notify.DescriptionEn = $"Manger has been created new enqiry";
             }
 
+            NotificationsBLL.Add(Notify, UserMangerBranch.Id);
+            new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserMangerBranch.Id.ToString() }, Notify);
             return new ResponseVM(RequestTypeEnum.Success, Token.Added, c);
         }
 
@@ -320,13 +312,14 @@ namespace BLL.BLL
                   CityId = c.FkCity_Id,
                   BranchId = c.FKBranch_Id,
                   EnquiryTypeId = c.FKEnquiryType_Id,
-                  ClendarEventId = c.ClendarEventId,
                   IsLinkedClinet = c.IsLinkedClinet,
-                  CountIsDepositPaymented = c.CountIsDepositPaymented.Value,
+                  IsDepositPaymented = c.IsDepositPaymented,
                   IsCreatedEvent = c.IsCreatedEvent,
                   ClinetId = c.FkClinet_Id,
-                  IsClosed=c.IsClosed,
-                  ClosedDateTime=c.ClosedDateTime,
+                  IsClosed = c.IsClosed,
+                  ClosedDateTime = c.ClosedDateTime,
+                  PhoneIsoCode = c.PhoneIsoCode,
+
 
                   Branch = new BranchVM
                   {
@@ -367,7 +360,7 @@ namespace BLL.BLL
                       UserCreatedName = b.Status_CreatedUserName,
                       ScheduleVisitDateTime = b.Status_ScheduleVisitDateTime,
                       EnquiryPaymentId = b.Status_EnquiryPaymentId,
-                      Amount=b.Amount,
+                      Amount = b.Amount,
                       EnquiryType = new EnquiryTypeVM
                       {
                           NameAr = b.Status_NameAr,
@@ -392,6 +385,7 @@ namespace BLL.BLL
                 BankTransferImage = c.TransferImage,
                 UserCreatedId = c.FKUserCreated_Id,
                 UserCreatedName = c.UserCreatedName,
+
             }).ToList();
 
             var Enquiy = db.Enquires_SelectByPk(id)
@@ -400,7 +394,6 @@ namespace BLL.BLL
                     Id = c.Id,
                     FirstName = c.FirstName,
                     LastName = c.LastName,
-
                     PhoneNo = c.PhoneNo,
                     CreateDateTime = c.CreateDateTime,
                     Day = c.Day,
@@ -412,10 +405,10 @@ namespace BLL.BLL
                     CityId = c.FkCity_Id,
                     BranchId = c.FKBranch_Id,
                     EnquiryTypeId = c.FKEnquiryType_Id,
-                    ClendarEventId = c.ClendarEventId,
                     IsLinkedClinet = c.IsLinkedClinet,
-                    CountIsDepositPaymented = c.CountIsDepositPaymented.Value,
+                    IsDepositPaymented = c.IsDepositPaymented,
                     IsCreatedEvent = c.IsCreatedEvent,
+                    PhoneIsoCode = c.PhoneIsoCode,
 
                     Branch = new BranchVM
                     {

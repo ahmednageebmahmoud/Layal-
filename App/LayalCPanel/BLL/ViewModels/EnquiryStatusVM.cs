@@ -13,8 +13,8 @@ namespace BLL.ViewModels
         public Int64 EnquiryId { get; set; }
         public DateTime? ScheduleVisitDateTime { get; set; }
         public DateTime? DateTime { get; set; }
-        public string ScheduleVisitDateTimeDisplay => DateService.GetDateTimeEn(this.ScheduleVisitDateTime);
-        public string DateTimeDisplay => DateService.GetDateTimeEn(this.DateTime);
+        public string ScheduleVisitDateTimeDisplay => DateService.GetDateTimeAr(this.ScheduleVisitDateTime);
+        public string DateTimeDisplay => DateService.GetDateTimeAr(this.DateTime);
         public string Notes { get; set; }
         public EnquiryStatusTypesEnum StatusId { get; set; }
         public int EnquiryBranchId { get; set; }

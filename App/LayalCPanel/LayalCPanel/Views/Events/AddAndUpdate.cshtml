@@ -19,7 +19,8 @@
                 <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link"> @Token.HomePage </a>
 
                 <span class="kt-subheader__breadcrumbs-separator"></span>
-                <a href="~/Events" class="kt-subheader__breadcrumbs-link"> @Token.Events </a>
+                <a href="~/Enquires" class="kt-subheader__breadcrumbs-link" ng-if="event.State!=state.update"> @Token.Enquires </a>
+                <a href="~/Events" class="kt-subheader__breadcrumbs-link" ng-if="event.State==state.update"> @Token.Events </a>
 
 
                 <span class="kt-subheader__breadcrumbs-separator"></span>
@@ -65,12 +66,15 @@
                                             ng-required="true"></select>
                                     <!--Errors:-->
                                     <small class="error invalid-feedback" ng-if="eventFrm.package.$error.required&&eventFormSubmitErro">@Token.FieldIsRequierd</small>
-                                </div>
+                               <!--Info-->
+                                      <alert-info model="PrintNamesNotes" ng-show="PrintNamesNotes"></alert-info>
+                                  </div>
+
                                 <!--EventDateTime-->
-                                <label class="col-form-label col-lg-2">@Token.EventDateTime</label>
+                                <label class="col-form-label col-lg-2">@Token.EventDate</label>
                                 <div class="col-lg-4 form-group-sub">
                                     <input class="form-control"
-                                           type="datetime-local"
+                                           type="date"
                                            name="eventDateTime"
                                            ng-class="{'is-invalid':eventFrm.eventDateTime.$invalid&&eventFormSubmitErro}"
                                            ng-model="event.EventDateTime"
@@ -78,26 +82,12 @@
                                     <!--Errors:-->
                                     <small class="error invalid-feedback" ng-if="eventFrm.eventDateTime.$error.required&&eventFormSubmitErro">@Token.FieldIsRequierd</small>
                                     <small class="error invalid-feedback" ng-if="eventFrm.eventDateTime.$invalid&&eventFormSubmitErro">@Token.InvalidData</small>
-                               
                                  </div>
-
-
                             </div>
 
                             <!--R O W 2-->
-                            <div class="form-group  row">
-                                <!--IsLogoAr
-                                <label class="col-form-label col-lg-2">@Token.IsLogoAr</label>
-                                <div class="col-lg-4 form-group-sub">
-                                    <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
-                                        <label>
-                                            <input type="checkbox" checked="checked" ng-model="event.IsLogoAr" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                                            <span></span>
-                                        </label>
-                                    </span>
-                                </div>
-                                    -->
-                                <!--IsClinetCustomLogo-->
+                            <div class="form-group  row" ng-if="event.State==state.update">
+                             <!--IsClinetCustomLogo-->
                                 <label class="col-form-label col-lg-2">@Token.IsClinetCustomLogo</label>
                                 <div class="col-lg-4 form-group-sub">
                                     <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
@@ -113,15 +103,13 @@
                                     <input type="file" accept=".pdf,.ai"
                                            onchange="angular.element(this).scope().uplaodLogo(this.files[0])">
                                     <p style="display:inline"><a href="{{event.LogoFilePath}}" ng-if="event.LogoFilePath" class="kt-link kt-font-boldest">@Token.Review</a></p>
-                                    <br />
-                                    <br />
-                                    <p class="alert-outline-info">@Token.Note: {{UploadLogoNotes}}</p>
+                                    <!--Info-->
+                                    <alert-info model="UploadLogoNotes" ng-show="UploadLogoNotes"></alert-info>
                                 </div>
-
                             </div>
 
                             <!--R O W 3-->
-                            <div class="form-group  row" ng-if="event.Package.IsAllowPrintNames">
+                            <div class="form-group  row" ng-if="event.State==state.update">
                                 <!--PrintNameType-->
                                 <label class="col-form-label col-lg-2">@Token.PrintNameType</label>
                                 <div class="col-lg-4 form-group-sub">
@@ -131,10 +119,8 @@
                                             ng-class="{'is-invalid':eventFrm.printNameType.$invalid&&eventFormSubmitErro}"
                                             ng-model="event.PrintNameTypeId"
                                             ng-options="c.Id as c.PrintNamesTypeName for c in printNameTypes"
-                                            ng-required="true"></select>
-                                    <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="eventFrm.printNameType.$error.required&&eventFormSubmitErro">@Token.FieldIsRequierd</small>
-                                </div>
+                                            ng-change="fillPrintTypePrice(event.PrintNameTypeId)"></select>
+                                  </div>
 
 
                                 <!--IsNamesAr-->
@@ -147,11 +133,14 @@
                                             <span></span>
                                         </label>
                                     </span>
+                                    <!--Info-->
+                                    <alert-info model="@Token.IsNameArDescription" ng-show="event.IsNamesAr" is-text="true"></alert-info>
                                 </div>
+
                             </div>
 
                             <!--R O W 4-->
-                            <div class="form-group  row" ng-if="event.Package.IsAllowPrintNames||event.IsClinetCustomLogo">
+                            <div class="form-group  row" ng-if="event.State==state.update">
                                 <!--NameGroom-->
                                 <label class="col-form-label col-lg-2">@Token.NameGroom</label>
                                 <div class="col-lg-4 form-group-sub">
@@ -173,6 +162,7 @@
                                     <input type="text"
                                            name="nameBride"
                                            class="form-control"
+
                                            ng-class="{'is-invalid':eventFrm.nameBride.$invalid&&eventFormSubmitErro}"
                                            ng-model="event.NameBride"
                                            maxlength="50"
@@ -186,7 +176,7 @@
                             
 
                             <!--R O W 5-->
-                            <div class="form-group  row">
+                            <div class="form-group  row" ng-if="event.State==state.update">
                                 <!--VistToCoordinationDateTime-->
                                 <label class="col-form-label col-lg-2">@Token.VistToCoordinationDateTime</label>
                                 <div class="col-lg-4 form-group-sub">
@@ -213,18 +203,19 @@
                                             <tr>
                                                 <th>@Token.PackagePrice</th>
                                                 <th>@Token.NamsArExtraPrice</th>
+                                                <th>@Token.NamesPrintingPrice</th>
                                                 <th>@Token.TotalPrice</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>{{event.PackagePrice|currency:' SAR '}}</td>
-                                                <td>{{event.PackageNamsArExtraPrice|currency:' SAR '}}</td>
-                                                <td>{{event.PackagePrice+event.PackageNamsArExtraPrice|currency:' SAR '}}</td>
+                                                <td>{{event.PackagePrice|currency}}</td>
+                                                <td>{{event.PackageNamsArExtraPrice|currency}}</td>
+                                                <td>{{event.NamesPrintingPrice|currency}}</td>
+                                                <td>{{event.PackagePrice+event.PackageNamsArExtraPrice+event.NamesPrintingPrice|currency}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
-
                                 </div>
                             </div>
 

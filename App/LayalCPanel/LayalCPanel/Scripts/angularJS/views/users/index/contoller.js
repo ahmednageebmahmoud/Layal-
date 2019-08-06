@@ -21,7 +21,8 @@
     };
 
     s.accountTypes = accountTypesList;
-    
+    s.accountTypeEnum = AccountTypesEnum;
+
 
     s.languages = [{
         Id: null,

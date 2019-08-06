@@ -226,3 +226,7 @@ div#ng_table_1_filter {
          display:block !important
 
  }
+
+ .alert .alert-icon i{
+     font-size:10px
+ }

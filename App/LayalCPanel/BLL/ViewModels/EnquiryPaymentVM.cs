@@ -18,7 +18,7 @@ namespace BLL.ViewModels
         public string BankTransferImageName { get; set; }
         public string UserCreatedName { get; set; }
         public DateTime DateTime { get; set; }
-        public string DateTimeDisplay => DateService.GetDateTimeEn(DateTime);
+        public string DateTimeDisplay => DateService.GetDateTimeAr(DateTime);
         public long EnquiryId { get; set; }
         public long UserCreatedId { get; set; }
         public int BranchId { get; set; }

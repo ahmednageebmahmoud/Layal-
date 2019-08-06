@@ -182,11 +182,13 @@
     <Parameter Name="FkCity_Id" Type="int" Mode="In" />
     <Parameter Name="FKEnquiryType_Id" Type="int" Mode="In" />
     <Parameter Name="FKUserCreated_Id" Type="bigint" Mode="In" />
+    <Parameter Name="Clinet_Id" Type="bigint" Mode="In" />
     <Parameter Name="CreateDateTime" Type="datetime" Mode="In" />
     <Parameter Name="Notes" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="BranchId" Type="int" Mode="In" />
     <Parameter Name="IsLinkedClinet" Type="bit" Mode="In" />
     <Parameter Name="IFWithBranch" Type="bit" Mode="In" />
+    <Parameter Name="PhoneCountryId" Type="int" Mode="In" />
   </Function>
   <Function Name="Enquires_IsClosed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
@@ -209,7 +211,7 @@
     <Parameter Name="IsForCurrentUser" Type="bit" Mode="In" />
     <Parameter Name="CurrentUserLoggadId" Type="bigint" Mode="In" />
     <Parameter Name="IsLinkedClinet" Type="bit" Mode="In" />
-    <Parameter Name="IsWithBranch" Type="bit" Mode="In" />
+    <Parameter Name="CurrentUserBranch" Type="bit" Mode="In" />
   </Function>
   <Function Name="Enquires_SelectByPk" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EnquiyId" Type="bigint" Mode="In" />
@@ -238,10 +240,6 @@
     <Parameter Name="Id" Type="bigint" Mode="In" />
     <Parameter Name="IsCreatedEvent" Type="bit" Mode="In" />
   </Function>
-  <Function Name="Enquiries_UpdateCalendarEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
-    <Parameter Name="ClendarEventId" Type="nvarchar(max)" Mode="In" />
-  </Function>
   <Function Name="EnquiryNote_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Notes" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="CreateDateTime" Type="datetime" Mode="In" />
@@ -256,10 +254,10 @@
     <Parameter Name="IsDeposit" Type="bit" Mode="In" />
     <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
   </Function>
-  <Function Name="EnquiryPayments_CheckIfClinetPaymentEventPricing" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="EnquiryPayments_CheckIfPaymentDeposit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
     <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
   </Function>
-  <Function Name="EnquiryPayments_CheckIfClinetPaymentPricing" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+  <Function Name="EnquiryPayments_CheckIfPaymentedDeposit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="EnquiryPayments_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -276,6 +274,12 @@
   <Function Name="EnquiryPayments_SelectByEnquiryId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
   </Function>
+  <Function Name="EnquiryPayments_TotalPayments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="decimal">
+    <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EnquiryPayments_TotalPaymentsActive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="decimal">
+    <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
+  </Function>
   <Function Name="EnquiryStatus_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Notes" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="DateTime" Type="datetime" Mode="In" />
@@ -285,6 +289,17 @@
     <Parameter Name="UserCreatedId" Type="bigint" Mode="In" />
     <Parameter Name="IFWithBranch" Type="bit" Mode="In" />
     <Parameter Name="EnquiryPaymentId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EnquiryStatus_ResetClendersIdsToNull" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EnquiryStatus_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
+    <Parameter Name="StatusId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EnquiryStatus_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="ScheduleVisitDateClendarEventId" Type="nvarchar(max)" Mode="In" />
   </Function>
   <Function Name="EnquiryStatusTypes_SelectByEnquiryId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EnquiyId" Type="bigint" Mode="In" />
@@ -359,6 +374,7 @@
     <Parameter Name="PackagePrice" Type="decimal" Mode="In" />
     <Parameter Name="PackageNamsArExtraPrice" Type="decimal" Mode="In" />
     <Parameter Name="VistToCoordinationDateTime" Type="datetime" Mode="In" />
+    <Parameter Name="NamesPrintingPrice" Type="decimal" Mode="In" />
   </Function>
   <Function Name="Events_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Skip" Type="int" Mode="In" />
@@ -412,6 +428,7 @@
     <Parameter Name="PackagePrice" Type="decimal" Mode="In" />
     <Parameter Name="PackageNamsArExtraPrice" Type="decimal" Mode="In" />
     <Parameter Name="VistToCoordinationDateTime" Type="datetime" Mode="In" />
+    <Parameter Name="NamesPrintingPrice" Type="decimal" Mode="In" />
   </Function>
   <Function Name="Events_Update2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
@@ -423,6 +440,7 @@
     <Parameter Name="FKPrintNameType_Id" Type="int" Mode="In" />
     <Parameter Name="PackagePrice" Type="decimal" Mode="In" />
     <Parameter Name="PackageNamsArExtraPrice" Type="decimal" Mode="In" />
+    <Parameter Name="NamesPrintingPrice" Type="decimal" Mode="In" />
   </Function>
   <Function Name="Events_UpdateCalendarEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EventId" Type="bigint" Mode="In" />
@@ -659,7 +677,7 @@
     <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
     <Parameter Name="DescriptionAr" Type="nvarchar" Mode="In" />
     <Parameter Name="DescriptionEn" Type="nvarchar" Mode="In" />
-    <Parameter Name="IsAllowPrintNames" Type="bit" Mode="In" />
+    <Parameter Name="IsPrintNamesFree" Type="bit" Mode="In" />
     <Parameter Name="AlbumTypeId" Type="int" Mode="In" />
     <Parameter Name="Price" Type="decimal" Mode="In" />
     <Parameter Name="NamsArExtraPrice" Type="decimal" Mode="In" />
@@ -678,7 +696,7 @@
     <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
     <Parameter Name="DescriptionAr" Type="nvarchar" Mode="In" />
     <Parameter Name="DescriptionEn" Type="nvarchar" Mode="In" />
-    <Parameter Name="IsAllowPrintNames" Type="bit" Mode="In" />
+    <Parameter Name="IsPrintNamesFree" Type="bit" Mode="In" />
     <Parameter Name="AlbumTypeId" Type="int" Mode="In" />
     <Parameter Name="WordNameId" Type="bigint" Mode="In" />
     <Parameter Name="WordDescriptionId" Type="bigint" Mode="In" />
@@ -703,6 +721,7 @@
     <Parameter Name="Id" Type="int" Mode="InOut" />
     <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
     <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+    <Parameter Name="Price" Type="decimal" Mode="In" />
   </Function>
   <Function Name="PrintNamesTypes_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Skip" Type="int" Mode="In" />
@@ -713,8 +732,12 @@
     <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
     <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
     <Parameter Name="WordId" Type="bigint" Mode="In" />
+    <Parameter Name="Price" Type="decimal" Mode="In" />
   </Function>
   <Function Name="PrintNameTypes_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="PrintNameTypes_SelectByPK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
   <Function Name="SocialAccountTypes_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="In" />
   </Function>

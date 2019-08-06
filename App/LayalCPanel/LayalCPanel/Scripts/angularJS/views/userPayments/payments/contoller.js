@@ -9,11 +9,12 @@ ngApp.controller('paymentsInformationsCtrl', ['$scope', '$http', 'paymentsInform
         State: StateEnum.create
     }
     s.paymentStatus = [{ Id: true, Name: LangIsEn ?'Accept':'معتمدة'},{ Id: false, Name: LangIsEn ?'Reject':'مرفوضة'}]
-    var userToId = getQueryStringValue("id");
+    s.userToId = getQueryStringValue("id");
+   
 
     //============= G E T =================
     s.getUserPayments = () => {
-        if (!userToId) {
+        if (!s.userToId) {
             SMSSweet.alert(LangIsEn ? 'User Id Not Found' : 'معرف المستخدم غير موجود', RequestTypeEnum.error);
             return;
         }
@@ -21,13 +22,15 @@ ngApp.controller('paymentsInformationsCtrl', ['$scope', '$http', 'paymentsInform
         let loading = BlockingService.generateLoding();
         loading.show();
 
-        paymentsInformationsServ.getUserPayments(userToId,s.skip,s.take).then(d => {
+        paymentsInformationsServ.getUserPayments(s.userToId,s.skip,s.take).then(d => {
             loading.hide();
 
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
                     s.skip += s.take;
-                    s.paymentsInformations = s.paymentsInformations.concat(d.data.Result);
+                    s.userToName = d.data.Result.UserName;
+
+                    s.paymentsInformations = s.paymentsInformations.concat(d.data.Result.PaymentsInformations);
 
                     if (s.paymentsInformationFOP && s.paymentsInformationFOP.paging)
                         s.paymentsInformationFOP = new FOP(lengthWithOutDeleted(s.paymentsInformations), s.paymentsInformationFOP.paging.currentPage,
@@ -40,8 +43,14 @@ ngApp.controller('paymentsInformationsCtrl', ['$scope', '$http', 'paymentsInform
 
                 case RequestTypeEnum.error:
                 case RequestTypeEnum.warning:
-                case RequestTypeEnum.info:
                     SMSSweet.alert(d.data.Message, d.data.RequestType);
+                    break;
+               case RequestTypeEnum.info:
+                    {
+                        s.userToName = d.data.Result.UserName;
+                        SMSSweet.alert(d.data.Message, d.data.RequestType);
+
+                    }
                     break;
             }
             co("G E T - getPaymentsInformations", d);
@@ -65,7 +74,7 @@ ngApp.controller('paymentsInformationsCtrl', ['$scope', '$http', 'paymentsInform
         s.paymentFormErrorSubmit = false;
         if(! s.payment.State)
         s.payment.State = StateEnum.create;
-        s.payment.UserToId = userToId;
+        s.payment.UserToId = s.userToId;
         
         //نتحقق من وجود صورة الدفع 
         if (!s.payment.PaymentImage&&s.payment.IsAcceptFromManger && (s.payment.IsBankTransfer || !s.currentAdmin))
@@ -81,12 +90,16 @@ ngApp.controller('paymentsInformationsCtrl', ['$scope', '$http', 'paymentsInform
             BlockingService.unBlock();
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
-                     if (s.payment.State == StateEnum.create)
-                    s.paymentsInformations.push(d.data.Result);
+                    //Add To List Or Update List
+                    if (s.payment.State == StateEnum.create)
+                        s.paymentsInformations.unshift(d.data.Result);
+                    else
+                        s.paymentsInformations.find(c=> c.Id = d.data.Result.Id) = d.data.Result;
 
                     s.payment = {
                         State: StateEnum.create
                     }
+
                     $('[type="file"').val(null)
 
                    

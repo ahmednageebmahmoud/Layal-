@@ -56,18 +56,17 @@
                 </div>
             </div>
 
-          
+
             <div class="kt-portlet__body">
                 <div class="kt-portlet__body">
                     @if (Priv.CanDisplay)
             {
-                        <table class="table sms-table  " 
-                            datatable="ng" 
+                        <table class="table sms-table  "
+                               datatable="ng"
                                dt-options="vm.dtOptions"
                                dt-instance="vm.dtInstance"
                                dt-column-defs="vm.dtColumnDefs"
-                               id="ng_table_1" 
-                               >
+                               id="ng_table_1">
                             <thead>
                                 <tr>
                                     <th class="th-15 ">
@@ -92,40 +91,41 @@
                                     </th>
                                     <th class="th-15 ">
                                         <sms-sort ng-sms-fop="packageFOP"
-                                                  ng-sms-field-name="IsAllowPrintNames"
-                                                  ng-sms-resource="@Token.IsAllowPrintNames"></sms-sort>
+                                                  ng-sms-field-name="IsPrintNamesFree"
+                                                  ng-sms-resource="@Token.IsNamesPrintingFree"></sms-sort>
                                     </th>
-                                    
+
                                     <th class="th-15">
-                                        @Token.Operations  
+                                        @Token.Operations
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody >
-                                <tr
-                                    ng-repeat="x in packages|filter:packageSearch |orderBy:packageFOP.sort.propName:packageFOP.sort.reverse | limitTo:packageFOP.paging.pagingLimt.take:packageFOP.paging.pagingLimt.skip track by $index"
+                            <tbody>
+                                <tr ng-repeat="x in packages|filter:packageSearch |orderBy:packageFOP.sort.propName:packageFOP.sort.reverse | limitTo:packageFOP.paging.pagingLimt.take:packageFOP.paging.pagingLimt.skip track by $index"
                                     ng-class="{'kt-datatable__row--even':$index%2==0}">
 
                                     <td><span>{{x.NameAr}}</span></td>
                                     <td><span>{{x.NameEn}}</span></td>
                                     <td><span>{{x.DescriptionAr}}</span></td>
                                     <td><span>{{x.DescriptionEn}}</span></td>
-                                    <td><span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
-    <label>
-        <input type="checkbox" checked="checked" ng-model="x.IsAllowPrintNames" disabled name="" class="ng-pristine ng-untouched ng-valid ng-not-empty" />
-        <span></span>
-    </label>
-</span></td>
+                                    <td>
+                                        <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                            <label>
+                                                <input type="checkbox" checked="checked" ng-model="x.IsPrintNamesFree" disabled name="" class="ng-pristine ng-untouched ng-valid ng-not-empty" />
+                                                <span></span>
+                                            </label>
+                                        </span>
+                                    </td>
                                     <td>
                                         <!--Btn:Edit-->
                                         @if (Priv.CanEdit)
                                         {
-                                            <a href="/Packages/AddAndUpdate?id={{x.Id}}" title="Edit" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                            <a href="/Packages/AddAndUpdate?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="Edit" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
                                         }
                                         <!--Btn:Delete-->
                                         @if (Priv.CanDelete)
                                         {
-                                            <a href="javascript:void(0);" title="Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="delete(x)"><i class="la la-trash"></i> </a>
+                                            <a href="javascript:void(0);" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="delete(x)"><i class="la la-trash"></i> </a>
                                         }
                                     </td>
                                 </tr>

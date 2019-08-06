@@ -1951,6 +1951,7 @@
     <Content Include="Scripts\angularJS\angularJS.js" />
     <Content Include="Scripts\angularJS\directives\models\add-new-element.js" />
     <Content Include="Scripts\angularJS\directives\models\sms-model.js" />
+    <Content Include="Scripts\angularJS\directives\alertInfo.js" />
     <Content Include="Scripts\angularJS\directives\sms-checkbox.js" />
     <Content Include="Scripts\angularJS\directives\sms-document\sms-document-render-element.js" />
     <Content Include="Scripts\angularJS\directives\sms-draw-menu.js" />
@@ -1960,6 +1961,8 @@
     <Content Include="Scripts\angularJS\directives\sms-upload-files.js" />
     <Content Include="Scripts\angularJS\filters\employeeWorkFilter.js" />
     <Content Include="Scripts\angularJS\filters\filterWithoutStaticItems.js" />
+    <Content Include="Scripts\angularJS\views\enquires\addEnquiry\contoller.js" />
+    <Content Include="Scripts\angularJS\views\enquires\addEnquiry\service.js" />
     <Content Include="Scripts\angularJS\views\enquires\addAndUpdate\contoller.js" />
     <Content Include="Scripts\angularJS\views\enquires\enquiryInformation\service.js" />
     <Content Include="Scripts\angularJS\views\enquiryPayments\payments\contoller.js" />
@@ -2004,12 +2007,13 @@
     <Content Include="Scripts\angularJS\views\eventSurveyQuestionTypes\index\service.js" />
     <Content Include="Scripts\angularJS\views\filesReceivedTypes\index\contoller.js" />
     <Content Include="Scripts\angularJS\views\filesReceivedTypes\index\service.js" />
+    <Content Include="Scripts\angularJS\views\shared\anonymous\contoller.js" />
+    <Content Include="Scripts\angularJS\views\shared\anonymous\ngModul.js" />
+    <Content Include="Scripts\angularJS\views\shared\anonymous\service.js" />
     <Content Include="Scripts\angularJS\views\socialAccountTypes\index\contoller.js" />
     <Content Include="Scripts\angularJS\views\socialAccountTypes\index\service.js" />
     <Content Include="Scripts\angularJS\views\printNamsTypes\index\contoller.js" />
     <Content Include="Scripts\angularJS\views\printNamsTypes\index\service.js" />
-    <Content Include="Scripts\angularJS\views\myEnquires\addAndUpdate\contoller.js" />
-    <Content Include="Scripts\angularJS\views\myEnquires\addAndUpdate\service.js" />
     <Content Include="Scripts\angularJS\views\myEnquires\index\contoller.js" />
     <Content Include="Scripts\angularJS\views\myEnquires\index\service.js" />
     <Content Include="Scripts\angularJS\views\notifications\index\contoller.js" />
@@ -2046,6 +2050,7 @@
     <Content Include="Scripts\angularJS\views\users\index\contoller.js" />
     <Content Include="Scripts\angularJS\views\users\index\service.js" />
     <Content Include="Scripts\bll\enums.js" />
+    <Content Include="Scripts\bll\init.js" />
     <Content Include="Scripts\bll\resources.js" />
     <Content Include="Scripts\bll\services\blocking-service.js" />
     <Content Include="Scripts\bll\services\bootstrap-service.js" />
@@ -2313,6 +2318,10 @@
     <Content Include="Views\Shared\AdminIndex.cshtml" />
     <Content Include="Views\EEW\Implementations.cshtml" />
     <Content Include="Views\FilesReceivedTypes\Index.cshtml" />
+    <Content Include="Views\Enquires\AddEnquiry.cshtml" />
+    <Content Include="Views\Shared\_Layout_Anonymous.cshtml" />
+    <Content Include="Views\MyEnquires\EnquiryInformation.cshtml" />
+    <Content Include="Views\Enquires\_AddAndUpdatePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

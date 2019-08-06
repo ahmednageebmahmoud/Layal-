@@ -310,7 +310,7 @@ namespace BLL.BLL
                 if (Enquiry == null)
                     return new ResponseVM(RequestTypeEnum.Error, $"{Token.Enquiry}: {Token.UserNotFound}");
 
-                if (Enquiry.CountIsDepositPaymented <= 0)
+                if (Enquiry.IsDepositPaymented==true)
                     return new ResponseVM(RequestTypeEnum.Error, Token.ClinetIsNotPayment);
 
 
@@ -322,13 +322,13 @@ namespace BLL.BLL
                     return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToCreateAccont);
             }
 
-            if (db.Users_UserNameBeforUsed(c.Id, c.UserName).FirstOrDefault() > 0)
+            if (db.Users_UserNameBeforUsed(c.Id, c.UserName).FirstOrDefault() .Value> 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.UserNameItIsAlreadyUsed, c);
 
-            if (db.Users_EmailBeforUsed(c.Id, c.Email).FirstOrDefault() > 0)
+            if (db.Users_EmailBeforUsed(c.Id, c.Email).FirstOrDefault().Value > 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.EmailItIsAlreadyUsed, c);
 
-            if (db.Users_PhoneNumberBeforUsed(c.Id, c.PhoneNo).FirstOrDefault() > 0)
+            if (db.Users_PhoneNumberBeforUsed(c.Id, c.PhoneNo).FirstOrDefault().Value > 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.PhoneItIsAlreadyUsed, c);
 
             if (db.Users_NationalityNumberBeforUsed(c.Id, c.NationalityNumber).FirstOrDefault() > 0)

@@ -17,7 +17,7 @@ namespace DAL
         public System.DateTime DateTime { get; set; }
         public Nullable<long> Target_Id { get; set; }
         public int FKPage_Id { get; set; }
-        public long FKUser_Id { get; set; }
+        public Nullable<long> FKUser_Id { get; set; }
         public long FkWord_Id { get; set; }
         public long FKDescriptionWord_Id { get; set; }
         public string RedirectUrl { get; set; }

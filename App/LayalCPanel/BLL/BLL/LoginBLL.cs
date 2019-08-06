@@ -25,7 +25,9 @@ namespace BLL.BLL
                 BrId = c.FKPranch_Id.HasValue ? c.FKPranch_Id.Value : 0,
                 IsActiveEmail = c.IsActiveEmail,
                 Email = c.Email,
-                IsActive = c.IsActive
+                IsActive = c.IsActive,
+                CountryId=c.FkCountry_Id,
+                CityId=c.FkCity_Id
             }).FirstOrDefault();
 
             if (User == null)

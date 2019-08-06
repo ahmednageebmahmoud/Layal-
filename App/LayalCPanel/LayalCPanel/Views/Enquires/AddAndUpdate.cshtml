@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = Token.AddAndUpdateEnquiry;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var CurrentAdmin = CookieService.UserInfo.IsAdmin.ToString().ToLower();
 
     UsersPrivilegeVM
      Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.Enquires);
@@ -107,30 +108,33 @@
                                 <div class="col-lg-4 form-group-sub">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="">{{enquiry.Month?enquiry.Month:'--'}}/{{enquiry.Day?enquiry.Day:'--'}}/{{enquiry.Year?enquiry.Year:'--'}}</span>
+                                            <span class="input-group-text" id="">{{enquiry.Day?enquiry.Day:'--'}}/{{enquiry.Month?enquiry.Month:'--'}}/{{enquiry.Year?enquiry.Year:'--'}}</span>
                                         </div>
-                                        <input type="number" class="form-control"
-                                               name="month"
-                                               placeholder="@Token.Month"
-                                               ng-model="enquiry.Month"
-                                               ng-class="{'is-invalid':enquiryFrm.month.$invalid&&enquiyFormSubmitErro}"
-                                               min="@DateTime.Now.Month"
-                                               max="12">
-                                        <!--Error-->
-                                        <small class="error invalid-feedback" ng-if="enquiryFrm.month.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs 12</small>
-                                        <small class="error invalid-feedback" ng-if="enquiryFrm.month.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs @DateTime.Now.Month</small>
 
+                                        <!--Day-->
                                         <input type="number" class="form-control"
                                                name="day"
                                                placeholder="@Token.Day"
                                                ng-model="enquiry.Day"
                                                ng-class="{'is-invalid':enquiryFrm.day.$invalid&&enquiyFormSubmitErro}"
                                                min="@DateTime.Now.Day"
-                                               max="{{fillDayMax(enquiry.Month)}}">
+                                               max="{{getMaxDay(enquiry.Month)}}">
                                         <!--Error-->
-                                        <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs {{fillDayMax(enquiry.Month)}}</small>
+                                        <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs {{getMaxDay(enquiry.Month)}}</small>
                                         <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs 1</small>
 
+                                        <!--Month-->
+                                        <input type="number" class="form-control"
+                                               name="month"
+                                               placeholder="@Token.Month"
+                                               ng-model="enquiry.Month"
+                                               ng-class="{'is-invalid':enquiryFrm.month.$invalid&&enquiyFormSubmitErro}"
+                                               min="{{getMinMonth(enquiry.Month,enquiry.Year)}}"
+                                               max="12">
+                                        <!--Error-->
+                                        <small class="error invalid-feedback" ng-if="enquiryFrm.month.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs 12</small>
+                                        <small class="error invalid-feedback" ng-if="enquiryFrm.month.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs {{getMinMonth(enquiry.Month,enquiry.Year)}}</small>
+                                        <!--Year-->
                                         <input type="number" class="form-control"
                                                name="year"
                                                placeholder="@Token.Year"
@@ -143,35 +147,38 @@
                                 </div>
                             </div>
 
-                            <!--R O W 3-->
-                            <div class="form-group  row">
-                                <!--Country-->
-                                <label class="col-form-label col-lg-2">@Token.Country</label>
-                                <div class="col-lg-4 form-group-sub">
-                                    <select class="form-control"
-                                            serchbale
-                                            name="country"
-                                            ng-class="{'is-invalid':enquiryFrm.emp.$invalid&&enquiyFormSubmitErro}"
-                                            ng-model="enquiry.CountryId"
-                                            ng-options="c.Id as c.CountryName for c in countries"
-                                            ng-required="true"></select>
-                                    <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.country.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
+                            <!--R O W 3
+                               المدير فقط هوا الىيقدر يحول الاستفسار من فرع الى آخر 
+                                ولذللك نقل الدولة والمدية لاننهم مرتبطين مع الفرع 
+                                -->
+                                <div class="form-group  row" ng-if="enquiry.State==state.create||CurrentAdmin">
+                                    <!--Country-->          
+                                    <label class="col-form-label col-lg-2">@Token.Country</label>
+                                    <div class="col-lg-4 form-group-sub">
+                                        <select class="form-control"
+                                                serchbale
+                                                name="country"
+                                                ng-class="{'is-invalid':enquiryFrm.emp.$invalid&&enquiyFormSubmitErro}"
+                                                ng-model="enquiry.CountryId"
+                                                ng-options="c.Id as c.CountryName for c in countries"
+                                                ng-required="true"></select>
+                                        <!--Errors:-->
+                                        <small class="error invalid-feedback" ng-if="enquiryFrm.country.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
+                                    </div>
+                                    <!--City-->
+                                    <label class="col-form-label col-lg-2">@Token.City</label>
+                                    <div class="col-lg-4 form-group-sub">
+                                        <select class="form-control"
+                                                serchbale
+                                                name="city"
+                                                ng-class="{'is-invalid':enquiryFrm.emp.$invalid&&enquiyFormSubmitErro}"
+                                                ng-model="enquiry.CityId"
+                                                ng-options="c.Id as c.CityName for c in cities|filterWithoutStaticItems:{'CountryId':enquiry.CountryId}"
+                                                ng-required="true"></select>
+                                        <!--Errors:-->
+                                        <small class="error invalid-feedback" ng-if="enquiryFrm.city.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
+                                    </div>
                                 </div>
-                                <!--City-->
-                                <label class="col-form-label col-lg-2">@Token.City</label>
-                                <div class="col-lg-4 form-group-sub">
-                                    <select class="form-control"
-                                            serchbale
-                                            name="city"
-                                            ng-class="{'is-invalid':enquiryFrm.emp.$invalid&&enquiyFormSubmitErro}"
-                                            ng-model="enquiry.CityId"
-                                            ng-options="c.Id as c.CityName for c in cities|filterWithoutStaticItems:{'CountryId':enquiry.CountryId}"
-                                            ng-required="true"></select>
-                                    <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.city.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
-                                </div>
-                            </div>
 
                             <!--R O W 4-->
                             <div class="form-group  row">
@@ -188,21 +195,19 @@
                                     <!--Errors:-->
                                     <small class="error invalid-feedback" ng-if="enquiryFrm.enquiryType.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
                                 </div>
-
                                 <!--Branches-->
-                                <label class="col-form-label col-lg-2">@Token.Branch</label>
-
-                                <div class="col-lg-4 form-group-sub">
-                                    <select class="form-control"
-                                            serchbale
-                                            name="branch"
-                                            ng-class="{'is-invalid':enquiryFrm.branch.$invalid&&enquiyFormSubmitErro}"
-                                            ng-model="enquiry.BranchId"
-                                            ng-options="c.Id as c.BranchName for c in branches|filterWithoutStaticItems:{'CityId':enquiry.CityId}"
-                                            ng-required="true"></select>
-                                    <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.branch.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
-                                </div>
+                                    <label class="col-form-label col-lg-2" ng-if="enquiry.State==state.create||CurrentAdmin">@Token.Branch</label>
+                                    <div class="col-lg-4 form-group-sub"   ng-if="enquiry.State==state.create||CurrentAdmin">
+                                        <select class="form-control"
+                                                serchbale
+                                                name="branch"
+                                                ng-class="{'is-invalid':enquiryFrm.branch.$invalid&&enquiyFormSubmitErro}"
+                                                ng-model="enquiry.BranchId"
+                                                ng-options="c.Id as c.BranchName for c in branches|filterWithoutStaticItems:{'CityId':enquiry.CityId}"
+                                                ng-required="true"></select>
+                                        <!--Errors:-->
+                                        <small class="error invalid-feedback" ng-if="enquiryFrm.branch.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
+                                    </div>
                             </div>
 
                             <!--R O W 5-->

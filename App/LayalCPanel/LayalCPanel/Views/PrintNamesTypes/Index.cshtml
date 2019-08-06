@@ -82,6 +82,21 @@
                                     <div class="error invalid-feedback" ng-if="addPrintNamesTypeFrm.nameEn.$error.maxlength&&printNamesTypeFrmErrorSubmit">@Token.MaxLengthCharIs 50</div>
                                 </div>
                             </div>
+                            <div class="form-group  row">
+                                <!--Price-->
+                                <label class="col-lg-2 col-form-label">@Token.Price</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="number" class="form-control input-disabled"
+                                           name="price"
+                                           ng-class="{'is-invalid':addPrintNamesTypeFrm.price.$invalid&&printNamesTypeFrmErrorSubmit}"
+                                           ng-model="newPrintNamesType.Price"
+                                           ng-required="true" />
+                                    <!--Errors:Price-->
+                                    <div class="error invalid-feedback" ng-if="addPrintNamesTypeFrm.price.$error.required&&printNamesTypeFrmErrorSubmit">@Token.FieldIsRequierd</div>
+                                </div>
+ 
+                            </div>
+                            
                             <!--R O W 4-->
                             <div class="kt-portlet__foot">
                                 <div class="kt-form__actions">
@@ -131,6 +146,12 @@
                                                   ng-sms-field-name="NameEn"
                                                   ng-sms-resource="@Token.NameEn"></sms-sort>
                                     </th>
+                                    <th class="th-45 ">
+                                        <sms-sort ng-sms-fop="printNamesTypeFOP"
+                                                  ng-sms-field-name="Price"
+                                                  ng-sms-resource="@Token.Price"></sms-sort>
+                                    </th>
+                                    
                                     <th class="th-15">
                                         @Token.Operations
                                     </th>
@@ -164,20 +185,32 @@
                                         </div>
                                     </td>
                                     <td>
+                                        <input type="number" class="form-control input-disabled"
+                                               placeholder="@Token.Price"
+                                               ng-model="x.Price" ng-disabled="x.Id!=itemEditId" />
+
+                                        <!--Errors:NameEn-->
+                                        <div>
+                                            <small class="help-block" ng-if="propertyIsFalthy(x.Price)">@Token.FieldIsRequierd</small>
+                                        </div>
+                                    </td>
+
+                                    
+                                    <td>
                                         <!--Btn:Edit-->
                                         @if (Priv.CanEdit)
                                         {
                                                 <!--Btn:Edit-->
-                                            <a href="javascript:void(0);" ng-click="changeEdit(x)" ng-if="x.Id!=itemEditId" title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                            <a href="javascript:void(0);" ng-click="changeEdit(x)" ng-if="x.Id!=itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
 																<!--Btn:Save-->
-                                            <a href="javascript:void(0);" ng-click="saveEdit(x)" ng-if="x.Id==itemEditId" title="@Token.Save" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-save"></i></a>
+                                            <a href="javascript:void(0);" ng-click="saveEdit(x)" ng-if="x.Id==itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.Save" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-save"></i></a>
 																<!--Btn:Cancel-->
-                                                <a href="javascript:void(0);" ng-click="cancelEdit( )" ng-if="x.Id==itemEditId" title="@Token.Cancel" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-undo"></i></a>
+                                                <a href="javascript:void(0);" ng-click="cancelEdit( )" ng-if="x.Id==itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.Cancel" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-undo"></i></a>
                                         }
                                         <!--Btn:Delete-->
                                         @if (Priv.CanDelete)
                                         {
-                                            <a href="javascript:void(0);" ng-click="delete(x)" ng-if="x.Id!=itemEditId" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
+                                            <a href="javascript:void(0);" ng-click="delete(x)" ng-if="x.Id!=itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
                                         }
                                     </td>
                                 </tr>

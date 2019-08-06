@@ -32,6 +32,7 @@ namespace DAL
         public decimal PackageNamsArExtraPrice { get; set; }
         public Nullable<System.DateTime> VistToCoordinationDateTime { get; set; }
         public string VistToCoordinationClendarEventId { get; set; }
+        public Nullable<decimal> NamesPrintingPrice { get; set; }
         public long EventId { get; set; }
         public Nullable<bool> Booking { get; set; }
         public Nullable<bool> DataPerfection { get; set; }

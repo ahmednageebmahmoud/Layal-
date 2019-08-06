@@ -11,7 +11,7 @@ namespace BLL.ViewModels
     {
         public string Notes { get; set; }
         public DateTime? CreateDateTime { get; set; }
-        public string CreateDateTimeDisplay => DateService.GetDateTimeEn(this.CreateDateTime);
+        public string CreateDateTimeDisplay => DateService.GetDateTimeAr(this.CreateDateTime);
         public long? UserCreatedId { get;   set; }
         public string UserCreatedName { get;   set; }
         public int? Id { get; internal set; }

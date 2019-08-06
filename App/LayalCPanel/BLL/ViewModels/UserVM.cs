@@ -36,7 +36,7 @@ namespace BLL.ViewModels
         public DateTime? CreateDateTo { get; set; }
         public DateTime? CreateDateFrom { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public string DateOfBirthDisplay => DateService.GetDateEn(this.DateOfBirth);
+        public string DateOfBirthDisplay => DateService.GetDateAr(this.DateOfBirth);
         
         public LanguageEnum _Language { get; set; }
         public int BranchId { get; set; }

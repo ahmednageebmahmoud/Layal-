@@ -32,6 +32,7 @@ namespace DAL
         public decimal PackageNamsArExtraPrice { get; set; }
         public Nullable<System.DateTime> VistToCoordinationDateTime { get; set; }
         public string VistToCoordinationClendarEventId { get; set; }
+        public Nullable<decimal> NamesPrintingPrice { get; set; }
         public string EnquiryName { get; set; }
         public Nullable<bool> IsClosed { get; set; }
         public string Branch_NameAr { get; set; }
@@ -40,6 +41,6 @@ namespace DAL
         public string Package_NameEn { get; set; }
         public string WordPrintNamesType_NameAr { get; set; }
         public string WordPrintNamesType_NameEn { get; set; }
-        public Nullable<bool> IsPayment { get; set; }
+        public Nullable<bool> IsDepositPaymented { get; set; }
     }
 }

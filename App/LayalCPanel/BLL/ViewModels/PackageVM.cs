@@ -17,7 +17,7 @@ namespace BLL.ViewModels
         public string DescriptionEn { get; set; }
         public string DescriptionName => this.IsEn ? this.DescriptionEn : this.DescriptionAr;
 
-        public bool IsAllowPrintNames { get;   set; }
+        public bool IsPrintNamesFree { get;   set; }
         public int AlbumTypeId { get; set; }
         
         public long WordNameId { get; set; }

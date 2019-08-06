@@ -16,8 +16,7 @@
         "IsClosed": null, //اذا تم اغلاق الملف
         "DateTimeClosed": null, //تاريخ الاغلاق
         "IFWithBranch": null, //اذا هوا الان مع الشركة وليس مع الادارة
-        "ClendarEventId": null, //معرف النتيجة فى جوجل لكي يتم حذفها فيما بعد
-        "FkClinet_Id": null, //معرف العميل الذى انشىء من منطلق هذا الاستفسار
+              "FkClinet_Id": null, //معرف العميل الذى انشىء من منطلق هذا الاستفسار
         "IsLinkedClinet": null,
         "IsCreatedEvent": true
     },
@@ -44,7 +43,8 @@
         "ScheduleVisitDateTime": null,
         "FKEnquiry_Id": null,
         "FKEnquiryStatus_Id": null,
-        "FKUserCreated_Id": null
+        "FKUserCreated_Id": null,
+        "ScheduleVisitDateClendarEventId":""
     },
     "EnquiryPayments": {
         "Id": 0,

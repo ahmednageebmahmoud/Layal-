@@ -34,8 +34,14 @@ namespace UI.Controllers
             return View();
         }
 
-
-
+        [AllowAnonymous]
+        public ActionResult AddEnquiry(int q)
+        {
+            //اذا كان معرف نوع الاستفسار اذا هذةالصفحة تعتبر ليست موجودة
+            if (!FillItems.GetEnquiryTypes().Any(c => c.Id == q))
+                return HttpNotFound();
+                return View();
+        }
         
                  public ActionResult GetFullEnquiy(long id)
         {
@@ -56,13 +62,14 @@ namespace UI.Controllers
         
 
 
+        [AllowAnonymous]
         public JsonResult GetItems()
         {
             return Json(new ResponseVM(RequestTypeEnum.Success, Token.Success, new
             {
                 Countries = FillItems.GetCountries(),
                 Cities = FillItems.GetCities(),
-                EnquiryTypes=FillItems.GetEnquiryTypes(),
+                EnquiryTypes=User.Identity.IsAuthenticated? FillItems.GetEnquiryTypes():null,
                 Branches = FillItems.GetBranches()
 
 
@@ -79,7 +86,14 @@ namespace UI.Controllers
         }
 
         [HttpPost]
+
         public JsonResult SaveChange(EnquiyVM c)
+        {
+            return Json(EnquiyBLL.SaveChange(c), JsonRequestBehavior.AllowGet);
+        }
+        [AllowAnonymous]
+
+        public JsonResult AddEnqu(EnquiyVM c)
         {
             return Json(EnquiyBLL.SaveChange(c), JsonRequestBehavior.AllowGet);
         }

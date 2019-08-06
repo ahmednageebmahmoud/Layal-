@@ -952,15 +952,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Event Date Time.
-        /// </summary>
-        public static string EventDateTime {
-            get {
-                return ResourceManager.GetString("EventDateTime", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Event Date To.
         /// </summary>
         public static string EventDateTo {
@@ -1060,6 +1051,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filter.
+        /// </summary>
+        public static string Filter {
+            get {
+                return ResourceManager.GetString("Filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Finshe.
         /// </summary>
         public static string Finshe {
@@ -1110,6 +1110,15 @@ namespace Resources {
         public static string FirstName {
             get {
                 return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For Employee.
+        /// </summary>
+        public static string ForEmployee {
+            get {
+                return ResourceManager.GetString("ForEmployee", resourceCulture);
             }
         }
         
@@ -1182,6 +1191,15 @@ namespace Resources {
         public static string Hour {
             get {
                 return ResourceManager.GetString("Hour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id.
+        /// </summary>
+        public static string Id {
+            get {
+                return ResourceManager.GetString("Id", resourceCulture);
             }
         }
         
@@ -1294,11 +1312,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An extra amount will be added to the bill..
+        /// </summary>
+        public static string IsNameArDescription {
+            get {
+                return ResourceManager.GetString("IsNameArDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Arabic Names.
         /// </summary>
         public static string IsNamesAr {
             get {
                 return ResourceManager.GetString("IsNamesAr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Names Printing Free.
+        /// </summary>
+        public static string IsNamesPrintingFree {
+            get {
+                return ResourceManager.GetString("IsNamesPrintingFree", resourceCulture);
             }
         }
         
@@ -1551,6 +1587,15 @@ namespace Resources {
         public static string NameGroom {
             get {
                 return ResourceManager.GetString("NameGroom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name Printing Price.
+        /// </summary>
+        public static string NamesPrintingPrice {
+            get {
+                return ResourceManager.GetString("NamesPrintingPrice", resourceCulture);
             }
         }
         
@@ -1866,6 +1911,15 @@ namespace Resources {
         public static string PleaseCopyThisCode {
             get {
                 return ResourceManager.GetString("PleaseCopyThisCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        public static string Price {
+            get {
+                return ResourceManager.GetString("Price", resourceCulture);
             }
         }
         

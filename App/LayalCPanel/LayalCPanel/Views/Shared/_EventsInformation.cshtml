@@ -1,8 +1,4 @@
-﻿@{
-    bool IsCurrentClinet = CookieService.UserInfo.IsClinet;
-    bool IsCurrentEmployee = CookieService.UserInfo.IsEmployee;
-}
-
+﻿
 <!--AddEvent-->
 <div class="kt-portlet" ng-if="event">
     <div class="kt-portlet__head">
@@ -61,7 +57,7 @@
             </div>
 
             <!--R O W 3-->
-            <div class="form-group  row" ng-if="event.Package.IsAllowPrintNames">
+            <div class="form-group  row" >
                 <!--PrintNameType-->
                 <label class="col-form-label col-lg-2">@Token.PrintNameType</label>
                 <div class="col-lg-4 form-group-sub">
@@ -110,7 +106,7 @@
             <!--R O W 5-->
             <div class="form-group  row">
                 <!--EventDateTime-->
-                <label class="col-form-label col-lg-2">@Token.EventDateTime</label>
+                <label class="col-form-label col-lg-2">@Token.EventDate</label>
                 <div class="col-lg-4 form-group-sub">
                     <input class="form-control input-disabled"
                            type="text"
@@ -126,56 +122,15 @@
                            ng-disabled="true" />
                 </div>-->
                 <!--EventDateTime-->
-                @if (!IsCurrentEmployee)
-                {
                     <label class="col-form-label col-lg-2">@Token.VistToCoordinationDateTime</label>
                     <div class="col-lg-4 form-group-sub">
                         <input class="form-control input-disabled"
                                type="text"
                                ng-model="event.VistToCoordinationDateTimeDisplay"
                                ng-disabled="true" />
-                    </div>}
+                    </div>
             </div>
 
-            @if (!IsCurrentEmployee)
-            {
-
-            <!--R O W 6-->
-                <div class="form-group  row">
-
-                    <!--PackagePrice-->
-                    <label class="col-form-label col-lg-2">@Token.Pricing</label>
-                    <div class="col-lg-10 form-group-sub">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>@Token.PackagePrice</th>
-                                    <th>@Token.NamsArExtraPrice</th>
-                                    <th>@Token.TotalPrice</th>
-                                    <th>@Token.TotalPayments</th>
-                                    <th>@Token.TotalPaymentsActivated</th>
-                                    <th>@Token.RemainingAmount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{event.PackagePrice|currency:' SAR '}}</td>
-                                    <td>{{event.PackageNamsArExtraPrice|currency:' SAR '}}</td>
-                                    <td>{{event.PackagePrice+event.PackageNamsArExtraPrice|currency:' SAR '}}</td>
-                                    <td>{{event.TotalPayments|currency:' SAR '}}</td>
-                                    <td>{{event.TotalPaymentsActivated|currency:' SAR '}}</td>
-                                    <td>{{event.RemainingAmount|currency:' SAR '}}</td>
-
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-            }
-
-            @if (!IsCurrentClinet && !IsCurrentEmployee)
-            {
                         <!--R O W 7-->
                 <div class="form-group  row">
                     <!--UserCreated-->
@@ -211,7 +166,6 @@
                         </div>
                     </div>
                 </div>
-            }
 
             <!--R O W 8-->
             <div class="form-group  row">
@@ -224,6 +178,43 @@
                               ng-disabled="true"></textarea>
                 </div>
             </div>
+
+
+
+            <!--R O W 6-->
+                <div class="form-group  row">
+
+                    <!--PackagePrice-->
+                    <label class="col-form-label col-lg-2">@Token.Pricing</label>
+                    <div class="col-lg-10 form-group-sub">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>@Token.PackagePrice</th>
+                                    <th>@Token.NamsArExtraPrice</th>
+                                    <th>@Token.NamesPrintingPrice</th>
+                                    <th>@Token.TotalPrice</th>
+                                    <th>@Token.TotalPayments</th>
+                                    <th>@Token.TotalPaymentsActivated</th>
+                                    <th>@Token.RemainingAmount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{event.PackagePrice|currency:' SAR '}}</td>
+                                    <td>{{event.PackageNamsArExtraPrice|currency:' SAR '}}</td>
+                                    <td>{{event.NamesPrintingPrice|currency:' SAR '}}</td>
+                                    <td>{{event.TotalPrice|currency:' SAR '}}</td>
+                                    <td>{{event.TotalPayments|currency:' SAR '}}</td>
+                                    <td>{{event.TotalPaymentsActivated|currency:' SAR '}}</td>
+                                    <td>{{event.RemainingAmount|currency:' SAR '}}</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
 
         </div>
     </form>

@@ -63,7 +63,6 @@ namespace BLL.BLL
                 {
                     var UserMangerBranch = db.Users_SelectByBranchId(c.EnquiryBranchId, (int)AccountTypeEnum.BranchManager).FirstOrDefault();
                     SendAndSaveNotification(c.StatusId, UserMangerBranch.Id, true, c.EnquiryId);
-
                 }
 
                 //اتخاذ قرار ما بناء على كل  حالة
@@ -135,13 +134,18 @@ namespace BLL.BLL
                     {
                         db.Enquires_Closed(c.EnquiryId, DateTime.Now).Select(v => new
                         {
-                            v.Enquiry_ClendarEventId,
+                            v.ScheduleVisitDateClendarEventId,
+                            v.VistToCoordinationClendarEventId,
                             v.Event_ClendarEventId
                         }).ToList().ForEach(v =>
                         {
-                            GoggelApiCalendarService.DeleteEvent(v.Enquiry_ClendarEventId);
+                            GoggelApiCalendarService.DeleteEvent(v.ScheduleVisitDateClendarEventId);
+                            GoggelApiCalendarService.DeleteEvent(v.VistToCoordinationClendarEventId);
                             GoggelApiCalendarService.DeleteEvent(v.Event_ClendarEventId);
                         });
+
+                        //Update Befor (ScheduleVisitDateClendarEventId) To Null
+                        db.EnquiryStatus_ResetClendersIdsToNull(c.EnquiryId);
                     }
                     break;
                 case EnquiryStatusTypesEnum.ScheduleVisit:
@@ -158,8 +162,13 @@ namespace BLL.BLL
                             Description = $"تم تحديد موعد زيارة اليوم لـ العميل : {ClinetName}";
                         }
 
+                        //جلب معرفات الزيارات السابقة وحذفهم
+                        db.EnquiryStatus_SelectByFilter(c.EnquiryId,(int) EnquiryStatusTypesEnum.ScheduleVisit).ToList().ForEach(v =>
+                        {
+                            GoggelApiCalendarService.DeleteEvent(v.ScheduleVisitDateClendarEventId);
+                        });
                         Event Even = GoggelApiCalendarService.AddEvent(Title, Description, c.ScheduleVisitDateTime.Value, "Egypt Pyramids Tours, Ad Doqi, Giza District, Giza Governorate 12411, Egypt");
-                        db.Enquiries_UpdateCalendarEventId(c.EnquiryId, Even.Id);
+                        db.EnquiryStatus_Update(c.Id, Even.Id);
                     }
                     break;
                 case EnquiryStatusTypesEnum.NeedsToThink:

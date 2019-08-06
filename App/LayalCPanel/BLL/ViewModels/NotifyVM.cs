@@ -17,7 +17,7 @@ namespace BLL.ViewModels
         public string DescriptionEn { get; set; }
         public string Description => this.IsEn ? this.DescriptionEn : this.DescriptionAr;
         public DateTime DateTime { get; set; }
-        public string DateTimeDisplay => DateService.GetDateTimeEn(this.DateTime);
+        public string DateTimeDisplay => DateService.GetDateTimeAr(this.DateTime);
         public string DateTimeSince => DateService.GetDateTimeSince(this.DateTime);
         public Int64? TargetId { get; set; }
         public int PageId { get; set; }

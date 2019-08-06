@@ -21,7 +21,8 @@ namespace BLL.BLL
                 Id = c.Id,
                 WordId = c.FKWord_Id,
                 NameAr = c.NameAr,
-                NameEn = c.NameEn
+                NameEn = c.NameEn,
+                Price=c.Price
 
             }).ToList();
 
@@ -88,7 +89,7 @@ namespace BLL.BLL
         {
             try
             {
-                db.PrintNamesTypes_Update(c.Id, c.NameAr, c.NameEn, c.WordId);
+                db.PrintNamesTypes_Update(c.Id, c.NameAr, c.NameEn, c.WordId,c.Price);
                 return new ResponseVM(RequestTypeEnum.Success, Token.Updated, c);
             }
             catch (Exception ex)
@@ -102,7 +103,7 @@ namespace BLL.BLL
             try
             {
                 ObjectParameter ID = new ObjectParameter("Id", typeof(int));
-                db.PrintNamesTypes_Insert(ID, c.NameAr, c.NameEn);
+                db.PrintNamesTypes_Insert(ID, c.NameAr, c.NameEn,c.Price);
                 c.Id = (int)ID.Value;
                 return new ResponseVM(RequestTypeEnum.Success, Token.Added, c);
             }

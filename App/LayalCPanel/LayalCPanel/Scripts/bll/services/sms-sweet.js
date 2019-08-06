@@ -25,6 +25,29 @@
         });
     }
 
+    //Confirm Alert Info
+    static confirmInfo(message,okFunCallback,cancelFuncCallback) {
+        new Audio('/assets/sound/sweetAlert.mp3').play();
+
+        swal.fire({
+            title: message || Token.deleteMessageConfirmation + ' ',
+            text: Token.success,
+            type: 'success',
+            showCancelButton: true,
+            confirmButtonText: Token.ok,
+            cancelButtonText: Token.cancel,
+            reverseButtons: true
+        }).then(function (result) {
+            if (result.value) {
+                okFunCallback();
+            } else if (result.dismiss === 'cancel') {
+                swal.fire(Token.cancelled, '', 'error');
+                if (cancelFuncCallback)
+                    cancelFuncCallback();
+            }
+        });
+    }
+
 
     static alert(message, requestType, callBack) {
         new Audio('/assets/sound/sweetAlert.mp3').play();

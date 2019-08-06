@@ -511,7 +511,7 @@
     <value>بيانات الاستفسار</value>
   </data>
   <data name="Status" xml:space="preserve">
-    <value>الحالة</value>
+    <value>الحالات</value>
   </data>
   <data name="FromAdmin" xml:space="preserve">
     <value>من الادمين</value>
@@ -580,10 +580,10 @@
     <value>اضافة نوع اسماء جديد</value>
   </data>
   <data name="PrintNamesType" xml:space="preserve">
-    <value>نوع طباعة الاسماء</value>
+    <value>نوع حفر الاسماء</value>
   </data>
   <data name="PrintNamesTypes" xml:space="preserve">
-    <value>انواع طباعة الاسماء</value>
+    <value>انواع حفر الاسماء</value>
   </data>
   <data name="AddEvents" xml:space="preserve">
     <value>اضافة مناسبة</value>
@@ -606,9 +606,6 @@
   <data name="UpdateEvent" xml:space="preserve">
     <value>تحديث المناسبة </value>
   </data>
-  <data name="EventDateTime" xml:space="preserve">
-    <value>تاريخ ووقت المناسبة</value>
-  </data>
   <data name="IsClinetCustomLogo" xml:space="preserve">
     <value>شعار مخصص</value>
   </data>
@@ -628,7 +625,7 @@
     <value>باكيج</value>
   </data>
   <data name="PrintNameType" xml:space="preserve">
-    <value>نوع طباعة الاسم </value>
+    <value>نوع حفر الاسم </value>
   </data>
   <data name="AddEvent" xml:space="preserve">
     <value>اضافة مناسبة</value>
@@ -685,7 +682,7 @@
     <value>وصف بـ الانجليزى</value>
   </data>
   <data name="IsAllowPrintNames" xml:space="preserve">
-    <value>السماح بـ طباعة الاسماء </value>
+    <value>السماح بـ حفر الاسماء </value>
   </data>
   <data name="Album" xml:space="preserve">
     <value>الالبوم</value>
@@ -956,5 +953,26 @@
   </data>
   <data name="FilesReceivedTypes" xml:space="preserve">
     <value>انوع تسليم الملفات</value>
+  </data>
+  <data name="ForEmployee" xml:space="preserve">
+    <value>لـ الموظف</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>فلتر</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>رقم المسلسل</value>
+  </data>
+  <data name="NamesPrintingPrice" xml:space="preserve">
+    <value>سعر حفر الاسماء</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>السعر</value>
+  </data>
+  <data name="IsNameArDescription" xml:space="preserve">
+    <value>سوف يضاف مبلغ اضافى فى الفاتورة </value>
+  </data>
+  <data name="IsNamesPrintingFree" xml:space="preserve">
+    <value>حفر الاسماء مجانى</value>
   </data>
 </root>

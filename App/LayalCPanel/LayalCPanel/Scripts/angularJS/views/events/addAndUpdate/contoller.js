@@ -5,18 +5,21 @@
     s.UploadLogoNotes = LangIsEn ? "If is not upload logo or not upload good logo it will automatically be replaced with a logo from the lab" : "اذا لم يتم تحميل شعار او لم يتم تحميل شعار جديد سوف يتم استبدالة بشعار من المعمل بشكل تلقائى";
 
     var eventId = getQueryStringValue("id");
+    var date = getQueryStringValue("date");
+    
     s.event = {
         Id: getQueryStringValue("enquiryId"),
         State: eventId ? StateEnum.update : StateEnum.create,
         PrintNameTypeId: null,
         Package: null,
         IsActive:true,
-        IsNamesAr:false
+        IsNamesAr:false,
+        EventDateTime:new Date(Date.parse(date))
     };
 
     s.packages = [];
 
-    s.printNameTypes = [];
+    s.printNameTypes = [{ Id: null, PrintNamesTypeName: Token.select }];
 
 
     //============= G E T =================
@@ -170,6 +173,25 @@
 
         s.event.PackagePrice = s.event.Package.Price;
         s.event.PackageNamsArExtraPrice = 0;
+
+        //اذاذا كان مجانى فسوف نعرض رسالة بانة مجانى
+        if (s.event.Package.IsPrintNamesFree)
+            s.PrintNamesNotes = LangIsEn ? "Digging names is free." : "حفر الاسماء مجانى";
+        else
+        //اذا كان ليس مجانى فسوف نعرض رسالة بان الطباعة ليست مجانية
+            s.PrintNamesNotes = LangIsEn ? "Digging names is not free of charge and the drilling value will be added to the bill." : "حفر الاسماء ليس مجانى وسوف تضاف قيمة الحفر على الفاتورة";
+
+        s.fillPrintTypePrice(s.event.PrintNameTypeId)
+    }
+
+    //ملىء قيمة الحفر 
+    s.fillPrintTypePrice = printNameTypeId=>{
+        //اذا كان الحفر مجانى فسوف نضع صف
+        if (s.event.Package.IsPrintNamesFree || !printNameTypeId)
+            s.event.NamesPrintingPrice = 0;
+        else
+            //اذا الحفر ليس مجانى ويجب اضافة قيمة الحفر
+            s.event.NamesPrintingPrice = s.printNameTypes.find(c=> c.Id == printNameTypeId).Price;
     }
 
     //تغير حالة طباعة الاسماء

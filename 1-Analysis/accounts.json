@@ -3,11 +3,24 @@
         "emai":"Thelabprint@gmail.com",
         "password":"!Q@W#E$R%T",
         "hosting":{
-            "url":"ws9.win.arvixe.com",
-            "IP":"100.42.50.206",
-            "userName":"bokehsit",
-            "password":"Xv1qY2br26"
+            "aravix":{
+                "UserName":"Thelabprint@gmail.com",
+                "Password":"!Q@W#E$R%T",
+                "hosting":{
+                    "url":"https://ws9.win.arvixe.com:8443/smb/",
+                    "IP":"100.42.50.206",
+                    "userName":"bokehsit",
+                    "password":"Xv1qY2br26"
+                }
+            }
+           
 
+        }
+    },
+    "Emails":{
+        "email1":{
+            "UserName":"Thelabprint@gmail.com",
+            "Password":"Hh@123456"
         }
     }
 }

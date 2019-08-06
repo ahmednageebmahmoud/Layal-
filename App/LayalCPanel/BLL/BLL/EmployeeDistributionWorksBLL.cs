@@ -61,13 +61,13 @@ namespace BLL.BLL
         }
 
         /// <summary>
-        /// الحقق من ان الستخد قام بـ دفع كامل المستخقات
+        /// التحقق من انة تم دفع العربون
         /// </summary>
         /// <param name="eventId"></param>
         /// <returns></returns>
         private bool CheckIsPayment(long eventId)
         {
-            return db.EnquiryPayments_CheckIfClinetPaymentEventPricing(eventId).First().Value;
+            return db.EnquiryPayments_CheckIfPaymentedDeposit(eventId).First().Value;
         }
 
         private object Delete(EmployeeDiributionWorkVM c)

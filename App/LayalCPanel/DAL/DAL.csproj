@@ -126,6 +126,9 @@
     <Compile Include="EnquiryStatusTypes_SelectByEnquiryId_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EnquiryStatus_SelectByFilter_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EnquiryTypes_SelectAll_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -214,6 +217,9 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="PrintNameTypes_SelectAll_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrintNameTypes_SelectByPK_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

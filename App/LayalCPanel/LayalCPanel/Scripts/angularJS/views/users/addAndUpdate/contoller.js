@@ -17,7 +17,7 @@
     };
     s.accountTypeDisapled = s.user.EnquiryId ? true : false;
     s.accountTypeEnum = AccountTypesEnum;
-    s.accountTypes = accountTypesList;
+    s.accountTypes = accountTypesList.filter(c=> c.Id != AccountTypesEnum.ProjectManger);
     s.user.WorkTypes = workTypesList;
 
     s.languages = [{
