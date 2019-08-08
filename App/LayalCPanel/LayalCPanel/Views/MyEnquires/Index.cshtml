@@ -242,12 +242,9 @@
              
             <div class="kt-portlet__body">
                 <div class="kt-portlet__body">
-                    <table class="table sms-table  "
-                           datatable="ng"
-                           dt-options="vm.dtOptions"
-                           dt-instance="vm.dtInstance"
-                           dt-column-defs="vm.dtColumnDefs"
-                           id="ng_table_1">
+                    <!--SMS Print,Excel,PDF,Search,....-->
+                    <sms-buttons-search ng-sms-tableid="ng_table_1" ng-sms-search-model="itemSearch"></sms-buttons-search>
+                    <table class="table sms-table " id="ng_table_1">
                         <thead class=" ">
                             <tr class=" ">
                                 <th class="th-10">
@@ -301,7 +298,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="x in enquires|filter:enquiresSearch |orderBy:enquiyFOP.sort.propName:enquiyFOP.sort.reverse | limitTo:enquiyFOP.paging.pagingLimt.take:enquiyFOP.paging.pagingLimt.skip track by $index">
+                            <tr ng-repeat="x in enquires|customFilter:itemSearch:enquiyFOP:'enquiyFOP':this|orderBy:enquiyFOP.sort.propName:enquiyFOP.sort.reverse | limitTo:enquiyFOP.paging.pagingLimt.take:enquiyFOP.paging.pagingLimt.skip track by $index">
                                 <td>{{x.FirstName}}</td>
                                 <td>{{x.LastName}}</td>
                                 <td>{{x.PhoneFull}}</td>
@@ -314,9 +311,9 @@
                                 <td>
                                     <!--Btn:Edit-->
                                     @*<a href="/Enquires/AddAndUpdate?id={{x.Id}}"
-                                    data-skin="dark" data-toggle="kt-tooltip" data-placement="top"         title="@Token.Update"
-                                           ng-if="!x.IsClosed"
-                                            class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>*@
+                        data-skin="dark" data-toggle="kt-tooltip" data-placement="top"         title="@Token.Update"
+                               ng-if="!x.IsClosed"
+                                class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>*@
                                     <!--Show Details-->
                                     <a href="/MyEnquires/EnquiryInformation?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.ShowDetails" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="la la-search"></i> </a>
                                 </td>

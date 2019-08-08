@@ -123,12 +123,9 @@
                     @if (Priv.CanDisplay)
                     {
 
-                        <table class="table sms-table  "
-                               datatable="ng"
-                               dt-options="vm.dtOptions"
-                               dt-instance="vm.dtInstance"
-                               dt-column-defs="vm.dtColumnDefs"
-                               id="ng_table_1">
+                        <!--SMS Print,Excel,PDF,Search,....-->
+                        <sms-buttons-search ng-sms-tableid="ng_table_1" ng-sms-search-model="itemSearch"></sms-buttons-search>
+                        <table class="table sms-table " id="ng_table_1">
                             <thead>
                                 <tr>
                                     <th class="th-30 ">
@@ -136,14 +133,14 @@
                                                   ng-sms-field-name="SurveyQuestionTypeId"
                                                   ng-sms-resource="@Token.EventSurveyQuestionType"></sms-sort>
                                     </th>
-                                 <!--
-                                     
-                                       <th class="th-30 ">
-                                        <sms-sort ng-sms-fop="eventSurveyQuestionFOP"
-                                                  ng-sms-field-name="IsDefault"
-                                                  ng-sms-resource="@Token.IsDefault"></sms-sort>
-                                    </th>
-                                 -->
+                                    <!--
+
+                                          <th class="th-30 ">
+                                           <sms-sort ng-sms-fop="eventSurveyQuestionFOP"
+                                                     ng-sms-field-name="IsDefault"
+                                                     ng-sms-resource="@Token.IsDefault"></sms-sort>
+                                       </th>
+                                    -->
                                     <th class="th-30 ">
                                         <sms-sort ng-sms-fop="eventSurveyQuestionFOP"
                                                   ng-sms-field-name="IsActive"
@@ -156,7 +153,7 @@
                             </thead>
                             <tbody>
 
-                                <tr ng-repeat="x in eventSurveyQuestions|orderBy:eventSurveyQuestionFOP.sort.propName:eventSurveyQuestionFOP.sort.reverse | limitTo:eventSurveyQuestionFOP.paging.pagingLimt.take:eventSurveyQuestionFOP.paging.pagingLimt.skip track by $index"
+                                <tr ng-repeat="x in eventSurveyQuestions|customFilter:itemSearch:eventSurveyQuestionFOP:'eventSurveyQuestionFOP':this|orderBy:eventSurveyQuestionFOP.sort.propName:eventSurveyQuestionFOP.sort.reverse | limitTo:eventSurveyQuestionFOP.paging.pagingLimt.take:eventSurveyQuestionFOP.paging.pagingLimt.skip track by $index"
                                     ng-class="{'kt-datatable__row--even':$index%2==0}">
 
                                     <td>
@@ -166,16 +163,17 @@
                                                 ng-options="c.Id as c.EventSurveyQuestionTypeName for c in eventSurveyQuestionTypes"></select>
 
                                     </td>
-                              <!--      <td>
-                                        <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
-                                            <label>
-                                                <input type="checkbox" disabled
-                                                       ng-model="x.IsDefault" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                                                <span></span>
-                                            </label>
-                                        </span>
-                                    </td>
-                               -->     <td>
+                                    <!--      <td>
+                                              <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                                  <label>
+                                                      <input type="checkbox" disabled
+                                                             ng-model="x.IsDefault" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                                      <span></span>
+                                                  </label>
+                                              </span>
+                                          </td>
+                                     -->
+                                    <td>
                                         <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
                                             <label>
                                                 <input type="checkbox"

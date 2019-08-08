@@ -47,12 +47,9 @@
 
             <div class="kt-portlet__body">
                 <div class="kt-portlet__body">
-                    <table class="table sms-table"
-                           datatable="ng"
-                           dt-options="vm.dtOptions"
-                           dt-instance="vm.dtInstance"
-                           dt-column-defs="vm.dtColumnDefs"
-                           id="ng_table_1">
+                    <!--SMS Print,Excel,PDF,Search,....-->
+                    <sms-buttons-search ng-sms-tableid="ng_table_1" ng-sms-search-model="itemSearch"></sms-buttons-search>
+                    <table class="table sms-table " id="ng_table_1">
                         <thead class="">
                             <tr class="">
 
@@ -91,13 +88,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="x in paymentsInformations|filter:paymentsInformationsSearch |orderBy:enquiyFOP.sort.propName:enquiyFOP.sort.reverse | limitTo:enquiyFOP.paging.pagingLimt.take:enquiyFOP.paging.pagingLimt.skip track by $index">
+                            <tr ng-repeat="x in paymentsInformations|customFilter:itemSearch:enquiyFOP:'enquiyFOP':this |orderBy:enquiyFOP.sort.propName:enquiyFOP.sort.reverse | limitTo:enquiyFOP.paging.pagingLimt.take:enquiyFOP.paging.pagingLimt.skip track by $index">
                                 <td>{{x.DateTimeDisplay}}</td>
                                 <td>{{x.Amount}}</td>
                                 <td><i class="fas " ng-class="{'fa-check':x.IsBankTransfer}"></i></td>
 
                                 <td>
-                                    <a class="kt-link kt-font-boldest" href="{{x.PaymentImage}}" target="_blank" >
+                                    <a class="kt-link kt-font-boldest" href="{{x.PaymentImage}}" target="_blank">
                                         <img class="figure-img img-thumbnail" src="{{x.PaymentImage}}" width="100" height="100" />
                                     </a>
                                 </td>

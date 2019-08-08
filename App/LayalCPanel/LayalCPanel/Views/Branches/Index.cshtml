@@ -61,12 +61,9 @@
                 <div class="kt-portlet__body">
                     @if (Priv.CanDisplay)
                     {
-                        <table class="table sms-table  "
-                               datatable="ng"
-                               dt-options="vm.dtOptions"
-                               dt-instance="vm.dtInstance"
-                               dt-column-defs="vm.dtColumnDefs"
-                               id="ng_table_1">
+                       <!--SMS Print,Excel,PDF,Search,....-->
+                        <sms-buttons-search ng-sms-tableid="ng_table_1" ng-sms-search-model="itemSearch"></sms-buttons-search>
+                        <table class="table sms-table " id="ng_table_1">
                             <thead class=" ">
                                 <tr class=" ">
                                     <th class="th-10">
@@ -105,7 +102,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="x in branches|filter:branchesSearch |orderBy:branchFOP.sort.propName:branchFOP.sort.reverse | limitTo:branchFOP.paging.pagingLimt.take:branchFOP.paging.pagingLimt.skip track by $index">
+                                <tr ng-repeat="x in branches|customFilter:itemSearch:branchFOP:'branchFOP':this|orderBy:branchFOP.sort.propName:branchFOP.sort.reverse | limitTo:branchFOP.paging.pagingLimt.take:branchFOP.paging.pagingLimt.skip track by $index">
                                     <td>{{x.NameAr}}</td>
                                     <td>{{x.NameEn}}</td>
                                     <td>{{x.PhoneNo}}</td>

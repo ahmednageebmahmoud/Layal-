@@ -85,54 +85,50 @@
             </div>
             <div class="kt-portlet__body">
                 <div class="kt-portlet__body">
-                        <table class="table sms-table  " 
-                            datatable="ng" 
-                               dt-options="vm.dtOptions"
-                               dt-instance="vm.dtInstance"
-                               dt-column-defs="vm.dtColumnDefs"
-                               id="ng_table_1">
-                            <thead>
-                                <tr>
-                                    <th class="th-25 ">
-                                        <sms-sort ng-sms-fop="notifyFOP"
-                                                  ng-sms-field-name="Title"
-                                                  ng-sms-resource="@Token.Title"></sms-sort>
-                                    </th>
-                                    <th class="th-45 ">
-                                        <sms-sort ng-sms-fop="notifyFOP"
-                                                  ng-sms-field-name="Description"
-                                                  ng-sms-resource="@Token.Description"></sms-sort>
-                                    </th>
-                                    <th class="th-20 ">
-                                        <sms-sort ng-sms-fop="notifyFOP"
-                                                  ng-sms-field-name="DateTimeDisplay"
-                                                  ng-sms-resource="@Token.CreateDateTime"></sms-sort>
-                                    </th>
-                                    <th class="th-20 ">
-                                        <sms-sort ng-sms-fop="notifyFOP"
-                                                  ng-sms-field-name="IsRead"
-                                                  ng-sms-resource="@Token.Readed"></sms-sort>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody >
-                                <tr
-                                    ng-repeat="x in notifications|filter:notifySearch |orderBy:notifyFOP.sort.propName:notifyFOP.sort.reverse | limitTo:notifyFOP.paging.pagingLimt.take:notifyFOP.paging.pagingLimt.skip track by $index"
-                                    ng-class="{'kt-datatable__row--even':$index%2==0}">
+                    <!--SMS Print,Excel,PDF,Search,....-->
+                    <sms-buttons-search ng-sms-tableid="ng_table_1" ng-sms-search-model="itemSearch"></sms-buttons-search>
+                    <table class="table sms-table " id="ng_table_1">
+                        <thead>
+                            <tr>
+                                <th class="th-25 ">
+                                    <sms-sort ng-sms-fop="notifyFOP"
+                                              ng-sms-field-name="Title"
+                                              ng-sms-resource="@Token.Title"></sms-sort>
+                                </th>
+                                <th class="th-45 ">
+                                    <sms-sort ng-sms-fop="notifyFOP"
+                                              ng-sms-field-name="Description"
+                                              ng-sms-resource="@Token.Description"></sms-sort>
+                                </th>
+                                <th class="th-20 ">
+                                    <sms-sort ng-sms-fop="notifyFOP"
+                                              ng-sms-field-name="DateTimeDisplay"
+                                              ng-sms-resource="@Token.CreateDateTime"></sms-sort>
+                                </th>
+                                <th class="th-20 ">
+                                    <sms-sort ng-sms-fop="notifyFOP"
+                                              ng-sms-field-name="IsRead"
+                                              ng-sms-resource="@Token.Readed"></sms-sort>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in notifications|customFilter:itemSearch:notifyFOP:'notifyFOP':this |orderBy:notifyFOP.sort.propName:notifyFOP.sort.reverse | limitTo:notifyFOP.paging.pagingLimt.take:notifyFOP.paging.pagingLimt.skip track by $index"
+                                ng-class="{'kt-datatable__row--even':$index%2==0}">
 
-                                    <td>
-                                        <p><a href="{{x.FullRedirectUrl}}&isRead={{x.IsRead}}" class="kt-link kt-font-boldest">{{x.Title}}</a></p>
-                                    </td>
-                                    <td><span>{{x.Description}}</span></td>
-                                    <td><span>{{x.DateTimeDisplay}}</span></td>
-                                    <td>
+                                <td>
+                                    <p><a href="{{x.FullRedirectUrl}}&isRead={{x.IsRead}}" class="kt-link kt-font-boldest">{{x.Title}}</a></p>
+                                </td>
+                                <td><span>{{x.Description}}</span></td>
+                                <td><span>{{x.DateTimeDisplay}}</span></td>
+                                <td>
                                     <i class="fa" ng-class="{'fa-check':x.IsRead}"></i>
-                                    </td>
+                                </td>
 
-                                    
-                                </tr>
-                            </tbody>
-                        </table>
+
+                            </tr>
+                        </tbody>
+                    </table>
                              <!--Paging -->
                         <sms-paging-select ng-sms-fop="notifyFOP"></sms-paging-select>
                         <sms-paging ng-sms-fop="notifyFOP" ng-sms-display-m-func="getNotifications()"></sms-paging>

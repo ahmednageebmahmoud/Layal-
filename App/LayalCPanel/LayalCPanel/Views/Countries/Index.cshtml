@@ -61,13 +61,9 @@
                 <div class="kt-portlet__body">
                     @if (Priv.CanDisplay)
             {
-                        <table class="table sms-table  " 
-                            datatable="ng" 
-                               dt-options="vm.dtOptions"
-                               dt-instance="vm.dtInstance"
-                               dt-column-defs="vm.dtColumnDefs"
-                               id="ng_table_1" 
-                               >
+                      <!--SMS Print,Excel,PDF,Search,....-->
+                        <sms-buttons-search ng-sms-tableid="ng_table_1" ng-sms-search-model="itemSearch"></sms-buttons-search>
+                        <table class="table sms-table " id="ng_table_1">
                             <thead>
                                 <tr>
                                     <th class="th-40 ">
@@ -81,13 +77,12 @@
                                                   ng-sms-resource="@Token.NameEn"></sms-sort>
                                     </th>
                                     <th class="th-15">
-                                        @Token.Operations  
+                                        @Token.Operations
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody >
-                                <tr
-                                    ng-repeat="x in countries|filter:countrySearch |orderBy:countryFOP.sort.propName:countryFOP.sort.reverse | limitTo:countryFOP.paging.pagingLimt.take:countryFOP.paging.pagingLimt.skip track by $index"
+                            <tbody>
+                                <tr ng-repeat="x in countries|customFilter:itemSearch:countryFOP:'countryFOP':this |orderBy:countryFOP.sort.propName:countryFOP.sort.reverse | limitTo:countryFOP.paging.pagingLimt.take:countryFOP.paging.pagingLimt.skip track by $index"
                                     ng-class="{'kt-datatable__row--even':$index%2==0}">
 
                                     <td><span>{{x.NameAr}}</span></td>

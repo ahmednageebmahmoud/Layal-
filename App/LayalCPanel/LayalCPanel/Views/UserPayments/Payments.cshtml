@@ -157,12 +157,9 @@
 
                     @if (Priv.CanDisplay)
                     {
-                        <table class="table sms-table"
-                               datatable="ng"
-                               dt-options="vm.dtOptions"
-                               dt-instance="vm.dtInstance"
-                               dt-column-defs="vm.dtColumnDefs"
-                               id="ng_table_1">
+                       <!--SMS Print,Excel,PDF,Search,....-->
+                        <sms-buttons-search ng-sms-tableid="ng_table_1" ng-sms-search-model="itemSearch"></sms-buttons-search>
+                        <table class="table sms-table " id="ng_table_1">
                             <thead class="">
                                 <tr class="">
 
@@ -177,17 +174,17 @@
                                                   ng-sms-resource="@Token.Amount"></sms-sort>
                                     </th>
 
-                                       <th class="th-10">
-                                           <sms-sort ng-sms-fop="enquiyFOP"
-                                                     ng-sms-field-name="IsBankTransfer"
-                                                     ng-sms-resource="@Token.IsBankTransfer"></sms-sort>
-                                       </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="IsBankTransfer"
+                                                  ng-sms-resource="@Token.IsBankTransfer"></sms-sort>
+                                    </th>
 
-                                       <th class="th-10">
-                                           <sms-sort ng-sms-fop="enquiyFOP"
-                                                     ng-sms-field-name="PaymentImage"
-                                                     ng-sms-resource="@Token.PaymentPhoto"></sms-sort>
-                                       </th>
+                                    <th class="th-10">
+                                        <sms-sort ng-sms-fop="enquiyFOP"
+                                                  ng-sms-field-name="PaymentImage"
+                                                  ng-sms-resource="@Token.PaymentPhoto"></sms-sort>
+                                    </th>
                                     <th class="th-10">
                                         <sms-sort ng-sms-fop="enquiyFOP"
                                                   ng-sms-field-name="IsAcceptFromManger"
@@ -204,29 +201,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="x in paymentsInformations|filter:paymentsInformationsSearch |orderBy:enquiyFOP.sort.propName:enquiyFOP.sort.reverse | limitTo:enquiyFOP.paging.pagingLimt.take:enquiyFOP.paging.pagingLimt.skip track by $index">
+                                <tr ng-repeat="x in paymentsInformations|customFilter:itemSearch:enquiyFOP:'enquiyFOP':this |orderBy:enquiyFOP.sort.propName:enquiyFOP.sort.reverse | limitTo:enquiyFOP.paging.pagingLimt.take:enquiyFOP.paging.pagingLimt.skip track by $index">
                                     <td>{{x.DateTimeDisplay}}</td>
                                     <td>{{x.Amount}}</td>
-                                       <td><i class="fas " ng-class="{'fa-check':x.IsBankTransfer}"></i></td>
-                                       <td>
-                                           <a class="kt-link kt-font-boldest" href="{{x.PaymentImage}}" target="_blank" >
-                                               <img class="figure-img img-thumbnail" src="{{x.PaymentImage}}" width="100" height="100" />
-                                           </a>
-                                       </td>
+                                    <td><i class="fas " ng-class="{'fa-check':x.IsBankTransfer}"></i></td>
                                     <td>
-                                            <i class="fas " ng-class="{'fa-check':x.IsAcceptFromManger,'fa-close':x.IsAcceptFromManger==false}"></i>
+                                        <a class="kt-link kt-font-boldest" href="{{x.PaymentImage}}" target="_blank">
+                                            <img class="figure-img img-thumbnail" src="{{x.PaymentImage}}" width="100" height="100" />
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <i class="fas " ng-class="{'fa-check':x.IsAcceptFromManger,'fa-close':x.IsAcceptFromManger==false}"></i>
                                     </td>
                                     <td>
                                         <textarea class="form-control input-disabled" ng-model="x.Notes" disabled></textarea>
                                     </td>
-                               <td>
-                                   @if (Priv.CanEdit)
-                                   {
-                                       <a href="#" title="@Token.Edit"
-                                          data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  ng-if="!x.IsClosed" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="paymentUpdate(x)"><i class="la la-edit"></i></a>
-                                   }
-                               </td>
-                                 </tr>
+                                    <td>
+                                        @if (Priv.CanEdit)
+                                        {
+                                            <a href="#" title="@Token.Edit"
+                                               data-skin="dark" data-toggle="kt-tooltip" data-placement="top" ng-if="!x.IsClosed" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="paymentUpdate(x)"><i class="la la-edit"></i></a>
+                                        }
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                               <!--Paging -->

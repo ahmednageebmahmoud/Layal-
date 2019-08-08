@@ -107,12 +107,9 @@
                 <div class="kt-portlet__body">
                     @if (Priv.CanDisplay)
             {
-                        <table class="table sms-table  "
-                               datatable="ng"
-                               dt-options="vm.dtOptions"
-                               dt-instance="vm.dtInstance"
-                               dt-column-defs="vm.dtColumnDefs"
-                               id="ng_table_1">
+                     <!--SMS Print,Excel,PDF,Search,....-->
+                        <sms-buttons-search ng-sms-tableid="ng_table_1" ng-sms-search-model="itemSearch"></sms-buttons-search>
+                        <table class="table sms-table " id="ng_table_1">
                             <thead>
                                 <tr>
                                     <th class="th-40 ">
@@ -136,7 +133,7 @@
                             </thead>
                             <tbody>
 
-                                <tr ng-repeat="x in enquiryTypes|filter:enquiryTypeSearch |orderBy:enquiryTypeFOP.sort.propName:enquiryTypeFOP.sort.reverse | limitTo:enquiryTypeFOP.paging.pagingLimt.take:enquiryTypeFOP.paging.pagingLimt.skip track by $index"
+                                <tr ng-repeat="x in enquiryTypes|customFilter:itemSearch:enquiryTypeFOP:'enquiryTypeFOP':this |orderBy:enquiryTypeFOP.sort.propName:enquiryTypeFOP.sort.reverse | limitTo:enquiryTypeFOP.paging.pagingLimt.take:enquiryTypeFOP.paging.pagingLimt.skip track by $index"
                                     ng-class="{'kt-datatable__row--even':$index%2==0}">
 
                                     <td>
@@ -162,8 +159,8 @@
                                     <td>
                                         <p>
 
-                                        <a class="kt-link kt-font-boldest"
-                                           href="/Enquires/AddEnquiry?q={{x.Id}}" target="_blank">@Token.AddNewEnquiry</a>
+                                            <a class="kt-link kt-font-boldest"
+                                               href="/Enquires/AddEnquiry?q={{x.Id}}" target="_blank">@Token.AddNewEnquiry</a>
                                         </p>
                                     </td>
                                     <td>

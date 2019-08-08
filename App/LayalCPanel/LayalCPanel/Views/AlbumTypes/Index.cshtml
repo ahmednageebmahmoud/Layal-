@@ -123,83 +123,79 @@
 
                     @if (Priv.CanDisplay)
                     {
+                        <!--SMS Print,Excel,PDF,Search,....-->
+                        <sms-buttons-search ng-sms-tableid="ng_table_1" ng-sms-search-model="itemSearch"></sms-buttons-search>
+                        <table class="table sms-table " id="ng_table_1">
+                            <thead>
+                                <tr>
+                                    <th class="th-40 ">
+                                        <sms-sort ng-sms-fop="albumTypeFOP"
+                                                  ng-sms-field-name="NameAr"
+                                                  ng-sms-resource="@Token.NameAr"></sms-sort>
+                                    </th>
+                                    <th class="th-45 ">
+                                        <sms-sort ng-sms-fop="albumTypeFOP"
+                                                  ng-sms-field-name="NameEn"
+                                                  ng-sms-resource="@Token.NameEn"></sms-sort>
+                                    </th>
+                                    <th class="th-15">
+                                        @Token.Operations
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                    <table class="table sms-table  "
-                           datatable="ng"
-                           dt-options="vm.dtOptions"
-                           dt-instance="vm.dtInstance"
-                           dt-column-defs="vm.dtColumnDefs"
-                           id="ng_table_1">
-                        <thead>
-                            <tr>
-                                <th class="th-40 ">
-                                    <sms-sort ng-sms-fop="albumTypeFOP"
-                                              ng-sms-field-name="NameAr"
-                                              ng-sms-resource="@Token.NameAr"></sms-sort>
-                                </th>
-                                <th class="th-45 ">
-                                    <sms-sort ng-sms-fop="albumTypeFOP"
-                                              ng-sms-field-name="NameEn"
-                                              ng-sms-resource="@Token.NameEn"></sms-sort>
-                                </th>
-                                <th class="th-15">
-                                    @Token.Operations
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                                <tr ng-repeat="x in albumTypes|customFilter:itemSearch:albumTypeFOP:'albumTypeFOP':this  |orderBy:albumTypeFOP.sort.propName:albumTypeFOP.sort.reverse | limitTo:albumTypeFOP.paging.pagingLimt.take:albumTypeFOP.paging.pagingLimt.skip track by $index"
+                                    ng-class="{'kt-datatable__row--even':$index%2==0}">
 
-                            <tr ng-repeat="x in albumTypes|filter:albumTypeSearch |orderBy:albumTypeFOP.sort.propName:albumTypeFOP.sort.reverse | limitTo:albumTypeFOP.paging.pagingLimt.take:albumTypeFOP.paging.pagingLimt.skip track by $index"
-                                ng-class="{'kt-datatable__row--even':$index%2==0}">
+                                    <td>
+                                        <input type="text"
+                                               class="form-control input-disabled"
+                                               placeholder="@Token.NameAr"
+                                               ng-model="x.NameAr" ng-disabled="x.Id!=itemEditId" />
+                                        <!--Errors:NameAr-->
+                                        <div>
+                                            <small class="help-block" ng-if="propertyIsFalthy(x.NameAr)">@Token.FieldIsRequierd</small>
+                                            <small class="help-block" ng-if="propertyIsMaxLength(x.NameAr,50)">@Token.MaxLengthCharIs 50</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control input-disabled"
+                                               placeholder="@Token.NameEn"
+                                               ng-model="x.NameEn" ng-disabled="x.Id!=itemEditId" />
 
-                                <td>
-                                    <input type="text"
-                                           class="form-control input-disabled"
-                                           placeholder="@Token.NameAr"
-                                           ng-model="x.NameAr" ng-disabled="x.Id!=itemEditId" />
-                                    <!--Errors:NameAr-->
-                                    <div>
-                                        <small class="help-block" ng-if="propertyIsFalthy(x.NameAr)">@Token.FieldIsRequierd</small>
-                                        <small class="help-block" ng-if="propertyIsMaxLength(x.NameAr,50)">@Token.MaxLengthCharIs 50</small>
-                                    </div>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control input-disabled"
-                                           placeholder="@Token.NameEn"
-                                           ng-model="x.NameEn" ng-disabled="x.Id!=itemEditId" />
-
-                                    <!--Errors:NameEn-->
-                                    <div>
-                                        <small class="help-block" ng-if="propertyIsFalthy(x.NameEn)">@Token.FieldIsRequierd</small>
-                                        <small class="help-block" ng-if="propertyIsMaxLength(x.NameEn,50)">@Token.MaxLengthCharIs 50</small>
-                                    </div>
-                                </td>
-                                <td>
-                                    <!--Btn:Edit-->
-                                    @if (Priv.CanEdit)
+                                        <!--Errors:NameEn-->
+                                        <div>
+                                            <small class="help-block" ng-if="propertyIsFalthy(x.NameEn)">@Token.FieldIsRequierd</small>
+                                            <small class="help-block" ng-if="propertyIsMaxLength(x.NameEn,50)">@Token.MaxLengthCharIs 50</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <!--Btn:Edit-->
+                                        @if (Priv.CanEdit)
                                         {
                                                 <!--Btn:Edit-->
-                                        <a href="javascript:void(0);" ng-click="changeEdit(x)" ng-if="x.Id!=itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                            <a href="javascript:void(0);" ng-click="changeEdit(x)" ng-if="x.Id!=itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
 																<!--Btn:Save-->
-                                        <a href="javascript:void(0);" ng-click="saveEdit(x)" ng-if="x.Id==itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Save" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-save"></i></a>
+                                            <a href="javascript:void(0);" ng-click="saveEdit(x)" ng-if="x.Id==itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Save" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-save"></i></a>
 																<!--Btn:Cancel-->
-                                        <a href="javascript:void(0);" ng-click="cancelEdit( )" ng-if="x.Id==itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Cancel" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-undo"></i></a>
+                                            <a href="javascript:void(0);" ng-click="cancelEdit( )" ng-if="x.Id==itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Cancel" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-undo"></i></a>
                                         }
-                                    <!--Btn:Delete-->
-                                    @if (Priv.CanDelete)
+                                        <!--Btn:Delete-->
+                                        @if (Priv.CanDelete)
                                         {
-                                        <a href="javascript:void(0);" ng-click="delete(x)" ng-if="x.Id!=itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
+                                            <a href="javascript:void(0);" ng-click="delete(x)" ng-if="x.Id!=itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
                                         }
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
 
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
 
                              <!--Paging -->
-                    <sms-paging-select ng-sms-fop="albumTypeFOP"></sms-paging-select>
-                    <sms-paging ng-sms-fop="albumTypeFOP" ng-sms-display-m-func="getAlbumTypes()"></sms-paging>
+                        <sms-paging-select ng-sms-fop="albumTypeFOP"></sms-paging-select>
+                        <sms-paging ng-sms-fop="albumTypeFOP" ng-sms-display-m-func="getAlbumTypes()"></sms-paging>
                     }
                 </div>
             </div>

@@ -145,12 +145,9 @@
             </div>
             <div class="kt-portlet__body">
                 <div class="kt-portlet__body">
-                    <table class="table sms-table  "
-                           datatable="ng"
-                           dt-options="vm.dtOptions"
-                           dt-instance="vm.dtInstance"
-                           dt-column-defs="vm.dtColumnDefs"
-                           id="ng_table_1">
+                    <!--SMS Print,Excel,PDF,Search,....-->
+                    <sms-buttons-search ng-sms-tableid="ng_table_1" ng-sms-search-model="itemSearch"></sms-buttons-search>
+                    <table class="table sms-table " id="ng_table_1">
                         <thead class="">
                             <tr class="">
                                 <th class="th-10">
@@ -205,7 +202,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="x in events|filter:eventsSearch |orderBy:enquiyFOP.sort.propName:enquiyFOP.sort.reverse | limitTo:enquiyFOP.paging.pagingLimt.take:enquiyFOP.paging.pagingLimt.skip track by $index">
+                            <tr ng-repeat="x in events|customFilter:itemSearch:enquiyFOP:'enquiyFOP':this |orderBy:enquiyFOP.sort.propName:enquiyFOP.sort.reverse | limitTo:enquiyFOP.paging.pagingLimt.take:enquiyFOP.paging.pagingLimt.skip track by $index">
                                 <td>{{x.NameGroom}}</td>
                                 <td>{{x.NameGroom}}</td>
                                 <td><i class="fas " ng-class="{'fa-check':x.IsClinetCustomLogo}"></i></td>
