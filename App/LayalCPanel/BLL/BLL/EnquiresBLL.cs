@@ -28,6 +28,8 @@ namespace BLL.BLL
                 branchId = this.UserLoggad.BrId;
                 CurrentUserBranch = true;
             }
+            else if (branchId == 0)
+                branchId = null;
 
             var Enquires = db.Enquires_SelectByFilter
                 (skip, take, firstName, lastName, phone, day, month, year, createDateTimeFrom, createDateTimeTo,
@@ -167,6 +169,7 @@ namespace BLL.BLL
                     //check if create event 
                     if (db.Enquires_CheckIfCreatedEvent(c.Id).First().Value > 0)
                         return new ResponseVM(RequestTypeEnum.Error, Token.CanNotDoAnyThingBecuseThisEnquiryConvertedToEvent);
+
                     var ObjectReturn = new object();
                     switch (c.State)
                     {
@@ -174,10 +177,20 @@ namespace BLL.BLL
                             ObjectReturn = Add(c);
                             break;
                         case StateEnum.Update:
-                            ObjectReturn = Update(c);
+                            {
+                                if (this.AdminId != this.UserLoggad.Id && c.BranchId != this.UserLoggad.BrId)
+                                    return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEnquiry);
+
+                                ObjectReturn = Update(c);
+                            }
                             break;
                         case StateEnum.Delete:
-                            ObjectReturn = Delete(c); break;
+                            {
+                                if (this.AdminId != this.UserLoggad.Id && c.BranchId != this.UserLoggad.BrId)
+                                    return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEnquiry);
+
+                                ObjectReturn = Delete(c); break;
+                            }
                             break;
                         default:
                             return new ResponseVM(RequestTypeEnum.Error, Token.StateNotFound);
@@ -208,6 +221,7 @@ namespace BLL.BLL
             //check if closed
             if (CheckIfEnquiryClosed(c.Id))
                 return new ResponseVM(RequestTypeEnum.Error, Token.EnquiryIsClosed);
+
 
 
             var OldBranchId = db.Enquires_SelectByPk(c.Id).First().FKBranch_Id;
@@ -253,8 +267,8 @@ namespace BLL.BLL
                 IsWithBranch = true;
             ObjectParameter ID = new ObjectParameter("Id", typeof(long));
             if (this.UserLoggad.Id == 0)
-                db.Enquires_Insert(ID, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId, null, null, DateTime.Now, c.Note, c.BranchId, false, IsWithBranch,c.PhoneCountryId);
-            else db.Enquires_Insert(ID, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId, this.UserLoggad.Id,this.UserLoggad.Id, DateTime.Now, c.Note, c.BranchId, this.UserLoggad.IsClinet, IsWithBranch, c.PhoneCountryId);
+                db.Enquires_Insert(ID, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId, null, null, DateTime.Now, c.Note, c.BranchId, false, IsWithBranch, c.PhoneCountryId);
+            else db.Enquires_Insert(ID, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId, this.UserLoggad.Id, this.UserLoggad.Id, DateTime.Now, c.Note, c.BranchId, this.UserLoggad.IsClinet, IsWithBranch, c.PhoneCountryId);
 
             c.Id = (long)ID.Value;
             var UserMangerBranch = db.Users_SelectByBranchId(c.BranchId, (int)AccountTypeEnum.BranchManager).FirstOrDefault();
@@ -268,27 +282,33 @@ namespace BLL.BLL
                 PageId = (int)PagesEnum.Enquires,
                 RedirectUrl = $"/Enquires/EnquiryInformation?id={c.Id}&notifyId=",
             };
+            if (UserMangerBranch != null)
+            {
 
-            //ارسال اشعار للـ الادمين اذا كان الشخص الحالى هو عميل 
-            if (this.UserLoggad.IsAnonymous)
-            {
-                Notify.DescriptionAr = $"لقد قام شخص ما بـ انشاء استفسار جديد";
-                Notify.DescriptionEn = $"Some people has been created new enqiry";
-            }
-            else if (this.UserLoggad.IsClinet)
-            {
-                Notify.DescriptionAr = $"لقد قام العميل {this.UserLoggad.UserName}  بـ انشاء استفسار جديد";
-                Notify.DescriptionEn = $"{this.UserLoggad.UserName} Has been created new enqiry";
-            }
-            else if (this.UserLoggad.IsAdmin)
-            {
-                //ارسال الاشعار للفعر اذا اكان المستخدم الحالى هوا المدير
-                Notify.DescriptionAr = $"لقد قام المدير بـ انشاء استفسار جديد";
-                Notify.DescriptionEn = $"Manger has been created new enqiry";
+                //ارسال اشعار للـ الادمين اذا كان الشخص الحالى هو عميل 
+                if (this.UserLoggad.IsAnonymous)
+                {
+                    Notify.DescriptionAr = $"لقد قام شخص ما بـ انشاء استفسار جديد";
+                    Notify.DescriptionEn = $"Some people has been created new enqiry";
+                }
+                else if (this.UserLoggad.IsClinet)
+                {
+                    Notify.DescriptionAr = $"لقد قام العميل {this.UserLoggad.UserName}  بـ انشاء استفسار جديد";
+                    Notify.DescriptionEn = $"{this.UserLoggad.UserName} Has been created new enqiry";
+                }
+                else if (this.UserLoggad.IsAdmin)
+                {
+                    //ارسال الاشعار للفعر اذا اكان المستخدم الحالى هوا المدير
+                    Notify.DescriptionAr = $"لقد قام المدير بـ انشاء استفسار جديد";
+                    Notify.DescriptionEn = $"Manger has been created new enqiry";
+                }
+                if (this.UserLoggad.Id != UserMangerBranch.Id)
+                {
+                    NotificationsBLL.Add(Notify, UserMangerBranch.Id);
+                    new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserMangerBranch.Id.ToString() }, Notify);
+                }
             }
 
-            NotificationsBLL.Add(Notify, UserMangerBranch.Id);
-            new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserMangerBranch.Id.ToString() }, Notify);
             return new ResponseVM(RequestTypeEnum.Success, Token.Added, c);
         }
 
@@ -449,7 +469,7 @@ namespace BLL.BLL
                         UserCreatedName = b.Status_CreatedUserName,
                         ScheduleVisitDateTime = b.Status_ScheduleVisitDateTime,
                         EnquiryPaymentId = b.Status_EnquiryPaymentId,
-                        IsBankTransferDeposit = b.Status_EnquiryPaymentId.HasValue ? EnquiryPayments.Single(w => w.Id == b.Status_EnquiryPaymentId.Value).IsBankTransfer : false,
+                        IsBookByBankTransfer = b.Status_EnquiryPaymentId.HasValue ? EnquiryPayments.Single(w => w.Id == b.Status_EnquiryPaymentId.Value).IsBankTransfer : false,
                         Amount = b.Status_EnquiryPaymentId.HasValue ? EnquiryPayments.Single(w => w.Id == b.Status_EnquiryPaymentId.Value).Amount : 0,
                         EnquiryType = new EnquiryTypeVM
                         {

@@ -7,3 +7,4 @@ G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\Resources\obj\Release
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\Resources\obj\Release\ar\Resources.resources.dll
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\Resources\obj\Release\Resources.dll
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\Resources\obj\Release\Resources.pdb
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\Resources\obj\Release\Resources.csprojResolveAssemblyReference.cache

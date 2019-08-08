@@ -1,7 +1,7 @@
 ﻿ngApp.controller('enquiresCtrl', ['$scope', '$http', 'enquiresServ', function (s, h, enquiresServ) {
     //Fill Current Date
     var currentDate = new Date();
-    var currentMonth = currentDate.getMonth() + 1, currentYear = currentDate.getFullYear();
+    var currentDay = currentDate.getDate(), currentMonth = currentDate.getMonth() + 1, currentYear = currentDate.getFullYear();
 
     s.state = StateEnum;
     s.enquires = [];
@@ -76,14 +76,7 @@
         s.enquiyFormSubmitErro = false;
         BlockingService.block();
         enquiresServ.saveChange(s.enquiry).then(d => {
-            s.enquiry = {
-                State: StateEnum.create,
-                EnquiryTypeId: accountTypeId,
-                CountryId: null,
-                CityId: null,
-                BranchId: null,
-                PhoneCountryId: null
-            };
+         
 
             setTimeout(() => {
                 $("select[serchbale]").select2();
@@ -92,6 +85,14 @@
             BlockingService.unBlock();
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
+                    s.enquiry = {
+                        State: StateEnum.create,
+                        EnquiryTypeId: accountTypeId,
+                        CountryId: null,
+                        CityId: null,
+                        BranchId: null,
+                        PhoneCountryId: null
+                    };
                     SMSSweet.confirmInfo(LangIsEn ? "Would you like to send another query?" : "هل تود ارسال استفسار آخر؟",
                         () => {
                     window.location.reload();
@@ -144,13 +145,17 @@
                 return 31;
         }
     };
+    //For Get Min Day User Can Be Insert
+    s.getMinDay = (year) => {
+        if (year > currentYear) return 1;
+        return currentDay;
+    };
+
     //For Get Min Month User Can Be Inserted
     s.getMinMonth= (month, year) => {
         if (year > currentYear) return 1;
         return currentMonth;
     };
-
-
     s.gotoUrl = url=> {
         window.location.href = url;
     };

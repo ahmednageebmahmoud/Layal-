@@ -89,8 +89,8 @@
     Token.publishByCLinet = LangIsEn ? 'Publish By Manger' : 'تم النشر بواسطة المدير';
     Token.publishByManger = LangIsEn ? 'Publish By Clinet' : 'تم النشر بواسطة العميل';
     Token.needsToThink = LangIsEn ? 'Needs To Think' : 'يحتاج للتفكير';
-    Token.desireToBook = LangIsEn ? 'Desire To Book' : 'الرغبة فى الحجز';
-    Token.bankTransferDeposit = LangIsEn ? 'Bank Transfer Deposit' : 'عربون حوالة بنكية';
+    Token.bookByCash = LangIsEn ? 'Book By Cash' : 'الحجز بواسطة الدفع الكاش';
+    Token.bookBybankTransfer = LangIsEn ? 'Book Bank Transfer' : 'الحجز بواسطة حوالة بنكية';
 
     
     Token.active = LangIsEn ? 'Active' : 'مفعل';

@@ -192,7 +192,7 @@
                                 <th class="th-10">
                                     <sms-sort ng-sms-fop="enquiyFOP"
                                               ng-sms-field-name="EventDateTimeDisplay"
-                                              ng-sms-resource="@Token.EventDateTime"></sms-sort>
+                                              ng-sms-resource="@Token.EventDate"></sms-sort>
                                 </th>
                                 <th class="th-10">
                                     <sms-sort ng-sms-fop="enquiyFOP"
@@ -217,24 +217,25 @@
                                 <td>{{x.CreateDateTimeDisplay}}</td>
                                 <td>
                                     <!--Btn:Edit-->
-                                    <a href="/MyEvents/AddAndUpdate?id={{x.Id}}" 
+                                    <a href="/MyEvents/AddAndUpdate?id={{x.Id}}"
                                        ng-if="!x.IsAllowSurvey"
-                                 data-skin="dark" data-toggle="kt-tooltip" data-placement="top"        title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
-                                   <!--EventCoordinations-->
-                                     <a href="/EEW/AddAndUpdateCoordinations?id={{x.Id}}"
-                                          ng-hide="x.IsClosed||!x.IsPayment||x.IsAllowSurvey"
-                                 data-skin="dark" data-toggle="kt-tooltip" data-placement="top"         title="@Token.AddAndUpdateCoordinations" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fa fa-tasks"></i></a>
+                                       data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+
+                                    <!--EventCoordinations-->
+                                    <a href="/EEW/AddAndUpdateCoordinations?id={{x.Id}}"
+                                       ng-hide="x.IsClosed||!x.IsPayment||x.IsAllowSurvey"
+                                       data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.AddAndUpdateCoordinations" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fa fa-tasks"></i></a>
 
                                     <!--Show Details-->
-                                    <a href="/MyEnquires/EnquiryInformation?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.ShowDetails" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="la la-search"></i> </a>
-                              
+                                    <a href="/MyEnquires/EnquiryInformation?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.ShowDetails" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="la la-search"></i> </a>
+
                                     <!--Surveys-->
-                                          <a href="/EventSurveyQuestions/Survey?eventId={{x.Id}}" 
-                                             ng-if="x.IsAllowSurvey"
-                                          data-skin="dark" data-toggle="kt-tooltip" data-placement="top"    title="@Token.Survey" 
-                                             class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fa fa-chart-line"></i> </a>
-                                
-                                  </td>
+                                    <a href="/EventSurveyQuestions/Survey?eventId={{x.Id}}"
+                                       ng-if="x.IsAllowSurvey"
+                                       data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Survey"
+                                       class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fa fa-chart-line"></i></a>
+
+                                </td>
                             </tr>
                         </tbody>
                     </table>

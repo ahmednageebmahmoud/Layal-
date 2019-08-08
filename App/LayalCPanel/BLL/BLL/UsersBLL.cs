@@ -310,7 +310,7 @@ namespace BLL.BLL
                 if (Enquiry == null)
                     return new ResponseVM(RequestTypeEnum.Error, $"{Token.Enquiry}: {Token.UserNotFound}");
 
-                if (Enquiry.IsDepositPaymented==true)
+                if (Enquiry.IsDepositPaymented==false)
                     return new ResponseVM(RequestTypeEnum.Error, Token.ClinetIsNotPayment);
 
 
@@ -319,7 +319,7 @@ namespace BLL.BLL
 
 
                 if (this.AdminId != this.UserLoggad.Id && Enquiry.FKBranch_Id != this.UserLoggad.BrId)
-                    return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToCreateAccont);
+                    return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToCreateAccontForThisEnquiry);
             }
 
             if (db.Users_UserNameBeforUsed(c.Id, c.UserName).FirstOrDefault() .Value> 0)

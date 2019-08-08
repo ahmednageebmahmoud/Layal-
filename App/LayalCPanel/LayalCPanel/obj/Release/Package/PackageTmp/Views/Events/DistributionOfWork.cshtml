@@ -1,0 +1,185 @@
+﻿
+@{
+    ViewBag.Title = Token.DistributionOfWork;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    UsersPrivilegeVM Priv =
+        new UsersPrivilegesBLL().SelectByUserId(PagesEnum.Events);
+
+}
+<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" ng-controller="distributionOfWorkCtrl">
+    <!-- begin:: Subheader -->
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <span class="kt-subheader__separator kt-hidden"></span>
+            <div class="kt-subheader__breadcrumbs">
+                <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link"> @Token.HomePage </a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="~/Events" class="kt-subheader__breadcrumbs-link"> @Token.Events </a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">@Token.DistributionOfWork</a>
+                <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active </span> -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- end:: Subheader -->
+
+
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--Package-->
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <span class="kt-portlet__head-icon">
+                                <i class="kt-font-brand flaticon-add"></i>
+                            </span>
+                            <h3 class="kt-portlet__head-title">@Token.DistributionOfWork</h3>
+                        </div>
+                    </div>
+                    <!--Package Form-->
+                    <form novalidate name="addNewEmpWorkFrom" class="kt-form kt-form--label-right"
+                          ng-submit="saveChange(addNewEmpWorkFrom)">
+                        <div class="kt-portlet__body">
+                            <!--R O W 1-->
+                            <div class="form-group row">
+                                
+                                          <!--WorkType-->
+                                <label class="col-form-label col-lg-2">@Token.WorkType</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <select class="form-control"
+                                            serchbale
+                                            name="albumTypeId"
+                                            ng-class="{'is-invalid':addNewEmpWorkFrom.albumTypeId.$invalid&&addNewEmpWorkFromErrorSubmit}"
+                                            ng-model="newEmpWork.WorkTypeId"
+                                            ng-options="c.Id as c.WorkTypeName for c in workTypes"
+                                            ng-required="true"></select>
+                                    <!--Errors:-->
+                                    <small class="error invalid-feedback" ng-if="addNewEmpWorkFrom.albumTypeId.$error.required&&addNewEmpWorkFromErrorSubmit">@Token.FieldIsRequierd</small>
+                                
+                                              </div>
+
+                                <!--Employee-->
+                                <label class="col-form-label col-lg-2">@Token.Employee</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <select class="form-control"
+                                            serchbale
+                                            name="employeeId"
+                                            ng-class="{'is-invalid':addNewEmpWorkFrom.employeeId.$invalid&&addNewEmpWorkFromErrorSubmit}"
+                                            ng-model="newEmpWork.EmployeeId"
+                                            ng-options="c.Id as c.UserName for c in employees|employeeWorkFilter:newEmpWork.WorkTypeId"
+                                            ng-required="true"></select>
+                                    <!--Errors:-->
+                                    <small class="error invalid-feedback" ng-if="addNewEmpWorkFrom.employeeId.$error.required&&addNewEmpWorkFromErrorSubmit">@Token.FieldIsRequierd</small>
+                                </div>
+
+                      
+                            </div>
+                        </div>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-9"></div>
+                                    <div class="col-lg-3">
+                                        @if (Priv.CanAdd)
+                                        {
+                                            <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                                                <i class="la la-save">@Token.Add</i>
+                                            </button>
+
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">@Token.DistributionOfWorkDetails</h3>
+                        </div>
+                    </div>
+
+                    <!--Employees-->
+                    <div class="kt-portlet__body">
+
+                        <div class="form-group  row">
+                            <table class="table sms-table">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="th-10 ">
+                                            <label class="sms-sort-field">
+                                                @Token.Id
+                                            </label>
+                                        </th>
+                                           <th class="th-25 ">
+                                            <label class="sms-sort-field">
+                                                @Token.Employee
+                                            </label>
+                                        </th>
+                                        <th class="th-30">
+                                            <label class="sms-sort-field">
+                                                @Token.WorkType
+                                            </label>
+                                        </th>
+                                        <th class="th-10">
+                                            <label class="sms-sort-field">
+                                                @Token.Finshed
+                                            </label>
+                                        </th>
+                                        <th class="th-10">
+                                            <label class="sms-sort-field">
+                                                @Token.Operations
+                                            </label>
+                                        </th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="gp in employeeDistributionWorks">
+                                        <td>{{gp.EmployeeId}}</td>
+                                        <td>
+                                            <p><a href="/Users/UserInformation?id={{gp.EmployeeId}}" class="kt-link kt-font-boldest">{{gp.UserName}}</a></p>
+                                        </td>
+                                        <td>
+                                            <select class="form-control input-disabled"
+                                                    ng-model="gp.WorkTypeId"
+                                                    ng-options="c.Id as c.WorkTypeName for c in workTypes"
+                                                    ng-disabled="true"></select>
+                                        </td>
+                                        <td><i class="fa" ng-class="{'fa-check':gp.IsFinshed}"></i></td>
+                                        <td>
+                                            <!--Btn:Delete-->
+                                            @if (Priv.CanDelete)
+                                            {
+                                                <a href="javascript:void(0);" 
+                                                   ng-if="!gp.IsFinshed"
+                                                    ng-click="delete(gp)"  data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/events/distributionOfWork/service.js"></script>
+    <script src="~/Scripts/angularJS/views/events/distributionOfWork/contoller.js"></script>
+<script src="~/Scripts/angularJS/filters/employeeWorkFilter.js"></script>
+}

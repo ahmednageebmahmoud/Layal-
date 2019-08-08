@@ -80,11 +80,11 @@
                            placeholder="@Token.Day"
                            ng-model="enquiry.Day"
                            ng-class="{'is-invalid':enquiryFrm.day.$invalid&&enquiyFormSubmitErro}"
-                           min="@DateTime.Now.Day"
+                           min="{{getMinDay(enquiry.Year)}}"
                            max="{{getMaxDay(enquiry.Month)}}">
                     <!--Error-->
                     <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs {{getMaxDay(enquiry.Month)}}</small>
-                    <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs 1</small>
+                    <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs {{getMinDay(enquiry.Year)}}</small>
 
                     <!--Month-->
                     <input type="number" class="form-control"

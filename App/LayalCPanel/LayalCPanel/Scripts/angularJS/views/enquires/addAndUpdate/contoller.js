@@ -1,7 +1,7 @@
 ﻿ngApp.controller('enquiresCtrl', ['$scope', '$http', 'enquiresServ', function (s, h, enquiresServ) {
     //Fill Current Date
     var currentDate = new Date();
-    var currentMonth = currentDate.getMonth() + 1, currentYear = currentDate.getFullYear();
+    var currentDay = currentDate.getDate(), currentMonth = currentDate.getMonth() + 1, currentYear = currentDate.getFullYear();
 
     s.state = StateEnum;
     s.enquires = [];
@@ -13,19 +13,19 @@
         State: enquiyId ? StateEnum.update : StateEnum.create,
         EnquiryTypeId: null,
         CountryId: s.currentUserInfromation.CountryId,
-        CityId:  s.currentUserInfromation.CityId,
+        CityId: s.currentUserInfromation.CityId,
         BranchId: s.currentUserInfromation.BrId,
         PhoneCountryId: null
     };
-
     s.countries = [{
         Id: null,
-        CountryName: Token.select
+        CountryName: Token.select,
+        CountryNameIsoCode: Token.select,
     }];
     s.cities = [{
         Id: null,
         CityName: Token.select,
-        CountryId:null
+        CountryId: null
     }];
     s.enquiryTypes = [{
         Id: null,
@@ -35,9 +35,9 @@
     s.branches = [{
         Id: null,
         BranchName: Token.select,
-        CityId:null
+        CityId: null
     }];
-    
+
 
     //============= G E T =================
     //get items
@@ -53,7 +53,7 @@
                     s.cities = s.cities.concat(d.data.Result.Cities);
                     s.enquiryTypes = s.enquiryTypes.concat(d.data.Result.EnquiryTypes);;
                     s.branches = s.branches.concat(d.data.Result.Branches);;
-                    
+
                 } break;
                 case RequestTypeEnum.error:
                 case RequestTypeEnum.warning:
@@ -82,12 +82,12 @@
                 case RequestTypeEnum.sucess: {
                     s.enquiry = d.data.Result;
                     s.enquiry.State = StateEnum.update;
-                    
+
                     setTimeout(() => {
                         $("select[serchbale]").select2();
                     }, 500)
-                    
-    
+
+
                 } break;
                 case RequestTypeEnum.error:
                 case RequestTypeEnum.warning:
@@ -125,7 +125,7 @@
                     s.enquiry.Note = null;
                 } break;
             }
-                SMSSweet.alert(d.data.Message, d.data.RequestType);
+            SMSSweet.alert(d.data.Message, d.data.RequestType);
             co("G E T - saveChange", d);
         }).catch(err => {
             BlockingService.unBlock();
@@ -152,23 +152,25 @@
         switch (month) {
             case 2:
                 return 29;
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
+            case 1: case 3:
+            case 5: case 7:
+            case 8: case 10:
             case 12:
-                return 31;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
+            return 31;
+            case 4:case 6:
+            case 9:case 11:
                 return 30;
             default:
                 return 31;
         }
     };
+    //For Get Min Day User Can Be Insert
+    s.getMinDay = (year) => {
+        if (year > currentYear) return 1;
+        return currentDay;
+    };
+    
+
     //For Get Min Month User Can Be Inserted
     s.getMinMonth = (month, year) => {
         if (year > currentYear) return 1;
@@ -183,6 +185,6 @@
 
 
     //Call Functions
-   s.getItems();
+    s.getItems();
     s.getEnquiy();
 }]);

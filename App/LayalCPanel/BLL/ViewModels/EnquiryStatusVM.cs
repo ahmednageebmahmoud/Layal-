@@ -22,12 +22,14 @@ namespace BLL.ViewModels
         public string UserCreatedName { get; set; }
         public EnquiryTypeVM EnquiryType { get; set; }
         public long? Id { get; internal set; }
-        public bool IsBankTransferDeposit { get; set; }
+        public bool IsBookByBankTransfer { get; set; }
         public decimal? Amount { get; set; }
         public bool IsWithBranch { get; set; }
         public string ClinetName { get; set; }
         public string BankTransferImage { get;  set; }
         public string BankTransferImageName { get;   set; }
         public long? EnquiryPaymentId { get;   set; }
+        public long BranchId { get; set; }
+
     }
 }

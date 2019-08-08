@@ -1,0 +1,98 @@
+﻿
+            <!--Package-->
+            <div class="kt-portlet" ng-if="package.PackageName">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <span class="kt-portlet__head-icon">
+                            <i class="kt-font-brand fas fa-hand-holding-heart"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-title">@Token.PackageInformation</h3>
+                    </div>
+                </div>
+                <!--Package Form-->
+                <form novalidate name="addPackageFrm" class="kt-form kt-form--label-right">
+                    <div class="kt-portlet__body">
+                        <!--R O W 1-->
+                        <div class="form-group row">
+                            <!--PackageName-->
+                            <label class="col-form-label col-lg-2">@Token.NameAr</label>
+                            <div class="col-lg-4 form-group-sub">
+                                <input type="text" class="form-control input-disabled  " name="nameAr"
+                                       ng-model="package.PackageName" ng-disabled="true">
+                            </div>
+
+                            <!--Description-->
+                            <label class="col-form-label col-lg-2">@Token.Description</label>
+                            <div class="col-lg-4 form-group-sub">
+                                <textarea class="form-control input-disabled "
+                                          name="descriptionAr"
+                                          ng-model="package.DescriptionName"
+                                          ng-disabled="true"></textarea>
+                            </div>
+                        </div>
+
+                        <!--R O W 2-->
+                        <div class="form-group row">
+                            <!--Album-->
+                            <label class="col-form-label col-lg-2">@Token.Album</label>
+                            <div class="col-lg-4 form-group-sub">
+                                <input type="text" class="form-control input-disabled "
+                                       ng-model="package.AlbumType.AlbumTypeName"
+                                       ng-disabled="true" />
+                            </div>
+
+                            <!--IsAllowPrintNames-->
+                            <label class="col-form-label col-lg-2">@Token.IsAllowPrintNames</label>
+                            <div class="col-lg-4 form-group-sub">
+                                <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                    <label>
+                                        <input type="checkbox" checked="checked" disabled ng-model="package.IsAllowPrintNames" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty" />
+                                        <span></span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!--R  W O 3-->
+                        <div class="form-group row">
+                            <label class="col-form-label col-lg-2">@Token.PackageDetails</label>
+                            <div class="col-lg-10 form-group-sub">
+                                <table class="table sms-table table-bordered ">
+
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="th-30 ">
+                                                <label class="sms-sort-field">
+                                                    @Token.Input
+                                                </label>
+                                            </th>
+                                            <th class="th-30">
+                                                <label class="sms-sort-field">
+                                                </label>
+                                            </th>
+                                        
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="gp in package.PackageDetails">
+                                            <td>
+                                                <input type="text" class="form-control input-disabled"
+                                                       ng-model="gp.PackageInputType.PackageInputTypeName"
+                                                       ng-disabled="true" />
+                                            </td>
+                                            <td>
+                                                {{gp.Value}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+            <!--end::Portlet-->
+  

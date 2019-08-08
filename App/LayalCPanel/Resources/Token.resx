@@ -963,4 +963,10 @@
   <data name="IsNamesPrintingFree" xml:space="preserve">
     <value>Names Printing Free</value>
   </data>
+  <data name="YouCanNotAccessToCreateAccontForThisEnquiry" xml:space="preserve">
+    <value>You Can Not Access To Create Accont For This Enquiry</value>
+  </data>
+  <data name="YouCanNotAccessToThisEnquiry" xml:space="preserve">
+    <value>You Can Not Access To This Enquiry</value>
+  </data>
 </root>

@@ -1,0 +1,206 @@
+﻿
+@{
+    ViewBag.Title = Token.EnquiryTypes;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    UsersPrivilegeVM Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.EnquiryTypes);
+}
+
+<!-- begin:: Content Head -->
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+
+        <span class="kt-subheader__separator kt-hidden"></span>
+        <div class="kt-subheader__breadcrumbs">
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link">
+                @Token.HomePage
+            </a>
+
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">
+                @Token.EnquiryTypes
+            </a>
+
+            <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+        </div>
+    </div>
+
+</div>
+
+<!-- end:: Content Head -->
+<!--Page Body-->
+<div ng-controller="enquiryTypesCtrl">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon-list-1"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        @Token.EnquiryTypes
+                    </h3>
+                </div>
+
+            </div>
+            <!--Create-->
+            @if (Priv.CanAdd)
+            {
+                <div class="kt-portlet__body">
+                    <form novalidate name="addEnquiryTypeFrm" class="kt-form kt-form--label-right" ng-submit="addNew(addEnquiryTypeFrm)">
+                        <div class="kt-portlet__body">
+
+                            <!--R O W 1-->
+                            <div class="form-group  row">
+                                <!--NameAr-->
+                                <label class="col-lg-2 col-form-label">@Token.NameAr</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text" class="form-control input-disabled"
+                                           name="nameAr"
+                                           ng-class="{'is-invalid':addEnquiryTypeFrm.nameAr.$invalid&&enquiryTypeFrmErrorSubmit}"
+                                           ng-model="newEnquiryType.NameAr"
+                                           ng-required="true" maxlength="50" ng-maxlength="50" />
+
+                                    <!--Errors:NameAr-->
+                                    <div class="error invalid-feedback" ng-if="addEnquiryTypeFrm.nameAr.$error.required&&enquiryTypeFrmErrorSubmit">@Token.FieldIsRequierd</div>
+                                    <div class="error invalid-feedback" ng-if="addEnquiryTypeFrm.nameAr.$error.maxlength&&enquiryTypeFrmErrorSubmit">@Token.MaxLengthCharIs 50</div>
+                                </div>
+
+                                <!--NameEn-->
+                                <label class="col-lg-2 col-form-label">@Token.NameEn</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text"
+                                           class="form-control input-disabled"
+                                           name="nameEn"
+                                           ng-class="{'is-invalid':addEnquiryTypeFrm.nameEn.$invalid&&enquiryTypeFrmErrorSubmit}"
+                                           ng-model="newEnquiryType.NameEn"
+                                           ng-required="true" maxlength="50" ng-maxlength="50" />
+                                    <!--Errors:NameEn-->
+                                    <div class="error invalid-feedback" ng-if="addEnquiryTypeFrm.nameEn.$error.required&&enquiryTypeFrmErrorSubmit">@Token.FieldIsRequierd</div>
+                                    <div class="error invalid-feedback" ng-if="addEnquiryTypeFrm.nameEn.$error.maxlength&&enquiryTypeFrmErrorSubmit">@Token.MaxLengthCharIs 50</div>
+                                </div>
+                            </div>
+                            <!--R O W 4-->
+                            <div class="kt-portlet__foot">
+                                <div class="kt-form__actions">
+                                    <div class="row">
+                                        <div class="col-lg-9"></div>
+                                        <div class="col-lg-3">
+
+                                            <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                                                <i class="la la-save">@Token.Add</i>
+                                            </button>
+
+                                            <button type="reset" class="btn btn-warning btn-elevate btn-elevate-air" ng-if="enquiry.State!=state.update" ng-click="reSelect()"><i class="la la-file">@Token.Cancel</i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            }
+
+
+            <div class="kt-portlet__body">
+                <div class="kt-portlet__body">
+                    @if (Priv.CanDisplay)
+            {
+                        <table class="table sms-table  "
+                               datatable="ng"
+                               dt-options="vm.dtOptions"
+                               dt-instance="vm.dtInstance"
+                               dt-column-defs="vm.dtColumnDefs"
+                               id="ng_table_1">
+                            <thead>
+                                <tr>
+                                    <th class="th-40 ">
+                                        <sms-sort ng-sms-fop="enquiryTypeFOP"
+                                                  ng-sms-field-name="NameAr"
+                                                  ng-sms-resource="@Token.NameAr"></sms-sort>
+                                    </th>
+                                    <th class="th-45 ">
+                                        <sms-sort ng-sms-fop="enquiryTypeFOP"
+                                                  ng-sms-field-name="NameEn"
+                                                  ng-sms-resource="@Token.NameEn"></sms-sort>
+                                    </th>
+                                    <th class="th-45 ">
+                                        <sms-sort ng-sms-fop="enquiryTypeFOP"
+                                                  ng-sms-resource="@Token.Page"></sms-sort>
+                                    </th>
+                                    <th class="th-15">
+                                        @Token.Operations
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr ng-repeat="x in enquiryTypes|filter:enquiryTypeSearch |orderBy:enquiryTypeFOP.sort.propName:enquiryTypeFOP.sort.reverse | limitTo:enquiryTypeFOP.paging.pagingLimt.take:enquiryTypeFOP.paging.pagingLimt.skip track by $index"
+                                    ng-class="{'kt-datatable__row--even':$index%2==0}">
+
+                                    <td>
+                                        <input type="text" class="form-control input-disabled"
+                                               placeholder="@Token.NameAr"
+                                               ng-model="x.NameAr" ng-disabled="x.Id!=itemEditId">
+                                        <!--Errors:NameAr-->
+                                        <div>
+                                            <small class="help-block" ng-if="propertyIsFalthy(x.NameAr)">@Token.FieldIsRequierd</small>
+                                            <small class="help-block" ng-if="propertyIsMaxLength(x.NameAr,50)">@Token.MaxLengthCharIs 50</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control input-disabled"
+                                               placeholder="@Token.NameEn"
+                                               ng-model="x.NameEn" ng-disabled="x.Id!=itemEditId">
+                                        <!--Errors:NameEn-->
+                                        <div>
+                                            <small class="help-block" ng-if="propertyIsFalthy(x.NameEn)">@Token.FieldIsRequierd</small>
+                                            <small class="help-block" ng-if="propertyIsMaxLength(x.NameEn,50)">@Token.MaxLengthCharIs 50</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p>
+
+                                        <a class="kt-link kt-font-boldest"
+                                           href="/Enquires/AddEnquiry?q={{x.Id}}" target="_blank">@Token.AddNewEnquiry</a>
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <!--Btn:Edit-->
+                                        @if (Priv.CanEdit)
+                                        {
+                                                <!--Btn:Edit-->
+                                            <a href="javascript:void(0);" ng-click="changeEdit(x)" ng-if="x.Id!=itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+																<!--Btn:Save-->
+                                            <a href="javascript:void(0);" ng-click="saveEdit(x)" ng-if="x.Id==itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Save" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-save"></i></a>
+																<!--Btn:Cancel-->
+                                            <a href="javascript:void(0);" ng-click="cancelEdit( )" ng-if="x.Id==itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Cancel" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-undo"></i></a>
+                                        }
+                                        <!--Btn:Delete-->
+                                        @if (Priv.CanDelete)
+                                        {
+                                            <a href="javascript:void(0);" ng-click="delete(x)" ng-if="x.Id!=itemEditId" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
+                                        }
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+
+                             <!--Paging -->
+                        <sms-paging-select ng-sms-fop="enquiryTypeFOP"></sms-paging-select>
+                        <sms-paging ng-sms-fop="enquiryTypeFOP" ng-sms-display-m-func="getEnquiryTypes()"></sms-paging>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/enquiryTypes/index/service.js"></script>
+    <script src="~/Scripts/angularJS/views/enquiryTypes/index/contoller.js"></script>
+}

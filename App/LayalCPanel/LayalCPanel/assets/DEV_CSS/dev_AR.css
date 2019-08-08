@@ -227,3 +227,6 @@ form-control:disabled, .form-control[readonly] {
           .alert .alert-icon i{
      font-size:10px
  }
+            .blockUI{
+            z-index:50000 !important
+        }

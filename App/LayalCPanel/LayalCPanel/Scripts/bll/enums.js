@@ -118,7 +118,7 @@ class worksTypesEnnum {
  
 
 class AccountTypesEnum {
-    static get ProjectManger() { return 2 };
+    static get ProjectManger() { return 1 };
     static get Supervisor() { return 2 };
     static get BranchManager() { return 3 };
 

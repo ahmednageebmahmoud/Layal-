@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewBag.Title = Token.Packages;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    UsersPrivilegeVM Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.Packages);
+}
+
+<!-- begin:: Content Head -->
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+
+        <span class="kt-subheader__separator kt-hidden"></span>
+        <div class="kt-subheader__breadcrumbs">
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link">
+                @Token.HomePage
+            </a>
+
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">
+                @Token.Packages
+            </a>
+
+            <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+        </div>
+    </div>
+
+</div>
+
+<!-- end:: Content Head -->
+<!--Page Body-->
+<div ng-controller="packagesCtrl">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand fas fa-hand-holding-heart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        @Token.Packages
+                    </h3>
+                </div>
+                <div class="kt-portlet__head-toolbar">
+                    <div class="kt-portlet__head-wrapper">
+                        <div class="kt-portlet__head-actions">
+                            @if (Priv.CanAdd)
+                            {
+                                <a href="/Packages/AddAndUpdate" class="btn btn-brand btn-elevate btn-icon-sm">
+                                    <i class="la la-plus"></i>@Token.AddNewPackage
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="kt-portlet__body">
+                <div class="kt-portlet__body">
+                    @if (Priv.CanDisplay)
+            {
+                        <table class="table sms-table  "
+                               datatable="ng"
+                               dt-options="vm.dtOptions"
+                               dt-instance="vm.dtInstance"
+                               dt-column-defs="vm.dtColumnDefs"
+                               id="ng_table_1">
+                            <thead>
+                                <tr>
+                                    <th class="th-15 ">
+                                        <sms-sort ng-sms-fop="packageFOP"
+                                                  ng-sms-field-name="NameAr"
+                                                  ng-sms-resource="@Token.NameAr"></sms-sort>
+                                    </th>
+                                    <th class="th-15 ">
+                                        <sms-sort ng-sms-fop="packageFOP"
+                                                  ng-sms-field-name="NameEn"
+                                                  ng-sms-resource="@Token.NameEn"></sms-sort>
+                                    </th>
+                                    <th class="th-15 ">
+                                        <sms-sort ng-sms-fop="packageFOP"
+                                                  ng-sms-field-name="DescriptionAr"
+                                                  ng-sms-resource="@Token.DescriptionAr"></sms-sort>
+                                    </th>
+                                    <th class="th-15 ">
+                                        <sms-sort ng-sms-fop="packageFOP"
+                                                  ng-sms-field-name="DescriptionEn"
+                                                  ng-sms-resource="@Token.DescriptionEn"></sms-sort>
+                                    </th>
+                                    <th class="th-15 ">
+                                        <sms-sort ng-sms-fop="packageFOP"
+                                                  ng-sms-field-name="IsPrintNamesFree"
+                                                  ng-sms-resource="@Token.IsNamesPrintingFree"></sms-sort>
+                                    </th>
+
+                                    <th class="th-15">
+                                        @Token.Operations
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in packages|filter:packageSearch |orderBy:packageFOP.sort.propName:packageFOP.sort.reverse | limitTo:packageFOP.paging.pagingLimt.take:packageFOP.paging.pagingLimt.skip track by $index"
+                                    ng-class="{'kt-datatable__row--even':$index%2==0}">
+
+                                    <td><span>{{x.NameAr}}</span></td>
+                                    <td><span>{{x.NameEn}}</span></td>
+                                    <td><span>{{x.DescriptionAr}}</span></td>
+                                    <td><span>{{x.DescriptionEn}}</span></td>
+                                    <td>
+                                        <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                            <label>
+                                                <input type="checkbox" checked="checked" ng-model="x.IsPrintNamesFree" disabled name="" class="ng-pristine ng-untouched ng-valid ng-not-empty" />
+                                                <span></span>
+                                            </label>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <!--Btn:Edit-->
+                                        @if (Priv.CanEdit)
+                                        {
+                                            <a href="/Packages/AddAndUpdate?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="Edit" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                        }
+                                        <!--Btn:Delete-->
+                                        @if (Priv.CanDelete)
+                                        {
+                                            <a href="javascript:void(0);" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="delete(x)"><i class="la la-trash"></i> </a>
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                             <!--Paging -->
+                        <sms-paging-select ng-sms-fop="packageFOP"></sms-paging-select>
+                        <sms-paging ng-sms-fop="packageFOP" ng-sms-display-m-func="getPackages()"></sms-paging>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/packages/index/service.js"></script>
+    <script src="~/Scripts/angularJS/views/packages/index/contoller.js"></script>
+}

@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = Token.Countries;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    UsersPrivilegeVM Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.Countries);
+}
+
+<!-- begin:: Content Head -->
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+
+        <span class="kt-subheader__separator kt-hidden"></span>
+        <div class="kt-subheader__breadcrumbs">
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link">
+                @Token.HomePage
+            </a>
+
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">
+                @Token.Countries
+            </a>
+
+            <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+        </div>
+    </div>
+
+</div>
+
+<!-- end:: Content Head -->
+<!--Page Body-->
+<div ng-controller="countriesCtrl">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon-list-1"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        @Token.Countries
+                    </h3>
+                </div>
+                <div class="kt-portlet__head-toolbar">
+                    <div class="kt-portlet__head-wrapper">
+                        <div class="kt-portlet__head-actions">
+                            @if (Priv.CanAdd)
+                            {
+                                <a href="/Countries/AddAndUpdate" class="btn btn-brand btn-elevate btn-icon-sm">
+                                    <i class="la la-plus"></i>@Token.AddNewCountry
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          
+            <div class="kt-portlet__body">
+                <div class="kt-portlet__body">
+                    @if (Priv.CanDisplay)
+            {
+                        <table class="table sms-table  " 
+                            datatable="ng" 
+                               dt-options="vm.dtOptions"
+                               dt-instance="vm.dtInstance"
+                               dt-column-defs="vm.dtColumnDefs"
+                               id="ng_table_1" 
+                               >
+                            <thead>
+                                <tr>
+                                    <th class="th-40 ">
+                                        <sms-sort ng-sms-fop="countryFOP"
+                                                  ng-sms-field-name="NameAr"
+                                                  ng-sms-resource="@Token.NameAr"></sms-sort>
+                                    </th>
+                                    <th class="th-45 ">
+                                        <sms-sort ng-sms-fop="countryFOP"
+                                                  ng-sms-field-name="NameEn"
+                                                  ng-sms-resource="@Token.NameEn"></sms-sort>
+                                    </th>
+                                    <th class="th-15">
+                                        @Token.Operations  
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr
+                                    ng-repeat="x in countries|filter:countrySearch |orderBy:countryFOP.sort.propName:countryFOP.sort.reverse | limitTo:countryFOP.paging.pagingLimt.take:countryFOP.paging.pagingLimt.skip track by $index"
+                                    ng-class="{'kt-datatable__row--even':$index%2==0}">
+
+                                    <td><span>{{x.NameAr}}</span></td>
+                                    <td><span>{{x.NameEn}}</span></td>
+                                    <td>
+                                        <!--Btn:Edit-->
+                                        @if (Priv.CanEdit)
+                                        {
+                                            <a href="/Countries/AddAndUpdate?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Edit" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                        }
+                                        <!--Btn:Delete-->
+                                        @if (Priv.CanDelete)
+                                        {
+                                            <a href="javascript:void(0);" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="delete(x)"><i class="la la-trash"></i> </a>
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                             <!--Paging -->
+                        <sms-paging-select ng-sms-fop="countryFOP"></sms-paging-select>
+                        <sms-paging ng-sms-fop="countryFOP" ng-sms-display-m-func="getCountries()"></sms-paging>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/countries/index/service.js"></script>
+    <script src="~/Scripts/angularJS/views/countries/index/contoller.js"></script>
+}

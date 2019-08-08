@@ -230,3 +230,7 @@ div#ng_table_1_filter {
  .alert .alert-icon i{
      font-size:10px
  }
+
+   .blockUI{
+            z-index:50000 !important
+        }

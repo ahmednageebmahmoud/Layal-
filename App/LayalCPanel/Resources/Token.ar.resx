@@ -975,4 +975,10 @@
   <data name="IsNamesPrintingFree" xml:space="preserve">
     <value>حفر الاسماء مجانى</value>
   </data>
+  <data name="YouCanNotAccessToCreateAccontForThisEnquiry" xml:space="preserve">
+    <value> ليس لديك صلاحية  لـ انشاء حساب مستخدم تابع لهذا الاستفسار</value>
+  </data>
+  <data name="YouCanNotAccessToThisEnquiry" xml:space="preserve">
+    <value>ليس لديك صلاحية للوصول الى هذا الطلب</value>
+  </data>
 </root>

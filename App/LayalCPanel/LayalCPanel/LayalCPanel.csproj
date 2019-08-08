@@ -2050,6 +2050,15 @@
     <Content Include="Scripts\angularJS\views\users\index\contoller.js" />
     <Content Include="Scripts\angularJS\views\users\index\service.js" />
     <Content Include="Scripts\bll\enums.js" />
+    <Content Include="Scripts\bll\fop\angularClass\filters\customFilter.js" />
+    <Content Include="Scripts\bll\fop\angularClass\sms-fop\buttons-search.js" />
+    <Content Include="Scripts\bll\fop\angularClass\sms-fop\paging-select.js" />
+    <Content Include="Scripts\bll\fop\angularClass\sms-fop\paging.js" />
+    <Content Include="Scripts\bll\fop\angularClass\sms-fop\sort.js" />
+    <Content Include="Scripts\bll\fop\jsClass\fop.js" />
+    <Content Include="Scripts\bll\fop\jsClass\paging-limt.js" />
+    <Content Include="Scripts\bll\fop\jsClass\Paging.js" />
+    <Content Include="Scripts\bll\fop\jsClass\sort.js" />
     <Content Include="Scripts\bll\init.js" />
     <Content Include="Scripts\bll\resources.js" />
     <Content Include="Scripts\bll\services\blocking-service.js" />
@@ -2061,12 +2070,6 @@
     <Content Include="Scripts\bll\services\sms-sweet.js" />
     <Content Include="Scripts\bll\services\sms-toastr.js" />
     <Content Include="Scripts\bll\signalAr\main.js" />
-    <Content Include="Scripts\bll\sms-contextmenu.js" />
-    <Content Include="Scripts\bll\SMS-FOP\fop.js" />
-    <Content Include="Scripts\bll\SMS-FOP\notification.js" />
-    <Content Include="Scripts\bll\SMS-FOP\paging-limt.js" />
-    <Content Include="Scripts\bll\SMS-FOP\Paging.js" />
-    <Content Include="Scripts\bll\SMS-FOP\sort.js" />
     <Content Include="Scripts\bll\usersPagesPrivileges.js" />
     <Content Include="Scripts\bll\_auth.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -2231,15 +2234,8 @@
     <Content Include="credentials.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\a.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\dataTables\angular-datatables.buttons.min.js" />
-    <Content Include="Scripts\dataTables\angular-datatables.min.js" />
-    <Content Include="Scripts\dataTables\buttons.colVis.min.js" />
-    <Content Include="Scripts\dataTables\buttons.flash.min.js" />
-    <Content Include="Scripts\dataTables\buttons.html5.min.js" />
-    <Content Include="Scripts\dataTables\buttons.print.min.js" />
-    <Content Include="Scripts\dataTables\dataTables.buttons.min.js" />
-    <Content Include="Scripts\dataTables\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -2282,7 +2278,7 @@
     <Content Include="Views\UsersPrivileges\Index.cshtml" />
     <Content Include="Views\Users\AddAndUpdate.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\MyEnquires\AddAndUpdate.cshtml" />
+    <Content Include="Views\MyEvents\AddAndUpdate.cshtml" />
     <Content Include="Views\MyEnquires\Index.cshtml" />
     <Content Include="Views\Users\UserInformation.cshtml" />
     <Content Include="Views\Notifications\Index.cshtml" />
@@ -2293,7 +2289,6 @@
     <Content Include="Views\Events\AddAndUpdate.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
     <Content Include="Views\MyEvents\Index.cshtml" />
-    <Content Include="Views\MyEvents\AddAndUpdate.cshtml" />
     <Content Include="Views\AlbumTypes\Index.cshtml" />
     <Content Include="Views\PackageInputTypes\Index.cshtml" />
     <Content Include="Views\Packages\AddAndUpdate.cshtml" />

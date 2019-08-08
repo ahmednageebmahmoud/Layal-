@@ -7,3 +7,4 @@ G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\bin\Release\Entit
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\bin\Release\EntityFramework.SqlServer.xml
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\obj\Release\DAL.dll
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\obj\Release\DAL.pdb
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\obj\Release\DAL.csprojResolveAssemblyReference.cache

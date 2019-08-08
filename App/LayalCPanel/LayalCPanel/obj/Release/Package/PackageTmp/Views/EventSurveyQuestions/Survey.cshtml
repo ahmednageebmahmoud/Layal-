@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = Token.Survey;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var IsCurrentClinet = CookieService.UserInfo.IsClinet.ToString().ToLower();
+}
+
+<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" ng-controller="eventSurveyQuestionsCtrl" >
+    <!-- begin:: Subheader -->
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <span class="kt-subheader__separator kt-hidden"></span>
+            <div class="kt-subheader__breadcrumbs">
+                <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link"> @Token.HomePage </a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="~/Events" class="kt-subheader__breadcrumbs-link"> @Token.Events {{isClinet}}</a>
+
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active"" >@Token.Survey</a>
+
+                <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+            </div>
+        </div>
+
+    </div>
+    <!-- end:: Subheader -->
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--AddEvent-->
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <span class="kt-portlet__head-icon">
+                                <i class="kt-font-brand flaticon-add"></i>
+                            </span>
+                            <h3 class="kt-portlet__head-title" >@Token.Survey</h3>
+                        </div>
+
+                    </div>
+                    <!--AddEvent Form-->
+                    <form novalidate name="eventFrm" class="kt-form kt-form--label-right" ng-submit="saveChange(eventFrm)">
+                        <div class="kt-portlet__body">
+                            <!--R O W 1s-->
+                            <div class="row ">
+                                <div class="col-lg-6 row form-group" ng-repeat="q in eventSurvey.SurveyQuestions">
+                                    <label class="col-form-label col-lg-4">{{q.SurveyQuestion.EventSurveyQuestionTypeName}} </label>
+                                    <div class="col-lg-8 form-group-sub">
+                                        <textarea class="form-control input-disabled"
+                                                  name="notes"
+                                                   ng-disabled='"@IsCurrentClinet"'
+                                                  ng-class="{'is-invalid':q.Answerer.length>4000&&eventFormSubmitErro}"
+                                                  ng-model="q.Answerer"
+                                                  ng-maxlength="4000"
+                                                  maxlength="4000"
+                                                  rows="4" placeholder="@Token.YourAnswerer . . ."></textarea>
+                                        <!--Errors:-->
+                                        <small class="error invalid-feedback" ng-if="q.Answerer.length>4000&&eventFormSubmitErro">@Token.MaxLengthCharIs 4000</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--R O W 2-->
+                            <div class="form-group row ">
+                                <label class="col-form-label col-lg-2">@Token.AreYouSatisfiedToMyService ?</label>
+                                <div class="col-lg-10 form-group-sub">
+                                    <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                        <label>
+                                            <input type="checkbox" checked="checked"
+                                                   ng-disabled='"@IsCurrentClinet"'
+                                                   ng-model="eventSurvey.IsSatisfied" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                            <span></span>
+                                            <i class="fa "
+                                               style="font-size: 35px;"
+                                               ng-class="{'fa-grin-hearts':eventSurvey.IsSatisfied,'fa-frown':!eventSurvey.IsSatisfied}"></i>
+                                        </label>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__foot" ng-if="@IsCurrentClinet">
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-9"></div>
+                                    <div class="col-lg-3">
+                                        <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                                            <i class="la la-save">@Token.Save</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+                <!--Event-->
+                @Html.Partial("~/Views/Shared/_EventsInformation.cshtml")
+
+
+                <!--end::Portlet-->
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/eventSurveyQuestions/survey/service.js"></script>
+    <script src="~/Scripts/angularJS/views/eventSurveyQuestions/survey/contoller.js"></script>
+}

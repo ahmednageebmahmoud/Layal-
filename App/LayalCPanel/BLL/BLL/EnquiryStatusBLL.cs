@@ -32,9 +32,13 @@ namespace BLL.BLL
                     return new ResponseVM(RequestTypeEnum.Error, Token.EnquiryIsClosed);
 
                 //check if with admin
-                if(this.UserLoggad.IsBranchManager)
-                    if(db.Enquires_CheckIfWithBranch(c.EnquiryId).First().Value<=0)
-                        return new ResponseVM(RequestTypeEnum.Error, Token.EnquiryWithAdmin);
+                //if(this.UserLoggad.IsBranchManager)
+                //    if(db.Enquires_CheckIfWithBranch(c.EnquiryId).First().Value<=0)
+                //        return new ResponseVM(RequestTypeEnum.Error, Token.EnquiryWithAdmin);
+
+                if (this.AdminId != this.UserLoggad.Id && c.BranchId != this.UserLoggad.BrId)
+                    return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEnquiry);
+
 
                 //check if create event 
                 if (db.Enquires_CheckIfCreatedEvent(c.Id).First().Value > 0)
@@ -82,7 +86,7 @@ namespace BLL.BLL
         /// <returns></returns>
         private object AddNewPayment(EnquiryStatusVM c)
         {
-            if (c.StatusId == EnquiryStatusTypesEnum.BankTransferDeposit || c.IsBankTransferDeposit)
+            if (c.StatusId == EnquiryStatusTypesEnum.BookByBankTransfer || c.IsBookByBankTransfer)
             {
                 //اذا هى عملية حجز عن طريق حوالة بنكية
                 string ImagePath = null;
@@ -106,7 +110,7 @@ namespace BLL.BLL
                 }, ImagePath);
 
             }
-            else if (c.StatusId == EnquiryStatusTypesEnum.DesireToBook)
+            else if (c.StatusId == EnquiryStatusTypesEnum.BookByCash)
             {
                 c.EnquiryPaymentId = new EnquiryPaymentsBLL().Add(new EnquiryPaymentVM
                 {
@@ -172,8 +176,8 @@ namespace BLL.BLL
                     }
                     break;
                 case EnquiryStatusTypesEnum.NeedsToThink:
-                case EnquiryStatusTypesEnum.DesireToBook:
-                case EnquiryStatusTypesEnum.BankTransferDeposit:
+                case EnquiryStatusTypesEnum.BookByCash:
+                case EnquiryStatusTypesEnum.BookByBankTransfer:
                     break;
             }
         }
@@ -224,17 +228,17 @@ namespace BLL.BLL
                     break;
                 case EnquiryStatusTypesEnum.NeedsToThink:
                     break;
-                case EnquiryStatusTypesEnum.DesireToBook:
+                case EnquiryStatusTypesEnum.BookByCash:
                     {
                         ObjectReturn.Amount = c.Amount;
                     }
                     break;
-                case EnquiryStatusTypesEnum.BankTransferDeposit:
+                case EnquiryStatusTypesEnum.BookByBankTransfer:
                     {
                         ObjectReturn.Amount = c.Amount;
                         ObjectReturn.BankTransferImageName = c.BankTransferImageName;
                         ObjectReturn.BankTransferImage = c.BankTransferImage;
-                        ObjectReturn.IsBankTransferDeposit = true;
+                        ObjectReturn.IsBookByBankTransfer = true;
                     }
                     break;
             }

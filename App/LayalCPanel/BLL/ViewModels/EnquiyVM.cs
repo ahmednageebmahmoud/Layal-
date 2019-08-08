@@ -55,5 +55,7 @@ namespace BLL.ViewModels
         public List<NoteVM> Notes { get; set; }
         public BranchVM Branch { get; set; }
         public bool IsCreatedEvent { get;   set; }
+        public bool IsCanBeAccess => this.UserLoggad.IsAdmin || this.BranchId == this.UserLoggad.BrId;
+
     }//endclass
 }

@@ -1,43 +1,7 @@
 ﻿ngApp.controller('sharedCtrl', ['$scope', '$http', 'sharedServ', '$rootScope',
-                                 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder',
-                                 function (s, h, sharedServ, rs, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+                                 function (s, h, sharedServ, rs) {
 
-                                     //Data Table Seting
-                                     rs.initDataTables = () => {
-                                         s.vm = {};
-                                         s.vm.dtInstance = {};
-                                         s.vm.dtColumnDefs = [DTColumnDefBuilder.newColumnDef(2).notSortable()];
-                                         s.vm.dtOptions = DTOptionsBuilder.newOptions()
-                                                           .withOption('paging', false)
-                                                           .withOption('searching', false)
-                                                           .withOption('info', false)
-                                                           .withOption('sort', false)
-                                                           .withButtons([
-                                                                               {
-                                                                                   extend: 'copy',
-                                                                                   text: 'Copy',
-                                                                                   titleAttr: 'Copy'
-                                                                               },
-                                                                               {
-                                                                                   extend: 'print',
-                                                                                   text: 'Print',
-                                                                                   titleAttr: 'Print'
-                                                                               },
-                                                                               {
-                                                                                   extend: 'excel',
-                                                                                   text: 'Excel',
-                                                                                   titleAttr: 'Excel'
-                                                                               },
-                                                                               {
-                                                                                   extend: 'pdf',
-                                                                                   text: 'Pdf',
-                                                                                   titleAttr: 'Pdf'
-                                                                               }
-                                                           ]);
-
-                                     };
-                                     rs.initDataTables();
-
+                          
                                      s.state = StateEnum;
                                      s.langIsEn = LangIsEn;
                                      s.notifyId = getQueryStringValue("notifyId");

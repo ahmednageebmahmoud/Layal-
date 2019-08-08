@@ -24,7 +24,7 @@
                     s.paymentsInformations = s.paymentsInformations.concat(d.data.Result.PaymentsInformations);
                     s.enquiry = d.data.Result.Enquiry;
                     s.event = d.data.Result.Event;
-                    if (s.event || s.event.EventDateTimeDisplay)
+                    if (s.event && s.event.EventDateTimeDisplay)
                     s.event.EventDateTime = new Date(Date.parse(s.event.EventDateTimeDisplay))
 
                     s.paymentsInformationFOP = new FOP(lengthWithOutDeleted(s.paymentsInformations));

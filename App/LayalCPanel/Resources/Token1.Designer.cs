@@ -2554,6 +2554,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You Can Not Access To Create Accont For This Enquiry.
+        /// </summary>
+        public static string YouCanNotAccessToCreateAccontForThisEnquiry {
+            get {
+                return ResourceManager.GetString("YouCanNotAccessToCreateAccontForThisEnquiry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You Can Not Access To This Enquiry.
+        /// </summary>
+        public static string YouCanNotAccessToThisEnquiry {
+            get {
+                return ResourceManager.GetString("YouCanNotAccessToThisEnquiry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You Can Not Access To This Event.
         /// </summary>
         public static string YouCanNotAccessToThisEvent {

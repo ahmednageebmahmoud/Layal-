@@ -30,8 +30,8 @@
         new Audio('/assets/sound/sweetAlert.mp3').play();
 
         swal.fire({
-            title: message || Token.deleteMessageConfirmation + ' ',
-            text: Token.success,
+            title:Token.success,
+            text: message ,
             type: 'success',
             showCancelButton: true,
             confirmButtonText: Token.ok,

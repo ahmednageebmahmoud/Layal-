@@ -213,7 +213,7 @@
                                     <th class="th-10">
                                         <sms-sort ng-sms-fop="enquiyFOP"
                                                   ng-sms-field-name="EventDateTimeDisplay"
-                                                  ng-sms-resource="@Token.EventDateTime"></sms-sort>
+                                                  ng-sms-resource="@Token.EventDate"></sms-sort>
                                     </th>
                                     <th class="th-10">
                                         <sms-sort ng-sms-fop="enquiyFOP"
@@ -251,41 +251,39 @@
                                         <a href="/EEW/AddAndUpdateCoordinations?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.AddAndUpdateCoordinations"
                                            ng-hide="x.IsClosed||!x.IsPayment"
                                            class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fa fa-tasks"></i></a>
-                                   
-                                             <!--توزيع اوامر العمل على الموظفين-->
+
+                                        <!--توزيع اوامر العمل على الموظفين-->
                                         <a href="/Events/DistributionOfWork?id={{x.Id}}&branchId={{x.BranchId}}"
-                                         data-skin="dark" data-toggle="kt-tooltip" data-placement="top"   title="@Token.DistributionOfWork"
+                                           data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.DistributionOfWork"
                                            class="btn btn-sm btn-clean btn-icon btn-icon-md"
                                            ng-hide="x.IsClosed||!x.IsPayment"><i class="fas fa-users-cog"></i></a>
 
                                         <!--Event Employees-->
                                         <a href="Javascript:void(0)"
-                                         data-skin="dark" data-toggle="kt-tooltip" data-placement="top"   title="@Token.EventEmployees"
+                                           data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.EventEmployees"
                                            class="btn btn-sm btn-clean btn-icon btn-icon-md"
-                                           ng-click="showEventEmployees(x)"
-                                           ><i class="fa fa-users"></i></a>
+                                           ng-click="showEventEmployees(x)"><i class="fa fa-users"></i></a>
 
-                                        
+
 
 
                                         @if (PrivPayments.CanAdd || PrivPayments.CanDisplay)
                                         {
-                                            <a href="/EnquiryPayments/Payments?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.Payments" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fas fa-hand-holding-usd"></i> </a>
+                                            <a href="/EnquiryPayments/Payments?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Payments" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fas fa-hand-holding-usd"></i> </a>
                                         }
 
                                         @if (IsCurrentUserAdmin)
                                         {
                                             <!--التعدير فى حقول الاستبيان-->
-                                            <a href="Javascript:void(0)" data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.CreateCustomSurvey"
+                                            <a href="Javascript:void(0)" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.CreateCustomSurvey"
                                                class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"
                                                ng-if="!x.IsAllowSurvey"
-
                                                ng-click="showCreateCustomSurveyModel(x)"><i class="fa fa-chart-line"></i></a>
 
                                               <!--نعرض الاستبيان بدام تمت اضافتها -->
                                             <a href="/EventSurveyQuestions/Survey?eventId={{x.Id}}"
                                                ng-if="x.IsAllowSurvey"
-                                              data-skin="dark" data-toggle="kt-tooltip" data-placement="top"  title="@Token.Survey"
+                                               data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Survey"
                                                class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fa fa-chart-line"></i></a>
 
                                         }
@@ -407,7 +405,7 @@
                                         </td>
                                         <td><i class="fa" ng-class="{'fa-check':gp.IsFinshed}"></i></td>
                                         <td>
-                                            @if(PrivUserPayments.CanEdit|| PrivUserPayments.CanAdd|| PrivUserPayments.CanDisplay)
+                                            @if (PrivUserPayments.CanEdit || PrivUserPayments.CanAdd || PrivUserPayments.CanDisplay)
                                             {
                                                 <a href="/UserPayments/Payments?id={{gp.EmployeeId}}"
                                                    ng-if="gp.UserAccountTypeId==accountTypeEnum.Helper"

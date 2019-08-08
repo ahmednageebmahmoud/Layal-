@@ -90,17 +90,30 @@
                                 <!--PhoneNumber-->
                                 <label class="col-form-label col-lg-2">@Token.PhoneNumber</label>
                                 <div class="col-lg-4 form-group-sub">
-                                    <input type="text"
-                                           name="phoneNo"
-                                           ng-class="{'is-invalid':enquiryFrm.phoneNo.$invalid&&enquiyFormSubmitErro}"
-                                           class="form-control"
-                                           ng-model="enquiry.PhoneNo"
-                                           pattern="[0-9]{10,14}"
-                                           ng-required="true" />
-                                    <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.phoneNo.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.phoneNumber.$invalid&&!enquiryFrm.phoneNo.$error.required&&enquiyFormSubmitErro">@Token.InvalidData</small>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+
+                                            <select class="form-control"
+                                                    name="PhoneCountryId"
+                                                    ng-class="{'is-invalid':enquiryFrm.PhoneCountryId.$invalid&&enquiyFormSubmitErro}"
+                                                    ng-model="enquiry.PhoneCountryId"
+                                                    ng-options="c.Id as c.CountryNameIsoCode for c in countries|orderBy:'CountryNameIsoCode'"
+                                                    ng-required="true"></select>
+                                        </div>
+                                        <input type="text"
+                                               name="phoneNo"
+                                               ng-class="{'is-invalid':enquiryFrm.phoneNo.$invalid&&enquiyFormSubmitErro}"
+                                               class="form-control"
+                                               ng-model="enquiry.PhoneNo"
+                                               pattern="[0-9]{5,30}"
+                                               ng-required="true" />
+                                        <!--Errors:-->
+                                        <small class="error invalid-feedback" ng-if="enquiryFrm.PhoneCountryId.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
+                                        <small class="error invalid-feedback" ng-if="enquiryFrm.phoneNo.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
+                                        <small class="error invalid-feedback" ng-if="enquiryFrm.phoneNo.$invalid&&!enquiryFrm.phoneNo.$error.required&&enquiyFormSubmitErro">@Token.InvalidData</small>
+                                    </div>
                                 </div>
+
 
 
                                 <!--EventDate-->
@@ -182,7 +195,20 @@
 
                             <!--R O W 4-->
                             <div class="form-group  row">
-                                <!--EnquiryType-->
+                                <!--Branches-->
+                                <label class="col-form-label col-lg-2" ng-if="enquiry.State==state.create||CurrentAdmin">@Token.Branch</label>
+                                <div class="col-lg-4 form-group-sub" ng-if="enquiry.State==state.create||CurrentAdmin">
+                                    <select class="form-control"
+                                            serchbale
+                                            name="branch"
+                                            ng-class="{'is-invalid':enquiryFrm.branch.$invalid&&enquiyFormSubmitErro}"
+                                            ng-model="enquiry.BranchId"
+                                            ng-options="c.Id as c.BranchName for c in branches|filterWithoutStaticItems:{'CityId':enquiry.CityId}"
+                                            ng-required="true"></select>
+                                    <!--Errors:-->
+                                    <small class="error invalid-feedback" ng-if="enquiryFrm.branch.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
+                                </div>
+                                   <!--EnquiryType-->
                                 <label class="col-form-label col-lg-2">@Token.EnquiryType</label>
                                 <div class="col-lg-4 form-group-sub">
                                     <select class="form-control"
@@ -195,19 +221,7 @@
                                     <!--Errors:-->
                                     <small class="error invalid-feedback" ng-if="enquiryFrm.enquiryType.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
                                 </div>
-                                <!--Branches-->
-                                    <label class="col-form-label col-lg-2" ng-if="enquiry.State==state.create||CurrentAdmin">@Token.Branch</label>
-                                    <div class="col-lg-4 form-group-sub"   ng-if="enquiry.State==state.create||CurrentAdmin">
-                                        <select class="form-control"
-                                                serchbale
-                                                name="branch"
-                                                ng-class="{'is-invalid':enquiryFrm.branch.$invalid&&enquiyFormSubmitErro}"
-                                                ng-model="enquiry.BranchId"
-                                                ng-options="c.Id as c.BranchName for c in branches|filterWithoutStaticItems:{'CityId':enquiry.CityId}"
-                                                ng-required="true"></select>
-                                        <!--Errors:-->
-                                        <small class="error invalid-feedback" ng-if="enquiryFrm.branch.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
-                                    </div>
+                               
                             </div>
 
                             <!--R O W 5-->

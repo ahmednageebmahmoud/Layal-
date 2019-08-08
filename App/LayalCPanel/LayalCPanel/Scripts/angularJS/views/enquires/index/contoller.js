@@ -24,8 +24,8 @@
         fullApproval: 4,
         scheduleVisit: 5,
         needsToThink: 6,
-        desireToBook :7,
-        bankTransferDeposit:8
+        bookByCash: 7,
+        bookBybankTransfer: 8
 
     };
 
@@ -36,8 +36,8 @@
     { Id: s.enquiryStatusTypesEnum.fullApproval, Name: Token.fullApproval },
     { Id: s.enquiryStatusTypesEnum.scheduleVisit, Name: Token.scheduleVisit },
     { Id: s.enquiryStatusTypesEnum.needsToThink, Name: Token.needsToThink },
-    { Id: s.enquiryStatusTypesEnum.desireToBook, Name: Token.desireToBook },
-    { Id: s.enquiryStatusTypesEnum.bankTransferDeposit, Name: Token.bankTransferDeposit },
+    { Id: s.enquiryStatusTypesEnum.bookByCash, Name: Token.bookByCash },
+    { Id: s.enquiryStatusTypesEnum.bookBybankTransfer, Name: Token.bookBybankTransfer },
     
     
     ];
@@ -157,6 +157,16 @@
         }
         s.enquiytStusSubmitErro = false;
 
+        //نتحقق من صورة الحوالة
+        if (s.enquiryStatusTypesEnum.bookBybankTransfer == s.enquiryNewStatus.StatusId && !s.enquiryNewStatus.BankTransferImage)
+           
+        {
+            SMSSweet.alert(LangIsEn ? "Payment image not found" : "صورة الحوالة ليست موجودة", RequestTypeEnum.error);
+            return;
+        }
+
+
+         
         BlockingService.block();
         enquiresServ.addNewStatus(s.enquiryNewStatus).then(d => {
 
@@ -235,9 +245,10 @@
     s.showAddStatus = enquiry => {
         s.enquiryNewStatus = {
             EnquiryId: enquiry.Id,
+            BranchId: enquiry.BranchId,
             EnquiryBranchId: enquiry.BranchId,
             StatusId: null,
-            IsBankTransferDeposit:true,
+            IsBookByBankTransfer: true,
             ClinetName:enquiry.FirstName+' '+enquiry.LastName,
         };
         $('[type="file"]').val(null);

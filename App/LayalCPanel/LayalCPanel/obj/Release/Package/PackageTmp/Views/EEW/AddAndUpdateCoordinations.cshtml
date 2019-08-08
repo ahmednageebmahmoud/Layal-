@@ -1,0 +1,198 @@
+﻿
+@{
+    ViewBag.Title = Token.AddAndUpdateCoordinations  ;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" ng-controller="eventCoordinationCtrl">
+    <!-- begin:: Subheader -->
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <span class="kt-subheader__separator kt-hidden"></span>
+            <div class="kt-subheader__breadcrumbs">
+                <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link"> @Token.HomePage </a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="~/EEW/Coordinations" class="kt-subheader__breadcrumbs-link"> @Token.EventCoordinations </a>
+
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">@Token.AddAndUpdateCoordinations</a>
+                <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active </span> -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- end:: Subheader -->
+
+
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--Add New Task-->
+                <div class="kt-portlet" ng-if="!event.EventWorkStatusIsFinshed.Coordination">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <span class="kt-portlet__head-icon">
+                                <i class="kt-font-brand flaticon-add"></i>
+                            </span>
+                            <h3 class="kt-portlet__head-title">@Token.AddNewTask</h3>
+                        </div>
+
+                        @if (CookieService.UserInfo.IsHelper|| CookieService.UserInfo.IsEmployee|| CookieService.UserInfo.IsBranchManager)
+                        {
+                            /*
+                             مدير الفرع او الموظف فقط هم من يمكنهم انهاء هذة المهمة
+                             */
+                        <div class="kt-portlet__head-toolbar" ng-hide="event.EventWorkStatusIsFinshed.Coordination">
+                            <div class="kt-portlet__head-wrapper">
+                                <div class="kt-portlet__head-actions">
+                                        <a href="#" class="btn btn-success btn-elevate btn-icon-sm" ng-click="taskFinsh()">
+                                            <i class="la la-plus"></i>@Token.Finshed
+                                        </a>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    
+                    </div>
+                    <!--Package Form-->
+                    <form novalidate name="newTaskFrm" class="kt-form kt-form--label-right" 
+                          ng-submit="saveChange(newTaskFrm)">
+                        <div class="kt-portlet__body">
+                            <!--R O W 1-->
+                            <div class="form-group row">
+                                <!--TaskNumber-->
+                                <label class="col-form-label col-lg-2">@Token.TaskNumber</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text" class="form-control" readonly="readonly" ng-model="newTask.TaskNumber" />
+                                </div>
+
+                                <!--Task-->
+                                <label class="col-form-label col-lg-2">@Token.Task</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text" class="form-control" name="task" ng-model="newTask.Task"
+                                           ng-class="{'is-invalid':newTaskFrm.task.$invalid&&newTaskFrmSubmitError}"
+                                           ng-required="true" maxlength="50" ng-maxlength="50" />
+                                    <small class="error invalid-feedback" ng-if="newTaskFrm.task.$error.required&&newTaskFrmSubmitError">@Token.FieldIsRequierd</small>
+                                    <small class="error invalid-feedback" ng-if="newTaskFrm.task.$error.$error.maxlength&&newTaskFrmSubmitError">@Token.MaxLengthCharIs 50</small>
+                                </div>
+                            </div>
+                            <!--R O W 2-->
+                            <div class="form-group row">
+                                <!--StartTime-->
+                                <label class="col-form-label col-lg-2">@Token.StartTime</label>
+                                <div class="col-lg-4 form-group-sub"> 
+                                    <input type="time" class="form-control"  ng-model="newTask.StartTime"  name="startTime" id="startTime" 
+                                           ng-class="{'is-invalid':newTaskFrm.startTime.$invalid&&newTaskFrmSubmitError}"
+                                           ng-required="true"/>
+                                    <small class="error invalid-feedback" ng-if="newTaskFrm.startTime.$error.required&&newTaskFrmSubmitError">@Token.FieldIsRequierd</small>
+                                    <small class="error invalid-feedback" ng-if="!newTaskFrm.startTime.$error.required&&newTaskFrm.startTime.$invalid&&newTaskFrmSubmitError">@Token.InvalidData</small>
+                                </div>
+
+                                <!--EndTime-->
+                                <label class="col-form-label col-lg-2">@Token.EndTime</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="time" class="form-control" ng-model="newTask.EndTime" name="endTime"  id="endTime"
+                                           ng-class="{'is-invalid':newTaskFrm.endTime.$invalid&&newTaskFrmSubmitError}"
+                                           ng-required="true"/>
+                                    <small class="error invalid-feedback" ng-if="newTaskFrm.endTime.$error.required&&newTaskFrmSubmitError">@Token.FieldIsRequierd</small>
+                                    <small class="error invalid-feedback" ng-if="!newTaskFrm.endTime.$error.required&&newTaskFrm.endTime.$invalid&&newTaskFrmSubmitError">@Token.InvalidData</small>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <!--Notes-->
+                                <label class="col-form-label col-lg-2">@Token.Notes</label>
+                                <div class="col-lg-10 form-group-sub">
+                                    <textarea  class="form-control" 
+                                              name="notes"
+                                              ng-model="newTask.Notes" 
+                                           ng-class="{'is-invalid':newTaskFrm.notes.$invalid&&newTaskFrmSubmitError}"
+                                           ng-maxlength="4000" rows="4" ></textarea>
+                                    <small class="error invalid-feedback" ng-if="newTaskFrm.notes.$error.maxlength&&newTaskFrmSubmitError">@Token.InvalidData</small>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-9"></div>
+                                    <div class="col-lg-3">
+                                        <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air" 
+                                                ng-show="newTask.TaskNumber">
+                                            <i class="la la-save">@Token.Add</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!--Tasks-->
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">@Token.Tasks</h3>
+                        </div>
+                    </div>
+
+                    <!--Employees-->
+                    <div class="kt-portlet__body">
+
+                        <div class="form-group  row">
+                            <table class="table sms-table">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="th-10 "><label class="sms-sort-field">@Token.TaskNumber</label></th>
+                                        <th class="th-25 "><label class="sms-sort-field">@Token.Task</label></th>
+                                        <th class="th-10 "><label class="sms-sort-field">@Token.StartTime</label></th>
+                                        <th class="th-10 "><label class="sms-sort-field">@Token.EndTime</label></th>
+                                        <th class="th-30 "><label class="sms-sort-field">@Token.Notes</label></th>
+                                        <th class="th-10 "><label class="sms-sort-field">@Token.UserName</label></th>
+
+                                        
+                                        <th class="th-15 " ng-if="!event.EventWorkStatusIsFinshed.Coordination"><label class="sms-sort-field">@Token.Operations</label></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="x in tasks">
+                                        <td>{{x.TaskNumber}}</td>
+                                        <td>{{x.Task}}</td>
+                                        <td>{{x.StartTimeDisplay}}</td>
+                                        <td>{{x.EndTimeDisplay}}</td>
+                                        <td><textarea class="form-control" 
+                                                      ng-model="x.Notes"
+                                                      readonly
+                                                      ></textarea></td>
+                                        
+                                        <td>{{x.CreatedUserName}}</td>
+                                        <td ng-if="!event.EventWorkStatusIsFinshed.Coordination">
+                                            <a href="javascript:void(0);" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="delete(x)"><i class="la la-trash"></i> </a>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Event-->
+                @Html.Partial("~/Views/Shared/_EventsInformation.cshtml")
+
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <!--(ANageeb) link angualr files for thsis  view -->
+<script src="~/Scripts/angularJS/views/eew/coordination/addAndUpdate/service.js"></script>
+    <script src="~/Scripts/angularJS/views/eew/coordination/addAndUpdate/contoller.js"></script>
+}

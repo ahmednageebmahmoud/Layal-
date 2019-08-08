@@ -82,8 +82,8 @@ namespace BLL.Enums
         FullApproval= 4,
         ScheduleVisit= 5,
         NeedsToThink= 6,
-        DesireToBook =7,
-        BankTransferDeposit=8
+        BookByCash =7,
+        BookByBankTransfer=8
 
 
     }
