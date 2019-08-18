@@ -74,7 +74,7 @@
                                             name="employeeId"
                                             ng-class="{'is-invalid':addNewEmpWorkFrom.employeeId.$invalid&&addNewEmpWorkFromErrorSubmit}"
                                             ng-model="newEmpWork.EmployeeId"
-                                            ng-options="c.Id as c.UserName for c in employees|employeeWorkFilter:newEmpWork.WorkTypeId"
+                                            ng-options="c.Id as c.UserName for c in employees|employeeWorkFilter:newEmpWork.WorkTypeId:true"
                                             ng-required="true"></select>
                                     <!--Errors:-->
                                     <small class="error invalid-feedback" ng-if="addNewEmpWorkFrom.employeeId.$error.required&&addNewEmpWorkFromErrorSubmit">@Token.FieldIsRequierd</small>

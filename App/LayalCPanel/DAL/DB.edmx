@@ -43,6 +43,7 @@
           <Parameter Name="CountryId" Type="int" Mode="In" />
           <Parameter Name="CityId" Type="int" Mode="In" />
           <Parameter Name="WordId" Type="int" Mode="InOut" />
+          <Parameter Name="IsBasic" Type="bit" Mode="In" />
         </Function>
         <Function Name="Branches_SelectByAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Branches_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -61,6 +62,7 @@
           <Parameter Name="CountryId" Type="int" Mode="In" />
           <Parameter Name="CityId" Type="int" Mode="In" />
           <Parameter Name="WordId" Type="bigint" Mode="In" />
+          <Parameter Name="IsBasic" Type="bit" Mode="In" />
         </Function>
         <Function Name="Cities_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="bigint" Mode="In" />
@@ -958,7 +960,7 @@
       <Schema Namespace="LayanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="LayanEntities" annotation:LazyLoadingEnabled="true" >
           <FunctionImport Name="AlbumTypes_CheckIfUsed" ReturnType="Collection(Int32)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AlbumTypes_Delete">
             <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -981,10 +983,10 @@
             <Parameter Name="WordId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Branches_CheckIfUsed" ReturnType="Collection(Int32)">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Branches_Delete">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Branches_Insert">
             <Parameter Name="Id" Mode="InOut" Type="Int32" />
@@ -995,6 +997,7 @@
             <Parameter Name="CountryId" Mode="In" Type="Int32" />
             <Parameter Name="CityId" Mode="In" Type="Int32" />
             <Parameter Name="WordId" Mode="InOut" Type="Int32" />
+            <Parameter Name="IsBasic" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Branches_SelectByAll" ReturnType="Collection(LayanModel.Branches_SelectByAll_Result)" />
           <FunctionImport Name="Branches_SelectByFilter" ReturnType="Collection(LayanModel.Branches_SelectByFilter_Result)">
@@ -1002,7 +1005,7 @@
             <Parameter Name="Take" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Branches_SelectByPk" ReturnType="Collection(LayanModel.Branches_SelectByPk_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Branches_Update">
             <Parameter Name="Id" Mode="In" Type="Int32" />
@@ -1013,12 +1016,13 @@
             <Parameter Name="CountryId" Mode="In" Type="Int32" />
             <Parameter Name="CityId" Mode="In" Type="Int32" />
             <Parameter Name="WordId" Mode="In" Type="Int64" />
+            <Parameter Name="IsBasic" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Cities_CheckIfUsed" ReturnType="Collection(Int32)">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Cities_Delete">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Cities_Insert">
             <Parameter Name="Id" Mode="InOut" Type="Int32" />
@@ -1028,7 +1032,7 @@
           </FunctionImport>
           <FunctionImport Name="Cities_SelectAll" ReturnType="Collection(LayanModel.Cities_SelectAll_Result)" />
           <FunctionImport Name="Cities_SelectByFilter" ReturnType="Collection(LayanModel.Cities_SelectByFilter_Result)">
-            <Parameter Name="CountryId" Mode="In" Type="Int32" />
+          <Parameter Name="CountryId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Cities_Update">
             <Parameter Name="Id" Mode="In" Type="Int32" />
@@ -1037,10 +1041,10 @@
             <Parameter Name="WordId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Countries_CheckIfUsed" ReturnType="Collection(Int32)">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Countries_Delete">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Countries_Insert">
             <Parameter Name="Id" Mode="InOut" Type="Int32" />
@@ -1058,7 +1062,7 @@
             <Parameter Name="Take" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Countries_SelectWithCitiesByPk" ReturnType="Collection(LayanModel.Countries_SelectWithCitiesByPk_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Countries_Update">
             <Parameter Name="Id" Mode="In" Type="Int32" />
@@ -1073,7 +1077,7 @@
             <Parameter Name="EventId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EmployeeDistributionWorks_Delete">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EmployeeDistributionWorks_Insert">
             <Parameter Name="Id" Mode="InOut" Type="Int64" />
@@ -1082,7 +1086,7 @@
             <Parameter Name="EventId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EmployeeDistributionWorks_SelectByEventId" ReturnType="Collection(LayanModel.EmployeeDistributionWorks_SelectByEventId_Result)">
-            <Parameter Name="EventId" Mode="In" Type="Int64" />
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Employees_CheckAllowAccessToEventForUpdateWorks" ReturnType="Collection(Int32)">
             <Parameter Name="IsAdmin" Mode="In" Type="Boolean" />
@@ -1094,38 +1098,38 @@
             <Parameter Name="BranchId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Employees_SelectWorks" ReturnType="Collection(LayanModel.Employees_SelectWorks_Result)">
-            <Parameter Name="EmpId" Mode="In" Type="Int64" />
+          <Parameter Name="EmpId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EmployeesWorks_CheckIfInserted" ReturnType="Collection(Int32)">
             <Parameter Name="WorkTypeId" Mode="In" Type="Int32" />
             <Parameter Name="UserId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EmployeesWorks_Delete">
-            <Parameter Name="UserId" Mode="In" Type="Int64" />
+          <Parameter Name="UserId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EmployeesWorks_Insert">
             <Parameter Name="WorkType_Id" Mode="In" Type="Int32" />
             <Parameter Name="UserId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EmployeesWorks_SelectByUserId" ReturnType="Collection(LayanModel.EmployeesWorks_SelectByUserId_Result)">
-            <Parameter Name="UserId" Mode="In" Type="Int64" />
+          <Parameter Name="UserId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Enquires_CheckFromOwner" ReturnType="Collection(Int32)">
             <Parameter Name="EnquiryOrEventId" Mode="In" Type="Int64" />
             <Parameter Name="UsereLoggadId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Enquires_CheckIfCreatedEvent" ReturnType="Collection(Int32)">
-            <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
+          <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Enquires_CheckIfWithBranch" ReturnType="Collection(Int32)">
-            <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
+          <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Enquires_Closed" ReturnType="Collection(LayanModel.Enquires_Closed_Result)">
             <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
             <Parameter Name="DateTime" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="Enquires_Delete">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Enquires_Insert">
             <Parameter Name="Id" Mode="InOut" Type="Int64" />
@@ -1148,7 +1152,7 @@
             <Parameter Name="PhoneCountryId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Enquires_IsClosed" ReturnType="Collection(Int32)">
-            <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
+          <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Enquires_SelectByFilter" ReturnType="Collection(LayanModel.Enquires_SelectByFilter_Result)">
             <Parameter Name="Skip" Mode="In" Type="Int32" />
@@ -1171,10 +1175,10 @@
             <Parameter Name="CurrentUserBranch" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Enquires_SelectByPk" ReturnType="Collection(LayanModel.Enquires_SelectByPk_Result)">
-            <Parameter Name="EnquiyId" Mode="In" Type="Int64" />
+          <Parameter Name="EnquiyId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Enquires_SelectByPk_SimpleData" ReturnType="Collection(LayanModel.Enquires_SelectByPk_SimpleData_Result)">
-            <Parameter Name="EnauiryId" Mode="In" Type="Int64" />
+          <Parameter Name="EnauiryId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Enquires_Update">
             <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -1204,7 +1208,7 @@
             <Parameter Name="FKUserCreated_Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EnquiryNotes_SelectByEnquiryId" ReturnType="Collection(LayanModel.EnquiryNotes_SelectByEnquiryId_Result)">
-            <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
+          <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EnquiryPayments_AcceptFromManger">
             <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -1212,7 +1216,7 @@
             <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EnquiryPayments_CheckIfPaymentedDeposit" ReturnType="Collection(Boolean)">
-            <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
+          <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EnquiryPayments_Insert">
             <Parameter Name="Id" Mode="InOut" Type="Int64" />
@@ -1226,7 +1230,7 @@
             <Parameter Name="FKUserCreated_Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EnquiryPayments_SelectByEnquiryId" ReturnType="Collection(LayanModel.EnquiryPayments_SelectByEnquiryId_Result)">
-            <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
+          <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EnquiryStatus_Insert">
             <Parameter Name="Notes" Mode="In" Type="String" />
@@ -1239,7 +1243,7 @@
             <Parameter Name="EnquiryPaymentId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EnquiryStatus_ResetClendersIdsToNull">
-            <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
+          <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EnquiryStatus_SelectByFilter" ReturnType="Collection(LayanModel.EnquiryStatus_SelectByFilter_Result)">
             <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
@@ -1250,10 +1254,10 @@
             <Parameter Name="ScheduleVisitDateClendarEventId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="EnquiryStatusTypes_SelectByEnquiryId" ReturnType="Collection(LayanModel.EnquiryStatusTypes_SelectByEnquiryId_Result)">
-            <Parameter Name="EnquiyId" Mode="In" Type="Int64" />
+          <Parameter Name="EnquiyId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EnquiryTypes_CheckIfUsed" ReturnType="Collection(Int32)">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EnquiryTypes_Delete">
             <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -1276,7 +1280,7 @@
             <Parameter Name="WordId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EventCoordinations_Delete">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EventCoordinations_Insert">
             <Parameter Name="TaskNumber" Mode="In" Type="Int32" />
@@ -1288,17 +1292,17 @@
             <Parameter Name="FKUserCreated_Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EventCoordinations_SelectByEventId" ReturnType="Collection(LayanModel.EventCoordinations_SelectByEventId_Result)">
-            <Parameter Name="EventId" Mode="In" Type="Int64" />
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EventCoordinations_SelectTasksNumber" ReturnType="Collection(Int32)">
-            <Parameter Name="EventId" Mode="In" Type="Int64" />
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Events_CheckFromDateEventIsFinshed" ReturnType="Collection(Int32)">
             <Parameter Name="EventId" Mode="In" Type="Int64" />
             <Parameter Name="DateTime" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="Events_CountsByYear" ReturnType="Collection(Int32)">
-            <Parameter Name="Year" Mode="In" Type="Int32" />
+          <Parameter Name="Year" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Events_Insert">
             <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -1320,23 +1324,6 @@
             <Parameter Name="VistToCoordinationDateTime" Mode="In" Type="DateTime" />
             <Parameter Name="NamesPrintingPrice" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="Events_SelectByFilter" ReturnType="Collection(LayanModel.Events_SelectByFilter_Result)">
-            <Parameter Name="Skip" Mode="In" Type="Int32" />
-            <Parameter Name="Take" Mode="In" Type="Int32" />
-            <Parameter Name="IsClinetCustomLogo" Mode="In" Type="Boolean" />
-            <Parameter Name="IsNamesAr" Mode="In" Type="Boolean" />
-            <Parameter Name="NameGroom" Mode="In" Type="String" />
-            <Parameter Name="NameBride" Mode="In" Type="String" />
-            <Parameter Name="EventDateTimeTo" Mode="In" Type="DateTime" />
-            <Parameter Name="EventDateTimeFrom" Mode="In" Type="DateTime" />
-            <Parameter Name="CreateDateTimeTo" Mode="In" Type="DateTime" />
-            <Parameter Name="CreateDateTimeFrom" Mode="In" Type="DateTime" />
-            <Parameter Name="FKPackage_Id" Mode="In" Type="Int32" />
-            <Parameter Name="FKPrintNameType_Id" Mode="In" Type="Int32" />
-            <Parameter Name="FKBranch_Id" Mode="In" Type="Int32" />
-            <Parameter Name="IsForCurrentClinet" Mode="In" Type="Boolean" />
-            <Parameter Name="CurrentClinetId" Mode="In" Type="Int64" />
-          </FunctionImport>
           <FunctionImport Name="Events_SelectByFilterForEmployee" ReturnType="Collection(LayanModel.Events_SelectByFilterForEmployee_Result)">
             <Parameter Name="Skip" Mode="In" Type="Int32" />
             <Parameter Name="Take" Mode="In" Type="Int32" />
@@ -1353,10 +1340,10 @@
             <Parameter Name="IsFinshed" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Events_SelectByPK" ReturnType="Collection(LayanModel.Events_SelectByPK_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Events_SelectInformation" ReturnType="Collection(LayanModel.Events_SelectInformation_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Events_Update">
             <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -1394,10 +1381,10 @@
             <Parameter Name="IsUpdateClendar" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="EventSurveies_ChartByYear" ReturnType="Collection(LayanModel.EventSurveies_ChartByYear_Result)">
-            <Parameter Name="Year" Mode="In" Type="Int32" />
+          <Parameter Name="Year" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="EventSurveies_DeleteByEventId">
-            <Parameter Name="EventID" Mode="In" Type="Int64" />
+          <Parameter Name="EventID" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EventSurveies_Insert">
             <Parameter Name="EventId" Mode="In" Type="Int64" />
@@ -1405,16 +1392,16 @@
             <Parameter Name="IsSatisfied" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="EventSurveies_Insert_DeleteByEventId">
-            <Parameter Name="EventId" Mode="In" Type="Int64" />
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EventSurveies_SelectByPK" ReturnType="Collection(LayanModel.EventSurveies_SelectByPK_Result)">
-            <Parameter Name="EventId" Mode="In" Type="Int64" />
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EventSurvey_CheckIfIsInserted" ReturnType="Collection(Int32)">
-            <Parameter Name="EventId" Mode="In" Type="Int64" />
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EventSurveyQuestionAnswerer_DeleteByEventSurveyId">
-            <Parameter Name="EventSurveyId" Mode="In" Type="Int64" />
+          <Parameter Name="EventSurveyId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EventSurveyQuestionAnswerer_Insert">
             <Parameter Name="EventSurveyQuestionId" Mode="In" Type="Int64" />
@@ -1424,13 +1411,13 @@
             <Parameter Name="EventSurveyId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EventSurveyQuestions_CheckIfInserted" ReturnType="Collection(Int32)">
-            <Parameter Name="SurveyQuestionTypeId" Mode="In" Type="Int32" />
+          <Parameter Name="SurveyQuestionTypeId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="EventSurveyQuestions_CheckIfUsed" ReturnType="Collection(Int32)">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EventSurveyQuestions_Delete">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EventSurveyQuestions_Insert">
             <Parameter Name="Id" Mode="InOut" Type="Int64" />
@@ -1440,14 +1427,14 @@
             <Parameter Name="IsActive" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="EventSurveyQuestions_RemoveByEventId">
-            <Parameter Name="EventId" Mode="In" Type="Int64" />
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EventSurveyQuestions_SelectAll" ReturnType="Collection(LayanModel.EventSurveyQuestions_SelectAll_Result)" />
           <FunctionImport Name="EventSurveyQuestions_SelectByEventId" ReturnType="Collection(LayanModel.EventSurveyQuestions_SelectByEventId_Result)">
-            <Parameter Name="EventId" Mode="In" Type="Int64" />
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EventSurveyQuestions_SelectDefault" ReturnType="Collection(LayanModel.EventSurveyQuestions_SelectDefault_Result)">
-            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+          <Parameter Name="IsActive" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="EventSurveyQuestions_Update">
             <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -1455,10 +1442,10 @@
             <Parameter Name="IsActive" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="EventSurveyQuestions_WithEvent" ReturnType="Collection(LayanModel.EventSurveyQuestions_WithEvent_Result)">
-            <Parameter Name="EventId" Mode="In" Type="Int64" />
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EventSurveyQuestionTypes_CheckIfUsed" ReturnType="Collection(Int32)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="EventSurveyQuestionTypes_Delete">
             <Parameter Name="Id" Mode="In" Type="Int32" />
@@ -1491,7 +1478,7 @@
             <Parameter Name="FKAccountType_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="EventWorksStatusHistory_SelectByEventId" ReturnType="Collection(LayanModel.EventWorksStatusHistory_SelectByEventId_Result)">
-            <Parameter Name="eventId" Mode="In" Type="Int64" />
+          <Parameter Name="eventId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="EventWorksStatusHistory_SelectLast" ReturnType="Collection(LayanModel.EventWorksStatusHistory_SelectLast_Result)">
             <Parameter Name="eventId" Mode="In" Type="Int64" />
@@ -1507,7 +1494,7 @@
             <Parameter Name="WorkTypeId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="FilesReceivedTypes_CheckIfUsed" ReturnType="Collection(Int32)">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="FilesReceivedTypes_Delete">
             <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -1531,7 +1518,7 @@
           </FunctionImport>
           <FunctionImport Name="Menus_SelectAll" ReturnType="Collection(LayanModel.Menus_SelectAll_Result)" />
           <FunctionImport Name="Menus_SelectAllByUser_Id">
-            <Parameter Name="UserId" Mode="In" Type="Int64" />
+          <Parameter Name="UserId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Menus_SelectAllForUserCanBeAccess" ReturnType="Collection(LayanModel.Menus_SelectAllForUserCanBeAccess_Result)">
             <Parameter Name="UserId" Mode="In" Type="Int64" />
@@ -1566,13 +1553,13 @@
             <Parameter Name="UserId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Package_CheckIfUsed" ReturnType="Collection(Int32)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PackageDetails_Delete">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PackageDetails_DeleteAllByPackageId">
-            <Parameter Name="PackageId" Mode="In" Type="Int32" />
+          <Parameter Name="PackageId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PackageDetails_Insert">
             <Parameter Name="Id" Mode="InOut" Type="Int32" />
@@ -1582,10 +1569,10 @@
             <Parameter Name="PackageInputId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PackageInputTypes_CheckIfUsed" ReturnType="Collection(Int32)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PackageInputTypes_Delete">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="PackageInputTypes_Insert">
             <Parameter Name="Id" Mode="InOut" Type="Int32" />
@@ -1625,7 +1612,7 @@
             <Parameter Name="Take" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Packages_SelectByPK" ReturnType="Collection(LayanModel.Packages_SelectByPK_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Packages_Update">
             <Parameter Name="Id" Mode="In" Type="Int32" />
@@ -1641,14 +1628,14 @@
             <Parameter Name="NamsArExtraPrice" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="Pages_SelectAllByUser_Id">
-            <Parameter Name="UserId" Mode="In" Type="Int64" />
+          <Parameter Name="UserId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Pages_SelectAllForUserCanBeAccess" ReturnType="Collection(LayanModel.Pages_SelectAllForUserCanBeAccess_Result)">
             <Parameter Name="UserId" Mode="In" Type="Int64" />
             <Parameter Name="IsPublicMenus" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="PrintNamesTypes_CheckIfUsed" ReturnType="Collection(Int32)">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="PrintNamesTypes_Delete">
             <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -1673,10 +1660,10 @@
           </FunctionImport>
           <FunctionImport Name="PrintNameTypes_SelectAll" ReturnType="Collection(LayanModel.PrintNameTypes_SelectAll_Result)" />
           <FunctionImport Name="PrintNameTypes_SelectByPK" ReturnType="Collection(LayanModel.PrintNameTypes_SelectByPK_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SocialAccountTypes_CheckIfUsed" ReturnType="Collection(Int32)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SocialAccountTypes_Delete">
             <Parameter Name="Id" Mode="In" Type="Int32" />
@@ -1750,10 +1737,10 @@
             <Parameter Name="ActiveCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Users_CheckIfActive" ReturnType="Collection(Int32)">
-            <Parameter Name="UserId" Mode="In" Type="Int64" />
+          <Parameter Name="UserId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Users_CheckIfEmailActivated" ReturnType="Collection(Boolean)">
-            <Parameter Name="UserId" Mode="In" Type="Int64" />
+          <Parameter Name="UserId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Users_EmailBeforUsed" ReturnType="Collection(Int32)">
             <Parameter Name="UserId" Mode="In" Type="Int64" />
@@ -1795,7 +1782,7 @@
             <Parameter Name="AccountTypeId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Users_SelectByBranchIdWithWorkTypes" ReturnType="Collection(LayanModel.Users_SelectByBranchIdWithWorkTypes_Result)">
-            <Parameter Name="BranchId" Mode="In" Type="Int64" />
+          <Parameter Name="BranchId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Users_SelectByFilter" ReturnType="Collection(LayanModel.Users_SelectByFilter_Result)">
             <Parameter Name="Skip" Mode="In" Type="Int32" />
@@ -1813,7 +1800,7 @@
             <Parameter Name="BranchId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Users_SelectByPk" ReturnType="Collection(LayanModel.Users_SelectByPk_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Users_SelectByUserNameAndPassword" ReturnType="Collection(LayanModel.Users_SelectByUserNameAndPassword_Result)">
             <Parameter Name="UserName" Mode="In" Type="String" />
@@ -1849,7 +1836,7 @@
             <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UserSocialAccounts_Delete">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="UserSocialAccounts_Insert">
             <Parameter Name="Id" Mode="InOut" Type="Int64" />
@@ -1858,17 +1845,17 @@
             <Parameter Name="FKUser_Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="UserSocialAccounts_SelectAllByUserId" ReturnType="Collection(LayanModel.UserSocialAccounts_SelectAllByUserId_Result)">
-            <Parameter Name="UserId" Mode="In" Type="Int64" />
+          <Parameter Name="UserId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="UsersPrivileges_ChekcIfIsClosed" ReturnType="Collection(Int32)">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="UsersPrivileges_SelectByMenuId" ReturnType="Collection(LayanModel.UsersPrivileges_SelectByMenuId_Result)">
             <Parameter Name="menuId" Mode="In" Type="Int32" />
             <Parameter Name="userId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Words_Delete">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Words_Insert">
             <Parameter Name="ar" Mode="In" Type="String" />
@@ -1878,6 +1865,23 @@
             <Parameter Name="Id" Mode="In" Type="Int64" />
             <Parameter Name="Ar" Mode="In" Type="String" />
             <Parameter Name="En" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Events_SelectByFilter" ReturnType="Collection(LayanModel.Events_SelectByFilter_Result)">
+            <Parameter Name="Skip" Mode="In" Type="Int32" />
+            <Parameter Name="Take" Mode="In" Type="Int32" />
+            <Parameter Name="IsClinetCustomLogo" Mode="In" Type="Boolean" />
+            <Parameter Name="IsNamesAr" Mode="In" Type="Boolean" />
+            <Parameter Name="NameGroom" Mode="In" Type="String" />
+            <Parameter Name="NameBride" Mode="In" Type="String" />
+            <Parameter Name="EventDateTimeTo" Mode="In" Type="DateTime" />
+            <Parameter Name="EventDateTimeFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="CreateDateTimeTo" Mode="In" Type="DateTime" />
+            <Parameter Name="CreateDateTimeFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="FKPackage_Id" Mode="In" Type="Int32" />
+            <Parameter Name="FKPrintNameType_Id" Mode="In" Type="Int32" />
+            <Parameter Name="FKBranch_Id" Mode="In" Type="Int32" />
+            <Parameter Name="IsForCurrentClinet" Mode="In" Type="Boolean" />
+            <Parameter Name="CurrentClinetId" Mode="In" Type="Int64" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="AlbumTypes_SelectAll_Result">
@@ -1899,6 +1903,7 @@
           <Property Type="Int32" Name="FkCountry_Id" Nullable="false" />
           <Property Type="Int32" Name="FKCity_Id" Nullable="false" />
           <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsBasic" Nullable="false" />
           <Property Type="String" Name="BranchNameAR" Nullable="true" />
           <Property Type="String" Name="BranchNameEn" Nullable="true" />
         </ComplexType>
@@ -1909,6 +1914,7 @@
           <Property Type="Int32" Name="FkCountry_Id" Nullable="false" />
           <Property Type="Int32" Name="FKCity_Id" Nullable="false" />
           <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsBasic" Nullable="false" />
           <Property Type="String" Name="CountryNameAr" Nullable="true" />
           <Property Type="String" Name="CountryNameEn" Nullable="true" />
           <Property Type="String" Name="CityNameAr" Nullable="true" />
@@ -1924,6 +1930,7 @@
           <Property Type="Int32" Name="FkCountry_Id" Nullable="false" />
           <Property Type="Int32" Name="FKCity_Id" Nullable="false" />
           <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsBasic" Nullable="false" />
           <Property Type="String" Name="CountryNameAr" Nullable="true" />
           <Property Type="String" Name="CountryNameEn" Nullable="true" />
           <Property Type="String" Name="CityNameAr" Nullable="true" />
@@ -2167,37 +2174,6 @@
           <Property Type="Boolean" Name="Packaging" Nullable="true" />
           <Property Type="Boolean" Name="TransmissionAndDelivery" Nullable="true" />
           <Property Type="Boolean" Name="Archiving" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="Events_SelectByFilter_Result">
-          <Property Type="Int64" Name="Id" Nullable="false" />
-          <Property Type="Boolean" Name="IsClinetCustomLogo" Nullable="true" />
-          <Property Type="String" Name="LogoFilePath" Nullable="true" />
-          <Property Type="Boolean" Name="IsNamesAr" Nullable="true" />
-          <Property Type="String" Name="NameGroom" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="NameBride" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="FKPrintNameType_Id" Nullable="true" />
-          <Property Type="DateTime" Name="EventDateTime" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="FKPackage_Id" Nullable="false" />
-          <Property Type="Int64" Name="FKClinet_Id" Nullable="false" />
-          <Property Type="String" Name="Notes" Nullable="true" />
-          <Property Type="Int64" Name="FKUserCreaed_Id" Nullable="false" />
-          <Property Type="Int32" Name="FKBranch_Id" Nullable="false" />
-          <Property Type="String" Name="ClendarEventId" Nullable="true" />
-          <Property Type="Decimal" Name="PackagePrice" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="PackageNamsArExtraPrice" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="DateTime" Name="VistToCoordinationDateTime" Nullable="true" Precision="23" />
-          <Property Type="String" Name="VistToCoordinationClendarEventId" Nullable="true" />
-          <Property Type="Decimal" Name="NamesPrintingPrice" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="String" Name="EnquiryName" Nullable="true" MaxLength="101" />
-          <Property Type="Boolean" Name="IsClosed" Nullable="true" />
-          <Property Type="String" Name="Branch_NameAr" Nullable="true" />
-          <Property Type="String" Name="Branch_NameEn" Nullable="true" />
-          <Property Type="String" Name="Package_NameAr" Nullable="true" />
-          <Property Type="String" Name="Package_NameEn" Nullable="true" />
-          <Property Type="String" Name="WordPrintNamesType_NameAr" Nullable="true" />
-          <Property Type="String" Name="WordPrintNamesType_NameEn" Nullable="true" />
-          <Property Type="Boolean" Name="IsDepositPaymented" Nullable="true" />
         </ComplexType>
         <ComplexType Name="Events_SelectByFilterForEmployee_Result">
           <Property Type="Int64" Name="Id" Nullable="false" />
@@ -2681,6 +2657,7 @@
           <Property Type="String" Name="NationalityNumber" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="WebSite" Nullable="true" MaxLength="500" />
           <Property Type="Int32" Name="FkWorkType_Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsBasic" Nullable="false" />
         </ComplexType>
         <ComplexType Name="Users_SelectByFilter_Result">
           <Property Type="Int64" Name="Id" Nullable="false" />
@@ -2810,6 +2787,38 @@
           <Property Type="Boolean" Name="UsersPrivileges_CanDisplay" Nullable="true" />
           <Property Type="Boolean" Name="UsersPrivileges_CanEdit" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="Events_SelectByFilter_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsClinetCustomLogo" Nullable="true" />
+          <Property Type="String" Name="LogoFilePath" Nullable="true" />
+          <Property Type="Boolean" Name="IsNamesAr" Nullable="true" />
+          <Property Type="String" Name="NameGroom" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NameBride" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="FKPrintNameType_Id" Nullable="true" />
+          <Property Type="DateTime" Name="EventDateTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="FKPackage_Id" Nullable="false" />
+          <Property Type="Int64" Name="FKClinet_Id" Nullable="false" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+          <Property Type="Int64" Name="FKUserCreaed_Id" Nullable="false" />
+          <Property Type="Int32" Name="FKBranch_Id" Nullable="false" />
+          <Property Type="String" Name="ClendarEventId" Nullable="true" />
+          <Property Type="Decimal" Name="PackagePrice" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PackageNamsArExtraPrice" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="VistToCoordinationDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="VistToCoordinationClendarEventId" Nullable="true" />
+          <Property Type="Decimal" Name="NamesPrintingPrice" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="EnquiryName" Nullable="true" MaxLength="101" />
+          <Property Type="Boolean" Name="IsClosed" Nullable="true" />
+          <Property Type="String" Name="Branch_NameAr" Nullable="true" />
+          <Property Type="String" Name="Branch_NameEn" Nullable="true" />
+          <Property Type="String" Name="Package_NameAr" Nullable="true" />
+          <Property Type="String" Name="Package_NameEn" Nullable="true" />
+          <Property Type="String" Name="WordPrintNamesType_NameAr" Nullable="true" />
+          <Property Type="String" Name="WordPrintNamesType_NameEn" Nullable="true" />
+          <Property Type="Boolean" Name="IsDepositPaymented" Nullable="true" />
+          <Property Type="Decimal" Name="TotalPaymentsActivated" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2852,6 +2861,7 @@
                 <ScalarProperty Name="FkCountry_Id" ColumnName="FkCountry_Id" />
                 <ScalarProperty Name="FKCity_Id" ColumnName="FKCity_Id" />
                 <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+                <ScalarProperty Name="IsBasic" ColumnName="IsBasic" />
                 <ScalarProperty Name="BranchNameAR" ColumnName="BranchNameAR" />
                 <ScalarProperty Name="BranchNameEn" ColumnName="BranchNameEn" />
               </ComplexTypeMapping>
@@ -2866,6 +2876,7 @@
                 <ScalarProperty Name="FkCountry_Id" ColumnName="FkCountry_Id" />
                 <ScalarProperty Name="FKCity_Id" ColumnName="FKCity_Id" />
                 <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+                <ScalarProperty Name="IsBasic" ColumnName="IsBasic" />
                 <ScalarProperty Name="CountryNameAr" ColumnName="CountryNameAr" />
                 <ScalarProperty Name="CountryNameEn" ColumnName="CountryNameEn" />
                 <ScalarProperty Name="CityNameAr" ColumnName="CityNameAr" />
@@ -2885,6 +2896,7 @@
                 <ScalarProperty Name="FkCountry_Id" ColumnName="FkCountry_Id" />
                 <ScalarProperty Name="FKCity_Id" ColumnName="FKCity_Id" />
                 <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+                <ScalarProperty Name="IsBasic" ColumnName="IsBasic" />
                 <ScalarProperty Name="CountryNameAr" ColumnName="CountryNameAr" />
                 <ScalarProperty Name="CountryNameEn" ColumnName="CountryNameEn" />
                 <ScalarProperty Name="CityNameAr" ColumnName="CityNameAr" />
@@ -3249,41 +3261,6 @@
           <FunctionImportMapping FunctionImportName="Events_CheckFromDateEventIsFinshed" FunctionName="LayanModel.Store.Events_CheckFromDateEventIsFinshed" />
           <FunctionImportMapping FunctionImportName="Events_CountsByYear" FunctionName="LayanModel.Store.Events_CountsByYear" />
           <FunctionImportMapping FunctionImportName="Events_Insert" FunctionName="LayanModel.Store.Events_Insert" />
-          <FunctionImportMapping FunctionImportName="Events_SelectByFilter" FunctionName="LayanModel.Store.Events_SelectByFilter">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.Events_SelectByFilter_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IsClinetCustomLogo" ColumnName="IsClinetCustomLogo" />
-                <ScalarProperty Name="LogoFilePath" ColumnName="LogoFilePath" />
-                <ScalarProperty Name="IsNamesAr" ColumnName="IsNamesAr" />
-                <ScalarProperty Name="NameGroom" ColumnName="NameGroom" />
-                <ScalarProperty Name="NameBride" ColumnName="NameBride" />
-                <ScalarProperty Name="FKPrintNameType_Id" ColumnName="FKPrintNameType_Id" />
-                <ScalarProperty Name="EventDateTime" ColumnName="EventDateTime" />
-                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
-                <ScalarProperty Name="FKPackage_Id" ColumnName="FKPackage_Id" />
-                <ScalarProperty Name="FKClinet_Id" ColumnName="FKClinet_Id" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="FKUserCreaed_Id" ColumnName="FKUserCreaed_Id" />
-                <ScalarProperty Name="FKBranch_Id" ColumnName="FKBranch_Id" />
-                <ScalarProperty Name="ClendarEventId" ColumnName="ClendarEventId" />
-                <ScalarProperty Name="PackagePrice" ColumnName="PackagePrice" />
-                <ScalarProperty Name="PackageNamsArExtraPrice" ColumnName="PackageNamsArExtraPrice" />
-                <ScalarProperty Name="VistToCoordinationDateTime" ColumnName="VistToCoordinationDateTime" />
-                <ScalarProperty Name="VistToCoordinationClendarEventId" ColumnName="VistToCoordinationClendarEventId" />
-                <ScalarProperty Name="NamesPrintingPrice" ColumnName="NamesPrintingPrice" />
-                <ScalarProperty Name="EnquiryName" ColumnName="EnquiryName" />
-                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
-                <ScalarProperty Name="Branch_NameAr" ColumnName="Branch_NameAr" />
-                <ScalarProperty Name="Branch_NameEn" ColumnName="Branch_NameEn" />
-                <ScalarProperty Name="Package_NameAr" ColumnName="Package_NameAr" />
-                <ScalarProperty Name="Package_NameEn" ColumnName="Package_NameEn" />
-                <ScalarProperty Name="WordPrintNamesType_NameAr" ColumnName="WordPrintNamesType_NameAr" />
-                <ScalarProperty Name="WordPrintNamesType_NameEn" ColumnName="WordPrintNamesType_NameEn" />
-                <ScalarProperty Name="IsDepositPaymented" ColumnName="IsDepositPaymented" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Events_SelectByFilterForEmployee" FunctionName="LayanModel.Store.Events_SelectByFilterForEmployee">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LayanModel.Events_SelectByFilterForEmployee_Result">
@@ -3970,6 +3947,7 @@
                 <ScalarProperty Name="NationalityNumber" ColumnName="NationalityNumber" />
                 <ScalarProperty Name="WebSite" ColumnName="WebSite" />
                 <ScalarProperty Name="FkWorkType_Id" ColumnName="FkWorkType_Id" />
+                <ScalarProperty Name="IsBasic" ColumnName="IsBasic" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -4134,6 +4112,42 @@
           <FunctionImportMapping FunctionImportName="Words_Delete" FunctionName="LayanModel.Store.Words_Delete" />
           <FunctionImportMapping FunctionImportName="Words_Insert" FunctionName="LayanModel.Store.Words_Insert" />
           <FunctionImportMapping FunctionImportName="Words_Update" FunctionName="LayanModel.Store.Words_Update" />
+          <FunctionImportMapping FunctionImportName="Events_SelectByFilter" FunctionName="LayanModel.Store.Events_SelectByFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Events_SelectByFilter_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IsClinetCustomLogo" ColumnName="IsClinetCustomLogo" />
+                <ScalarProperty Name="LogoFilePath" ColumnName="LogoFilePath" />
+                <ScalarProperty Name="IsNamesAr" ColumnName="IsNamesAr" />
+                <ScalarProperty Name="NameGroom" ColumnName="NameGroom" />
+                <ScalarProperty Name="NameBride" ColumnName="NameBride" />
+                <ScalarProperty Name="FKPrintNameType_Id" ColumnName="FKPrintNameType_Id" />
+                <ScalarProperty Name="EventDateTime" ColumnName="EventDateTime" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="FKPackage_Id" ColumnName="FKPackage_Id" />
+                <ScalarProperty Name="FKClinet_Id" ColumnName="FKClinet_Id" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="FKUserCreaed_Id" ColumnName="FKUserCreaed_Id" />
+                <ScalarProperty Name="FKBranch_Id" ColumnName="FKBranch_Id" />
+                <ScalarProperty Name="ClendarEventId" ColumnName="ClendarEventId" />
+                <ScalarProperty Name="PackagePrice" ColumnName="PackagePrice" />
+                <ScalarProperty Name="PackageNamsArExtraPrice" ColumnName="PackageNamsArExtraPrice" />
+                <ScalarProperty Name="VistToCoordinationDateTime" ColumnName="VistToCoordinationDateTime" />
+                <ScalarProperty Name="VistToCoordinationClendarEventId" ColumnName="VistToCoordinationClendarEventId" />
+                <ScalarProperty Name="NamesPrintingPrice" ColumnName="NamesPrintingPrice" />
+                <ScalarProperty Name="EnquiryName" ColumnName="EnquiryName" />
+                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+                <ScalarProperty Name="Branch_NameAr" ColumnName="Branch_NameAr" />
+                <ScalarProperty Name="Branch_NameEn" ColumnName="Branch_NameEn" />
+                <ScalarProperty Name="Package_NameAr" ColumnName="Package_NameAr" />
+                <ScalarProperty Name="Package_NameEn" ColumnName="Package_NameEn" />
+                <ScalarProperty Name="WordPrintNamesType_NameAr" ColumnName="WordPrintNamesType_NameAr" />
+                <ScalarProperty Name="WordPrintNamesType_NameEn" ColumnName="WordPrintNamesType_NameEn" />
+                <ScalarProperty Name="IsDepositPaymented" ColumnName="IsDepositPaymented" />
+                <ScalarProperty Name="TotalPaymentsActivated" ColumnName="TotalPaymentsActivated" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

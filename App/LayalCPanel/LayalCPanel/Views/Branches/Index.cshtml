@@ -97,6 +97,11 @@
                                                   ng-sms-resource="@Token.City"></sms-sort>
                                     </th>
                                     <th class="th-10">
+                                        <sms-sort ng-sms-fop="branchFOP"
+                                                  ng-sms-field-name="IsBasic"
+                                                  ng-sms-resource="@Token.IsBasic"></sms-sort>
+                                    </th>
+                                    <th class="th-10">
                                         @Token.Operations
                                     </th>
                                 </tr>
@@ -110,15 +115,25 @@
                                     <td>{{x.Country.CountryName}}</td>
                                     <td>{{x.City.CityName}}</td>
                                     <td>
+                                        <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                            <label>
+                                                <input type="checkbox" checked="checked" ng-model="x.IsBasic" ng-disabled="true" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                                <span></span>
+                                            </label>
+                                        </span>
+                                    </td>
+                                    <td>
                                         <!--Btn:Edit-->
                                         @if (Priv.CanEdit)
                                         {
-                                            <a href="/Branches/AddAndUpdate?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="Edit" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                            <a href="/Branches/AddAndUpdate?id={{x.Id}}"
+                                                data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Edit"
+                                                class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
                                         }
                                         <!--Btn:Delete-->
                                         @if (Priv.CanDelete)
                                         {
-                                            <a href="javascript:void(0);" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="delete(x)"><i class="la la-trash"></i> </a>
+                                            <a href="javascript:void(0);" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="delete(x)"><i class="la la-trash"></i> </a>
                                         }
                                     </td>
                                 </tr>

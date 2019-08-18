@@ -5,7 +5,7 @@
     s.UploadLogoNotes = LangIsEn ? "If is not upload logo or not upload good logo it will automatically be replaced with a logo from the lab" : "اذا لم يتم تحميل شعار او لم يتم تحميل شعار جديد سوف يتم استبدالة بشعار من المعمل بشكل تلقائى";
 
     var eventId = getQueryStringValue("id");
-    var date = getQueryStringValue("date");
+
     
     s.event = {
         Id: getQueryStringValue("enquiryId"),
@@ -14,7 +14,11 @@
         Package: null,
         IsActive:true,
         IsNamesAr:false,
-        EventDateTime:new Date(Date.parse(date))
+        EventDateTime:new Date(
+            Number(getQueryStringValue("eYear"))||null,
+            Number(getQueryStringValue("eDay"))||null,
+            Number(getQueryStringValue("eMonth"))||null
+            )
     };
 
     s.packages = [];

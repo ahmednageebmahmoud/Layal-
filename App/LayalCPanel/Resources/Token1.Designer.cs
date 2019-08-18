@@ -1276,6 +1276,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Basic.
+        /// </summary>
+        public static string IsBasic {
+            get {
+                return ResourceManager.GetString("IsBasic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Logo.
         /// </summary>
         public static string IsClinetCustomLogo {

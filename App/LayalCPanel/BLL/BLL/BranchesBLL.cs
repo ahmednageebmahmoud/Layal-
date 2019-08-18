@@ -24,6 +24,7 @@ namespace BLL.BLL
                 NameEn = c.BranchNameEn,
                 PhoneNo = c.PhoneNo,
                 Address=c.Address,
+                IsBasic=c.IsBasic,
 
                 City = new CityVM
                 {
@@ -96,7 +97,7 @@ namespace BLL.BLL
 
         private object Update(BranchVM c)
         {
-            db.Branches_Update(c.Id, c.NameAr, c.NameEn, c.Address, c.PhoneNo, c.CountryId, c.CityId, c.WordId);
+            db.Branches_Update(c.Id, c.NameAr, c.NameEn, c.Address, c.PhoneNo, c.CountryId, c.CityId, c.WordId,c.IsBasic);
             return new ResponseVM(RequestTypeEnum.Success, Token.Updated, c);
         }
 
@@ -104,7 +105,7 @@ namespace BLL.BLL
         {
             ObjectParameter ID = new ObjectParameter("Id", typeof(int));
             ObjectParameter WordId = new ObjectParameter("WordId", typeof(int));
-            db.Branches_Insert(ID, c.NameAr, c.NameEn, c.Address, c.PhoneNo, c.CountryId, c.CityId, WordId);
+            db.Branches_Insert(ID, c.NameAr, c.NameEn, c.Address, c.PhoneNo, c.CountryId, c.CityId, WordId,c.IsBasic);
             c.Id = (int)ID.Value;
             c.WordId = (int)WordId.Value;
             return new ResponseVM(RequestTypeEnum.Success, Token.Added, c);
@@ -122,6 +123,7 @@ namespace BLL.BLL
                 CityId = c.FKCity_Id,
                 CountryId = c.FkCountry_Id,
                 WordId=c.FKWord_Id,
+                IsBasic=c.IsBasic,
 
                 City = new CityVM
                 {

@@ -12,9 +12,11 @@
         CityId: Number(getQueryStringValue("cityId")) || null,
         BranchId: Number(getQueryStringValue("branchId")) || null,
         PhoneNo: getQueryStringValue("phoneNo") || null,
-        UserName:getQueryStringValue("fName")? decodeURI(getQueryStringValue("fName")) : null,
-        EnquiryId: getQueryStringValue("enquiryId") || null
+        UserName: getQueryStringValue("fName") ? decodeURI(getQueryStringValue("fName")) : null,
+        EnquiryId: getQueryStringValue("enquiryId") || null,
+        IsActive:true
     };
+ 
     s.accountTypeDisapled = s.user.EnquiryId ? true : false;
     s.accountTypeEnum = AccountTypesEnum;
     s.accountTypes = accountTypesList.filter(c=> c.Id != AccountTypesEnum.ProjectManger);
@@ -95,7 +97,7 @@
                     s.user.Password = null;
                     s.user.State = StateEnum.update;
 
-                    if (s.user.WorkTypes && s.user.WorkTypes.length>0)
+                    if (s.user.WorkTypes && s.user.WorkTypes.length > 0)
                         WorkTypes.forEach(c=> {
                             if (s.user.WorkTypes.filter(v=> v.Selected && v.Id == c.Id).length > 0)
                                 c.Selected = true;
@@ -136,11 +138,20 @@
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
                     s.user = d.data.Result;
-                    s.user.WorkTypes = vrtialWorkTypes; 
+                    s.user.WorkTypes = vrtialWorkTypes;
                     s.user.State = StateEnum.update;
                 } break;
             }
-            SMSSweet.alert(d.data.Message, d.data.RequestType);
+
+            //نحولة الى صفحة انشاء مناسبة لهذا الاستفسار اذا كانت هذة عملية انشاء من اجل استفسار
+            if (s.user.EnquiryId && d.data.RequestType == RequestTypeEnum.sucess) {
+                SMSSweet.alert(d.data.Message, d.data.RequestType, () => {
+                    window.location.href = `/Events/AddAndUpdate?enquiryId=${s.user.EnquiryId}&eDay=${getQueryStringValue("eDay")}&eMonth=${getQueryStringValue("eMonth")}&eYear=${getQueryStringValue("eYear")}`
+                });
+            } else {
+                SMSSweet.alert(d.data.Message, d.data.RequestType);
+            }
+
             co("G E T - saveChange", d);
         }).catch(err => {
             BlockingService.unBlock();
@@ -166,8 +177,8 @@
 
     //check from input language
     s.$watch('user.UserName', (newVal, oldVal) => {
-            if (checkInputRTL(newVal[newVal.length - 1]))
-                s.user.UserName = oldVal;
+        if (checkInputRTL(newVal[newVal.length - 1]))
+            s.user.UserName = oldVal;
     });
     //Call Functions
     s.getItems();

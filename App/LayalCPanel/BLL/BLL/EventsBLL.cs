@@ -51,6 +51,7 @@ namespace BLL.BLL
                     EnquiryName = c.EnquiryName,
                     ClendarEventId = c.ClendarEventId,
                     PackagePrice = c.PackagePrice,
+                    TotalPaymentsActivated=c.TotalPaymentsActivated,
                     PackageNamsArExtraPrice = c.PackageNamsArExtraPrice,
                     Package = new PackageVM
                     {

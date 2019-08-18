@@ -19,6 +19,7 @@ namespace DAL
         public int FkCountry_Id { get; set; }
         public int FKCity_Id { get; set; }
         public long FKWord_Id { get; set; }
+        public bool IsBasic { get; set; }
         public string BranchNameAR { get; set; }
         public string BranchNameEn { get; set; }
     }

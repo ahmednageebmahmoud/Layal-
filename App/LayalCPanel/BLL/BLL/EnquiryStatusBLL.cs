@@ -66,6 +66,7 @@ namespace BLL.BLL
                 else
                 {
                     var UserMangerBranch = db.Users_SelectByBranchId(c.EnquiryBranchId, (int)AccountTypeEnum.BranchManager).FirstOrDefault();
+                    if(UserMangerBranch!=null)
                     SendAndSaveNotification(c.StatusId, UserMangerBranch.Id, true, c.EnquiryId);
                 }
 

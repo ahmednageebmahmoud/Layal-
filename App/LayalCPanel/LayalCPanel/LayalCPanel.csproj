@@ -1949,6 +1949,7 @@
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\angularJS\angularJS.js" />
+    <Content Include="Scripts\angularJS\directives\toolTip.js" />
     <Content Include="Scripts\angularJS\directives\models\add-new-element.js" />
     <Content Include="Scripts\angularJS\directives\models\sms-model.js" />
     <Content Include="Scripts\angularJS\directives\alertInfo.js" />

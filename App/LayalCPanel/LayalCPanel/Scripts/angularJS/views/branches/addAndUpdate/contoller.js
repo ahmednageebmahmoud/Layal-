@@ -63,6 +63,7 @@
                     s.branch = d.data.Result;
                     s.branch.Password = null;
                     s.branch.State = StateEnum.update;
+                    s.isBasicDisabled = s.branch.IsBasic;
                     
                     setTimeout(() => {
                         $("select[serchbale]").select2();
@@ -100,6 +101,8 @@
                 case RequestTypeEnum.sucess: {
                     s.branch = d.data.Result;
                     s.branch.State = StateEnum.update;
+                    s.isBasicDisabled = s.branch.IsBasic;
+
                 } break;
             }
                 SMSSweet.alert(d.data.Message, d.data.RequestType);

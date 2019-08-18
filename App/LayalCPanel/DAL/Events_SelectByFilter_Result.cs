@@ -42,5 +42,6 @@ namespace DAL
         public string WordPrintNamesType_NameAr { get; set; }
         public string WordPrintNamesType_NameEn { get; set; }
         public Nullable<bool> IsDepositPaymented { get; set; }
+        public Nullable<decimal> TotalPaymentsActivated { get; set; }
     }
 }

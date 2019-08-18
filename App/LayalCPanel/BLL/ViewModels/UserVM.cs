@@ -47,5 +47,6 @@ namespace BLL.ViewModels
         public bool IsActive { get; set; }
         public List<WorkTypeVM> WorkTypes { get; set; }
         public List<UserSocialAccountVM> SocialAccounts { get;   set; }
+        public bool IsBasicBranch { get;   set; }
     }//endclass
 }

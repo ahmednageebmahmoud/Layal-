@@ -75,7 +75,7 @@
                                            ng-model="user.Password"
                                            maxlength="50"
                                            pattern="\w{6,50}"
-                                           ng-required="user.State==state.Create"
+                                           ng-required="user.State!=state.update"
                                            autocomplete="off" />
 
                                     <!--Errors:-->

@@ -39,6 +39,7 @@
       <Parameter Name="CountryId" Mode="In" Type="Int32" />
       <Parameter Name="CityId" Mode="In" Type="Int32" />
       <Parameter Name="WordId" Mode="InOut" Type="Int32" />
+      <Parameter Name="IsBasic" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="Branches_SelectByAll" ReturnType="Collection(LayanModel.Branches_SelectByAll_Result)" />
     <FunctionImport Name="Branches_SelectByFilter" ReturnType="Collection(LayanModel.Branches_SelectByFilter_Result)">
@@ -57,6 +58,7 @@
       <Parameter Name="CountryId" Mode="In" Type="Int32" />
       <Parameter Name="CityId" Mode="In" Type="Int32" />
       <Parameter Name="WordId" Mode="In" Type="Int64" />
+      <Parameter Name="IsBasic" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="Cities_CheckIfUsed" ReturnType="Collection(Int32)">
       <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -363,23 +365,6 @@
       <Parameter Name="PackageNamsArExtraPrice" Mode="In" Type="Decimal" />
       <Parameter Name="VistToCoordinationDateTime" Mode="In" Type="DateTime" />
       <Parameter Name="NamesPrintingPrice" Mode="In" Type="Decimal" />
-    </FunctionImport>
-    <FunctionImport Name="Events_SelectByFilter" ReturnType="Collection(LayanModel.Events_SelectByFilter_Result)">
-      <Parameter Name="Skip" Mode="In" Type="Int32" />
-      <Parameter Name="Take" Mode="In" Type="Int32" />
-      <Parameter Name="IsClinetCustomLogo" Mode="In" Type="Boolean" />
-      <Parameter Name="IsNamesAr" Mode="In" Type="Boolean" />
-      <Parameter Name="NameGroom" Mode="In" Type="String" />
-      <Parameter Name="NameBride" Mode="In" Type="String" />
-      <Parameter Name="EventDateTimeTo" Mode="In" Type="DateTime" />
-      <Parameter Name="EventDateTimeFrom" Mode="In" Type="DateTime" />
-      <Parameter Name="CreateDateTimeTo" Mode="In" Type="DateTime" />
-      <Parameter Name="CreateDateTimeFrom" Mode="In" Type="DateTime" />
-      <Parameter Name="FKPackage_Id" Mode="In" Type="Int32" />
-      <Parameter Name="FKPrintNameType_Id" Mode="In" Type="Int32" />
-      <Parameter Name="FKBranch_Id" Mode="In" Type="Int32" />
-      <Parameter Name="IsForCurrentClinet" Mode="In" Type="Boolean" />
-      <Parameter Name="CurrentClinetId" Mode="In" Type="Int64" />
     </FunctionImport>
     <FunctionImport Name="Events_SelectByFilterForEmployee" ReturnType="Collection(LayanModel.Events_SelectByFilterForEmployee_Result)">
       <Parameter Name="Skip" Mode="In" Type="Int32" />
@@ -923,6 +908,23 @@
       <Parameter Name="Ar" Mode="In" Type="String" />
       <Parameter Name="En" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="Events_SelectByFilter" ReturnType="Collection(LayanModel.Events_SelectByFilter_Result)">
+      <Parameter Name="Skip" Mode="In" Type="Int32" />
+      <Parameter Name="Take" Mode="In" Type="Int32" />
+      <Parameter Name="IsClinetCustomLogo" Mode="In" Type="Boolean" />
+      <Parameter Name="IsNamesAr" Mode="In" Type="Boolean" />
+      <Parameter Name="NameGroom" Mode="In" Type="String" />
+      <Parameter Name="NameBride" Mode="In" Type="String" />
+      <Parameter Name="EventDateTimeTo" Mode="In" Type="DateTime" />
+      <Parameter Name="EventDateTimeFrom" Mode="In" Type="DateTime" />
+      <Parameter Name="CreateDateTimeTo" Mode="In" Type="DateTime" />
+      <Parameter Name="CreateDateTimeFrom" Mode="In" Type="DateTime" />
+      <Parameter Name="FKPackage_Id" Mode="In" Type="Int32" />
+      <Parameter Name="FKPrintNameType_Id" Mode="In" Type="Int32" />
+      <Parameter Name="FKBranch_Id" Mode="In" Type="Int32" />
+      <Parameter Name="IsForCurrentClinet" Mode="In" Type="Boolean" />
+      <Parameter Name="CurrentClinetId" Mode="In" Type="Int64" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="AlbumTypes_SelectAll_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -943,6 +945,7 @@
     <Property Type="Int32" Name="FkCountry_Id" Nullable="false" />
     <Property Type="Int32" Name="FKCity_Id" Nullable="false" />
     <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsBasic" Nullable="false" />
     <Property Type="String" Name="BranchNameAR" Nullable="true" />
     <Property Type="String" Name="BranchNameEn" Nullable="true" />
   </ComplexType>
@@ -953,6 +956,7 @@
     <Property Type="Int32" Name="FkCountry_Id" Nullable="false" />
     <Property Type="Int32" Name="FKCity_Id" Nullable="false" />
     <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsBasic" Nullable="false" />
     <Property Type="String" Name="CountryNameAr" Nullable="true" />
     <Property Type="String" Name="CountryNameEn" Nullable="true" />
     <Property Type="String" Name="CityNameAr" Nullable="true" />
@@ -968,6 +972,7 @@
     <Property Type="Int32" Name="FkCountry_Id" Nullable="false" />
     <Property Type="Int32" Name="FKCity_Id" Nullable="false" />
     <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsBasic" Nullable="false" />
     <Property Type="String" Name="CountryNameAr" Nullable="true" />
     <Property Type="String" Name="CountryNameEn" Nullable="true" />
     <Property Type="String" Name="CityNameAr" Nullable="true" />
@@ -1211,37 +1216,6 @@
     <Property Type="Boolean" Name="Packaging" Nullable="true" />
     <Property Type="Boolean" Name="TransmissionAndDelivery" Nullable="true" />
     <Property Type="Boolean" Name="Archiving" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="Events_SelectByFilter_Result">
-    <Property Type="Int64" Name="Id" Nullable="false" />
-    <Property Type="Boolean" Name="IsClinetCustomLogo" Nullable="true" />
-    <Property Type="String" Name="LogoFilePath" Nullable="true" />
-    <Property Type="Boolean" Name="IsNamesAr" Nullable="true" />
-    <Property Type="String" Name="NameGroom" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="NameBride" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="FKPrintNameType_Id" Nullable="true" />
-    <Property Type="DateTime" Name="EventDateTime" Nullable="false" Precision="23" />
-    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="FKPackage_Id" Nullable="false" />
-    <Property Type="Int64" Name="FKClinet_Id" Nullable="false" />
-    <Property Type="String" Name="Notes" Nullable="true" />
-    <Property Type="Int64" Name="FKUserCreaed_Id" Nullable="false" />
-    <Property Type="Int32" Name="FKBranch_Id" Nullable="false" />
-    <Property Type="String" Name="ClendarEventId" Nullable="true" />
-    <Property Type="Decimal" Name="PackagePrice" Nullable="false" Precision="18" Scale="2" />
-    <Property Type="Decimal" Name="PackageNamsArExtraPrice" Nullable="false" Precision="18" Scale="2" />
-    <Property Type="DateTime" Name="VistToCoordinationDateTime" Nullable="true" Precision="23" />
-    <Property Type="String" Name="VistToCoordinationClendarEventId" Nullable="true" />
-    <Property Type="Decimal" Name="NamesPrintingPrice" Nullable="true" Precision="18" Scale="2" />
-    <Property Type="String" Name="EnquiryName" Nullable="true" MaxLength="101" />
-    <Property Type="Boolean" Name="IsClosed" Nullable="true" />
-    <Property Type="String" Name="Branch_NameAr" Nullable="true" />
-    <Property Type="String" Name="Branch_NameEn" Nullable="true" />
-    <Property Type="String" Name="Package_NameAr" Nullable="true" />
-    <Property Type="String" Name="Package_NameEn" Nullable="true" />
-    <Property Type="String" Name="WordPrintNamesType_NameAr" Nullable="true" />
-    <Property Type="String" Name="WordPrintNamesType_NameEn" Nullable="true" />
-    <Property Type="Boolean" Name="IsDepositPaymented" Nullable="true" />
   </ComplexType>
   <ComplexType Name="Events_SelectByFilterForEmployee_Result">
     <Property Type="Int64" Name="Id" Nullable="false" />
@@ -1725,6 +1699,7 @@
     <Property Type="String" Name="NationalityNumber" Nullable="true" MaxLength="20" />
     <Property Type="String" Name="WebSite" Nullable="true" MaxLength="500" />
     <Property Type="Int32" Name="FkWorkType_Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsBasic" Nullable="false" />
   </ComplexType>
   <ComplexType Name="Users_SelectByFilter_Result">
     <Property Type="Int64" Name="Id" Nullable="false" />
@@ -1853,5 +1828,37 @@
     <Property Type="Boolean" Name="UsersPrivileges_CanDelete" Nullable="true" />
     <Property Type="Boolean" Name="UsersPrivileges_CanDisplay" Nullable="true" />
     <Property Type="Boolean" Name="UsersPrivileges_CanEdit" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Events_SelectByFilter_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsClinetCustomLogo" Nullable="true" />
+    <Property Type="String" Name="LogoFilePath" Nullable="true" />
+    <Property Type="Boolean" Name="IsNamesAr" Nullable="true" />
+    <Property Type="String" Name="NameGroom" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="NameBride" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="FKPrintNameType_Id" Nullable="true" />
+    <Property Type="DateTime" Name="EventDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="FKPackage_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKClinet_Id" Nullable="false" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="Int64" Name="FKUserCreaed_Id" Nullable="false" />
+    <Property Type="Int32" Name="FKBranch_Id" Nullable="false" />
+    <Property Type="String" Name="ClendarEventId" Nullable="true" />
+    <Property Type="Decimal" Name="PackagePrice" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="PackageNamsArExtraPrice" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="DateTime" Name="VistToCoordinationDateTime" Nullable="true" Precision="23" />
+    <Property Type="String" Name="VistToCoordinationClendarEventId" Nullable="true" />
+    <Property Type="Decimal" Name="NamesPrintingPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="EnquiryName" Nullable="true" MaxLength="101" />
+    <Property Type="Boolean" Name="IsClosed" Nullable="true" />
+    <Property Type="String" Name="Branch_NameAr" Nullable="true" />
+    <Property Type="String" Name="Branch_NameEn" Nullable="true" />
+    <Property Type="String" Name="Package_NameAr" Nullable="true" />
+    <Property Type="String" Name="Package_NameEn" Nullable="true" />
+    <Property Type="String" Name="WordPrintNamesType_NameAr" Nullable="true" />
+    <Property Type="String" Name="WordPrintNamesType_NameEn" Nullable="true" />
+    <Property Type="Boolean" Name="IsDepositPaymented" Nullable="true" />
+    <Property Type="Decimal" Name="TotalPaymentsActivated" Nullable="true" Precision="18" Scale="2" />
   </ComplexType>
 </Schema>

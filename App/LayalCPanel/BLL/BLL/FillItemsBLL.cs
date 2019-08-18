@@ -118,12 +118,15 @@ namespace BLL.BLL
               .GroupBy(c => new
               {
                   c.Id,
-                  c.UserName
+                  c.UserName,
+                  c.IsBasic
               })
               .Select(c => new UserVM
               {
                   Id = c.Key.Id,
                   UserName = c.Key.UserName,
+                  IsBasicBranch=  c.Key.IsBasic,
+
                   WorkTypes = c.Select(v => new WorkTypeVM
                   {
                       Id = v.FkWorkType_Id 

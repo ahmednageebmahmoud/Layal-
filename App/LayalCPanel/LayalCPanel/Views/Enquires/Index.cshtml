@@ -384,7 +384,7 @@
                                                class="btn btn-sm btn-clean btn-icon btn-icon-md"
                                                ng-click="showAddStatus(x)"><i class="flaticon-file-1"></i></a>
 
-                                            <a href="/Users/AddAndUpdate?enquiryId={{x.Id}}&fName={{x.FirstName}}&lName={{x.LastName}}&phoneNo={{x.PhoneNo}}&branchId={{x.BranchId}}&cityId={{x.CityId}}&countryId={{x.CountryId}}" title="@Token.AddUser"
+                                            <a href="/Users/AddAndUpdate?enquiryId={{x.Id}}&fName={{x.FirstName}}&lName={{x.LastName}}&phoneNo={{x.PhoneNo}}&branchId={{x.BranchId}}&cityId={{x.CityId}}&countryId={{x.CountryId}}&eDay={{x.Day}}&eMonth={{x.Month}}&eYear={{x.Year}}" title="@Token.AddUser"
                                                ng-if="!x.IsClosed&&!x.IsLinkedClinet&&x.IsDepositPaymented&&x.IsCanBeAccess"
                                                class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fa fa-user-plus"></i></a>
                                         }
@@ -392,7 +392,7 @@
                                         @if (privEven.CanAdd)
                                         {
 
-                                            <a href="/Events/AddAndUpdate?enquiryId={{x.Id}}&date={{x.Day}}/{{x.Month}}/{{x.Year}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.AddEvent" class="btn btn-sm btn-clean btn-icon btn-icon-md"
+                                            <a href="/Events/AddAndUpdate?enquiryId={{x.Id}}&eDay={{x.Day}}&eMonth={{x.Month}}&eYear={{x.Year}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.AddEvent" class="btn btn-sm btn-clean btn-icon btn-icon-md"
                                                ng-if="x.IsLinkedClinet&&!x.IsCreatedEvent&&x.IsDepositPaymented&&x.IsCanBeAccess">
                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

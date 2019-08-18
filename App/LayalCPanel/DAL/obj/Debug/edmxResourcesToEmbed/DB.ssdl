@@ -38,6 +38,7 @@
     <Parameter Name="CountryId" Type="int" Mode="In" />
     <Parameter Name="CityId" Type="int" Mode="In" />
     <Parameter Name="WordId" Type="int" Mode="InOut" />
+    <Parameter Name="IsBasic" Type="bit" Mode="In" />
   </Function>
   <Function Name="Branches_SelectByAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="Branches_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -56,6 +57,7 @@
     <Parameter Name="CountryId" Type="int" Mode="In" />
     <Parameter Name="CityId" Type="int" Mode="In" />
     <Parameter Name="WordId" Type="bigint" Mode="In" />
+    <Parameter Name="IsBasic" Type="bit" Mode="In" />
   </Function>
   <Function Name="Cities_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />

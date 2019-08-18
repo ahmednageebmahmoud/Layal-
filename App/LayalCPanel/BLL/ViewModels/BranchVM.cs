@@ -19,6 +19,6 @@ namespace BLL.ViewModels
         public CountryVM Country { get;   set; }
         public int CityId { get;   set; }
         public int CountryId { get; set; }
-        
+        public bool IsBasic { get; set; }
     }//end class
 }

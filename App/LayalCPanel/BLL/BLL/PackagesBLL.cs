@@ -30,8 +30,8 @@ namespace BLL.BLL
             if (Packages.Count == 0)
             {
                 if (skip == 0)
-                    return new ResponseVM(RequestTypeEnum.Error, Token.NoResult);
-                return new ResponseVM(RequestTypeEnum.Error, Token.NoMoreResult);
+                    return new ResponseVM(RequestTypeEnum.Info, Token.NoResult);
+                return new ResponseVM(RequestTypeEnum.Info, Token.NoMoreResult);
 
             }
 

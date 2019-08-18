@@ -969,4 +969,7 @@
   <data name="YouCanNotAccessToThisEnquiry" xml:space="preserve">
     <value>You Can Not Access To This Enquiry</value>
   </data>
+  <data name="IsBasic" xml:space="preserve">
+    <value>Basic</value>
+  </data>
 </root>

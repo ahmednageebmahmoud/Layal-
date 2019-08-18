@@ -120,7 +120,7 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Branches_Delete", idParameter);
         }
     
-        public virtual int Branches_Insert(ObjectParameter id, string nameAr, string nameEn, string address, string phone, Nullable<int> countryId, Nullable<int> cityId, ObjectParameter wordId)
+        public virtual int Branches_Insert(ObjectParameter id, string nameAr, string nameEn, string address, string phone, Nullable<int> countryId, Nullable<int> cityId, ObjectParameter wordId, Nullable<bool> isBasic)
         {
             var nameArParameter = nameAr != null ?
                 new ObjectParameter("NameAr", nameAr) :
@@ -146,7 +146,11 @@ namespace DAL
                 new ObjectParameter("CityId", cityId) :
                 new ObjectParameter("CityId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Branches_Insert", id, nameArParameter, nameEnParameter, addressParameter, phoneParameter, countryIdParameter, cityIdParameter, wordId);
+            var isBasicParameter = isBasic.HasValue ?
+                new ObjectParameter("IsBasic", isBasic) :
+                new ObjectParameter("IsBasic", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Branches_Insert", id, nameArParameter, nameEnParameter, addressParameter, phoneParameter, countryIdParameter, cityIdParameter, wordId, isBasicParameter);
         }
     
         public virtual ObjectResult<Branches_SelectByAll_Result> Branches_SelectByAll()
@@ -176,7 +180,7 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Branches_SelectByPk_Result>("Branches_SelectByPk", idParameter);
         }
     
-        public virtual int Branches_Update(Nullable<int> id, string nameAr, string nameEn, string address, string phone, Nullable<int> countryId, Nullable<int> cityId, Nullable<long> wordId)
+        public virtual int Branches_Update(Nullable<int> id, string nameAr, string nameEn, string address, string phone, Nullable<int> countryId, Nullable<int> cityId, Nullable<long> wordId, Nullable<bool> isBasic)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
@@ -210,7 +214,11 @@ namespace DAL
                 new ObjectParameter("WordId", wordId) :
                 new ObjectParameter("WordId", typeof(long));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Branches_Update", idParameter, nameArParameter, nameEnParameter, addressParameter, phoneParameter, countryIdParameter, cityIdParameter, wordIdParameter);
+            var isBasicParameter = isBasic.HasValue ?
+                new ObjectParameter("IsBasic", isBasic) :
+                new ObjectParameter("IsBasic", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Branches_Update", idParameter, nameArParameter, nameEnParameter, addressParameter, phoneParameter, countryIdParameter, cityIdParameter, wordIdParameter, isBasicParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> Cities_CheckIfUsed(Nullable<long> id)
@@ -1243,71 +1251,6 @@ namespace DAL
                 new ObjectParameter("NamesPrintingPrice", typeof(decimal));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Events_Insert", idParameter, isClinetCustomLogoParameter, logoFilePathParameter, isNamesArParameter, nameGroomParameter, nameBrideParameter, eventDateTimeParameter, createDateTimeParameter, fKPackage_IdParameter, fKPrintNameType_IdParameter, fKClinet_IdParameter, notesParameter, fKUserCreaed_IdParameter, fKBranch_IdParameter, packagePriceParameter, packageNamsArExtraPriceParameter, vistToCoordinationDateTimeParameter, namesPrintingPriceParameter);
-        }
-    
-        public virtual ObjectResult<Events_SelectByFilter_Result> Events_SelectByFilter(Nullable<int> skip, Nullable<int> take, Nullable<bool> isClinetCustomLogo, Nullable<bool> isNamesAr, string nameGroom, string nameBride, Nullable<System.DateTime> eventDateTimeTo, Nullable<System.DateTime> eventDateTimeFrom, Nullable<System.DateTime> createDateTimeTo, Nullable<System.DateTime> createDateTimeFrom, Nullable<int> fKPackage_Id, Nullable<int> fKPrintNameType_Id, Nullable<int> fKBranch_Id, Nullable<bool> isForCurrentClinet, Nullable<long> currentClinetId)
-        {
-            var skipParameter = skip.HasValue ?
-                new ObjectParameter("Skip", skip) :
-                new ObjectParameter("Skip", typeof(int));
-    
-            var takeParameter = take.HasValue ?
-                new ObjectParameter("Take", take) :
-                new ObjectParameter("Take", typeof(int));
-    
-            var isClinetCustomLogoParameter = isClinetCustomLogo.HasValue ?
-                new ObjectParameter("IsClinetCustomLogo", isClinetCustomLogo) :
-                new ObjectParameter("IsClinetCustomLogo", typeof(bool));
-    
-            var isNamesArParameter = isNamesAr.HasValue ?
-                new ObjectParameter("IsNamesAr", isNamesAr) :
-                new ObjectParameter("IsNamesAr", typeof(bool));
-    
-            var nameGroomParameter = nameGroom != null ?
-                new ObjectParameter("NameGroom", nameGroom) :
-                new ObjectParameter("NameGroom", typeof(string));
-    
-            var nameBrideParameter = nameBride != null ?
-                new ObjectParameter("NameBride", nameBride) :
-                new ObjectParameter("NameBride", typeof(string));
-    
-            var eventDateTimeToParameter = eventDateTimeTo.HasValue ?
-                new ObjectParameter("EventDateTimeTo", eventDateTimeTo) :
-                new ObjectParameter("EventDateTimeTo", typeof(System.DateTime));
-    
-            var eventDateTimeFromParameter = eventDateTimeFrom.HasValue ?
-                new ObjectParameter("EventDateTimeFrom", eventDateTimeFrom) :
-                new ObjectParameter("EventDateTimeFrom", typeof(System.DateTime));
-    
-            var createDateTimeToParameter = createDateTimeTo.HasValue ?
-                new ObjectParameter("CreateDateTimeTo", createDateTimeTo) :
-                new ObjectParameter("CreateDateTimeTo", typeof(System.DateTime));
-    
-            var createDateTimeFromParameter = createDateTimeFrom.HasValue ?
-                new ObjectParameter("CreateDateTimeFrom", createDateTimeFrom) :
-                new ObjectParameter("CreateDateTimeFrom", typeof(System.DateTime));
-    
-            var fKPackage_IdParameter = fKPackage_Id.HasValue ?
-                new ObjectParameter("FKPackage_Id", fKPackage_Id) :
-                new ObjectParameter("FKPackage_Id", typeof(int));
-    
-            var fKPrintNameType_IdParameter = fKPrintNameType_Id.HasValue ?
-                new ObjectParameter("FKPrintNameType_Id", fKPrintNameType_Id) :
-                new ObjectParameter("FKPrintNameType_Id", typeof(int));
-    
-            var fKBranch_IdParameter = fKBranch_Id.HasValue ?
-                new ObjectParameter("FKBranch_Id", fKBranch_Id) :
-                new ObjectParameter("FKBranch_Id", typeof(int));
-    
-            var isForCurrentClinetParameter = isForCurrentClinet.HasValue ?
-                new ObjectParameter("IsForCurrentClinet", isForCurrentClinet) :
-                new ObjectParameter("IsForCurrentClinet", typeof(bool));
-    
-            var currentClinetIdParameter = currentClinetId.HasValue ?
-                new ObjectParameter("CurrentClinetId", currentClinetId) :
-                new ObjectParameter("CurrentClinetId", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Events_SelectByFilter_Result>("Events_SelectByFilter", skipParameter, takeParameter, isClinetCustomLogoParameter, isNamesArParameter, nameGroomParameter, nameBrideParameter, eventDateTimeToParameter, eventDateTimeFromParameter, createDateTimeToParameter, createDateTimeFromParameter, fKPackage_IdParameter, fKPrintNameType_IdParameter, fKBranch_IdParameter, isForCurrentClinetParameter, currentClinetIdParameter);
         }
     
         public virtual ObjectResult<Events_SelectByFilterForEmployee_Result> Events_SelectByFilterForEmployee(Nullable<int> skip, Nullable<int> take, Nullable<bool> isClinetCustomLogo, Nullable<bool> isNamesAr, string nameGroom, string nameBride, Nullable<System.DateTime> eventDateTimeTo, Nullable<System.DateTime> eventDateTimeFrom, Nullable<int> fKPackage_Id, Nullable<int> fKPrintNameType_Id, Nullable<int> workTypeId, Nullable<long> emplolyeeId, Nullable<bool> isFinshed)
@@ -3129,6 +3072,71 @@ namespace DAL
                 new ObjectParameter("En", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Words_Update", idParameter, arParameter, enParameter);
+        }
+    
+        public virtual ObjectResult<Events_SelectByFilter_Result> Events_SelectByFilter(Nullable<int> skip, Nullable<int> take, Nullable<bool> isClinetCustomLogo, Nullable<bool> isNamesAr, string nameGroom, string nameBride, Nullable<System.DateTime> eventDateTimeTo, Nullable<System.DateTime> eventDateTimeFrom, Nullable<System.DateTime> createDateTimeTo, Nullable<System.DateTime> createDateTimeFrom, Nullable<int> fKPackage_Id, Nullable<int> fKPrintNameType_Id, Nullable<int> fKBranch_Id, Nullable<bool> isForCurrentClinet, Nullable<long> currentClinetId)
+        {
+            var skipParameter = skip.HasValue ?
+                new ObjectParameter("Skip", skip) :
+                new ObjectParameter("Skip", typeof(int));
+    
+            var takeParameter = take.HasValue ?
+                new ObjectParameter("Take", take) :
+                new ObjectParameter("Take", typeof(int));
+    
+            var isClinetCustomLogoParameter = isClinetCustomLogo.HasValue ?
+                new ObjectParameter("IsClinetCustomLogo", isClinetCustomLogo) :
+                new ObjectParameter("IsClinetCustomLogo", typeof(bool));
+    
+            var isNamesArParameter = isNamesAr.HasValue ?
+                new ObjectParameter("IsNamesAr", isNamesAr) :
+                new ObjectParameter("IsNamesAr", typeof(bool));
+    
+            var nameGroomParameter = nameGroom != null ?
+                new ObjectParameter("NameGroom", nameGroom) :
+                new ObjectParameter("NameGroom", typeof(string));
+    
+            var nameBrideParameter = nameBride != null ?
+                new ObjectParameter("NameBride", nameBride) :
+                new ObjectParameter("NameBride", typeof(string));
+    
+            var eventDateTimeToParameter = eventDateTimeTo.HasValue ?
+                new ObjectParameter("EventDateTimeTo", eventDateTimeTo) :
+                new ObjectParameter("EventDateTimeTo", typeof(System.DateTime));
+    
+            var eventDateTimeFromParameter = eventDateTimeFrom.HasValue ?
+                new ObjectParameter("EventDateTimeFrom", eventDateTimeFrom) :
+                new ObjectParameter("EventDateTimeFrom", typeof(System.DateTime));
+    
+            var createDateTimeToParameter = createDateTimeTo.HasValue ?
+                new ObjectParameter("CreateDateTimeTo", createDateTimeTo) :
+                new ObjectParameter("CreateDateTimeTo", typeof(System.DateTime));
+    
+            var createDateTimeFromParameter = createDateTimeFrom.HasValue ?
+                new ObjectParameter("CreateDateTimeFrom", createDateTimeFrom) :
+                new ObjectParameter("CreateDateTimeFrom", typeof(System.DateTime));
+    
+            var fKPackage_IdParameter = fKPackage_Id.HasValue ?
+                new ObjectParameter("FKPackage_Id", fKPackage_Id) :
+                new ObjectParameter("FKPackage_Id", typeof(int));
+    
+            var fKPrintNameType_IdParameter = fKPrintNameType_Id.HasValue ?
+                new ObjectParameter("FKPrintNameType_Id", fKPrintNameType_Id) :
+                new ObjectParameter("FKPrintNameType_Id", typeof(int));
+    
+            var fKBranch_IdParameter = fKBranch_Id.HasValue ?
+                new ObjectParameter("FKBranch_Id", fKBranch_Id) :
+                new ObjectParameter("FKBranch_Id", typeof(int));
+    
+            var isForCurrentClinetParameter = isForCurrentClinet.HasValue ?
+                new ObjectParameter("IsForCurrentClinet", isForCurrentClinet) :
+                new ObjectParameter("IsForCurrentClinet", typeof(bool));
+    
+            var currentClinetIdParameter = currentClinetId.HasValue ?
+                new ObjectParameter("CurrentClinetId", currentClinetId) :
+                new ObjectParameter("CurrentClinetId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Events_SelectByFilter_Result>("Events_SelectByFilter", skipParameter, takeParameter, isClinetCustomLogoParameter, isNamesArParameter, nameGroomParameter, nameBrideParameter, eventDateTimeToParameter, eventDateTimeFromParameter, createDateTimeToParameter, createDateTimeFromParameter, fKPackage_IdParameter, fKPrintNameType_IdParameter, fKBranch_IdParameter, isForCurrentClinetParameter, currentClinetIdParameter);
         }
     }
 }
