@@ -972,4 +972,58 @@
   <data name="IsBasic" xml:space="preserve">
     <value>Basic</value>
   </data>
+  <data name="BasicBranchEmployee" xml:space="preserve">
+    <value>Basic Branch Employee</value>
+  </data>
+  <data name="SelectEmployeeFromBasicBranch" xml:space="preserve">
+    <value>Select Employee From Basic Branch</value>
+  </data>
+  <data name="EventArchivings" xml:space="preserve">
+    <value>Event Archivings</value>
+  </data>
+  <data name="AddAndUpdateArchiving" xml:space="preserve">
+    <value>Add And Update Archiving</value>
+  </data>
+  <data name="ArchivingDate" xml:space="preserve">
+    <value>Archiving Date</value>
+  </data>
+  <data name="HDName" xml:space="preserve">
+    <value>Hard Disk Name</value>
+  </data>
+  <data name="PortableHDName" xml:space="preserve">
+    <value>Portable Hard Disk Name</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="HDNumber" xml:space="preserve">
+    <value>Hard Disk Number</value>
+  </data>
+  <data name="MemoryId" xml:space="preserve">
+    <value>Memory Id</value>
+  </data>
+  <data name="MemoryType" xml:space="preserve">
+    <value>Memory Type</value>
+  </data>
+  <data name="PhotoNumberFrom" xml:space="preserve">
+    <value>Photo Number From</value>
+  </data>
+  <data name="PhotoNumberTo" xml:space="preserve">
+    <value>Photo Number To</value>
+  </data>
+  <data name="PhotoStartName" xml:space="preserve">
+    <value>Name Photo Start With</value>
+  </data>
+  <data name="AddDetails" xml:space="preserve">
+    <value>Add Details</value>
+  </data>
+  <data name="TaskFinshe" xml:space="preserve">
+    <value>Task Finshe</value>
+  </data>
+  <data name="AddBasicInformation" xml:space="preserve">
+    <value>Add Basic Information</value>
+  </data>
+  <data name="FolderName" xml:space="preserve">
+    <value>Folder Name</value>
+  </data>
 </root>

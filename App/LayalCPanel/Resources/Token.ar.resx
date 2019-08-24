@@ -984,4 +984,55 @@
   <data name="IsBasic" xml:space="preserve">
     <value>رئيسى</value>
   </data>
+  <data name="BasicBranchEmployee" xml:space="preserve">
+    <value>موظف الفرع الاساسى</value>
+  </data>
+  <data name="SelectEmployeeFromBasicBranch" xml:space="preserve">
+    <value>اختيار موظف من الفرع الاساسى</value>
+  </data>
+  <data name="EventArchivings" xml:space="preserve">
+    <value>مناسبات الارشفة والحفظ</value>
+  </data>
+  <data name="AddAndUpdateArchiving" xml:space="preserve">
+    <value>اضافة وتحديث مهام الارشفة</value>
+  </data>
+  <data name="ArchivingDate" xml:space="preserve">
+    <value>تاريخ الارشفة</value>
+  </data>
+  <data name="HDName" xml:space="preserve">
+    <value>اسم وحدة التخزين</value>
+  </data>
+  <data name="PortableHDName" xml:space="preserve">
+    <value>اسم وحدة التخزين النقالة </value>
+  </data>
+  <data name="HDNumber" xml:space="preserve">
+    <value>معرف او رقم وحدة التخزين</value>
+  </data>
+  <data name="MemoryId" xml:space="preserve">
+    <value>معرف او رقم الذاكرة</value>
+  </data>
+  <data name="MemoryType" xml:space="preserve">
+    <value>نوع الذاكرة</value>
+  </data>
+  <data name="PhotoNumberFrom" xml:space="preserve">
+    <value>رقم تسلسل الصور من</value>
+  </data>
+  <data name="PhotoNumberTo" xml:space="preserve">
+    <value>رقم تسلسل الصور الى </value>
+  </data>
+  <data name="PhotoStartName" xml:space="preserve">
+    <value>اسم الصور يبداء بـ</value>
+  </data>
+  <data name="AddDetails" xml:space="preserve">
+    <value>اضافة التفاصيل</value>
+  </data>
+  <data name="TaskFinshe" xml:space="preserve">
+    <value>انهاء المهمة</value>
+  </data>
+  <data name="AddBasicInformation" xml:space="preserve">
+    <value>اضافة المعلومات الاساسية</value>
+  </data>
+  <data name="FolderName" xml:space="preserve">
+    <value>اسم المجلد</value>
+  </data>
 </root>

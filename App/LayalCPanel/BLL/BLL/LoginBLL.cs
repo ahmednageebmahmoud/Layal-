@@ -26,8 +26,8 @@ namespace BLL.BLL
                 IsActiveEmail = c.IsActiveEmail,
                 Email = c.Email,
                 IsActive = c.IsActive,
-                CountryId=c.FkCountry_Id,
-                CityId=c.FkCity_Id
+                //CountryId=c.FkCountry_Id,
+                //CityId=c.FkCity_Id
             }).FirstOrDefault();
 
             if (User == null)

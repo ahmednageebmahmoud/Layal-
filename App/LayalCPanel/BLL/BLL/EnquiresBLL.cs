@@ -93,6 +93,8 @@ namespace BLL.BLL
             return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, Enquires);
         }
 
+       
+
         public object CloseEnquiry(long id)
         {
             try
@@ -211,7 +213,7 @@ namespace BLL.BLL
             GoggelApiCalendarService.DeleteEvent(c.ClendarEventId);
             return new ResponseVM(RequestTypeEnum.Success, Token.Deleted);
         }
-        private bool CheckIfEnquiryClosed(long enquiryId)
+        public bool CheckIfEnquiryClosed(long enquiryId)
         {
             return db.Enquires_IsClosed(enquiryId).First().Value > 0;
         }

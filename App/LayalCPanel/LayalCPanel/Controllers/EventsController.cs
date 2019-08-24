@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BLL.Services;
 
 namespace UI.Controllers
 {
@@ -60,13 +61,16 @@ namespace UI.Controllers
             }), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetDistributionOfWorkItems(int branchId)
+        public ActionResult GetItems2(int branchId)
         {
             return Json(new ResponseVM(RequestTypeEnum.Success, Token.Success, new
             {
-              Employees= FillItems.UsersWithCurrentBranchWithWorkTypes(branchId),
-
+                Branches = FillItems.GetBranchesWithoutBranch(branchId) ,
             }), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetDistributionOfWorkItems(int branchId)
+        {
+            return Json(new ResponseVM(RequestTypeEnum.Success, Token.Success, FillItems.UsersWithCurrentBranchWithWorkTypes(branchId)), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetEvents(EventVM even)

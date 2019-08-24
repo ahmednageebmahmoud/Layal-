@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\EEWBLL.cs" />
+    <Compile Include="BLL\EventArchivesBLL.cs" />
     <Compile Include="BLL\EventCoordinationsBLL.cs" />
     <Compile Include="BLL\EventSurveyQuestionsBLL.cs" />
     <Compile Include="BLL\EmployeeDistributionWorksBLL.cs" />
@@ -156,6 +157,8 @@
     <Compile Include="ViewModels\EmployeeDiributionWorkVM.cs" />
     <Compile Include="ViewModels\EmployeeWorkVM.cs" />
     <Compile Include="ViewModels\EnquiryPaymentVM.cs" />
+    <Compile Include="ViewModels\EventArchivDetailVM.cs" />
+    <Compile Include="ViewModels\EventArchivVM.cs" />
     <Compile Include="ViewModels\EventCoordinationVM.cs" />
     <Compile Include="ViewModels\EventSurveyChartVM.cs" />
     <Compile Include="ViewModels\EventSurveyQuestionTypeVM.cs" />

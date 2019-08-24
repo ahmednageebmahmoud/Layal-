@@ -84,6 +84,41 @@ namespace BLL.BLL
             return EventSurveyChart;
         }
 
+        public object GetBranchesWithoutBranch(int branchId)
+        {
+            var Result = db.Branches_SelectByAll().Where(c=> c.Id!= branchId).Select(c => new BranchVM
+            {
+                Id = c.Id,
+                NameAr = c.BranchNameAR,
+                NameEn = c.BranchNameEn,
+                CityId = c.FKCity_Id
+            });
+            return Result;
+        }
+
+        public object GetUsersWithBaicBranchWithWorkTypes()
+        {
+            var Result = db.Users_SelectByBaicBranchWithWorkTypes()
+          .GroupBy(c => new
+          {
+              c.Id,
+              c.UserName,
+              c.IsBasic
+          })
+          .Select(c => new UserVM
+          {
+              Id = c.Key.Id,
+              UserName = c.Key.UserName,
+              IsBasicBranch = c.Key.IsBasic,
+
+              WorkTypes = c.Select(v => new WorkTypeVM
+              {
+                  Id = v.FkWorkType_Id
+              }).ToList()
+          }).ToList();
+            return Result;
+        }
+
         public object GetSurveyQuestions()
         {
             var Result = db.EventSurveyQuestions_SelectAll().Select(c => new EventSurveyQuestionVM
@@ -119,19 +154,17 @@ namespace BLL.BLL
               {
                   c.Id,
                   c.UserName,
-                  c.IsBasic
               })
               .Select(c => new UserVM
               {
                   Id = c.Key.Id,
                   UserName = c.Key.UserName,
-                  IsBasicBranch=  c.Key.IsBasic,
-
                   WorkTypes = c.Select(v => new WorkTypeVM
                   {
                       Id = v.FkWorkType_Id 
                   }).ToList()
               }).ToList();
+
             return Result;
         }
 

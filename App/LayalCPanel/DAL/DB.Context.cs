@@ -111,6 +111,15 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Branches_CheckIfUsed", idParameter);
         }
     
+        public virtual ObjectResult<Nullable<int>> Branches_CheckIsBasicBranch(Nullable<int> branchId)
+        {
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Branches_CheckIsBasicBranch", branchIdParameter);
+        }
+    
         public virtual int Branches_Delete(Nullable<long> id)
         {
             var idParameter = id.HasValue ?
@@ -389,58 +398,6 @@ namespace DAL
                 new ObjectParameter("WordId", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Countries_Update", idParameter, nameArParameter, nameEnParameter, isoCodeParameter, wordIdParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> EmployeeDistributionWorks_CheckIfInserted(Nullable<int> workTypeId, Nullable<long> employeeId, Nullable<long> eventId)
-        {
-            var workTypeIdParameter = workTypeId.HasValue ?
-                new ObjectParameter("WorkTypeId", workTypeId) :
-                new ObjectParameter("WorkTypeId", typeof(int));
-    
-            var employeeIdParameter = employeeId.HasValue ?
-                new ObjectParameter("EmployeeId", employeeId) :
-                new ObjectParameter("EmployeeId", typeof(long));
-    
-            var eventIdParameter = eventId.HasValue ?
-                new ObjectParameter("EventId", eventId) :
-                new ObjectParameter("EventId", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("EmployeeDistributionWorks_CheckIfInserted", workTypeIdParameter, employeeIdParameter, eventIdParameter);
-        }
-    
-        public virtual int EmployeeDistributionWorks_Delete(Nullable<long> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EmployeeDistributionWorks_Delete", idParameter);
-        }
-    
-        public virtual int EmployeeDistributionWorks_Insert(ObjectParameter id, Nullable<int> workTypeId, Nullable<long> employeeId, Nullable<long> eventId)
-        {
-            var workTypeIdParameter = workTypeId.HasValue ?
-                new ObjectParameter("WorkTypeId", workTypeId) :
-                new ObjectParameter("WorkTypeId", typeof(int));
-    
-            var employeeIdParameter = employeeId.HasValue ?
-                new ObjectParameter("EmployeeId", employeeId) :
-                new ObjectParameter("EmployeeId", typeof(long));
-    
-            var eventIdParameter = eventId.HasValue ?
-                new ObjectParameter("EventId", eventId) :
-                new ObjectParameter("EventId", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EmployeeDistributionWorks_Insert", id, workTypeIdParameter, employeeIdParameter, eventIdParameter);
-        }
-    
-        public virtual ObjectResult<EmployeeDistributionWorks_SelectByEventId_Result> EmployeeDistributionWorks_SelectByEventId(Nullable<long> eventId)
-        {
-            var eventIdParameter = eventId.HasValue ?
-                new ObjectParameter("EventId", eventId) :
-                new ObjectParameter("EventId", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeeDistributionWorks_SelectByEventId_Result>("EmployeeDistributionWorks_SelectByEventId", eventIdParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> Employees_CheckAllowAccessToEventForUpdateWorks(Nullable<bool> isAdmin, Nullable<bool> isClint, Nullable<bool> isBranchManger, Nullable<long> eventId, Nullable<int> workTypeId, Nullable<long> userLoggedId, Nullable<int> branchId)
@@ -1253,6 +1210,71 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Events_Insert", idParameter, isClinetCustomLogoParameter, logoFilePathParameter, isNamesArParameter, nameGroomParameter, nameBrideParameter, eventDateTimeParameter, createDateTimeParameter, fKPackage_IdParameter, fKPrintNameType_IdParameter, fKClinet_IdParameter, notesParameter, fKUserCreaed_IdParameter, fKBranch_IdParameter, packagePriceParameter, packageNamsArExtraPriceParameter, vistToCoordinationDateTimeParameter, namesPrintingPriceParameter);
         }
     
+        public virtual ObjectResult<Events_SelectByFilter_Result> Events_SelectByFilter(Nullable<int> skip, Nullable<int> take, Nullable<bool> isClinetCustomLogo, Nullable<bool> isNamesAr, string nameGroom, string nameBride, Nullable<System.DateTime> eventDateTimeTo, Nullable<System.DateTime> eventDateTimeFrom, Nullable<System.DateTime> createDateTimeTo, Nullable<System.DateTime> createDateTimeFrom, Nullable<int> fKPackage_Id, Nullable<int> fKPrintNameType_Id, Nullable<int> fKBranch_Id, Nullable<bool> isForCurrentClinet, Nullable<long> currentClinetId)
+        {
+            var skipParameter = skip.HasValue ?
+                new ObjectParameter("Skip", skip) :
+                new ObjectParameter("Skip", typeof(int));
+    
+            var takeParameter = take.HasValue ?
+                new ObjectParameter("Take", take) :
+                new ObjectParameter("Take", typeof(int));
+    
+            var isClinetCustomLogoParameter = isClinetCustomLogo.HasValue ?
+                new ObjectParameter("IsClinetCustomLogo", isClinetCustomLogo) :
+                new ObjectParameter("IsClinetCustomLogo", typeof(bool));
+    
+            var isNamesArParameter = isNamesAr.HasValue ?
+                new ObjectParameter("IsNamesAr", isNamesAr) :
+                new ObjectParameter("IsNamesAr", typeof(bool));
+    
+            var nameGroomParameter = nameGroom != null ?
+                new ObjectParameter("NameGroom", nameGroom) :
+                new ObjectParameter("NameGroom", typeof(string));
+    
+            var nameBrideParameter = nameBride != null ?
+                new ObjectParameter("NameBride", nameBride) :
+                new ObjectParameter("NameBride", typeof(string));
+    
+            var eventDateTimeToParameter = eventDateTimeTo.HasValue ?
+                new ObjectParameter("EventDateTimeTo", eventDateTimeTo) :
+                new ObjectParameter("EventDateTimeTo", typeof(System.DateTime));
+    
+            var eventDateTimeFromParameter = eventDateTimeFrom.HasValue ?
+                new ObjectParameter("EventDateTimeFrom", eventDateTimeFrom) :
+                new ObjectParameter("EventDateTimeFrom", typeof(System.DateTime));
+    
+            var createDateTimeToParameter = createDateTimeTo.HasValue ?
+                new ObjectParameter("CreateDateTimeTo", createDateTimeTo) :
+                new ObjectParameter("CreateDateTimeTo", typeof(System.DateTime));
+    
+            var createDateTimeFromParameter = createDateTimeFrom.HasValue ?
+                new ObjectParameter("CreateDateTimeFrom", createDateTimeFrom) :
+                new ObjectParameter("CreateDateTimeFrom", typeof(System.DateTime));
+    
+            var fKPackage_IdParameter = fKPackage_Id.HasValue ?
+                new ObjectParameter("FKPackage_Id", fKPackage_Id) :
+                new ObjectParameter("FKPackage_Id", typeof(int));
+    
+            var fKPrintNameType_IdParameter = fKPrintNameType_Id.HasValue ?
+                new ObjectParameter("FKPrintNameType_Id", fKPrintNameType_Id) :
+                new ObjectParameter("FKPrintNameType_Id", typeof(int));
+    
+            var fKBranch_IdParameter = fKBranch_Id.HasValue ?
+                new ObjectParameter("FKBranch_Id", fKBranch_Id) :
+                new ObjectParameter("FKBranch_Id", typeof(int));
+    
+            var isForCurrentClinetParameter = isForCurrentClinet.HasValue ?
+                new ObjectParameter("IsForCurrentClinet", isForCurrentClinet) :
+                new ObjectParameter("IsForCurrentClinet", typeof(bool));
+    
+            var currentClinetIdParameter = currentClinetId.HasValue ?
+                new ObjectParameter("CurrentClinetId", currentClinetId) :
+                new ObjectParameter("CurrentClinetId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Events_SelectByFilter_Result>("Events_SelectByFilter", skipParameter, takeParameter, isClinetCustomLogoParameter, isNamesArParameter, nameGroomParameter, nameBrideParameter, eventDateTimeToParameter, eventDateTimeFromParameter, createDateTimeToParameter, createDateTimeFromParameter, fKPackage_IdParameter, fKPrintNameType_IdParameter, fKBranch_IdParameter, isForCurrentClinetParameter, currentClinetIdParameter);
+        }
+    
         public virtual ObjectResult<Events_SelectByFilterForEmployee_Result> Events_SelectByFilterForEmployee(Nullable<int> skip, Nullable<int> take, Nullable<bool> isClinetCustomLogo, Nullable<bool> isNamesAr, string nameGroom, string nameBride, Nullable<System.DateTime> eventDateTimeTo, Nullable<System.DateTime> eventDateTimeFrom, Nullable<int> fKPackage_Id, Nullable<int> fKPrintNameType_Id, Nullable<int> workTypeId, Nullable<long> emplolyeeId, Nullable<bool> isFinshed)
         {
             var skipParameter = skip.HasValue ?
@@ -1743,7 +1765,7 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EventSurveyQuestionTypes_Update", idParameter, nameArParameter, nameEnParameter, wordIdParameter, inputTypeParameter);
         }
     
-        public virtual int EventWorksStatusHistory_Insert(Nullable<bool> isFinshed, Nullable<System.DateTime> dateTime, Nullable<long> fKEvent_Id, Nullable<int> fKWorkType_Id, Nullable<long> fKUsre_Id, Nullable<int> fKAccountType_Id)
+        public virtual int EventWorksStatusHistory_Insert(Nullable<bool> isFinshed, Nullable<System.DateTime> dateTime, Nullable<long> fKEvent_Id, Nullable<int> fKWorkType_Id, Nullable<long> fKUsre_Id, Nullable<int> fKAccountType_Id, Nullable<int> branchId)
         {
             var isFinshedParameter = isFinshed.HasValue ?
                 new ObjectParameter("IsFinshed", isFinshed) :
@@ -1769,7 +1791,11 @@ namespace DAL
                 new ObjectParameter("FKAccountType_Id", fKAccountType_Id) :
                 new ObjectParameter("FKAccountType_Id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EventWorksStatusHistory_Insert", isFinshedParameter, dateTimeParameter, fKEvent_IdParameter, fKWorkType_IdParameter, fKUsre_IdParameter, fKAccountType_IdParameter);
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EventWorksStatusHistory_Insert", isFinshedParameter, dateTimeParameter, fKEvent_IdParameter, fKWorkType_IdParameter, fKUsre_IdParameter, fKAccountType_IdParameter, branchIdParameter);
         }
     
         public virtual ObjectResult<EventWorksStatusHistory_SelectByEventId_Result> EventWorksStatusHistory_SelectByEventId(Nullable<long> eventId)
@@ -2773,6 +2799,11 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Users_SelectAllForUsersPrivileges_Result>("Users_SelectAllForUsersPrivileges");
         }
     
+        public virtual ObjectResult<Users_SelectByBaicBranchWithWorkTypes_Result> Users_SelectByBaicBranchWithWorkTypes()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Users_SelectByBaicBranchWithWorkTypes_Result>("Users_SelectByBaicBranchWithWorkTypes");
+        }
+    
         public virtual ObjectResult<Users_SelectByBranchId_Result> Users_SelectByBranchId(Nullable<int> branchId, Nullable<int> accountTypeId)
         {
             var branchIdParameter = branchId.HasValue ?
@@ -3074,69 +3105,215 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Words_Update", idParameter, arParameter, enParameter);
         }
     
-        public virtual ObjectResult<Events_SelectByFilter_Result> Events_SelectByFilter(Nullable<int> skip, Nullable<int> take, Nullable<bool> isClinetCustomLogo, Nullable<bool> isNamesAr, string nameGroom, string nameBride, Nullable<System.DateTime> eventDateTimeTo, Nullable<System.DateTime> eventDateTimeFrom, Nullable<System.DateTime> createDateTimeTo, Nullable<System.DateTime> createDateTimeFrom, Nullable<int> fKPackage_Id, Nullable<int> fKPrintNameType_Id, Nullable<int> fKBranch_Id, Nullable<bool> isForCurrentClinet, Nullable<long> currentClinetId)
+        public virtual int EmployeeDistributionWorks_Delete(Nullable<long> id)
         {
-            var skipParameter = skip.HasValue ?
-                new ObjectParameter("Skip", skip) :
-                new ObjectParameter("Skip", typeof(int));
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
     
-            var takeParameter = take.HasValue ?
-                new ObjectParameter("Take", take) :
-                new ObjectParameter("Take", typeof(int));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EmployeeDistributionWorks_Delete", idParameter);
+        }
     
-            var isClinetCustomLogoParameter = isClinetCustomLogo.HasValue ?
-                new ObjectParameter("IsClinetCustomLogo", isClinetCustomLogo) :
-                new ObjectParameter("IsClinetCustomLogo", typeof(bool));
+        public virtual ObjectResult<EmployeeDistributionWorks_Insert_Result> EmployeeDistributionWorks_Insert(ObjectParameter id, Nullable<int> workTypeId, Nullable<long> employeeId, Nullable<long> eventId, Nullable<bool> isAnotherBranch, Nullable<int> branchId)
+        {
+            var workTypeIdParameter = workTypeId.HasValue ?
+                new ObjectParameter("WorkTypeId", workTypeId) :
+                new ObjectParameter("WorkTypeId", typeof(int));
     
-            var isNamesArParameter = isNamesAr.HasValue ?
-                new ObjectParameter("IsNamesAr", isNamesAr) :
-                new ObjectParameter("IsNamesAr", typeof(bool));
+            var employeeIdParameter = employeeId.HasValue ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(long));
     
-            var nameGroomParameter = nameGroom != null ?
-                new ObjectParameter("NameGroom", nameGroom) :
-                new ObjectParameter("NameGroom", typeof(string));
+            var eventIdParameter = eventId.HasValue ?
+                new ObjectParameter("EventId", eventId) :
+                new ObjectParameter("EventId", typeof(long));
     
-            var nameBrideParameter = nameBride != null ?
-                new ObjectParameter("NameBride", nameBride) :
-                new ObjectParameter("NameBride", typeof(string));
+            var isAnotherBranchParameter = isAnotherBranch.HasValue ?
+                new ObjectParameter("IsAnotherBranch", isAnotherBranch) :
+                new ObjectParameter("IsAnotherBranch", typeof(bool));
     
-            var eventDateTimeToParameter = eventDateTimeTo.HasValue ?
-                new ObjectParameter("EventDateTimeTo", eventDateTimeTo) :
-                new ObjectParameter("EventDateTimeTo", typeof(System.DateTime));
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
     
-            var eventDateTimeFromParameter = eventDateTimeFrom.HasValue ?
-                new ObjectParameter("EventDateTimeFrom", eventDateTimeFrom) :
-                new ObjectParameter("EventDateTimeFrom", typeof(System.DateTime));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeeDistributionWorks_Insert_Result>("EmployeeDistributionWorks_Insert", id, workTypeIdParameter, employeeIdParameter, eventIdParameter, isAnotherBranchParameter, branchIdParameter);
+        }
     
-            var createDateTimeToParameter = createDateTimeTo.HasValue ?
-                new ObjectParameter("CreateDateTimeTo", createDateTimeTo) :
-                new ObjectParameter("CreateDateTimeTo", typeof(System.DateTime));
+        public virtual ObjectResult<EmployeeDistributionWorks_SelectByEventId_Result> EmployeeDistributionWorks_SelectByEventId(Nullable<long> eventId)
+        {
+            var eventIdParameter = eventId.HasValue ?
+                new ObjectParameter("EventId", eventId) :
+                new ObjectParameter("EventId", typeof(long));
     
-            var createDateTimeFromParameter = createDateTimeFrom.HasValue ?
-                new ObjectParameter("CreateDateTimeFrom", createDateTimeFrom) :
-                new ObjectParameter("CreateDateTimeFrom", typeof(System.DateTime));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeeDistributionWorks_SelectByEventId_Result>("EmployeeDistributionWorks_SelectByEventId", eventIdParameter);
+        }
     
-            var fKPackage_IdParameter = fKPackage_Id.HasValue ?
-                new ObjectParameter("FKPackage_Id", fKPackage_Id) :
-                new ObjectParameter("FKPackage_Id", typeof(int));
+        public virtual ObjectResult<Nullable<int>> Events_CheckFromDateEventIsFinshedBranchId(Nullable<long> eventId, Nullable<int> branchId)
+        {
+            var eventIdParameter = eventId.HasValue ?
+                new ObjectParameter("EventId", eventId) :
+                new ObjectParameter("EventId", typeof(long));
     
-            var fKPrintNameType_IdParameter = fKPrintNameType_Id.HasValue ?
-                new ObjectParameter("FKPrintNameType_Id", fKPrintNameType_Id) :
-                new ObjectParameter("FKPrintNameType_Id", typeof(int));
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
     
-            var fKBranch_IdParameter = fKBranch_Id.HasValue ?
-                new ObjectParameter("FKBranch_Id", fKBranch_Id) :
-                new ObjectParameter("FKBranch_Id", typeof(int));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Events_CheckFromDateEventIsFinshedBranchId", eventIdParameter, branchIdParameter);
+        }
     
-            var isForCurrentClinetParameter = isForCurrentClinet.HasValue ?
-                new ObjectParameter("IsForCurrentClinet", isForCurrentClinet) :
-                new ObjectParameter("IsForCurrentClinet", typeof(bool));
+        public virtual ObjectResult<Nullable<bool>> EventWorksStatusHistory_CheckIfTaskFinshedWithBranch(Nullable<long> eventId, Nullable<int> branchId, Nullable<int> workTypeId, Nullable<bool> forIsCurrentBranch)
+        {
+            var eventIdParameter = eventId.HasValue ?
+                new ObjectParameter("EventId", eventId) :
+                new ObjectParameter("EventId", typeof(long));
     
-            var currentClinetIdParameter = currentClinetId.HasValue ?
-                new ObjectParameter("CurrentClinetId", currentClinetId) :
-                new ObjectParameter("CurrentClinetId", typeof(long));
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Events_SelectByFilter_Result>("Events_SelectByFilter", skipParameter, takeParameter, isClinetCustomLogoParameter, isNamesArParameter, nameGroomParameter, nameBrideParameter, eventDateTimeToParameter, eventDateTimeFromParameter, createDateTimeToParameter, createDateTimeFromParameter, fKPackage_IdParameter, fKPrintNameType_IdParameter, fKBranch_IdParameter, isForCurrentClinetParameter, currentClinetIdParameter);
+            var workTypeIdParameter = workTypeId.HasValue ?
+                new ObjectParameter("WorkTypeId", workTypeId) :
+                new ObjectParameter("WorkTypeId", typeof(int));
+    
+            var forIsCurrentBranchParameter = forIsCurrentBranch.HasValue ?
+                new ObjectParameter("ForIsCurrentBranch", forIsCurrentBranch) :
+                new ObjectParameter("ForIsCurrentBranch", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("EventWorksStatusHistory_CheckIfTaskFinshedWithBranch", eventIdParameter, branchIdParameter, workTypeIdParameter, forIsCurrentBranchParameter);
+        }
+    
+        public virtual int EventArchivesDetails_Delete(Nullable<long> id, Nullable<long> eventId, Nullable<int> eventArchifId)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            var eventIdParameter = eventId.HasValue ?
+                new ObjectParameter("EventId", eventId) :
+                new ObjectParameter("EventId", typeof(long));
+    
+            var eventArchifIdParameter = eventArchifId.HasValue ?
+                new ObjectParameter("EventArchifId", eventArchifId) :
+                new ObjectParameter("EventArchifId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EventArchivesDetails_Delete", idParameter, eventIdParameter, eventArchifIdParameter);
+        }
+    
+        public virtual int EventArchivesDetails_Inserrt(ObjectParameter id, Nullable<long> eventId, Nullable<int> eventArchiveId, string memoryId, string memoryType, string photoStartName, Nullable<int> photoNumberFrom, Nullable<int> photoNumberTo, string notes, Nullable<System.DateTime> dateTime)
+        {
+            var eventIdParameter = eventId.HasValue ?
+                new ObjectParameter("EventId", eventId) :
+                new ObjectParameter("EventId", typeof(long));
+    
+            var eventArchiveIdParameter = eventArchiveId.HasValue ?
+                new ObjectParameter("EventArchiveId", eventArchiveId) :
+                new ObjectParameter("EventArchiveId", typeof(int));
+    
+            var memoryIdParameter = memoryId != null ?
+                new ObjectParameter("MemoryId", memoryId) :
+                new ObjectParameter("MemoryId", typeof(string));
+    
+            var memoryTypeParameter = memoryType != null ?
+                new ObjectParameter("MemoryType", memoryType) :
+                new ObjectParameter("MemoryType", typeof(string));
+    
+            var photoStartNameParameter = photoStartName != null ?
+                new ObjectParameter("PhotoStartName", photoStartName) :
+                new ObjectParameter("PhotoStartName", typeof(string));
+    
+            var photoNumberFromParameter = photoNumberFrom.HasValue ?
+                new ObjectParameter("PhotoNumberFrom", photoNumberFrom) :
+                new ObjectParameter("PhotoNumberFrom", typeof(int));
+    
+            var photoNumberToParameter = photoNumberTo.HasValue ?
+                new ObjectParameter("PhotoNumberTo", photoNumberTo) :
+                new ObjectParameter("PhotoNumberTo", typeof(int));
+    
+            var notesParameter = notes != null ?
+                new ObjectParameter("Notes", notes) :
+                new ObjectParameter("Notes", typeof(string));
+    
+            var dateTimeParameter = dateTime.HasValue ?
+                new ObjectParameter("DateTime", dateTime) :
+                new ObjectParameter("DateTime", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EventArchivesDetails_Inserrt", id, eventIdParameter, eventArchiveIdParameter, memoryIdParameter, memoryTypeParameter, photoStartNameParameter, photoNumberFromParameter, photoNumberToParameter, notesParameter, dateTimeParameter);
+        }
+    
+        public virtual int EventArchives_Insert(ObjectParameter id, Nullable<long> fKEvent_Id, string hDNumber, string folderName, Nullable<System.DateTime> dateTime, Nullable<long> userId)
+        {
+            var fKEvent_IdParameter = fKEvent_Id.HasValue ?
+                new ObjectParameter("FKEvent_Id", fKEvent_Id) :
+                new ObjectParameter("FKEvent_Id", typeof(long));
+    
+            var hDNumberParameter = hDNumber != null ?
+                new ObjectParameter("HDNumber", hDNumber) :
+                new ObjectParameter("HDNumber", typeof(string));
+    
+            var folderNameParameter = folderName != null ?
+                new ObjectParameter("FolderName", folderName) :
+                new ObjectParameter("FolderName", typeof(string));
+    
+            var dateTimeParameter = dateTime.HasValue ?
+                new ObjectParameter("DateTime", dateTime) :
+                new ObjectParameter("DateTime", typeof(System.DateTime));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EventArchives_Insert", id, fKEvent_IdParameter, hDNumberParameter, folderNameParameter, dateTimeParameter, userIdParameter);
+        }
+    
+        public virtual ObjectResult<EventArchives_SelectAll_Result> EventArchives_SelectAll(Nullable<long> eventId, Nullable<long> userId)
+        {
+            var eventIdParameter = eventId.HasValue ?
+                new ObjectParameter("EventId", eventId) :
+                new ObjectParameter("EventId", typeof(long));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EventArchives_SelectAll_Result>("EventArchives_SelectAll", eventIdParameter, userIdParameter);
+        }
+    
+        public virtual int EventArchives_Update(Nullable<int> id, Nullable<long> fKEvent_Id, string hDNumber, string folderName)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var fKEvent_IdParameter = fKEvent_Id.HasValue ?
+                new ObjectParameter("FKEvent_Id", fKEvent_Id) :
+                new ObjectParameter("FKEvent_Id", typeof(long));
+    
+            var hDNumberParameter = hDNumber != null ?
+                new ObjectParameter("HDNumber", hDNumber) :
+                new ObjectParameter("HDNumber", typeof(string));
+    
+            var folderNameParameter = folderName != null ?
+                new ObjectParameter("FolderName", folderName) :
+                new ObjectParameter("FolderName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EventArchives_Update", idParameter, fKEvent_IdParameter, hDNumberParameter, folderNameParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> EmployeeDistributionWorks_CheckIfInserted(Nullable<int> workTypeId, Nullable<long> eventId, Nullable<int> branchId)
+        {
+            var workTypeIdParameter = workTypeId.HasValue ?
+                new ObjectParameter("WorkTypeId", workTypeId) :
+                new ObjectParameter("WorkTypeId", typeof(int));
+    
+            var eventIdParameter = eventId.HasValue ?
+                new ObjectParameter("EventId", eventId) :
+                new ObjectParameter("EventId", typeof(long));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("EmployeeDistributionWorks_CheckIfInserted", workTypeIdParameter, eventIdParameter, branchIdParameter);
         }
     }
 }

@@ -115,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add And Update Archiving.
+        /// </summary>
+        public static string AddAndUpdateArchiving {
+            get {
+                return ResourceManager.GetString("AddAndUpdateArchiving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add And Update Task Coordinations.
         /// </summary>
         public static string AddAndUpdateCoordinations {
@@ -138,6 +147,24 @@ namespace Resources {
         public static string AddAndUpdateEvent {
             get {
                 return ResourceManager.GetString("AddAndUpdateEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Basic Information.
+        /// </summary>
+        public static string AddBasicInformation {
+            get {
+                return ResourceManager.GetString("AddBasicInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Details.
+        /// </summary>
+        public static string AddDetails {
+            get {
+                return ResourceManager.GetString("AddDetails", resourceCulture);
             }
         }
         
@@ -367,6 +394,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Archiving Date.
+        /// </summary>
+        public static string ArchivingDate {
+            get {
+                return ResourceManager.GetString("ArchivingDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are You Satisfied To My Service.
         /// </summary>
         public static string AreYouSatisfiedToMyService {
@@ -390,6 +426,15 @@ namespace Resources {
         public static string BankTransferPhoto {
             get {
                 return ResourceManager.GetString("BankTransferPhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Basic Branch Employee.
+        /// </summary>
+        public static string BasicBranchEmployee {
+            get {
+                return ResourceManager.GetString("BasicBranchEmployee", resourceCulture);
             }
         }
         
@@ -925,6 +970,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Event Archivings.
+        /// </summary>
+        public static string EventArchivings {
+            get {
+                return ResourceManager.GetString("EventArchivings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Event Coordinations.
         /// </summary>
         public static string EventCoordinations {
@@ -1114,6 +1168,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Folder Name.
+        /// </summary>
+        public static string FolderName {
+            get {
+                return ResourceManager.GetString("FolderName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to For Employee.
         /// </summary>
         public static string ForEmployee {
@@ -1164,6 +1227,24 @@ namespace Resources {
         public static string GoToFinsh {
             get {
                 return ResourceManager.GetString("GoToFinsh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hard Disk Name.
+        /// </summary>
+        public static string HDName {
+            get {
+                return ResourceManager.GetString("HDName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hard Disk Number.
+        /// </summary>
+        public static string HDNumber {
+            get {
+                return ResourceManager.GetString("HDNumber", resourceCulture);
             }
         }
         
@@ -1461,6 +1542,24 @@ namespace Resources {
         public static string MaxNumberIs {
             get {
                 return ResourceManager.GetString("MaxNumberIs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Memory Id.
+        /// </summary>
+        public static string MemoryId {
+            get {
+                return ResourceManager.GetString("MemoryId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Memory Type.
+        /// </summary>
+        public static string MemoryType {
+            get {
+                return ResourceManager.GetString("MemoryType", resourceCulture);
             }
         }
         
@@ -1915,11 +2014,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Photo Number From.
+        /// </summary>
+        public static string PhotoNumberFrom {
+            get {
+                return ResourceManager.GetString("PhotoNumberFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Photo Number To.
+        /// </summary>
+        public static string PhotoNumberTo {
+            get {
+                return ResourceManager.GetString("PhotoNumberTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name Photo Start With.
+        /// </summary>
+        public static string PhotoStartName {
+            get {
+                return ResourceManager.GetString("PhotoStartName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please Copy This Code.
         /// </summary>
         public static string PleaseCopyThisCode {
             get {
                 return ResourceManager.GetString("PleaseCopyThisCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Portable Hard Disk Name.
+        /// </summary>
+        public static string PortableHDName {
+            get {
+                return ResourceManager.GetString("PortableHDName", resourceCulture);
             }
         }
         
@@ -2032,6 +2167,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Employee From Basic Branch.
+        /// </summary>
+        public static string SelectEmployeeFromBasicBranch {
+            get {
+                return ResourceManager.GetString("SelectEmployeeFromBasicBranch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Send Active Code To Email.
         /// </summary>
         public static string SendActiveCodeToEmail {
@@ -2131,6 +2275,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Success.
         /// </summary>
         public static string Success {
@@ -2163,6 +2316,15 @@ namespace Resources {
         public static string Task {
             get {
                 return ResourceManager.GetString("Task", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task Finshe.
+        /// </summary>
+        public static string TaskFinshe {
+            get {
+                return ResourceManager.GetString("TaskFinshe", resourceCulture);
             }
         }
         

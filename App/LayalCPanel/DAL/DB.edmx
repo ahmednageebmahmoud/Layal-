@@ -31,6 +31,9 @@
         <Function Name="Branches_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="Branches_CheckIsBasicBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+        </Function>
         <Function Name="Branches_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="bigint" Mode="In" />
         </Function>
@@ -119,8 +122,8 @@
         </Function>
         <Function Name="EmployeeDistributionWorks_CheckIfInserted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="WorkTypeId" Type="int" Mode="In" />
-          <Parameter Name="EmployeeId" Type="bigint" Mode="In" />
           <Parameter Name="EventId" Type="bigint" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
         </Function>
         <Function Name="EmployeeDistributionWorks_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="bigint" Mode="In" />
@@ -130,6 +133,8 @@
           <Parameter Name="WorkTypeId" Type="int" Mode="In" />
           <Parameter Name="EmployeeId" Type="bigint" Mode="In" />
           <Parameter Name="EventId" Type="bigint" Mode="In" />
+          <Parameter Name="IsAnotherBranch" Type="bit" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
         </Function>
         <Function Name="EmployeeDistributionWorks_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EventId" Type="bigint" Mode="In" />
@@ -334,6 +339,41 @@
           <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
           <Parameter Name="WordId" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="EventArchives_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="InOut" />
+          <Parameter Name="FKEvent_Id" Type="bigint" Mode="In" />
+          <Parameter Name="HDNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="FolderName" Type="nvarchar" Mode="In" />
+          <Parameter Name="DateTime" Type="datetime" Mode="In" />
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EventArchives_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventId" Type="bigint" Mode="In" />
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EventArchives_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="FKEvent_Id" Type="bigint" Mode="In" />
+          <Parameter Name="HDNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="FolderName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="EventArchivesDetails_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="EventId" Type="bigint" Mode="In" />
+          <Parameter Name="EventArchifId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EventArchivesDetails_Inserrt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="InOut" />
+          <Parameter Name="EventId" Type="bigint" Mode="In" />
+          <Parameter Name="EventArchiveId" Type="int" Mode="In" />
+          <Parameter Name="MemoryId" Type="nvarchar" Mode="In" />
+          <Parameter Name="MemoryType" Type="nvarchar" Mode="In" />
+          <Parameter Name="PhotoStartName" Type="nvarchar" Mode="In" />
+          <Parameter Name="PhotoNumberFrom" Type="int" Mode="In" />
+          <Parameter Name="PhotoNumberTo" Type="int" Mode="In" />
+          <Parameter Name="Notes" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="DateTime" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="EventCoordinations_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="bigint" Mode="In" />
         </Function>
@@ -355,6 +395,10 @@
         <Function Name="Events_CheckFromDateEventIsFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EventId" Type="bigint" Mode="In" />
           <Parameter Name="DateTime" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Events_CheckFromDateEventIsFinshedBranchId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventId" Type="bigint" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
         </Function>
         <Function Name="Events_CheckIfWorkFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
           <Parameter Name="eventId" Type="bigint" Mode="In" />
@@ -545,6 +589,12 @@
           <Parameter Name="WordId" Type="bigint" Mode="In" />
           <Parameter Name="InputType" Type="int" Mode="In" />
         </Function>
+        <Function Name="EventWorksStatusHistory_CheckIfTaskFinshedWithBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventId" Type="bigint" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="WorkTypeId" Type="int" Mode="In" />
+          <Parameter Name="ForIsCurrentBranch" Type="bit" Mode="In" />
+        </Function>
         <Function Name="EventWorksStatusHistory_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IsFinshed" Type="bit" Mode="In" />
           <Parameter Name="DateTime" Type="datetime" Mode="In" />
@@ -552,6 +602,7 @@
           <Parameter Name="FKWorkType_Id" Type="int" Mode="In" />
           <Parameter Name="FKUsre_Id" Type="bigint" Mode="In" />
           <Parameter Name="FKAccountType_Id" Type="int" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
         </Function>
         <Function Name="EventWorksStatusHistory_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="eventId" Type="bigint" Mode="In" />
@@ -864,6 +915,7 @@
         </Function>
         <Function Name="Users_SelectAllEmployees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Users_SelectAllForUsersPrivileges" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Users_SelectByBaicBranchWithWorkTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Users_SelectByBranchId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BranchId" Type="int" Mode="In" />
           <Parameter Name="AccountTypeId" Type="int" Mode="In" />
@@ -985,6 +1037,9 @@
           <FunctionImport Name="Branches_CheckIfUsed" ReturnType="Collection(Int32)">
           <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
+          <FunctionImport Name="Branches_CheckIsBasicBranch" ReturnType="Collection(Int32)">
+          <Parameter Name="BranchId" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="Branches_Delete">
           <Parameter Name="Id" Mode="In" Type="Int64" />
           </FunctionImport>
@@ -1070,23 +1125,6 @@
             <Parameter Name="NameEn" Mode="In" Type="String" />
             <Parameter Name="IsoCode" Mode="In" Type="String" />
             <Parameter Name="WordId" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="EmployeeDistributionWorks_CheckIfInserted" ReturnType="Collection(Int32)">
-            <Parameter Name="WorkTypeId" Mode="In" Type="Int32" />
-            <Parameter Name="EmployeeId" Mode="In" Type="Int64" />
-            <Parameter Name="EventId" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="EmployeeDistributionWorks_Delete">
-          <Parameter Name="Id" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="EmployeeDistributionWorks_Insert">
-            <Parameter Name="Id" Mode="InOut" Type="Int64" />
-            <Parameter Name="WorkTypeId" Mode="In" Type="Int32" />
-            <Parameter Name="EmployeeId" Mode="In" Type="Int64" />
-            <Parameter Name="EventId" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="EmployeeDistributionWorks_SelectByEventId" ReturnType="Collection(LayanModel.EmployeeDistributionWorks_SelectByEventId_Result)">
-          <Parameter Name="EventId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Employees_CheckAllowAccessToEventForUpdateWorks" ReturnType="Collection(Int32)">
             <Parameter Name="IsAdmin" Mode="In" Type="Boolean" />
@@ -1324,6 +1362,23 @@
             <Parameter Name="VistToCoordinationDateTime" Mode="In" Type="DateTime" />
             <Parameter Name="NamesPrintingPrice" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <FunctionImport Name="Events_SelectByFilter" ReturnType="Collection(LayanModel.Events_SelectByFilter_Result)">
+            <Parameter Name="Skip" Mode="In" Type="Int32" />
+            <Parameter Name="Take" Mode="In" Type="Int32" />
+            <Parameter Name="IsClinetCustomLogo" Mode="In" Type="Boolean" />
+            <Parameter Name="IsNamesAr" Mode="In" Type="Boolean" />
+            <Parameter Name="NameGroom" Mode="In" Type="String" />
+            <Parameter Name="NameBride" Mode="In" Type="String" />
+            <Parameter Name="EventDateTimeTo" Mode="In" Type="DateTime" />
+            <Parameter Name="EventDateTimeFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="CreateDateTimeTo" Mode="In" Type="DateTime" />
+            <Parameter Name="CreateDateTimeFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="FKPackage_Id" Mode="In" Type="Int32" />
+            <Parameter Name="FKPrintNameType_Id" Mode="In" Type="Int32" />
+            <Parameter Name="FKBranch_Id" Mode="In" Type="Int32" />
+            <Parameter Name="IsForCurrentClinet" Mode="In" Type="Boolean" />
+            <Parameter Name="CurrentClinetId" Mode="In" Type="Int64" />
+          </FunctionImport>
           <FunctionImport Name="Events_SelectByFilterForEmployee" ReturnType="Collection(LayanModel.Events_SelectByFilterForEmployee_Result)">
             <Parameter Name="Skip" Mode="In" Type="Int32" />
             <Parameter Name="Take" Mode="In" Type="Int32" />
@@ -1476,6 +1531,7 @@
             <Parameter Name="FKWorkType_Id" Mode="In" Type="Int32" />
             <Parameter Name="FKUsre_Id" Mode="In" Type="Int64" />
             <Parameter Name="FKAccountType_Id" Mode="In" Type="Int32" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="EventWorksStatusHistory_SelectByEventId" ReturnType="Collection(LayanModel.EventWorksStatusHistory_SelectByEventId_Result)">
           <Parameter Name="eventId" Mode="In" Type="Int64" />
@@ -1777,6 +1833,7 @@
           </FunctionImport>
           <FunctionImport Name="Users_SelectAllEmployees" ReturnType="Collection(LayanModel.Users_SelectAllEmployees_Result)" />
           <FunctionImport Name="Users_SelectAllForUsersPrivileges" ReturnType="Collection(LayanModel.Users_SelectAllForUsersPrivileges_Result)" />
+          <FunctionImport Name="Users_SelectByBaicBranchWithWorkTypes" ReturnType="Collection(LayanModel.Users_SelectByBaicBranchWithWorkTypes_Result)" />
           <FunctionImport Name="Users_SelectByBranchId" ReturnType="Collection(LayanModel.Users_SelectByBranchId_Result)">
             <Parameter Name="BranchId" Mode="In" Type="Int32" />
             <Parameter Name="AccountTypeId" Mode="In" Type="Int32" />
@@ -1866,22 +1923,69 @@
             <Parameter Name="Ar" Mode="In" Type="String" />
             <Parameter Name="En" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="Events_SelectByFilter" ReturnType="Collection(LayanModel.Events_SelectByFilter_Result)">
-            <Parameter Name="Skip" Mode="In" Type="Int32" />
-            <Parameter Name="Take" Mode="In" Type="Int32" />
-            <Parameter Name="IsClinetCustomLogo" Mode="In" Type="Boolean" />
-            <Parameter Name="IsNamesAr" Mode="In" Type="Boolean" />
-            <Parameter Name="NameGroom" Mode="In" Type="String" />
-            <Parameter Name="NameBride" Mode="In" Type="String" />
-            <Parameter Name="EventDateTimeTo" Mode="In" Type="DateTime" />
-            <Parameter Name="EventDateTimeFrom" Mode="In" Type="DateTime" />
-            <Parameter Name="CreateDateTimeTo" Mode="In" Type="DateTime" />
-            <Parameter Name="CreateDateTimeFrom" Mode="In" Type="DateTime" />
-            <Parameter Name="FKPackage_Id" Mode="In" Type="Int32" />
-            <Parameter Name="FKPrintNameType_Id" Mode="In" Type="Int32" />
-            <Parameter Name="FKBranch_Id" Mode="In" Type="Int32" />
-            <Parameter Name="IsForCurrentClinet" Mode="In" Type="Boolean" />
-            <Parameter Name="CurrentClinetId" Mode="In" Type="Int64" />
+          <FunctionImport Name="EmployeeDistributionWorks_Delete">
+          <Parameter Name="Id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EmployeeDistributionWorks_Insert" ReturnType="Collection(LayanModel.EmployeeDistributionWorks_Insert_Result)">
+            <Parameter Name="Id" Mode="InOut" Type="Int64" />
+            <Parameter Name="WorkTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeId" Mode="In" Type="Int64" />
+            <Parameter Name="EventId" Mode="In" Type="Int64" />
+            <Parameter Name="IsAnotherBranch" Mode="In" Type="Boolean" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EmployeeDistributionWorks_SelectByEventId" ReturnType="Collection(LayanModel.EmployeeDistributionWorks_SelectByEventId_Result)">
+          <Parameter Name="EventId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Events_CheckFromDateEventIsFinshedBranchId" ReturnType="Collection(Int32)">
+            <Parameter Name="EventId" Mode="In" Type="Int64" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EventWorksStatusHistory_CheckIfTaskFinshedWithBranch" ReturnType="Collection(Boolean)">
+            <Parameter Name="EventId" Mode="In" Type="Int64" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="WorkTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="ForIsCurrentBranch" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="EventArchivesDetails_Delete">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="EventId" Mode="In" Type="Int64" />
+            <Parameter Name="EventArchifId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EventArchivesDetails_Inserrt">
+            <Parameter Name="Id" Mode="InOut" Type="Int64" />
+            <Parameter Name="EventId" Mode="In" Type="Int64" />
+            <Parameter Name="EventArchiveId" Mode="In" Type="Int32" />
+            <Parameter Name="MemoryId" Mode="In" Type="String" />
+            <Parameter Name="MemoryType" Mode="In" Type="String" />
+            <Parameter Name="PhotoStartName" Mode="In" Type="String" />
+            <Parameter Name="PhotoNumberFrom" Mode="In" Type="Int32" />
+            <Parameter Name="PhotoNumberTo" Mode="In" Type="Int32" />
+            <Parameter Name="Notes" Mode="In" Type="String" />
+            <Parameter Name="DateTime" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="EventArchives_Insert">
+            <Parameter Name="Id" Mode="InOut" Type="Int64" />
+            <Parameter Name="FKEvent_Id" Mode="In" Type="Int64" />
+            <Parameter Name="HDNumber" Mode="In" Type="String" />
+            <Parameter Name="FolderName" Mode="In" Type="String" />
+            <Parameter Name="DateTime" Mode="In" Type="DateTime" />
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EventArchives_SelectAll" ReturnType="Collection(LayanModel.EventArchives_SelectAll_Result)">
+            <Parameter Name="EventId" Mode="In" Type="Int64" />
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EventArchives_Update">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="FKEvent_Id" Mode="In" Type="Int64" />
+            <Parameter Name="HDNumber" Mode="In" Type="String" />
+            <Parameter Name="FolderName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EmployeeDistributionWorks_CheckIfInserted" ReturnType="Collection(Int32)">
+            <Parameter Name="WorkTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="EventId" Mode="In" Type="Int64" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="AlbumTypes_SelectAll_Result">
@@ -1976,15 +2080,6 @@
           <Property Type="Int64" Name="CityFkWord_Id" Nullable="true" />
           <Property Type="String" Name="CityNameAr" Nullable="true" />
           <Property Type="String" Name="CityNameEn" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="EmployeeDistributionWorks_SelectByEventId_Result">
-          <Property Type="Int64" Name="Id" Nullable="false" />
-          <Property Type="Int32" Name="FKWorkType_Id" Nullable="false" />
-          <Property Type="Int64" Name="FKEmployee_Id" Nullable="false" />
-          <Property Type="Int64" Name="FKEvent_Id" Nullable="false" />
-          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="FKAccountType_Id" Nullable="false" />
-          <Property Type="Boolean" Name="IsFinshed" Nullable="false" />
         </ComplexType>
         <ComplexType Name="Employees_SelectWorks_Result">
           <Property Type="Int64" Name="Id" Nullable="false" />
@@ -2174,6 +2269,38 @@
           <Property Type="Boolean" Name="Packaging" Nullable="true" />
           <Property Type="Boolean" Name="TransmissionAndDelivery" Nullable="true" />
           <Property Type="Boolean" Name="Archiving" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Events_SelectByFilter_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsClinetCustomLogo" Nullable="true" />
+          <Property Type="String" Name="LogoFilePath" Nullable="true" />
+          <Property Type="Boolean" Name="IsNamesAr" Nullable="true" />
+          <Property Type="String" Name="NameGroom" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NameBride" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="FKPrintNameType_Id" Nullable="true" />
+          <Property Type="DateTime" Name="EventDateTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="FKPackage_Id" Nullable="false" />
+          <Property Type="Int64" Name="FKClinet_Id" Nullable="false" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+          <Property Type="Int64" Name="FKUserCreaed_Id" Nullable="false" />
+          <Property Type="Int32" Name="FKBranch_Id" Nullable="false" />
+          <Property Type="String" Name="ClendarEventId" Nullable="true" />
+          <Property Type="Decimal" Name="PackagePrice" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PackageNamsArExtraPrice" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="VistToCoordinationDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="VistToCoordinationClendarEventId" Nullable="true" />
+          <Property Type="Decimal" Name="NamesPrintingPrice" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="EnquiryName" Nullable="true" MaxLength="101" />
+          <Property Type="Boolean" Name="IsClosed" Nullable="true" />
+          <Property Type="String" Name="Branch_NameAr" Nullable="true" />
+          <Property Type="String" Name="Branch_NameEn" Nullable="true" />
+          <Property Type="String" Name="Package_NameAr" Nullable="true" />
+          <Property Type="String" Name="Package_NameEn" Nullable="true" />
+          <Property Type="String" Name="WordPrintNamesType_NameAr" Nullable="true" />
+          <Property Type="String" Name="WordPrintNamesType_NameEn" Nullable="true" />
+          <Property Type="Boolean" Name="IsDepositPaymented" Nullable="true" />
+          <Property Type="Decimal" Name="TotalPaymentsActivated" Nullable="true" Precision="18" Scale="2" />
         </ComplexType>
         <ComplexType Name="Events_SelectByFilterForEmployee_Result">
           <Property Type="Int64" Name="Id" Nullable="false" />
@@ -2614,6 +2741,29 @@
           <Property Type="String" Name="CityNameAr" Nullable="true" />
           <Property Type="String" Name="CityNameEn" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="Users_SelectByBaicBranchWithWorkTypes_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PhoneNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ActiveCode" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="FKAccountType_Id" Nullable="false" />
+          <Property Type="Int32" Name="FkCountry_Id" Nullable="true" />
+          <Property Type="Int32" Name="FkCity_Id" Nullable="true" />
+          <Property Type="Int32" Name="FKLanguage_Id" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="FKPranch_Id" Nullable="true" />
+          <Property Type="Boolean" Name="IsActiveEmail" Nullable="false" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NationalityNumber" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="WebSite" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="FkWorkType_Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsBasic" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="Users_SelectByBranchId_Result">
           <Property Type="Int64" Name="Id" Nullable="false" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
@@ -2657,7 +2807,6 @@
           <Property Type="String" Name="NationalityNumber" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="WebSite" Nullable="true" MaxLength="500" />
           <Property Type="Int32" Name="FkWorkType_Id" Nullable="false" />
-          <Property Type="Boolean" Name="IsBasic" Nullable="false" />
         </ComplexType>
         <ComplexType Name="Users_SelectByFilter_Result">
           <Property Type="Int64" Name="Id" Nullable="false" />
@@ -2787,37 +2936,47 @@
           <Property Type="Boolean" Name="UsersPrivileges_CanDisplay" Nullable="true" />
           <Property Type="Boolean" Name="UsersPrivileges_CanEdit" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="Events_SelectByFilter_Result">
+        <ComplexType Name="EmployeeDistributionWorks_Insert_Result">
           <Property Type="Int64" Name="Id" Nullable="false" />
-          <Property Type="Boolean" Name="IsClinetCustomLogo" Nullable="true" />
-          <Property Type="String" Name="LogoFilePath" Nullable="true" />
-          <Property Type="Boolean" Name="IsNamesAr" Nullable="true" />
-          <Property Type="String" Name="NameGroom" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="NameBride" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="FKPrintNameType_Id" Nullable="true" />
-          <Property Type="DateTime" Name="EventDateTime" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="FKPackage_Id" Nullable="false" />
-          <Property Type="Int64" Name="FKClinet_Id" Nullable="false" />
-          <Property Type="String" Name="Notes" Nullable="true" />
-          <Property Type="Int64" Name="FKUserCreaed_Id" Nullable="false" />
+          <Property Type="Int32" Name="FKWorkType_Id" Nullable="false" />
+          <Property Type="Int64" Name="FKEmployee_Id" Nullable="false" />
+          <Property Type="Int64" Name="FKEvent_Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsAnotherBranch" Nullable="false" />
           <Property Type="Int32" Name="FKBranch_Id" Nullable="false" />
-          <Property Type="String" Name="ClendarEventId" Nullable="true" />
-          <Property Type="Decimal" Name="PackagePrice" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="PackageNamsArExtraPrice" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="DateTime" Name="VistToCoordinationDateTime" Nullable="true" Precision="23" />
-          <Property Type="String" Name="VistToCoordinationClendarEventId" Nullable="true" />
-          <Property Type="Decimal" Name="NamesPrintingPrice" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="String" Name="EnquiryName" Nullable="true" MaxLength="101" />
-          <Property Type="Boolean" Name="IsClosed" Nullable="true" />
-          <Property Type="String" Name="Branch_NameAr" Nullable="true" />
-          <Property Type="String" Name="Branch_NameEn" Nullable="true" />
-          <Property Type="String" Name="Package_NameAr" Nullable="true" />
-          <Property Type="String" Name="Package_NameEn" Nullable="true" />
-          <Property Type="String" Name="WordPrintNamesType_NameAr" Nullable="true" />
-          <Property Type="String" Name="WordPrintNamesType_NameEn" Nullable="true" />
-          <Property Type="Boolean" Name="IsDepositPaymented" Nullable="true" />
-          <Property Type="Decimal" Name="TotalPaymentsActivated" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="FKAccountType_Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsFinshed" Nullable="true" />
+          <Property Type="String" Name="BranchNameAr" Nullable="true" />
+          <Property Type="String" Name="BranchNameEn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="EmployeeDistributionWorks_SelectByEventId_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="FKWorkType_Id" Nullable="false" />
+          <Property Type="Int64" Name="FKEmployee_Id" Nullable="false" />
+          <Property Type="Int64" Name="FKEvent_Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsAnotherBranch" Nullable="false" />
+          <Property Type="Int32" Name="FKBranch_Id" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="FKAccountType_Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsFinshed" Nullable="false" />
+          <Property Type="String" Name="BranchNameAr" Nullable="true" />
+          <Property Type="String" Name="BranchNameEn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="EventArchives_SelectAll_Result">
+          <Property Type="Int32" Name="EV_Id" Nullable="false" />
+          <Property Type="Int64" Name="EV_EventId" Nullable="false" />
+          <Property Type="Int64" Name="EV_UserId" Nullable="false" />
+          <Property Type="String" Name="EV_FolderName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="EV_HardDiskName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="EV_DateTime" Nullable="false" Precision="23" />
+          <Property Type="Int64" Name="EVD_Id" Nullable="true" />
+          <Property Type="DateTime" Name="EVD_DateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EVD_MemoryId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EVD_MemoryType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EVD_Notes" Nullable="true" />
+          <Property Type="Int32" Name="EVD_PhotoNumberFrom" Nullable="true" />
+          <Property Type="Int32" Name="EVD_PhotoNumberTo" Nullable="true" />
+          <Property Type="String" Name="EVD_PhotoStartName" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2850,6 +3009,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="AlbumTypes_Update" FunctionName="LayanModel.Store.AlbumTypes_Update" />
           <FunctionImportMapping FunctionImportName="Branches_CheckIfUsed" FunctionName="LayanModel.Store.Branches_CheckIfUsed" />
+          <FunctionImportMapping FunctionImportName="Branches_CheckIsBasicBranch" FunctionName="LayanModel.Store.Branches_CheckIsBasicBranch" />
           <FunctionImportMapping FunctionImportName="Branches_Delete" FunctionName="LayanModel.Store.Branches_Delete" />
           <FunctionImportMapping FunctionImportName="Branches_Insert" FunctionName="LayanModel.Store.Branches_Insert" />
           <FunctionImportMapping FunctionImportName="Branches_SelectByAll" FunctionName="LayanModel.Store.Branches_SelectByAll">
@@ -2975,22 +3135,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Countries_Update" FunctionName="LayanModel.Store.Countries_Update" />
-          <FunctionImportMapping FunctionImportName="EmployeeDistributionWorks_CheckIfInserted" FunctionName="LayanModel.Store.EmployeeDistributionWorks_CheckIfInserted" />
-          <FunctionImportMapping FunctionImportName="EmployeeDistributionWorks_Delete" FunctionName="LayanModel.Store.EmployeeDistributionWorks_Delete" />
-          <FunctionImportMapping FunctionImportName="EmployeeDistributionWorks_Insert" FunctionName="LayanModel.Store.EmployeeDistributionWorks_Insert" />
-          <FunctionImportMapping FunctionImportName="EmployeeDistributionWorks_SelectByEventId" FunctionName="LayanModel.Store.EmployeeDistributionWorks_SelectByEventId">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.EmployeeDistributionWorks_SelectByEventId_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FKWorkType_Id" ColumnName="FKWorkType_Id" />
-                <ScalarProperty Name="FKEmployee_Id" ColumnName="FKEmployee_Id" />
-                <ScalarProperty Name="FKEvent_Id" ColumnName="FKEvent_Id" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="FKAccountType_Id" ColumnName="FKAccountType_Id" />
-                <ScalarProperty Name="IsFinshed" ColumnName="IsFinshed" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Employees_CheckAllowAccessToEventForUpdateWorks" FunctionName="LayanModel.Store.Employees_CheckAllowAccessToEventForUpdateWorks" />
           <FunctionImportMapping FunctionImportName="Employees_SelectWorks" FunctionName="LayanModel.Store.Employees_SelectWorks">
             <ResultMapping>
@@ -3261,6 +3405,42 @@
           <FunctionImportMapping FunctionImportName="Events_CheckFromDateEventIsFinshed" FunctionName="LayanModel.Store.Events_CheckFromDateEventIsFinshed" />
           <FunctionImportMapping FunctionImportName="Events_CountsByYear" FunctionName="LayanModel.Store.Events_CountsByYear" />
           <FunctionImportMapping FunctionImportName="Events_Insert" FunctionName="LayanModel.Store.Events_Insert" />
+          <FunctionImportMapping FunctionImportName="Events_SelectByFilter" FunctionName="LayanModel.Store.Events_SelectByFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Events_SelectByFilter_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IsClinetCustomLogo" ColumnName="IsClinetCustomLogo" />
+                <ScalarProperty Name="LogoFilePath" ColumnName="LogoFilePath" />
+                <ScalarProperty Name="IsNamesAr" ColumnName="IsNamesAr" />
+                <ScalarProperty Name="NameGroom" ColumnName="NameGroom" />
+                <ScalarProperty Name="NameBride" ColumnName="NameBride" />
+                <ScalarProperty Name="FKPrintNameType_Id" ColumnName="FKPrintNameType_Id" />
+                <ScalarProperty Name="EventDateTime" ColumnName="EventDateTime" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="FKPackage_Id" ColumnName="FKPackage_Id" />
+                <ScalarProperty Name="FKClinet_Id" ColumnName="FKClinet_Id" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="FKUserCreaed_Id" ColumnName="FKUserCreaed_Id" />
+                <ScalarProperty Name="FKBranch_Id" ColumnName="FKBranch_Id" />
+                <ScalarProperty Name="ClendarEventId" ColumnName="ClendarEventId" />
+                <ScalarProperty Name="PackagePrice" ColumnName="PackagePrice" />
+                <ScalarProperty Name="PackageNamsArExtraPrice" ColumnName="PackageNamsArExtraPrice" />
+                <ScalarProperty Name="VistToCoordinationDateTime" ColumnName="VistToCoordinationDateTime" />
+                <ScalarProperty Name="VistToCoordinationClendarEventId" ColumnName="VistToCoordinationClendarEventId" />
+                <ScalarProperty Name="NamesPrintingPrice" ColumnName="NamesPrintingPrice" />
+                <ScalarProperty Name="EnquiryName" ColumnName="EnquiryName" />
+                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+                <ScalarProperty Name="Branch_NameAr" ColumnName="Branch_NameAr" />
+                <ScalarProperty Name="Branch_NameEn" ColumnName="Branch_NameEn" />
+                <ScalarProperty Name="Package_NameAr" ColumnName="Package_NameAr" />
+                <ScalarProperty Name="Package_NameEn" ColumnName="Package_NameEn" />
+                <ScalarProperty Name="WordPrintNamesType_NameAr" ColumnName="WordPrintNamesType_NameAr" />
+                <ScalarProperty Name="WordPrintNamesType_NameEn" ColumnName="WordPrintNamesType_NameEn" />
+                <ScalarProperty Name="IsDepositPaymented" ColumnName="IsDepositPaymented" />
+                <ScalarProperty Name="TotalPaymentsActivated" ColumnName="TotalPaymentsActivated" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Events_SelectByFilterForEmployee" FunctionName="LayanModel.Store.Events_SelectByFilterForEmployee">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LayanModel.Events_SelectByFilterForEmployee_Result">
@@ -3898,6 +4078,33 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Users_SelectByBaicBranchWithWorkTypes" FunctionName="LayanModel.Store.Users_SelectByBaicBranchWithWorkTypes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Users_SelectByBaicBranchWithWorkTypes_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ActiveCode" ColumnName="ActiveCode" />
+                <ScalarProperty Name="FKAccountType_Id" ColumnName="FKAccountType_Id" />
+                <ScalarProperty Name="FkCountry_Id" ColumnName="FkCountry_Id" />
+                <ScalarProperty Name="FkCity_Id" ColumnName="FkCity_Id" />
+                <ScalarProperty Name="FKLanguage_Id" ColumnName="FKLanguage_Id" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="FKPranch_Id" ColumnName="FKPranch_Id" />
+                <ScalarProperty Name="IsActiveEmail" ColumnName="IsActiveEmail" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="NationalityNumber" ColumnName="NationalityNumber" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+                <ScalarProperty Name="FkWorkType_Id" ColumnName="FkWorkType_Id" />
+                <ScalarProperty Name="IsBasic" ColumnName="IsBasic" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Users_SelectByBranchId" FunctionName="LayanModel.Store.Users_SelectByBranchId">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LayanModel.Users_SelectByBranchId_Result">
@@ -3947,7 +4154,6 @@
                 <ScalarProperty Name="NationalityNumber" ColumnName="NationalityNumber" />
                 <ScalarProperty Name="WebSite" ColumnName="WebSite" />
                 <ScalarProperty Name="FkWorkType_Id" ColumnName="FkWorkType_Id" />
-                <ScalarProperty Name="IsBasic" ColumnName="IsBasic" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -4112,42 +4318,68 @@
           <FunctionImportMapping FunctionImportName="Words_Delete" FunctionName="LayanModel.Store.Words_Delete" />
           <FunctionImportMapping FunctionImportName="Words_Insert" FunctionName="LayanModel.Store.Words_Insert" />
           <FunctionImportMapping FunctionImportName="Words_Update" FunctionName="LayanModel.Store.Words_Update" />
-          <FunctionImportMapping FunctionImportName="Events_SelectByFilter" FunctionName="LayanModel.Store.Events_SelectByFilter">
+          <FunctionImportMapping FunctionImportName="EmployeeDistributionWorks_Delete" FunctionName="LayanModel.Store.EmployeeDistributionWorks_Delete" />
+          <FunctionImportMapping FunctionImportName="EmployeeDistributionWorks_Insert" FunctionName="LayanModel.Store.EmployeeDistributionWorks_Insert">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.Events_SelectByFilter_Result">
+              <ComplexTypeMapping TypeName="LayanModel.EmployeeDistributionWorks_Insert_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IsClinetCustomLogo" ColumnName="IsClinetCustomLogo" />
-                <ScalarProperty Name="LogoFilePath" ColumnName="LogoFilePath" />
-                <ScalarProperty Name="IsNamesAr" ColumnName="IsNamesAr" />
-                <ScalarProperty Name="NameGroom" ColumnName="NameGroom" />
-                <ScalarProperty Name="NameBride" ColumnName="NameBride" />
-                <ScalarProperty Name="FKPrintNameType_Id" ColumnName="FKPrintNameType_Id" />
-                <ScalarProperty Name="EventDateTime" ColumnName="EventDateTime" />
-                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
-                <ScalarProperty Name="FKPackage_Id" ColumnName="FKPackage_Id" />
-                <ScalarProperty Name="FKClinet_Id" ColumnName="FKClinet_Id" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="FKUserCreaed_Id" ColumnName="FKUserCreaed_Id" />
+                <ScalarProperty Name="FKWorkType_Id" ColumnName="FKWorkType_Id" />
+                <ScalarProperty Name="FKEmployee_Id" ColumnName="FKEmployee_Id" />
+                <ScalarProperty Name="FKEvent_Id" ColumnName="FKEvent_Id" />
+                <ScalarProperty Name="IsAnotherBranch" ColumnName="IsAnotherBranch" />
                 <ScalarProperty Name="FKBranch_Id" ColumnName="FKBranch_Id" />
-                <ScalarProperty Name="ClendarEventId" ColumnName="ClendarEventId" />
-                <ScalarProperty Name="PackagePrice" ColumnName="PackagePrice" />
-                <ScalarProperty Name="PackageNamsArExtraPrice" ColumnName="PackageNamsArExtraPrice" />
-                <ScalarProperty Name="VistToCoordinationDateTime" ColumnName="VistToCoordinationDateTime" />
-                <ScalarProperty Name="VistToCoordinationClendarEventId" ColumnName="VistToCoordinationClendarEventId" />
-                <ScalarProperty Name="NamesPrintingPrice" ColumnName="NamesPrintingPrice" />
-                <ScalarProperty Name="EnquiryName" ColumnName="EnquiryName" />
-                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
-                <ScalarProperty Name="Branch_NameAr" ColumnName="Branch_NameAr" />
-                <ScalarProperty Name="Branch_NameEn" ColumnName="Branch_NameEn" />
-                <ScalarProperty Name="Package_NameAr" ColumnName="Package_NameAr" />
-                <ScalarProperty Name="Package_NameEn" ColumnName="Package_NameEn" />
-                <ScalarProperty Name="WordPrintNamesType_NameAr" ColumnName="WordPrintNamesType_NameAr" />
-                <ScalarProperty Name="WordPrintNamesType_NameEn" ColumnName="WordPrintNamesType_NameEn" />
-                <ScalarProperty Name="IsDepositPaymented" ColumnName="IsDepositPaymented" />
-                <ScalarProperty Name="TotalPaymentsActivated" ColumnName="TotalPaymentsActivated" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FKAccountType_Id" ColumnName="FKAccountType_Id" />
+                <ScalarProperty Name="IsFinshed" ColumnName="IsFinshed" />
+                <ScalarProperty Name="BranchNameAr" ColumnName="BranchNameAr" />
+                <ScalarProperty Name="BranchNameEn" ColumnName="BranchNameEn" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EmployeeDistributionWorks_SelectByEventId" FunctionName="LayanModel.Store.EmployeeDistributionWorks_SelectByEventId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.EmployeeDistributionWorks_SelectByEventId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKWorkType_Id" ColumnName="FKWorkType_Id" />
+                <ScalarProperty Name="FKEmployee_Id" ColumnName="FKEmployee_Id" />
+                <ScalarProperty Name="FKEvent_Id" ColumnName="FKEvent_Id" />
+                <ScalarProperty Name="IsAnotherBranch" ColumnName="IsAnotherBranch" />
+                <ScalarProperty Name="FKBranch_Id" ColumnName="FKBranch_Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FKAccountType_Id" ColumnName="FKAccountType_Id" />
+                <ScalarProperty Name="IsFinshed" ColumnName="IsFinshed" />
+                <ScalarProperty Name="BranchNameAr" ColumnName="BranchNameAr" />
+                <ScalarProperty Name="BranchNameEn" ColumnName="BranchNameEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Events_CheckFromDateEventIsFinshedBranchId" FunctionName="LayanModel.Store.Events_CheckFromDateEventIsFinshedBranchId" />
+          <FunctionImportMapping FunctionImportName="EventWorksStatusHistory_CheckIfTaskFinshedWithBranch" FunctionName="LayanModel.Store.EventWorksStatusHistory_CheckIfTaskFinshedWithBranch" />
+          <FunctionImportMapping FunctionImportName="EventArchivesDetails_Delete" FunctionName="LayanModel.Store.EventArchivesDetails_Delete" />
+          <FunctionImportMapping FunctionImportName="EventArchivesDetails_Inserrt" FunctionName="LayanModel.Store.EventArchivesDetails_Inserrt" />
+          <FunctionImportMapping FunctionImportName="EventArchives_Insert" FunctionName="LayanModel.Store.EventArchives_Insert" />
+          <FunctionImportMapping FunctionImportName="EventArchives_SelectAll" FunctionName="LayanModel.Store.EventArchives_SelectAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.EventArchives_SelectAll_Result">
+                <ScalarProperty Name="EV_Id" ColumnName="EV_Id" />
+                <ScalarProperty Name="EV_EventId" ColumnName="EV_EventId" />
+                <ScalarProperty Name="EV_UserId" ColumnName="EV_UserId" />
+                <ScalarProperty Name="EV_FolderName" ColumnName="EV_FolderName" />
+                <ScalarProperty Name="EV_HardDiskName" ColumnName="EV_HardDiskName" />
+                <ScalarProperty Name="EV_DateTime" ColumnName="EV_DateTime" />
+                <ScalarProperty Name="EVD_Id" ColumnName="EVD_Id" />
+                <ScalarProperty Name="EVD_DateTime" ColumnName="EVD_DateTime" />
+                <ScalarProperty Name="EVD_MemoryId" ColumnName="EVD_MemoryId" />
+                <ScalarProperty Name="EVD_MemoryType" ColumnName="EVD_MemoryType" />
+                <ScalarProperty Name="EVD_Notes" ColumnName="EVD_Notes" />
+                <ScalarProperty Name="EVD_PhotoNumberFrom" ColumnName="EVD_PhotoNumberFrom" />
+                <ScalarProperty Name="EVD_PhotoNumberTo" ColumnName="EVD_PhotoNumberTo" />
+                <ScalarProperty Name="EVD_PhotoStartName" ColumnName="EVD_PhotoStartName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EventArchives_Update" FunctionName="LayanModel.Store.EventArchives_Update" />
+          <FunctionImportMapping FunctionImportName="EmployeeDistributionWorks_CheckIfInserted" FunctionName="LayanModel.Store.EmployeeDistributionWorks_CheckIfInserted" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -127,7 +127,8 @@
                     </th>
                    
                     <th class="th-10">
-                        @Token.Operations
+                        <sms-sort  
+                                  ng-sms-resource="@Token.Operations"></sms-sort>
                     </th>
                 </tr>
             </thead>
@@ -145,29 +146,29 @@
                         <!--Btn:Coordination-->
                         <a href="/EEW/AddAndUpdateCoordinations?id={{x.Id}}" 
                            ng-if="!x.EventWorkStatusIsFinshed.Coordination&&x.WorkTypeId==worksTypesEnum.Coordination"
-                        data-skin="dark" data-toggle="kt-tooltip" data-placement="top"    title="@Token.Update"  
+                            title="@Token.Update"  
                             class="btn btn-sm btn-clean btn-icon btn-icon-md" ><i class="la la-edit"></i></a>
                       
+                        <!--Btn:Implementation-->
                         <a href="javascript:void(0)"
                            ng-if="!x.EventWorkStatusIsFinshed.Implementation&&x.WorkTypeId==worksTypesEnum.Implementation"
-                        data-skin="dark" data-toggle="kt-tooltip" data-placement="top"    title="@Token.Finshe"
+                            title="@Token.Finshe"
                            ng-click="taskFinsh(x)"
                            class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="flaticon-interface-10"></i></a>
 
+                        <!--Btn:ArchivingAndSaveing -->
+                        <a href="/EEW/AddAndUpdateArchivingAndSaveing?id={{x.Id}}" 
+                           ng-if="!x.EventWorkStatusIsFinshed.ArchivingAndSaveing&&x.WorkTypeId==worksTypesEnum.ArchivingAndSaveing"
+                           title="@Token.Finshe"
+                           class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="flaticon-interface-10"></i></a>
                     
+                      
                     
-                    
-                    
-                      </td>
-
-
-                    <!--Another Here-->
-
-
+                    </td>
                 </tr>
             </tbody>
         </table>
         <!--Paging -->
-        <sms-paging ng-sms-fop="enquiyFOP" ng-sms-display-m-func="getEventCoordinations()"></sms-paging>
+        <sms-paging ng-sms-fop="enquiyFOP" ng-sms-display-m-func="getEvents()"></sms-paging>
     </div>
 </div>

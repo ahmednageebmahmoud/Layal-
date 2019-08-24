@@ -26,6 +26,9 @@
   <Function Name="Branches_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
   </Function>
+  <Function Name="Branches_CheckIsBasicBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchId" Type="int" Mode="In" />
+  </Function>
   <Function Name="Branches_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
   </Function>
@@ -114,8 +117,8 @@
   </Function>
   <Function Name="EmployeeDistributionWorks_CheckIfInserted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="WorkTypeId" Type="int" Mode="In" />
-    <Parameter Name="EmployeeId" Type="bigint" Mode="In" />
     <Parameter Name="EventId" Type="bigint" Mode="In" />
+    <Parameter Name="BranchId" Type="int" Mode="In" />
   </Function>
   <Function Name="EmployeeDistributionWorks_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
@@ -125,6 +128,8 @@
     <Parameter Name="WorkTypeId" Type="int" Mode="In" />
     <Parameter Name="EmployeeId" Type="bigint" Mode="In" />
     <Parameter Name="EventId" Type="bigint" Mode="In" />
+    <Parameter Name="IsAnotherBranch" Type="bit" Mode="In" />
+    <Parameter Name="BranchId" Type="int" Mode="In" />
   </Function>
   <Function Name="EmployeeDistributionWorks_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EventId" Type="bigint" Mode="In" />
@@ -329,6 +334,41 @@
     <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
     <Parameter Name="WordId" Type="bigint" Mode="In" />
   </Function>
+  <Function Name="EventArchives_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="InOut" />
+    <Parameter Name="FKEvent_Id" Type="bigint" Mode="In" />
+    <Parameter Name="HDNumber" Type="nvarchar" Mode="In" />
+    <Parameter Name="FolderName" Type="nvarchar" Mode="In" />
+    <Parameter Name="DateTime" Type="datetime" Mode="In" />
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EventArchives_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventId" Type="bigint" Mode="In" />
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EventArchives_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="FKEvent_Id" Type="bigint" Mode="In" />
+    <Parameter Name="HDNumber" Type="nvarchar" Mode="In" />
+    <Parameter Name="FolderName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="EventArchivesDetails_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="EventId" Type="bigint" Mode="In" />
+    <Parameter Name="EventArchifId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EventArchivesDetails_Inserrt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="InOut" />
+    <Parameter Name="EventId" Type="bigint" Mode="In" />
+    <Parameter Name="EventArchiveId" Type="int" Mode="In" />
+    <Parameter Name="MemoryId" Type="nvarchar" Mode="In" />
+    <Parameter Name="MemoryType" Type="nvarchar" Mode="In" />
+    <Parameter Name="PhotoStartName" Type="nvarchar" Mode="In" />
+    <Parameter Name="PhotoNumberFrom" Type="int" Mode="In" />
+    <Parameter Name="PhotoNumberTo" Type="int" Mode="In" />
+    <Parameter Name="Notes" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="DateTime" Type="datetime" Mode="In" />
+  </Function>
   <Function Name="EventCoordinations_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
   </Function>
@@ -350,6 +390,10 @@
   <Function Name="Events_CheckFromDateEventIsFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EventId" Type="bigint" Mode="In" />
     <Parameter Name="DateTime" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="Events_CheckFromDateEventIsFinshedBranchId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventId" Type="bigint" Mode="In" />
+    <Parameter Name="BranchId" Type="int" Mode="In" />
   </Function>
   <Function Name="Events_CheckIfWorkFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
     <Parameter Name="eventId" Type="bigint" Mode="In" />
@@ -540,6 +584,12 @@
     <Parameter Name="WordId" Type="bigint" Mode="In" />
     <Parameter Name="InputType" Type="int" Mode="In" />
   </Function>
+  <Function Name="EventWorksStatusHistory_CheckIfTaskFinshedWithBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventId" Type="bigint" Mode="In" />
+    <Parameter Name="BranchId" Type="int" Mode="In" />
+    <Parameter Name="WorkTypeId" Type="int" Mode="In" />
+    <Parameter Name="ForIsCurrentBranch" Type="bit" Mode="In" />
+  </Function>
   <Function Name="EventWorksStatusHistory_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IsFinshed" Type="bit" Mode="In" />
     <Parameter Name="DateTime" Type="datetime" Mode="In" />
@@ -547,6 +597,7 @@
     <Parameter Name="FKWorkType_Id" Type="int" Mode="In" />
     <Parameter Name="FKUsre_Id" Type="bigint" Mode="In" />
     <Parameter Name="FKAccountType_Id" Type="int" Mode="In" />
+    <Parameter Name="BranchId" Type="int" Mode="In" />
   </Function>
   <Function Name="EventWorksStatusHistory_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="eventId" Type="bigint" Mode="In" />
@@ -859,6 +910,7 @@
   </Function>
   <Function Name="Users_SelectAllEmployees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="Users_SelectAllForUsersPrivileges" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Users_SelectByBaicBranchWithWorkTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="Users_SelectByBranchId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="BranchId" Type="int" Mode="In" />
     <Parameter Name="AccountTypeId" Type="int" Mode="In" />

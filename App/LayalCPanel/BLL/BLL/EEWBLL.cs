@@ -50,7 +50,6 @@ namespace BLL.BLL
         public bool ChakIfEmployeeAllowAccess(WorksTypesEnum workType)
         {
             if (this.UserLoggad.IsAdmin) return true;
-
             return db.EmployeesWorks_CheckIfInserted((int)workType, this.UserLoggad.Id).First().Value > 0;
         }
 
@@ -59,6 +58,21 @@ namespace BLL.BLL
         {
             if (!CheckAlloweAccess(eventId, workType))
                 return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEvent);
+
+            //switch (workType)
+            //{
+            //    case WorksTypesEnum.ArchivingAndSaveing:
+            //        {
+            //            /*
+            //             فى هذة الحالة لا يدخل الى صفحة التعديل الا موظف الفرع الى تابع لة المناسبة 
+            //             لان هوا الى يقدر يضيف تفاصيل الارشفة 
+            //             والفرع الاخر الى هوا فى الموظف المنتدب .. فقط بيضيف اسم الهارد الى حفظ فية 
+            //             */
+            //             if(db.Events_CheckFromDateEventIsFinshedBranchId(eventId, this.UserLoggad.BrId).First().Value==0)
+            //    return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEvent);
+            //        }
+            //        break;
+            //}
 
             return new EventsBLL().GetEventForCurrretnEmployee(eventId);
         }
@@ -90,22 +104,28 @@ namespace BLL.BLL
                 var ObjReturn = CheckIfAllowSave(eventId, workTypeId);
                 if (ObjReturn != null) return ObjReturn;
 
-
-                //Insert In History
-                db.EventWorksStatusHistory_Insert(true, DateTime.Now, eventId, (int)workTypeId, this.UserLoggad.Id, this.UserLoggad.AccountTypeId);
-
-                //Update Event Finshed
-                UpdateFinshed(eventId, workTypeId);
-
-                //Send Notification
-                SaveNotificationFinshTask(eventId, workTypeId);
-
+                TaskFinshed(eventId, workTypeId);
                 return new ResponseVM(RequestTypeEnum.Success, Token.Finshed);
             }
             catch (Exception ex)
             {
                 return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
             }
+        }
+
+
+        public void TaskFinshed(long eventId, WorksTypesEnum workTypeId)
+        {
+           
+            //Insert In History
+            db.EventWorksStatusHistory_Insert(true, DateTime.Now, eventId, (int)workTypeId, this.UserLoggad.Id, this.UserLoggad.AccountTypeId, this.UserLoggad.BrId);
+
+            //Update Event Finshed
+            UpdateFinshed(eventId, workTypeId);
+
+            //Send Notification
+            SaveNotificationFinshTask(eventId, workTypeId);
+
         }
 
         /// <summary>
@@ -125,7 +145,7 @@ namespace BLL.BLL
                 return new ResponseVM(RequestTypeEnum.Error, Token.ThisTaskIsFinshed);
 
             //التحقق لان المناسبة لم تغلق
-            if (CheckIfEnquiryClosed(eventId))
+            if (new EnquiresBLL().CheckIfEnquiryClosed(eventId))
                 return new ResponseVM(RequestTypeEnum.Error, Token.EventIsClosed);
 
             switch (workTypeId)
@@ -186,6 +206,11 @@ namespace BLL.BLL
                     db.EventWorksStatusIsFinshed_Update(eventId, true, (int)workTypeId);
                     break;
                 case WorksTypesEnum.ArchivingAndSaveing:
+                    //لا ننهى هذة المهمة الا التاكد ان الفرع الاخر بة شخص ماء قد قام بـ انهاء المهمة
+                    if (db.EventWorksStatusHistory_CheckIfTaskFinshedWithBranch(eventId,this.UserLoggad.BrId ,(int)workTypeId,false).First().Value)
+                    {
+                        db.EventWorksStatusIsFinshed_Update(eventId, true, (int)workTypeId);
+                    }
                     break;
                 case WorksTypesEnum.ProductProcessing:
                     break;
@@ -276,10 +301,7 @@ namespace BLL.BLL
             }
         }
 
-        private bool CheckIfEnquiryClosed(long enquiryId)
-        {
-            return db.Enquires_IsClosed(enquiryId).First().Value > 0;
-        }
+      
 
         private object Delete(EventCoordinationVM c)
         {

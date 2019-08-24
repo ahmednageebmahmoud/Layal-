@@ -252,15 +252,15 @@
                                         <!--Btn:Edit-->
                                         @if (Priv.CanEdit)
                                         {
-                                            <a href="/Users/AddAndUpdate?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Edit" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                            <a href="/Users/AddAndUpdate?id={{x.Id}}"  title="@Token.Edit" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
                                         }
-                                        <a href="/Users/UserInformation?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.UserInformation" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-search"></i></a>
+                                        <a href="/Users/UserInformation?id={{x.Id}}"  title="@Token.UserInformation" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-search"></i></a>
                                         @if (PrivUserPayments.CanEdit || PrivUserPayments.CanAdd || PrivUserPayments.CanDisplay)
                                         {
                                             <a href="/UserPayments/Payments?id={{x.Id}}"
                                                ng-if="x.AccountTypeId==accountTypeEnum.Helper"
                                                title="@Token.Payments"
-                                               data-skin="dark" data-toggle="kt-tooltip" data-placement="top" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fas fa-hand-holding-usd"></i></a>
+                                                class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fas fa-hand-holding-usd"></i></a>
                                         }
                                     </td>
                                 </tr>

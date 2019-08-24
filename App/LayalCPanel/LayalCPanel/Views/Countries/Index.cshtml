@@ -91,12 +91,12 @@
                                         <!--Btn:Edit-->
                                         @if (Priv.CanEdit)
                                         {
-                                            <a href="/Countries/AddAndUpdate?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Edit" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                            <a href="/Countries/AddAndUpdate?id={{x.Id}}"  title="@Token.Edit" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
                                         }
                                         <!--Btn:Delete-->
                                         @if (Priv.CanDelete)
                                         {
-                                            <a href="javascript:void(0);" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="delete(x)"><i class="la la-trash"></i> </a>
+                                            <a href="javascript:void(0);"  title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="delete(x)"><i class="la la-trash"></i> </a>
                                         }
                                     </td>
                                 </tr>

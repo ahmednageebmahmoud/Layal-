@@ -1962,6 +1962,10 @@
     <Content Include="Scripts\angularJS\directives\sms-upload-files.js" />
     <Content Include="Scripts\angularJS\filters\employeeWorkFilter.js" />
     <Content Include="Scripts\angularJS\filters\filterWithoutStaticItems.js" />
+    <Content Include="Scripts\angularJS\views\eew\archivingAndSaveing\addAndUpdate\contoller.js" />
+    <Content Include="Scripts\angularJS\views\eew\archivingAndSaveing\addAndUpdate\service.js" />
+    <Content Include="Scripts\angularJS\views\eew\archivingAndSaveing\index\contoller.js" />
+    <Content Include="Scripts\angularJS\views\eew\archivingAndSaveing\index\service.js" />
     <Content Include="Scripts\angularJS\views\enquires\addEnquiry\contoller.js" />
     <Content Include="Scripts\angularJS\views\enquires\addEnquiry\service.js" />
     <Content Include="Scripts\angularJS\views\enquires\addAndUpdate\contoller.js" />
@@ -2318,6 +2322,8 @@
     <Content Include="Views\Shared\_Layout_Anonymous.cshtml" />
     <Content Include="Views\MyEnquires\EnquiryInformation.cshtml" />
     <Content Include="Views\Enquires\_AddAndUpdatePartial.cshtml" />
+    <Content Include="Views\EEW\ArchivingAndSaveing.cshtml" />
+    <Content Include="Views\EEW\AddAndUpdateArchivingAndSaveing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

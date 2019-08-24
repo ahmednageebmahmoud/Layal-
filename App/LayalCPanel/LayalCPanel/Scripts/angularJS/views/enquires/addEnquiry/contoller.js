@@ -2,7 +2,12 @@
     //Fill Current Date
     var currentDate = new Date();
     var currentDay = currentDate.getDate(), currentMonth = currentDate.getMonth() + 1, currentYear = currentDate.getFullYear();
-
+    s.dateCond = {
+        minDay: 0,
+        maxDay: 0,
+        minMonth: 0,
+        maxMonth: 12,
+    };s
     s.state = StateEnum;
     s.enquires = [];
     s.enquiyFOP = {};
@@ -123,39 +128,32 @@
             priv.CanDisplay = true;
     };
 
-    //For Get Max Day User Can Be Insert
-    s.getMaxDay = (month) => {
-        switch (month) {
-            case 2:
-                return 29;
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                return 31;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                return 30;
-            default:
-                return 31;
+    s.cultDateCondetion = () => {
+        //Day Min And Month
+        if (s.enquiry.Year > currentYear) {
+            s.dateCond.minMonth = 1;
+            s.dateCond.minDay = 1;
         }
-    };
-    //For Get Min Day User Can Be Insert
-    s.getMinDay = (year) => {
-        if (year > currentYear) return 1;
-        return currentDay;
-    };
+        else {
+            s.dateCond.minMonth = currentMonth;
+            s.dateCond.minDay = currentDay;
+        }
 
-    //For Get Min Month User Can Be Inserted
-    s.getMinMonth= (month, year) => {
-        if (year > currentYear) return 1;
-        return currentMonth;
-    };
+        // Max Day
+        switch (s.enquiry.Month) {
+            case 2:
+                {
+                    if (s.enquiry.Year % 4 == 0)
+                        s.dateCond.maxDay = 29;
+                    else
+                        s.dateCond.maxDay = 28;
+                } break;
+                //    case 1: case 3: case 5: case 7: case 8: case 10: case 12: return 31;
+            case 4: case 6: case 9: case 11: s.dateCond.maxDay = 30; break;
+            default: s.dateCond.maxDay = 31; break;
+        }
+    }
+
     s.gotoUrl = url=> {
         window.location.href = url;
     };
@@ -163,4 +161,5 @@
 
     //Call Functions
     s.getItems();
+    s.cultDateCondetion();
 }]);

@@ -178,7 +178,10 @@ namespace BLL.BLL
                     UserName = c.UserName,
                     AccountTypeId = c.FKAccountType_Id,
                     _Language = (LanguageEnum)c.FKLanguage_Id,
-                    _IsRemmeberMe = this.UserLoggad._IsRemmeberMe,
+                    BrId = c.FKPranch_Id.HasValue ? c.FKPranch_Id.Value : 0,
+                    IsActiveEmail = c.IsActiveEmail,
+                    Email = c.Email,
+                    IsActive = c.IsActive,
                 }).FirstOrDefault();
 
                 if (User == null)

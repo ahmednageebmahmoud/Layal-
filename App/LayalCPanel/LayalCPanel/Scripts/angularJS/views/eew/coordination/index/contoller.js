@@ -46,7 +46,6 @@
             s.eventFOP = new FOP(lengthWithOutDeleted(s.events));
         }
 
-
         let loading = BlockingService.generateLoding();
         loading.show();
 

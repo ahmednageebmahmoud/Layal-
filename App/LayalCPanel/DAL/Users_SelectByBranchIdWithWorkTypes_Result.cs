@@ -33,6 +33,5 @@ namespace DAL
         public string NationalityNumber { get; set; }
         public string WebSite { get; set; }
         public int FkWorkType_Id { get; set; }
-        public bool IsBasic { get; set; }
     }
 }

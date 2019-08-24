@@ -96,6 +96,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeDistributionWorks_Insert_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EmployeeDistributionWorks_SelectByEventId_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -133,6 +136,9 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="EnquiryTypes_SelectByFilter_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventArchives_SelectAll_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="EventCoordinations_SelectByEventId_Result.cs">
@@ -248,6 +254,9 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Users_SelectAllForUsersPrivileges_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Users_SelectByBaicBranchWithWorkTypes_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Users_SelectByBranchIdWithWorkTypes_Result.cs">

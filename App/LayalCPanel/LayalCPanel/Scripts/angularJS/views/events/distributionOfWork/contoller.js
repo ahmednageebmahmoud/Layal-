@@ -14,20 +14,68 @@ ngApp.controller('distributionOfWorkCtrl', ['$scope', '$http', 'eventsServ', fun
         Id: null,
         UserName: Token.select
     }];
-    	
+
+   
+    s.branches = [{
+        Id: null,
+        BranchName: Token.select
+    }];
+
+    s.worksTypesEnnum = worksTypesEnnum;
     s.workTypes =[{Id:null,WorkTypeName:Token.select},...workTypesList];
     s.employeeDistributionWorks = [];
+    
+
+
     //============= G E T =================
     //get items
-    s.getItems = () => {
+    s.getEmployees = (brancId) => {
+        if (!brancId) return;
+        BlockingService.block();
+        eventsServ.getEmployees(brancId).then(d => {
+        BlockingService.unBlock();
+            switch (d.data.RequestType) {
+                case RequestTypeEnum.sucess: {
+                    if (brancId == branchId)
+                    {
+                        //معنى كدا ان دول الموظفين الاساسين وهما بيتملو اول  لما الصفحة تحمل
+                    s.employees = s.employees.concat(d.data.Result);
+                    s.employeesTarget = s.employees;
+                    }
+                    else
+                    {
+                        s.newEmpWork.IsBasicBranch = true;
+                        s.employeesTarget = [{
+                            Id: null,
+                            UserName: Token.select
+                        },... d.data.Result];
+
+                    }
+                        
+                } break;
+                case RequestTypeEnum.error:
+                case RequestTypeEnum.warning:
+                case RequestTypeEnum.info:
+                    SMSSweet.alert(d.data.Message, d.data.RequestType);
+                    break;
+            }
+            co("G E T - getEmployees", d);
+        }).catch(err => {
+            BlockingService.unBlock();
+            SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+            co("E R R O R - getEmployees", err);
+        })
+    };
+
+    s.getItems = (branhId) => {
 
         let loading = BlockingService.generateLoding();
         loading.show();
-        eventsServ.getItems(branchId).then(d => {
+        eventsServ.getItems(branhId).then(d => {
             loading.hide();
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
-                    s.employees = s.employees.concat(d.data.Result.Employees);
+                    s.branches = s.branches.concat(d.data.Result.Branches);
                 } break;
                 case RequestTypeEnum.error:
                 case RequestTypeEnum.warning:
@@ -42,6 +90,7 @@ ngApp.controller('distributionOfWorkCtrl', ['$scope', '$http', 'eventsServ', fun
             co("E R R O R - getItems", err);
         })
     };
+
 
     s.getEmployeeDistributionWorks = () => {
 
@@ -60,11 +109,11 @@ ngApp.controller('distributionOfWorkCtrl', ['$scope', '$http', 'eventsServ', fun
                     SMSSweet.alert(d.data.Message, d.data.RequestType);
                     break;
             }
-            co("G E T - getItems", d);
+            co("G E T - getEmployeeDistributionWorks", d);
         }).catch(err => {
             loading.hide();
             SMSSweet.alert(err.statusText, RequestTypeEnum.error);
-            co("E R R O R - getItems", err);
+            co("E R R O R - getEmployeeDistributionWorks", err);
         })
     };
 
@@ -78,6 +127,9 @@ ngApp.controller('distributionOfWorkCtrl', ['$scope', '$http', 'eventsServ', fun
         s.addNewEmpWorkFromErrorSubmit = false;
         s.newEmpWork.State = StateEnum.create;
         s.newEmpWork.EventId = eventId;
+        if (!s.newEmpWork.BranchId)
+            s.newEmpWork.BranchId = branchId;
+
         BlockingService.block();
         eventsServ.saveChange(s.newEmpWork).then(d => {
             BlockingService.unBlock();
@@ -85,10 +137,14 @@ ngApp.controller('distributionOfWorkCtrl', ['$scope', '$http', 'eventsServ', fun
                 case RequestTypeEnum.sucess: {
                     s.newEmpWork = d.data.Result;
                     s.employeeDistributionWorks.push(angular.copy(s.newEmpWork));
-                    s.newEmpWork={};
+                 s.reset();
+
+
                 } break;
             }
-            SMSSweet.alert(d.data.Message, d.data.RequestType);
+            SMSSweet.alert(d.data.Message, d.data.RequestType, () => {
+            s.reSelect();
+            });
             co("G E T - saveChange", d);
         }).catch(err => {
             BlockingService.unBlock();
@@ -130,7 +186,23 @@ ngApp.controller('distributionOfWorkCtrl', ['$scope', '$http', 'eventsServ', fun
             priv.CanDisplay = true;
     };
 
+    s.reset = () => {
+        s.newEmpWork = {
+            EmployeeId: null,
+            WorkTypeId: null
+        };
+        s.employeesTarget = s.employees;
+        setTimeout(()=>{
+            s.reSelect();
+        },400);
+    }
+    s.reSelect=()=>{
+        $("select[serchbale]").select2();
+
+    }
+
     //Call Functions
-    s.getItems();
+    s.getItems(branchId);
+    s.getEmployees(branchId);
     s.getEmployeeDistributionWorks();
 }]);

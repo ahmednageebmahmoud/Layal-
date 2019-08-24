@@ -366,20 +366,20 @@
                                         @if (Priv.CanEdit)
                                         {
                                             <a href="/Enquires/AddAndUpdate?id={{x.Id}}"
-                                               data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Update"
+                                                title="@Token.Update"
                                                ng-if="!x.IsClosed"
                                                class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
                                         }
                                         <!--Btn:Delete-->
                                         @if (Priv.CanDelete)
                                         {
-                                            <a href="javascript:void(0);" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="delete(x)"><i class="la la-trash"></i> </a>
+                                            <a href="javascript:void(0);"  title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="delete(x)"><i class="la la-trash"></i> </a>
                                         }
                                         @if (Priv.CanEdit)
                                         {
 
                                         <!--Add New Status-->
-                                            <a href="javascript:void(0);" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.AddStatus"
+                                            <a href="javascript:void(0);"  title="@Token.AddStatus"
                                                ng-if="!x.IsClosed&&!x.IsCreatedEvent&&x.IsCanBeAccess"
                                                class="btn btn-sm btn-clean btn-icon btn-icon-md"
                                                ng-click="showAddStatus(x)"><i class="flaticon-file-1"></i></a>
@@ -392,7 +392,7 @@
                                         @if (privEven.CanAdd)
                                         {
 
-                                            <a href="/Events/AddAndUpdate?enquiryId={{x.Id}}&eDay={{x.Day}}&eMonth={{x.Month}}&eYear={{x.Year}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.AddEvent" class="btn btn-sm btn-clean btn-icon btn-icon-md"
+                                            <a href="/Events/AddAndUpdate?enquiryId={{x.Id}}&eDay={{x.Day}}&eMonth={{x.Month}}&eYear={{x.Year}}"  title="@Token.AddEvent" class="btn btn-sm btn-clean btn-icon btn-icon-md"
                                                ng-if="x.IsLinkedClinet&&!x.IsCreatedEvent&&x.IsDepositPaymented&&x.IsCanBeAccess">
                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -406,11 +406,11 @@
 
                                         @if (PrivPayments.CanAdd || PrivPayments.CanDisplay)
                                         {
-                                            <a href="/EnquiryPayments/Payments?id={{x.Id}}" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.Payments" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fas fa-hand-holding-usd"></i> </a>
+                                            <a href="/EnquiryPayments/Payments?id={{x.Id}}"  title="@Token.Payments" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fas fa-hand-holding-usd"></i> </a>
                                         }
 
                                         <a href="/Enquires/EnquiryInformation?id={{x.Id}}"
-                                           ng-if="x.IsCanBeAccess" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="@Token.ShowDetails" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="la la-search"></i></a>
+                                           ng-if="x.IsCanBeAccess"  title="@Token.ShowDetails" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="la la-search"></i></a>
                                     </td>
                                 </tr>
                             </tbody>

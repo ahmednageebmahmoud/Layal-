@@ -22,7 +22,12 @@ namespace BLL.BLL
                 WorkTypeId = c.FKWorkType_Id,
                 IsFinshed = c.IsFinshed,
                 UserName = c.UserName,
-                UserAccountTypeId = c.FKAccountType_Id
+                UserAccountTypeId = c.FKAccountType_Id,
+                 Branch = new BranchVM
+                 {
+                     NameAr = c.BranchNameAr,
+                     NameEn = c.BranchNameEn,
+                 }
             }).ToList();
 
             return new ResponseVM(RequestTypeEnum.Success, Token.Success, Emps);
@@ -37,6 +42,11 @@ namespace BLL.BLL
                     //التحقق من انة تم الدفع
                     if (!CheckIsPayment(c.EventId))
                         return new ResponseVM(RequestTypeEnum.Error, Token.ClinetIsNotPayment);
+
+                    //التحقق لان المناسبة لم تغلق
+                    if (new EnquiresBLL().CheckIfEnquiryClosed(c.EventId))
+                        return new ResponseVM(RequestTypeEnum.Error, Token.EventIsClosed);
+
 
                     var ObjectReturn = new object();
                     switch (c.State)
@@ -78,13 +88,28 @@ namespace BLL.BLL
 
         private object Add(EmployeeDiributionWorkVM c)
         {
-            if (db.EmployeeDistributionWorks_CheckIfInserted(c.WorkTypeId, c.EmployeeId, c.EventId).First().Value > 0)
+
+            //Checck Dublicate
+            if (db.EmployeeDistributionWorks_CheckIfInserted(c.WorkTypeId,  c.EventId, c.BranchId).First().Value > 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.CanNotDuplicate);
 
-            ObjectParameter ID = new ObjectParameter("Id", typeof(long));
 
-            db.EmployeeDistributionWorks_Insert(ID, c.WorkTypeId, c.EmployeeId, c.EventId);
-            c.Id = (long)ID.Value;
+            ObjectParameter ID = new ObjectParameter("Id", typeof(long));
+          c=  db.EmployeeDistributionWorks_Insert(ID, c.WorkTypeId, c.EmployeeId, c.EventId,c.IsBasicBranch,c.BranchId).Select(v=> new EmployeeDiributionWorkVM
+            {
+                Id = v.Id,
+                EmployeeId = v.FKEmployee_Id,
+                EventId = v.FKEvent_Id,
+                WorkTypeId = v.FKWorkType_Id,
+                IsFinshed = false,
+                UserName = v.UserName,
+                UserAccountTypeId = v.FKAccountType_Id,
+                Branch=new BranchVM
+                {
+                    NameAr=v.BranchNameAr,
+                    NameEn=v.BranchNameEn,
+                }
+            }).FirstOrDefault();
             return new ResponseVM(RequestTypeEnum.Success, Token.Success, c);
         }
     }

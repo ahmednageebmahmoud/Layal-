@@ -30,7 +30,7 @@
         "EndTime": "",
         "Notes": "",
         "FKEvent_Id": "",
-        "FKUserCreated_Id": ""
+        "FKUserCreated_Id": "",
     },
     //هنا يوضع كل الحالات الخاصة بـ اعمال المناسبة ويمكن ان تكرر ولذالك انشئت جدول جديد وهوا التالى
     "EventWorksStatusHistory": {
@@ -41,6 +41,7 @@
         "FKWorkType_Id": 0,
         "FKUsre_Id": 0,
         "FKAccountType_Id": 0,
+        "FKBranch_Id":0
     },
     // يرط المناسبة هنا مرة واحدة ووضع الحالات كلها مرة واحدة
     //وهذا الجدول هوا الذى نتحقق منة هل المهمة انتهت ام لم تنتهى
@@ -61,9 +62,29 @@
         "TransmissionAndDelivery": true,
         "Archiving": true
     },
-
-    "FilesReceivedTypes":{
-        "Id":0,
-        "FKWord_Id":0
+    //انواع استلام الملفات للعميل
+    "FilesReceivedTypes": {
+        "Id": 0,
+        "FKWord_Id": 0
+    },
+    "EventArchives": {
+        "Id": 1,
+        "FKEvent_Id": 1,
+        "HardDiskNumber": 1,
+        "FolderName":"",
+        "DateTime": "1/1",
+        "FKUser_Id": 1
+    },
+    "EventArchiveDetails": {
+        "Id": 1,
+        "FKEvent_Id": 1,
+        "FKEventArchive_Id":0,
+        "MemoryId": 1,
+        "MemoryType":"",
+        "PhotoStartName": "",
+        "PhotoNumberFrom": 1,
+        "PhotoNumberTo": 1,
+        "Notes": "",
+        "DateTime":"1/1"
     }
 }

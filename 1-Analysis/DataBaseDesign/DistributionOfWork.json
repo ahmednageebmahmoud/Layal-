@@ -7,6 +7,8 @@
     "EmployeeDistributionWorks":{
         "Id":0,
         "FKWorkType_Id":0,
-        "FKEmployee_Id":0
+        "FKEmployee_Id":0,
+        "IsAnotherBranch":false//اى ان هذا الموظف من الفرع الرئيسى ونحن نستخدمة فى عملية الارشفة
+
     }
 }

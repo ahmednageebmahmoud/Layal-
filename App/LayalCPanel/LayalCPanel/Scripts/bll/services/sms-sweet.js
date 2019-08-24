@@ -6,6 +6,7 @@
     static delete(okFunCallback, cancelFuncCallback, message) {
         new Audio('/assets/sound/sweetAlert.mp3').play();
 
+      
         swal.fire({
             title: message || Token.deleteMessageConfirmation + ' ',
             text: "",
@@ -29,6 +30,7 @@
     static confirmInfo(message,okFunCallback,cancelFuncCallback) {
         new Audio('/assets/sound/sweetAlert.mp3').play();
 
+               
         swal.fire({
             title:Token.success,
             text: message ,

@@ -61,7 +61,7 @@ namespace BLL.BLL
                 return new ResponseVM(RequestTypeEnum.Error, Token.ThisTaskIsFinshed);
 
             //التحقق لان المناسبة لم تغلق
-            if (CheckIfEnquiryClosed(c.EventId))
+            if (new EnquiresBLL(). CheckIfEnquiryClosed(c.EventId))
                 return new ResponseVM(RequestTypeEnum.Error, Token.EventIsClosed);
 
             //التحقق ان المناسبة لم تبداء فى حالة الاعداد والتنسيق فقط
@@ -124,11 +124,7 @@ namespace BLL.BLL
         }
 
 
-        private bool CheckIfEnquiryClosed(long enquiryId)
-        {
-            return db.Enquires_IsClosed(enquiryId).First().Value > 0;
-        }
-
+     
         private object Delete(EventCoordinationVM c)
         {
             db.EventCoordinations_Delete(c.Id);

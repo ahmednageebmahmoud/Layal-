@@ -80,11 +80,12 @@
                            placeholder="@Token.Day"
                            ng-model="enquiry.Day"
                            ng-class="{'is-invalid':enquiryFrm.day.$invalid&&enquiyFormSubmitErro}"
-                           min="{{getMinDay(enquiry.Year)}}"
-                           max="{{getMaxDay(enquiry.Month)}}">
+                           min="{{dateCond.minDay}}"
+                           max="{{dateCond.maxDay}}"
+                           ng-change="cultDateCondetion()" />
                     <!--Error-->
-                    <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs {{getMaxDay(enquiry.Month)}}</small>
-                    <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs {{getMinDay(enquiry.Year)}}</small>
+                    <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs {{dateCond.maxDay}}</small>
+                    <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs {{dateCond.minDay}}</small>
 
                     <!--Month-->
                     <input type="number" class="form-control"
@@ -92,18 +93,20 @@
                            placeholder="@Token.Month"
                            ng-model="enquiry.Month"
                            ng-class="{'is-invalid':enquiryFrm.month.$invalid&&enquiyFormSubmitErro}"
-                           min="{{getMinMonth(enquiry.Month,enquiry.Year)}}"
-                           max="12">
+                           min="{{dateCond.minMonth}}"
+                           max="{{dateCond.maxMonth}}"
+                           ng-change="cultDateCondetion()">
                     <!--Error-->
-                    <small class="error invalid-feedback" ng-if="enquiryFrm.month.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs 12</small>
-                    <small class="error invalid-feedback" ng-if="enquiryFrm.month.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs {{getMinMonth(enquiry.Month,enquiry.Year)}}</small>
+                    <small class="error invalid-feedback" ng-if="enquiryFrm.month.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs {{dateCond.minMonth}}  </small>
+                    <small class="error invalid-feedback" ng-if="enquiryFrm.month.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs {{dateCond.maxMonth}} </small>
                     <!--Year-->
                     <input type="number" class="form-control"
                            name="year"
                            placeholder="@Token.Year"
                            ng-model="enquiry.Year"
                            min="@DateTime.Now.Year"
-                           ng-class="{'is-invalid':enquiryFrm.year.$invalid&&enquiyFormSubmitErro}">
+                           ng-class="{'is-invalid':enquiryFrm.year.$invalid&&enquiyFormSubmitErro}"
+                           ng-change="cultDateCondetion()">
                     <!--Error-->
                     <small class="error invalid-feedback" ng-if="enquiryFrm.year.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs @DateTime.Now.Year</small>
                 </div>

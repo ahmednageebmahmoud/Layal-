@@ -1,0 +1,206 @@
+﻿
+@{
+    ViewBag.Title = Token.AddAndUpdateArchiving;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" ng-controller="addAndUpdateCtrl">
+    <!-- begin:: Subheader -->
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <span class="kt-subheader__separator kt-hidden"></span>
+            <div class="kt-subheader__breadcrumbs">
+                <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link"> @Token.HomePage </a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="~/EEW/Coordinations" class="kt-subheader__breadcrumbs-link"> @Token.EventCoordinations </a>
+
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">@Token.AddAndUpdateArchiving</a>
+                <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active </span> -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- end:: Subheader -->
+
+
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--Add Archif-->
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <span class="kt-portlet__head-icon">
+                                <i class="kt-font-brand flaticon-add"></i>
+                            </span>
+                            <h3 class="kt-portlet__head-title">@Token.AddBasicInformation</h3>
+                        </div>
+                        <div class="kt-portlet__head-toolbar" ng-if="allowManage">
+                            <div class="kt-portlet__head-wrapper">
+                                <div class="kt-portlet__head-actions">
+                                    <a href="#" class="btn btn-success btn-elevate btn-icon-sm" ng-click="taskFinsh()">
+                                        <i class="la la-plus"></i>@Token.Finshed
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Form-->
+                    <form novalidate name="basicInfoFrm" class="kt-form kt-form--label-right"
+                          ng-submit="eventArvhivSaveChange(basicInfoFrm)">
+                        <div class="kt-portlet__body">
+                            <!--R O W 1-->
+                            <div class="form-group row">
+                                <!--HDNumber-->
+                                <label class="col-form-label col-lg-2">@Token.HDNumber</label>
+                                <div class="col-lg-3 form-group-sub">
+                                    <input type="text" class="form-control input-disabled" name="hDNumber" ng-model="basicInfo.HardDiskNumber"
+                                           ng-class="{'is-invalid':basicInfoFrm.hDNumber.$invalid&&basicInfoFrmSubmitError}"
+                                           ng-required="true"
+                                           ng-disabled="!allowManage" />
+                                    <small class="error " ng-if="basicInfoFrm.hDNumber.$error.required&&basicInfoFrmSubmitError">@Token.FieldIsRequierd</small>
+                                </div>
+
+                                <!--FolderName-->
+                                <label class="col-form-label col-lg-2">@Token.FolderName</label>
+                                <div class="col-lg-3 form-group-sub">
+                                    <input type="text" class="form-control input-disabled" name="folderName" ng-model="basicInfo.FolderName"
+                                           ng-class="{'is-invalid':basicInfoFrm.folderName.$invalid&&basicInfoFrmSubmitError}"
+                                           ng-required="true"
+                                           ng-disabled="!allowManage" />
+
+                                    <small class="error " ng-if="basicInfoFrm.folderName.$error.required&&basicInfoFrmSubmitError">@Token.FieldIsRequierd</small>
+                                    <small class="error " ng-if="basicInfoFrm.folderName.$error.$error.maxlength&&basicInfoFrmSubmitError">@Token.MaxLengthCharIs 10</small>
+                                </div>
+
+                                <!--FolderName-->
+                                <div class="col-lg-2 form-group-sub" ng-if="allowManage">
+                                    <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                                        <i class="la la-save" ng-if="basicInfo.State==state.create">@Token.Add</i>
+                                        <i class="la la-save" ng-if="basicInfo.State==state.update">@Token.Update</i>
+                                    </button>
+                                </div>
+                            </div>
+                            </div>
+                    </form>
+                </div>
+                 
+                <!--Add Details-->
+                <div class="kt-portlet" ng-if="basicInfo.State==state.update&&event.IsCurrentUserSameBranch">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <span class="kt-portlet__head-icon">
+                                <i class="kt-font-brand flaticon-add"></i>
+                            </span>
+                            <h3 class="kt-portlet__head-title">@Token.AddDetails</h3>
+                        </div>
+                    </div>
+                    <!--Form-->
+                    <form novalidate name="newDetailFrm" class="kt-form kt-form--label-right"
+                          ng-submit="detailSaveChange(newDetailFrm)">
+                        <div class="kt-portlet__body">
+                            <!--R O W 1-->
+                            <div class="form-group row">
+                                <table class="table sms-table table-bordered">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="th-15 "><label class="sms-sort-field">@Token.MemoryId</label></th>
+                                            <th class="th-15 "><label class="sms-sort-field">@Token.MemoryType</label></th>
+                                            <th class="th-10 "><label class="sms-sort-field">@Token.PhotoNumberFrom</label></th>
+                                            <th class="th-10 "><label class="sms-sort-field">@Token.PhotoNumberTo</label></th>
+                                            <th class="th-15 "><label class="sms-sort-field">@Token.PhotoStartName</label></th>
+                                            <th class="th-25 "><label class="sms-sort-field">@Token.Notes</label></th>
+                                            <th class="th-10 " ng-if="allowManage"><label class="sms-sort-field">@Token.Operations</label></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-if="allowManage">
+                                            <td>
+                                                <input type="text" class="form-control" name="memoryId"
+                                                       ng-model="newDetail.MemoryId" 
+                                                        ng-class="{'is-invalid':newDetailFrm.memoryId.$invalid&&newDetailFrmSubmitError}"
+                                                       ng-required="true" maxlength="50" ng-maxlength="50" />
+                                                <small class="error " ng-if="newDetailFrm.memoryId.$error.required&&newDetailFrmSubmitError">@Token.FieldIsRequierd</small>
+
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" name="memoryType"
+                                                       ng-model="newDetail.MemoryType" ng-required="true"
+                                                        ng-class="{'is-invalid':newDetailFrm.memoryType.$invalid&&newDetailFrmSubmitError}"
+                                                        />
+                                                <small class="error " ng-if="newDetailFrm.memoryType.$error.required&&newDetailFrmSubmitError">@Token.FieldIsRequierd</small>
+                                            </td>
+                                            <td>
+                                                <input type="number" class="form-control" name="photoNumberFrom"
+                                                       ng-model="newDetail.PhotoNumberFrom" ng-required="true"
+                                                        ng-class="{'is-invalid':newDetailFrm.photoNumberFrom.$invalid&&newDetailFrmSubmitError}"
+                                                       min="0"
+                                                        />
+                                                <small class="error " ng-if="newDetailFrm.photoNumberFrom.$error.required&&newDetailFrmSubmitError">@Token.FieldIsRequierd</small>
+                                                <small class="error " ng-if="newDetailFrm.photoNumberFrom.$error.min&&newDetailFrmSubmitError">@Token.MinNumberIs 0</small>
+                                            </td>
+                                            <td>
+                                                <input type="number" class="form-control" name="photoNumberTo"
+                                                       ng-model="newDetail.PhotoNumberTo" ng-required="true"
+                                                        ng-class="{'is-invalid':newDetailFrm.photoNumberTo.$invalid&&newDetailFrmSubmitError}"
+                                                       min="0"
+                                                        />
+                                                <small class="error " ng-if="newDetailFrm.photoNumberTo.$error.required&&newDetailFrmSubmitError">@Token.FieldIsRequierd</small>
+                                                <small class="error " ng-if="newDetailFrm.photoNumberTo.$error.min&&newDetailFrmSubmitError">@Token.MinNumberIs 0</small>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" name="photoStartName"
+                                                       ng-model="newDetail.PhotoStartName" ng-required="true"
+                                                        ng-class="{'is-invalid':newDetailFrm.photoStartName.$invalid&&newDetailFrmSubmitError}"
+                                                        />
+                                                <small class="error" ng-if="newDetailFrm.photoStartName.$error.required&&newDetailFrmSubmitError">@Token.FieldIsRequierd</small>
+                                            </td>
+                                            <td><textarea class="form-control " ng-model="newDetail.Notes" maxlength="50"></textarea></td>
+                                            <td>
+                                                <a href="javascript:void(0);" title="@Token.Add" 
+                                                   class="btn btn-sm btn-clean btn-icon btn-icon-md" 
+                                                   ng-click="detailSaveChange(newDetailFrm)"><i class="la la-plus"></i> </a>
+                                            </td>
+                                        </tr>
+                                        <tr ng-repeat="x in basicInfo.EventArchivDetails">
+                                            <td><label>{{x.MemoryId}}</label></td>
+                                            <td><label>{{x.MemoryType}}</label></td>
+                                            <td><label>{{x.PhotoNumberFrom}}</label></td>
+                                            <td><label>{{x.PhotoNumberTo}}</label></td>
+                                            <td><label>{{x.PhotoStartName}}</label></td>
+                                            <td><textarea class="form-control input-disabled" disabled>{{x.Notes}}</textarea></td>
+                                            <td ng-if="allowManage">
+                                                <a href="javascript:void(0);"  title="@Token.Delete" 
+                                                   class="btn btn-sm btn-clean btn-icon btn-icon-md" 
+                                                   ng-click="delete(x)"><i class="la la-trash"></i> </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+
+                    
+
+                </div>
+
+                <!--Event-->
+                @Html.Partial("~/Views/Shared/_EventsInformation.cshtml")
+
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/eew/archivingAndSaveing/addAndUpdate/service.js"></script>
+    <script src="~/Scripts/angularJS/views/eew/archivingAndSaveing/addAndUpdate/contoller.js"></script>
+}

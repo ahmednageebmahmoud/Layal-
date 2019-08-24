@@ -151,11 +151,11 @@
                                                      SMSSweet.alert(d.data.Message, d.data.RequestType);
                                                      break;
                                              }
-                                             co("G E T - getItems", d);
+                                             co("G E T - getItems - Shared", d);
                                          }).catch(err => {
                                              loading.hide();
                                              SMSSweet.alert(err.statusText, RequestTypeEnum.error);
-                                             co("E R R O R - getItems", err);
+                                             co("E R R O R - getItems - Shared  ", err);
                                          })
                                      };
 

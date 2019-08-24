@@ -13,7 +13,7 @@ namespace BLL.ViewModels
         public long Id { get;   set; }
         public string ReturnUrl { get;   set; }
         public string Email { get; set; }
-
+        public bool IsBasicBranch { get; set; }
         public bool IsActiveEmail { get;   set; }
         public bool _IsRemmeberMe { get;   set; }
         public LanguageEnum _Language { get;   set; }
@@ -27,7 +27,7 @@ namespace BLL.ViewModels
         public string UserName { get;   set; }
         public int BrId { get; set; }
         public bool IsActive { get;   set; }
-        public int? CountryId { get;   set; }
-        public int? CityId { get;   set; }
+      //  public int? CountryId { get;   set; }
+    //    public int? CityId { get;   set; }
     }
 }

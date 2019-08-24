@@ -104,5 +104,29 @@ namespace BLL.ViewModels
         public List<EventWorkStatusVM> EventWorksStatus { get; set; } = new List<EventWorkStatusVM>();
         public EventWorksStatusIsFinshedVM EventWorkStatusIsFinshed { get; set; }
         public decimal NamesPrintingPrice { get;   set; }
+
+        /// <summary>
+        /// هناك بعض الحالات التى ينتهى فييها التاسك على اكثر من مرحلة 
+        /// مثلا فى عملية الارشفة والحفظ قد تنتهى التاسك من الفرع الاول ولم تنتهى فى الفرع التانى 
+        /// وحينها نتحقق بان المستخدم الحالى انهىء التاسك بتاعة
+        /// </summary>
+        public EventWorksStatusIsFinshedVM EventWorkStatusIsFinshedByCurrentUser { get {
+
+                if (this.EventWorksStatus.Count == 0)
+                    return new EventWorksStatusIsFinshedVM();
+
+                return new EventWorksStatusIsFinshedVM
+                {
+                    ArchivingAndSaveing = this.EventWorksStatus.Any(v => v.WorkTypeId == WorksTypesEnum.ArchivingAndSaveing &&
+                     v.UserId == this.UserLoggad.Id) ? this.EventWorksStatus.LastOrDefault(v => v.WorkTypeId == WorksTypesEnum.ArchivingAndSaveing &&
+                      v.UserId == this.UserLoggad.Id).IsFinshed : false
+                };
+            } }
+
+
+        /// <summary>
+        /// معنى ذالك ان المستخدم الحالى هوا من نفس الفرع الخاص بـ المناسبة
+        /// </summary>
+        public bool IsCurrentUserSameBranch => this.UserLoggad.BrId == this.BranchId;
     }//end class
 }

@@ -112,7 +112,6 @@ namespace BLL.BLL
                     //PackageNamsArExtraPrice = c.PackageNamsArExtraPrice,
                     WorkTypeId = workTypeId,
 
-
                     Package = new PackageVM
                     {
                         NameAr = c.Package_NameAr,
@@ -132,7 +131,6 @@ namespace BLL.BLL
                         FinshedUserName=v.UserName,
                         DateTime=v.DateTime,
                         IsFinshed=v.IsFinshed
-                        
                     }).FirstOrDefault(),
                     EventWorkStatusIsFinshed = new EventWorksStatusIsFinshedVM
                     {
@@ -199,13 +197,14 @@ namespace BLL.BLL
                 TotalPayments = c.TotalPayments,
                 TotalPaymentsActivated = c.TotalPaymentsActivated,
                 VistToCoordinationDateTime = c.VistToCoordinationDateTime,
+                EventWorksStatus= EventWorkStatus,
                 EventWorkStatusIsFinshed = new EventWorksStatusIsFinshedVM
                 {
                     Booking = c.Booking,
                     DataPerfection = c.DataPerfection,
                     Coordination = c.Coordination,
                     Implementation = c.Implementation,
-                    ArchivingAndSaveing = c.ArchivingAndSaveing,
+                    ArchivingAndSaveing = c.ArchivingAndSaveing ,
                     ProductProcessing = c.ProductProcessing,
                     Chooseing = c.Chooseing,
                     DigitalProcessing = c.DigitalProcessing,
@@ -216,6 +215,8 @@ namespace BLL.BLL
                     TransmissionAndDelivery = c.TransmissionAndDelivery,
                     Archiving = c.Archiving,
                 },
+
+               
 
                 Package = new PackageVM
                 {

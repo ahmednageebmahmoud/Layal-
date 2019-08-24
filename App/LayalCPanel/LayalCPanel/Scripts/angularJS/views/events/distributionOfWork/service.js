@@ -8,13 +8,20 @@
 
 	//Methods
 
-        getItems(branchId) {
+        getEmployees(branchId) {
             return h({
                 url: `${this.basePath}GetDistributionOfWorkItems?branchId=${branchId}`,
                 method: 'get',
             });
         };
  
+        getItems(branchId) {
+            return h({
+                url: `${this.basePath}getItems2?branchId=${branchId}`,
+                method: 'get',
+            });
+        };
+
         getEmployeeDistributionWorks(eventId) {
             return h({
                 url: `${this.basePath}getEmployeeDistributionWorks?eventId=${eventId}`,
