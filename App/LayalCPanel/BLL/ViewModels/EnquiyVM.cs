@@ -39,7 +39,6 @@ namespace BLL.ViewModels
         public DateTime? ClosedDateTime { get; set; }
         public string CreateDateTimeDisplay => DateService.GetDateTimeAr(this.CreateDateTime);
         public string ClosedDateTimeDisplay => DateService.GetDateTimeAr(this.ClosedDateTime);
-        public string Note { get; set; }
         public long? ClinetId { get; set; }
         public string EventDate
         {

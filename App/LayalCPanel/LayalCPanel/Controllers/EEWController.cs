@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BLL.Services;
 
 namespace UI.Controllers
 {
@@ -27,6 +28,12 @@ namespace UI.Controllers
         public ActionResult AddAndUpdateCoordinations(long id)
         {
             if (!EEWBLL.CheckAlloweAccess(id, WorksTypesEnum.Coordination))
+                return HttpNotFound();
+            return View();
+        }
+        public ActionResult CoordinationsInformation(long id)
+        {
+            if (!EEWBLL.ChakIefPhotographerAllowAccess(id))
                 return HttpNotFound();
             return View();
         }
@@ -51,6 +58,14 @@ namespace UI.Controllers
                 return HttpNotFound();
             return View();
         }
+        //Event Photographer
+        public ActionResult EventsPhoto()
+        {
+            if(!CookieService.UserInfo.IsPhotographerOrHelper)
+                return HttpNotFound();
+            return View();
+        }
+
 
 
         public ActionResult GetItems(bool? isForFilter)

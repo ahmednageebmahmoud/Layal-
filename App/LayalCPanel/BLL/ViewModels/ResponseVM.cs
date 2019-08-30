@@ -11,11 +11,12 @@ namespace BLL.ViewModels
     {
         public RequestTypeEnum RequestType { get; set; }
         public string Message { get; set; }
+
         public bool IsData { get; set; }
         public object Result { get; set; }
         public object DevMessage { get; set; }
 
-
+        public string DevInnerException { get; set; }
         public ResponseVM(RequestTypeEnum requestType, string message, object data)
         {
             this.RequestType = requestType;
@@ -29,11 +30,13 @@ namespace BLL.ViewModels
             this.RequestType = requestType;
             this.Message = message;
             this.DevMessage = ex.Message;
+            this.DevInnerException =     ex.InnerException==null?null: ex.InnerException.Message;
         }
         public ResponseVM(RequestTypeEnum requestType, string message)
         {
             this.RequestType = requestType;
             this.Message = message;
+
         }
     }
 }

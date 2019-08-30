@@ -3,6 +3,7 @@ using BLL.Enums;
 using BLL.Services;
 using BLL.SignalAr;
 using BLL.ViewModels;
+using DAL;
 using Google.Apis.Calendar.v3.Data;
 using Resources;
 using System;
@@ -22,28 +23,35 @@ namespace BLL.BLL
             return db.Enquires_IsClosed(enquiryId).First().Value > 0;
         }
 
-        public object AddNewStatus(EnquiryStatusVM c)
+        public async Task<object> AddNewStatus(EnquiryStatusVM c)
         {
             try
             {
-              
-                //check if closed
-                if (CheckIfEnquiryClosed(c.EnquiryId))
+                var Enquiry = db.Enquires_SelectByPk(c.EnquiryId).FirstOrDefault();
+
+                if (Enquiry==null)
+                    return new ResponseVM(RequestTypeEnum.Error, Token.EnquiryIsNotFound);
+
+                if (Enquiry.IsClosed==true)
                     return new ResponseVM(RequestTypeEnum.Error, Token.EnquiryIsClosed);
 
-                //check if with admin
-                //if(this.UserLoggad.IsBranchManager)
-                //    if(db.Enquires_CheckIfWithBranch(c.EnquiryId).First().Value<=0)
-                //        return new ResponseVM(RequestTypeEnum.Error, Token.EnquiryWithAdmin);
+                //check if create event 
+                if (Enquiry.IsCreatedEvent)
+                    return new ResponseVM(RequestTypeEnum.Error, Token.CanNotDoAnyThingBecuseThisEnquiryConvertedToEvent);
 
+                //Check From Date Time
+                if (c.DateTime.HasValue && c.DateTime.Value < DateTime.Now)
+                    return new ResponseVM(RequestTypeEnum.Error, Token.CanNotInsertDateLessThanCurrentDate);
+
+                //check if with admin
+                if(this.UserLoggad.IsBranchManager&&!Enquiry.IsWithBranch)
+                    return new ResponseVM(RequestTypeEnum.Error, Token.EnquiryWithAdmin);
+
+                //Check If Current Employee in The same enquiry
                 if (this.AdminId != this.UserLoggad.Id && c.BranchId != this.UserLoggad.BrId)
                     return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEnquiry);
 
-
-                //check if create event 
-                if (db.Enquires_CheckIfCreatedEvent(c.Id).First().Value > 0)
-                    return new ResponseVM(RequestTypeEnum.Error, Token.CanNotDoAnyThingBecuseThisEnquiryConvertedToEvent);
-
+             
 
                 c = GetEnquiyStatusPure(c);
 
@@ -59,15 +67,15 @@ namespace BLL.BLL
                 db.EnquiryStatus_Insert(c.Notes, c.DateTime, c.EnquiryId, (int)c.StatusId, c.ScheduleVisitDateTime, this.UserLoggad.Id, c.IsWithBranch, c.EnquiryPaymentId);
 
                 //هنا يتم اتمام العمليات المعتمدة على ذالك  بـ الاضافة الى الاشعارات
-                if (this.UserLoggad.AccountTypeId == (int)AccountTypeEnum.BranchManager)
+                if (this.UserLoggad.AccountTypeId == AccountTypeEnum.BranchManager)
                 {
-                    SendAndSaveNotification(c.StatusId, this.AdminId, false, c.EnquiryId);
+                    SendAndSaveNotification(Enquiry,c.StatusId, this.AdminId, false, c.EnquiryId);
                 }
                 else
                 {
                     var UserMangerBranch = db.Users_SelectByBranchId(c.EnquiryBranchId, (int)AccountTypeEnum.BranchManager).FirstOrDefault();
-                    if(UserMangerBranch!=null)
-                    SendAndSaveNotification(c.StatusId, UserMangerBranch.Id, true, c.EnquiryId);
+                    if (UserMangerBranch != null)
+                        SendAndSaveNotification(Enquiry,c.StatusId, UserMangerBranch.Id, true, c.EnquiryId);
                 }
 
                 //اتخاذ قرار ما بناء على كل  حالة
@@ -107,7 +115,7 @@ namespace BLL.BLL
                     IsBankTransfer = true,
                     EnquiryId = c.EnquiryId,
                     IsAcceptFromManger = false,
-                    BranchId=c.EnquiryBranchId
+                    BranchId = c.EnquiryBranchId
                 }, ImagePath);
 
             }
@@ -132,6 +140,11 @@ namespace BLL.BLL
             switch (c.StatusId)
             {
                 case EnquiryStatusTypesEnum.NotAnswer:
+                    {
+                        //ارا
+
+                        break;
+                    }
                 case EnquiryStatusTypesEnum.CustomerContacted:
                 case EnquiryStatusTypesEnum.FullApproval:
                     break;
@@ -155,20 +168,23 @@ namespace BLL.BLL
                     break;
                 case EnquiryStatusTypesEnum.ScheduleVisit:
                     {
-                        string Title, Description, ClinetName = c.ClinetName;
+                        var Enquiry = db.Enquires_SelectByPk(c.EnquiryId).First();
+                        string Title, Description;
+
+
                         if (this.IsEn)
                         {
                             Title = "Schedule Visit";
-                            Description = $"Today's visit is scheduled for the client: {ClinetName}";
+                            Description = $"Today's visit is scheduled for the client {Enquiry.FirstName} /n and city {Enquiry.CityNameEn} /n and phone number {Enquiry.PhoneIsoCode}{Enquiry.PhoneNo}";
                         }
                         else
                         {
                             Title = "تحديد موعد زيارة ";
-                            Description = $"تم تحديد موعد زيارة اليوم لـ العميل : {ClinetName}";
+                            Description = $"تم تحديد موعد زيارة اليوم لـ العميل لـ {Enquiry.FirstName} /n والمدينة {Enquiry.CityNameAr} /n ورقم الهاتف {Enquiry.PhoneIsoCode}{Enquiry.PhoneNo} ";
                         }
 
                         //جلب معرفات الزيارات السابقة وحذفهم
-                        db.EnquiryStatus_SelectByFilter(c.EnquiryId,(int) EnquiryStatusTypesEnum.ScheduleVisit).ToList().ForEach(v =>
+                        db.EnquiryStatus_SelectByFilter(c.EnquiryId, (int)EnquiryStatusTypesEnum.ScheduleVisit).ToList().ForEach(v =>
                         {
                             GoggelApiCalendarService.DeleteEvent(v.ScheduleVisitDateClendarEventId);
                         });
@@ -206,7 +222,7 @@ namespace BLL.BLL
                 case EnquiryStatusTypesEnum.NotAnswer:
                     {
                         //يجب ان يتحول الى الآدارة 
-                        ObjectReturn.IsWithBranch = true;
+                        ObjectReturn.IsWithBranch = false;
                     }
                     break;
                 case EnquiryStatusTypesEnum.CustomerContacted:
@@ -246,28 +262,21 @@ namespace BLL.BLL
             return ObjectReturn;
         }
 
-        public void SendAndSaveNotification(EnquiryStatusTypesEnum enquiryType, Int64 userTargetId, bool isToBranch, long targetId)
+        public void SendAndSaveNotification(Enquires_SelectByPk_Result enq, EnquiryStatusTypesEnum enquiryType, Int64 userTargetId, bool isToBranch, long targetId)
         {
-            string UserName = "";
-            //التحقق لان الادرة لها نص معين والفرع لة نص معين
-            if (isToBranch)
-                UserName = this.IsEn ? "Manger" : "المدير";
-            else
-                UserName = this.UserLoggad.UserName;
-
-            var Notify = new NotifyVM
+            var Status = db.EnquiryStatusTypes_SelectByPK((int)enquiryType).First();
+            var Notify = new NotifyVM()
             {
-                TitleAr = "اضافة حالة جديدة على استفسار ما",
-                TitleEn = "Add New Status On Some Enquiry",
-                DescriptionAr = $"لقد قام { UserName} بـ وضع حالة جديد   ",
-                DescriptionEn = $"{ UserName} Has Been Add New Status",
                 DateTime = DateTime.Now,
                 TargetId = targetId,
                 PageId = (int)PagesEnum.Enquires,
                 RedirectUrl = $"/Enquires/EnquiryInformation?id={targetId}&notifyId=",
             };
 
-
+            Notify.TitleAr = "اضافة حالة جديدة على استفسار ما";
+            Notify.TitleEn = "Add New Status On Some Enquiry";
+            Notify.DescriptionAr = string.Format("لقد تم اضافة حالة {0} على استفسار {1} {2}", Status.Ar, enq.FirstName, enq.LastName);
+            Notify.DescriptionEn = string.Format("Ahmed has been adde status {0} on enquiry {1} {2}", Status.En, enq.FirstName, enq.LastName);
             NotificationsBLL.Add(Notify, userTargetId);
             new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { userTargetId.ToString() }, Notify);
         }

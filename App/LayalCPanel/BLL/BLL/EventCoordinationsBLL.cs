@@ -57,7 +57,7 @@ namespace BLL.BLL
                 return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEvent);
 
             //التحقق ان هذة المهمة لم تنتهى بعد
-            if (db.EventWorksStatusIsFinsed_CheckIfFinshed(c.EventId, (int)WorksTypesEnum.Coordination).First().Value)
+            if (!this.UserLoggad.IsBranchManager&& db.EventWorksStatusIsFinsed_CheckIfFinshed(c.EventId, (int)WorksTypesEnum.Coordination).First().Value)
                 return new ResponseVM(RequestTypeEnum.Error, Token.ThisTaskIsFinshed);
 
             //التحقق لان المناسبة لم تغلق
@@ -65,7 +65,7 @@ namespace BLL.BLL
                 return new ResponseVM(RequestTypeEnum.Error, Token.EventIsClosed);
 
             //التحقق ان المناسبة لم تبداء فى حالة الاعداد والتنسيق فقط
-            if ( db.Events_CheckFromDateEventIsFinshed(c.EventId, DateTime.Now).First().Value > 0)
+            if ( db.Events_CheckFromDateEventIsFinshed(c.EventId, DateTime.Now).First().Value> 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.ThisEventDateIsFinshed);
 
 

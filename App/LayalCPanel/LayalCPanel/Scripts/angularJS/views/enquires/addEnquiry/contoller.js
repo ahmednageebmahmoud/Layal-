@@ -105,6 +105,9 @@
                         window.close();
                     })
                 } break;
+                default:
+                    SMSSweet.alert(d.data.Message, d.data.RequestType);
+                    break;
             }
 
             co("G E T - saveChange", d);

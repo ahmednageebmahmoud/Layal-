@@ -138,6 +138,8 @@
 
     };
 
+    //update Event Survey Questions
+   
     s.updateEventSurveyQuestions = () => {
         BlockingService.block();
         eventsServ.saveChangeEventSurveyQuestions(s.surveyQuestions).then(d => {
@@ -157,6 +159,26 @@
         })
     }
 
+    //update Event Photographers
+     s.updateEventPhotographers = () => {
+        BlockingService.block();
+         eventsServ.updateEventPhotographers(s.photographers).then(d => {
+            switch (d.data.RequestType) {
+                case RequestTypeEnum.sucess: {
+                    bootstrapModelHide("eventPhotographers");
+                } break;
+            }
+
+            SMSSweet.alert(d.data.Message, d.data.RequestType);
+            co("P O S T - updateEventPhotographers", d);
+            BlockingService.unBlock();
+        }).catch(err => {
+            BlockingService.unBlock();
+            SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+            co("E R R O R - updateEventPhotographers", err);
+        })
+    }
+    
     //============= Delete ================
     s.delete = event => {
         //show confirm delete
@@ -225,6 +247,7 @@
 
     //================= Other ======================
     s.showCreateCustomSurveyModel = eve => {
+        debugger;
         let loading = BlockingService.generateLoding();
         loading.show();
         eventsServ.getSurveyQuestionsforUpdateEventSurvey(eve.Id).then(d => {
@@ -232,7 +255,7 @@
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
                     s.surveyQuestions = d.data.Result;
-        bootstrapModelShow("createCustomSurvey");
+            bootstrapModelShow("createCustomSurvey");
 
                 } break;
                 case RequestTypeEnum.error:
@@ -247,7 +270,33 @@
             SMSSweet.alert(err.statusText, RequestTypeEnum.error);
             co("E R R O R - getItems", err);
         })
+    };
 
+    //show Event Photographers Model
+    s.showEventPhotographersModel = eve => {
+        s.photographers = null;
+        let loading = BlockingService.generateLoding();
+        loading.show();
+        eventsServ.getEventPhotographers(eve.Id).then(d => {
+            loading.hide();
+            switch (d.data.RequestType) {
+                case RequestTypeEnum.sucess: {
+                    s.photographers = d.data.Result;
+                    bootstrapModelShow("eventPhotographers");
+
+                } break;
+                case RequestTypeEnum.error:
+                case RequestTypeEnum.warning:
+                case RequestTypeEnum.info:
+                    SMSSweet.alert(d.data.Message, d.data.RequestType);
+                    break;
+            }
+            co("G E T - getEventPhotographers", d);
+        }).catch(err => {
+            loading.hide();
+            SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+            co("E R R O R - getEventPhotographers", err);
+        })
     };
 
 

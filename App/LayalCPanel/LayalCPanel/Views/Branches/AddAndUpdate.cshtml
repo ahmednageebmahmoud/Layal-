@@ -4,6 +4,9 @@
     UsersPrivilegeVM Priv =
         new UsersPrivilegesBLL().SelectByUserId(PagesEnum.Branches);
 
+
+    string Description = LanguageService.IsEn ? "The event will be sent automatically as soon as its data is completed" : "سوف يتم ارسال الحدث تلقائيا فور استكمال بياناتها",
+        DescriptionDisapled = LanguageService.IsEn ? "Basic information cannot be updated if this branch is used by" : "لا يمكن تحديث المعلومات الاساسية اذا كان هذا الفرع مستخدم من قبل";
 }
 
 <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" ng-controller="branchesCtrl">
@@ -48,6 +51,7 @@
                     </div>
                     <!--AddBranch Form-->
                     <form novalidate name="branchFrm" class="kt-form kt-form--label-right" ng-submit="saveChange(branchFrm,Branch)">
+                        <!--Form Body-->
                         <div class="kt-portlet__body">
                             <!--R O W 1-->
                             <div class="form-group  row">
@@ -119,21 +123,22 @@
                             <!--R O W 3-->
                             <div class="form-group  row">
                                 <!--Country-->
-                                <label class="col-form-label col-lg-2">@Token.Country</label>
+                                <label class="col-form-label col-lg-2" title="@DescriptionDisapled">@Token.Country</label>
                                 <div class="col-lg-4 form-group-sub">
                                     <select class="form-control"
                                             serchbale
                                             name="country"
-                                            ng-class="{'is-invalid':branchFrm.emp.$invalid&&branchFormSubmitErro}"
+                                            ng-class="{'is-invalid':branchFrm.country.$invalid&&branchFormSubmitErro}"
                                             ng-model="branch.CountryId"
                                             ng-options="c.Id as c.CountryName for c in countries"
-                                            ng-required="true"></select>
+                                            ng-required="true"
+                                            ng-disabled="branch.IsDeisabledBaicElements"></select>
                                     <!--Errors:-->
                                     <small class="error invalid-feedback" ng-if="branchFrm.country.$error.required&&branchFormSubmitErro">@Token.FieldIsRequierd</small>
                                 </div>
 
                                 <!--City-->
-                                <label class="col-form-label col-lg-2">@Token.City</label>
+                                <label class="col-form-label col-lg-2" title="@DescriptionDisapled">@Token.City</label>
                                 <div class="col-lg-4 form-group-sub">
                                     <select class="form-control"
                                             serchbale
@@ -141,72 +146,125 @@
                                             ng-class="{'is-invalid':branchFrm.city.$invalid&&branchFormSubmitErro}"
                                             ng-model="branch.CityId"
                                             ng-options="c.Id as c.CityName for c in cities|filter:{'CountryId':branch.CountryId}"
-                                            ng-required="true"></select>
+                                            ng-required="true"
+                                            ng-disabled="branch.IsDeisabledBaicElements"></select>
                                     <!--Errors:-->
                                     <small class="error invalid-feedback" ng-if="branchFrm.city.$error.required&&branchFormSubmitErro">@Token.FieldIsRequierd</small>
                                 </div>
                             </div>
 
-
                             <!--R O W 4-->
-                            <div class="form-group  row">
-                                <!--IsBasic
-                                    لا يمكن الغاء التفعيل من هنا 
-                                    لان هذا يعنى اذا قام بـ الغاء التفعيل فسوف يصبح البرنامج بلا فرع رئيسى وهذا خطاء
-                                    والحل انة يذهب الى اى فرع آخ ويقوم بتفعيلة وسوف تصبح الفروع الاخرى كلها غير مفعلة
-                                    -->
-                                <label class="col-form-label col-lg-2">@Token.IsBasic</label>
-                                <div class="col-lg-4 form-group-sub">
-                                    <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
-                                        <label   title="@(LanguageService.IsEn?"The main branch is only one branch at the level of the program and one of the most important use in the archive of albums in the main branch":"الفرع الرئيس هوا فرع واحد فقط على مستوى البرنامج ومن اهم استخدامتة فى ارشفة الالبومات فى الفرع الرئيسى")">
-                                            <input type="checkbox" checked="checked" ng-model="branch.IsBasic"
-                                                    name="" class="ng-pristine ng-untouched ng-valid ng-not-empty" 
-                                                   ng-disabled="isBasicDisabled"/>
-                                            <span></span>
-                                        </label>
-                                    </span>
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div class="kt-portlet__foot">
-                            <div class="kt-form__actions">
-                                <div class="row">
-                                    <div class="col-lg-9"></div>
-                                    <div class="col-lg-3">
-                                        @if (Priv.CanEdit)
-                                        {
-
-                                            <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"
-                                                    ng-if="branch.State==state.update">
-                                                <i class="la la-save">@Token.Save</i>
-                                            </button>
-                                        }
-                                        @if (Priv.CanAdd)
-                                        {
-                                            <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"
-                                                    ng-if="branch.State!=state.update">
-                                                <i class="la la-save">@Token.Add</i>
-                                            </button>
-
-                                        }
-                                        <button type="reset" class="btn btn-warning btn-elevate btn-elevate-air" ng-if="branch.State!=state.update" ng-click="reSelect()"><i class="la la-file">@Token.Cancel</i></button>
+                            <div class="form-group  row" ng-if="branch.State==state.update">
+                                <!-- Coordination Employee-->
+                                <label class="col-form-label col-lg-2"
+                                       title="@Description">@Token.CoordinationEmployee</label>
+                                    <div class="col-lg-4 form-group-sub">
+                                        <select class="form-control"
+                                                serchbale
+                                                name="coordinationEmployee"
+                                                ng-if="branch.State==state.update"
+                                                ng-model="branch.CoordinationEmployeeId"
+                                                ng-options="c.Id as c.UserName for c in employees|employeeWorkFilter:worksTypesEnnum.Coordination"></select>
                                     </div>
+
+                                    <!--Implementation EmployeeId-->
+                                    <label class="col-form-label col-lg-2"
+                                           title="@Description">@Token.ImplementationEmployeeId</label>
+                                        <div class="col-lg-4 form-group-sub">
+                                            <select class="form-control"
+                                                    serchbale
+                                                    name="city"
+                                                    ng-if="branch.State==state.update"
+                                                    ng-model="branch.ImplementationEmployeeId"
+                                                    ng-options="c.Id as c.UserName for c in employees|employeeWorkFilter:worksTypesEnnum.Implementation"></select>
+                                        </div>
+                                    </div>
+
+                                    <!--R O W 5-->
+                                    <div class="form-group  row" ng-if="branch.State==state.update">
+                                        <!--ArchivingAndSaveing EmployeeId-->
+                                        <label class="col-form-label col-lg-2"
+                                               title="@Description">@Token.ArchivingAndSaveingEmployee</label>
+                                            <div class="col-lg-4 form-group-sub">
+                                                <select class="form-control"
+                                                        serchbale
+                                                        name="city"
+                                                        ng-model="branch.ArchivingAndSaveingEmployeeId"
+                                                        ng-options="c.Id as c.UserName for c in employees|employeeWorkFilter:worksTypesEnnum.ArchivingAndSaveing"></select>
+                                            </div>
+                                            <!--ArchivingAndSaveing Another Branch-->
+                                            <label class="col-form-label col-lg-2"
+                                                    >@Token.ArchivingAndSaveingAnotherBranch</label>
+                                                <div class="col-lg-4 form-group-sub">
+                                                    <select class="form-control"
+                                                            serchbale
+                                                            name="branch"
+                                                            ng-model="branch.ArchivingAndSaveingAnotherBranchId"
+                                                            ng-options="c.Id as c.BranchName for c in branches"></select>
+                                                </div>
+                                            </div>
+                                            <!--ROW6-->
+                                            <div class="form-group  row">
+                                                <!--IsBasic
+                                                لا يمكن الغاء التفعيل من هنا
+                                                لان هذا يعنى اذا قام بـ الغاء التفعيل فسوف يصبح البرنامج بلا فرع رئيسى وهذا خطاء
+                                                والحل انة يذهب الى اى فرع آخ ويقوم بتفعيلة وسوف تصبح الفروع الاخرى كلها غير مفعلة
+                                                -->
+                                                <label class="col-form-label col-lg-2">@Token.IsBasic</label>
+                                                <div class="col-lg-4 form-group-sub">
+                                                    <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                                        <label title="@(LanguageService.IsEn?"The main branch is only one branch at the level of the program and one of the most important use in the archive of albums in the main branch":"الفرع الرئيس هوا فرع واحد فقط على مستوى البرنامج ومن اهم استخدامتة فى ارشفة الالبومات فى الفرع الرئيسى")">
+                                                            <input type="checkbox" checked="checked" ng-model="branch.IsBasic"
+                                                                   name="" class="ng-pristine ng-untouched ng-valid ng-not-empty"
+                                                                   ng-disabled="isBasicDisabled" />
+                                                            <span></span>
+                                                        </label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--Form Fotter-->
+                                        <div class="kt-portlet__foot">
+                                            <div class="kt-form__actions">
+                                                <div class="row">
+                                                    <div class="col-lg-9"></div>
+                                                    <div class="col-lg-3">
+                                                        @if (Priv.CanEdit)
+                                                        {
+
+                                                            <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"
+                                                                    ng-if="branch.State==state.update">
+                                                                <i class="la la-save">@Token.Save</i>
+                                                            </button>
+                                                        }
+                                                        @if (Priv.CanAdd)
+                                                        {
+                                                            <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"
+                                                                    ng-if="branch.State!=state.update">
+                                                                <i class="la la-save">@Token.Add</i>
+                                                            </button>
+
+                                                        }
+                                                        <button type="reset" class="btn btn-warning btn-elevate btn-elevate-air" ng-if="branch.State!=state.update" ng-click="reSelect()"><i class="la la-file">@Token.Cancel</i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
+
+                                <!--end::Portlet-->
                             </div>
                         </div>
-                    </form>
+                    </div>
+
                 </div>
+                @section scripts{
+                    <!--(ANageeb) link angualr files for thsis  view -->
+                    <script src="~/Scripts/angularJS/views/branches/addAndUpdate/service.js"></script>
+                    <script src="~/Scripts/angularJS/views/branches/addAndUpdate/contoller.js"></script>
 
-                <!--end::Portlet-->
-            </div>
-        </div>
-    </div>
+                    <script src="~/Scripts/angularJS/filters/employeeWorkFilter.js"></script>
 
-</div>
-@section scripts{
-    <!--(ANageeb) link angualr files for thsis  view -->
-    <script src="~/Scripts/angularJS/views/branches/addAndUpdate/service.js"></script>
-    <script src="~/Scripts/angularJS/views/branches/addAndUpdate/contoller.js"></script>
-}
+                }

@@ -86,5 +86,11 @@
         "PhotoNumberTo": 1,
         "Notes": "",
         "DateTime":"1/1"
+    },
+    "EventPhotographers": {
+        "Id": 1,
+        "CreateDateTime":"",
+        "FKEvent_Id": 1,
+        "FKUser_Id":0
     }
 }

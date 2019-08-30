@@ -39,7 +39,7 @@ namespace UI.Models
            if(this.CheckIfAnormalUser)
             {
                 
-                if(CookieService.UserInfo.AccountTypeId!=(int)AccountTypeEnum.Clinet)
+                if(CookieService.UserInfo.AccountTypeId!=AccountTypeEnum.Clinet)
                     //معنى ذالك ان المستخدم الحالى ليس مستخدم عادى ويجب توجية الى صفحة الخطاء
                     filterContext.Result = new HttpNotFoundResult();
                 return;

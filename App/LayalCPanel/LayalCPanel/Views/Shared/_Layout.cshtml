@@ -219,6 +219,7 @@
                                 </a>
                             </li>
                             <sms-draw-menu></sms-draw-menu>
+
                             <li class="kt-menu__item kt-menu__item--submenu" ng-show="false"
                                 aria-haspopup="true"
                                 data-ktmenu-submenu-toggle="hover"
@@ -245,6 +246,7 @@
                             </li>
 
 
+                            <!--employeeWorks-->
                             <li class="kt-menu__item" ng-class="{'kt-menu__item--active':checkIsCrrentPageEquals(null,m.WorkType.PageUrl)}" aria-haspopup="true"
                                 ng-repeat="m in employeeWorks">
                                 <a href="{{m.WorkType.PageUrl}}" class="kt-menu__link ">
@@ -255,8 +257,19 @@
                                 </a>
                             </li>
 
+                            <!--Phtograhper nd Helpre-->
+                            @if(CookieService.UserInfo.IsPhotographerOrHelper)
+                            {
 
+                            <li class="kt-menu__item" ng-class="{'kt-menu__item--active':checkIsCrrentPageEquals(null,'/EEW/EventsPhoto')}" aria-haspopup="true">
+                                <a href="/EEW/EventsPhoto" class="kt-menu__link ">
+                                    <span class="kt-menu__link-icon">
+                                        <i class="fa fa-camera"></i>
+                                    </span><span class="kt-menu__link-text">@Token.Events</span>
+                                </a>
+                            </li>
 
+                            }
                         </ul>
                     </div>
                 </div>
@@ -710,6 +723,9 @@
     <script src="~/Scripts/bll/fop/angularClass/filters/customFilter.js"></script>
     <script src="~/Scripts/bll/fop/jsClass/sort.js"></script>
     <script src="~/Scripts/angularJS/directives/toolTip.js"></script>
+    <script src="~/Scripts/angularJS/directives/alertInfo.js"></script>
+
+
     <!--Ssignal AR-->
     <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src="~/signalr/hubs"></script>

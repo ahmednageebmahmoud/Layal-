@@ -90,7 +90,7 @@ namespace BLL.BLL
         {
 
             //Checck Dublicate
-            if (db.EmployeeDistributionWorks_CheckIfInserted(c.WorkTypeId,  c.EventId, c.BranchId).First().Value > 0)
+            if (db.EmployeeDistributionWorks_CheckIfInserted(c.WorkTypeId,  c.EventId, c.BranchId,c.IsBasicBranch).First().Value > 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.CanNotDuplicate);
 
 

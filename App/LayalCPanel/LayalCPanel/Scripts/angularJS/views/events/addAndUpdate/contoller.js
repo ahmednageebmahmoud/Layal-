@@ -1,4 +1,4 @@
-﻿ngApp.controller('eventsCtrl', ['$scope', '$http', 'eventsServ', function (s, h, eventsServ) {
+﻿    ngApp.controller('eventsCtrl', ['$scope', '$http', 'eventsServ', function (s, h, eventsServ) {
     s.state = StateEnum;
     s.events = [];
     s.eventFOP = {};
@@ -66,6 +66,7 @@
             loading.hide();
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
+                    debugger;
                     s.event = d.data.Result;
                     s.event.State = StateEnum.update;
                     s.event.EventDateTime = new Date(Date.parse(s.event.EventDateTimeDisplay))
@@ -107,6 +108,7 @@
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
                     s.event.State = StateEnum.update;
+                    s.event.BranchId=d.data.Result.BranchId;
                     s.event.Note = null;
                 } break;
             }

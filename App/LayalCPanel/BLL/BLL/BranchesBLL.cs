@@ -25,7 +25,9 @@ namespace BLL.BLL
                 PhoneNo = c.PhoneNo,
                 Address=c.Address,
                 IsBasic=c.IsBasic,
-
+                ArchivingAndSaveingEmployeeId=c.FKArchivingAndSaveingEmployee_Id,
+                ImplementationEmployeeId=c.FKImplementationEmployeeId_Id,
+                CoordinationEmployeeId=c.FKCoordinationEmployee_Id,
                 City = new CityVM
                 {
                     Id = c.FKCity_Id,
@@ -97,7 +99,9 @@ namespace BLL.BLL
 
         private object Update(BranchVM c)
         {
-            db.Branches_Update(c.Id, c.NameAr, c.NameEn, c.Address, c.PhoneNo, c.CountryId, c.CityId, c.WordId,c.IsBasic);
+            db.Branches_Update(c.Id, c.NameAr, c.NameEn, c.Address, c.PhoneNo, c.CountryId, c.CityId,
+                c.WordId,c.IsBasic,c.ArchivingAndSaveingEmployeeId,c.ImplementationEmployeeId,
+                c.CoordinationEmployeeId,c.ArchivingAndSaveingAnotherBranchId).First();
             return new ResponseVM(RequestTypeEnum.Success, Token.Updated, c);
         }
 
@@ -124,6 +128,11 @@ namespace BLL.BLL
                 CountryId = c.FkCountry_Id,
                 WordId=c.FKWord_Id,
                 IsBasic=c.IsBasic,
+                ArchivingAndSaveingEmployeeId = c.FKArchivingAndSaveingEmployee_Id,
+                ImplementationEmployeeId = c.FKImplementationEmployeeId_Id,
+                CoordinationEmployeeId = c.FKCoordinationEmployee_Id,
+                ArchivingAndSaveingAnotherBranchId=c.FKArchivingAndSaveingAnotherBranch_Id, 
+                IsDeisabledBaicElements =db.Branches_CheckIfUsed(c.Id).First().Value>0,
 
                 City = new CityVM
                 {

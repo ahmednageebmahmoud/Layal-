@@ -15,12 +15,20 @@
             });
         };
 
-        getItems() {
+        getItems(branchId) {
             return h({
-                url: `${this.basePath}getItems`,
+                url: `${this.basePath}getItems?branchId=${branchId}`,
+                method: 'get',
+            });  
+        };
+
+        getItemsByBranchId(branchId) {
+            return h({
+                url: `${this.basePath}getItemsByBranchId?branchId=${branchId}`,
                 method: 'get',
             });
         };
+	    
 
 	    getBranch(id) {
             return h({

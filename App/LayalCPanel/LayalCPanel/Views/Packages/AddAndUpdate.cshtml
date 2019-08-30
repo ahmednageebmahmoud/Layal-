@@ -165,7 +165,7 @@
                                            min="1"
                                            ng-class="{'is-invalid':addPackageFrm.namsArExtraPrice.$invalid&&packageFrmErrorSubmit}"
                                            ng-model="package.NamsArExtraPrice"
-                                           ng-required="package.IsAllowPrintNames" />
+                                           />
                                     <!--Errors:-->
                                     <small class="error invalid-feedback" ng-if="addPackageFrm.namsArExtraPrice.$error.required&&packageFrmErrorSubmit">@Token.FieldIsRequierd</small>
                                     <small class="error invalid-feedback" ng-if="addPackageFrm.namsArExtraPrice.$error.min&&packageFrmErrorSubmit">@Token.MinNumberIs 1 </small>

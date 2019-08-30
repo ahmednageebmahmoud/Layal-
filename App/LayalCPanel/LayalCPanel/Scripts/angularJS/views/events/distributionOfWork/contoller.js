@@ -22,7 +22,15 @@ ngApp.controller('distributionOfWorkCtrl', ['$scope', '$http', 'eventsServ', fun
     }];
 
     s.worksTypesEnnum = worksTypesEnnum;
-    s.workTypes =[{Id:null,WorkTypeName:Token.select},...workTypesList];
+    s.workTypes = [{ Id: null, WorkTypeName: Token.select },
+        //هناك بعض اوامر العمل توضع لها موظفين ثابتين فى  صفحة تعديل البرانش لذالك لا نظهرها هنا
+        ...workTypesList.filter(c=>
+        c.Id!=worksTypesEnnum.Coordination &&
+    c.Id!=worksTypesEnnum.Implementation &&
+        c.Id!=worksTypesEnnum.ArchivingAndSaveing 
+    )];
+
+    s.fullWorkTypes = workTypesList;
     s.employeeDistributionWorks = [];
     
 

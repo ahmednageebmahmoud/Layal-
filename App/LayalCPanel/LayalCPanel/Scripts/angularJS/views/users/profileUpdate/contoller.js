@@ -225,13 +225,10 @@
     };
 
     s.checkAllowDisplay = (priv) => {
-
         if (!priv.CanEdit && !priv.CanDelete)
             priv.CanDisplay = false;
         else
             priv.CanDisplay = true;
-
-
     };
 
 

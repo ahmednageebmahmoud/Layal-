@@ -93,7 +93,6 @@ G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\Micro
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
-G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\credentials.json
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\Google.Apis.Auth.dll
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\Google.Apis.Calendar.v3.dll
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\Google.Apis.dll

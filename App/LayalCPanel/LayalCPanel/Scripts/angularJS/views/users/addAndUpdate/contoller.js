@@ -12,11 +12,14 @@
         CityId: Number(getQueryStringValue("cityId")) || null,
         BranchId: Number(getQueryStringValue("branchId")) || null,
         PhoneNo: getQueryStringValue("phoneNo") || null,
-        UserName: getQueryStringValue("fName") ? decodeURI(getQueryStringValue("fName")) : null,
+        UserName:  getQueryStringValue("fName") ? decodeURI(getQueryStringValue("fName")) : null,
         EnquiryId: getQueryStringValue("enquiryId") || null,
         IsActive:true
     };
  
+    if(s.user.UserName)
+    s.user.UserName = checkInputRTL(s.user.UserName[s.user.UserName.length - 1]) ? null : s.user.UserName;
+
     s.accountTypeDisapled = s.user.EnquiryId ? true : false;
     s.accountTypeEnum = AccountTypesEnum;
     s.accountTypes = accountTypesList.filter(c=> c.Id != AccountTypesEnum.ProjectManger);
@@ -98,11 +101,11 @@
                     s.user.State = StateEnum.update;
 
                     if (s.user.WorkTypes && s.user.WorkTypes.length > 0)
-                        WorkTypes.forEach(c=> {
+                        workTypesList.forEach(c=> {
                             if (s.user.WorkTypes.filter(v=> v.Selected && v.Id == c.Id).length > 0)
                                 c.Selected = true;
                         });
-                    s.user.WorkTypes = WorkTypes;
+                    s.user.WorkTypes = workTypesList;
 
                     setTimeout(() => {
                         $("select[serchbale]").select2();

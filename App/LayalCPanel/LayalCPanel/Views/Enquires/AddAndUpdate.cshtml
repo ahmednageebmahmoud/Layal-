@@ -115,7 +115,6 @@
                                 </div>
 
 
-
                                 <!--EventDate-->
                                 <label class="col-form-label col-lg-2">@Token.EventDate</label>
                                 <div class="col-lg-4 form-group-sub">
@@ -132,11 +131,7 @@
                                                ng-class="{'is-invalid':enquiryFrm.day.$invalid&&enquiyFormSubmitErro}"
                                                min="{{dateCond.minDay}}"
                                                max="{{dateCond.maxDay}}"
-                                               ng-change="cultDateCondetion()"
-                                               />
-                                        <!--Error-->
-                                        <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs {{dateCond.maxDay}}</small>
-                                        <small class="error invalid-feedback" ng-if="enquiryFrm.day.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs {{dateCond.minDay}}</small>
+                                               ng-change="cultDateCondetion()" />
 
                                         <!--Month-->
                                         <input type="number" class="form-control"
@@ -147,9 +142,6 @@
                                                min="{{dateCond.minMonth}}"
                                                max="{{dateCond.maxMonth}}"
                                                ng-change="cultDateCondetion()">
-                                        <!--Error-->
-                                        <small class="error invalid-feedback" ng-if="enquiryFrm.month.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs {{dateCond.minMonth}}  </small>
-                                        <small class="error invalid-feedback" ng-if="enquiryFrm.month.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs {{dateCond.maxMonth}} </small>
                                         <!--Year-->
                                         <input type="number" class="form-control"
                                                name="year"
@@ -158,10 +150,22 @@
                                                min="@DateTime.Now.Year"
                                                ng-class="{'is-invalid':enquiryFrm.year.$invalid&&enquiyFormSubmitErro}"
                                                ng-change="cultDateCondetion()">
-                                        <!--Error-->
-                                        <small class="error invalid-feedback" ng-if="enquiryFrm.year.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs @DateTime.Now.Year</small>
+                                    </div>
+
+                                    <!--Errors-->
+                                    <div style="display:block">
+
+                                        <!--Error Day-->
+                                        <small class="row error " ng-if="enquiryFrm.day.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs {{dateCond.maxDay}}</small>
+                                        <small class="row error " ng-if="enquiryFrm.day.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs {{dateCond.minDay}}</small>
+                                        <!--Error Month-->
+                                        <small class="row error " ng-if="enquiryFrm.month.$error.max&&enquiyFormSubmitErro">@Token.MaxNumberIs {{dateCond.minMonth}}  </small>
+                                        <small class="row error " ng-if="enquiryFrm.month.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs {{dateCond.maxMonth}} </small>
+                                        <!--Error Year-->
+                                        <small class="row error " ng-if="enquiryFrm.year.$error.min&&enquiyFormSubmitErro">@Token.MinNumberIs @DateTime.Now.Year</small>
                                     </div>
                                 </div>
+
                             </div>
 
                             <!--R O W 3
@@ -226,24 +230,6 @@
                                     <small class="error invalid-feedback" ng-if="enquiryFrm.enquiryType.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
                                 </div>
                                
-                            </div>
-
-                            <!--R O W 5-->
-                            <div class="form-group  row">
-                                <!--Notes
-                                    هنا يضيف ملحوظة جديدة على الملحوظات القدية-->
-                                <label class="col-form-label col-lg-2">@Token.AddNewNotes</label>
-                                <div class="col-lg-10 form-group-sub">
-                                    <textarea class="form-control"
-                                              name="notes"
-                                              ng-class="{'is-invalid':enquiryFrm.notes.$invalid&&enquiyFormSubmitErro}"
-                                              ng-model="enquiry.Note"
-                                              ng-maxlength="4000"
-                                              maxlength="4000"
-                                              rows="4"></textarea>
-                                    <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="enquiryFrm.phoneNo.$error.maxlength&&enquiyFormSubmitErro">@Token.MaxLengthCharIs 4000</small>
-                                </div>
                             </div>
 
                         </div>

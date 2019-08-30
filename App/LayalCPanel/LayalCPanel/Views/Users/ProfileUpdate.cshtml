@@ -96,13 +96,13 @@
                                            class="form-control"
                                            ng-class="{'is-invalid':userFrm.nationalityNumber.$invalid&&userFormSubmitErro}"
                                            ng-model="user.NationalityNumber"
-                                           pattern="\d{14,14}"
+                                           pattern="\d{10}"
                                            ng-required="true" />
                                     <small class="error " ng-if="userFrm.nationalityNumber.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
 
 
                                     <!--Errors:-->
-                                    <small class="error " ng-if="userFrm.nationalityNumber.$error.pattern&&userFormSubmitErro">@Token.InvalidData , @Token.MustBeInsert 14 @Token.Number</small>
+                                    <small class="error " ng-if="userFrm.nationalityNumber.$error.pattern&&userFormSubmitErro">@Token.InvalidData , @Token.MustBeInsert 10 @Token.Number</small>
                                 </div>
                             </div>
 

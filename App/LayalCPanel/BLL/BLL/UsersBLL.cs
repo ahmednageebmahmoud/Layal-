@@ -76,7 +76,7 @@ namespace BLL.BLL
                 if (db.Users_EmailBeforUsed(id, email).FirstOrDefault() > 0)
                     return new ResponseVM(RequestTypeEnum.Error, Token.EmailItIsAlreadyUsed);
 
-                string ActiveCode = $"C-{new Random().Next(9999, 20000)}";
+                string ActiveCode = "C-4444";// $"C-{new Random().Next(9999, 20000)}";
                 //SaveCode 
                 db.Users_UpateActiveCodeAndEmail(id, ActiveCode, email);
 
@@ -151,7 +151,7 @@ namespace BLL.BLL
                 {
                     Id = c.Id,
                     UserName = c.UserName,
-                    AccountTypeId = c.FKAccountType_Id,
+                    AccountTypeId = (AccountTypeEnum)c.FKAccountType_Id,
                     _Language = (LanguageEnum)c.FKLanguage_Id,
                     BrId = c.FKPranch_Id.HasValue ? c.FKPranch_Id.Value : 0,
                     IsActiveEmail = c.IsActiveEmail,
@@ -176,7 +176,7 @@ namespace BLL.BLL
                 {
                     Id = c.Id,
                     UserName = c.UserName,
-                    AccountTypeId = c.FKAccountType_Id,
+                    AccountTypeId = (AccountTypeEnum)c.FKAccountType_Id,
                     _Language = (LanguageEnum)c.FKLanguage_Id,
                     BrId = c.FKPranch_Id.HasValue ? c.FKPranch_Id.Value : 0,
                     IsActiveEmail = c.IsActiveEmail,
@@ -285,7 +285,7 @@ namespace BLL.BLL
                 {
                     Id = b.Id,
                     UserName = b.UserName,
-                    AccountTypeId = b.FKAccountType_Id,
+                    AccountTypeId = (AccountTypeEnum)b.FKAccountType_Id,
                     _Language = (LanguageEnum)b.FKLanguage_Id,
                     BrId = b.FKPranch_Id.HasValue ? b.FKPranch_Id.Value : 0,
                     IsActiveEmail = b.IsActiveEmail,
@@ -295,7 +295,7 @@ namespace BLL.BLL
 
                 //اذا كان احد الحسابات التالية ولم يقوم لـ اضافة معلومات حسابة بشكل كامل فيجب توجية الى صفحة تعديل الحساب
             if(User.Id!=this.AdminId)
-                if (db.Users_CheckCompeleteAccountInformation(User.Id, User.AccountTypeId).First().Value == 1)
+                if (db.Users_CheckCompeleteAccountInformation(User.Id, (int)User.AccountTypeId).First().Value == 1)
                     User.ReturnUrl = $"/Users/ProfileUpdate";
                 User.Id = 0;
                 return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, User);
@@ -325,13 +325,14 @@ namespace BLL.BLL
                     return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToCreateAccontForThisEnquiry);
             }
 
-            if (db.Users_UserNameBeforUsed(c.Id, c.UserName).FirstOrDefault() .Value> 0)
+            if (db.Users_UserNameBeforUsed(c.Id, c.UserName.Trim()).FirstOrDefault() .Value> 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.UserNameItIsAlreadyUsed, c);
 
-            if (db.Users_EmailBeforUsed(c.Id, c.Email).FirstOrDefault().Value > 0)
+
+            if (!string.IsNullOrEmpty(c.Email) && db.Users_EmailBeforUsed(c.Id, c.Email.Trim()).FirstOrDefault().Value > 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.EmailItIsAlreadyUsed, c);
 
-            if (db.Users_PhoneNumberBeforUsed(c.Id, c.PhoneNo).FirstOrDefault().Value > 0)
+            if (!string.IsNullOrEmpty(c.PhoneNo) &&db.Users_PhoneNumberBeforUsed(c.Id, c.PhoneNo.Trim()).FirstOrDefault().Value > 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.PhoneItIsAlreadyUsed, c);
 
             if (db.Users_NationalityNumberBeforUsed(c.Id, c.NationalityNumber).FirstOrDefault() > 0)
@@ -343,22 +344,10 @@ namespace BLL.BLL
 
 
             ObjectParameter ID = new ObjectParameter("Id", typeof(long));
-            db.Users_Insert(ID, c.UserName, c.Email, c.PhoneNo, c.AccountTypeId, c.Address, c.CountryId, c.CityId, c.Password, null, DateTime.Now, c.LanguageId, c.BranchId, c.EnquiryId, c.DateOfBirth, c.IsActive, c.FullName, c.NationalityNumber, c.WebSite);
+            db.Users_Insert(ID, c.UserName.Trim(), string.IsNullOrEmpty(c.Email) ? null: c.Email.Trim(), string.IsNullOrEmpty(c.PhoneNo)?null: c.PhoneNo.Trim(), c.AccountTypeId, c.Address, c.CountryId, c.CityId, c.Password, null, DateTime.Now, c.LanguageId, c.BranchId, c.EnquiryId, c.DateOfBirth, c.IsActive, c.FullName, c.NationalityNumber, c.WebSite);
             c.Id = (long)ID.Value;
 
-            //Add WorksTypes if employee
-            if ((c.AccountTypeId == (int)AccountTypeEnum.Employee && c.WorkTypes.Count > 0) || c.AccountTypeId == (int)AccountTypeEnum.Helper)
-            {
-                if (c.AccountTypeId == (int)AccountTypeEnum.Helper)
-                    if (!c.WorkTypes.Any(n => n.Id == (int)WorksTypesEnum.Coordination && n.Selected))
-                        c.WorkTypes.First(
-                            v => v.Id == (int)WorksTypesEnum.Coordination).Selected = true;
-
-                c.WorkTypes.Where(v => v.Selected).ToList().ForEach(v =>
-                 {
-                     db.EmployeesWorks_Insert(v.Id, c.Id);
-                 });
-            }
+        
             return new ResponseVM(RequestTypeEnum.Success, Token.Added, c);
         }
 

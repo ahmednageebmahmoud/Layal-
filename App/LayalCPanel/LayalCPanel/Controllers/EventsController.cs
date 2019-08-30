@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BLL.Services;
+using System.Threading.Tasks;
 
 namespace UI.Controllers
 {
@@ -77,6 +78,11 @@ namespace UI.Controllers
         {
             return Json(EventsBLL.GetEvents(even), JsonRequestBehavior.AllowGet);
         }
+        
+                public JsonResult GetEventPhotographers(long eventId)
+        {
+            return Json(EventsBLL.GetEventPhotographers(eventId), JsonRequestBehavior.AllowGet);
+        }
 
         public JsonResult GetEmployeeDistributionWorks(long eventId)
         {
@@ -88,7 +94,7 @@ namespace UI.Controllers
         {
             return Json(EventsBLL.SelectById(id), JsonRequestBehavior.AllowGet);
         }
-
+         
         public ActionResult GetEventEmployees(long id)
         {
             return Json(EmployeeDistributionWorkBLL.GetByEventId(id), JsonRequestBehavior.AllowGet);
@@ -96,7 +102,7 @@ namespace UI.Controllers
 
 
         [HttpPost]
-        public JsonResult SaveChange(EventVM enquiryType)
+        public async Task<JsonResult> SaveChange(EventVM enquiryType)
         {
             return Json(EventsBLL.SaveChange(enquiryType), JsonRequestBehavior.AllowGet);
         }
@@ -116,8 +122,17 @@ namespace UI.Controllers
         }
 
 
-        
 
+        [HttpPost]
+        public JsonResult UpdateEventPhotographers(List<EventPhotographerVM> dis)
+        {
+            return Json(EventsBLL.UpdateEventPhotographers(dis), JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+        
 
 
     }//end class

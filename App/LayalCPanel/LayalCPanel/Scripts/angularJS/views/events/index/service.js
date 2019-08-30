@@ -37,7 +37,16 @@
                 method: 'get',
             });
         };
+
+        getEventPhotographers(id) {
+            return h({
+                url: `${this.basePath}getEventPhotographers?eventId=${id}`,
+                method: 'get',
+            });
+        };
         
+	    
+
 		//save event  
         saveChange(event) {
 
@@ -57,6 +66,15 @@
                 data: qus
             });
         };
+
+        updateEventPhotographers(qus) {
+            return h({
+                url: `${this.basePath}updateEventPhotographers`,
+                method: 'post',
+                data: qus
+            });
+        };
+	    
 
 	    
 

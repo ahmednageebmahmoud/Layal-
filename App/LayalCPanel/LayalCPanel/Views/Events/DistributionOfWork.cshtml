@@ -60,24 +60,10 @@
                                             ng-model="newEmpWork.WorkTypeId"
                                             ng-options="c.Id as c.WorkTypeName for c in workTypes"
                                             ng-required="true"
-                                            ng-change="employeesTarget =employees;newEmpWork.BranchId=null;reSelect()"
-                                            ></select>
+                                            ng-change="employeesTarget =employees;newEmpWork.BranchId=null;reSelect()"></select>
                                     <!--Errors:-->
                                     <small class="error invalid-feedback" ng-if="addNewEmpWorkFrom.albumTypeId.$error.required&&addNewEmpWorkFromErrorSubmit">@Token.FieldIsRequierd</small>
                                 </div>
-
-                                <!--IsBaic-->
-                                <label class="col-form-label col-lg-2">@Token.Branch</label>
-                                <div class="col-lg-4 form-group-sub">
-                                    <select class="form-control"
-                                            serchbale
-                                            ng-model="newEmpWork.BranchId"
-                                            ng-options="c.Id as c.BranchName for c in branches"
-                                            ng-disabled="newEmpWork.WorkTypeId!=worksTypesEnnum.ArchivingAndSaveing" ng-change="getEmployees(newEmpWork.BranchId)"></select>
-                                </div>
-                            </div>
-                            <!--R O W 2-->
-                            <div class="form-group row">
                                 <!--Employee-->
                                 <label class="col-form-label col-lg-2" ng-hide="newEmpWork.IsBasicBranch">@Token.Employee</label>
                                 <label class="col-form-label col-lg-2" ng-show="newEmpWork.IsBasicBranch">@Token.BasicBranchEmployee</label>
@@ -93,7 +79,20 @@
                                     <!--Errors:-->
                                     <small class="error invalid-feedback" ng-if="addNewEmpWorkFrom.employeeId.$error.required&&addNewEmpWorkFromErrorSubmit">@Token.FieldIsRequierd</small>
                                 </div>
+
+                                <!--IsBaic
+                                <label class="col-form-label col-lg-2">@Token.Branch</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <select class="form-control"
+                                            serchbale
+                                            ng-model="newEmpWork.BranchId"
+                                            ng-options="c.Id as c.BranchName for c in branches"
+                                            ng-disabled="newEmpWork.WorkTypeId!=worksTypesEnnum.ArchivingAndSaveing" ng-change="getEmployees(newEmpWork.BranchId)"></select>
+                                </div>
+                                    -->
+
                             </div>
+
                         </div>
                         <div class="kt-portlet__foot">
                             <div class="kt-form__actions">
@@ -106,8 +105,10 @@
                                                 <i class="la la-save">@Token.Add</i>
                                             </button>
                                             <button type="button"
-                                                     class="btn btn-warning btn-elevate btn-elevate-air "
-                                                      ng-click="reset()"><i class="la la-file">@Token.Cancel</i></button>
+                                                    class="btn btn-warning btn-elevate btn-elevate-air "
+                                                    ng-click="reset()">
+                                                <i class="la la-file">@Token.Cancel</i>
+                                            </button>
                                         }
                                     </div>
                                 </div>
@@ -172,7 +173,7 @@
                                         <td>
                                             <select class="form-control input-disabled"
                                                     ng-model="gp.WorkTypeId"
-                                                    ng-options="c.Id as c.WorkTypeName for c in workTypes"
+                                                    ng-options="c.Id as c.WorkTypeName for c in fullWorkTypes"
                                                     ng-disabled="true"></select>
                                         </td>
                                         <td>
@@ -184,7 +185,11 @@
                                             @if (Priv.CanDelete)
                                             {
                                                 <a href="javascript:void(0);"
-                                                   ng-if="!gp.IsFinshed"
+                                                   ng-if="!gp.IsFinshed &&
+                                                   gp.WorkTypeId!=worksTypesEnnum.Coordination&&
+                                                   gp.WorkTypeId!=worksTypesEnnum.Implementation&&
+                                                   gp.WorkTypeId!=worksTypesEnnum.ArchivingAndSaveing
+                                                   "
                                                    ng-click="delete(gp)" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i></a>
                                             }
                                         </td>

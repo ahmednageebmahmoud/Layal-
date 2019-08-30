@@ -97,8 +97,8 @@ namespace BLL.BLL
         {
             try
             {
-                if (!c.IsPrintNamesFree)
-                    c.NamsArExtraPrice = 0;
+                //if (!c.IsPrintNamesFree)
+                //    c.NamsArExtraPrice = 0;
 
                 db.Packages_Update(c.Id, c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.IsPrintNamesFree, c.AlbumTypeId, c.WordNameId, c.WordDescriptionId,c.Price,c.NamsArExtraPrice);
                 return new ResponseVM(RequestTypeEnum.Success, Token.Updated, c);
@@ -113,8 +113,8 @@ namespace BLL.BLL
         {
             try
             {
-                if (!c.IsPrintNamesFree)
-                    c.NamsArExtraPrice = 0;
+            //    if (!c.IsPrintNamesFree)
+            //        c.NamsArExtraPrice = 0;
                 ObjectParameter ID = new ObjectParameter("Id", typeof(int));
                 db.Packages_Insert(ID, c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.IsPrintNamesFree, c.AlbumTypeId,c.Price,c.NamsArExtraPrice);
 

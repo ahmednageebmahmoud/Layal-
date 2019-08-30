@@ -99,10 +99,10 @@ namespace UI.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddNewStatus(EnquiryStatusVM c)
+        public async System.Threading.Tasks.Task<JsonResult> AddNewStatus(EnquiryStatusVM c)
         {
-            return Json(EnquiryStatusBLL.AddNewStatus(c), JsonRequestBehavior.AllowGet);
+            return Json(await EnquiryStatusBLL.AddNewStatus(c), JsonRequestBehavior.AllowGet);
         }
-        
+
     }//end class
 }

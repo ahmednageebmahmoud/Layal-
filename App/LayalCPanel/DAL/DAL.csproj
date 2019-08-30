@@ -120,13 +120,13 @@
     <Compile Include="Enquires_SelectByPk_SimpleData_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EnquiryNotes_SelectByEnquiryId_Result.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
     <Compile Include="EnquiryPayments_SelectByEnquiryId_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="EnquiryStatusTypes_SelectByEnquiryId_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EnquiryStatusTypes_SelectByPK_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="EnquiryStatus_SelectByFilter_Result.cs">
@@ -142,6 +142,15 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="EventCoordinations_SelectByEventId_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventPhotographers_SelectAllByEventId_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventPhotographers_SelectAllUsers_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventPhotographers_SelectEventsByFilter_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="EventSurveies_ChartByYear_Result.cs">

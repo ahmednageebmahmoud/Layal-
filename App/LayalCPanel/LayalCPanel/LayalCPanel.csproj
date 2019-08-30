@@ -87,6 +87,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -172,12 +180,6 @@
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin">
-      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb">
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security">
       <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
@@ -1966,6 +1968,8 @@
     <Content Include="Scripts\angularJS\views\eew\archivingAndSaveing\addAndUpdate\service.js" />
     <Content Include="Scripts\angularJS\views\eew\archivingAndSaveing\index\contoller.js" />
     <Content Include="Scripts\angularJS\views\eew\archivingAndSaveing\index\service.js" />
+    <Content Include="Scripts\angularJS\views\eew\eventPoto\index\contoller.js" />
+    <Content Include="Scripts\angularJS\views\eew\eventPoto\index\service.js" />
     <Content Include="Scripts\angularJS\views\enquires\addEnquiry\contoller.js" />
     <Content Include="Scripts\angularJS\views\enquires\addEnquiry\service.js" />
     <Content Include="Scripts\angularJS\views\enquires\addAndUpdate\contoller.js" />
@@ -1990,6 +1994,8 @@
     <Content Include="Scripts\angularJS\views\home\index\helper\service.js" />
     <Content Include="Scripts\angularJS\views\home\index\employee\contoller.js" />
     <Content Include="Scripts\angularJS\views\home\index\employee\service.js" />
+    <Content Include="Scripts\angularJS\views\myEnquires\addAndUpdate\contoller.js" />
+    <Content Include="Scripts\angularJS\views\myEnquires\addAndUpdate\service.js" />
     <Content Include="Scripts\angularJS\views\packages\addAndUpdate\contoller.js" />
     <Content Include="Scripts\angularJS\views\packages\addAndUpdate\service.js" />
     <Content Include="Scripts\angularJS\views\packages\index\contoller.js" />
@@ -2236,9 +2242,7 @@
     <Content Include="assets\vendors\general\wnumb\bower.json" />
     <Content Include="assets\vendors\general\wnumb\package.json" />
     <Content Include="assets\vendors\general\wnumb\README.md" />
-    <Content Include="credentials.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="credentials.json" />
     <None Include="Properties\PublishProfiles\a.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -2324,6 +2328,9 @@
     <Content Include="Views\Enquires\_AddAndUpdatePartial.cshtml" />
     <Content Include="Views\EEW\ArchivingAndSaveing.cshtml" />
     <Content Include="Views\EEW\AddAndUpdateArchivingAndSaveing.cshtml" />
+    <Content Include="Views\EEW\EventsPhoto.cshtml" />
+    <Content Include="Views\EEW\CoordinationsInformation.cshtml" />
+    <Content Include="Views\MyEnquires\AddAndUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

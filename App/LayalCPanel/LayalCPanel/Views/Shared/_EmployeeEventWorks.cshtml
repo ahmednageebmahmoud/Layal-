@@ -148,7 +148,14 @@
                            ng-if="!x.EventWorkStatusIsFinshed.Coordination&&x.WorkTypeId==worksTypesEnum.Coordination"
                             title="@Token.Update"  
                             class="btn btn-sm btn-clean btn-icon btn-icon-md" ><i class="la la-edit"></i></a>
-                      
+                        
+                        <!--Btn:Coordination Photograhper-->
+                        <a href="/EEW/CoordinationsInformation?id={{x.Id}}"
+                           ng-if="@CookieService.UserInfo.IsPhotographerOrHelper.ToString().ToLower()"
+                           title="@Token.EventCoordinations"
+                           class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fa fa-tasks "></i></a>
+
+
                         <!--Btn:Implementation-->
                         <a href="javascript:void(0)"
                            ng-if="!x.EventWorkStatusIsFinshed.Implementation&&x.WorkTypeId==worksTypesEnum.Implementation"

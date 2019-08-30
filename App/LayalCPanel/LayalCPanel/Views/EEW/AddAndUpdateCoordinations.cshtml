@@ -34,7 +34,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <!--Add New Task-->
-                <div class="kt-portlet" ng-if="!event.EventWorkStatusIsFinshed.Coordination">
+                <div class="kt-portlet" ng-if="!event.EventWorkStatusIsFinshed.Coordination||@CookieService.UserInfo.IsBranchManager.ToString().ToLower()">
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
                             <span class="kt-portlet__head-icon">
@@ -158,7 +158,7 @@
                                         <th class="th-10 "><label class="sms-sort-field">@Token.UserName</label></th>
 
                                         
-                                        <th class="th-15 " ng-if="!event.EventWorkStatusIsFinshed.Coordination"><label class="sms-sort-field">@Token.Operations</label></th>
+                                        <th class="th-15 " ng-if="!event.EventWorkStatusIsFinshed.Coordination||@CookieService.UserInfo.IsBranchManager.ToString().ToLower()"><label class="sms-sort-field">@Token.Operations</label></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -173,7 +173,7 @@
                                                       ></textarea></td>
                                         
                                         <td>{{x.CreatedUserName}}</td>
-                                        <td ng-if="!event.EventWorkStatusIsFinshed.Coordination">
+                                        <td ng-if="!event.EventWorkStatusIsFinshed.Coordination||@CookieService.UserInfo.IsBranchManager.ToString().ToLower()">
                                             <a href="javascript:void(0);"  title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md" ng-click="delete(x)"><i class="la la-trash"></i> </a>
 
                                         </td>

@@ -859,7 +859,7 @@
     <value>يجب عليك ادخال</value>
   </data>
   <data name="NationalityNumber" xml:space="preserve">
-    <value>الرقم القومى</value>
+    <value>رقم الهوية</value>
   </data>
   <data name="Number" xml:space="preserve">
     <value>رقم</value>
@@ -868,7 +868,7 @@
     <value>الموقع الخاص بك</value>
   </data>
   <data name="NationalityNumberItIsAlreadyUsed" xml:space="preserve">
-    <value>الرقم القومى مستتخدم من قبل</value>
+    <value>رقم الهوية مستخدم من قبل</value>
   </data>
   <data name="SocialMedaiAccounts" xml:space="preserve">
     <value>حسابات التواصل الاجتماعى</value>
@@ -985,7 +985,7 @@
     <value>رئيسى</value>
   </data>
   <data name="BasicBranchEmployee" xml:space="preserve">
-    <value>موظف الفرع الاساسى</value>
+    <value>موظف الفرع الاخر</value>
   </data>
   <data name="SelectEmployeeFromBasicBranch" xml:space="preserve">
     <value>اختيار موظف من الفرع الاساسى</value>
@@ -1034,5 +1034,32 @@
   </data>
   <data name="FolderName" xml:space="preserve">
     <value>اسم المجلد</value>
+  </data>
+  <data name="CanNotInsertDateLessThanCurrentDate" xml:space="preserve">
+    <value>لا يمكنك اضافة تاريخ اقل من التاريخ الحالى  </value>
+  </data>
+  <data name="EventPhotographers" xml:space="preserve">
+    <value>مصورين المناسبة</value>
+  </data>
+  <data name="NoPhotographersFound" xml:space="preserve">
+    <value>لا يوجد مصورين</value>
+  </data>
+  <data name="EventsPhotography" xml:space="preserve">
+    <value>مناسبات التصوير</value>
+  </data>
+  <data name="ArchivingAndSaveingEmployee" xml:space="preserve">
+    <value>موظف الارشفة والحفظ</value>
+  </data>
+  <data name="CoordinationEmployee" xml:space="preserve">
+    <value>موظف الاعداد والتنسيق</value>
+  </data>
+  <data name="ImplementationEmployeeId" xml:space="preserve">
+    <value>موظف التنفيذ</value>
+  </data>
+  <data name="EnquiryIsNotFound" xml:space="preserve">
+    <value>الاستفسار غير موجود</value>
+  </data>
+  <data name="ArchivingAndSaveingAnotherBranch" xml:space="preserve">
+    <value>الفرع الآخر للآرشفه والحفظ</value>
   </data>
 </root>

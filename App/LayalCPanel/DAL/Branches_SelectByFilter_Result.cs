@@ -20,6 +20,10 @@ namespace DAL
         public int FKCity_Id { get; set; }
         public long FKWord_Id { get; set; }
         public bool IsBasic { get; set; }
+        public Nullable<long> FKArchivingAndSaveingEmployee_Id { get; set; }
+        public Nullable<long> FKImplementationEmployeeId_Id { get; set; }
+        public Nullable<long> FKCoordinationEmployee_Id { get; set; }
+        public Nullable<int> FKArchivingAndSaveingAnotherBranch_Id { get; set; }
         public string CountryNameAr { get; set; }
         public string CountryNameEn { get; set; }
         public string CityNameAr { get; set; }

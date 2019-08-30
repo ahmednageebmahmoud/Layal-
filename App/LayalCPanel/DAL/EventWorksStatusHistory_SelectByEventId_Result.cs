@@ -20,6 +20,7 @@ namespace DAL
         public int FKWorkType_Id { get; set; }
         public long FKUsre_Id { get; set; }
         public int FKAccountType_Id { get; set; }
+        public int FKBranch_Id { get; set; }
         public string UserName { get; set; }
         public string AccountTypeAr { get; set; }
         public string AccountTypeEn { get; set; }

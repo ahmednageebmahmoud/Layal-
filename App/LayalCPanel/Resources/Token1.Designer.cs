@@ -394,6 +394,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Archiving And Saveing Another Branch.
+        /// </summary>
+        public static string ArchivingAndSaveingAnotherBranch {
+            get {
+                return ResourceManager.GetString("ArchivingAndSaveingAnotherBranch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archiving And Saveing Employee.
+        /// </summary>
+        public static string ArchivingAndSaveingEmployee {
+            get {
+                return ResourceManager.GetString("ArchivingAndSaveingEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Archiving Date.
         /// </summary>
         public static string ArchivingDate {
@@ -430,7 +448,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Basic Branch Employee.
+        ///   Looks up a localized string similar to Another Branch Employee.
         /// </summary>
         public static string BasicBranchEmployee {
             get {
@@ -543,6 +561,15 @@ namespace Resources {
         public static string CanNotDuplicateEventWithOneEnquiry {
             get {
                 return ResourceManager.GetString("CanNotDuplicateEventWithOneEnquiry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can Not Insert Date Less Than Current Date.
+        /// </summary>
+        public static string CanNotInsertDateLessThanCurrentDate {
+            get {
+                return ResourceManager.GetString("CanNotInsertDateLessThanCurrentDate", resourceCulture);
             }
         }
         
@@ -660,6 +687,15 @@ namespace Resources {
         public static string CloseEnquiry {
             get {
                 return ResourceManager.GetString("CloseEnquiry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Coordination Employee.
+        /// </summary>
+        public static string CoordinationEmployee {
+            get {
+                return ResourceManager.GetString("CoordinationEmployee", resourceCulture);
             }
         }
         
@@ -934,6 +970,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enquiry Is NotFound.
+        /// </summary>
+        public static string EnquiryIsNotFound {
+            get {
+                return ResourceManager.GetString("EnquiryIsNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enquiry Type.
         /// </summary>
         public static string EnquiryType {
@@ -1051,11 +1096,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Event Photographers.
+        /// </summary>
+        public static string EventPhotographers {
+            get {
+                return ResourceManager.GetString("EventPhotographers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Events.
         /// </summary>
         public static string Events {
             get {
                 return ResourceManager.GetString("Events", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Events Photography.
+        /// </summary>
+        public static string EventsPhotography {
+            get {
+                return ResourceManager.GetString("EventsPhotography", resourceCulture);
             }
         }
         
@@ -1281,6 +1344,15 @@ namespace Resources {
         public static string Id {
             get {
                 return ResourceManager.GetString("Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Implementation EmployeeId.
+        /// </summary>
+        public static string ImplementationEmployeeId {
+            get {
+                return ResourceManager.GetString("ImplementationEmployeeId", resourceCulture);
             }
         }
         
@@ -1758,6 +1830,15 @@ namespace Resources {
         public static string NoMoreResult {
             get {
                 return ResourceManager.GetString("NoMoreResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Photographers Found.
+        /// </summary>
+        public static string NoPhotographersFound {
+            get {
+                return ResourceManager.GetString("NoPhotographersFound", resourceCulture);
             }
         }
         

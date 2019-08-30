@@ -299,9 +299,9 @@ namespace BLL.BLL
             return Result;
         }
 
-        public object GetBranches()
+        public object GetBranches(int? branchId=null)
         {
-            var Result = db.Branches_SelectByAll().Select(c => new BranchVM
+            var Result = db.Branches_SelectByAll().Where(c=> !branchId.HasValue || c.Id!= branchId.Value).Select(c => new BranchVM
             {
                 Id = c.Id,
                 NameAr = c.BranchNameAR,

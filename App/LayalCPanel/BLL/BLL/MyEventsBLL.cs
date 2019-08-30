@@ -23,7 +23,7 @@ namespace BLL.BLL
         {
             bool? IsWithBranch = null;
             //اذا كان الميتخدم الحالى هوا مدير فرع فـ يجب عرض الاستفسارات التى تخصة فقط
-            if (this.UserLoggad.AccountTypeId == (int)AccountTypeEnum.BranchManager)
+            if (this.UserLoggad.AccountTypeId ==  AccountTypeEnum.BranchManager)
             {
                 branchId = this.UserLoggad.BrId;
                 IsWithBranch = true;
@@ -173,6 +173,9 @@ namespace BLL.BLL
 
 
             db.Events_Update2(c.Id, c.IsClinetCustomLogo, c.LogoFilePath, c.IsNamesAr, c.NameGroom, c.NameBride, c.PrintNameTypeId,  c.PackagePrice, c.PackageNamsArExtraPrice,c.NamesPrintingPrice);
+
+            //نقوم بتوزيع اومر العمل على الموظفين
+            new EventsBLL().DistributionWorkOrderToDefaultEmployees(c.Id, c.BranchId.Value);
 
             return new ResponseVM(RequestTypeEnum.Success, Token.Updated, c);
         }

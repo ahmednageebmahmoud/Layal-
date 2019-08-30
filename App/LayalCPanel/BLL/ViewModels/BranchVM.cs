@@ -20,5 +20,30 @@ namespace BLL.ViewModels
         public int CityId { get;   set; }
         public int CountryId { get; set; }
         public bool IsBasic { get; set; }
+
+        /// <summary>
+        /// فى هذة الوظيفة يكون موظف واحد تابع للبرانش ولا يحتاج مدير البرناش لتوجية الوظيفة لة 
+        /// فـ الوظيفة سوف توجة بشكل تلقائى
+        /// </summary>
+        public long? ArchivingAndSaveingEmployeeId { get; set; }
+        /// <summary>
+        /// فى هذة الوظيفة يكون موظف واحد تابع للبرانش ولا يحتاج مدير البرناش لتوجية الوظيفة لة 
+        /// فـ الوظيفة سوف توجة بشكل تلقائى
+        /// </summary>
+        public long? ImplementationEmployeeId { get; set; }
+        /// <summary>
+        /// فى هذة الوظيفة يكون موظف واحد تابع للبرانش ولا يحتاج مدير البرناش لتوجية الوظيفة لة 
+        /// فـ الوظيفة سوف توجة بشكل تلقائى
+        /// </summary>
+        public long? CoordinationEmployeeId { get; set; }
+        /// <summary>
+        /// لا يمكن تحديث المعلومات الاساسية اذا كان هذا الفرع مستخدم من قبل 
+        /// </summary>
+        public bool IsDeisabledBaicElements { get;   set; }
+        /// <summary>
+        /// اسم الفرع الاخبر الذى سوف يقوم بحفظ الملفات احطياتيا
+        /// </summary>
+        public int? ArchivingAndSaveingAnotherBranchId { get; set; }
+
     }//end class
 }

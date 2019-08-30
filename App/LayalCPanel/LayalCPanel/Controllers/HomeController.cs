@@ -19,7 +19,13 @@ namespace UI.Controllers
 
             return View();
         }
+        public ActionResult Contact()
+        {
 
+            return View();
+        }
+
+        
         public ActionResult GetMenus()
         {
             return Json(FillItems.GetMenusWithPages(), JsonRequestBehavior.AllowGet);

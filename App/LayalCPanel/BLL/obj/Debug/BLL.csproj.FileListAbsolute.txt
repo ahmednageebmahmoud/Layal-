@@ -42,3 +42,11 @@ G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\BLL\bin\Debug\Google.
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\BLL\bin\Debug\Google.Apis.Calendar.v3.xml
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\BLL\bin\Debug\Google.Apis.Core.pdb
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\BLL\bin\Debug\Google.Apis.Core.xml
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\BLL\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\BLL\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\BLL\bin\Debug\Microsoft.Owin.Security.Cookies.dll
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\BLL\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\BLL\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\BLL\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\BLL\bin\Debug\Microsoft.Owin.Security.Cookies.xml
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\BLL\bin\Debug\Microsoft.Owin.Security.OAuth.xml

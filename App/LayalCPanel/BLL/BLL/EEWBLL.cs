@@ -47,15 +47,33 @@ namespace BLL.BLL
         /// التحقق ان الموظف الحالى يمكنة الوصول الى الصفحة
         /// </summary>
         /// <returns></returns>
-        public bool ChakIfEmployeeAllowAccess(WorksTypesEnum workType)
+        public bool ChakIfEmployeeAllowAccess(WorksTypesEnum workType, Int64? id = null)
         {
             if (this.UserLoggad.IsAdmin) return true;
+
             return db.EmployeesWorks_CheckIfInserted((int)workType, this.UserLoggad.Id).First().Value > 0;
         }
 
+        /// <summary>
+        /// التحقق ان المصور او المتاون الحالى يمكنكهم الوصول للمناسبة
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        public bool ChakIefPhotographerAllowAccess(long eventId)
+        {
+        //اذا كان الشخص الحالى مصور فـ يجب فقط التحقق ها يمكنة مشاهدة معلومات التنسيق ام لاء
+                return db.EventPhotographers_CheckCanBeAccess(this.UserLoggad.Id, eventId).First().Value >0;
+        }
 
         public object GetEventForCurrretnEmployee(long eventId, WorksTypesEnum workType)
         {
+            if(this.UserLoggad.IsPhotographerOrHelper)
+            {
+                if(!ChakIefPhotographerAllowAccess(eventId))
+                return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEvent);
+
+            }
+            else
             if (!CheckAlloweAccess(eventId, workType))
                 return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEvent);
 
@@ -118,7 +136,7 @@ namespace BLL.BLL
         {
            
             //Insert In History
-            db.EventWorksStatusHistory_Insert(true, DateTime.Now, eventId, (int)workTypeId, this.UserLoggad.Id, this.UserLoggad.AccountTypeId, this.UserLoggad.BrId);
+            db.EventWorksStatusHistory_Insert(true, DateTime.Now, eventId, (int)workTypeId, this.UserLoggad.Id, (int)this.UserLoggad.AccountTypeId, this.UserLoggad.BrId);
 
             //Update Event Finshed
             UpdateFinshed(eventId, workTypeId);

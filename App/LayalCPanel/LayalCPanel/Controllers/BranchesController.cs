@@ -34,15 +34,28 @@ namespace UI.Controllers
         }
 
 
-        public JsonResult GetItems()
+        public JsonResult GetItems(int? branchId)
         {
             return Json(new ResponseVM(RequestTypeEnum.Success, Token.Success, new
             {
                 Countries = FillItems.GetCountries(),
                 Cities = FillItems.GetCities(),
+                Branches = FillItems.GetBranches(branchId)
 
             }), JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetItemsByBranchId(int branchId)
+        {
+            return Json(new ResponseVM(RequestTypeEnum.Success, Token.Success, new
+            {
+                Employees = FillItems.UsersWithCurrentBranchWithWorkTypes(branchId)
+
+            }), JsonRequestBehavior.AllowGet);
+        }
+
+        
+
 
         public JsonResult GetBranches(int? skip, int? take, string branchName, string email, string phoneNumber, string adddress,
             DateTime? createDateTo, DateTime? createDateFrom, int? countryId, int? cityId, int? accountTypeId, int? languageId)

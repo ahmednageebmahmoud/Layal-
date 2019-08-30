@@ -973,7 +973,7 @@
     <value>Basic</value>
   </data>
   <data name="BasicBranchEmployee" xml:space="preserve">
-    <value>Basic Branch Employee</value>
+    <value>Another Branch Employee</value>
   </data>
   <data name="SelectEmployeeFromBasicBranch" xml:space="preserve">
     <value>Select Employee From Basic Branch</value>
@@ -1025,5 +1025,32 @@
   </data>
   <data name="FolderName" xml:space="preserve">
     <value>Folder Name</value>
+  </data>
+  <data name="CanNotInsertDateLessThanCurrentDate" xml:space="preserve">
+    <value>Can Not Insert Date Less Than Current Date</value>
+  </data>
+  <data name="EventPhotographers" xml:space="preserve">
+    <value>Event Photographers</value>
+  </data>
+  <data name="NoPhotographersFound" xml:space="preserve">
+    <value>No Photographers Found</value>
+  </data>
+  <data name="EventsPhotography" xml:space="preserve">
+    <value>Events Photography</value>
+  </data>
+  <data name="ArchivingAndSaveingEmployee" xml:space="preserve">
+    <value>Archiving And Saveing Employee</value>
+  </data>
+  <data name="CoordinationEmployee" xml:space="preserve">
+    <value>Coordination Employee</value>
+  </data>
+  <data name="ImplementationEmployeeId" xml:space="preserve">
+    <value>Implementation EmployeeId</value>
+  </data>
+  <data name="EnquiryIsNotFound" xml:space="preserve">
+    <value>Enquiry Is NotFound</value>
+  </data>
+  <data name="ArchivingAndSaveingAnotherBranch" xml:space="preserve">
+    <value>Archiving And Saveing Another Branch</value>
   </data>
 </root>

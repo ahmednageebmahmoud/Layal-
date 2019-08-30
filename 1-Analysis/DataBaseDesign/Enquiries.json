@@ -18,19 +18,14 @@
         "IFWithBranch": null, //اذا هوا الان مع الشركة وليس مع الادارة
               "FkClinet_Id": null, //معرف العميل الذى انشىء من منطلق هذا الاستفسار
         "IsLinkedClinet": null,
-        "IsCreatedEvent": true
+        "IsCreatedEvent": true,
+        "Notes":null
     },
     "EnquiryTypes": {
         "Id": null,
         "FkWord_Id": null
     },
-    "EnquiryFormNotes": {
-        "Id": null,
-        "FKEnquiryForm_Id": null,
-        "Notes": null,
-        "CreateDateTime": null,
-        "FKUserCreated_Id": null
-    },
+ 
     //  جدول الحالات : وهناك بعض الحالات التى يجب عند اتخاذها ان نعود بـ رسالة للمدير
     "EnquiryStatusTypes": {
         "Id": null,

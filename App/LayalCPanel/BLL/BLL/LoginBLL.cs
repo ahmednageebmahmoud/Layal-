@@ -19,7 +19,7 @@ namespace BLL.BLL
             {
                 Id = c.Id,
                 UserName = c.UserName,
-                AccountTypeId = c.FKAccountType_Id,
+                AccountTypeId = (AccountTypeEnum)c.FKAccountType_Id,
                 _Language = (LanguageEnum)c.FKLanguage_Id,
                 _IsRemmeberMe = isRemmber,
                 BrId = c.FKPranch_Id.HasValue ? c.FKPranch_Id.Value : 0,
@@ -40,12 +40,12 @@ namespace BLL.BLL
             //Set User In Cookie
             CookieService.SetUserInCookie(User);
 
-            if (!User.IsActiveEmail && User.AccountTypeId == (int)AccountTypeEnum.Clinet)
+            if (!User.IsActiveEmail && User.AccountTypeId == AccountTypeEnum.Clinet)
                 User.ReturnUrl = $"/Users/ActiveEmail?id={User.Id}&email={User.Email}&userName={User.UserName}";
 
             //اذا كان احد الحسابات التالية ولم يقوم لـ اضافة معلومات حسابة بشكل كامل فيجب توجية الى صفحة تعديل الحساب
             if(User.Id!=this.AdminId)
-            if (db.Users_CheckCompeleteAccountInformation(User.Id, User.AccountTypeId).First().Value == 1)
+            if (db.Users_CheckCompeleteAccountInformation(User.Id, (int)User.AccountTypeId).First().Value == 1)
                 User.ReturnUrl = $"/Users/ProfileUpdate";
 
 

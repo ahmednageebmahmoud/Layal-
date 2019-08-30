@@ -6,7 +6,7 @@
 
 }
 
-<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" ng-controller="usersCtrl">
+<div cla    s="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" ng-controller="usersCtrl">
     <!-- begin:: Subheader -->
     <div class="kt-subheader   kt-grid__item" id="kt_subheader">
         <div class="kt-subheader__main">
@@ -106,11 +106,11 @@
                                            class="form-control"
                                            ng-class="{'is-invalid':userFrm.nationalityNumber.$invalid&&userFormSubmitErro}"
                                            ng-model="user.NationalityNumber"
-                                           pattern="\d{14,14}"
+                                           pattern="\d{10}"
                                            />
 
                                     <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="userFrm.nationalityNumber.$error.pattern&&userFormSubmitErro">@Token.InvalidData , @Token.MustBeInsert 14 @Token.Number</small>
+                                    <small class="error invalid-feedback" ng-if="userFrm.nationalityNumber.$error.pattern&&userFormSubmitErro">@Token.InvalidData , @Token.MustBeInsert 10 @Token.Number</small>
                                 </div>
                             </div>
 
@@ -237,10 +237,6 @@
                                     <small class="error invalid-feedback" ng-if="userFrm.language.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
                                     <small class="error invalid-feedback" ng-if="userFrm.language.$invalid&&!userFrm.language.$error.required&&userFormSubmitErro">@Token.InvalidData</small>
                                 </div>
-
-                                
-
-
                             </div>
 
                             <!--R O W 7-->
@@ -257,9 +253,6 @@
                                     <small class="error invalid-feedback" ng-if="userFrm.dateOfBirth.$invalid&&userFormSubmitErro">@Token.InvalidData</small>
                                 </div>
 
-                                @if(CookieService.UserInfo.IsAdmin)
-                                {
-
                                 <!--IsActive-->
                                 <label class="col-form-label col-lg-2">@Token.IsActive</label>
                                 <div class="form-group-sub  col-lg-4">
@@ -271,7 +264,6 @@
                                         </label>
                                     </span>
                                 </div>
-                                }
                             </div>
 
                             <!--R O W 8-->
@@ -286,19 +278,14 @@
                                            ng-model="user.WebSite"
                                            maxlength="500" />
                                     <small class="error invalid-feedback" ng-if="userFrm.webSite.$error.pattern&&userFormSubmitErro">@Token.InvalidData</small>
-
                                 </div>
-
                             </div>
 
                             <!--R O W 9-->
                             <div class="form-group  row">
-                           
-                                @if (CookieService.UserInfo.IsAdmin)
-                                {
                                 <!--IsActive-->
-                                    <label class="col-form-label col-lg-2" ng-if="user.AccountTypeId==accountTypeEnum.Employee||user.AccountTypeId==accountTypeEnum.Helper">@Token.Works</label>
-                                    <div class="form-group-sub  col-lg-4" ng-if="user.AccountTypeId==accountTypeEnum.Employee||user.AccountTypeId==accountTypeEnum.Helper">
+                                    <label class="col-form-label col-lg-2" ng-if="user.AccountTypeId==accountTypeEnum.Employee">@Token.Works</label>
+                                    <div class="form-group-sub  col-lg-4" ng-if="user.AccountTypeId==accountTypeEnum.Employee">
                                         <div class="kt-checkbox-list">
                                             <label class="kt-checkbox" ng-repeat="w in user.WorkTypes">
                                                 <input type="checkbox"  ng-model="w.Selected">{{w.WorkTypeName}}
@@ -307,7 +294,6 @@
                                         </div>
 
                                     </div>
-                                }
                             </div>
                         </div>
                         <div class="kt-portlet__foot">

@@ -17,17 +17,20 @@ namespace BLL.ViewModels
         public bool IsActiveEmail { get;   set; }
         public bool _IsRemmeberMe { get;   set; }
         public LanguageEnum _Language { get;   set; }
-        public int AccountTypeId { get;   set; }
-        public bool IsClinet => this.AccountTypeId == (int)AccountTypeEnum.Clinet;
+        public AccountTypeEnum AccountTypeId { get;   set; }
+        public bool IsClinet => this.AccountTypeId ==AccountTypeEnum.Clinet;
         public bool IsAdmin => this.Id ==WebConfigService.AdminId;
-        public bool IsEmployee=> this.AccountTypeId==(int)AccountTypeEnum.Employee;
-        public bool IsBranchManager => this.AccountTypeId == (int)AccountTypeEnum.BranchManager;
-        public bool IsHelper => this.AccountTypeId == (int)AccountTypeEnum.Helper;
+        public bool IsEmployee=> this.AccountTypeId==AccountTypeEnum.Employee;
+        public bool IsBranchManager => this.AccountTypeId == AccountTypeEnum.BranchManager;
+        public bool IsHelper => this.AccountTypeId == AccountTypeEnum.Helper;
         public bool IsAnonymous { get; set; }
         public string UserName { get;   set; }
         public int BrId { get; set; }
         public bool IsActive { get;   set; }
-      //  public int? CountryId { get;   set; }
-    //    public int? CityId { get;   set; }
+        public bool IsPhotographerOrHelper =>
+           CookieService.UserInfo.AccountTypeId == AccountTypeEnum.Photographer || CookieService.UserInfo.AccountTypeId == AccountTypeEnum.Helper;
+
+        //  public int? CountryId { get;   set; }
+        //    public int? CityId { get;   set; }
     }
 }

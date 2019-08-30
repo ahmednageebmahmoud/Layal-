@@ -23,7 +23,7 @@ namespace BLL.BLL
         {
             bool? CurrentUserBranch = null;
             //اذا كان الميتخدم الحالى هوا مدير فرع فـ يجب عرض الاستفسارات التى تخصة فقط
-            if (this.UserLoggad.AccountTypeId == (int)AccountTypeEnum.BranchManager)
+            if (this.UserLoggad.AccountTypeId == AccountTypeEnum.BranchManager)
             {
                 branchId = this.UserLoggad.BrId;
                 CurrentUserBranch = true;
@@ -231,7 +231,7 @@ namespace BLL.BLL
             bool IsWithBranch = false;
             if (OldBranchId != c.BranchId)
                 IsWithBranch = true;
-            db.Enquires_Update(c.Id, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId, c.Note, DateTime.Now, this.UserLoggad.Id, c.BranchId, IsWithBranch);
+            db.Enquires_Update(c.Id, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId,  DateTime.Now, this.UserLoggad.Id, c.BranchId, IsWithBranch);
 
             if (OldBranchId != c.BranchId)
             {
@@ -269,8 +269,8 @@ namespace BLL.BLL
                 IsWithBranch = true;
             ObjectParameter ID = new ObjectParameter("Id", typeof(long));
             if (this.UserLoggad.Id == 0)
-                db.Enquires_Insert(ID, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId, null, null, DateTime.Now, c.Note, c.BranchId, false, IsWithBranch, c.PhoneCountryId);
-            else db.Enquires_Insert(ID, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId, this.UserLoggad.Id, this.UserLoggad.Id, DateTime.Now, c.Note, c.BranchId, this.UserLoggad.IsClinet, IsWithBranch, c.PhoneCountryId);
+                db.Enquires_Insert(ID, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId, null, null, DateTime.Now,  c.BranchId, false, IsWithBranch, c.PhoneCountryId);
+            else db.Enquires_Insert(ID, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId, this.UserLoggad.Id, this.UserLoggad.Id, DateTime.Now,  c.BranchId, this.UserLoggad.IsClinet, IsWithBranch, c.PhoneCountryId);
 
             c.Id = (long)ID.Value;
             var UserMangerBranch = db.Users_SelectByBranchId(c.BranchId, (int)AccountTypeEnum.BranchManager).FirstOrDefault();
@@ -365,14 +365,6 @@ namespace BLL.BLL
                       NameAr = c.EnquiryTypeNameAr,
                       NameEn = c.EnquiryTypeNameEn
                   },
-                  Notes = db.EnquiryNotes_SelectByEnquiryId(c.Id).Select(b => new NoteVM
-                  {
-                      Id = b.Id,
-                      Notes = b.Notes,
-                      CreateDateTime = b.CreateDateTime,
-                      UserCreatedId = b.FKUserCreated_Id,
-                      UserCreatedName = b.UserName
-                  }).ToList(),
                   Status = db.EnquiryStatusTypes_SelectByEnquiryId(c.Id).Select(b => new EnquiryStatusVM
                   {
                       Id = b.Status_Id,
@@ -407,6 +399,7 @@ namespace BLL.BLL
                 BankTransferImage = c.TransferImage,
                 UserCreatedId = c.FKUserCreated_Id,
                 UserCreatedName = c.UserCreatedName,
+                
 
             }).ToList();
 
@@ -431,7 +424,7 @@ namespace BLL.BLL
                     IsDepositPaymented = c.IsDepositPaymented,
                     IsCreatedEvent = c.IsCreatedEvent,
                     PhoneIsoCode = c.PhoneIsoCode,
-
+                    PhoneCountryId=c.FKPhoneCountry_Id,
                     Branch = new BranchVM
                     {
                         NameAr = c.BranchNameAR,
@@ -454,14 +447,6 @@ namespace BLL.BLL
                         NameAr = c.EnquiryTypeNameAr,
                         NameEn = c.EnquiryTypeNameEn
                     },
-                    Notes = db.EnquiryNotes_SelectByEnquiryId(c.Id).Select(b => new NoteVM
-                    {
-                        Id = b.Id,
-                        Notes = b.Notes,
-                        CreateDateTime = b.CreateDateTime,
-                        UserCreatedId = b.FKUserCreated_Id,
-                        UserCreatedName = b.UserName
-                    }).ToList(),
                     Status = db.EnquiryStatusTypes_SelectByEnquiryId(c.Id).Select(b => new EnquiryStatusVM
                     {
                         Id = b.Status_Id,

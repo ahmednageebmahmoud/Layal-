@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System.IO;
-using System.Threading;
 using System.Web;
+using System.Threading;
 
 namespace BLL.Services
 {
@@ -29,23 +25,36 @@ namespace BLL.Services
         {
             try
             {
-                if(!eventDateTime.HasValue) return new Event();
+                
                 UserCredential credential;
+                //  GoogleCredential credential;
 
                 using (var stream =
-                    new FileStream(HttpContext.Current.Server.MapPath("/credentials.json"), FileMode.Open, FileAccess.Read))
+                        new FileStream(HttpContext.Current.Server.MapPath("/credentials.json"), FileMode.Open, FileAccess.Read))
                 {
                     // The file token.json stores the user's access and refresh tokens, and is created
                     // automatically when the authorization flow completes for the first time.
                     string credPath = HttpContext.Current.Server.MapPath("/token.json");// "token.json";
+
                     credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                        GoogleClientSecrets.Load(stream).Secrets,
-                        Scopes,
-                        "user",
-                        CancellationToken.None,
-                        new FileDataStore(credPath, true)).Result;
-                    //   Console.WriteLine("Credential file saved to: " + credPath);
+                            GoogleClientSecrets.Load(stream).Secrets,
+                            Scopes,
+                            "user",
+                            CancellationToken.None,
+                            new FileDataStore(credPath, true)).Result;
+
+
+
                 }
+
+                //credential = GoogleWebAuthorizationBroker.AuthorizeAsync(new ClientSecrets
+                //{
+                //    ClientId = "661076660760-3ajonrlv2kebb3qt00pcpsuhrqftiqga.apps.googleusercontent.com",
+                //    ClientSecret = "LSfD1asqxBGvq3Y6esJ4Xeke"
+                //}, new string[] { CalendarService.Scope.Calendar },
+                //"user",
+                //CancellationToken.None,
+                //new FileDataStore("Googel Clander")).Result;
 
                 // Create Google Calendar API service.
                 var service = new CalendarService(new BaseClientService.Initializer()

@@ -8,8 +8,6 @@
     UsersPrivilegeVM
         PrivUserPayments = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.UserPayments);
 
-    bool IsCurrentUserAdmin = CookieService.UserInfo.AccountTypeId == (int)AccountTypeEnum.ProjectManager;
-    bool IsCurrentUserBranchManger = CookieService.UserInfo.AccountTypeId == (int)AccountTypeEnum.BranchManager;
 
 }
 
@@ -245,7 +243,7 @@
                                         }
 
                                         <!--EventCoordinations-->
-                                        <a href="/EEW/AddAndUpdateCoordinations?id={{x.Id}}"  title="@Token.AddAndUpdateCoordinations"
+                                        <a href="/EEW/AddAndUpdateCoordinations?id={{x.Id}}"  title="@Token.Tasks"
                                            ng-hide="x.IsClosed||!x.IsPayment"
                                            class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fa fa-tasks"></i></a>
 
@@ -261,7 +259,12 @@
                                            class="btn btn-sm btn-clean btn-icon btn-icon-md"
                                            ng-click="showEventEmployees(x)"><i class="fa fa-users"></i></a>
 
+                                        <a href="Javascript:void(0)"
+                                           title="@Token.EventPhotographers"
+                                           class="btn btn-sm btn-clean btn-icon btn-icon-md"
+                                           ng-click="showEventPhotographersModel(x)"><i class="fa fa-camera-retro"></i></a>
 
+                                        
 
 
                                         @if (PrivPayments.CanAdd || PrivPayments.CanDisplay)
@@ -269,11 +272,11 @@
                                             <a href="/EnquiryPayments/Payments?id={{x.Id}}"  title="@Token.Payments" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fas fa-hand-holding-usd"></i> </a>
                                         }
 
-                                        @if (IsCurrentUserAdmin)
+                                        @if (CookieService.UserInfo.IsAdmin)
                                         {
                                             <!--التعدير فى حقول الاستبيان-->
                                             <a href="Javascript:void(0)"  title="@Token.CreateCustomSurvey"
-                                               class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"
+                                               class="btn btn-sm btn-clean btn-icon btn-icon-md"  
                                                ng-if="!x.IsAllowSurvey"
                                                ng-click="showCreateCustomSurveyModel(x)"><i class="fa fa-chart-line"></i></a>
 
@@ -421,6 +424,45 @@
             </div>
         </div>
     </div>
+
+
+    <!--Event Photographers-->
+    <div id="eventPhotographers"
+         class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@Token.EventPhotographers {{(photographers|filter:{'IsSelected':true}).length}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <form novalidate name="eventPhotographerFrm" class="kt-form kt-form--label-right" ng-submit="saveEventPhotographerFrm(eventPhotographerFrm)">
+                <div class="modal-body">
+                        <!--R O W 1-->
+                        <div class="form-group  row">
+                            <!--Photographer-->
+                            <div class="col-lg-4 form-group-sub" ng-repeat="x in  photographers">
+                                <div class="kt-checkbox-list">
+                                    <label class="kt-checkbox kt-checkbox--bold kt-link kt-font-boldest"
+                                           ng-class="{'kt-checkbox--solid kt-checkbox--success':x.IsSelected}">
+                                        <input type="checkbox" ng-model="x.IsSelected">   {{x.UserFullName}}
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                         
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air" ng-click="updateEventPhotographers()">
+                        <i class="la la-save">@Token.Update</i>
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@Token.Close</button>
+                </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+
 
 
 </div>

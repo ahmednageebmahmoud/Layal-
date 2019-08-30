@@ -7,7 +7,13 @@
         Id: branchId,
         State: branchId ? StateEnum.update : StateEnum.create,
         CountryId: null,
-        CityId: null
+        CityId: null,
+
+
+        ArchivingAndSaveingEmployeeId:null,
+        ImplementationEmployeeId: null,
+        CoordinationEmployeeId: null,
+        ArchivingAndSaveingAnotherBranchId:null
     };
 
 
@@ -21,6 +27,18 @@
         CountryId:null
     }];
 
+    s.branches = [{
+        Id: null,
+        BranchName: Token.select,
+    }];
+    
+    s.worksTypesEnnum = worksTypesEnnum;
+    s.employees = [{
+        Id: null,
+        UserName: Token.select,
+        
+    }];
+
 
     //============= G E T =================
     //get items
@@ -28,12 +46,14 @@
 
         let loading = BlockingService.generateLoding();
         loading.show();
-        branchesServ.getItems().then(d => {
+        branchesServ.getItems(branchId).then(d => {
             loading.hide();
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
                     s.countries = s.countries.concat(d.data.Result.Countries);
                     s.cities = s.cities.concat(d.data.Result.Cities);
+                    s.branches = s.branches.concat(d.data.Result.Branches);
+
                 } break;
                 case RequestTypeEnum.error:
                 case RequestTypeEnum.warning:
@@ -49,11 +69,36 @@
         })
     };
 
+    s.getItemsByBranchId = (branchId) => {
+
+        let loading = BlockingService.generateLoding();
+        loading.show();
+        branchesServ.getItemsByBranchId(branchId).then(d => {
+            loading.hide();
+            switch (d.data.RequestType) {
+                case RequestTypeEnum.sucess: {
+                   
+                    s.employees = s.employees.concat(d.data.Result.Employees);
+                } break;
+                case RequestTypeEnum.error:
+                case RequestTypeEnum.warning:
+                case RequestTypeEnum.info:
+                    SMSSweet.alert(d.data.Message, d.data.RequestType);
+                    break;
+            }
+            co("G E T - getItemsByBranchId", d);
+        }).catch(err => {
+            loading.hide();
+            SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+            co("E R R O R - getItemsByBranchId", err);
+        })
+    };
+    
     //Get Branches
     s.getBranch = () => {
         if (!branchId)
             return;
-
+        s.getItemsByBranchId(branchId);
         let loading = BlockingService.generateLoding();
         loading.show();
         branchesServ.getBranch(branchId).then(d => {
@@ -100,6 +145,12 @@
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
                     s.branch = d.data.Result;
+                    
+                    //Get Employees
+                    if (s.branch.State == StateEnum.create)
+                    s.getItemsByBranchId(s.branch.Id);
+
+
                     s.branch.State = StateEnum.update;
                     s.isBasicDisabled = s.branch.IsBasic;
 

@@ -5,8 +5,7 @@
     UsersPrivilegeVM
       Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.EnquiryPayments);
 
-    bool IsCurrentUserAdmin = CookieService.UserInfo.AccountTypeId == (int)AccountTypeEnum.ProjectManager;
-
+ 
 }
 
 <!-- begin:: Content Head -->
@@ -91,7 +90,7 @@
                                     <img class="figure-img img-thumbnail" src="{{newPayment.BankTransferImage}}" width="100" height="100" />
                                 </div>
 
-                                @if(IsCurrentUserAdmin)
+                                @if(CookieService.UserInfo.IsAdmin)
                                 {
                                 <!--IsAcceptFromManger -->
                                 <label class="col-lg-2 col-form-label">@Token.IsAcceptFromManger </label>
@@ -188,8 +187,9 @@
                                         </a>
                                     </td>
                                     <td>
-                                        @if (IsCurrentUserAdmin)
-                                        {
+                                       @if (CookieService.UserInfo.IsAdmin)
+
+                                       {
 
                                             <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success" ng-show="x.IsBankTransfer">
                                                 <label>
