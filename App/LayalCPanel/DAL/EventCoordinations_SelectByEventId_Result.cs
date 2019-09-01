@@ -28,8 +28,8 @@ namespace DAL
         public Nullable<bool> Coordination { get; set; }
         public Nullable<bool> Implementation { get; set; }
         public Nullable<bool> ArchivingAndSaveing { get; set; }
-        public Nullable<bool> ProductProcessing { get; set; }
-        public Nullable<bool> Chooseing { get; set; }
+        public Nullable<bool> ProcessingProducts { get; set; }
+        public Nullable<bool> Choosing { get; set; }
         public Nullable<bool> DigitalProcessing { get; set; }
         public Nullable<bool> PreparingForPrinting { get; set; }
         public Nullable<bool> Manufacturing { get; set; }

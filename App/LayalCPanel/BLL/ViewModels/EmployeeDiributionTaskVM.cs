@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLL.ViewModels
 {
-public    class EmployeeDiributionWorkVM:BasicVM
+public    class EmployeeDiributionTaskVM:BasicVM
     {
         public long Id { get; set; }
         public long EventId { get; set; }

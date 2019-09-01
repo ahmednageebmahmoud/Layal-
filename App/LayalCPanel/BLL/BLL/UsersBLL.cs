@@ -176,6 +176,7 @@ namespace BLL.BLL
                 {
                     Id = c.Id,
                     UserName = c.UserName,
+                    FullName = c.FullName,
                     AccountTypeId = (AccountTypeEnum)c.FKAccountType_Id,
                     _Language = (LanguageEnum)c.FKLanguage_Id,
                     BrId = c.FKPranch_Id.HasValue ? c.FKPranch_Id.Value : 0,
@@ -285,6 +286,7 @@ namespace BLL.BLL
                 {
                     Id = b.Id,
                     UserName = b.UserName,
+                    FullName = b.FullName,
                     AccountTypeId = (AccountTypeEnum)b.FKAccountType_Id,
                     _Language = (LanguageEnum)b.FKLanguage_Id,
                     BrId = b.FKPranch_Id.HasValue ? b.FKPranch_Id.Value : 0,
@@ -323,6 +325,9 @@ namespace BLL.BLL
 
                 if (this.AdminId != this.UserLoggad.Id && Enquiry.FKBranch_Id != this.UserLoggad.BrId)
                     return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToCreateAccontForThisEnquiry);
+
+                //اضافة الحالة الافترضية وهى انشاء حساب المستخدم
+                db.EnquiryStatus_Insert(null, DateTime.Now, c.EnquiryId, (int)EnquiryStatusTypesEnum.CreateClinetAccount, null, this.UserLoggad.Id, null, null);
             }
 
             if (db.Users_UserNameBeforUsed(c.Id, c.UserName.Trim()).FirstOrDefault() .Value> 0)

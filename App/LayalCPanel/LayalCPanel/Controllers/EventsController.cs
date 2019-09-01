@@ -17,7 +17,7 @@ namespace UI.Controllers
     public class EventsController : BasicController
     {
         EventsBLL EventsBLL = new EventsBLL();
-        EmployeeDistributionWorksBLL EmployeeDistributionWorkBLL = new EmployeeDistributionWorksBLL();
+        EmployeeDistributionTasksBLL EmployeeDistributionWorkBLL = new EmployeeDistributionTasksBLL();
 
         [PagePrivilege(PagesEnum.Events, true, true, true, true)]
         public ActionResult Index()
@@ -108,7 +108,7 @@ namespace UI.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveChangeDistributionOfWork(EmployeeDiributionWorkVM  dis)
+        public JsonResult SaveChangeDistributionOfWork(EmployeeDiributionTaskVM  dis)
         {
             return Json(EmployeeDistributionWorkBLL.SaveChange(dis), JsonRequestBehavior.AllowGet);
         }

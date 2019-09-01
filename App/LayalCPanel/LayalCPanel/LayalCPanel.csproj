@@ -2331,6 +2331,8 @@
     <Content Include="Views\EEW\EventsPhoto.cshtml" />
     <Content Include="Views\EEW\CoordinationsInformation.cshtml" />
     <Content Include="Views\MyEnquires\AddAndUpdate.cshtml" />
+    <Content Include="Views\Shared\_CRM.cshtml" />
+    <Content Include="Views\Shared\_EnquiryWorkFlow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

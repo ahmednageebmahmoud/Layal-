@@ -358,6 +358,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        public static string All {
+            get {
+                return ResourceManager.GetString("All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount.
         /// </summary>
         public static string Amount {
@@ -390,6 +399,24 @@ namespace Resources {
         public static string Approve {
             get {
                 return ResourceManager.GetString("Approve", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archiving.
+        /// </summary>
+        public static string Archiving {
+            get {
+                return ResourceManager.GetString("Archiving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archiving And Saveing.
+        /// </summary>
+        public static string ArchivingAndSaveing {
+            get {
+                return ResourceManager.GetString("ArchivingAndSaveing", resourceCulture);
             }
         }
         
@@ -453,6 +480,15 @@ namespace Resources {
         public static string BasicBranchEmployee {
             get {
                 return ResourceManager.GetString("BasicBranchEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Booking.
+        /// </summary>
+        public static string Booking {
+            get {
+                return ResourceManager.GetString("Booking", resourceCulture);
             }
         }
         
@@ -628,6 +664,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choosing.
+        /// </summary>
+        public static string Choosing {
+            get {
+                return ResourceManager.GetString("Choosing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cities.
         /// </summary>
         public static string Cities {
@@ -687,6 +732,15 @@ namespace Resources {
         public static string CloseEnquiry {
             get {
                 return ResourceManager.GetString("CloseEnquiry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Coordination.
+        /// </summary>
+        public static string Coordination {
+            get {
+                return ResourceManager.GetString("Coordination", resourceCulture);
             }
         }
         
@@ -781,6 +835,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data Perfection.
+        /// </summary>
+        public static string DataPerfection {
+            get {
+                return ResourceManager.GetString("DataPerfection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date Of Birth.
         /// </summary>
         public static string DateOfBirth {
@@ -867,6 +930,15 @@ namespace Resources {
         public static string Details {
             get {
                 return ResourceManager.GetString("Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Digital Processing.
+        /// </summary>
+        public static string DigitalProcessing {
+            get {
+                return ResourceManager.GetString("DigitalProcessing", resourceCulture);
             }
         }
         
@@ -979,6 +1051,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enquiry Status.
+        /// </summary>
+        public static string EnquiryStatus {
+            get {
+                return ResourceManager.GetString("EnquiryStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enquiry Type.
         /// </summary>
         public static string EnquiryType {
@@ -1002,6 +1083,15 @@ namespace Resources {
         public static string EnquiryWithAdmin {
             get {
                 return ResourceManager.GetString("EnquiryWithAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enquiry Work Flow.
+        /// </summary>
+        public static string EnquiryWorkFlow {
+            get {
+                return ResourceManager.GetString("EnquiryWorkFlow", resourceCulture);
             }
         }
         
@@ -1339,11 +1429,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hours.
+        /// </summary>
+        public static string Hours {
+            get {
+                return ResourceManager.GetString("Hours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Id.
         /// </summary>
         public static string Id {
             get {
                 return ResourceManager.GetString("Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Implementation.
+        /// </summary>
+        public static string Implementation {
+            get {
+                return ResourceManager.GetString("Implementation", resourceCulture);
             }
         }
         
@@ -1596,6 +1704,15 @@ namespace Resources {
         public static string LogOut {
             get {
                 return ResourceManager.GetString("LogOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manufacturing.
+        /// </summary>
+        public static string Manufacturing {
+            get {
+                return ResourceManager.GetString("Manufacturing", resourceCulture);
             }
         }
         
@@ -2032,6 +2149,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Packaging.
+        /// </summary>
+        public static string Packaging {
+            get {
+                return ResourceManager.GetString("Packaging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Page.
         /// </summary>
         public static string Page {
@@ -2140,6 +2266,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Preparing For Printing.
+        /// </summary>
+        public static string PreparingForPrinting {
+            get {
+                return ResourceManager.GetString("PreparingForPrinting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Price.
         /// </summary>
         public static string Price {
@@ -2185,11 +2320,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Processing Products.
+        /// </summary>
+        public static string ProcessingProducts {
+            get {
+                return ResourceManager.GetString("ProcessingProducts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profile Update.
         /// </summary>
         public static string ProfileUpdate {
             get {
                 return ResourceManager.GetString("ProfileUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quality And Review.
+        /// </summary>
+        public static string QualityAndReview {
+            get {
+                return ResourceManager.GetString("QualityAndReview", resourceCulture);
             }
         }
         
@@ -2428,6 +2581,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Task Status.
+        /// </summary>
+        public static string TaskStatus {
+            get {
+                return ResourceManager.GetString("TaskStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Terms.
         /// </summary>
         public static string Terms {
@@ -2505,6 +2667,15 @@ namespace Resources {
         public static string TotalPrice {
             get {
                 return ResourceManager.GetString("TotalPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transmission And Delivery.
+        /// </summary>
+        public static string TransmissionAndDelivery {
+            get {
+                return ResourceManager.GetString("TransmissionAndDelivery", resourceCulture);
             }
         }
         

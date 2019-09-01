@@ -119,16 +119,25 @@
     <Parameter Name="IsoCode" Type="nvarchar" Mode="In" />
     <Parameter Name="WordId" Type="bigint" Mode="In" />
   </Function>
-  <Function Name="EmployeeDistributionWorks_CheckIfInserted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="CRM_EnquiryPayments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="CRM_EnquiryStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EnquiyId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="CRM_EventTaskStatusHistories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="eventId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="EmployeeDistributionTasks_CheckIfInserted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="WorkTypeId" Type="int" Mode="In" />
     <Parameter Name="EventId" Type="bigint" Mode="In" />
     <Parameter Name="BranchId" Type="int" Mode="In" />
     <Parameter Name="IsAnotherBranch" Type="bit" Mode="In" />
   </Function>
-  <Function Name="EmployeeDistributionWorks_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="EmployeeDistributionTasks_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
   </Function>
-  <Function Name="EmployeeDistributionWorks_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="EmployeeDistributionTasks_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="InOut" />
     <Parameter Name="WorkTypeId" Type="int" Mode="In" />
     <Parameter Name="EmployeeId" Type="bigint" Mode="In" />
@@ -136,7 +145,7 @@
     <Parameter Name="IsAnotherBranch" Type="bit" Mode="In" />
     <Parameter Name="BranchId" Type="int" Mode="In" />
   </Function>
-  <Function Name="EmployeeDistributionWorks_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="EmployeeDistributionTasks_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EventId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="Employees_CheckAllowAccessToEventForUpdateWorks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -294,6 +303,9 @@
   <Function Name="EnquiryStatus_ResetClendersIdsToNull" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
   </Function>
+  <Function Name="EnquiryStatus_SelectByEnquiryId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EnquiyId" Type="bigint" Mode="In" />
+  </Function>
   <Function Name="EnquiryStatus_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EnquiryId" Type="bigint" Mode="In" />
     <Parameter Name="StatusId" Type="int" Mode="In" />
@@ -301,9 +313,6 @@
   <Function Name="EnquiryStatus_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
     <Parameter Name="ScheduleVisitDateClendarEventId" Type="nvarchar(max)" Mode="In" />
-  </Function>
-  <Function Name="EnquiryStatusTypes_SelectByEnquiryId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="EnquiyId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="EnquiryStatusTypes_SelectByPK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="In" />
@@ -423,7 +432,7 @@
     <Parameter Name="EventId" Type="bigint" Mode="In" />
     <Parameter Name="BranchId" Type="int" Mode="In" />
   </Function>
-  <Function Name="Events_CheckIfWorkFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+  <Function Name="Events_CheckIfTaskFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
     <Parameter Name="eventId" Type="bigint" Mode="In" />
     <Parameter Name="workTypeId" Type="int" Mode="In" />
     <Parameter Name="UserId" Type="bigint" Mode="In" />
@@ -613,13 +622,13 @@
     <Parameter Name="WordId" Type="bigint" Mode="In" />
     <Parameter Name="InputType" Type="int" Mode="In" />
   </Function>
-  <Function Name="EventWorksStatusHistory_CheckIfTaskFinshedWithBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="EventTaskStatusHistories_CheckIfTaskFinshedWithBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EventId" Type="bigint" Mode="In" />
     <Parameter Name="BranchId" Type="int" Mode="In" />
     <Parameter Name="WorkTypeId" Type="int" Mode="In" />
     <Parameter Name="ForIsCurrentBranch" Type="bit" Mode="In" />
   </Function>
-  <Function Name="EventWorksStatusHistory_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="EventTaskStatusHistories_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IsFinshed" Type="bit" Mode="In" />
     <Parameter Name="DateTime" Type="datetime" Mode="In" />
     <Parameter Name="FKEvent_Id" Type="bigint" Mode="In" />
@@ -628,22 +637,22 @@
     <Parameter Name="FKAccountType_Id" Type="int" Mode="In" />
     <Parameter Name="BranchId" Type="int" Mode="In" />
   </Function>
-  <Function Name="EventWorksStatusHistory_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="EventTaskStatusHistories_SelectByEventId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="eventId" Type="bigint" Mode="In" />
   </Function>
-  <Function Name="EventWorksStatusHistory_SelectLast" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="EventTaskStatusHistories_SelectLast" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="eventId" Type="bigint" Mode="In" />
     <Parameter Name="WorkTypeId" Type="int" Mode="In" />
   </Function>
-  <Function Name="EventWorksStatusIsFinsed_CheckIfFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="EventTaskStatusIsFinsed_CheckIfFinshed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="eventId" Type="bigint" Mode="In" />
     <Parameter Name="workTypeId" Type="int" Mode="In" />
   </Function>
-  <Function Name="EventWorksStatusIsFinsed_CheckIfFinshedFun" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+  <Function Name="EventTaskStatusIsFinsed_CheckIfFinshedFun" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
     <Parameter Name="eventId" Type="bigint" Mode="In" />
     <Parameter Name="workTypeId" Type="int" Mode="In" />
   </Function>
-  <Function Name="EventWorksStatusIsFinshed_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="EventTaskStatusIsFinshed_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EventId" Type="bigint" Mode="In" />
     <Parameter Name="IsFinshed" Type="bit" Mode="In" />
     <Parameter Name="WorkTypeId" Type="int" Mode="In" />

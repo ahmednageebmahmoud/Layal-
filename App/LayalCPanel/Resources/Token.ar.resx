@@ -1062,4 +1062,61 @@
   <data name="ArchivingAndSaveingAnotherBranch" xml:space="preserve">
     <value>الفرع الآخر للآرشفه والحفظ</value>
   </data>
+  <data name="All" xml:space="preserve">
+    <value>الكل</value>
+  </data>
+  <data name="EnquiryStatus" xml:space="preserve">
+    <value>حالات الاستفسار</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>ساعات</value>
+  </data>
+  <data name="TaskStatus" xml:space="preserve">
+    <value>حالات المهام</value>
+  </data>
+  <data name="EnquiryWorkFlow" xml:space="preserve">
+    <value>خريطة تدفق الاستفسار</value>
+  </data>
+  <data name="Archiving" xml:space="preserve">
+    <value>الارشفة</value>
+  </data>
+  <data name="ArchivingAndSaveing" xml:space="preserve">
+    <value>الارشفة  والحفظ</value>
+  </data>
+  <data name="Booking" xml:space="preserve">
+    <value>الحجز</value>
+  </data>
+  <data name="Choosing" xml:space="preserve">
+    <value>الاختيار</value>
+  </data>
+  <data name="Coordination" xml:space="preserve">
+    <value>الاعداد والتنسيق</value>
+  </data>
+  <data name="DataPerfection" xml:space="preserve">
+    <value>اكمال البيانات</value>
+  </data>
+  <data name="DigitalProcessing" xml:space="preserve">
+    <value>المعالجة الرقمية</value>
+  </data>
+  <data name="Implementation" xml:space="preserve">
+    <value>التنفيذ</value>
+  </data>
+  <data name="Manufacturing" xml:space="preserve">
+    <value>التصنيع</value>
+  </data>
+  <data name="Packaging" xml:space="preserve">
+    <value>التغليف</value>
+  </data>
+  <data name="PreparingForPrinting" xml:space="preserve">
+    <value>التجهيز للطباعة</value>
+  </data>
+  <data name="ProcessingProducts" xml:space="preserve">
+    <value>تجهيز المنتاجات</value>
+  </data>
+  <data name="QualityAndReview" xml:space="preserve">
+    <value>الجودة والمراجعة</value>
+  </data>
+  <data name="TransmissionAndDelivery" xml:space="preserve">
+    <value>الارسال والتسليم</value>
+  </data>
 </root>

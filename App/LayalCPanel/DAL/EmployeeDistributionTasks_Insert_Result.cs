@@ -11,7 +11,7 @@ namespace DAL
 {
     using System;
     
-    public partial class EmployeeDistributionWorks_Insert_Result
+    public partial class EmployeeDistributionTasks_Insert_Result
     {
         public long Id { get; set; }
         public int FKWorkType_Id { get; set; }

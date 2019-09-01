@@ -164,6 +164,9 @@ namespace BLL.BLL
 
                         //Update Befor (ScheduleVisitDateClendarEventId) To Null
                         db.EnquiryStatus_ResetClendersIdsToNull(c.EnquiryId);
+
+                        //اضافة الحالة التقائية وهى اغلاق الاستفسار
+                        db.EnquiryStatus_Insert(null, DateTime.Now, c.EnquiryId, (int)EnquiryStatusTypesEnum.CloseEnquiry, null, this.UserLoggad.Id, null, null);
                     }
                     break;
                 case EnquiryStatusTypesEnum.ScheduleVisit:
@@ -196,6 +199,7 @@ namespace BLL.BLL
                 case EnquiryStatusTypesEnum.BookByCash:
                 case EnquiryStatusTypesEnum.BookByBankTransfer:
                     break;
+           
             }
         }
 
@@ -227,7 +231,7 @@ namespace BLL.BLL
                     break;
                 case EnquiryStatusTypesEnum.CustomerContacted:
                     {
-                        ObjectReturn.IsWithBranch = false;
+                        ObjectReturn.IsWithBranch = true;
                     }
                     break;
                 case EnquiryStatusTypesEnum.RejectService:

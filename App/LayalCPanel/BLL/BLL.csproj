@@ -120,11 +120,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\CRMBLL.cs" />
     <Compile Include="BLL\EEWBLL.cs" />
     <Compile Include="BLL\EventArchivesBLL.cs" />
     <Compile Include="BLL\EventCoordinationsBLL.cs" />
     <Compile Include="BLL\EventSurveyQuestionsBLL.cs" />
-    <Compile Include="BLL\EmployeeDistributionWorksBLL.cs" />
+    <Compile Include="BLL\EmployeeDistributionTasksBLL.cs" />
     <Compile Include="BLL\EmployeesWorksBLL.cs" />
     <Compile Include="BLL\EventSurveyQuestionTypesBLL.cs" />
     <Compile Include="BLL\FilesReceivedTypesBLL.cs" />
@@ -170,7 +171,8 @@
     <Compile Include="ViewModels\CityVM.cs" />
     <Compile Include="ViewModels\ConnectUsVM.cs" />
     <Compile Include="ViewModels\CountryVM.cs" />
-    <Compile Include="ViewModels\EmployeeDiributionWorkVM.cs" />
+    <Compile Include="ViewModels\CRMVM.cs" />
+    <Compile Include="ViewModels\EmployeeDiributionTaskVM.cs" />
     <Compile Include="ViewModels\EmployeeWorkVM.cs" />
     <Compile Include="ViewModels\EnquiryPaymentVM.cs" />
     <Compile Include="ViewModels\EventArchivDetailVM.cs" />

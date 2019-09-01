@@ -33,7 +33,14 @@ namespace BLL.Services
             return time.ToString();
         }
 
-        private  static string GetDateTimeByCulture(DateTime date)
+        internal static string GetTimeEn(DateTime time)
+        {
+            if(LanguageService.IsEn)
+            return time.ToString("hh:mm:ss tt",new CultureInfo("en"));
+            return time.ToString("hh:mm:ss tt",new CultureInfo("ar"));
+        }
+
+        private static string GetDateTimeByCulture(DateTime date)
         {
             string Format = "dd/MM/yyyy hh:mm:ss tt";
                 /*
@@ -123,7 +130,7 @@ namespace BLL.Services
             if (DTime.Hours > 0)
             {
                 if (DTime.Hours >= 3)
-                    return CultAgoText($"{DTime.Hours} {Token.Hour}");
+                    return CultAgoText($"{DTime.Hours} {Token.Hours}");
 
                 if (DTime.Hours >= 2)
                     return CultAgoText(Token.TwoHour);
@@ -159,6 +166,16 @@ namespace BLL.Services
                 return "";
             return date.Value.ToString("dd/MM/yyyy", new CultureInfo("en"));
         }
+
+        internal static string GetSmallDate(DateTime? dt)
+        {
+            if (!dt.HasValue)
+                return "";
+            if(LanguageService.IsEn)
+            return dt.Value.ToString("dd/MM", new CultureInfo("en"));
+            return dt.Value.ToString("MM    /dd", new CultureInfo("en"));
+        }
+
         public static DateTime DateTimeByCulture(DateTime date)
         {
             try

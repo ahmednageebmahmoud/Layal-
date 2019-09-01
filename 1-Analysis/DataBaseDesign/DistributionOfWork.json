@@ -4,7 +4,7 @@
         "Id":0,
         "FKWord_Id":0
     },
-    "EmployeeDistributionWorks":{
+    "EmployeeDistributionTasks":{
         "Id":0,
         "FKWorkType_Id":0,
         "FKEmployee_Id":0,

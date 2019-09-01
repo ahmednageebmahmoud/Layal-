@@ -408,7 +408,8 @@
                                             <a href="/EnquiryPayments/Payments?id={{x.Id}}"  title="@Token.Payments" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fas fa-hand-holding-usd"></i> </a>
                                         }
 
-                                        <a href="/Enquires/EnquiryInformation?id={{x.Id}}"
+
+                                        <a href="/Enquires/EnquiryInformation?id={{x.Id}}&q=true"
                                            ng-if="x.IsCanBeAccess"  title="@Token.ShowDetails" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="la la-search"></i></a>
                                     </td>
                                 </tr>

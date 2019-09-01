@@ -136,7 +136,7 @@ namespace BLL.BLL
         {
            
             //Insert In History
-            db.EventWorksStatusHistory_Insert(true, DateTime.Now, eventId, (int)workTypeId, this.UserLoggad.Id, (int)this.UserLoggad.AccountTypeId, this.UserLoggad.BrId);
+            db.EventTaskStatusHistories_Insert(true, DateTime.Now, eventId, (int)workTypeId, this.UserLoggad.Id, (int)this.UserLoggad.AccountTypeId, this.UserLoggad.BrId);
 
             //Update Event Finshed
             UpdateFinshed(eventId, workTypeId);
@@ -159,7 +159,7 @@ namespace BLL.BLL
                 return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEvent);
 
             //التحقق ان هذة المهمة لم تنتهى بعد
-            if (db.EventWorksStatusIsFinsed_CheckIfFinshed(eventId, (int)workTypeId).First().Value)
+            if (db.EventTaskStatusIsFinsed_CheckIfFinshed(eventId, (int)workTypeId).First().Value)
                 return new ResponseVM(RequestTypeEnum.Error, Token.ThisTaskIsFinshed);
 
             //التحقق لان المناسبة لم تغلق
@@ -221,13 +221,13 @@ namespace BLL.BLL
                 case WorksTypesEnum.Coordination:
                 case WorksTypesEnum.Implementation:
                     //فى هذة الحالات لا نحتاج الى مراجعة 
-                    db.EventWorksStatusIsFinshed_Update(eventId, true, (int)workTypeId);
+                    db.EventTaskStatusIsFinshed_Update(eventId, true, (int)workTypeId);
                     break;
                 case WorksTypesEnum.ArchivingAndSaveing:
                     //لا ننهى هذة المهمة الا التاكد ان الفرع الاخر بة شخص ماء قد قام بـ انهاء المهمة
-                    if (db.EventWorksStatusHistory_CheckIfTaskFinshedWithBranch(eventId,this.UserLoggad.BrId ,(int)workTypeId,false).First().Value)
+                    if (db.EventTaskStatusHistories_CheckIfTaskFinshedWithBranch(eventId,this.UserLoggad.BrId ,(int)workTypeId,false).First().Value)
                     {
-                        db.EventWorksStatusIsFinshed_Update(eventId, true, (int)workTypeId);
+                        db.EventTaskStatusIsFinshed_Update(eventId, true, (int)workTypeId);
                     }
                     break;
                 case WorksTypesEnum.ProductProcessing:
@@ -279,8 +279,8 @@ namespace BLL.BLL
                         {
                             Notify.TitleAr = " الانتهاء من الاعداد والتنسيق";
                             Notify.TitleEn = "Coordinations Finshed";
-                            Notify.DescriptionAr = $"لقد قام الموظف { this.UserLoggad.UserName } بـ انهاء مهام الاعداد والتنسيق للمناسبة ";
-                            Notify.DescriptionEn = $"{ this.UserLoggad.UserName } Has been finshed coordinations for event";
+                            Notify.DescriptionAr = $"لقد قام الموظف { this.UserLoggad.FullName } بـ انهاء مهام الاعداد والتنسيق للمناسبة ";
+                            Notify.DescriptionEn = $"{ this.UserLoggad.FullName} Has been finshed coordinations for event";
                         }
                         break;
                     case WorksTypesEnum.Implementation:

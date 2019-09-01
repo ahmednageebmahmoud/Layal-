@@ -11,7 +11,7 @@ namespace DAL
 {
     using System;
     
-    public partial class EventWorksStatusHistory_SelectLast_Result
+    public partial class EventTaskStatusHistories_SelectByEventId_Result
     {
         public long Id { get; set; }
         public bool IsFinshed { get; set; }
@@ -21,6 +21,8 @@ namespace DAL
         public long FKUsre_Id { get; set; }
         public int FKAccountType_Id { get; set; }
         public int FKBranch_Id { get; set; }
-        public string UserName { get; set; }
+        public string FullName { get; set; }
+        public string AccountTypeAr { get; set; }
+        public string AccountTypeEn { get; set; }
     }
 }

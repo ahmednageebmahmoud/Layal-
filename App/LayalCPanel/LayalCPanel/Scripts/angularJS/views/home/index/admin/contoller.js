@@ -150,6 +150,8 @@
         var chart = new Chart(ctx, config);
     }
 
+
+
     //=-=-=-=-=-=-= Other =-=-=-=-=--=-
     //Get satisfied Chart In Loacl Sorage
     s.chart = LocalStorageService.satisfiedChart;

@@ -134,7 +134,7 @@ namespace BLL.BLL
                             NameAr = c.WordPrintNamesType_NameAr,
                             NameEn = c.WordPrintNamesType_NameEn
                         },
-                        CurrentWorkStatus = db.EventWorksStatusHistory_SelectLast(c.Id, workTypeId).Select(v => new EventWorkStatusVM
+                        CurrentWorkStatus = db.EventTaskStatusHistories_SelectLast(c.Id, workTypeId).Select(v => new EventWorkStatusVM
                         {
                             FinshedUserName = v.UserName,
                             DateTime = v.DateTime,
@@ -147,8 +147,8 @@ namespace BLL.BLL
                             Coordination = c.Coordination,
                             Implementation = c.Implementation,
                             ArchivingAndSaveing = c.ArchivingAndSaveing,
-                            ProductProcessing = c.ProductProcessing,
-                            Chooseing = c.Chooseing,
+                            ProductProcessing = c.ProcessingProducts,
+                            Chooseing = c.Choosing,
                             DigitalProcessing = c.DigitalProcessing,
                             PreparingForPrinting = c.PreparingForPrinting,
                             Manufacturing = c.Manufacturing,
@@ -184,7 +184,7 @@ namespace BLL.BLL
                         NameAr = c.WordPrintNamesType_NameAr,
                         NameEn = c.WordPrintNamesType_NameEn
                     },
-                    CurrentWorkStatus = db.EventWorksStatusHistory_SelectLast(c.Id, workTypeId).Select(v => new EventWorkStatusVM
+                    CurrentWorkStatus = db.EventTaskStatusHistories_SelectLast(c.Id, workTypeId).Select(v => new EventWorkStatusVM
                     {
                         FinshedUserName = v.UserName,
                         DateTime = v.DateTime,
@@ -197,8 +197,8 @@ namespace BLL.BLL
                         Coordination = c.Coordination,
                         Implementation = c.Implementation,
                         ArchivingAndSaveing = c.ArchivingAndSaveing,
-                        ProductProcessing = c.ProductProcessing,
-                        Chooseing = c.Chooseing,
+                        ProductProcessing = c.ProcessingProducts,
+                        Chooseing = c.Choosing,
                         DigitalProcessing = c.DigitalProcessing,
                         PreparingForPrinting = c.PreparingForPrinting,
                         Manufacturing = c.Manufacturing,
@@ -247,13 +247,13 @@ namespace BLL.BLL
         public EventVM GetEventInformation(long? eventId)
         {
             if (!eventId.HasValue) return null;
-            var EventWorkStatus = db.EventWorksStatusHistory_SelectByEventId(eventId).Select(c => new EventWorkStatusVM
+            var EventWorkStatus = db.EventTaskStatusHistories_SelectByEventId(eventId).Select(c => new EventWorkStatusVM
             {
                 IsFinshed = c.IsFinshed,
                 WorkTypeId = (WorksTypesEnum)c.FKWorkType_Id,
                 DateTime = c.DateTime,
                 UserId = c.FKUsre_Id,
-                FinshedUserName = c.UserName,
+                FinshedUserName = c.FullName,
                 FinshedAccountTypeNameAr = c.AccountTypeAr,
                 FinshedAccountTypeNameEn = c.AccountTypeEn
             }).ToList();
@@ -290,8 +290,8 @@ namespace BLL.BLL
                     Coordination = c.Coordination,
                     Implementation = c.Implementation,
                     ArchivingAndSaveing = c.ArchivingAndSaveing,
-                    ProductProcessing = c.ProductProcessing,
-                    Chooseing = c.Chooseing,
+                    ProductProcessing = c.ProcessingProducts,
+                    Chooseing = c.Choosing,
                     DigitalProcessing = c.DigitalProcessing,
                     PreparingForPrinting = c.PreparingForPrinting,
                     Manufacturing = c.Manufacturing,
@@ -457,23 +457,23 @@ namespace BLL.BLL
             var Branch = db.Branches_SelectByPk(branchId).FirstOrDefault();
 
             //موظف التنسيق
-            if (Branch.FKCoordinationEmployee_Id.HasValue&&db.EmployeeDistributionWorks_CheckIfInserted((int)WorksTypesEnum.Coordination, eventId, branchId,false).First().Value == 0)
-                db.EmployeeDistributionWorks_Insert(new ObjectParameter("id", typeof(int)), (int)WorksTypesEnum.Coordination, Branch.FKCoordinationEmployee_Id, eventId, false, branchId).First();
+            if (Branch.FKCoordinationEmployee_Id.HasValue&&db.EmployeeDistributionTasks_CheckIfInserted((int)WorksTypesEnum.Coordination, eventId, branchId,false).First().Value == 0)
+                db.EmployeeDistributionTasks_Insert(new ObjectParameter("id", typeof(int)), (int)WorksTypesEnum.Coordination, Branch.FKCoordinationEmployee_Id, eventId, false, branchId).First();
 
             //موظف التنفيذ
-            if (Branch.FKImplementationEmployeeId_Id.HasValue && db.EmployeeDistributionWorks_CheckIfInserted((int)WorksTypesEnum.Implementation, eventId, branchId, false).First().Value == 0)
-                db.EmployeeDistributionWorks_Insert(new ObjectParameter("id", typeof(int)), (int)WorksTypesEnum.Implementation, Branch.FKImplementationEmployeeId_Id, eventId, false, branchId).First();
+            if (Branch.FKImplementationEmployeeId_Id.HasValue && db.EmployeeDistributionTasks_CheckIfInserted((int)WorksTypesEnum.Implementation, eventId, branchId, false).First().Value == 0)
+                db.EmployeeDistributionTasks_Insert(new ObjectParameter("id", typeof(int)), (int)WorksTypesEnum.Implementation, Branch.FKImplementationEmployeeId_Id, eventId, false, branchId).First();
 
             //موظف الارشفة
-            if (Branch.FKArchivingAndSaveingEmployee_Id.HasValue && db.EmployeeDistributionWorks_CheckIfInserted((int)WorksTypesEnum.ArchivingAndSaveing, eventId, branchId, false).First().Value == 0)
-                db.EmployeeDistributionWorks_Insert(new ObjectParameter("id", typeof(int)), (int)WorksTypesEnum.ArchivingAndSaveing, Branch.FKArchivingAndSaveingEmployee_Id, eventId, false, branchId).First();
+            if (Branch.FKArchivingAndSaveingEmployee_Id.HasValue && db.EmployeeDistributionTasks_CheckIfInserted((int)WorksTypesEnum.ArchivingAndSaveing, eventId, branchId, false).First().Value == 0)
+                db.EmployeeDistributionTasks_Insert(new ObjectParameter("id", typeof(int)), (int)WorksTypesEnum.ArchivingAndSaveing, Branch.FKArchivingAndSaveingEmployee_Id, eventId, false, branchId).First();
 
             //موظف الارشفة من الفرع الاخر
-            if (Branch.FKArchivingAndSaveingAnotherBranch_Id.HasValue && db.EmployeeDistributionWorks_CheckIfInserted((int)WorksTypesEnum.ArchivingAndSaveing, eventId, branchId, true).First().Value == 0)
+            if (Branch.FKArchivingAndSaveingAnotherBranch_Id.HasValue && db.EmployeeDistributionTasks_CheckIfInserted((int)WorksTypesEnum.ArchivingAndSaveing, eventId, branchId, true).First().Value == 0)
             {
                 var AnotherBranch = db.Branches_SelectByPk(Branch.FKArchivingAndSaveingAnotherBranch_Id).FirstOrDefault();
                 if(AnotherBranch.FKArchivingAndSaveingEmployee_Id.HasValue)
-                db.EmployeeDistributionWorks_Insert(new ObjectParameter("id", typeof(int)), (int)WorksTypesEnum.ArchivingAndSaveing, AnotherBranch.FKArchivingAndSaveingEmployee_Id.Value, eventId, true, AnotherBranch.Id).First();
+                db.EmployeeDistributionTasks_Insert(new ObjectParameter("id", typeof(int)), (int)WorksTypesEnum.ArchivingAndSaveing, AnotherBranch.FKArchivingAndSaveingEmployee_Id.Value, eventId, true, AnotherBranch.Id).First();
             }
 
         }
@@ -521,11 +521,16 @@ namespace BLL.BLL
             else if (c.PrintNameTypeId.HasValue && c.PrintNameTypeId.Value > 0)
                 c.NamesPrintingPrice = db.PrintNameTypes_SelectByPK(c.PrintNameTypeId).First().Price;
 
+            //اضاقة الحدث
             db.Events_Insert(c.Id, c.IsClinetCustomLogo, c.LogoFilePath, c.IsNamesAr, c.NameGroom, c.NameBride, c.EventDateTime, DateTime.Now,
                 c.Package.Id, c.PrintNameTypeId, c.ClinetId, c.Notes,
                 this.UserLoggad.Id, c.BranchId, c.PackagePrice, c.PackageNamsArExtraPrice, c.VistToCoordinationDateTime, c.NamesPrintingPrice);
 
+            //تحديث فلاج انشاء المناسبة 
             db.Enquiries_ChangeCreateEventState(c.Id, true);
+
+            //اضافة الحالة الافترضية وهى انشاء المناسبة
+            db.EnquiryStatus_Insert(null, DateTime.Now, c.Id, (int)EnquiryStatusTypesEnum.CreateEvent, null, this.UserLoggad.Id, null, null);
 
             //التفريغ بحيث اذا حدث خطاء ما لا يتم حذفة من السيرفر
             c.LogoFilePath = null;

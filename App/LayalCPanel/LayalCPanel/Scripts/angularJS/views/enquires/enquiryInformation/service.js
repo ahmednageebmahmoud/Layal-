@@ -21,6 +21,8 @@
                 method: 'get',
             });
         };
+        
+      
  
 		//save enquiy  
 	    closeEnquiry(id) {

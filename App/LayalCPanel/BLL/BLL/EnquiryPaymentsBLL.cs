@@ -53,8 +53,8 @@ namespace BLL.BLL
                 else
                 {
                     //ارسال اشعار للمدير
-                    Notify.DescriptionAr = $"لقد قام الموظف   {this.UserLoggad.UserName } باضافة عملية دفع عن طريق حولة بنكية وقيمتها { c.Amount}";
-                    Notify.DescriptionEn = $"{this.UserLoggad.UserName } Has been Add Payment Process By Bank Transfer And It Is Valaue { c.Amount}";
+                    Notify.DescriptionAr = $"لقد قام الموظف   {this.UserLoggad.FullName } باضافة عملية دفع عن طريق حولة بنكية وقيمتها { c.Amount}";
+                    Notify.DescriptionEn = $"{this.UserLoggad.FullName } Has been Add Payment Process By Bank Transfer And It Is Valaue { c.Amount}";
                     NotificationsBLL.Add(Notify, this.AdminId);
                     new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { this.AdminId.ToString() }, Notify);
 
@@ -78,8 +78,8 @@ namespace BLL.BLL
                 else
                 {
                     //ارسال اشعار لـ المدير لاعالمة ان البرانش قامت بعمل عملية دفع كاش
-                    Notify.DescriptionAr = $"لقد قام الموظف   {this.UserLoggad.UserName } باضافة عملية دفع عن طريق دفع نقدا وقيمتها { c.Amount}";
-                    Notify.DescriptionEn = $"{this.UserLoggad.UserName } Has been Add Payment Process By Cash Payment And It Is Valaue { c.Amount}";
+                    Notify.DescriptionAr = $"لقد قام الموظف   {this.UserLoggad.FullName } باضافة عملية دفع عن طريق دفع نقدا وقيمتها { c.Amount}";
+                    Notify.DescriptionEn = $"{this.UserLoggad.FullName} Has been Add Payment Process By Cash Payment And It Is Valaue { c.Amount}";
                     NotificationsBLL.Add(Notify, this.AdminId);
                     new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { this.AdminId.ToString() }, Notify);
                 }

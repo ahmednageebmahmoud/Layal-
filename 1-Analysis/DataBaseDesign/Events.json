@@ -32,8 +32,9 @@
         "FKEvent_Id": "",
         "FKUserCreated_Id": "",
     },
+    
     //هنا يوضع كل الحالات الخاصة بـ اعمال المناسبة ويمكن ان تكرر ولذالك انشئت جدول جديد وهوا التالى
-    "EventWorksStatusHistory": {
+    "EventTaskStatusHistories": {
         "Id": 0,
         "IsFinshed": true,
         "DateTime": 0,
@@ -45,7 +46,7 @@
     },
     // يرط المناسبة هنا مرة واحدة ووضع الحالات كلها مرة واحدة
     //وهذا الجدول هوا الذى نتحقق منة هل المهمة انتهت ام لم تنتهى
-    "EventWorksStatusIsFinshed": {
+    "EventTaskStatusIsFinshed": {
         "EventId": 00,
         "Booking": true,
         "DataPerfection": true,

@@ -65,7 +65,14 @@ namespace UI.Controllers
             }), JsonRequestBehavior.AllowGet);
         }
 
-        
+
+        public JsonResult GetCRM()
+        {
+
+            return Json(new CRMBLL().CRMDeitails(27), JsonRequestBehavior.AllowGet);
+        }
+
+
 
     }//end class 
 }

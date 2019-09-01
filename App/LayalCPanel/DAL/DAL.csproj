@@ -81,6 +81,15 @@
     <Compile Include="Countries_SelectWithCitiesByPk_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="CRM_EnquiryPayments_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CRM_EnquiryStatus_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CRM_EventTaskStatusHistories_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -96,10 +105,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="EmployeeDistributionWorks_Insert_Result.cs">
+    <Compile Include="EmployeeDistributionTasks_Insert_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EmployeeDistributionWorks_SelectByEventId_Result.cs">
+    <Compile Include="EmployeeDistributionTasks_SelectByEventId_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="EmployeesWorks_SelectByUserId_Result.cs">
@@ -123,10 +132,10 @@
     <Compile Include="EnquiryPayments_SelectByEnquiryId_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EnquiryStatusTypes_SelectByEnquiryId_Result.cs">
+    <Compile Include="EnquiryStatusTypes_SelectByPK_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EnquiryStatusTypes_SelectByPK_Result.cs">
+    <Compile Include="EnquiryStatus_SelectByEnquiryId_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="EnquiryStatus_SelectByFilter_Result.cs">
@@ -189,10 +198,10 @@
     <Compile Include="Events_SelectInformation_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EventWorksStatusHistory_SelectByEventId_Result.cs">
+    <Compile Include="EventTaskStatusHistories_SelectByEventId_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EventWorksStatusHistory_SelectLast_Result.cs">
+    <Compile Include="EventTaskStatusHistories_SelectLast_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="FilesReceivedTypes_SelectAll_Result.cs">

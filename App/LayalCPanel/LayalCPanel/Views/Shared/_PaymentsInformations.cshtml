@@ -1,24 +1,4 @@
-﻿@{ 
-    UsersPrivilegeVM
-      Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.EnquiryPayments);
-}
-
-@if (Priv.CanDisplay)
-{
-
-<div class="kt-portlet" ng-if="paymentsInformations.length>0">
-    <div class="kt-portlet__head">
-        <div class="kt-portlet__head-label">
-            <span class="kt-portlet__head-icon">
-                <i class="kt-font-brand fas fa-hand-holding-usd"></i>
-            </span>
-            <h3 class="kt-portlet__head-title">@Token.PaymentsInformations</h3>
-        </div>
-
-    </div>
-    <div class="kt-portlet__body">
-        <!--R O W 1-->
-        <div class="form-group  row">
+﻿ 
             <table class="table sms-table table-bordered ">
                 <thead class="">
                     <tr class="">
@@ -51,7 +31,3 @@
                 </tbody>
             </table>
 
-        </div>
-    </div>
-</div>
-}

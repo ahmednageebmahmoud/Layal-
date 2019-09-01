@@ -37,7 +37,7 @@ namespace BLL.BLL
                 return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEvent);
 
             //التحقق ان هذة المهمة لم تنتهى مع هذا الفرع
-            if (db.EventWorksStatusHistory_CheckIfTaskFinshedWithBranch(c.EventId, this.UserLoggad.BrId, (int)WorksTypesEnum.ArchivingAndSaveing, true).First().Value)
+            if (db.EventTaskStatusHistories_CheckIfTaskFinshedWithBranch(c.EventId, this.UserLoggad.BrId, (int)WorksTypesEnum.ArchivingAndSaveing, true).First().Value)
                 return new ResponseVM(RequestTypeEnum.Error, Token.ThisTaskIsFinshed);
 
 
@@ -111,7 +111,7 @@ namespace BLL.BLL
                 return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEvent);
 
             //التحقق ان هذة المهمة لم تنتهى مع هذا الفرع
-            if (db.EventWorksStatusHistory_CheckIfTaskFinshedWithBranch(c.EventId, this.UserLoggad.BrId, (int)WorksTypesEnum.ArchivingAndSaveing, true).First().Value)
+            if (db.EventTaskStatusHistories_CheckIfTaskFinshedWithBranch(c.EventId, this.UserLoggad.BrId, (int)WorksTypesEnum.ArchivingAndSaveing, true).First().Value)
                 return new ResponseVM(RequestTypeEnum.Error, Token.ThisTaskIsFinshed);
 
 

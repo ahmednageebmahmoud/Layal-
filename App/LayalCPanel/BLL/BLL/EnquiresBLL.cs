@@ -117,6 +117,8 @@ namespace BLL.BLL
 
                 //Update Befor (ScheduleVisitDateClendarEventId) To Null
                 db.EnquiryStatus_ResetClendersIdsToNull(id);
+                //اضافة الحالة التقائية وهى اغلاق الاستفسار
+                db.EnquiryStatus_Insert(null, DateTime.Now, id, (int)EnquiryStatusTypesEnum.CloseEnquiry, null,this.UserLoggad.Id, null, null);
                 return new ResponseVM(RequestTypeEnum.Success, Token.EnquiryIsClosed);
             }
             catch (Exception ex)
@@ -137,7 +139,7 @@ namespace BLL.BLL
 
         public object GetFullEnquiyInformation(long id)
         {
-            var Enquiry = GetInformation(id);
+            var Enquiry = GetInformation(id,false);
             //اذا ان المستخدم الحالى عميل فيجب ان يكون هوا الذى قد انشاء تلك الاستفسار
             if (Enquiry == null || (this.UserLoggad.IsClinet && Enquiry.ClinetId != this.UserLoggad.Id))
                 return new ResponseVM(Enums.RequestTypeEnum.Error, $"{Token.Event} : {Token.NotFound}");
@@ -153,12 +155,14 @@ namespace BLL.BLL
             if (Event != null)
                 Package = new PackagesBLL().GetPackageInformation(Event.PackageId.Value);
 
+            var CRM = new CRMBLL().CRMDeitails(id);
             return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, new
             {
                 Event,
                 Enquiry,
                 Package,
-                PaymentsInformations
+                PaymentsInformations,
+                CRM
             });
         }
 
@@ -270,7 +274,8 @@ namespace BLL.BLL
             ObjectParameter ID = new ObjectParameter("Id", typeof(long));
             if (this.UserLoggad.Id == 0)
                 db.Enquires_Insert(ID, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId, null, null, DateTime.Now,  c.BranchId, false, IsWithBranch, c.PhoneCountryId);
-            else db.Enquires_Insert(ID, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId, this.UserLoggad.Id, this.UserLoggad.Id, DateTime.Now,  c.BranchId, this.UserLoggad.IsClinet, IsWithBranch, c.PhoneCountryId);
+            else
+                db.Enquires_Insert(ID, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId, this.UserLoggad.Id, this.UserLoggad.Id, DateTime.Now,  c.BranchId, this.UserLoggad.IsClinet, IsWithBranch, c.PhoneCountryId);
 
             c.Id = (long)ID.Value;
             var UserMangerBranch = db.Users_SelectByBranchId(c.BranchId, (int)AccountTypeEnum.BranchManager).FirstOrDefault();
@@ -295,8 +300,8 @@ namespace BLL.BLL
                 }
                 else if (this.UserLoggad.IsClinet)
                 {
-                    Notify.DescriptionAr = $"لقد قام العميل {this.UserLoggad.UserName}  بـ انشاء استفسار جديد";
-                    Notify.DescriptionEn = $"{this.UserLoggad.UserName} Has been created new enqiry";
+                    Notify.DescriptionAr = $"لقد قام العميل {this.UserLoggad.FullName}  بـ انشاء استفسار جديد";
+                    Notify.DescriptionEn = $"{this.UserLoggad.FullName} Has been created new enqiry";
                 }
                 else if (this.UserLoggad.IsAdmin)
                 {
@@ -311,10 +316,19 @@ namespace BLL.BLL
                 }
             }
 
+
+
+
+            //اضافة الحالة الافترضية وهى انشاء الاستفسار 
+            if (this.UserLoggad.Id == 0)
+                db.EnquiryStatus_Insert(null, DateTime.Now, c.Id, (int)EnquiryStatusTypesEnum.CreateEnquiry, null, null, null, null);
+            else
+                db.EnquiryStatus_Insert(null, DateTime.Now, c.Id, (int)EnquiryStatusTypesEnum.CreateEnquiry, null, this.UserLoggad.Id, null, null);
+
             return new ResponseVM(RequestTypeEnum.Success, Token.Added, c);
         }
 
-        internal EnquiyVM GetInformation(long enquiryId)
+        internal EnquiyVM GetInformation(long enquiryId,bool allowStatus = true)
         {
             return db.Enquires_SelectByPk(enquiryId)
               .Select(c => new EnquiyVM
@@ -342,7 +356,6 @@ namespace BLL.BLL
                   ClosedDateTime = c.ClosedDateTime,
                   PhoneIsoCode = c.PhoneIsoCode,
 
-
                   Branch = new BranchVM
                   {
                       NameAr = c.BranchNameAR,
@@ -365,13 +378,13 @@ namespace BLL.BLL
                       NameAr = c.EnquiryTypeNameAr,
                       NameEn = c.EnquiryTypeNameEn
                   },
-                  Status = db.EnquiryStatusTypes_SelectByEnquiryId(c.Id).Select(b => new EnquiryStatusVM
+                  Status = allowStatus? db.EnquiryStatus_SelectByEnquiryId(c.Id).Select(b => new EnquiryStatusVM
                   {
                       Id = b.Status_Id,
                       Notes = b.Status_Notes,
                       DateTime = b.Status_CreateDateTime,
                       UserCreatedId = b.Status_UserCreatedId,
-                      UserCreatedName = b.Status_CreatedUserName,
+                      UserCreatedName = this.IsEn? b.Status_CreatedUserNameEn: b.Status_CreatedUserNameAr,
                       ScheduleVisitDateTime = b.Status_ScheduleVisitDateTime,
                       EnquiryPaymentId = b.Status_EnquiryPaymentId,
                       Amount = b.Amount,
@@ -380,7 +393,7 @@ namespace BLL.BLL
                           NameAr = b.Status_NameAr,
                           NameEn = b.Status_NameEn,
                       }
-                  }).ToList()
+                  }).ToList():null
 
               }).FirstOrDefault();
         }
@@ -447,13 +460,14 @@ namespace BLL.BLL
                         NameAr = c.EnquiryTypeNameAr,
                         NameEn = c.EnquiryTypeNameEn
                     },
-                    Status = db.EnquiryStatusTypes_SelectByEnquiryId(c.Id).Select(b => new EnquiryStatusVM
+                    Status = db.EnquiryStatus_SelectByEnquiryId(c.Id).Select(b => new EnquiryStatusVM
                     {
                         Id = b.Status_Id,
                         Notes = b.Status_Notes,
                         DateTime = b.Status_CreateDateTime,
                         UserCreatedId = b.Status_UserCreatedId,
-                        UserCreatedName = b.Status_CreatedUserName,
+                        UserCreatedName = this.IsEn ? b.Status_CreatedUserNameEn : b.Status_CreatedUserNameAr,
+
                         ScheduleVisitDateTime = b.Status_ScheduleVisitDateTime,
                         EnquiryPaymentId = b.Status_EnquiryPaymentId,
                         IsBookByBankTransfer = b.Status_EnquiryPaymentId.HasValue ? EnquiryPayments.Single(w => w.Id == b.Status_EnquiryPaymentId.Value).IsBankTransfer : false,
@@ -463,10 +477,13 @@ namespace BLL.BLL
                             NameAr = b.Status_NameAr,
                             NameEn = b.Status_NameEn,
                         }
-                    }).ToList()
+                    }).ToList(),
+
 
 
                 }).FirstOrDefault();
+
+
 
             //اذا ان المستخدم الحالى عميل فيجب ان يكون هوا الذى قد انشاء تلك الاستفسار
             if (Enquiy == null || (this.UserLoggad.IsClinet && Enquiy.UserCreatedId != this.UserLoggad.Id))
@@ -482,7 +499,7 @@ namespace BLL.BLL
             if (isToBranch)
                 UserName = this.IsEn ? "Manger" : "المدير";
             else
-                UserName = this.UserLoggad.UserName;
+                UserName = this.UserLoggad.FullName;
 
             var Notify = new NotifyVM
             {
@@ -495,11 +512,12 @@ namespace BLL.BLL
                 PageId = (int)PagesEnum.Enquires,
                 RedirectUrl = $"/Enquires/EnquiryInformation?id={targetId}&notifyId=",
             };
-
-
             NotificationsBLL.Add(Notify, userTargetId);
             new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { userTargetId.ToString() }, Notify);
         }
+
+
+
 
     }//end class
 }

@@ -19,6 +19,7 @@ namespace BLL.BLL
             {
                 Id = c.Id,
                 UserName = c.UserName,
+                FullName= c.FullName,
                 AccountTypeId = (AccountTypeEnum)c.FKAccountType_Id,
                 _Language = (LanguageEnum)c.FKLanguage_Id,
                 _IsRemmeberMe = isRemmber,

@@ -11,16 +11,17 @@ namespace DAL
 {
     using System;
     
-    public partial class EnquiryStatus_SelectByFilter_Result
+    public partial class CRM_EnquiryPayments_Result
     {
         public long Id { get; set; }
-        public string Notes { get; set; }
+        public decimal Amount { get; set; }
+        public bool IsDeposit { get; set; }
+        public bool IsBankTransfer { get; set; }
+        public string TransferImage { get; set; }
+        public Nullable<bool> IsAcceptFromManger { get; set; }
         public System.DateTime DateTime { get; set; }
-        public Nullable<System.DateTime> ScheduleVisitDateTime { get; set; }
         public long FKEnquiry_Id { get; set; }
-        public int FKEnquiryStatus_Id { get; set; }
-        public Nullable<long> FKUserCreated_Id { get; set; }
-        public Nullable<long> FKEnquiryPayment_Id { get; set; }
-        public string ScheduleVisitDateClendarEventId { get; set; }
+        public long FKUserCreated_Id { get; set; }
+        public string UserCreatedName { get; set; }
     }
 }

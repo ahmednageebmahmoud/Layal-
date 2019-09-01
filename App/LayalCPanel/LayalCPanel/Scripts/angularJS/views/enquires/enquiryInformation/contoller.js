@@ -1,5 +1,8 @@
 ﻿ngApp.controller('enquiresCtrl', ['$scope', '$http', 'enquiresServ', function (s, h, enquiresServ) {
     var enquiyId = getQueryStringValue("id");
+    s.isFromEnquiryPage = getQueryStringValue("q")=='true';
+
+
     s.countries = [{
         Id: null,
         CountryName: Token.select
@@ -22,6 +25,7 @@
 
 
     //============= G E T =================
+
     //get items
     s.getItems = () => {
 
@@ -63,17 +67,18 @@
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
                     s.enquiry = d.data.Result.Enquiry;
+                    s.crm = d.data.Result.CRM;
                     s.event = d.data.Result.Event;
                     s.paymentsInformations = d.data.Result.PaymentsInformations;
                     s.package = d.data.Result.Package;
-
+                    s.EventTaskStatusIsFinshed = s.event.EventWorkStatusIsFinshed;
                     s.enquiry.State = StateEnum.update;
 
                     setTimeout(() => {
                         $("select[serchbale]").select2();
                     }, 500)
 
-                    if (s.event)
+                    if (!s.isFromEnquiryPage)
                         document.title = LangIsEn ? "Event Information" : "بيانات المناسبة";
 
                 } break;
@@ -91,6 +96,7 @@
         })
     }
 
+ 
     //اغلاق الاستفسار
     s.closeEnquiry = enquiryId=> {
         if (!enquiryId) return;

@@ -12,9 +12,16 @@ namespace BLL.Enums
         Supervisor = 2,
         BranchManager = 3,
         Clinet = 4,
-        Employee=5,
-        Helper= 6,
-        Photographer=7
+        Employee = 5,
+        Helper = 6,
+        Photographer = 7
+    }
+
+    public enum CRMTypeEum
+    {
+        Payments = 1,
+        EnquiryStatus = 2,
+        EmployeeTasksStatus = 3
     }
 
 
@@ -52,18 +59,18 @@ namespace BLL.Enums
         EnquiryTypes = 4,
         Enquires = 5,
         Branches = 6,
-        UserInformation=10,
-        PrintNamesTypes=11,
-        Events=12,
-        Packages=14,
-        AlbumTypes=15,
-        PackageInputTypes=16,
-        SocialAccountTypes=17,
-        UserPayments=18,
-        EnquiryPayments=19,
-        EventSurveyQuestionTypes=20,
-        EventSurveyQuestions=21,
-        FilesReceivedTypes=22
+        UserInformation = 10,
+        PrintNamesTypes = 11,
+        Events = 12,
+        Packages = 14,
+        AlbumTypes = 15,
+        PackageInputTypes = 16,
+        SocialAccountTypes = 17,
+        UserPayments = 18,
+        EnquiryPayments = 19,
+        EventSurveyQuestionTypes = 20,
+        EventSurveyQuestions = 21,
+        FilesReceivedTypes = 22
     }
 
 
@@ -76,37 +83,45 @@ namespace BLL.Enums
 
     public enum EnquiryStatusTypesEnum
     {
-        NotAnswer= 1,
-        CustomerContacted= 2,
-        RejectService= 3,
-        FullApproval= 4,
-        ScheduleVisit= 5,
-        NeedsToThink= 6,
-        BookByCash =7,
-        BookByBankTransfer=8
+        NotAnswer = 1,
+        CustomerContacted = 2,
+        RejectService = 3,
+        FullApproval = 4,
+        ScheduleVisit = 5,
+        NeedsToThink = 6,
+        BookByCash = 7,
+        BookByBankTransfer = 8,
 
+        //يضاف تلقاء عند انشاء الاستفسار مباشرة
+        CreateEnquiry = 9,
+        //يضاف تلقائ عند انشاء حساب الميل 
+        CreateClinetAccount = 10,
+        //يضاف تلقائى عند انشاء المناسبة
+        CreateEvent = 11,
+        //يضاف تلقائى عند غلق الاستفسار
+        CloseEnquiry = 12
 
     }
 
     public enum WorksTypesEnum
     {
-	Booking                                         =1  ,
-	DataPerfection                                 =2  ,
-	Coordination                                    =3  ,
-	Implementation                                  =4  ,
-	ArchivingAndSaveing                           =5  ,
-	ProductProcessing                              =6  ,
-	Chooseing                                       =7  ,
-	DigitalProcessing                              =8  ,
-	PreparingForPrinting                          =9  ,
-	Manufacturing                                   =10 ,
-	QualityAndReview                              =11 ,
-	Packaging                                       =12 ,
-	TransmissionAndDelivery                       =13 ,
-	Archiving                                       =14 ,
+        Booking = 1,
+        DataPerfection = 2,
+        Coordination = 3,
+        Implementation = 4,
+        ArchivingAndSaveing = 5,
+        ProductProcessing = 6,
+        Chooseing = 7,
+        DigitalProcessing = 8,
+        PreparingForPrinting = 9,
+        Manufacturing = 10,
+        QualityAndReview = 11,
+        Packaging = 12,
+        TransmissionAndDelivery = 13,
+        Archiving = 14,
     }
 
 
 
-  
+
 }//end class

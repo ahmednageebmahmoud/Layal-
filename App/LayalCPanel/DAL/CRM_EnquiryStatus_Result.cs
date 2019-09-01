@@ -11,17 +11,14 @@ namespace DAL
 {
     using System;
     
-    public partial class EnquiryStatusTypes_SelectByEnquiryId_Result
+    public partial class CRM_EnquiryStatus_Result
     {
-        public long Status_Id { get; set; }
+        public int EnquiryStatusId { get; set; }
         public string Status_NameAr { get; set; }
         public string Status_NameEn { get; set; }
-        public string Status_Notes { get; set; }
         public System.DateTime Status_CreateDateTime { get; set; }
-        public Nullable<System.DateTime> Status_ScheduleVisitDateTime { get; set; }
-        public long Status_UserCreatedId { get; set; }
-        public Nullable<long> Status_EnquiryPaymentId { get; set; }
-        public Nullable<decimal> Amount { get; set; }
-        public string Status_CreatedUserName { get; set; }
+        public Nullable<long> Status_UserCreatedId { get; set; }
+        public string Status_CreatedUserNameAr { get; set; }
+        public string Status_CreatedUserNameEn { get; set; }
     }
 }

@@ -22,6 +22,7 @@ namespace UI.Controllers
         {
             return View();
         }
+
         [PagePrivilege(PagesEnum.Enquires, false,false, true,true)]
         public ActionResult AddAndUpdate()
         {

@@ -154,8 +154,8 @@ namespace BLL.BLL
             if (this.UserLoggad.IsBranchManager)
             {
                 //ارسال اشعار للمدير
-                Notify.DescriptionAr = $"لقد قام الموظف   {this.UserLoggad.UserName } باضافة عملية دفع لـ الموظف {  UserTo.UserName} وقيمتها { c.Amount}";
-                Notify.DescriptionEn = $"{this.UserLoggad.UserName } Has been Add Payment Process Fro { UserTo.UserName} Employee And It Is Valaue { c.Amount}";
+                Notify.DescriptionAr = $"لقد قام الموظف   {this.UserLoggad.FullName } باضافة عملية دفع لـ الموظف {  UserTo.UserName} وقيمتها { c.Amount}";
+                Notify.DescriptionEn = $"{this.UserLoggad.FullName} Has been Add Payment Process Fro { UserTo.UserName} Employee And It Is Valaue { c.Amount}";
                 NotificationsBLL.Add(Notify, this.AdminId);
                 new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { this.AdminId.ToString() }, Notify);
             }

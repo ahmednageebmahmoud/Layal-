@@ -15,3 +15,5 @@ ngApp.filter('filterWithoutStaticItems', function () {
 	    return returnItems;
 	};
 });
+
+

@@ -1,0 +1,85 @@
+﻿	<!--begin::Portlet-->
+<div class="kt-portlet  kt-portlet--tabs" ng-if="crm">
+    <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+            <span class="kt-portlet__head-icon">
+                <i class="fas fa-clipboard-list"></i>
+            </span>
+            <h3 class="kt-portlet__head-title">
+                CRM
+            </h3>
+        </div>
+        <div class="kt-portlet__head-toolbar">
+            <ul class="nav nav-tabs nav-tabs-line nav-tabs-line-brand nav-tabs-line-2x nav-tabs-line-right nav-tabs-bold" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link " data-toggle="tab" href="#kt_portlet_base_demo_3_3_tab_content" role="tab" aria-selected="true"
+                       ng-class="{'active':crmType==undefined}"
+                       ng-click="crmType=undefined">
+                        <i class="fa fa-check" aria-hidden="true"></i>@Token.All
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_3_2_tab_content" role="tab" aria-selected="false"
+                       ng-class="{'active':crmType==2}"
+                       ng-click="crmType=2">
+                        <i class="fas fa-hand-holding-usd" aria-hidden="true"></i>@Token.EnquiryStatus
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_3_3_tab_content" role="tab" aria-selected="false"
+                       ng-class="{'active':crmType==1}"
+                       ng-click="crmType=1">
+                        <i class="fas fa-hand-holding-usd" aria-hidden="true"></i>@Token.Payments
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_3_3_tab_content" role="tab" aria-selected="false"
+                       ng-class="{'active':crmType==3}"
+                       ng-click="crmType=3">
+                        <i class="fa fa-tasks" aria-hidden="true"></i>@Token.TaskStatus
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="kt-portlet__body">
+ 
+        <!--Begin::Timeline 3 -->
+        <div class="kt-timeline-v2">
+            <div class="kt-timeline-v2__items  kt-padding-top-25 kt-padding-bottom-30">
+                <div class="kt-timeline-v2__item" ng-repeat="v in crm ">
+                    <span class="kt-timeline-v2__item-time">{{v.Date}}</span>
+                    <div class="kt-timeline-v2__item-cricle">
+                        <i class="fa fa-genderless kt-font-warning"></i>
+                    </div>
+                    <div class="kt-timeline-v2__item-text  kt-padding-top-5">
+                        <div class="kt-demo__preview">
+                            <div class="kt-list-timeline">
+                                <div class="kt-list-timeline__items">
+                                    <div class="kt-demo__preview" style="margin-top: 19px">
+                                        <div class="kt-list-timeline">
+                                            <div class="kt-list-timeline__items">
+                                                <div class="kt-list-timeline__item " id="{{c.CRMType+'-'+$index}}" ng-repeat="c in v.Details|filter:{'CRMType':crmType}">
+                                                    <span class="kt-list-timeline__badge " ng-class="c.CircleColor"></span>
+                                                    <span class="kt-list-timeline__icon " ng-class="c.IconClass"></span>
+                                                    <span class="kt-list-timeline__text "> {{c.Description}}</span>
+                                                    <span class="kt-list-timeline__time " title="{{c.DateTimeDispaly}}">{{c.TimeDisplay}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+        <!--End::Timeline 3 -->
+
+    </div>
+
+
+
+</div>

@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace BLL.BLL
 {
-    public class EmployeeDistributionWorksBLL : BasicBLL
+    public class EmployeeDistributionTasksBLL : BasicBLL
     {
         public object GetByEventId(long eventId)
         {
-            var Emps = db.EmployeeDistributionWorks_SelectByEventId(eventId).Select(c => new EmployeeDiributionWorkVM
+            var Emps = db.EmployeeDistributionTasks_SelectByEventId(eventId).Select(c => new EmployeeDiributionTaskVM
             {
                 Id = c.Id,
                 EmployeeId = c.FKEmployee_Id,
@@ -33,7 +33,7 @@ namespace BLL.BLL
             return new ResponseVM(RequestTypeEnum.Success, Token.Success, Emps);
         }
 
-        public object SaveChange(EmployeeDiributionWorkVM c)
+        public object SaveChange(EmployeeDiributionTaskVM c)
         {
             using (var tranc = db.Database.BeginTransaction())
             {
@@ -80,22 +80,22 @@ namespace BLL.BLL
             return db.EnquiryPayments_CheckIfPaymentedDeposit(eventId).First().Value;
         }
 
-        private object Delete(EmployeeDiributionWorkVM c)
+        private object Delete(EmployeeDiributionTaskVM c)
         {
-            db.EmployeeDistributionWorks_Delete(c.Id);
+            db.EmployeeDistributionTasks_Delete(c.Id);
             return new ResponseVM(RequestTypeEnum.Success, Token.Deleted);
         }
 
-        private object Add(EmployeeDiributionWorkVM c)
+        private object Add(EmployeeDiributionTaskVM c)
         {
 
             //Checck Dublicate
-            if (db.EmployeeDistributionWorks_CheckIfInserted(c.WorkTypeId,  c.EventId, c.BranchId,c.IsBasicBranch).First().Value > 0)
+            if (db.EmployeeDistributionTasks_CheckIfInserted(c.WorkTypeId,  c.EventId, c.BranchId,c.IsBasicBranch).First().Value > 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.CanNotDuplicate);
 
 
             ObjectParameter ID = new ObjectParameter("Id", typeof(long));
-          c=  db.EmployeeDistributionWorks_Insert(ID, c.WorkTypeId, c.EmployeeId, c.EventId,c.IsBasicBranch,c.BranchId).Select(v=> new EmployeeDiributionWorkVM
+          c=  db.EmployeeDistributionTasks_Insert(ID, c.WorkTypeId, c.EmployeeId, c.EventId,c.IsBasicBranch,c.BranchId).Select(v=> new EmployeeDiributionTaskVM
             {
                 Id = v.Id,
                 EmployeeId = v.FKEmployee_Id,

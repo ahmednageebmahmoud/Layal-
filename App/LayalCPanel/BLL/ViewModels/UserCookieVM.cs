@@ -24,7 +24,8 @@ namespace BLL.ViewModels
         public bool IsBranchManager => this.AccountTypeId == AccountTypeEnum.BranchManager;
         public bool IsHelper => this.AccountTypeId == AccountTypeEnum.Helper;
         public bool IsAnonymous { get; set; }
-        public string UserName { get;   set; }
+       public string UserName { get;   set; }
+        public string FullName { get;   set; }
         public int BrId { get; set; }
         public bool IsActive { get;   set; }
         public bool IsPhotographerOrHelper =>

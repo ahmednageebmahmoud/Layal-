@@ -233,7 +233,7 @@
                                     <td>{{x.CreateDateTimeDisplay}}</td>
                                     <td>
                                         <!--Event Information-->
-                                        <a href="/Enquires/EnquiryInformation?id={{x.Id}}"  title="@Token.ShowDetails" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="la la-search"></i> </a>
+                                        <a href="/Enquires/EnquiryInformation?id={{x.Id}}&q=false"  title="@Token.ShowDetails" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="la la-search"></i> </a>
 
                                         <!--Btn:Edit-->
                                         @if (Priv.CanEdit)
@@ -285,7 +285,6 @@
                                                ng-if="x.IsAllowSurvey"
                                                 title="@Token.Survey"
                                                class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fa fa-chart-line"></i></a>
-
                                         }
                                     </td>
                                 </tr>
