@@ -154,7 +154,6 @@
         <div class="form-group  row">
             <!--Branches-->
             <label class="col-form-label col-lg-2">@Token.Branch</label>
-
             <div class="col-lg-4 form-group-sub">
                 <select class="form-control"
                         serchbale
@@ -162,7 +161,7 @@
                         ng-class="{'is-invalid':enquiryFrm.branch.$invalid&&enquiyFormSubmitErro}"
                         ng-model="enquiry.BranchId"
                         ng-options="c.Id as c.BranchName for c in branches|filterWithoutStaticItems:{'CityId':enquiry.CityId}"
-                        ng-required="true"></select>
+                        required></select>
                 <!--Errors:-->
                 <small class="error invalid-feedback" ng-if="enquiryFrm.branch.$error.required&&enquiyFormSubmitErro">@Token.FieldIsRequierd</small>
             </div>

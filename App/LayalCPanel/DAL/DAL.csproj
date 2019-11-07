@@ -51,10 +51,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlbumTypes_SelectAll_Result.cs">
+    <Compile Include="Albums_Insert_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="AlbumTypes_SelectByFilter_Result.cs">
+    <Compile Include="Albums_SelectAll_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Albums_SelectByFilter_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Albums_SelectByPk_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Albums_Update_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Branches_SelectByAll_Result.cs">
@@ -159,6 +168,9 @@
     <Compile Include="EventPhotographers_SelectAllUsers_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EventPhotographers_SelectAll_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EventPhotographers_SelectEventsByFilter_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -225,6 +237,9 @@
     <Compile Include="PackageInputTypes_SelectByFilter_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Packages_Insert_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Packages_SelectAll_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -251,6 +266,9 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="SocialAccountTypes_SelectByFilter_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserPayments_SelectByPK_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="UserPayments_SelectByUserToId_Result.cs">

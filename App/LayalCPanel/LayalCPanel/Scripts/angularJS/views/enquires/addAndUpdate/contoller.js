@@ -23,9 +23,9 @@
         Id: enquiyId,
         State: enquiyId ? StateEnum.update : StateEnum.create,
         EnquiryTypeId: null,
-        CountryId: s.currentUserInfromation.CountryId,
-        CityId: s.currentUserInfromation.CityId,
-        BranchId: s.currentUserInfromation.BrId,
+        CountryId: s.currentUserInfromation.CountryId||null,
+        CityId: s.currentUserInfromation.CityId || null,
+        BranchId: s.currentUserInfromation.BrId||null,
         PhoneCountryId: null
     };
     s.countries = [{

@@ -137,31 +137,38 @@ namespace BLL.BLL
             return db.Enquires_CheckFromOwner(id, this.UserLoggad.Id).First().Value > 0;
         }
 
+
+        /// <summary>
+        /// جلب كل البيانات من اجل صفحة بيانات النموذج
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public object GetFullEnquiyInformation(long id)
         {
+            var EventBll = new EventsBLL();
+
             var Enquiry = GetInformation(id,false);
             //اذا ان المستخدم الحالى عميل فيجب ان يكون هوا الذى قد انشاء تلك الاستفسار
             if (Enquiry == null || (this.UserLoggad.IsClinet && Enquiry.ClinetId != this.UserLoggad.Id))
                 return new ResponseVM(Enums.RequestTypeEnum.Error, $"{Token.Event} : {Token.NotFound}");
 
-            var Package = new PackageVM();
-            var Event = new EventVM();
 
             //Fill Enquiry Payments
             var PaymentsInformations = new EnquiryPaymentsBLL().GetPaymentsInformations(id);
 
             //Fill Event And Package
-            Event = new EventsBLL().GetEventInformation(Enquiry.Id);
-            if (Event != null)
-                Package = new PackagesBLL().GetPackageInformation(Event.PackageId.Value);
+            Enquiry. Event = EventBll.GetEventInformation(Enquiry.Id);
+            if (Enquiry.Event != null)
+            {
+                Enquiry.Event.Photographers = EventBll.GetEventPhotographInformation(id);
+                Enquiry.Event.Package = new PackagesBLL().GetPackageInformation(Enquiry.Event.PackageId.Value);
+            }
 
+            Enquiry.Payments = PaymentsInformations;
             var CRM = new CRMBLL().CRMDeitails(id);
             return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, new
             {
-                Event,
                 Enquiry,
-                Package,
-                PaymentsInformations,
                 CRM
             });
         }
@@ -235,6 +242,7 @@ namespace BLL.BLL
             bool IsWithBranch = false;
             if (OldBranchId != c.BranchId)
                 IsWithBranch = true;
+
             db.Enquires_Update(c.Id, c.FirstName, c.LastName, c.PhoneNo, c.Day, c.Month, c.Year, c.CountryId, c.CityId, c.EnquiryTypeId,  DateTime.Now, this.UserLoggad.Id, c.BranchId, IsWithBranch);
 
             if (OldBranchId != c.BranchId)

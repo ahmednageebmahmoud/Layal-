@@ -94,7 +94,7 @@ ngApp.controller('paymentsInformationsCtrl', ['$scope', '$http', 'paymentsInform
                     if (s.payment.State == StateEnum.create)
                         s.paymentsInformations.unshift(d.data.Result);
                     else
-                        s.paymentsInformations.find(c=> c.Id = d.data.Result.Id) = d.data.Result;
+                        s.paymentsInformations[s.paymentsInformations.findIndex(c=> c.Id = d.data.Result.Id)] = d.data.Result;
 
                     s.payment = {
                         State: StateEnum.create

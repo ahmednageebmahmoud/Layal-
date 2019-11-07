@@ -95,23 +95,21 @@
 
                         </div>
                         <div class="kt-portlet__foot">
-                            <div class="kt-form__actions">
-                                <div class="row">
-                                    <div class="col-lg-9"></div>
-                                    <div class="col-lg-3">
-                                        @if (Priv.CanAdd)
-                                        {
-                                            <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
-                                                <i class="la la-save">@Token.Add</i>
-                                            </button>
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 m--valign-middle">
+                                </div>
+                                <div class="col-lg-6 kt-align-right">
+                                    @if (Priv.CanAdd)
+                                    {
+                                        <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                                            <i class="la la-save">@Token.Add</i>
+                                        </button>
                                             <button type="button"
                                                     class="btn btn-warning btn-elevate btn-elevate-air "
                                                     ng-click="reset()">
                                                 <i class="la la-file">@Token.Cancel</i>
                                             </button>
-                                        }
-                                    </div>
-                                </div>
+                                    }                 </div>
                             </div>
                         </div>
                     </form>

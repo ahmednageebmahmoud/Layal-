@@ -50,8 +50,7 @@
                 </div>
             </div>
 
-            <div class="kt-portlet__body">
-                <form novalidate name="eventFrm" class="kt-form kt-form--label-right" ng-submit="getEvents(true)">
+                    <form novalidate name="eventFrm" class="kt-form kt-form--label-right" ng-submit="getEvents(true)">
                     <div class="kt-portlet__body">
                         <!--R O W 1-->
                         <div class="form-group  row">
@@ -91,33 +90,6 @@
                         </div>
                         <!--R o w 2-->
                         <div class="form-group  row">
-                            <!--IsLogoAr
-                            <div class="col-lg-3 form-group-sub">
-                                <label class="col-form-label">@Token.IsLogoAr</label>
-                                <select class="form-control"
-                                        serchbale
-                                        ng-model="eventFilter.IsLogoAr"
-                                        ng-options="c.Id as c.Name for c in checkBoxList"></select>
-                            </div>-->
-                            <!--PackageId-->
-                            <div class="col-lg-3 form-group-sub">
-                                <label class="col-form-label">@Token.Package</label>
-                                <select class="form-control"
-                                        serchbale
-                                        ng-model="eventFilter.PackageId"
-                                        ng-options="c.Id as c.PackageName for c in packages"></select>
-                            </div>
-                            <!--Branch-->
-                            <div class="col-lg-3 form-group-sub">
-                                <label class="col-form-label">@Token.Branch</label>
-                                <select class="form-control"
-                                        serchbale
-                                        ng-model="eventFilter.BranchId"
-                                        ng-options="c.Id as c.BranchName for c in branches"></select>
-                            </div>
-                        </div>
-
-                        <div class="form-group  row">
                             <!--CreateDateFrom-->
                             <div class="col-lg-3 form-group-sub">
                                 <label class="col-form-label">@Token.CreateDateFrom</label>
@@ -152,6 +124,34 @@
                                        ng-model="eventFilter.EventDateTimeTo" />
                             </div>
                         </div>
+                        <!--R o w 3-->
+                        <div class="form-group  row">
+                            <!--IsLogoAr
+                            <div class="col-lg-3 form-group-sub">
+                                <label class="col-form-label">@Token.IsLogoAr</label>
+                                <select class="form-control"
+                                        serchbale
+                                        ng-model="eventFilter.IsLogoAr"
+                                        ng-options="c.Id as c.Name for c in checkBoxList"></select>
+                            </div>-->
+                            <!--PackageId-->
+                            <div class="col-lg-3 form-group-sub">
+                                <label class="col-form-label">@Token.Package</label>
+                                <select class="form-control"
+                                        serchbale
+                                        ng-model="eventFilter.PackageId"
+                                        ng-options="c.Id as c.PackageName for c in packages"></select>
+                            </div>
+                            <!--Branch-->
+                            <div class="col-lg-3 form-group-sub">
+                                <label class="col-form-label">@Token.Branch</label>
+                                <select class="form-control"
+                                        serchbale
+                                        ng-model="eventFilter.BranchId"
+                                        ng-options="c.Id as c.BranchName for c in branches"></select>
+                            </div>
+                        </div>
+                        
                     </div>
 
                     <!--R O W 4-->
@@ -164,8 +164,6 @@
                         </div>
                     </div>
                 </form>
-            </div>
-            <div class="kt-portlet__body">
                 <div class="kt-portlet__body">
                     @if (Priv.CanDisplay)
                     {
@@ -243,29 +241,23 @@
                                         }
 
                                         <!--EventCoordinations-->
-                                        <a href="/EEW/AddAndUpdateCoordinations?id={{x.Id}}"  title="@Token.Tasks"
-                                           ng-hide="x.IsClosed||!x.IsPayment"
+                                        <a href="/EEW/AddAndUpdateCoordinations?id={{x.Id}}"  title="@Token.AddAndUpdateCoordinations"
+                                           ng-if="!x.IsClosed&&x.IsPayment&&x.EventWorkStatusIsFinshed.DataPerfection"
                                            class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fa fa-tasks"></i></a>
 
                                         <!--توزيع اوامر العمل على الموظفين-->
                                         <a href="/Events/DistributionOfWork?id={{x.Id}}&branchId={{x.BranchId}}"
                                             title="@Token.DistributionOfWork"
                                            class="btn btn-sm btn-clean btn-icon btn-icon-md"
-                                           ng-hide="x.IsClosed||!x.IsPayment"><i class="fas fa-users-cog"></i></a>
+                                           ng-if="!x.IsClosed&&x.IsPayment&&x.EventWorkStatusIsFinshed.DataPerfection"
+                                           ><i class="fas fa-users-cog"></i></a>
 
-                                        <!--Event Employees-->
-                                        <a href="Javascript:void(0)"
-                                            title="@Token.EventEmployees"
-                                           class="btn btn-sm btn-clean btn-icon btn-icon-md"
-                                           ng-click="showEventEmployees(x)"><i class="fa fa-users"></i></a>
-
+                                        <!--Event Photographers-->
                                         <a href="Javascript:void(0)"
                                            title="@Token.EventPhotographers"
                                            class="btn btn-sm btn-clean btn-icon btn-icon-md"
+                                           ng-if="x.IsllowUpdatePhotographers"
                                            ng-click="showEventPhotographersModel(x)"><i class="fa fa-camera-retro"></i></a>
-
-                                        
-
 
                                         @if (PrivPayments.CanAdd || PrivPayments.CanDisplay)
                                         {
@@ -277,7 +269,7 @@
                                             <!--التعدير فى حقول الاستبيان-->
                                             <a href="Javascript:void(0)"  title="@Token.CreateCustomSurvey"
                                                class="btn btn-sm btn-clean btn-icon btn-icon-md"  
-                                               ng-if="!x.IsAllowSurvey"
+                                               ng-if="x.IsAllowSurvey"
                                                ng-click="showCreateCustomSurveyModel(x)"><i class="fa fa-chart-line"></i></a>
 
                                               <!--نعرض الاستبيان بدام تمت اضافتها -->
@@ -294,7 +286,6 @@
                     <!--Paging -->
                     <sms-paging ng-sms-fop="enquiyFOP" ng-sms-display-m-func="getEvents()"></sms-paging>
                 </div>
-            </div>
         </div>
     </div>
 
@@ -344,112 +335,39 @@
         </div>
     </div>
 
-    <!--Event Employees-->
-    <div id="eventEmployees"
-         class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">@Token.CreateCustomSurvey</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form novalidate name="enquiryStatus" class="kt-form kt-form--label-right" ng-submit="addNewStatus(enquiryStatus)">
-                        <!--R O W 1-->
-                        <div class="form-group  row">
-                            <table class="table sms-table">
-                                <thead>
-                                    <tr role="row">
-                                        <th class="th-10 ">
-                                            <label class="sms-sort-field">
-                                                @Token.Id
-                                            </label>
-                                        </th>
-                                        <th class="th-25 ">
-                                            <label class="sms-sort-field">
-                                                @Token.Employee
-                                            </label>
-                                        </th>
-                                        <th class="th-30">
-                                            <label class="sms-sort-field">
-                                                @Token.WorkType
-                                            </label>
-                                        </th>
-                                        <th class="th-10">
-                                            <label class="sms-sort-field">
-                                                @Token.Finshed
-                                            </label>
-                                        </th>
-                                        <th class="th-10">
-                                            <label class="sms-sort-field">
-                                                @Token.Operations
-                                            </label>
-                                        </th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="gp in currentEventEmployees">
-                                        <td>
-                                            {{gp.EmployeeId}}
-                                        </td>
-                                        <td>
-                                            <p><a href="/Users/UserInformation?id={{gp.EmployeeId}}" class="kt-link kt-font-boldest">{{gp.UserName}}</a></p>
-                                        </td>
-                                        <td>
-                                            <select class="form-control input-disabled"
-                                                    ng-model="gp.WorkTypeId"
-                                                    ng-options="c.Id as c.WorkTypeName for c in workTypes"
-                                                    ng-disabled="true"></select>
-                                        </td>
-                                        <td><i class="fa" ng-class="{'fa-check':gp.IsFinshed}"></i></td>
-                                        <td>
-                                            @if (PrivUserPayments.CanEdit || PrivUserPayments.CanAdd || PrivUserPayments.CanDisplay)
-                                            {
-                                                <a href="/UserPayments/Payments?id={{gp.EmployeeId}}"
-                                                   ng-if="gp.UserAccountTypeId==accountTypeEnum.Helper"
-                                                   title="@Token.Payments" class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fas fa-hand-holding-usd"></i></a>
-                                            }
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@Token.Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <!--Event Photographers-->
     <div id="eventPhotographers"
          class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">@Token.EventPhotographers {{(photographers|filter:{'IsSelected':true}).length}}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">@Token.EventPhotographers : {{photographersSelectedCount}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                     <form novalidate name="eventPhotographerFrm" class="kt-form kt-form--label-right" ng-submit="saveEventPhotographerFrm(eventPhotographerFrm)">
                 <div class="modal-body">
                         <!--R O W 1-->
-                        <div class="form-group  row">
+                    <div class="form-group  row">
+                        <label class="col-form-label col-lg-2">@Token.SearchInPhotographers</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" ng-model="photoSearch"/>
+                        </div>
+                    </div>
+                    <!--R O W 2-->
+                        <div class="form-group  row scroll-300">
                             <!--Photographer-->
-                            <div class="col-lg-4 form-group-sub" ng-repeat="x in  photographers">
+                            <div class="col-lg-4 form-group-sub kt-scroll" ng-repeat="x in  photographers|filter:{'UserFullName':photoSearch}">
                                 <div class="kt-checkbox-list">
                                     <label class="kt-checkbox kt-checkbox--bold kt-link kt-font-boldest"
                                            ng-class="{'kt-checkbox--solid kt-checkbox--success':x.IsSelected}">
-                                        <input type="checkbox" ng-model="x.IsSelected">   {{x.UserFullName}}
+                                        <input type="checkbox" ng-model="x.IsSelected" 
+                                               ng-change="cultPhotographersSelectedCount()"/>   
+                                        {{x.UserFullName}}
                                         <span></span>
                                     </label>
                                 </div>
                             </div>
                         </div>
-                         
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air" ng-click="updateEventPhotographers()">

@@ -157,6 +157,7 @@
                     case RequestTypeEnum.sucess:
                         {
                             s.allowManage = false;
+
                         } break;
                 }
                 SMSSweet.alert(d.data.Message, d.data.RequestType);

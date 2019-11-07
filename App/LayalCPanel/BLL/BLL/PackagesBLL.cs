@@ -116,9 +116,13 @@ namespace BLL.BLL
             //    if (!c.IsPrintNamesFree)
             //        c.NamsArExtraPrice = 0;
                 ObjectParameter ID = new ObjectParameter("Id", typeof(int));
-                db.Packages_Insert(ID, c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.IsPrintNamesFree, c.AlbumTypeId,c.Price,c.NamsArExtraPrice);
+                db.Packages_Insert(ID, c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.IsPrintNamesFree, c.AlbumTypeId,c.Price,c.NamsArExtraPrice)
+                    .ToList().ForEach(v=> {
+                        c.Id = v.Id;
+                        c.WordDescriptionId = v.FkWordDescription_Id;
+                        c.WordNameId = v.FkWordName_Id;
+                    });
 
-                c.Id = (int)ID.Value;
                 return new ResponseVM(RequestTypeEnum.Success, Token.Added, c);
             }
             catch (Exception ex)
@@ -153,12 +157,11 @@ namespace BLL.BLL
                 IsPrintNamesFree = c.Key.IsPrintNamesFree,
                 WordDescriptionId = c.Key.FkWordDescription_Id,
                 WordNameId = c.Key.FkWordName_Id,
-                AlbumType = new AlbumTypeVM
+                AlbumType = new AlbumVM
                 {
                     NameAr = c.Key.AlbumType_NameAr,
                     NameEn = c.Key.AlbumType_NameEn,
                 },
-
                 PackageDetails = c.Where(x => x.PackageDetailsId.HasValue).Select(v => new PackageDetailVM
                 {
                     Id = v.PackageDetailsId,

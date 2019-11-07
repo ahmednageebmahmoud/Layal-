@@ -29,7 +29,8 @@ namespace BLL.BLL
 
             var Events = db.Events_SelectByFilter
                 (even.Skip, even.Take, even.IsClinetCustomLogo,
-                even.IsNamesAr, even.NameGroom, even.NameBride, even.EventDateTo, even.EventDateFrom, even.CreateDateTo,
+                even.IsNamesAr, even.NameGroom, even.NameBride,
+                even.EventDateTo, even.EventDateFrom, even.CreateDateTo,
                 even.CreateDateFrom, even.PackageId, even.PrintNameTypeId, even.BranchId, null, null)
                 .Select(c => new EventVM
                 {
@@ -67,6 +68,10 @@ namespace BLL.BLL
                     {
                         NameAr = c.Branch_NameAr,
                         NameEn = c.Branch_NameEn
+                    },
+                    EventWorkStatusIsFinshed = new EventWorksStatusIsFinshedVM
+                    {
+                        DataPerfection = c.EventTaskStatusIsFinshed_DataPerfection
                     }
                 }).ToList();
             if (Events.Count == 0)
@@ -85,10 +90,11 @@ namespace BLL.BLL
                 {
                     Id = c.EveId,
                     UserFullName = string.IsNullOrEmpty(c.FullName) ? c.UserName : c.FullName,
+
                     DateTime = c.EveCreateDateTime,
                     EventId = eventId,
                     UserId = c.Id,
-                    IsSelected = c.EveId.HasValue
+                    IsSelected = c.EveId.HasValue,
                 }).ToList();
 
             if (EventUsers.Count == 0)
@@ -96,9 +102,30 @@ namespace BLL.BLL
                 return new ResponseVM(Enums.RequestTypeEnum.Info, Token.NoPhotographersFound);
             }
             return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, EventUsers);
+        }
+        public List<EventPhotographerVM> GetEventPhotographInformation(long eventId)
+        {
+           return db.EventPhotographers_SelectAll(eventId)
+                .Select(c => new EventPhotographerVM
+                {
+                    Id = c.Id,
+                    UserId = c.Id,
+                    DateTime = c.CreateDateTime,
+                    User = new UserVM
+                    {
+                        Id=c.FKUser_Id,
+                        UserName=c.UserName,
+                        FullName=c.FullName,
+                        AccountType = new AccountTypeVM
+                        {
+                            Id=c.AccountTypeNameId,
+                            NameAr=c.AccountTypeNameAr,
+                            NameEn=c.AccountTypeNameEn,
+                        }
+                    }
+                }).ToList();
 
         }
-
         public object GetEventForCurrretnEmployee(long eventId)
         {
             return new ResponseVM(RequestTypeEnum.Success, Token.Success, GetEventInformation(eventId));
@@ -221,10 +248,25 @@ namespace BLL.BLL
 
         public object UpdateEventPhotographers(List<EventPhotographerVM> dis)
         {
+            if (dis == null || dis.Count == 0)
+                return ResponseVM.Error($"{Token.Photographers} :  {Token.NotFound }");
+
+
             using (var tranc = db.Database.BeginTransaction())
             {
                 try
                 {
+
+                    //التحقق من ان المناسبة لم تغلق وان تاريخ المناسبة لم نتخطاه
+                    if (CheckIfEnquiryClosed(dis[0].EventId.Value))
+                        return ResponseVM.Error(Token.EnquiryIsClosed);
+
+                    var Event = db.Events_SelectByPK(dis[0].EventId).FirstOrDefault();
+                    if (Event == null)
+                        return ResponseVM.Error($"{Token.Event} :  {Token.NotFound }");
+
+                    if (DateTime.Now > Event.EventDateTime)
+                        return ResponseVM.Error(Token.ThisEventDateIsFinshed);
 
                     db.EventPhotographers_Delete(dis[0].EventId);
                     dis.Where(v => v.IsSelected).ToList().ForEach(c =>
@@ -301,8 +343,6 @@ namespace BLL.BLL
                     Archiving = c.Archiving,
                 },
 
-
-
                 Package = new PackageVM
                 {
                     NameAr = c.Package_NameAr,
@@ -327,6 +367,7 @@ namespace BLL.BLL
         {
             return db.EnquiryPayments_CheckIfPaymentedDeposit(eventId).First().Value;
         }
+
 
         public object SaveChange(EventVM c)
         {
@@ -367,7 +408,7 @@ namespace BLL.BLL
 
         private bool CheckIfEnquiryClosed(long enquiryId)
         {
-            return db.Enquires_IsClosed(enquiryId).First().Value > 0;
+            return db.Enquires_IsClosed(enquiryId).Any(c => c.Value > 0);
         }
 
         private object Delete(EventVM c)
@@ -404,6 +445,12 @@ namespace BLL.BLL
 
             //تحديث الاسعار
             var OldEvent = db.Events_SelectByPK(c.Id).First();
+            //اذا كان يريد تحديث تاريخ المناسبة فلا يمكن التحديث الا بعد اليوم الحالى بيوم
+            if (OldEvent.EventDateTime.Date != c.EventDateTime.Date)
+                if (c.EventDateTime.Date <= DateTime.Now.Date)
+                    return ResponseVM.Error(Token.CanNotUpdateEventDateLessThanOrEquleCurrentDate);
+
+
             var Package = db.Packages_SelectByPK(c.PackageId).First();
             if (OldEvent.FKPackage_Id != c.PackageId)
             {
@@ -442,7 +489,7 @@ namespace BLL.BLL
             GoggelApiCalendarService.DeleteEvent(c.VistToCoordinationClendarEventId);
             AddGoogelEvent(c);
 
-            //نقوم بتوزيع اومر العمل على الموظفين
+            //نقوم بتوزيع اومر العمل على الموظفين الذين تم وضعهم مع الفرع 
             this.DistributionWorkOrderToDefaultEmployees(c.Id, c.BranchId.Value);
 
             return new ResponseVM(RequestTypeEnum.Success, Token.Updated, c);
@@ -457,7 +504,7 @@ namespace BLL.BLL
             var Branch = db.Branches_SelectByPk(branchId).FirstOrDefault();
 
             //موظف التنسيق
-            if (Branch.FKCoordinationEmployee_Id.HasValue&&db.EmployeeDistributionTasks_CheckIfInserted((int)WorksTypesEnum.Coordination, eventId, branchId,false).First().Value == 0)
+            if (Branch.FKCoordinationEmployee_Id.HasValue && db.EmployeeDistributionTasks_CheckIfInserted((int)WorksTypesEnum.Coordination, eventId, branchId, false).First().Value == 0)
                 db.EmployeeDistributionTasks_Insert(new ObjectParameter("id", typeof(int)), (int)WorksTypesEnum.Coordination, Branch.FKCoordinationEmployee_Id, eventId, false, branchId).First();
 
             //موظف التنفيذ
@@ -468,12 +515,17 @@ namespace BLL.BLL
             if (Branch.FKArchivingAndSaveingEmployee_Id.HasValue && db.EmployeeDistributionTasks_CheckIfInserted((int)WorksTypesEnum.ArchivingAndSaveing, eventId, branchId, false).First().Value == 0)
                 db.EmployeeDistributionTasks_Insert(new ObjectParameter("id", typeof(int)), (int)WorksTypesEnum.ArchivingAndSaveing, Branch.FKArchivingAndSaveingEmployee_Id, eventId, false, branchId).First();
 
-            //موظف الارشفة من الفرع الاخر
+
+            /*
+                 اذا كان هناك فرع اخر لـ الارشفة والحفظ 
+                 فيجب ان يتم تعين موظف لـ الارشفة والحفظ فى تلك الفرع الاخر
+                 */
             if (Branch.FKArchivingAndSaveingAnotherBranch_Id.HasValue && db.EmployeeDistributionTasks_CheckIfInserted((int)WorksTypesEnum.ArchivingAndSaveing, eventId, branchId, true).First().Value == 0)
             {
+                
                 var AnotherBranch = db.Branches_SelectByPk(Branch.FKArchivingAndSaveingAnotherBranch_Id).FirstOrDefault();
-                if(AnotherBranch.FKArchivingAndSaveingEmployee_Id.HasValue)
-                db.EmployeeDistributionTasks_Insert(new ObjectParameter("id", typeof(int)), (int)WorksTypesEnum.ArchivingAndSaveing, AnotherBranch.FKArchivingAndSaveingEmployee_Id.Value, eventId, true, AnotherBranch.Id).First();
+                if (AnotherBranch.FKArchivingAndSaveingEmployee_Id.HasValue)
+                    db.EmployeeDistributionTasks_Insert(new ObjectParameter("id", typeof(int)), (int)WorksTypesEnum.ArchivingAndSaveing, AnotherBranch.FKArchivingAndSaveingEmployee_Id.Value, eventId, true, AnotherBranch.Id).First();
             }
 
         }

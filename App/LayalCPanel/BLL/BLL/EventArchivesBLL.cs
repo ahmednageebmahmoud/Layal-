@@ -77,31 +77,16 @@ namespace BLL.BLL
 
         private object DeleteDetail(EventArchivDetailVM c)
         {
-            try
-            {
                 db.EventArchivesDetails_Delete(c.Id, c.EventId, c.EventArchivId);
                 return new ResponseVM(RequestTypeEnum.Success, Token.Deleted, c);
-            }
-            catch (Exception ex)
-            {
-                return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
-            }
         }
 
         private object AddDetail(EventArchivDetailVM c)
         {
-            try
-            {
-
                 ObjectParameter Id = new ObjectParameter("Id", typeof(long));
                 db.EventArchivesDetails_Inserrt(Id, c.EventId, c.EventArchivId, c.MemoryId, c.MemoryType, c.PhotoStartName, c.PhotoNumberFrom, c.PhotoNumberTo, c.Notes, DateTime.Now);
                 c.Id = (long)Id.Value;
                 return new ResponseVM(RequestTypeEnum.Success, Token.Success, c);
-            }
-            catch (Exception ex)
-            {
-                return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
-            }
         }
 
         public object EventArvhivSaveChange(EventArchivVM c)

@@ -37,6 +37,26 @@ namespace BLL.Services
             }
         }
 
+        public static FileSaveVM SaveFileHttpBase(FileSaveVM file)
+        {
+            try
+            {
+
+
+                file.SavedPath = "Image" + Guid.NewGuid().ToString() + Path.GetExtension(file.File.FileName);
+
+                file.File.SaveAs(HttpContext.Current.Server.MapPath(file.ServerPathSave) + file.SavedPath);
+                file.SavedPath = file.ServerPathSave + file.SavedPath;
+                file.IsSaved = true;
+                return file;
+            }
+            catch (Exception ex)
+            {
+                file.IsSaved = false;
+                return file;
+            }
+        }
+
         //internal static FileSaveVM SaveFileBase(FileSaveVM file)
         //{
         //    try
@@ -67,7 +87,7 @@ namespace BLL.Services
 
             }
 
-        }
+            }
 
         public static void RemoveFiles(List<string> imagesRemove)
         {
@@ -76,9 +96,8 @@ namespace BLL.Services
                 foreach (var item in imagesRemove)
                 {
                     if(item!=null)
-                    RemoveFile(HttpContext.Current.Server.MapPath(item));
+                    RemoveFile(item);
                 }
-
             }
             catch (Exception ex)
             {

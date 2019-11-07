@@ -138,12 +138,22 @@ namespace BLL.BLL
 
         public object GetAlbumsTypes()
         {
-            var Result = db.AlbumTypes_SelectAll().Select(c => new AlbumTypeVM
+            var Result = db.Albums_SelectAll().GroupBy(c => new {
+                c.Id,
+                c.DescriptionAr,
+                c.DescriptionEn,
+                c.NameAr,
+                c.NameEn
+            }).Select(c => new AlbumVM
             {
-                Id = c.Id,
-                NameAr = c.NameAr,
-                NameEn = c.NameEn,
-            });
+                Id = c.Key.Id,
+                NameAr = c.Key.NameAr,
+                NameEn = c.Key.NameEn,
+                AlbumFiles = c.Where(e => !string.IsNullOrEmpty(e.FileUrl)).Select(v => new AlbumFileVM
+                {
+                    FileUrl= v.FileUrl
+                }).ToList()
+            }).OrderBy(c=> c.NameAr).ToList();
             return Result;
         }
 

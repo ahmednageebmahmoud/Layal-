@@ -260,12 +260,14 @@ namespace BLL.BLL
                 int Valid = db.Users_CheckFromActiveCode(c.Id, c.ActiveCode).First().Value;
                 if (Valid == 0)
                     return new ResponseVM(RequestTypeEnum.Error, Token.InvalidActiveCode, c);
+                else
+                    db.Users_ActiveEmail(c.Id, c.ActiveCode).ToList();
             }
 
             //Update Account Now
             db.Users_Update(c.Id, c.UserName, c.Email, c.PhoneNo, c.Address, c.CountryId, c.CityId, c.Password, c.LanguageId, c.DateOfBirth, c.IsActive, c.FullName, c.NationalityNumber, c.WebSite);
 
-
+            
 
             //Add WorksTypes if employee
             if (c.AccountTypeId == (int)AccountTypeEnum.Employee && c.WorkTypes != null && c.WorkTypes.Count > 0)
@@ -347,12 +349,21 @@ namespace BLL.BLL
             if (c.AccountTypeId == (int)AccountTypeEnum.BranchManager && db.Users_SelectByBranchId(c.BranchId, c.AccountTypeId).Count() > 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.CanNotDuplicateBranchManger, c);
 
-
+            //Insert User Now 
             ObjectParameter ID = new ObjectParameter("Id", typeof(long));
             db.Users_Insert(ID, c.UserName.Trim(), string.IsNullOrEmpty(c.Email) ? null: c.Email.Trim(), string.IsNullOrEmpty(c.PhoneNo)?null: c.PhoneNo.Trim(), c.AccountTypeId, c.Address, c.CountryId, c.CityId, c.Password, null, DateTime.Now, c.LanguageId, c.BranchId, c.EnquiryId, c.DateOfBirth, c.IsActive, c.FullName, c.NationalityNumber, c.WebSite);
             c.Id = (long)ID.Value;
 
-        
+            //Insert Work Types
+            if (c.AccountTypeId == (int)AccountTypeEnum.Employee && c.WorkTypes != null && c.WorkTypes.Count > 0)
+            {
+                c.WorkTypes.Where(v => v.Selected).ToList().ForEach(v =>
+                {
+                    db.EmployeesWorks_Insert(v.Id, c.Id);
+                });
+            }
+
+
             return new ResponseVM(RequestTypeEnum.Success, Token.Added, c);
         }
 
@@ -375,6 +386,7 @@ namespace BLL.BLL
                 IsActive = c.IsActive,
                 FullName = c.FullName,
                 WebSite = c.WebSite,
+                BranchId=c.FKPranch_Id.Value,
                 NationalityNumber = c.NationalityNumber,
 
                 City = new CityVM

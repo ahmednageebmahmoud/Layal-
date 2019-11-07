@@ -133,6 +133,7 @@
                         case RequestTypeEnum.sucess:
                             {
                                 event.IsFinshed = true;
+
                             } break;
                     }
                     SMSSweet.alert(d.data.Message, d.data.RequestType);

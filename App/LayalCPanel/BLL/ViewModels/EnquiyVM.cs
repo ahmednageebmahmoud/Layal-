@@ -56,5 +56,7 @@ namespace BLL.ViewModels
         public bool IsCreatedEvent { get;   set; }
         public bool IsCanBeAccess => this.UserLoggad.IsAdmin || this.BranchId == this.UserLoggad.BrId;
 
+        public EventVM Event { get;  set; }
+        public List<EnquiryPaymentVM> Payments { get; internal set; }
     }//endclass
 }

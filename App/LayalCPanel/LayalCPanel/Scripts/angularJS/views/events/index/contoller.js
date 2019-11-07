@@ -214,40 +214,10 @@
             priv.CanDisplay = true;
     };
 
-    //Show Event Employees
-    s.showEventEmployees = event => {
-        s.currentEventEmployees = [];
-        if(event.eventEmployees)
-        {
-            s.currentEventEmployees = event.eventEmployees;
-            bootstrapModelShow("eventEmployees");
-            return;
-        }
-
-        BlockingService.block();
-        eventsServ.getEventEmployees(event.Id).then(d => {
-            switch (d.data.RequestType) {
-                case RequestTypeEnum.sucess: {
-                    event.eventEmployees = d.data.Result;
-                    s.currentEventEmployees = event.eventEmployees;
-                    bootstrapModelShow("eventEmployees");
-                } break;
-                default:
-                    SMSSweet.alert(d.data.Message, d.data.RequestType);
-                    break;
-            }
-            co("P O S T - getEventEmployees", d);
-            BlockingService.unBlock();
-        }).catch(err => {
-            BlockingService.unBlock();
-            SMSSweet.alert(err.statusText, RequestTypeEnum.error);
-            co("E R R O R - getEventEmployees", err);
-        })
-    }
-
     //================= Other ======================
-    s.showCreateCustomSurveyModel = eve => {
-        debugger;
+    s.showCreateCustomSurveyModel = eve =>
+    {
+        
         let loading = BlockingService.generateLoding();
         loading.show();
         eventsServ.getSurveyQuestionsforUpdateEventSurvey(eve.Id).then(d => {
@@ -282,6 +252,7 @@
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
                     s.photographers = d.data.Result;
+                    s.cultPhotographersSelectedCount();
                     bootstrapModelShow("eventPhotographers");
 
                 } break;
@@ -299,7 +270,9 @@
         })
     };
 
-
+    s.cultPhotographersSelectedCount = () => {
+        s.photographersSelectedCount = s.photographers.filter(c=> c.IsSelected).length;
+    }
     //Call Functions
     s.getItems();
     s.getEvents();

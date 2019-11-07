@@ -1,4 +1,4 @@
-﻿@{
+﻿    @{
     ViewBag.Title = Token.AddUser;
     Layout = "~/Views/Shared/_Layout.cshtml";
     UsersPrivilegeVM Priv =
@@ -59,6 +59,7 @@
                                            class="form-control"
                                            ng-class="{'is-invalid':userFrm.userName.$invalid&&userFormSubmitErro}"
                                            ng-model="user.UserName"
+                                           ng-disabled="user.State==state.update"
                                            maxlength="50"
                                            ng-required="true" />
 
@@ -187,6 +188,7 @@
                                     <select class="form-control"
                                             serchbale
                                             name="country"
+                                            required
                                             ng-class="{'is-invalid':userFrm.emp.$invalid&&userFormSubmitErro}"
                                             ng-model="user.CountryId"
                                             ng-options="c.Id as c.CountryName for c in countries"></select>
@@ -199,6 +201,7 @@
                                     <select class="form-control"
                                             serchbale
                                             name="city"
+                                            required
                                             ng-class="{'is-invalid':userFrm.emp.$invalid&&userFormSubmitErro}"
                                             ng-model="user.CityId"
                                             ng-options="c.Id as c.CityName for c in cities|filterWithoutStaticItems:{'CountryId':user.CountryId}"></select>
@@ -215,6 +218,7 @@
                                     <select class="form-control"
                                             serchbale
                                             name="branch"
+                                            required
                                             ng-class="{'is-invalid':userFrm.branch.$invalid&&userFormSubmitErro}"
                                             ng-model="user.BranchId"
                                             ng-options="c.Id as c.BranchName for c in branches|filterWithoutStaticItems:{'CityId':user.CityId}"
@@ -292,7 +296,6 @@
                                                 <span></span>
                                             </label>
                                         </div>
-
                                     </div>
                             </div>
                         </div>

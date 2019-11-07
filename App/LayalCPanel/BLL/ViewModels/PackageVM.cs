@@ -23,7 +23,7 @@ namespace BLL.ViewModels
         public long WordNameId { get; set; }
         public long WordDescriptionId { get; set; }
         public List<PackageDetailVM> PackageDetails { get;   set; }
-        public AlbumTypeVM AlbumType { get; set; }
+        public AlbumVM AlbumType { get; set; }
 
         public decimal Price { get; set; }
         public decimal NamsArExtraPrice { get; set; }

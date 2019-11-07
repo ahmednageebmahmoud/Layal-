@@ -106,11 +106,11 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add Album Type.
+        ///   Looks up a localized string similar to Add Album.
         /// </summary>
-        public static string AddAlbumType {
+        public static string AddAlbum {
             get {
-                return ResourceManager.GetString("AddAlbumType", resourceCulture);
+                return ResourceManager.GetString("AddAlbum", resourceCulture);
             }
         }
         
@@ -178,6 +178,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added Date.
+        /// </summary>
+        public static string AddedDate {
+            get {
+                return ResourceManager.GetString("AddedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Added With Task Nmber.
         /// </summary>
         public static string AddedWithTaskumber {
@@ -210,6 +219,15 @@ namespace Resources {
         public static string AddEvents {
             get {
                 return ResourceManager.GetString("AddEvents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Album.
+        /// </summary>
+        public static string AddNewAlbum {
+            get {
+                return ResourceManager.GetString("AddNewAlbum", resourceCulture);
             }
         }
         
@@ -286,6 +304,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New Status.
+        /// </summary>
+        public static string AddNewStatus {
+            get {
+                return ResourceManager.GetString("AddNewStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New Task.
         /// </summary>
         public static string AddNewTask {
@@ -300,6 +327,15 @@ namespace Resources {
         public static string AddNewUser {
             get {
                 return ResourceManager.GetString("AddNewUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Or Update Album.
+        /// </summary>
+        public static string AddOrUpdateAlbum {
+            get {
+                return ResourceManager.GetString("AddOrUpdateAlbum", resourceCulture);
             }
         }
         
@@ -349,11 +385,11 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Album Types.
+        ///   Looks up a localized string similar to Albums.
         /// </summary>
-        public static string AlbumTypes {
+        public static string Albums {
             get {
-                return ResourceManager.GetString("AlbumTypes", resourceCulture);
+                return ResourceManager.GetString("Albums", resourceCulture);
             }
         }
         
@@ -660,6 +696,15 @@ namespace Resources {
         public static string CanNotUpdateBecuseClinetIsFillSurvey {
             get {
                 return ResourceManager.GetString("CanNotUpdateBecuseClinetIsFillSurvey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can Not Update Event Date Less Than Or Equle Current Date.
+        /// </summary>
+        public static string CanNotUpdateEventDateLessThanOrEquleCurrentDate {
+            get {
+                return ResourceManager.GetString("CanNotUpdateEventDateLessThanOrEquleCurrentDate", resourceCulture);
             }
         }
         
@@ -1047,6 +1092,15 @@ namespace Resources {
         public static string EnquiryIsNotFound {
             get {
                 return ResourceManager.GetString("EnquiryIsNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enquiry Not Have Deposit ... Mustbe insert Deposit First.
+        /// </summary>
+        public static string EnquiryNotHaveDeposit {
+            get {
+                return ResourceManager.GetString("EnquiryNotHaveDeposit", resourceCulture);
             }
         }
         
@@ -1443,6 +1497,15 @@ namespace Resources {
         public static string Id {
             get {
                 return ResourceManager.GetString("Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Images.
+        /// </summary>
+        public static string Images {
+            get {
+                return ResourceManager.GetString("Images", resourceCulture);
             }
         }
         
@@ -1852,6 +1915,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Arabic Name.
         /// </summary>
         public static string NameAr {
@@ -2221,6 +2293,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Photographers.
+        /// </summary>
+        public static string Photographers {
+            get {
+                return ResourceManager.GetString("Photographers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Photo Number From.
         /// </summary>
         public static string PhotoNumberFrom {
@@ -2392,6 +2473,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search In Photographers.
+        /// </summary>
+        public static string SearchInPhotographers {
+            get {
+                return ResourceManager.GetString("SearchInPhotographers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select.
         /// </summary>
         public static string Select {
@@ -2437,6 +2527,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Details And Finshe.
+        /// </summary>
+        public static string ShowDetailsAndFinshe {
+            get {
+                return ResourceManager.GetString("ShowDetailsAndFinshe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show More.
         /// </summary>
         public static string ShowMore {
@@ -2478,6 +2577,15 @@ namespace Resources {
         public static string SomeErrorHasBeen {
             get {
                 return ResourceManager.GetString("SomeErrorHasBeen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Som Files Not Saved.
+        /// </summary>
+        public static string SomFilesNotSaved {
+            get {
+                return ResourceManager.GetString("SomFilesNotSaved", resourceCulture);
             }
         }
         
@@ -2617,6 +2725,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This Event Date Is Not Comming.
+        /// </summary>
+        public static string ThisEventDateIsNotComming {
+            get {
+                return ResourceManager.GetString("ThisEventDateIsNotComming", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This Payment Is Closed.
         /// </summary>
         public static string ThisPaymentIsClosed {
@@ -2734,6 +2851,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update Album.
+        /// </summary>
+        public static string UpdateAlbum {
+            get {
+                return ResourceManager.GetString("UpdateAlbum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update Branch.
         /// </summary>
         public static string UpdateBranch {
@@ -2802,6 +2928,15 @@ namespace Resources {
         public static string UpdateUser {
             get {
                 return ResourceManager.GetString("UpdateUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload.
+        /// </summary>
+        public static string Upload {
+            get {
+                return ResourceManager.GetString("Upload", resourceCulture);
             }
         }
         

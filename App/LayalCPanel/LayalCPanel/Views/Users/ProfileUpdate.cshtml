@@ -47,6 +47,7 @@
                                            class="form-control"
                                            ng-class="{'is-invalid':userFrm.userName.$invalid&&userFormSubmitErro}"
                                            ng-model="user.UserName"
+                                           ng-disabled="true"
                                            maxlength="50"
                                            ng-required="true" />
 
@@ -130,12 +131,11 @@
                                            ng-class="{'is-invalid':userFrm.phoneNo.$invalid&&userFormSubmitErro}"
                                            class="form-control"
                                            ng-model="user.PhoneNo"
-                                           pattern="[0-9]{1,14}"
+                                           pattern="[0-9]{9,14}"
                                            ng-required="true" />
-                                    <small class="error " ng-if="userFrm.phoneNo.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
-
                                     <!--Errors:-->
-                                    <small class="error " ng-if="userFrm.phoneNumber.$invalid&&userFormSubmitErro">@Token.InvalidData</small>
+                                    <small class="error " ng-if="userFrm.phoneNo.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
+                                    <small class="error " ng-if="userFrm.phoneNo.$error.pattern&&userFormSubmitErro">@Token.InvalidData @Token.MinLengthCharIs 9</small>
                                 </div>
 
                             </div>
@@ -163,8 +163,10 @@
                                            name="dateOfBirth"
                                            ng-class="{'is-invalid':userFrm.dateOfBirth.$invalid&&userFormSubmitErro}"
                                            class="form-control "
-                                           ng-model="user.DateOfBirth" ng-required="true" />
-                                    <small class="error " ng-if="userFrm.phoneNo.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
+                                           ng-model="user.DateOfBirth" 
+                                           ng-required="true" />
+                                    <small class="error " ng-if="userFrm.dateOfBirth.$error.required&&userFormSubmitErro">@Token.FieldIsRequierd</small>
+                                    <small class="error " ng-if="userFrm.dateOfBirth.$error.date&&userFormSubmitErro">@Token.InvalidData</small>
                                 </div>
                             </div>
 

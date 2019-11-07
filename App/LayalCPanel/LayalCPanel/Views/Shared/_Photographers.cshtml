@@ -1,0 +1,39 @@
+﻿ 
+@{ 
+    UsersPrivilegeVM PrivUserPayments = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.UserPayments);
+}
+
+<table class="table sms-table ">
+     <thead>
+         <tr>
+             <th class="th-30"><span class="sms-sort-field">@Token.FullName</span></th>
+             <th class="th-30"><span class="sms-sort-field">@Token.AccountType</span></th>
+             <th class="th-30"><span class="sms-sort-field">@Token.AddedDate</span></th>
+             <th class="th-15"><span class="sms-sort-field">@Token.Operations</span></th>
+         </tr>
+     </thead>
+    <tbody>
+        <tr ng-repeat="x in photograohers">
+            <td>
+                <p><a href="/Users/UserInformation?id={{x.User.Id}}" class="kt-link kt-font-boldest">{{x.User.Name}}</a></p>
+            </td>
+            <td><span>{{x.User.AccountType.AccountTypeName}}</span></td>
+            <td><span>{{x.DateTime_Display}}</span></td>
+            <td>
+                @if (PrivUserPayments.CanEdit || PrivUserPayments.CanAdd || PrivUserPayments.CanDisplay)
+                {
+                    <a href="/UserPayments/Payments?id={{x.User.Id}}"
+                       ng-if="x.User.AccountType.Id==accountTypeEnum.Helper"
+                       title="@Token.Payments"
+                       class="btn btn-sm btn-clean btn-icon btn-icon-md" target="_blank"><i class="fas fa-hand-holding-usd"></i></a>
+                }
+
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+

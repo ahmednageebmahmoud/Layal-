@@ -61,21 +61,21 @@ namespace BLL.BLL
         /// <returns></returns>
         public bool ChakIefPhotographerAllowAccess(long eventId)
         {
-        //اذا كان الشخص الحالى مصور فـ يجب فقط التحقق ها يمكنة مشاهدة معلومات التنسيق ام لاء
-                return db.EventPhotographers_CheckCanBeAccess(this.UserLoggad.Id, eventId).First().Value >0;
+            //اذا كان الشخص الحالى مصور فـ يجب فقط التحقق ها يمكنة مشاهدة معلومات التنسيق ام لاء
+            return db.EventPhotographers_CheckCanBeAccess(this.UserLoggad.Id, eventId).First().Value > 0;
         }
 
         public object GetEventForCurrretnEmployee(long eventId, WorksTypesEnum workType)
         {
-            if(this.UserLoggad.IsPhotographerOrHelper)
+            if (this.UserLoggad.IsPhotographerOrHelper)
             {
-                if(!ChakIefPhotographerAllowAccess(eventId))
-                return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEvent);
+                if (!ChakIefPhotographerAllowAccess(eventId))
+                    return ResponseVM.Error(Token.YouCanNotAccessToThisEvent);
 
             }
             else
             if (!CheckAlloweAccess(eventId, workType))
-                return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEvent);
+                return ResponseVM.Error(Token.YouCanNotAccessToThisEvent);
 
             //switch (workType)
             //{
@@ -87,7 +87,7 @@ namespace BLL.BLL
             //             والفرع الاخر الى هوا فى الموظف المنتدب .. فقط بيضيف اسم الهارد الى حفظ فية 
             //             */
             //             if(db.Events_CheckFromDateEventIsFinshedBranchId(eventId, this.UserLoggad.BrId).First().Value==0)
-            //    return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEvent);
+            //    return ResponseVM.Error( Token.YouCanNotAccessToThisEvent);
             //        }
             //        break;
             //}
@@ -127,14 +127,14 @@ namespace BLL.BLL
             }
             catch (Exception ex)
             {
-                return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
+                return ResponseVM.Error(Token.SomeErrorHasBeen, ex);
             }
         }
 
 
         public void TaskFinshed(long eventId, WorksTypesEnum workTypeId)
         {
-           
+
             //Insert In History
             db.EventTaskStatusHistories_Insert(true, DateTime.Now, eventId, (int)workTypeId, this.UserLoggad.Id, (int)this.UserLoggad.AccountTypeId, this.UserLoggad.BrId);
 
@@ -156,15 +156,20 @@ namespace BLL.BLL
         {
             //التحقق من امكانية الوصول الى المناسبة
             if (!CheckAlloweAccess(eventId, workTypeId))
-                return new ResponseVM(RequestTypeEnum.Error, Token.YouCanNotAccessToThisEvent);
+                return ResponseVM.Error(Token.YouCanNotAccessToThisEvent);
 
             //التحقق ان هذة المهمة لم تنتهى بعد
             if (db.EventTaskStatusIsFinsed_CheckIfFinshed(eventId, (int)workTypeId).First().Value)
-                return new ResponseVM(RequestTypeEnum.Error, Token.ThisTaskIsFinshed);
+                return ResponseVM.Error(Token.ThisTaskIsFinshed);
+
+            var Event = db.Events_SelectInformation(eventId).FirstOrDefault();
+            //التحقق ان المناسبة موجودة
+            if (Event == null)
+                return ResponseVM.Error($"{Token.Event} : {Token.NotFound}");
 
             //التحقق لان المناسبة لم تغلق
-            if (new EnquiresBLL().CheckIfEnquiryClosed(eventId))
-                return new ResponseVM(RequestTypeEnum.Error, Token.EventIsClosed);
+            if (Event.IsClosed.HasValue && Event.IsClosed.Value)
+                return ResponseVM.Error(Token.EventIsClosed);
 
             switch (workTypeId)
             {
@@ -175,11 +180,16 @@ namespace BLL.BLL
                 case WorksTypesEnum.Coordination:
                     {
                         //التحقق ان المناسبة لم تبداء فى حالة الاعداد والتنسيق فقط
-                        if (db.Events_CheckFromDateEventIsFinshed(eventId, DateTime.Now).First().Value > 0)
-                            return new ResponseVM(RequestTypeEnum.Error, Token.ThisEventDateIsFinshed);
+                        if (DateTime.Now > Event.EventDateTime)
+                            return ResponseVM.Error(Token.ThisEventDateIsFinshed);
                     }
                     break;
                 case WorksTypesEnum.Implementation:
+                    {
+                        //لا يمكن التحديث اذا كان تاريخ المناسبة لم ياتى بعد
+                        if (Event.EventDateTime > DateTime.Now)
+                            return ResponseVM.Error(Token.ThisEventDateIsNotComming);
+                    }
                     break;
                 case WorksTypesEnum.ArchivingAndSaveing:
                     break;
@@ -225,7 +235,7 @@ namespace BLL.BLL
                     break;
                 case WorksTypesEnum.ArchivingAndSaveing:
                     //لا ننهى هذة المهمة الا التاكد ان الفرع الاخر بة شخص ماء قد قام بـ انهاء المهمة
-                    if (db.EventTaskStatusHistories_CheckIfTaskFinshedWithBranch(eventId,this.UserLoggad.BrId ,(int)workTypeId,false).First().Value)
+                    if (db.EventTaskStatusHistories_CheckIfTaskFinshedWithBranch(eventId, this.UserLoggad.BrId, (int)workTypeId, false).First().Value)
                     {
                         db.EventTaskStatusIsFinshed_Update(eventId, true, (int)workTypeId);
                     }
@@ -319,7 +329,7 @@ namespace BLL.BLL
             }
         }
 
-      
+
 
         private object Delete(EventCoordinationVM c)
         {

@@ -75,7 +75,8 @@
 
 
                     if (s.userFOP && s.userFOP.paging)
-                        s.userFOP = new FOP(lengthWithOutDeleted(s.users), s.userFOP.paging.currentPage,
+                        s.userFOP = new FOP(lengthWithOutDeleted(s.users),
+                           s.userFOP.paging.currentPage,
                             s.userFOP.paging.limitPagesTake,
                             s.userFOP.paging.limitPagesSkip);
                     else

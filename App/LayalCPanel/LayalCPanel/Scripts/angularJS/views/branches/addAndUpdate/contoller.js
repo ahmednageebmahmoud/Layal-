@@ -2,6 +2,7 @@
     s.state = StateEnum;
     s.branches = [];
     s.branchFOP = {};
+    s.branchFormSubmitErro = false;
     var branchId = getQueryStringValue("id");
     s.branch = {
         Id: branchId,
@@ -171,14 +172,26 @@
     };
 
     s.checkAllowDisplay = (priv) => {
-
         if (!priv.CanEdit && !priv.CanDelete)
             priv.CanDisplay = false;
         else
             priv.CanDisplay = true;
-
-
     };
+
+    s.reset = () => {
+        s.branchFormSubmitErro = null;
+
+        s.branch = {
+            Id: branchId,
+            State: branchId ? StateEnum.update : StateEnum.create,
+            CountryId: null,
+            CityId: null,
+            ArchivingAndSaveingEmployeeId: null,
+            ImplementationEmployeeId: null,
+            CoordinationEmployeeId: null,
+            ArchivingAndSaveingAnotherBranchId: null
+        };
+    }
 
 
     //Call Functions

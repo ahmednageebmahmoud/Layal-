@@ -1,59 +1,9 @@
 ﻿ngApp.controller('enquiresCtrl', ['$scope', '$http', 'enquiresServ', function (s, h, enquiresServ) {
     var enquiyId = getQueryStringValue("id");
+    s.accountTypeEnum = AccountTypesEnum;
     s.isFromEnquiryPage = getQueryStringValue("q")=='true';
 
-
-    s.countries = [{
-        Id: null,
-        CountryName: Token.select
-    }];
-    s.cities = [{
-        Id: null,
-        CityName: Token.select,
-        CountryId: null
-    }];
-    s.enquiryTypes = [{
-        Id: null,
-        EnquiryTypeName: Token.select
-    }];
-
-    s.branches = [{
-        Id: null,
-        BranchName: Token.select,
-        CityId: null
-    }];
-
-
     //============= G E T =================
-
-    //get items
-    s.getItems = () => {
-
-        let loading = BlockingService.generateLoding();
-        loading.show();
-        enquiresServ.getItems().then(d => {
-            loading.hide();
-            switch (d.data.RequestType) {
-                case RequestTypeEnum.sucess: {
-                    s.countries = s.countries.concat(d.data.Result.Countries);
-                    s.cities = s.cities.concat(d.data.Result.Cities);
-                    s.enquiryTypes = s.enquiryTypes.concat(d.data.Result.EnquiryTypes);;
-                    s.branches = s.branches.concat(d.data.Result.Branches);;
-
-                } break;
-                case RequestTypeEnum.error:
-                case RequestTypeEnum.warning:
-                case RequestTypeEnum.info:
-                    SMSSweet.alert(d.data.Message, d.data.RequestType);
-                    break;
-            }
-            co("G E T - getItems", d);
-        }).catch(err => {
-            loading.hide();
-            SMSSweet.alert(err.statusText, RequestTypeEnum.error);
-            co("E R R O R - getItems", err);
-        })
-    };
 
     //Get Enquires
     s.getEnquiy = () => {
@@ -68,10 +18,11 @@
                 case RequestTypeEnum.sucess: {
                     s.enquiry = d.data.Result.Enquiry;
                     s.crm = d.data.Result.CRM;
-                    s.event = d.data.Result.Event;
-                    s.paymentsInformations = d.data.Result.PaymentsInformations;
-                    s.package = d.data.Result.Package;
-                    s.EventTaskStatusIsFinshed = s.event.EventWorkStatusIsFinshed;
+                    s.event = s.enquiry.Event;
+                    s.paymentsInformations = s.enquiry.Payments;
+                    s.package = s.event.Package;
+                    s.EventTaskStatusIsFinshed =s.event.EventWorkStatusIsFinshed;
+                    s.photograohers = s.event.Photographers;
                     s.enquiry.State = StateEnum.update;
 
                     setTimeout(() => {
@@ -123,7 +74,5 @@
         },null,LangIsEn?'Ara you sure close this enquiry and following it as payments process and event ?':'هل انت متاكد من اغلاق الاستفسار وكل ما يتتبعة من عمليات دفع والمناسبة ؟');
     }
 
-    //============= Saves =================
-    // s.getItems();
     s.getEnquiy();
 }]);

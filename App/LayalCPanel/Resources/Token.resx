@@ -132,8 +132,8 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="AddAlbumType" xml:space="preserve">
-    <value>Add Album Type</value>
+  <data name="AddAlbum" xml:space="preserve">
+    <value>Add Album</value>
   </data>
   <data name="AddAndUpdateCoordinations" xml:space="preserve">
     <value>Add And Update Task Coordinations</value>
@@ -204,8 +204,8 @@
   <data name="Album" xml:space="preserve">
     <value>Album</value>
   </data>
-  <data name="AlbumTypes" xml:space="preserve">
-    <value>Album Types</value>
+  <data name="Albums" xml:space="preserve">
+    <value>Albums</value>
   </data>
   <data name="Amount" xml:space="preserve">
     <value>Amount</value>
@@ -1109,5 +1109,50 @@
   </data>
   <data name="TransmissionAndDelivery" xml:space="preserve">
     <value>Transmission And Delivery</value>
+  </data>
+  <data name="AddNewStatus" xml:space="preserve">
+    <value>Add New Status</value>
+  </data>
+  <data name="EnquiryNotHaveDeposit" xml:space="preserve">
+    <value>Enquiry Not Have Deposit ... Mustbe insert Deposit First</value>
+  </data>
+  <data name="Photographers" xml:space="preserve">
+    <value>Photographers</value>
+  </data>
+  <data name="SearchInPhotographers" xml:space="preserve">
+    <value>Search In Photographers</value>
+  </data>
+  <data name="ThisEventDateIsNotComming" xml:space="preserve">
+    <value>This Event Date Is Not Comming</value>
+  </data>
+  <data name="CanNotUpdateEventDateLessThanOrEquleCurrentDate" xml:space="preserve">
+    <value>Can Not Update Event Date Less Than Or Equle Current Date</value>
+  </data>
+  <data name="ShowDetailsAndFinshe" xml:space="preserve">
+    <value>Show Details And Finshe</value>
+  </data>
+  <data name="AddedDate" xml:space="preserve">
+    <value>Added Date</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="SomFilesNotSaved" xml:space="preserve">
+    <value>Som Files Not Saved</value>
+  </data>
+  <data name="AddNewAlbum" xml:space="preserve">
+    <value>Add New Album</value>
+  </data>
+  <data name="AddOrUpdateAlbum" xml:space="preserve">
+    <value>Add Or Update Album</value>
+  </data>
+  <data name="UpdateAlbum" xml:space="preserve">
+    <value>Update Album</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Upload</value>
   </data>
 </root>

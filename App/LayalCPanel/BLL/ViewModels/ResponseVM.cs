@@ -1,4 +1,5 @@
 ﻿using BLL.Enums;
+using Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace BLL.ViewModels
             this.RequestType = requestType;
             this.Message = message;
             this.DevMessage = ex.Message;
-            this.DevInnerException =     ex.InnerException==null?null: ex.InnerException.Message;
+            this.DevInnerException = ex.InnerException == null ? null : ex.InnerException.Message;
         }
         public ResponseVM(RequestTypeEnum requestType, string message)
         {
@@ -38,5 +39,43 @@ namespace BLL.ViewModels
             this.Message = message;
 
         }
+        public ResponseVM()
+        {
+
+        }
+        /// <summary>
+        /// Response Error
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        static public ResponseVM Error(string message)
+        {
+            return new ResponseVM
+            {
+                RequestType = RequestTypeEnum.Error,
+                Message = message,
+            };
+        }
+
+        internal static ResponseVM Error(string message, Exception ex)
+        {
+            return new ResponseVM
+            {
+                RequestType = RequestTypeEnum.Error,
+                Message = message,
+                DevMessage = ex.Message,
+                DevInnerException = ex.InnerException == null ? null : ex.InnerException.Message,
+            };
+        }
+        internal static ResponseVM Success(object data)
+        {
+            return new ResponseVM
+            {
+                RequestType = RequestTypeEnum.Success,
+                Message = Token.Success,
+                Result=data
+            };
+        }
+        
     }
 }

@@ -660,8 +660,8 @@
   <data name="AddAlbumType" xml:space="preserve">
     <value>اضافة نوع البوم </value>
   </data>
-  <data name="AlbumTypes" xml:space="preserve">
-    <value>انوع الالبوم</value>
+  <data name="Albums" xml:space="preserve">
+    <value>الالبومات</value>
   </data>
   <data name="PackageInputTypes" xml:space="preserve">
     <value>انواع مدخلات الباكيجات</value>
@@ -1118,5 +1118,53 @@
   </data>
   <data name="TransmissionAndDelivery" xml:space="preserve">
     <value>الارسال والتسليم</value>
+  </data>
+  <data name="AddNewStatus" xml:space="preserve">
+    <value>اضافة حالة جديدة</value>
+  </data>
+  <data name="EnquiryNotHaveDeposit" xml:space="preserve">
+    <value>الاستفسار لا يوجد بة اى عربون .. يجب اضافة عربون اولا قبل اضافة اى دفعات</value>
+  </data>
+  <data name="Photographers" xml:space="preserve">
+    <value>المصورين</value>
+  </data>
+  <data name="SearchInPhotographers" xml:space="preserve">
+    <value>ابحث فى المصورين</value>
+  </data>
+  <data name="ThisEventDateIsNotComming" xml:space="preserve">
+    <value>تاريخ المناسبة لم ياتى بعد</value>
+  </data>
+  <data name="CanNotUpdateEventDateLessThanOrEquleCurrentDate" xml:space="preserve">
+    <value>لا يمكن تحديث تاريخ المناسبة بـ تاريخ اقل من او يساوى التاريخ الحالى</value>
+  </data>
+  <data name="ShowDetailsAndFinshe" xml:space="preserve">
+    <value>مشاهدة التفاصيل والانهاء</value>
+  </data>
+  <data name="AddedDate" xml:space="preserve">
+    <value>تاريخ الاضافة</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SomFilesNotSaved" xml:space="preserve">
+    <value>هناك بعض الصور لم نتمكن من حفظها</value>
+  </data>
+  <data name="AddNewAlbum" xml:space="preserve">
+    <value>اضافة البوم جديد</value>
+  </data>
+  <data name="AddOrUpdateAlbum" xml:space="preserve">
+    <value>اضافة او تحديث الالبوم</value>
+  </data>
+  <data name="UpdateAlbum" xml:space="preserve">
+    <value>تحديث الالبوم</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>الصور</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>تحميل ملفات</value>
   </data>
 </root>

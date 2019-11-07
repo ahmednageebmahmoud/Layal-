@@ -16,5 +16,7 @@ namespace BLL.ViewModels
         public bool IsSelected { get; set; }
         public DateTime? DateTime { get; set; }
         public string DateTime_Display => DateService.GetDateTimeAr(this.DateTime);
+
+        public UserVM User { get; internal set; }
     }
 }

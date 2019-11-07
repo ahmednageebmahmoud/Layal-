@@ -172,7 +172,7 @@
                                المدير فقط هوا الىيقدر يحول الاستفسار من فرع الى آخر 
                                 ولذللك نقل الدولة والمدية لاننهم مرتبطين مع الفرع 
                                 -->
-                                <div class="form-group  row" ng-if="enquiry.State==state.create||CurrentAdmin">
+                                <div class="form-group  row" ng-if="enquiry.State==state.create||@CurrentAdmin">
                                     <!--Country-->          
                                     <label class="col-form-label col-lg-2">@Token.Country</label>
                                     <div class="col-lg-4 form-group-sub">
@@ -204,8 +204,8 @@
                             <!--R O W 4-->
                             <div class="form-group  row">
                                 <!--Branches-->
-                                <label class="col-form-label col-lg-2" ng-if="enquiry.State==state.create||CurrentAdmin">@Token.Branch</label>
-                                <div class="col-lg-4 form-group-sub" ng-if="enquiry.State==state.create||CurrentAdmin">
+                                <label class="col-form-label col-lg-2" ng-if="enquiry.State==state.create||@CurrentAdmin">@Token.Branch</label>
+                                <div class="col-lg-4 form-group-sub" ng-if="enquiry.State==state.create||@CurrentAdmin">
                                     <select class="form-control"
                                             serchbale
                                             name="branch"

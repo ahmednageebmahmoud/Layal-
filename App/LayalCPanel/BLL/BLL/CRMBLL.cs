@@ -92,7 +92,7 @@ namespace BLL.BLL
                 StatusName = "بانهاء";
             else
                 StatusName = "بالغاء انهاء";
-            return string.Format("لفد قام {0} احمد {1} مهمه {2}", fullName, StatusName, workTypeNameAr);
+            return string.Format("لفد قام {0}  {1} مهمه {2}", fullName, StatusName, workTypeNameAr);
         }
 
 

@@ -17,7 +17,7 @@ namespace BLL.BLL
 
         public long Add(EnquiryPaymentVM c, string imagePath)
         {
-           
+
             ObjectParameter ID = new ObjectParameter("Id", typeof(long));
             db.EnquiryPayments_Insert(ID, c.Amount, c.IsDeposit, c.IsBankTransfer, imagePath, c.IsAcceptFromManger, DateTime.Now, c.EnquiryId, this.UserLoggad.Id);
 
@@ -38,7 +38,7 @@ namespace BLL.BLL
             if (c.IsBankTransfer)
             {
                 //اذا هى حوالة بنكية 
-                if (c.IsAcceptFromManger == true)
+                if (this.UserLoggad.IsAdmin)
                 {
                     //ارسال اشعار للبرنش ولا داعى ارسل للمدير لان المدير هوا الذى قد ضافة 
                     Notify.DescriptionAr = $"لقد قام المدير  باضافة عملية دفع عن طريق حولة بنكية وقيمتها { c.Amount}";
@@ -63,7 +63,7 @@ namespace BLL.BLL
             else
             {
                 //اذا هى دفع كاش
-                if (this.AdminId == this.UserLoggad.Id)
+                if (this.UserLoggad.IsAdmin)
                 {
                     //ارسال اشعار للبرانش من اجل اعلامة ان المدير قام باضفة عملة دفع كاش
                     Notify.DescriptionAr = $"لقد قام المدير  باضافة عملية دفع عن طريق دفع نقدا وقيمتها { c.Amount}";
@@ -115,6 +115,9 @@ namespace BLL.BLL
             if (CheckIfEnquiryClosed(c.EnquiryId))
                 return new ResponseVM(RequestTypeEnum.Error, Token.EnquiryIsClosed);
 
+            //يجب قبل اضافة اى دفعة التاكد ان المستخدم قد دفع عربون اولا
+            if (c.IsDeposit = false && !db.EnquiryPayments_CheckIfPaymentedDeposit(c.EnquiryId).Any(b => b.Value))
+                return ResponseVM.Error(Token.EnquiryNotHaveDeposit);
             if (c.IsBankTransfer)
             {
 
@@ -151,7 +154,7 @@ namespace BLL.BLL
                     IsBankTransfer = false,
                     EnquiryId = c.EnquiryId,
                     IsAcceptFromManger = false,
-                    BranchId=c.BranchId
+                    BranchId = c.BranchId
                 }, null);
             }
 
@@ -193,7 +196,7 @@ namespace BLL.BLL
 
         public List<EnquiryPaymentVM> GetPaymentsInformations(long enquiryId)
         {
-            return  db.EnquiryPayments_SelectByEnquiryId(enquiryId).Select(c => new EnquiryPaymentVM
+            return db.EnquiryPayments_SelectByEnquiryId(enquiryId).Select(c => new EnquiryPaymentVM
             {
                 Id = c.Id,
                 Amount = c.Amount,

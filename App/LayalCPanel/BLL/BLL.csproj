@@ -139,7 +139,7 @@
     <Compile Include="BLL\EnquiryStatusBLL.cs" />
     <Compile Include="BLL\PackagesDetailBLL.cs" />
     <Compile Include="BLL\PackagesBLL.cs" />
-    <Compile Include="BLL\AlbumTypesBLL.cs" />
+    <Compile Include="BLL\AlbumsBLL.cs" />
     <Compile Include="BLL\SocialAccountTypesBLL.cs" />
     <Compile Include="BLL\PrintNamesTypesBLL.cs" />
     <Compile Include="BLL\NotificationsBLL.cs" />
@@ -165,7 +165,8 @@
     <Compile Include="SignalAr\UserHub.cs" />
     <Compile Include="ViewModels\AccessTokenVM.cs" />
     <Compile Include="ViewModels\AccountTypeVM.cs" />
-    <Compile Include="ViewModels\AlbumTypeVM.cs" />
+    <Compile Include="ViewModels\AlbumFileVM.cs" />
+    <Compile Include="ViewModels\AlbumVM.cs" />
     <Compile Include="ViewModels\BasicVM.cs" />
     <Compile Include="ViewModels\BranchVM.cs" />
     <Compile Include="ViewModels\CityVM.cs" />

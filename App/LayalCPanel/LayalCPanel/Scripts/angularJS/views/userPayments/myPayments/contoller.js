@@ -18,7 +18,7 @@
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
                     s.skip += s.take;
-                    s.paymentsInformations = s.paymentsInformations.concat(d.data.Result);
+                    s.paymentsInformations = s.paymentsInformations.concat(d.data.Result.PaymentsInformations);
 
                     if (s.paymentsInformationFOP && s.paymentsInformationFOP.paging)
                         s.paymentsInformationFOP = new FOP(s.paymentsInformations.length, s.paymentsInformationFOP.paging.currentPage,

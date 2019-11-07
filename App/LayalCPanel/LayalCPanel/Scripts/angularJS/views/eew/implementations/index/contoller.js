@@ -132,7 +132,7 @@
                     switch (d.data.RequestType) {
                         case RequestTypeEnum.sucess:
                             {
-                                event.IsFinshed = true;
+                                event.EventWorkStatusIsFinshed.Implementation = true;
                             } break;
                     }
                     SMSSweet.alert(d.data.Message, d.data.RequestType);

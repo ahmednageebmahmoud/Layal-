@@ -63,7 +63,7 @@ namespace BLL.Enums
         PrintNamesTypes = 11,
         Events = 12,
         Packages = 14,
-        AlbumTypes = 15,
+        Albums = 15,
         PackageInputTypes = 16,
         SocialAccountTypes = 17,
         UserPayments = 18,

@@ -45,8 +45,17 @@ namespace BLL.ViewModels
         public PrintNamesTypeVM PrintNameType { get; set; }
         public string LogoFileName { get; set; }
         public string ClendarEventId { get; set; }
-        public bool IsAllowSurvey => DateTime.Now > this.EventDateTime &&
-         DateTime.Now < this.EventDateTime.AddMonths(1);
+        public bool IsAllowSurvey
+        {
+            get
+            {
+                if (this.EventWorkStatusIsFinshed == null || !this.EventWorkStatusIsFinshed.DataPerfection.HasValue || !this.EventWorkStatusIsFinshed.DataPerfection.Value)
+                    return false;
+                if (this.EventDateTime.AddMonths(1) > DateTime.Now)
+                    return false;
+                return true;
+            }
+        }
 
 
 
@@ -103,14 +112,17 @@ namespace BLL.ViewModels
         public EventWorkStatusVM CurrentWorkStatus { get; set; }
         public List<EventWorkStatusVM> EventWorksStatus { get; set; } = new List<EventWorkStatusVM>();
         public EventWorksStatusIsFinshedVM EventWorkStatusIsFinshed { get; set; }
-        public decimal NamesPrintingPrice { get;   set; }
+        public decimal NamesPrintingPrice { get; set; }
 
         /// <summary>
         /// هناك بعض الحالات التى ينتهى فييها التاسك على اكثر من مرحلة 
         /// مثلا فى عملية الارشفة والحفظ قد تنتهى التاسك من الفرع الاول ولم تنتهى فى الفرع التانى 
         /// وحينها نتحقق بان المستخدم الحالى انهىء التاسك بتاعة
         /// </summary>
-        public EventWorksStatusIsFinshedVM EventWorkStatusIsFinshedByCurrentUser { get {
+        public EventWorksStatusIsFinshedVM EventWorkStatusIsFinshedByCurrentUser
+        {
+            get
+            {
 
                 if (this.EventWorksStatus.Count == 0)
                     return new EventWorksStatusIsFinshedVM();
@@ -121,12 +133,35 @@ namespace BLL.ViewModels
                      v.UserId == this.UserLoggad.Id) ? this.EventWorksStatus.LastOrDefault(v => v.WorkTypeId == WorksTypesEnum.ArchivingAndSaveing &&
                       v.UserId == this.UserLoggad.Id).IsFinshed : false
                 };
-            } }
+            }
+        }
 
 
         /// <summary>
         /// معنى ذالك ان المستخدم الحالى هوا من نفس الفرع الخاص بـ المناسبة
         /// </summary>
         public bool IsCurrentUserSameBranch => this.UserLoggad.BrId == this.BranchId;
+
+
+        public bool IsllowUpdatePhotographers
+        {
+            get
+
+            {
+                //اذا محدد الاغلاق بةداتا او الداتا بـ ترو اذا لا يمكنة تحديث المصورين
+                if (this.IsClosed.HasValue && this.IsClosed.Value)
+                    return false;
+                //اذا لم يدفع فلا يمكنة تحديث المصورين
+                if (!this.IsPayment.HasValue || !this.IsPayment.Value)
+                    return false;
+
+                if (this.EventWorkStatusIsFinshed == null || !this.EventWorkStatusIsFinshed.DataPerfection.HasValue || !this.EventWorkStatusIsFinshed.DataPerfection.Value)
+                    return false;
+
+                return true;
+            }
+        }
+
+        public object Photographers { get; internal set; }
     }//end class
 }

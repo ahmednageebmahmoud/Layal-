@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Layal Documentation</title>
+
+    <link rel="stylesheet" href="C:/Users/Sezer/Desktop/Analisys/scripts/bootstrap-rtl/bootstrap.min.css">
+    <link rel="stylesheet" href="C:/Users/Sezer/Desktop/Analisys/css/css.css">
+</head>
+
+<body id="accordion">
+    <div class="row">
+        <!--Menu-->
+        <div class="col-lg-2">
+            <ul class="">
+                <li class="active">
+                    <label data-toggle="collapse" data-target="#userUl">المستخدمين</label>
+                    <ul class="collapse " id="userUl">
+                        <li><a href="#users-login " onclick="updateImage('/images/users/login/0.png')"
+                                data-toggle="collapse" data-target="#users-login">تسجيل الدخول</a></li>
+                        <li><a href="#users-add" data-toggle="collapse" data-target="#users-add"
+                                onclick="updateImage('/images/users/add/0.jpg')">اضافة</a></li>
+                        <li><a href="#users-update" data-toggle="collapse" data-target="#users-update"
+                                onclick="updateImage('/images/users/update/0.jpg')">تحديث</a>
+                        </li>
+                        <li><a href="#users-list" data-toggle="collapse" data-target="#users-list"
+                                onclick="updateImage('/images/users/list/0.jpg')">العرض</a></li>
+                        <li><a href="#users-privileges" data-toggle="collapse" data-target="#users-privileges"
+                                onclick="updateImage('/images/users/privileges/0.jpg')">امتيازات
+                                صفحات المستخدمين</a></li>
+
+                        <li><a href="#users-payments" data-toggle="collapse" data-target="#users-payments"
+                                onclick="updateImage('/images/users/userPayments/0.jpg')">
+                                مدفوعات الموظفين </a></li>
+                    </ul>
+                </li>
+                <li>
+                    <label data-toggle="collapse" data-target="#countryUl">الدول</label>
+                    <ul class="collapse " id="countryUl">
+                        <li><a href="#countries-add" data-toggle="collapse" data-target="#countries-add"
+                                onclick="updateImage('/images/countries/add/0.jpg')">اضافة</a>
+                        </li>
+                        <li><a href="#countries-update" data-toggle="collapse" data-target="#countries-update"
+                                onclick="updateImage('/images/countries/update/0.jpg')">تحديث</a>
+                        </li>
+                        <li><a href="#countries-list" data-toggle="collapse" data-target="#countries-list"
+                                onclick="updateImage('/images/countries/list/0.jpg')">العرض</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <label data-toggle="collapse" data-target="#branchUl">الفروع</label>
+                    <ul class="collapse  " id="branchUl">
+
+                        <li><a href="#branches-add" data-toggle="collapse" data-target="#branches-add"
+                                onclick="updateImage('/images/branches/add/0.jpg')">اضافة</a></li>
+                        <li><a href="#branches-update" data-toggle="collapse" data-target="#branches-update"
+                                onclick="updateImage('/images/branches/update/0.jpg')">تحديث</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--الاستفسارات-->
+                <li>
+                    <label data-toggle="collapse" data-target="#enquiryUl">الاستفسارات</label>
+                    <ul class="collapse" id="enquiryUl">
+                        <!--انواع الاستفسارات-->
+                        <li>
+                            <label data-toggle="collapse" data-target="enquiryTypeUl">انواع الاستفسارات</label>
+                            <ul>
+                                <li><a href="#enquiry-type-add" data-toggle="collapse" data-target="#enquiry-type-add"
+                                        onclick="updateImage('/images/enquires/enquiryTypes/add/0.jpg')">اضافة</a></li>
+                                <li><a href="#enquiry-type-update" data-toggle="collapse"
+                                        data-target="#enquiry-type-update"
+                                        onclick="updateImage('/images/enquires/enquiryTypes/update/0.jpg')">تحديث</a>
+                                </li>
+                                <li><a href="#enquiry-type-delete" data-toggle="collapse"
+                                        data-target="#enquiry-type-delete"
+                                        onclick="updateImage('/images/enquires/enquiryTypes/delete/0.jpg')">حذف</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#enquires-add" data-toggle="collapse" data-target="#enquires-add"
+                                onclick="updateImage('/images/enquires/add/0.jpg')">اضافة</a></li>
+                        <li><a href="#enquires-update" data-toggle="collapse" data-target="#enquires-update"
+                                onclick="updateImage('/images/enquires/add/0.jpg')">تحديث</a>
+                        </li>
+                        <li><a href="#enquires-list" data-toggle="collapse" data-target="#enquires-list"
+                                onclick="updateImage('/images/enquires/list/0.jpg')">العرض</a>
+                        </li>
+                        <li><a href="#enquires-information" data-toggle="collapse" data-target="#enquires-information"
+                                onclick="updateImage('/images/enquires/information/0.jpg')">بيانات الاستفسار </a>
+                        <li><a href="#enquires-status" data-toggle="collapse" data-target="#enquires-status"
+                                onclick="updateImage('/images/enquires/status/0.jpg')">حالات الطلب</a>
+                        </li>
+                        <li><a href="#enquires-payments" data-toggle="collapse" data-target="#enquires-payments"
+                                onclick="updateImage('/images/enquires/payments/0.jpg')">المدفوعات</a>
+                        </li>
+                        <li><a href="#enquires-addclinetaccount" data-toggle="collapse"
+                                data-target="#enquires-addclinetaccount"
+                                onclick="updateImage('/images/enquires/addClinetAccount/0.jpg')">اضافة حساب العميل</a>
+                        </li>
+                        <li><a href="#enquires-addEvent" data-toggle="collapse" data-target="#enquires-addEvent"
+                                onclick="updateImage('/images/enquires/addEvent/0.jpg')">اضافة مناسبة</a>
+                        </li>
+
+                </li>
+            </ul>
+            </li>
+            <!--المناسبات-->
+            <li>
+                <label data-toggle="collapse" data-target="#eventUl">المناسبات</label>
+                <ul class="collapse" id="eventUl">
+                    <li>
+                        <label data-toggle="collapse"></label>الباكجات</label>
+                        <ul>
+                            <li><a href="#events-packages-albums" data-toggle="collapse"
+                                    data-target="#events-packages-albums"
+                                    onclick="updateImage('/images/events/packages/albums/0.jpg')">الالبومات</a></li>
+                            <li><a href="#event-package-inputTypes" data-toggle="collapse"
+                                    data-target="#event-package-inputTypes"
+                                    onclick="updateImage('/images/events/packages/inputTypes/0.jpg')">انواع مدخلات
+                                    الباكجات</a>
+                            </li>
+                            <li><a href="#events-packages" data-toggle="collapse" data-target="#events-packages"
+                                    onclick="updateImage('/images/events/packages/0.jpg')">الباكجات</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#evens-printTypes" data-toggle="collapse" data-target="#evens-printTypes"
+                            onclick="updateImage('/images/events/printTypes/0.jpg')">انواع حفر الاسماء </a>
+                    </li>
+                    <li><a href="#enquires-addEvent" data-toggle="collapse" data-target="#enquires-addEvent"
+                            onclick="updateImage('/images/enquires/addEvent/0.jpg')">اضاافة مناسبة </a>
+                    </li>
+                    <li><a href="#events-update" data-toggle="collapse" data-target="#events-update"
+                            onclick="updateImage('/images/events/update/0.jpg')">تحديث مناسبة </a>
+                    </li>
+                    <li><a href="#events-task-coordinations" data-toggle="collapse"
+                            data-target="#events-task-coordinations"
+                            onclick="updateImage('/images/events/tasks/coordinations/0.jpg')"> مهمة الاعداد والتنسيق
+                        </a>
+                    </li>
+                    <li><a href="#events-task-photographers" data-toggle="collapse"
+                            data-target="#events-task-photographers"
+                            onclick="updateImage('/images/events/tasks/photographers/0.jpg')"> مصورين المناسبة </a>
+                    </li>
+                    <li><a href="#events-task-distributionOfWork" data-toggle="collapse"
+                            data-target="#events-task-distributionOfWork"
+                            onclick="updateImage('/images/events/tasks/distributionOfWork/0.jpg')"> توزيع اوامر العمل
+                            على الموظفين </a>
+                    </li>
+
+                    <li><a href="#events-task-impementaion" data-toggle="collapse"
+                            data-target="#events-task-impementaion"
+                            onclick="updateImage('/images/events/tasks/impementaion/0.jpg')">مهمة التنفيذ </a>
+                    </li>
+
+                    <li><a href="#events-task-archivingAndSaveing" data-toggle="collapse"
+                            data-target="#events-task-archivingAndSavein"
+                            onclick="updateImage('/images/events/tasks/archivingAndSaveing/0.jpg')">مهمة الارشفة والحفظ
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            </ul>
+        </div>
+
+        <!--Content-->
+        <div class="col-lg-5 tab-content">
+            <!--Users-->
+            <!--User Login-->
+            <div id="users-login" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        يتم تسجيل الدخول بواسطة
+                        <u updae-image data-new-image="/users/login/1.png">اسم
+                            المستخدم</u>
+                        و
+                        <u updae-image data-new-image="/users/login/2.png">كلمة
+                            السر</u>
+                    </li>
+                    <li>
+                        وايضا يمكن تسجيل الدخول لفترة طوير بواسطة النقر على
+                        <u updae-image data-new-image="/users/login/3.png">تذكرنى</u>
+                    </li>
+                    <li>
+                        اذا قد تم ادخار اسم المستخدم او كلمة المرور بشكل غير صحيح فسوف تظهر
+
+                        <u updae-image data-new-image="/users/login/4.jpg">رسالة</u>
+                        تفيد بان البيانات المدخلة غير صحيحة
+                    </li>
+                    <li>
+                        اذا قد تم الغاء تفعيل المستخدم سوف تظهر
+                        <u updae-image data-new-image="/users/login/5.jpg">رسالة</u>
+                        تفيد بانة تم حظرك
+                        ... ويمكن الغاء الحظر من
+                        <u updae-image data-new-image="/users/login/6.jpg">شاشة تحديث
+                            بيانات المستخدم</u>
+                    </li>
+                    <li>
+                        فى الفديو التالى عملية تسجيل الدخول لـ موظف او لـ عميل وسوف يتوضح بة عملية تفعيل الحساب والاميل
+                        وخلافة
+                        <br>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/XRy5kTylHZU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </li>
+                </ul>
+            </div>
+
+            <!--User Add-->
+            <div id="users-add" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+
+                        يتم انشاء الحساب عن طريق حقول مطلوبة وحقول غير مطلوبة
+                        <!--Fields Required-->
+
+                        اولا الحقول المطللوبة : وهى الحقول الذى يجب ادخالها من قبل منشىء الحساب وهما كـ
+                        الاتى
+
+                        <table class="table table-hover table-bordered table-dark">
+                            <thead>
+                                <tr>
+                                    <th>الحقل</th>
+                                    <th>مطلوب</th>
+                                    <th>الوصف</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--User Name-->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/users/add/1.JPG">اسم
+                                            المستخدم </u>
+                                    </td>
+                                    <td>
+                                        نعم
+                                    </td>
+                                    <td>
+                                        وهوا اسم فريد لايتكرر ويستخدم فى عملية
+                                        <a href="index.html#users-login" target="_blank">
+                                            <u updae-image data-new-image="/users/login/0.png">
+                                                تسجيل الدخول
+                                            </u>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!--Password-->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/users/add/2.jpg">كلمة
+                                            السر</u>
+                                    </td>
+                                    <td>
+                                        نعم
+                                    </td>
+                                    <td>
+                                        تتكون من 6 -50 خانة من الحروف او الارقام او العلامات الخاصة وتستخدم فى عملية
+
+                                        <a href="index.html#users-login" target="_blank">
+                                            <u updae-image data-new-image="/users/login/0.png">
+                                                تسجيل الدخول
+                                            </u>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!--Full Name-->
+                                <tr>
+                                    <td><u updae-image data-new-image="/users/add/3.JPG">اسم
+                                            بالاكامل </u></td>
+                                    <td></td>
+                                    <td>
+                                        يتم ادخل الاسم بـ الكامل واقصى عدد للحروف هوا 150 حرف
+
+                                    </td>
+                                </tr>
+                                <!--NationalityId-->
+                                <tr>
+                                    <td><u updae-image data-new-image="/users/add/4.JPG">رقم
+                                            الهوية </u></td>
+                                    <td></td>
+                                    <td>
+                                        وهوا رقم فريد من نوعة لا يتكرر مع حسابات آخرى واقصى عدد للخانات هوا 10
+                                    </td>
+                                </tr>
+                                <!--Email-->
+                                <tr>
+                                    <td><u updae-image data-new-image="/users/add/5.JPG">الاميل
+                                        </u></td>
+                                    <td></td>
+                                    <td> يتم ادخال ايميل المستخدم الحقيقة وهوا فريد من نوعة ويتم التحقق من صحة الاميل
+                                        عند تسجيل الدخول من قبل المستخدم</td>
+                                </tr>
+                                <!--Phone Number-->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/users/add/6.JPG">
+                                            رقم الهاتف
+                                        </u>
+                                    </td>
+                                    <td>رقم الهاتف وهوا فريد من نوعة لا يتكرر مع اى حساب اخر ويتم التحقق من بواسطة
+                                        رسالة نصية ترسل للعميل
+                                        عند تسجيل الدخول من قبل المستخدم</td>
+                                </tr>
+                                <!--Address-->
+                                <tr>
+                                    <td><u updae-image data-new-image="/users/add/7.JPG">
+                                            العنوان
+                                        </u></td>
+                                    <td></td>
+                                    <td>
+                                        يتم ادخال عنوان المستخدم باقصى عدد حروق هوا 250 حرف
+                                    </td>
+                                </tr>
+
+
+                                <!--Account Type-->
+                                <tr>
+                                    <td><u updae-image data-new-image="/users/add/8.jpg">نوع
+                                            الحساب
+                                        </u></td>
+                                    <td>نعم</td>
+                                    <td> وهوا حقل اختيارى يختار من بين احد العناصر التالية
+                                        <ul>
+                                            <li>
+                                                مشرف : وهوا حساب خاص بـ موظف فى يتم تعينة فى البرنامج للقيام بمراقبة
+                                                العمليات والمعاملات داخل البرنامج
+                                                والذى يمكننا اضافة لة
+
+                                                <a href="index.html#users-privileges" target="_blank">
+                                                    <u updae-image data-new-image="/users/privileges/0.jpg">
+                                                        امتيازات
+                                                    </u>
+                                                </a>
+                                                على صفحات معينة ليقوم بـ مراقبتها او اضافة او تعديل الخ ...
+                                            </li>
+
+                                            <li>
+                                                مدير الفرع
+                                            </li>
+                                            <li>
+                                                عميل
+                                            </li>
+                                            <li>
+                                                موظف : عمد اختيار هذا الاختيار سوف يظهر فى الاسفل مجموعة من
+                                                <u updae-image data-new-image="/users/add/19.jpg">
+                                                    الاعمال
+                                                </u>
+                                                او المهام التى سوف يقوم بها هذا الموظف
+                                                يمكن تحديد واحدة او اكثر
+                                            </li>
+                                            <li>متعاون</li>
+                                            <li>مصور</li>
+                                        </ul>
+
+                                    </td>
+                                </tr>
+                                <!--Country And City-->
+                                <tr>
+                                    <td> <u updae-image data-new-image="/users/add/9.jpg">الدولة
+                                        </u>
+                                        و
+                                        <u updae-image data-new-image="/users/add/10.jpg">المدينة
+                                        </u></td>
+                                    <td>نعم</td>
+                                    <td> لم يتم تحديثهما فى اى وقت لاحق وذالك لاننا نعتمد على البرانش الذى يتبعة
+                                        الحساب الحالى
+                                        ويمكن اضافة الدول من
+                                        <a href="index.html#countries-add" target="_blank">
+                                            <u updae-image data-new-image="/countries/add/0.jpg">
+                                                هنا
+                                            </u>
+                                        </a></td>
+                                </tr>
+                                <!--Branch-->
+                                <tr>
+                                    <td><u updae-image data-new-image="/users/add/11.jpg">فرع
+                                            الشركة
+                                        </u></td>
+                                    <td>نعم</td>
+                                    <td> يتم تحديد فرع الشركة من اجل تصنيف هذا الحساب انة احدى حسابات الفرع المحدد
+                                        وذالك لاننا نعتمد على فرع الشركة فى اشياء كثير
+                                        مثل التحكم فى الاستعلامات الذى تخص الفرع الحساب الذى يفتحة الموظف
+                                        وكذالك توزيع اوامر العمل على الموظفين وخلافة
+                                        ويمكن اضافة فروع الشركة من
+                                        <a href="index.html#branches-add" target="_blank">
+                                            <u updae-image data-new-image="/branches/add/0.jpg">
+                                                هنا
+                                            </u>
+                                        </a></td>
+                                </tr>
+                                <!--Language-->
+                                <tr>
+                                    <td><u updae-image data-new-image="/users/add/12.jpg">
+                                            اللغة
+                                        </u></td>
+                                    <td>نعم</td>
+                                    <td> لغة الحساب والذى من خلالها يستطيع المستخدم التعامل مع البرنامج بـ اللغة
+                                        <u updae-image data-new-image="/users/add/17.jpg">
+                                            العربية
+                                        </u> او
+                                        <u updae-image data-new-image="/users/add/18.jpg">
+                                            الانجليزية
+                                        </u></td>
+                                </tr>
+                                <!--Date Of Pirth-->
+                                <tr>
+                                    <td><u updae-image data-new-image="/users/add/13.JPG">
+                                            تاريخ الميلاد
+                                        </u></td>
+                                    <td></td>
+                                    <td>
+                                        تاريخ ميلاد المستخدم
+                                    </td>
+                                </tr>
+                                <!--Is Active-->
+                                <tr>
+                                    <td><u updae-image data-new-image="/users/add/14.JPG">
+                                            مفعل
+                                        </u></td>
+                                    <td></td>
+                                    <td>
+                                        من اجل تفعيل او حظر المستخدم
+                                    </td>
+                                </tr>
+                                <!--Website Link-->
+                                <tr>
+                                    <td><u updae-image data-new-image="/users/add/15.JPG">
+                                            الموقع الخاص بـ المستخدم
+                                        </u></td>
+                                    <td></td>
+                                    <td>
+                                        يتم ادخال رابط موقع المستخدم على الانتر نت
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+            </div>
+
+            <!--User Update-->
+            <div id="users-update" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        فى تحديث حساب المستخدم يتم تعديل كل شىء ولاكن لا يمكن تحديث نوع الحساب
+                    </li>
+                </ul>
+            </div>
+
+            <!--User List-->
+            <div id="users-list" class="collapse" data-parent="#accordion">
+                <!--Description-->
+                <ul>
+                    <li>
+                        يتم هنا عرض جميع المستخدمين بناء على
+                        <u updae-image data-new-image="/users/list/1.JPG">
+                            الفيلتر
+                        </u>
+                        ويمكن
+                        <u updae-image data-new-image="/users/list/3.JPG">
+                            مشاهدة بيانات المستخدم </u>
+                        او
+                        <u updae-image data-new-image="/users/list/2.JPG">
+                            تحديث بياناتة </u>
+                    </li>
+                </ul>
+            </div>
+
+            <!--Users Privileges-->
+            <div id="users-privileges" class="collapse" data-parent="#accordion">
+                <!--Description-->
+                <ul>
+                    <li>
+                        يتم اختيار
+                        <u updae-image data-new-image="/users/Privileges/1.JPG">
+                            الموظف
+                        </u>
+                        و
+                        <u updae-image data-new-image="/users/Privileges/2.JPG">
+                            القائمة
+                        </u>
+                        ثم تعرض الصفح ويتم تحديد <u updae-image data-new-image="/users/Privileges/3.JPG">
+                            المسؤليات
+                        </u> الموظف فى هذة الصفحة
+                        ...
+                        وفى حقل
+                        <u updae-image data-new-image="/users/Privileges/1.JPG">
+                            الموظف
+                        </u>
+                        يتم عرض موظفين الذين يملكون صلاحية مدير فرع او صلاحية مشرف
+                    </li>
+                </ul>
+            </div>
+
+            <!--User Payments-->
+            <div id="users-payments" class="collapse" data-parent="#accordion">
+                <!--Description-->
+                <ul>
+                    <li>
+                        يتم هنا الدفع للموظفين مثل الموظف المتعاون بطريقة الدفع الكاش او عن طريق الحوالة البنكية
+                    </li>
+                    <li>
+                        والذى يتمكن من اضافة دفعات الى الموظف هوا الشخص الذى يمتلك تلك
+                        <a>
+                            <u updae-image data-new-image="/users/privileges/0.JPG">
+                                الصلاحية
+                            </u>
+                        </a>
+                    </li>
+                    <li>
+                        فى الفديو التالى عملية اضافة الدفعات لـ الموظف المتعاون
+                        <br>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/4oymCoxD3gE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </li>
+                </ul>
+            </div>
+
+            <!--Countries-->
+            <!--Add-->
+            <div id="countries-add" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        يتم اضافة <u updae-image data-new-image="/countries/add/1.jpg">
+                            اسم الدولة بـ العربية
+                        </u> ثم
+                        <u updae-image data-new-image="/countries/add/2.jpg">
+                            اسم الدولة بـ الاتجليزية
+                        </u>
+                        ثم <u updae-image data-new-image="/countries/add/3.jpg">
+                            مفتاح الدولة
+                        </u>
+                        ثم الاضافة وبعدها تتحول الصفحة مباشرة الى
+                        <a href="#countries-update" target="_blank">
+                            <u updae-image data-new-image="/countries/update/0.jpg">
+                                تحديث
+                            </u>
+                        </a>
+                        وحينها يمكن اضافة المدن
+
+                    </li>
+                </ul>
+            </div>
+
+            <!--Update-->
+            <div id="countries-update" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        فى حالة التحديث نستطيع تحديث جميع المعلومات بـ الاضافة الى امكانية
+                        <u updae-image data-new-image="/countries/update/1.jpg">
+                            اضافة
+                        </u>
+                        و
+                        <u updae-image data-new-image="/countries/update/2.jpg">
+                            تحديث
+                        </u>
+                        و
+                        <u updae-image data-new-image="/countries/update/3.jpg">
+                            حذف
+                        </u>
+                        المدن المرتبطة بهذة الدولة ...
+                        ولاكن يجب مراعة انة لا يمكن حذف مدينة هى موجودة من قبل
+                    </li>
+                </ul>
+            </div>
+
+            <!--List-->
+            <div id="countries-list" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        يتم هنا عرض جميع جميع الدول ويمكن الوصل الى صفح التحديث من زر
+                        <a href="#countries-update" target="_blank">
+
+                            <u updae-image data-new-image="/countries/list/1.jpg">
+                                التحديث
+                            </u>
+                        </a>
+                        او الحذف من زر <u updae-image data-new-image="/countries/list/2.jpg">
+                            الحذف
+                        </u>
+                        ولاكن يجب مراعة انة لا يمكن حذف دولة هى مستخدمة من قبل
+                    </li>
+                </ul>
+            </div>
+
+            <!--Branches-->
+            <!--Add-->
+            <div id="branches-add" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        يتم اضافة بيانات الفرع مع العلم انة لا يمكن تحديث بيانات الفعر الاساسية فى حالة اا كان الفعر
+                        مستخدم
+                        .. الحقول هى
+
+                        <table class="table table-dark table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>الحقل</th>
+                                    <th>اساسى</th>
+                                    <th>مطلوب</th>
+                                    <th>الوصف</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/branches/add/1.jpg">
+                                            الاسم بـ العربية
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td></td>
+                                    <td>اسم الفرع بـ اللغة العربية</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/branches/add/2.jpg">
+                                            الاسم بـ الانجليزية
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td></td>
+                                    <td>اسم الفرع بـ اللغة الانجليزية</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/branches/add/3.jpg">
+                                            رقم الهاتف
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td></td>
+                                    <td>رقم الهاتف الخاص بـ الفرع</td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/branches/add/4.jpg">
+                                            العنوان
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td></td>
+                                    <td>عنواع الفرع داخل المدينة</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/branches/add/5.jpg">
+                                            الدولة
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td>نعم</td>
+                                    <td>الدولة التى يوجد بها الفرع</td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/branches/add/6.jpg">
+                                            المدينة
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td>نعم</td>
+                                    <td>المدينة التى يوجد بها الفرع</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/branches/add/7.jpg">
+                                            فرع اساسى
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td></td>
+                                    <td>لتحديد هل الفرع اساسى ام لا وذالك لان الفرع الاساسى هوا الذى يحفظ به الملفات
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </li>
+                </ul>
+            </div>
+
+            <!--Update-->
+            <div id="branches-update" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>هنا فى عملية التحديث سوف نجد انة تم اغلاق الحقلين الدولة والمدينة وذالك لان هذا الفرع مستخدم
+                        وتم اغلاقهم حتى لا يحدث تضارض فى الداتا ... على سبيل المثال لا يمكن تغر المدينة وقد تم وضع الفرع
+                        على حساب احد الاشخاص حينها سوف يفقد هذا الشخص الفرع وهكذ
+                    </li>
+                    <li>
+
+                        وايضا تم اضافة
+                        <u updae-image data-new-image="/branches/update/1.jpg">
+                            حقول
+                        </u>
+                        جديدة مهمة وهى لتوظيف الموظفين على المهام الخاص بهم وتم اختيار هذة المهام لانها ثابتة وتحتاج الى
+                        شخص واحد معروف لدى الفرع للقيام بها
+                        ...
+                        وايضا عند اضافة مناسبة جديدة لا نحتاج لتحديد الموظفين مرة آخرى
+                        وسوف ترسل اليهم البيانات بشكل تلقائى عندما تكون مكتملة البيانات
+                        <table class="table table-dark table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>الحقل</th>
+                                    <th>اساسى</th>
+                                    <th>مطلوب</th>
+                                    <th>الوصف</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/branches/update/2.jpg">
+                                            موظف الاعداد والتنسيق
+                                        </u>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>يتم اختيار موظف من الموظفين الذين تم
+                                        <a href="#users-add" target="_blank">
+                                            <u updae-image data-new-image="/users/add/19.jpg">
+                                                تحديد
+                                            </u>
+                                        </a>
+                                        لهم مهام الاعداد والتنسيق مسبقا
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/branches/update/2.jpg">
+                                            موظف التنفيذ
+                                        </u>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>يتم اختيار موظف من الموظفين الذين تم
+                                        <a href="#users-add" target="_blank">
+                                            <u updae-image data-new-image="/users/add/19.jpg">
+                                                تحديد
+                                            </u>
+                                        </a>
+                                        لهم مهام التنفيذ مسبقا
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/branches/update/4.jpg">
+                                            موظف الارشفة والحفظ
+                                        </u>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>يتم اختيار موظف من الموظفين الذين تم
+                                        <a href="#users-add" target="_blank">
+                                            <u updae-image data-new-image="/users/add/19.jpg">
+                                                تحديد
+                                            </u>
+                                        </a>
+                                        لهم مهام الارشفة و الحفظ مسبقا
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/branches/update/5.jpg">
+                                            الفرع الآخر للآرشفه والحفظ
+                                        </u>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        يتم اختيار الفرع الاخر الذى سوف يقوم بـ الارشة والحفظ هوا الآخر
+                                        وذالك لان مرحلة الارشة والحفظ تتم على فرعين مختلفين
+                                        <br>
+                                        يجب ان يتم تعين موظف لـ الارشفة والحفظ فى تلك الفرع الاخر
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+            </div>
+
+
+            <!--Enquiries-->
+            <!--Enquiry Types-->
+            <!--Add-->
+            <div id="enquiry-type-add" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        يتم اضافة انواع الاستفسارات من اجل تصنيف كل استفسار وايضا انشاء روابط تلقائية لكل نوع من اجل
+                        استخدمها فى انشاء الاستفسارات للمستخدم المجهول
+                        .. الحقول هى
+
+                        <table class="table table-dark table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>الحقل</th>
+                                    <th>مطلوب</th>
+                                    <th>الوصف</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/enquiryTypes/add/1.JPG">
+                                            الاسم بـ العربية
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td>اسم نوع الاستفسار بـ اللغة العربية</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/enquiryTypes/add/2.JPG">
+                                            الاسم بـ الانجليزية
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td>اسم نوع الاستفسار بـ اللغة الانجليزية</td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+
+                        وبعد الاضافة سوف يظهر فى الجدول فى الاسفل بـ الاضافة
+                        <u updae-image data-new-image="/enquires/enquiryTypes/add/3.JPG">
+                            الى انشاء رابط تلقائى
+                        </u>
+                        بتم نسخة ووضعة او ارسالة للمعميل ليكى يتمكن من انشاء الاستفسار
+                    </li>
+                </ul>
+            </div>
+            <!--Update-->
+            <div id="enquiry-type-update" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        فى التحديث نقوم بـ النقر فوق
+                        <u updae-image data-new-image="/enquires/enquiryTypes/update/1.JPG">
+                            ايقونة
+                        </u>
+                        التحديث مقابل نوع الاستفسار الذى نريد تحديثة ثم نحدث
+                        <u updae-image data-new-image="/enquires/enquiryTypes/update/2.JPG">
+                            الاسم العربى
+                        </u>
+                        و
+                        <u updae-image data-new-image="/enquires/enquiryTypes/update/2.JPG">
+                            الاسم الانجليزي
+                        </u>
+                        اذا اردنا ثم ننقر على
+                        <u updae-image data-new-image="/enquires/enquiryTypes/update/4.JPG">
+                            حفظ
+                        </u>
+                        لنقوم بحفظ التغيرات
+                    </li>
+                </ul>
+            </div>
+            <!--Delete-->
+            <div id="enquiry-type-delete" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        فى الحذف نقوم بـ النقر فوق
+                        <u updae-image data-new-image="/enquires/enquiryTypes/delete/1.JPG">
+                            ايقونة
+                        </u>
+                        الحذف مقابل نوع الاستفسار الذى نريد حذف ثم سوف تظهر
+                        <u updae-image data-new-image="/enquires/enquiryTypes/delete/2.JPG">
+                            رسالة التحقق
+                        </u>
+                        وننقر على <u updae-image data-new-image="/enquires/enquiryTypes/delete/3.JPG">
+                            موافق
+                        </u> للتم عملية الحذف
+                        ... ولاكن اذا كان هذا النوع مستخدم من قبل مع اى استفسار اخر فلا يكن حذفة
+
+                        لنقوم بحفظ التغيرات
+                    </li>
+                </ul>
+            </div>
+
+            <!--Add-->
+            <div id="enquires-add" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        فى اضافة الاستفسار من جانب الآدارة تكون
+                        .. الحقول هى
+                        <table class="table table-dark table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>الحقل</th>
+                                    <th>مطلوب</th>
+                                    <th>الوصف</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- الاسم الاول -->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/add/1.JPG">
+                                            الاسم الاول
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td>اسم العميل الاول</td>
+                                </tr>
+                                <!-- الاسم الاخير -->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/add/2.JPG">
+                                            الاسم الاخير
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td>اسم العميل التانى</td>
+                                </tr>
+                                <!--دولة رقم الهاتف-->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/add/9.JPG">
+                                            دولة رقم الهاتف
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td>
+                                        يتم اختيار دولة رقم الهاتف من
+                                        <a href="#countries-add" target="_blank">
+                                            <u updae-image data-new-image="/countries/add/0.JPG">
+                                                الدول
+                                            </u>
+                                        </a>
+                                        التى تم اضافتها مسبقا
+
+                                    </td>
+                                </tr>
+                                <!-- رقم الهاتف -->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/add/3.JPG">
+                                            رقم الهاتف
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td>رقم هاتف العميل الذى سوف يتم التوصل معة من خلالة</td>
+                                </tr>
+                                <!-- تارسخ المناسبة  -->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/add/4.JPG">
+                                            تاريخ المناسبة
+                                        </u>
+                                    </td>
+                                    <td>لا</td>
+                                    <td>يمكن وضع اليوم او الشهر او السنة او المتوفر منهم
+                                        ..
+                                        <br>
+                                        برجاء العملم ان تاريخ المناسبة يجب ان يكون اكبر من تاريخ اليوم
+                                    </td>
+                                </tr>
+                                <!-- الدولة -->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/add/5.JPG">
+                                            الدولة
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td>دولة الناسبة</td>
+                                </tr>
+                                <!-- المدينة -->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/add/6.JPG">
+                                            المدينة
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td>المدينة التى سوف تقام بها المناسبة</td>
+                                </tr>
+                                <!-- الفرع -->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/add/7.JPG">
+                                            الفرع
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td>الفرع التى سوف ترسل لة المناسبة وسوف يكون مسوال عنها </td>
+                                </tr>
+                                <!-- نوع الاسستفسار -->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/add/8.JPG">
+                                            نوع الاستفسار
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td>تحديد نوع الاستفسار </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        ام بـ النسبة لـ اضافة الاستفسار من قبل
+                        <u updae-image data-new-image="/enquires/enquiryTypes/add/3.JPG">
+                            رابط نوع الاستفسار
+                        </u>
+                        فسوف يقوم بملىء كل الحقول معادا نوع الاستفسار
+
+                    </li>
+                </ul>
+            </div>
+
+            <!--Update-->
+            <div id="enquires-update" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        فى تحديث الاستفسار لا يوجد حقول جديدة ... ولاكن هناك بعض الحقول لا تظهر ولا يمكن تحديثها الا لـ
+                        المستخدم الذى يكون نوع حسابة مدير المشروع
+                        .. الحقول هى
+                        <table class="table table-dark table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>الحقل</th>
+                                    <th>مطلوب</th>
+                                    <th>الوصف</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- الدولة -->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/add/5.JPG">
+                                            الدولة
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td>دولة الناسبة</td>
+                                </tr>
+                                <!-- المدينة -->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/add/6.JPG">
+                                            المدينة
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td>المدينة التى سوف تقام بها المناسبة</td>
+                                </tr>
+                                <!-- الفرع -->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/add/7.JPG">
+                                            الفرع
+                                        </u>
+                                    </td>
+                                    <td>نعم</td>
+                                    <td>الفرع التى سوف ترسل لة المناسبة وسوف يكون مسوال عنها </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        وعماتا الذى يمكنة التحديث اما مدير المشروع او مدير الفرع
+                    </li>
+                </ul>
+            </div>
+
+            <!--List-->
+            <div id="enquires-list" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        تنقيم صفحة عرض الاستفسارات الى قسمين الاول وهوا
+                        <u updae-image data-new-image="/enquires/list/1.JPG">
+                            الفيلتر
+                        </u>
+                        والثانى وهوا
+                        <u data-new-image="/enquires/list/0.JPG">
+                            الاستفسارت
+                        </u>
+                        التى تاتى اعتمادا على <u updae-image data-new-image="/enquires/list/1.JPG">
+                            الفيلتر
+                        </u>
+                    </li>
+                    <li>
+                        ويوجد فى الجدول عمود العمليات التى تظهر فيها
+                        <u updae-image data-new-image="/enquires/list/2.JPG">
+                            ايقونات التحكم
+                        </u>
+                        فى الاستفسار
+                        <br>
+                        وقد تظهر بعضها والاخر لا يظهر وذالك لان هي تظهر بناء على حالة الاستفسار او صلاحية الموظف الحالى
+                        <br>
+                        وكل ايقونة مشروحة فى الصفحات القادمة
+                    </li>
+                </ul>
+            </div>
+
+            <!--Information-->
+            <div id="enquires-information" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        عند النقر على
+                        <u updae-image data-new-image="/enquires/information/1.JPG">
+                            ايقونة مشاهدة التفاصيل
+                        </u>
+                        يتم انتقالنا الى نافذة جديدة بها ل البيانات عن المناسبة
+                        <br>
+                        وفى الفديو التالى شرح تفصيلى
+                        <br>
+                        <video src="C:\Users\Sezer\Desktop\Analisys\images\enquires\information\2.mp4" controls
+                            style="width: 100%"></video>
+                    </li>
+                </ul>
+            </div>
+
+            <!--Status-->
+            <div id="enquires-status" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        عند النقر على
+                        <u updae-image data-new-image="/enquires/status/1.JPG">
+                            ايقونة حالات الطلب
+                        </u>
+                        فتظهر نافذة جديدة
+                        ليقوم الموظف بـ ادخال الحالة التى حصل عليها من العميل على الطلب
+                        <br>
+                        وفيما يلى
+                        <u updae-image data-new-image="/enquires/status/2.JPG">
+                            الحالات
+                        </u>
+                        وما يجب ان يتم ادخاله لـ كل حالة
+
+                        <table class="table table-dark table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>الحالة</th>
+                                    <th>الوصف</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- العميل لم يرد -->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/status/2.JPG">
+                                            العميل لم يرد
+                                        </u>
+                                    </td>
+                                    <td>
+                                        عند تحديد هذة الحالة سوف يتحول الطلب من الفرع الى المدير بحيث يتوصل المدير مع
+                                        العميل وبناء علية اما يرجع الطلب مرة آخرى للفرع او بتم الغاءه
+                                    </td>
+                                </tr>
+                                <!--تم التواصل مع العميل -->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/status/3.JPG">
+                                            تم التواصل مع العميل
+                                        </u>
+                                    </td>
+                                    <td>
+                                        وهنا اذا كان الطلب ليس فى جة الفرع اى ان الفرع لا يمكنة التحكم بة فسوف يتحول
+                                        اليه لانة عادتا يفوم
+                                        باضافتة المدير بعد ان تم التواصل مع العميل
+                                    </td>
+                                </tr>
+                                <!--رفض الخدمة-->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/status/4.JPG">
+                                            رفض الخدمة
+                                        </u>
+                                    </td>
+                                    <td>
+                                        هنا يتم اغلاق الاستفسار نهائيا
+                                    </td>
+                                </tr>
+
+                                <!--الموافقة التامة-->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/status/5.JPG">
+                                            الموافقة التامة
+                                        </u>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <!--تحديد موعد للزيارة-->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/status/6.JPG">
+                                            تحديد موعد للزيارة
+                                        </u>
+                                    </td>
+                                    <td>
+                                        وهنا يطلب العميل زيارة الفرع وحينها يجب ادخال
+                                        <u updae-image data-new-image="/enquires/status/10.JPG">
+                                            تاريخ
+                                        </u>
+                                        الزيارة من اجل تسجيلها على
+                                        Goggel Clander
+                                    </td>
+                                </tr>
+
+                                <!--يحتاج للتفكير-->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/status/7.JPG">
+                                            يحتاج للتفكير
+                                        </u>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+
+                                <!--الحجز بواسطة الدفع الكاش-->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/status/8.JPG">
+                                            الحجز بواسطة الدفع الكاش
+                                        </u>
+                                    </td>
+                                    <td>
+                                        هنا فـ العميل يريد دفع عربون كاش فيجب ادخال
+                                        <u updae-image data-new-image="/enquires/status/11.JPG">
+                                            المبلغ
+                                        </u>
+                                        المراد دفعة
+                                        <br>
+                                        وحينها سوف يتم ظهور ايقونة جديدة لـ اضافة
+                                        <u updae-image data-new-image="/enquires/status/12.JPG">
+                                            حساب العميل
+                                        </u>
+                                    </td>
+                                </tr>
+
+                                <!--الحجز بواسطة الدفع التحويل البنكى-->
+                                <tr>
+                                    <td>
+                                        <u updae-image data-new-image="/enquires/status/8.JPG">
+                                            الحجز بواسطة الدفع التحويل البنكى
+                                        </u>
+                                    </td>
+                                    <td>
+                                        هنا فـ العميل يريد دفع عربون كاش فيجب ادخال
+                                        <u updae-image data-new-image="/enquires/status/14.JPG">
+                                            المبلغ
+                                        </u>
+                                        المراد دفعة
+                                        وايضا صورة
+                                        <u updae-image data-new-image="/enquires/status/13.JPG">
+
+                                            الحوالة البنكية
+                                        </u>
+                                        <br>
+                                        بعد ذالك يجب التحقق من صحة الحوالة من قبل المدير والموافقة عليها لتتم عملية دفع
+                                        العربون بطريقة صحيحة
+                                        <br>
+                                        وحينها سوف يتم ظهور ايقونة جديدة لـ اضافة
+                                        <u updae-image data-new-image="/enquires/status/12.JPG">
+                                            حساب العميل
+                                        </u>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <!--Pyments-->
+            <div id="enquires-payments" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        عند النقر على ايقونة
+                        <u updae-image data-new-image="/enquires/payments/1.JPG">
+                            المدفوعات
+                        </u>
+                        ننتقل الى شاشة المدفوعات حيث يمكن الاضافة او عرض او الموافقة على عملية دفع تمت عن طريق حوالة
+                        بنكية
+                        <br>
+                        من يدخل الى صفحة المدفوعات يجب ان يكون لة
+                        <a href="#users-privileges" target="_blank">
+                            <u updae-image data-new-image="/users/privileges/3.JPG">
+                                صلاحيات الوصول
+                            </u>
+                        </a>
+                        .. الية والمدير فقط هوا الذى يمكنة قبول الحوالة البنكية
+                        اى يمكن لـ اى موظف يضف دفعة سواء كانت مباشرة او حوالة بنكية ولاكن المدير فقط هوا من يمكنة قبلو
+                        <br>
+                        وفى الفديو التالى شرح تفصيلى
+                        <br>
+                        <video src="C:\Users\Sezer\Desktop\Analisys\images\enquires\payments\2.mp4" controls
+                            style="width: 100%"></video>
+                    </li>
+                </ul>
+            </div>
+
+
+            <!--Add Client Account-->
+            <div id="enquires-addclinetaccount" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        بعد ان يتم دفع العربون يتم اتاحة اضافة حساب المستخدم ومن ثما اضافة المناسبة بعد اضافة الحساب ..
+                        عند النقر على ايقونة
+                        <u updae-image data-new-image="/enquires/addclinetaccount/1.JPG">
+                            اضافة مستخدم
+                        </u>
+                        ننتقل الى شاشة اضافة المستخدم وتظهر هذة الايقونة فى حالة تم دفع العربون لذالك
+                        <br>
+                        من يدخل الى صفحة اضافة مستخدم يجب ان يكون لة
+                        <a href="#users-privileges" target="_blank">
+                            <u updae-image data-new-image="/users/privileges/3.JPG">
+                                صلاحيات الوصول
+                            </u>
+                        </a>
+                        وفى الفديو التالى شرح تفصيلى لـ عملية اضافة حساب المستخدم
+                        <br>
+                        <video src="C:\Users\Sezer\Desktop\Analisys\images\enquires\addclinetaccount\2.mp4" controls
+                            style="width: 100%"></video>
+                    </li>
+                </ul>
+            </div>
+
+            <!--Add Event-->
+            <div id="enquires-addEvent" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        بعد ان يتم فتح حساب المستخدم نحول مباشرة الى انشاء ءالمناسبة وايضا تظهر ايقونة
+                        <u updae-image data-new-image="/enquires/addEvent/1.JPG">
+                            اضافة مناسبة
+                        </u>
+                        وعند النقر عليها تحولنا الى شاشة اضافة مناسبة
+                        <br>
+                        من يدخل الى صفحة اضافة مناسبة يجب ان يكون لة
+                        <a href="#users-privileges" target="_blank">
+                            <u updae-image data-new-image="/users/privileges/3.JPG">
+                                صلاحيات الوصول
+                            </u>
+                        </a>
+                        وفى الفديو التالى شرح تفصيلى لـ عملية اضافة مناسبة
+                        <br>
+                        <video src="C:\Users\Sezer\Desktop\Analisys\images\enquires\addEvent\2.mp4" controls
+                            style="width: 100%"></video>
+                    </li>
+                </ul>
+            </div>
+
+
+            <!--Events-->
+            <!--Packages-->
+            <div id="events-packages" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        من يدخل الى صفحة الباكدجات يجب ان يكون لة
+                        <a href="#users-privileges" target="_blank">
+                            <u updae-image data-new-image="/users/privileges/3.JPG">
+                                صلاحيات الوصول
+                            </u>
+                        </a>
+                        وفى الفديو التالى شرح تفصيلى للعميات التى تحدث مع الباكدجات
+                        <br>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/_v5_eNFZoh0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </li>
+                </ul>
+            </div>
+            <!--event package inputTypes-->
+            <div id="event-package-inputTypes" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        تم انشاء هذا الجزاء من اجل عدم كتابة الانواع مرة آخرى عن اضافة باكج جديد وايضا للتوفير فى الوقت
+                        ويكون التفاصيل منسقة
+                        <br>
+                        من يدخل الى صفحة انواع مدخلات الباكدجات يجب ان يكون لة
+                        <a href="#users-privileges" target="_blank">
+                            <u updae-image data-new-image="/users/privileges/3.JPG">
+                                صلاحيات الوصول
+                            </u>
+                        </a>
+                        وفى الفديو التالى شرح تفصيلى للعمليات التى تحدث مع انواع مدخلات الباكدجات
+                        <br>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/XloP_yILHzA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </li>
+                </ul>
+            </div>
+
+            <!--Albums-->
+            <div id="events-packages-albums" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        تضاف الالبومات من اجل اختيارها فى الباكدجات ولا يضاف لها سعر كما هوا كان مطلوب ... والسعر الخاص
+                        بها هوا مضمن مع سعر الاباكج
+                        <br>
+                        من يدخل الى صفحة الالبومات يجب ان يكون لة
+                        <a href="#users-privileges" target="_blank">
+                            <u updae-image data-new-image="/users/privileges/3.JPG">
+                                صلاحيات الوصول
+                            </u>
+                        </a>
+                        وفى الفديو التالى شرح تفصيلى للعمليات التى تحدث مع الالبومات
+                        <br>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/KCu7U_O5mRE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </li>
+                </ul>
+            </div>
+
+            <!--Events Print Type-->
+            <div id="evens-printTypes" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        تضاف انواع حفر الاسماء من اجل اختيارها اثناء تعديل المناسبة ويضاف لكل نوع حفر السعر الخاص بة
+                        <br>
+                        وعندما يتم اختيار نوع الحفر يتم اضافة السعر على الفاتورة
+                        <br>
+                        وهناك سعر اضافى لـ حفر الاسماء بـ العربى وهذا السعر يحدد اثناء اضافة الحزمة لان السعر الاضافى
+                        هذا يختلف ما بين كل حزمة والاخرى
+                        <br>
+                        من يدخل الى صفحة انواع حفر الاسماء يجب ان يكون لة
+                        <a href="#users-privileges" target="_blank">
+                            <u updae-image data-new-image="/users/privileges/3.JPG">
+                                صلاحيات الوصول
+                            </u>
+                        </a>
+                        وفى الفديو التالى شرح تفصيلى للعمليات التى تحدث مع انواع حفر الاسماء
+                        <br>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/zbgpKxX6jzY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </li>
+                </ul>
+            </div>
+
+            <!--Update Event-->
+            <div id="events-update" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        عن النقر على
+                        <u updae-image data-new-image="/events/update/1.JPG">
+                            ايقونة تعديل المناسبة
+                        </u>
+                        نقوم بـ الانتقال الى صفحة تعديل المناسبةولكى تهر الايقونة فيجب ان يكون لنا
+                        <a href="#users-privileges" target="_blank">
+                            <u updae-image data-new-image="/users/privileges/3.JPG">
+                                صلاحية الوصول
+                            </u>
+                        </a>
+                        الى المناسبات
+                    </li>
+                    <li>ملحوظة : لا يمكن تحديث تاريخ المناسبة الى تاريخ اقل من او يساوى التاريخ الحالى</li>
+                    <li>
+                        فى الفديو التالى شرح تفصيلى لـ عملية التحديث بـ الكامل
+                        <br>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/nQQOF_V8iCU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </li>
+                </ul>
+            </div>
+
+            <!--Tasks-->
+            <!--Coordinations-->
+            <div id="events-task-coordinations" class="collapse" data-parent="#accordion">
+                <ul>
+
+                    <li>
+                        الاعداد والتمسيق : هى شاشة يدخل بها المهام التى يريدها العميل ان تحديث فى ذالك المناسبة
+                        <br>
+                        ويتم الوصول الى صفحة الاعداد والتنسيق عن طريق النقر على
+                        <u updae-image data-new-image="/events/tasks\coordinations\1.JPG">
+                            ايقونة مهام الاعداد والتنسيق
+                        </u>
+                    </li>
+                    <li>
+                        ويمكن ان يقوم المدير او مدير الفرع او موظف الاعداد والتمسيق او العميل بـ اضافة او تعديل المهام
+                        <br>
+                        و الموظف المسوال عن الاعداد والتنسيق هوا الموظف الذى ينكنة انهاء المهمة ولا يستطع العميل بعدها
+                        اضافة اى شىء الا بـ طلب ذالك منم الفعر وحينهها مدير الفرع يمكنة الاضافة
+                    </li>
+
+                    <li>
+
+                        فى الفديو التالى شرح تفصيلى لـ عملية الاصافة والتحديث بـ الكامل
+                        <br>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/EXp_K9c_jB0 " frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </li>
+
+                    <li>
+                        وايضا شرح تفصيلى لـ الموظف المسوال عن الاعداد والتنسيق
+                        <br>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/7LaQUDqUW5w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </li>
+                </ul>
+            </div>
+
+            <!--Event Photographers-->
+            <div id="events-task-photographers" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        مصورين المناسبة : يتم اختيار المصورين الذين تم اضافت حسابتهم من قبل ويجب ان تكون فى نفس الفرع
+                        وايضا تكون الحسابات مفعلة ولا يمكن تحديث المصورين بعد تخطى تاريخ المناسبة
+                        <br>
+                        ويمكن تحديث مصورين المناسبة عبر النقر على
+                        <u updae-image data-new-image="/events/tasks\photographers\1.JPG">
+                            ايقونة مصورين المناسبة
+                        </u>
+                    </li>
+                    <li>
+                        فى الفديو التالى شرح لـ عملية اختيار مصورين المناسبة
+                        <br>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/XhSRQk4cnyE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </li>
+                </ul>
+            </div>
+
+            <!--Distribution Of Work-->
+            <div id="events-task-distributionOfWork" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        توزيع اوامر العمل على الموظفين : فـ هناك موظفين يتم اضافت لهم المهام مباشرة وهم موظفين معروفين
+                        لدى الفرع ويتم تحديدهم
+                        <a href="" target="_blank">
+                            <u updae-image data-new-image="/branches/update/0.JPG">
+                                اثناء تحديث الفرع
+                            </u>
+                        </a>
+                        وهولاء الموظفين يتم اضافت لهم اومر العمل بشكل تلقائى بعد اكمال بيانات المناسبة
+                        وهناك انواع مهام اخرى يجب تحديد الموظفين الذين سوف يقومون بها فى كل مناسبة ويمكن توزيع المهام
+                        <br>
+
+                        عبر النقر على
+                        <u updae-image data-new-image="/events/tasks/distributionOfWork/1.JPG">
+                            ايقونة توزيع اومر العمل على الموظفين
+                        </u>
+                    </li>
+                    <li>
+                        فى الفديو التالى شرح لـ عملية
+                        توزيع اومر العمل على الموظفين
+                        <br>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/vxuppQI_zoE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </li>
+                </ul>
+            </div>
+
+            <!--Impementaion-->
+            <div id="events-task-impementaion" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        مهمة التنفيذ : وهي المهمة التى تتم صابح يوم المناسبة والتى تعتمد على تسليم الداتا من المصور الى
+                        موظف التنفيذ
+                    </li>
+                    <li>
+                        لا يمكن اتمام عملية التنفيذ الا بعد المناسبة بـ يوم
+                    </li>
+                    <li>
+                        فى الفديو التالى شرح لـ عملية
+                        التنفيذ من قبل موظف التنفيذ
+                        <br>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/wrk7e_hCf_s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </li>
+                </ul>
+            </div>
+
+
+            <!--Archiving And Saveing-->
+            <div id="events-task-archivingAndSaveing" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        مهمة الارشفة والحفظ : فى هذة المهمة تتم ارشفة وحفظ الداتا بعد
+
+                        مهمة التنفيذ
+
+                        وهى تتم على مرحلتين الاولى فى الفرع الاساسى الذى قام بتصوير المناسبة والثانية كـ نسخة احتياطية
+                        فى الفرع الآخر
+                    </li>
+                    <li>
+                        لا يمكن اتمام عملية التنفيذ الا بعد المناسبة بـ يوم
+                    </li>
+                    <li>
+                        فى الفديو التالى شرح لـ عملية
+                        التنفيذ من قبل موظف التنفيذ
+                        <br>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed//Fog430ykKW8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+
+
+
+
+        <!--Image-->
+        <div class="col-lg-5 ">
+            <img id="imageReview" class="my-image" data-base-src="">
+        </div>
+
+
+        <script src="C:/Users/Sezer/Desktop/Analisys//scripts/jquery-3.2.1.min.js"></script>
+        <script src="C:/Users/Sezer/Desktop/Analisys//scripts/bootstrap-rtl/bootstrap.js"></script>
+
+
+
+        <script src="C:/Users/Sezer/Desktop/Analisys//scripts/custom.scripts.js"></script>
+</body>
+
+</html

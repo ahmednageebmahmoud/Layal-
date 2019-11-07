@@ -32,7 +32,79 @@
 <!--Page Body-->
 <div ng-controller="packageInputTypesCtrl">
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
-        <div class="kt-portlet kt-portlet--mobile">
+        <!--Add-->
+        @if (Priv.CanAdd)
+        {
+
+            <div class="kt-portlet ">
+                <div class="kt-portlet__head kt-portlet__head--lg">
+                    <div class="kt-portlet__head-label">
+                        <span class="kt-portlet__head-icon">
+                            <i class="kt-font-brand flaticon-list-1"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-title">
+                            @Token.PackageInputTypes
+                        </h3>
+                    </div>
+
+                </div>
+
+                <form novalidate name="addPackageInputTypeFrm" class="kt-form kt-form--label-right" ng-submit="addNew(addPackageInputTypeFrm)">
+                    <div class="kt-portlet__body">
+
+                        <!--R O W 1-->
+                        <div class="form-group  row">
+                            <!--NameAr-->
+                            <label class="col-lg-2 col-form-label">@Token.NameAr</label>
+                            <div class="col-lg-4 form-group-sub">
+                                <input type="text" class="form-control input-disabled"
+                                       name="nameAr"
+                                       ng-class="{'is-invalid':addPackageInputTypeFrm.nameAr.$invalid&&packageInputTypeFrmErrorSubmit}"
+                                       ng-model="newPackageInputType.NameAr"
+                                       ng-required="true" maxlength="50" ng-maxlength="50" />
+
+                                <!--Errors:NameAr-->
+                                <div class="error invalid-feedback" ng-if="addPackageInputTypeFrm.nameAr.$error.required&&packageInputTypeFrmErrorSubmit">@Token.FieldIsRequierd</div>
+                                <div class="error invalid-feedback" ng-if="addPackageInputTypeFrm.nameAr.$error.maxlength&&packageInputTypeFrmErrorSubmit">@Token.MaxLengthCharIs 50</div>
+                            </div>
+
+                            <!--NameEn-->
+                            <label class="col-lg-2 col-form-label">@Token.NameEn</label>
+                            <div class="col-lg-4 form-group-sub">
+                                <input type="text"
+                                       class="form-control input-disabled"
+                                       name="nameEn"
+                                       ng-class="{'is-invalid':addPackageInputTypeFrm.nameEn.$invalid&&packageInputTypeFrmErrorSubmit}"
+                                       ng-model="newPackageInputType.NameEn"
+                                       ng-required="true" maxlength="50" ng-maxlength="50" />
+                                <!--Errors:NameEn-->
+                                <div class="error invalid-feedback" ng-if="addPackageInputTypeFrm.nameEn.$error.required&&packageInputTypeFrmErrorSubmit">@Token.FieldIsRequierd</div>
+                                <div class="error invalid-feedback" ng-if="addPackageInputTypeFrm.nameEn.$error.maxlength&&packageInputTypeFrmErrorSubmit">@Token.MaxLengthCharIs 50</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="kt-portlet__foot">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 m--valign-middle">
+                            </div>
+                            <div class="col-lg-6 kt-align-right">
+                                @if (Priv.CanAdd)
+                                {
+                                    <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                                        <i class="la la-save">@Token.Add</i>
+                                    </button>
+                                }
+                                <button type="reset" class="btn btn-warning btn-elevate btn-elevate-air" ng-if="enquiry.State!=state.update" ng-click="reSelect()"><i class="la la-file">@Token.Cancel</i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        }
+
+        <!--List-->
+        <div class="kt-portlet ">
             <div class="kt-portlet__head kt-portlet__head--lg">
                 <div class="kt-portlet__head-label">
                     <span class="kt-portlet__head-icon">
@@ -42,150 +114,148 @@
                         @Token.PackageInputTypes
                     </h3>
                 </div>
-                 
+
             </div>
 
             <!--Create-->
             @if (Priv.CanAdd)
             {
-                <div class="kt-portlet__body">
-                    <form novalidate name="addPackageInputTypeFrm" class="kt-form kt-form--label-right" ng-submit="addNew(addPackageInputTypeFrm)">
-                        <div class="kt-portlet__body">
-                           
-                             <!--R O W 1-->
-                            <div class="form-group  row">
-                                <!--NameAr-->
-                                    <label class="col-lg-2 col-form-label">@Token.NameAr</label>
-                                <div class="col-lg-4 form-group-sub">
-                                    <input type="text" class="form-control input-disabled"
-                                           name="nameAr"
-                                           ng-class="{'is-invalid':addPackageInputTypeFrm.nameAr.$invalid&&packageInputTypeFrmErrorSubmit}"
-                                           ng-model="newPackageInputType.NameAr"
-                                            ng-required="true" maxlength="50" ng-maxlength="50"  />
+            <div class="kt-portlet__body">
+                <form novalidate name="addPackageInputTypeFrm" class="kt-form kt-form--label-right" ng-submit="addNew(addPackageInputTypeFrm)">
+                    <div class="kt-portlet__body">
 
-                                    <!--Errors:NameAr-->
-                                    <div class="error invalid-feedback" ng-if="addPackageInputTypeFrm.nameAr.$error.required&&packageInputTypeFrmErrorSubmit">@Token.FieldIsRequierd</div>
-                                    <div class="error invalid-feedback" ng-if="addPackageInputTypeFrm.nameAr.$error.maxlength&&packageInputTypeFrmErrorSubmit">@Token.MaxLengthCharIs 50</div>
-                                </div>
-                        
-                                        <!--NameEn-->
-                                    <label class="col-lg-2 col-form-label">@Token.NameEn</label>
-                                <div class="col-lg-4 form-group-sub">
-                                    <input type="text"
-                                           class="form-control input-disabled"
-                                           name="nameEn"
-                                           ng-class="{'is-invalid':addPackageInputTypeFrm.nameEn.$invalid&&packageInputTypeFrmErrorSubmit}"
-                                           ng-model="newPackageInputType.NameEn"
-                                           ng-required="true" maxlength="50" ng-maxlength="50" />
-                                    <!--Errors:NameEn-->
-                                    <div class="error invalid-feedback" ng-if="addPackageInputTypeFrm.nameEn.$error.required&&packageInputTypeFrmErrorSubmit">@Token.FieldIsRequierd</div>
-                                    <div class="error invalid-feedback" ng-if="addPackageInputTypeFrm.nameEn.$error.maxlength&&packageInputTypeFrmErrorSubmit">@Token.MaxLengthCharIs 50</div>
-                                </div>
+                        <!--R O W 1-->
+                        <div class="form-group  row">
+                            <!--NameAr-->
+                            <label class="col-lg-2 col-form-label">@Token.NameAr</label>
+                            <div class="col-lg-4 form-group-sub">
+                                <input type="text" class="form-control input-disabled"
+                                       name="nameAr"
+                                       ng-class="{'is-invalid':addPackageInputTypeFrm.nameAr.$invalid&&packageInputTypeFrmErrorSubmit}"
+                                       ng-model="newPackageInputType.NameAr"
+                                       ng-required="true" maxlength="50" ng-maxlength="50" />
+
+                                <!--Errors:NameAr-->
+                                <div class="error invalid-feedback" ng-if="addPackageInputTypeFrm.nameAr.$error.required&&packageInputTypeFrmErrorSubmit">@Token.FieldIsRequierd</div>
+                                <div class="error invalid-feedback" ng-if="addPackageInputTypeFrm.nameAr.$error.maxlength&&packageInputTypeFrmErrorSubmit">@Token.MaxLengthCharIs 50</div>
                             </div>
-                            <!--R O W 4-->
-                            <div class="kt-portlet__foot">
-                                <div class="kt-form__actions">
-                                    <div class="row">
-                                        <div class="col-lg-9"></div>
-                                        <div class="col-lg-3">
-                                            @if (Priv.CanAdd)
+
+                            <!--NameEn-->
+                            <label class="col-lg-2 col-form-label">@Token.NameEn</label>
+                            <div class="col-lg-4 form-group-sub">
+                                <input type="text"
+                                       class="form-control input-disabled"
+                                       name="nameEn"
+                                       ng-class="{'is-invalid':addPackageInputTypeFrm.nameEn.$invalid&&packageInputTypeFrmErrorSubmit}"
+                                       ng-model="newPackageInputType.NameEn"
+                                       ng-required="true" maxlength="50" ng-maxlength="50" />
+                                <!--Errors:NameEn-->
+                                <div class="error invalid-feedback" ng-if="addPackageInputTypeFrm.nameEn.$error.required&&packageInputTypeFrmErrorSubmit">@Token.FieldIsRequierd</div>
+                                <div class="error invalid-feedback" ng-if="addPackageInputTypeFrm.nameEn.$error.maxlength&&packageInputTypeFrmErrorSubmit">@Token.MaxLengthCharIs 50</div>
+                            </div>
+                        </div>
+                        <!--R O W 4-->
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-9"></div>
+                                    <div class="col-lg-3">
+                                        @if (Priv.CanAdd)
                                             {
-                                                <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
-                                                    <i class="la la-save">@Token.Add</i>
-                                                </button>
+                                            <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                                                <i class="la la-save">@Token.Add</i>
+                                            </button>
                                             }
-                                            <button type="reset" class="btn btn-warning btn-elevate btn-elevate-air" ng-if="enquiry.State!=state.update" ng-click="reSelect()"><i class="la la-file">@Token.Cancel</i></button>
-                                        </div>
+                                        <button type="reset" class="btn btn-warning btn-elevate btn-elevate-air" ng-if="enquiry.State!=state.update" ng-click="reSelect()"><i class="la la-file">@Token.Cancel</i></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
+            </div>
             }
 
             <div class="kt-portlet__body">
-                <div class="kt-portlet__body">
 
 
 
-                    @if (Priv.CanDisplay)
+                @if (Priv.CanDisplay)
                     {
                     <!--SMS Print,Excel,PDF,Search,....-->
-                        <sms-buttons-search ng-sms-tableid="ng_table_1" ng-sms-search-model="itemSearch"></sms-buttons-search>
-                        <table class="table sms-table " id="ng_table_1">
-                            <thead>
-                                <tr>
-                                    <th class="th-40 ">
-                                        <sms-sort ng-sms-fop="packageInputTypeFOP"
-                                                  ng-sms-field-name="NameAr"
-                                                  ng-sms-resource="@Token.NameAr"></sms-sort>
-                                    </th>
-                                    <th class="th-45 ">
-                                        <sms-sort ng-sms-fop="packageInputTypeFOP"
-                                                  ng-sms-field-name="NameEn"
-                                                  ng-sms-resource="@Token.NameEn"></sms-sort>
-                                    </th>
-                                    <th class="th-15">
-                                        @Token.Operations
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                <sms-buttons-search ng-sms-tableid="ng_table_1" ng-sms-search-model="itemSearch"></sms-buttons-search>
+                <table class="table sms-table " id="ng_table_1">
+                    <thead>
+                        <tr>
+                            <th class="th-40 ">
+                                <sms-sort ng-sms-fop="packageInputTypeFOP"
+                                          ng-sms-field-name="NameAr"
+                                          ng-sms-resource="@Token.NameAr"></sms-sort>
+                            </th>
+                            <th class="th-45 ">
+                                <sms-sort ng-sms-fop="packageInputTypeFOP"
+                                          ng-sms-field-name="NameEn"
+                                          ng-sms-resource="@Token.NameEn"></sms-sort>
+                            </th>
+                            <th class="th-15">
+                                @Token.Operations
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                                <tr ng-repeat="x in packageInputTypes|customFilter:itemSearch:packageInputTypeFOP:'packageInputTypeFOP':this |orderBy:packageInputTypeFOP.sort.propName:packageInputTypeFOP.sort.reverse | limitTo:packageInputTypeFOP.paging.pagingLimt.take:packageInputTypeFOP.paging.pagingLimt.skip track by $index"
-                                    ng-class="{'kt-datatable__row--even':$index%2==0}">
+                        <tr ng-repeat="x in packageInputTypes|customFilter:itemSearch:packageInputTypeFOP:'packageInputTypeFOP':this |orderBy:packageInputTypeFOP.sort.propName:packageInputTypeFOP.sort.reverse | limitTo:packageInputTypeFOP.paging.pagingLimt.take:packageInputTypeFOP.paging.pagingLimt.skip track by $index"
+                            ng-class="{'kt-datatable__row--even':$index%2==0}">
 
-                                    <td>
-                                        <input type="text"
-                                               class="form-control input-disabled"
-                                               placeholder="@Token.NameAr"
-                                               ng-model="x.NameAr" ng-disabled="x.Id!=itemEditId" />
-                                        <!--Errors:NameAr-->
-                                        <div>
-                                            <small class="help-block" ng-if="propertyIsFalthy(x.NameAr)">@Token.FieldIsRequierd</small>
-                                            <small class="help-block" ng-if="propertyIsMaxLength(x.NameAr,50)">@Token.MaxLengthCharIs 50</small>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control input-disabled"
-                                               placeholder="@Token.NameEn"
-                                               ng-model="x.NameEn" ng-disabled="x.Id!=itemEditId" />
+                            <td>
+                                <input type="text"
+                                       class="form-control input-disabled"
+                                       placeholder="@Token.NameAr"
+                                       ng-model="x.NameAr" ng-disabled="x.Id!=itemEditId" />
+                                <!--Errors:NameAr-->
+                                <div>
+                                    <small class="help-block" ng-if="propertyIsFalthy(x.NameAr)">@Token.FieldIsRequierd</small>
+                                    <small class="help-block" ng-if="propertyIsMaxLength(x.NameAr,50)">@Token.MaxLengthCharIs 50</small>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control input-disabled"
+                                       placeholder="@Token.NameEn"
+                                       ng-model="x.NameEn" ng-disabled="x.Id!=itemEditId" />
 
-                                        <!--Errors:NameEn-->
-                                        <div>
-                                            <small class="help-block" ng-if="propertyIsFalthy(x.NameEn)">@Token.FieldIsRequierd</small>
-                                            <small class="help-block" ng-if="propertyIsMaxLength(x.NameEn,50)">@Token.MaxLengthCharIs 50</small>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <!--Btn:Edit-->
-                                        @if (Priv.CanEdit)
+                                <!--Errors:NameEn-->
+                                <div>
+                                    <small class="help-block" ng-if="propertyIsFalthy(x.NameEn)">@Token.FieldIsRequierd</small>
+                                    <small class="help-block" ng-if="propertyIsMaxLength(x.NameEn,50)">@Token.MaxLengthCharIs 50</small>
+                                </div>
+                            </td>
+                            <td>
+                                <!--Btn:Edit-->
+                                @if (Priv.CanEdit)
                                         {
                                                 <!--Btn:Edit-->
-                                            <a href="javascript:void(0);" ng-click="changeEdit(x)" ng-if="x.Id!=itemEditId"  title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                        <a href="javascript:void(0);" ng-click="changeEdit(x)" ng-if="x.Id!=itemEditId" title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
 																<!--Btn:Save-->
-                                            <a href="javascript:void(0);" ng-click="saveEdit(x)" ng-if="x.Id==itemEditId"  title="@Token.Save" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-save"></i></a>
+                                        <a href="javascript:void(0);" ng-click="saveEdit(x)" ng-if="x.Id==itemEditId" title="@Token.Save" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-save"></i></a>
 																<!--Btn:Cancel-->
-                                            <a href="javascript:void(0);" ng-click="cancelEdit( )" ng-if="x.Id==itemEditId"  title="@Token.Cancel" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-undo"></i></a>
+                                        <a href="javascript:void(0);" ng-click="cancelEdit( )" ng-if="x.Id==itemEditId" title="@Token.Cancel" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-undo"></i></a>
                                         }
-                                        <!--Btn:Delete-->
-                                        @if (Priv.CanDelete)
+                                <!--Btn:Delete-->
+                                @if (Priv.CanDelete)
                                         {
-                                            <a href="javascript:void(0);" ng-click="delete(x)" ng-if="x.Id!=itemEditId"  title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
+                                        <a href="javascript:void(0);" ng-click="delete(x)" ng-if="x.Id!=itemEditId" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
                                         }
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                            </tbody>
-                        </table>
+                    </tbody>
+                </table>
 
                              <!--Paging -->
-                        <sms-paging-select ng-sms-fop="packageInputTypeFOP"></sms-paging-select>
-                            <sms-paging ng-sms-fop="packageInputTypeFOP" ng-sms-display-m-func="getPackageInputTypes()"></sms-paging>
+                <sms-paging-select ng-sms-fop="packageInputTypeFOP"></sms-paging-select>
+                <sms-paging ng-sms-fop="packageInputTypeFOP" ng-sms-display-m-func="getPackageInputTypes()"></sms-paging>
                     }
-                </div>
             </div>
         </div>
     </div>
@@ -193,7 +263,7 @@
 
 @section scripts{
     <!--(ANageeb) link angualr files for thsis  view -->
-<script src="~/Scripts/angularJS/views/packageInputTypes/index/service.js"></script>
+    <script src="~/Scripts/angularJS/views/packageInputTypes/index/service.js"></script>
     <script src="~/Scripts/angularJS/views/packageInputTypes/index/contoller.js"></script>
 }
 

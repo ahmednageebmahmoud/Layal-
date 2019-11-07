@@ -84,44 +84,44 @@
             <thead class="">
                 <tr class="">
                     <th class="th-10">
-                        <sms-sort ng-sms-fop="enquiyFOP"
+                        <sms-sort ng-sms-fop="eventFOP"
                                   ng-sms-field-name="NameGroom"
                                   ng-sms-resource="@Token.NameGroom"></sms-sort>
                     </th>
                     <th class="th-10">
-                        <sms-sort ng-sms-fop="enquiyFOP"
+                        <sms-sort ng-sms-fop="eventFOP"
                                   ng-sms-field-name="NameBride"
                                   ng-sms-resource="@Token.NameBride"></sms-sort>
                     </th>
                     <th class="th-10">
-                        <sms-sort ng-sms-fop="enquiyFOP"
+                        <sms-sort ng-sms-fop="eventFOP"
                                   ng-sms-field-name="IsClinetCustomLogo"
                                   ng-sms-resource="@Token.IsClinetCustomLogo"></sms-sort>
                     </th>
 
                     <th class="th-10">
-                        <sms-sort ng-sms-fop="enquiyFOP"
+                        <sms-sort ng-sms-fop="eventFOP"
                                   ng-sms-field-name="PackageName"
                                   ng-sms-resource="@Token.Package"></sms-sort>
                     </th>
                     <th class="th-10">
-                        <sms-sort ng-sms-fop="enquiyFOP"
+                        <sms-sort ng-sms-fop="eventFOP"
                                   ng-sms-field-name="PrintNamesTypeName"
                                   ng-sms-resource="@Token.PrintNamesType"></sms-sort>
                     </th>
 
                     <th class="th-10">
-                        <sms-sort ng-sms-fop="enquiyFOP"
+                        <sms-sort ng-sms-fop="eventFOP"
                                   ng-sms-field-name="IsFinshed"
                                   ng-sms-resource="@Token.Finshed"></sms-sort>
                     </th>
                     <th class="th-10">
-                        <sms-sort ng-sms-fop="enquiyFOP"
+                        <sms-sort ng-sms-fop="eventFOP"
                                   ng-sms-field-name="DateTimeDisplay"
                                   ng-sms-resource="@Token.FinshedDateTime"></sms-sort>
                     </th>
                     <th class="th-10">
-                        <sms-sort ng-sms-fop="enquiyFOP"
+                        <sms-sort ng-sms-fop="eventFOP"
                                   ng-sms-field-name="FinshedUserName"
                                   ng-sms-resource="@Token.FinshedUserName"></sms-sort>
                     </th>
@@ -133,7 +133,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="x in events|filter:eventsSearch |orderBy:enquiyFOP.sort.propName:enquiyFOP.sort.reverse | limitTo:enquiyFOP.paging.pagingLimt.take:enquiyFOP.paging.pagingLimt.skip track by $index">
+                <tr ng-repeat="x in events|filter:eventsSearch |orderBy:eventFOP.sort.propName:eventFOP.sort.reverse | limitTo:eventFOP.paging.pagingLimt.take:eventFOP.paging.pagingLimt.skip track by $index">
                     <td>{{x.NameGroom}}</td>
                     <td>{{x.NameGroom}}</td>
                     <td><i class="fas " ng-class="{'fa-check':x.IsClinetCustomLogo}"></i></td>
@@ -165,17 +165,14 @@
 
                         <!--Btn:ArchivingAndSaveing -->
                         <a href="/EEW/AddAndUpdateArchivingAndSaveing?id={{x.Id}}" 
-                           ng-if="!x.EventWorkStatusIsFinshed.ArchivingAndSaveing&&x.WorkTypeId==worksTypesEnum.ArchivingAndSaveing"
-                           title="@Token.Finshe"
+                           ng-if="x.WorkTypeId==worksTypesEnum.ArchivingAndSaveing"
+                           title="@Token.ShowDetailsAndFinshe"
                            class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="flaticon-interface-10"></i></a>
-                    
-                      
-                    
                     </td>
                 </tr>
             </tbody>
         </table>
         <!--Paging -->
-        <sms-paging ng-sms-fop="enquiyFOP" ng-sms-display-m-func="getEvents()"></sms-paging>
+        <sms-paging ng-sms-fop="eventFOP" ng-sms-display-m-func="getEvents()"></sms-paging>
     </div>
 </div>

@@ -22,9 +22,8 @@
 
 
                 <span class="kt-subheader__breadcrumbs-separator"></span>
-                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" ng-if="package.State==state.create">@Token.AddNewPackage</a>
-                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" ng-if="package.State==state.update">@Token.UpdatePackage</a>
-                <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active" ng-if="package.State!=state.update">@Token.AddNewPackage</a>
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active" ng-if="package.State==state.update">@Token.UpdatePackage</a>
             </div>
         </div>
 
@@ -60,8 +59,8 @@
                                            ng-class="{'is-invalid':addPackageFrm.nameAr.$invalid&&packageFrmErrorSubmit}"
                                            ng-model="package.NameAr" ng-required="true" ng-maxlength="50" maxlength="50">
                                     <!--Errors:NameAr-->
-                                    <div class="error invalid-feedback" ng-if="addPackageFrm.nameAr.$error.required&&packageFrmErrorSubmit">@Token.FieldIsRequierd</div>
-                                    <div class="error invalid-feedback" ng-if="addPackageFrm.nameAr.$error.maxlength&&packageFrmErrorSubmit">@Token.MaxLengthCharIs 50</div>
+                                    <small class="error " ng-if="addPackageFrm.nameAr.$error.required&&packageFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                    <small class="error " ng-if="addPackageFrm.nameAr.$error.maxlength&&packageFrmErrorSubmit">@Token.MaxLengthCharIs 50</small>
                                 </div>
 
                                 <!--NameEn-->
@@ -71,8 +70,8 @@
                                            ng-class="{'is-invalid':addPackageFrm.nameEn.$invalid&&packageFrmErrorSubmit}"
                                            ng-model="package.NameEn" ng-required="true" ng-maxlength="50" maxlength="50">
                                     <!--Errors:NameEn-->
-                                    <div class="error invalid-feedback" ng-if="addPackageFrm.nameEn.$error.required&&packageFrmErrorSubmit">@Token.FieldIsRequierd</div>
-                                    <div class="error invalid-feedback" ng-if="addPackageFrm.nameEn.$error.maxlength&&packageFrmErrorSubmit">@Token.MaxLengthCharIs 50</div>
+                                    <small class="error " ng-if="addPackageFrm.nameEn.$error.required&&packageFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                    <small class="error " ng-if="addPackageFrm.nameEn.$error.maxlength&&packageFrmErrorSubmit">@Token.MaxLengthCharIs 50</small>
                                 </div>
                             </div>
 
@@ -90,8 +89,8 @@
                                               rows="4"
                                               ng-required="true"></textarea>
                                     <!--Errors-->
-                                    <div class="error invalid-feedback" ng-if="addPackageFrm.descriptionAr.$error.required&&packageFrmErrorSubmit">@Token.FieldIsRequierd</div>
-                                    <div class="error invalid-feedback" ng-if="addPackageFrm.descriptionAr.$error.maxlength&&packageFrmErrorSubmit">@Token.MaxLengthCharIs 4000</div>
+                                    <small class="error " ng-if="addPackageFrm.descriptionAr.$error.required&&packageFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                    <small class="error " ng-if="addPackageFrm.descriptionAr.$error.maxlength&&packageFrmErrorSubmit">@Token.MaxLengthCharIs 4000</small>
                                 </div>
 
                                 <!--DescriptionEn-->
@@ -106,8 +105,8 @@
                                               rows="4"
                                               ng-required="true"></textarea>
                                     <!--Errors-->
-                                    <div class="error invalid-feedback" ng-if="addPackageFrm.descriptionEn.$error.required&&packageFrmErrorSubmit">@Token.FieldIsRequierd</div>
-                                    <div class="error invalid-feedback" ng-if="addPackageFrm.descriptionEn.$error.maxlength&&packageFrmErrorSubmit">@Token.MaxLengthCharIs 4000</div>
+                                    <small class="error " ng-if="addPackageFrm.descriptionEn.$error.required&&packageFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                    <small class="error " ng-if="addPackageFrm.descriptionEn.$error.maxlength&&packageFrmErrorSubmit">@Token.MaxLengthCharIs 4000</small>
                                 </div>
                             </div>
 
@@ -124,7 +123,7 @@
                                             ng-options="c.Id as c.AlbumTypeName for c in albumsTypes"
                                             ng-required="true"></select>
                                     <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="addPackageFrm.albumTypeId.$error.required&&packageFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                    <small class="error " ng-if="addPackageFrm.albumTypeId.$error.required&&packageFrmErrorSubmit">@Token.FieldIsRequierd</small>
                                 </div>
 
                                 <!--IsPrintNamesFree-->
@@ -152,8 +151,8 @@
                                            ng-model="package.Price"
                                            ng-required="true" />
                                     <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="addPackageFrm.price.$error.required&&packageFrmErrorSubmit">@Token.FieldIsRequierd</small>
-                                    <small class="error invalid-feedback" ng-if="addPackageFrm.price.$error.min&&packageFrmErrorSubmit">@Token.MinNumberIs 1 </small>
+                                    <small class="error " ng-if="addPackageFrm.price.$error.required&&packageFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                    <small class="error " ng-if="addPackageFrm.price.$error.min&&packageFrmErrorSubmit">@Token.MinNumberIs 1 </small>
                                 </div>
 
                                 <!--NamsArExtraPrice-->
@@ -167,8 +166,8 @@
                                            ng-model="package.NamsArExtraPrice"
                                            />
                                     <!--Errors:-->
-                                    <small class="error invalid-feedback" ng-if="addPackageFrm.namsArExtraPrice.$error.required&&packageFrmErrorSubmit">@Token.FieldIsRequierd</small>
-                                    <small class="error invalid-feedback" ng-if="addPackageFrm.namsArExtraPrice.$error.min&&packageFrmErrorSubmit">@Token.MinNumberIs 1 </small>
+                                    <small class="error " ng-if="addPackageFrm.namsArExtraPrice.$error.required&&packageFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                    <small class="error " ng-if="addPackageFrm.namsArExtraPrice.$error.min&&packageFrmErrorSubmit">@Token.MinNumberIs 1 </small>
 
                                 </div>
                             </div>

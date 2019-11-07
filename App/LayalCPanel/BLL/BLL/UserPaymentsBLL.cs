@@ -41,6 +41,7 @@ namespace BLL.BLL
             //Check If Not Closed
             if (db.UsersPrivileges_ChekcIfIsClosed(c.Id).First().Value > 0)
                 return new ResponseVM(RequestTypeEnum.Error, Token.ThisPaymentIsClosed);
+
             var UserTo = db.Users_SelectByPk(c.UserToId).First();
             if (!UserTo.IsActive)
                 return new ResponseVM(RequestTypeEnum.Error, Token.CanNotPayUserAccountIsNotActive);
@@ -49,74 +50,116 @@ namespace BLL.BLL
             if (!SavePaymentImage(c))
                 return new ResponseVM(RequestTypeEnum.Error, Token.CanNotSavePaymentPhoto);
 
+            var OldPayment = db.UserPayments_SelectByPK(c.Id).FirstOrDefault();
+
             db.UserPayments_Update(c.Id, c.IsAcceptFromManger, c.Notes, c.IsBankTransfer, c.PaymentImage);
 
-            NotificationsBLL NotificationsBLL = new NotificationsBLL();
-            var Notify = new NotifyVM
+            //ارسال الاشعار فى حالة اذا كانت هذة عملية تعديل لـ قية الرفض او القبول 
+            if (OldPayment.IsAcceptFromManger != c.IsAcceptFromManger)
             {
-                TitleAr = "عملية دفع مقبولة",
-                TitleEn = "New Payment Process Accepted",
-                DateTime = DateTime.Now,
-                TargetId = c.UserToId,
-                PageId = (int)PagesEnum.UserPayments,
-                RedirectUrl = $"/UserPayments/Payments?id={c.UserToId}&notifyId=",
-            };
 
-            //ارسار اشعار اذا كانت هذة عملية موافقة , دفع وارفاق صورة
-            if (c.IsAcceptFromManger == true && !string.IsNullOrEmpty(c.PaymentImage))
-            {
-                Notify.TitleAr = "عملية دفع جديدة";
-                Notify.TitleEn = "New Payment Process";
-                
-                //اذا هذة عملية دفع مكتملة ويجب ارسال اشعر للمستخدم
-                if (c.IsBankTransfer == true)
+                NotificationsBLL NotificationsBLL = new NotificationsBLL();
+                var Notify = new NotifyVM
                 {
-                    Notify.DescriptionAr = $"لقد تم دفع لك دفعة مالية عن طريق تحويل لنكى وقبمتها { c.Amount} ريال ";
-                    Notify.DescriptionEn = $"You have new payment by bank transfer and it is value { c.Amount} ";
+                    TitleAr = "عملية دفع مقبولة",
+                    TitleEn = "New Payment Process Accepted",
+                    DateTime = DateTime.Now,
+                    TargetId = c.UserToId,
+                    PageId = (int)PagesEnum.UserPayments,
+                    RedirectUrl = $"/UserPayments/Payments?id={c.UserToId}&notifyId=",
+                };
+
+
+                //ارسار اشعار اذا كانت هذة عملية موافقة 
+                if (c.IsAcceptFromManger == true )
+                {
+                    //ارسال اشعار للموظف
+                    {
+                        if (c.IsBankTransfer == true)
+                        {
+                            Notify.DescriptionAr = $"لقد تم دفع لك دفعة مالية عن طريق تحويل لنكى وقبمتها { c.Amount} ريال ";
+                            Notify.DescriptionEn = $"You have new payment by bank transfer and it is value { c.Amount} ";
+                        }
+                        else
+                        {
+                            Notify.DescriptionAr = $"لقد تم دفع لك دفعة مالية عن طريق دفع كاش وقبمتها { c.Amount} ريال ";
+                            Notify.DescriptionEn = $"You have new payment by cash payment and it is value { c.Amount} ";
+                        }
+                        Notify.RedirectUrl = $"/UserPayments/MyPayments?notifyId=";
+                        NotificationsBLL.Add(Notify, UserTo.Id);
+                        new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserTo.Id.ToString() }, Notify);
+                    }
+
+
+                    //ارسار اشعار لمدير الفرع
+                    {
+                        var BranchManger = db.Users_SelectByBranchId(UserTo.FKPranch_Id, (int)AccountTypeEnum.BranchManager).First();
+                        //اذا هذة عملية دفع كاش ويجب ارسال اشعار للفرع من اجل اكمالى باقى الخطوات
+                        if (c.IsBankTransfer == true)
+                        {
+                            Notify.DescriptionAr = $"لقد تمت الموافقة على الدفع بالتحويل البنكى لـ الموظف {  UserTo.UserName}";
+                            Notify.DescriptionEn = $"has been accept for bank transfer payment for {  UserTo.UserName} employee";
+                        }
+                        else
+                        {
+                            Notify.DescriptionAr = $"لقد تمت الموافقة على الدفع الكاش لـ الموظف {  UserTo.UserName}";
+                            Notify.DescriptionEn = $"has been accept for cash payment for {  UserTo.UserName} employee";
+                        }
+                        Notify.RedirectUrl = $"/UserPayments/MyPayments?notifyId=";
+
+                        NotificationsBLL.Add(Notify, BranchManger.Id);
+                        new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { BranchManger.Id.ToString() }, Notify);
+                    }
                 }
                 else
                 {
-                    Notify.DescriptionAr = $"لقد تم دفع لك دفعة مالية عن طريق دفع كاش وقبمتها { c.Amount} ريال ";
-                    Notify.DescriptionEn = $"You have new payment by cash payment and it is value { c.Amount} ";
+
+                    Notify.TitleAr = "عملية دفع مرفوضة";
+                    Notify.TitleEn = "Rejectd Payment Process";
+                    //ارسار اشعار اذا كانت هذة عملية موافقة 
+                    if (c.IsAcceptFromManger == true)
+                    {
+                        //ارسال اشعار للموظف
+                        {
+                            if (c.IsBankTransfer == true)
+                            {
+                                Notify.DescriptionAr = $"لقد تم رفض دفعة مالية عن طريق تحويل لنكى وقبمتها { c.Amount} ريال ";
+                                Notify.DescriptionEn = $"You have new payment by bank transfer and it is value { c.Amount} ";
+                            }
+                            else
+                            {
+                                Notify.DescriptionAr = $"لقد تم رفض دفعة مالية عن طريق دفع كاش وقبمتها { c.Amount} ريال ";
+                                Notify.DescriptionEn = $"You have new payment by cash payment and it is value { c.Amount} ";
+                            }
+                            Notify.RedirectUrl = $"/UserPayments/MyPayments?notifyId=";
+                            NotificationsBLL.Add(Notify, UserTo.Id);
+                            new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserTo.Id.ToString() }, Notify);
+                        }
+
+
+                        //ارسار اشعار لمدير الفرع
+                        {
+                            var BranchManger = db.Users_SelectByBranchId(UserTo.FKPranch_Id, (int)AccountTypeEnum.BranchManager).First();
+                            //اذا هذة عملية دفع كاش ويجب ارسال اشعار للفرع من اجل اكمالى باقى الخطوات
+                            if (c.IsBankTransfer == true)
+                            {
+                                Notify.DescriptionAr = $"لقد تم رفض على الدفع بالتحويل البنكى لـ الموظف {  UserTo.UserName}";
+                                Notify.DescriptionEn = $"has been accept for bank transfer payment for {  UserTo.UserName} employee";
+                            }
+                            else
+                            {
+                                Notify.DescriptionAr = $"لقد تم رفض على الدفع الكاش لـ الموظف {  UserTo.UserName}";
+                                Notify.DescriptionEn = $"has been accept for cash payment for {  UserTo.UserName} employee";
+                            }
+                            Notify.RedirectUrl = $"/UserPayments/MyPayments?notifyId=";
+
+                            NotificationsBLL.Add(Notify, BranchManger.Id);
+                            new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { BranchManger.Id.ToString() }, Notify);
+                        }
+                    }
                 }
-
-                Notify.RedirectUrl = $"/UserPayments/MyPayments?notifyId=";
-                NotificationsBLL.Add(Notify, UserTo.Id);
-                new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserTo.Id.ToString() }, Notify);
             }
-            else if (c.IsAcceptFromManger == true && this.UserLoggad.IsAdmin)
-            {
-                //ارسار اشعار لمدير الفرع
-                var BranchManger = db.Users_SelectByBranchId(UserTo.FKPranch_Id, (int)AccountTypeEnum.BranchManager).First();
-                //اذا هذة عملية دفع كاش ويجب ارسال اشعار للفرع من اجل اكمالى باقى الخطوات
-                if (c.IsBankTransfer == true)
-                {
-                    Notify.DescriptionAr = $"لقد تمت الموافقة على الدفع بالتحويل البنكى لـ الموظف {  UserTo.UserName}";
-                    Notify.DescriptionEn = $"has been accept for bank transfer payment for {  UserTo.UserName} employee";
-                }
-                else
-                {
-                    Notify.DescriptionAr = $"لقد تمت الموافقة على الدفع الكاش لـ الموظف {  UserTo.UserName}";
-                    Notify.DescriptionEn = $"has been accept for cash payment for {  UserTo.UserName} employee";
-                }
-                Notify.RedirectUrl = $"/UserPayments/MyPayments?notifyId=";
 
-                NotificationsBLL.Add(Notify, BranchManger.Id);
-                new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { BranchManger.Id.ToString() }, Notify);
-            }
-            else if(!c.IsAcceptFromManger.Value)
-            {  
-                //ارسار اشعار لمدير الفرع ان الدفعة مرفوضة
-                var BranchManger = db.Users_SelectByBranchId(UserTo.FKPranch_Id, (int)AccountTypeEnum.BranchManager).First();
-
-                Notify.TitleAr = "عملية دفع مرفوضة";
-                Notify.TitleEn = "New Payment Process Is Rejected";
-                Notify.DescriptionAr = $"يوجد عملية دفع مرفوضة خاصة بـ الموظف { UserTo.UserName}";
-                Notify.DescriptionEn = $"You have rejected payment process for {UserTo.UserName} employee";
-                NotificationsBLL.Add(Notify, c.UserToId);
-                new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { c.UserToId.ToString() }, Notify);
-
-            }
             return new ResponseVM(RequestTypeEnum.Success, Token.Success, c);
         }
 
@@ -225,7 +268,7 @@ namespace BLL.BLL
             if (!userToId.HasValue)
                 userToId = this.UserLoggad.Id;
             else
-              UserTo = db.Users_SelectByPk(userToId.Value).First();
+                UserTo = db.Users_SelectByPk(userToId.Value).First();
             var Payments = db.UserPayments_SelectByUserToId(userToId, skip, take).Select(c => new UserPaymentVM
             {
                 Id = c.Id,
@@ -246,10 +289,10 @@ namespace BLL.BLL
             {
                 if (skip > 0)
                     return new ResponseVM(RequestTypeEnum.Info, Token.NoMoreResult, new { UserName = UserTo.UserName, });
-                return new ResponseVM(RequestTypeEnum.Info, Token.NoResult,new { UserName = UserTo.UserName, });
+                return new ResponseVM(RequestTypeEnum.Info, Token.NoResult, new { UserName = UserTo.UserName, });
             }
 
-            return new ResponseVM(RequestTypeEnum.Success, Token.Success,new {UserName= UserTo.UserName, PaymentsInformations = Payments });
+            return new ResponseVM(RequestTypeEnum.Success, Token.Success, new { UserName = UserTo.UserName, PaymentsInformations = Payments });
         }
 
 

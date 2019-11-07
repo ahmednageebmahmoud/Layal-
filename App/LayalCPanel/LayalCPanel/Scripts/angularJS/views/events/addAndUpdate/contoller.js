@@ -2,7 +2,7 @@
     s.state = StateEnum;
     s.events = [];
     s.eventFOP = {};
-    s.UploadLogoNotes = LangIsEn ? "If is not upload logo or not upload good logo it will automatically be replaced with a logo from the lab" : "اذا لم يتم تحميل شعار او لم يتم تحميل شعار جديد سوف يتم استبدالة بشعار من المعمل بشكل تلقائى";
+    s.UploadLogoNotes = LangIsEn ? "If is not upload logo or not upload good logo it will automatically be replaced with a logo from the lab" : "اذا لم يتم تحميل شعار او لم يتم تحميل شعار جيد سوف يتم استبدالة بشعار من المعمل بشكل تلقائى";
 
     var eventId = getQueryStringValue("id");
 

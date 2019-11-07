@@ -1,4 +1,4 @@
-﻿\@{
+﻿@{
     ViewBag.Title = Token.Events;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -220,7 +220,8 @@
 
                                     <!--EventCoordinations-->
                                     <a href="/EEW/AddAndUpdateCoordinations?id={{x.Id}}"
-                                       ng-hide="x.IsClosed||!x.IsPayment||x.IsAllowSurvey"
+                                           ng-if="!x.IsClosed&&x.IsPayment&&x.EventWorkStatusIsFinshed.DataPerfection"
+
                                         title="@Token.AddAndUpdateCoordinations" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fa fa-tasks"></i></a>
 
                                     <!--Show Details-->

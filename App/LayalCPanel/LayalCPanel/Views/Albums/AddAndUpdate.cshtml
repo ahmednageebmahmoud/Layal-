@@ -1,0 +1,189 @@
+﻿@{
+    ViewBag.Title = Token.AddOrUpdateAlbum;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    UsersPrivilegeVM Priv =
+        new UsersPrivilegesBLL().SelectByUserId(PagesEnum.Albums);
+
+
+    string Description = LanguageService.IsEn ? "The event will be sent automatically as soon as its data is completed" : "سوف يتم ارسال الحدث تلقائيا فور استكمال بياناتها",
+        DescriptionDisapled = LanguageService.IsEn ? "Basic information cannot be updated if this branch is used by" : "لا يمكن تحديث المعلومات الاساسية اذا كان هذا الفرع مستخدم من قبل";
+}
+
+<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" ng-controller="albumsCtrl">
+    <!-- begin:: Subheader -->
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <span class="kt-subheader__separator kt-hidden"></span>
+            <div class="kt-subheader__breadcrumbs">
+                <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link"> @Token.HomePage </a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="~/Albums" class="kt-subheader__breadcrumbs-link"> @Token.Albums </a>
+
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" ng-if="branch.State!=state.update">@Token.AddNewAlbum</a>
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" ng-if="branch.State==state.update">@Token.UpdateAlbum</a>
+
+                <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+            </div>
+        </div>
+
+    </div>
+    <!-- end:: Subheader -->
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--AddAlbum-->
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <span class="kt-portlet__head-icon">
+                                <i class="kt-font-brand flaticon-add"></i>
+                            </span>
+                            <h3 class="kt-portlet__head-title" ng-if="branch.State!=state.update">@Token.AddNewAlbum</h3>
+                            <h3 class="kt-portlet__head-title" ng-if="branch.State==state.update">@Token.UpdateAlbum</h3>
+                        </div>
+
+                    </div>
+                    <!--AddAlbum Form-->
+                    <form novalidate name="addAlbumFrm" class="kt-form kt-form--label-right" ng-submit="saveChange(addAlbumFrm)">
+                        <div class="kt-portlet__body">
+
+                            <!--R O W 1-->
+                            <div class="form-group  row">
+                                <!--NameAr-->
+                                <label class="col-lg-2 col-form-label">@Token.NameAr</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text" class="form-control input-disabled"
+                                           name="nameAr"
+                                           ng-class="{'is-invalid':addAlbumFrm.nameAr.$invalid&&albumFrmErrorSubmit}"
+                                           ng-model="newAlbum.NameAr"
+                                          required maxlength="50" ng-maxlength="50" />
+
+                                    <!--Errors:NameAr-->
+                                    <small class="error " ng-if="addAlbumFrm.nameAr.$error.required&&albumFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                </div>
+
+                                <!--NameEn-->
+                                <label class="col-lg-2 col-form-label">@Token.NameEn</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <input type="text"
+                                           class="form-control input-disabled"
+                                           name="nameEn"
+                                           ng-class="{'is-invalid':addAlbumFrm.nameEn.$invalid&&albumFrmErrorSubmit}"
+                                           ng-model="newAlbum.NameEn"
+                                          required maxlength="50" ng-maxlength="50" />
+                                    <!--Errors:NameEn-->
+                                    <small class="error " ng-if="addAlbumFrm.nameEn.$error.required&&albumFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                </div>
+                            </div>
+
+                            <!--R O W 2-->
+                            <div class="form-group  row">
+                                <!--DescriptionAr-->
+                                <label class="col-lg-2 col-form-label">@Token.DescriptionAr</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <textarea class="form-control input-disabled"
+                                              name="descriptionAr"
+                                              ng-class="{'is-invalid':addAlbumFrm.descriptionAr.$invalid&&albumFrmErrorSubmit}"
+                                              ng-model="newAlbum.DescriptionAr"
+                                             required maxlength="500"></textarea>
+                                    <!--Errors:DescriptionAr-->
+                                    <small class="error " ng-if="addAlbumFrm.descriptionAr.$error.required&&albumFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                </div>
+
+                                <!--DescriptionEn-->
+                                <label class="col-lg-2 col-form-label">@Token.DescriptionEn</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <textarea class="form-control input-disabled"
+                                              name="descriptionEn"
+                                              ng-class="{'is-invalid':addAlbumFrm.descriptionEn.$invalid&&albumFrmErrorSubmit}"
+                                              ng-model="newAlbum.DescriptionEn"
+                                             required maxlength="500"></textarea>
+                                    <!--Errors:DescriptionEn-->
+                                    <small class="error " ng-if="addAlbumFrm.descriptionEn.$error.required&&albumFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                </div>
+                            </div>
+
+                            <!--R O W 3-->
+                            <div class="form-group row">
+                                <!--Images-->
+                                <label class="col-lg-2 col-form-label">@Token.Images</label>
+                                <div class="col-lg-2 form-group-sub">
+                                  <up-files 
+                                                text="@Token.Upload"
+                                                accept="image/*"
+                                                count="10"
+                                                
+                                                ></up-files>
+                                </div>
+                                <!--Images-->
+                                <div class="col-lg-8 form-group-sub">
+                                    <div class="row">
+                                        <div class="col-md-4" ng-repeat="im in newAlbum.AlbumFiles " ng-hide="im.State==state.delete">
+                                            <div class="thumbnail">
+                                                    <img src="{{im.FileUrl}}" alt="Lights" style="width:100%">
+                                                    <div class="caption">
+                                                        <div class="kt-section__content kt-section__content--solid">
+                                                            <div class="kt-divider">
+                                                                <span></span>
+                                                                <span class="cursor-pointer kt-link kt-font-boldest     " ng-click="deleteImage($index)">@Token.Delete</span>
+                                                                <span></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                               
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="kt-portlet__foot">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 m--valign-middle">
+                                </div>
+                                <div class="col-lg-6 kt-align-right">
+                                    @if (Priv.CanAdd)
+                                    {
+                                        <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"
+                                                ng-if="newAlbum.State==state.create"
+                                                >
+                                            <i class="la la-save">@Token.Add</i>
+                                        </button>
+                                    }
+
+                                    @if (Priv.CanAdd)
+                                    {
+                                        <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"
+                                                ng-if="newAlbum.State==state.update"
+                                                >
+                                            <i class="la la-save">@Token.Update</i>
+                                        </button>
+                                    }
+                                    <button type="reset" class="btn btn-warning btn-elevate btn-elevate-air" ng-if="enquiry.State!=state.update" ng-click="reSelect()"><i class="la la-file">@Token.Cancel</i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!--end::Portlet-->
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/albums/addAndUpdate/service.js"></script>
+    <script src="~/Scripts/angularJS/views/albums/addAndUpdate/contoller.js"></script>
+
+
+}

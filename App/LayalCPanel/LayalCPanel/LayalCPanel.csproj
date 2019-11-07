@@ -222,7 +222,7 @@
     <Compile Include="Controllers\BranchesController.cs" />
     <Compile Include="Controllers\MyEventsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
-    <Compile Include="Controllers\AlbumTypesController.cs" />
+    <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\SocialAccountTypesController.cs" />
     <Compile Include="Controllers\PrintNamesTypesController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
@@ -328,6 +328,7 @@
     <Content Include="assets\demo\default\skins\header\menu\light.rtl.min.css" />
     <Content Include="assets\DEV_CSS\dev_AR.css" />
     <Content Include="assets\DEV_CSS\dev_EN.css" />
+    <Content Include="assets\DEV_CSS\dev_shared.css" />
     <Content Include="assets\media\bg\300.jpg" />
     <Content Include="assets\media\bg\350.jpg" />
     <Content Include="assets\media\bg\400.jpg" />
@@ -1961,9 +1962,11 @@
     <Content Include="Scripts\angularJS\directives\sms-fop\sms-paging-select.js" />
     <Content Include="Scripts\angularJS\directives\sms-fop\sms-paging.js" />
     <Content Include="Scripts\angularJS\directives\sms-fop\sms-sort.js" />
-    <Content Include="Scripts\angularJS\directives\sms-upload-files.js" />
+    <Content Include="Scripts\angularJS\directives\upload-files.js" />
     <Content Include="Scripts\angularJS\filters\employeeWorkFilter.js" />
     <Content Include="Scripts\angularJS\filters\filterWithoutStaticItems.js" />
+    <Content Include="Scripts\angularJS\views\albums\addAndUpdate\contoller.js" />
+    <Content Include="Scripts\angularJS\views\albums\addAndUpdate\service.js" />
     <Content Include="Scripts\angularJS\views\eew\archivingAndSaveing\addAndUpdate\contoller.js" />
     <Content Include="Scripts\angularJS\views\eew\archivingAndSaveing\addAndUpdate\service.js" />
     <Content Include="Scripts\angularJS\views\eew\archivingAndSaveing\index\contoller.js" />
@@ -2012,8 +2015,8 @@
     <Content Include="Scripts\angularJS\views\events\addAndUpdate\service.js" />
     <Content Include="Scripts\angularJS\views\events\index\contoller.js" />
     <Content Include="Scripts\angularJS\views\events\index\service.js" />
-    <Content Include="Scripts\angularJS\views\albumTypes\index\contoller.js" />
-    <Content Include="Scripts\angularJS\views\albumTypes\index\service.js" />
+    <Content Include="Scripts\angularJS\views\albums\index\contoller.js" />
+    <Content Include="Scripts\angularJS\views\albums\index\service.js" />
     <Content Include="Scripts\angularJS\views\eventSurveyQuestionTypes\index\contoller.js" />
     <Content Include="Scripts\angularJS\views\eventSurveyQuestionTypes\index\service.js" />
     <Content Include="Scripts\angularJS\views\filesReceivedTypes\index\contoller.js" />
@@ -2298,7 +2301,7 @@
     <Content Include="Views\Events\AddAndUpdate.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
     <Content Include="Views\MyEvents\Index.cshtml" />
-    <Content Include="Views\AlbumTypes\Index.cshtml" />
+    <Content Include="Views\Albums\Index.cshtml" />
     <Content Include="Views\PackageInputTypes\Index.cshtml" />
     <Content Include="Views\Packages\AddAndUpdate.cshtml" />
     <Content Include="Views\Packages\Index.cshtml" />
@@ -2333,10 +2336,13 @@
     <Content Include="Views\MyEnquires\AddAndUpdate.cshtml" />
     <Content Include="Views\Shared\_CRM.cshtml" />
     <Content Include="Views\Shared\_EnquiryWorkFlow.cshtml" />
+    <Content Include="Views\Shared\_Photographers.cshtml" />
+    <Content Include="Views\Albums\AddAndUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\css\" />
+    <Folder Include="Files\Albums\" />
     <Folder Include="Files\Enquiries\Payments\" />
     <Folder Include="Files\Events\CustomLogos\" />
     <Folder Include="Files\Users\Payments\" />

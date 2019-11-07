@@ -101,7 +101,8 @@ ngApp.controller('addAUpdatePackagesCtrl', ['$scope', '$http', 'addAUpdatePackag
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess:
                     {
-                        s.package.Id = d.data.Result.Id;
+                        s.package = d.data.Result;
+                        s.package.NamsArExtraPrice = s.package.NamsArExtraPrice || null;
                         s.package.State = StateEnum.update;
 
                     } break;

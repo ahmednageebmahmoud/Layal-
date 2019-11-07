@@ -119,9 +119,9 @@ namespace BLL.BLL
                 WordId = c.Key.FKWord_Id,
                 NameAr = c.Key.CountryNameAr,
                 NameEn = c.Key.CountryNameEn,
-                Cities = c.Select(v => new CityVM
+                Cities = c.Where(v=> v.CityId>0).Select(v => new CityVM
                 {
-                    Id = v.Id,
+                    Id = v.CityId,
                     CountryId = c.Key.Id,
                     WordId = v.CityFkWord_Id,
                     NameAr = v.CityNameAr,

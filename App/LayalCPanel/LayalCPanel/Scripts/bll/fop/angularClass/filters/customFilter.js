@@ -12,14 +12,10 @@ ngApp.filter('customFilter', function ($filter) {
         //اذا لم يكن هناك حقول فـ نرجع لـ الداتا مباشرة
         if (!fildesUsed) return items;
 
-
-
-
         //Generate Custom Object Search
         let valus = [];
         fildesUsed.forEach(feild => {
             let objSerarch = { feild: condetion };
-
             //   console.log($filter('filter')(items, feild, condetion))
         });
 
@@ -61,10 +57,7 @@ function filterArray(items, condetion, fildesUsed) {
                 else if (typeof (c[prop]) === "object") {
                         try {
                             Object.getOwnPropertyNames(c[prop]).forEach(newProp=>{
-                                
                                 if (fildesUsed.filter(v => v.toLocaleLowerCase() == newProp.toLocaleLowerCase()).length == 0) return;
-
-
                             fildesUsed.forEach(feild => {
                                 if (!c[prop][newProp].toString().toLowerCase().includes(condetion.toLowerCase())) return;
                                 inserted = true;
@@ -72,12 +65,9 @@ function filterArray(items, condetion, fildesUsed) {
 
                             })
                         } catch (e) {
-
                         }
                 }
                 else {
-                  
-
                     if (fildesUsed.filter(v => v.toLocaleLowerCase() == prop.toLocaleLowerCase()).length == 0) return;
 
                     fildesUsed.forEach(feild => {
@@ -94,6 +84,8 @@ function filterArray(items, condetion, fildesUsed) {
     });
     return vrtial;
 }
+
+
 function filterInObject() {
 
 

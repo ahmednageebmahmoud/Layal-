@@ -26,6 +26,7 @@ namespace BLL.ViewModels
         public int LanguageId { get; set; }
         public bool _IsRemmeberMe { get;  set; }
         public string FullName { get; set; }
+        public string Name => string.IsNullOrEmpty(this.FullName) ? this.UserName : this.FullName;
         public string WebSite { get; set; }
         public string NationalityNumber { get; set; }
         public int Skip { get; set; }

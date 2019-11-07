@@ -1,0 +1,24 @@
+u{
+    cursor: help;
+}
+li{
+    font-size: 15px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+.my-image{
+    width: 99%;
+    box-shadow: 3px 3px 4px 3px #00000030;
+    border-radius: 11px;
+}
+
+ul.myCollapes li {
+    cursor: pointer;
+}
+ul.myCollapes{
+    display: none;
+}
+ ul.myCollapes.activeUl{
+display: block;
+ }
+ 
