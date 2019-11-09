@@ -153,7 +153,7 @@ ngApp.controller('addAUpdateCountriesCtrl', ['$scope', '$http', 'addAUpdateCount
 
 
 
-    //============= E D I T I  =================
+    //============= U P D A T E  =================
     //change row for edit 
     s.countryItemOpration.changeEdit = country => {
         if (!country) return;

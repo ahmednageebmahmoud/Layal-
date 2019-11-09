@@ -15,7 +15,7 @@ namespace BLL.ViewModels
         
         public int? PackageInputTypeId { get; set; }
         public int PackageId { get; set; }
-        public PackageInputTypeVM PackageInputType { get; set; }
+        public StaticFieldVM PackageInputType { get; set; }
 
     }//end class
 }

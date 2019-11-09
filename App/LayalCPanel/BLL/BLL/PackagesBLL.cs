@@ -168,7 +168,7 @@ namespace BLL.BLL
                     ValueAr = v.PackageDetailValueAr,
                     ValueEn = v.PackageDetailValueEn,
                     PackageInputTypeId = v.FKPackageInputType_Id,
-                    PackageInputType = new PackageInputTypeVM
+                    PackageInputType = new StaticFieldVM
                     {
                         NameAr = v.PackageInputTypeAr,
                         NameEn = v.PackageInputTypeEn,

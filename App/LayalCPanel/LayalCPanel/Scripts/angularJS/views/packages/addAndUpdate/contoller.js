@@ -182,7 +182,7 @@ ngApp.controller('addAUpdatePackagesCtrl', ['$scope', '$http', 'addAUpdatePackag
 
 
 
-    //============= E D I T I  =================
+    //============= U P D A T E  =================
     //change row for edit 
    
 

@@ -123,7 +123,7 @@
         });
     };
 
-    //============= E D I T I  =================
+    //============= U P D A T E  =================
     s.changeActive = qu=> {
         qu.State = StateEnum.update;
         BlockingService.block();

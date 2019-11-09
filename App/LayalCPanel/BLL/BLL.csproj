@@ -131,7 +131,7 @@
     <Compile Include="BLL\FilesReceivedTypesBLL.cs" />
     <Compile Include="BLL\UserPaymentsBLL.cs" />
     <Compile Include="BLL\EnquiryPaymentsBLL.cs" />
-    <Compile Include="BLL\PackageInputTypesBLL.cs" />
+    <Compile Include="BLL\StaticFieldsBLL.cs" />
     <Compile Include="BLL\BasicBLL.cs" />
     <Compile Include="BLL\BranchesBLL.cs" />
     <Compile Include="BLL\MyEventsBLL.cs" />
@@ -188,7 +188,7 @@
     <Compile Include="ViewModels\EventWorksStatusIsFinshedVM.cs" />
     <Compile Include="ViewModels\EventWorkStatusVM.cs" />
     <Compile Include="ViewModels\PackageDetailVM.cs" />
-    <Compile Include="ViewModels\PackageInputTypeVM.cs" />
+    <Compile Include="ViewModels\StaticFieldVM.cs" />
     <Compile Include="ViewModels\PackageVM.cs" />
     <Compile Include="ViewModels\FilesReceivedTypeVM .cs" />
     <Compile Include="ViewModels\PrintNamesTypeVM.cs" />

@@ -234,3 +234,9 @@ div#ng_table_1_filter {
    .blockUI{
             z-index:50000 !important
         }
+
+   .sms-table tbody tr:hover{
+           border-left: 2px solid #2a3450;
+   }
+
+    

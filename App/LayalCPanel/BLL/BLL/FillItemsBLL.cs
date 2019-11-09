@@ -47,7 +47,7 @@ namespace BLL.BLL
 
         public object GetPackageInputTypes()
         {
-            var Result = db.PackageInputTypes_SelectAll().Select(c => new PackageInputTypeVM
+            var Result = db.PackageInputTypes_SelectAll().Select(c => new StaticFieldVM
             {
                 Id = c.Id,
                 NameAr = c.NameAr,

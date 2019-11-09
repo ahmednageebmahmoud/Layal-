@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /*
 $kt-media-breakpoints: (
     // Small screen / phone
@@ -8420,14 +8420,16 @@ a.text-dark:hover, a.text-dark:focus {
     /*rtl:raw:
         left: auto !important;
         */ }
-  .dropdown-menu.dropdown-menu-sm {
+  /*.dropdown-menu.dropdown-menu-sm {
     width: 240px; }
   .dropdown-menu.dropdown-menu-md {
     width: 260px; }
   .dropdown-menu.dropdown-menu-lg {
     width: 320px; }
   .dropdown-menu.dropdown-menu-xl {
-    width: 380px; }
+    width: 380px; }*/
+
+
   .dropdown-menu.dropdown-menu-anim {
     -webkit-animation: dropdown-menu-fade-in .3s ease 1, dropdown-menu-move-up .3s ease-out 1;
     animation: dropdown-menu-fade-in .3s ease 1, dropdown-menu-move-up .3s ease-out 1; }

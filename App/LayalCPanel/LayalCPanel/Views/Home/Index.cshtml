@@ -4,6 +4,8 @@
 <!-- begin:: Content Head -->
  
 <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content" ng-controller="homeCtrl">
+    
+         
     @if (CookieService.UserInfo.IsAdmin)
     {
         @Html.Partial("~/Views/Shared/AdminIndex.cshtml")
@@ -40,6 +42,8 @@
         }
     }
 </div>
+
+
 
 
 

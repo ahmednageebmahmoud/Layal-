@@ -64,7 +64,7 @@ namespace BLL.Enums
         Events = 12,
         Packages = 14,
         Albums = 15,
-        PackageInputTypes = 16,
+        StaticFields = 16,
         SocialAccountTypes = 17,
         UserPayments = 18,
         EnquiryPayments = 19,

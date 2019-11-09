@@ -62,7 +62,7 @@
                                            name="nameAr"
                                            ng-class="{'is-invalid':addAlbumFrm.nameAr.$invalid&&albumFrmErrorSubmit}"
                                            ng-model="newAlbum.NameAr"
-                                          required maxlength="50" ng-maxlength="50" />
+                                           required maxlength="50" ng-maxlength="50" />
 
                                     <!--Errors:NameAr-->
                                     <small class="error " ng-if="addAlbumFrm.nameAr.$error.required&&albumFrmErrorSubmit">@Token.FieldIsRequierd</small>
@@ -76,7 +76,7 @@
                                            name="nameEn"
                                            ng-class="{'is-invalid':addAlbumFrm.nameEn.$invalid&&albumFrmErrorSubmit}"
                                            ng-model="newAlbum.NameEn"
-                                          required maxlength="50" ng-maxlength="50" />
+                                           required maxlength="50" ng-maxlength="50" />
                                     <!--Errors:NameEn-->
                                     <small class="error " ng-if="addAlbumFrm.nameEn.$error.required&&albumFrmErrorSubmit">@Token.FieldIsRequierd</small>
                                 </div>
@@ -91,7 +91,7 @@
                                               name="descriptionAr"
                                               ng-class="{'is-invalid':addAlbumFrm.descriptionAr.$invalid&&albumFrmErrorSubmit}"
                                               ng-model="newAlbum.DescriptionAr"
-                                             required maxlength="500"></textarea>
+                                              required maxlength="500"></textarea>
                                     <!--Errors:DescriptionAr-->
                                     <small class="error " ng-if="addAlbumFrm.descriptionAr.$error.required&&albumFrmErrorSubmit">@Token.FieldIsRequierd</small>
                                 </div>
@@ -103,46 +103,46 @@
                                               name="descriptionEn"
                                               ng-class="{'is-invalid':addAlbumFrm.descriptionEn.$invalid&&albumFrmErrorSubmit}"
                                               ng-model="newAlbum.DescriptionEn"
-                                             required maxlength="500"></textarea>
+                                              required maxlength="500"></textarea>
                                     <!--Errors:DescriptionEn-->
                                     <small class="error " ng-if="addAlbumFrm.descriptionEn.$error.required&&albumFrmErrorSubmit">@Token.FieldIsRequierd</small>
                                 </div>
                             </div>
+                            @*
+                                <!--R O W 3-->
+                                <div class="form-group row" >
+                                    <!--Images-->
+                                    <label class="col-lg-2 col-form-label">@Token.Images</label>
+                                    <div class="col-lg-2 form-group-sub">
+                                      <up-files
+                                                    text="@Token.Upload"
+                                                    accept="image/*"
+                                                    count="10"
 
-                            <!--R O W 3-->
-                            <div class="form-group row">
-                                <!--Images-->
-                                <label class="col-lg-2 col-form-label">@Token.Images</label>
-                                <div class="col-lg-2 form-group-sub">
-                                  <up-files 
-                                                text="@Token.Upload"
-                                                accept="image/*"
-                                                count="10"
-                                                
-                                                ></up-files>
-                                </div>
-                                <!--Images-->
-                                <div class="col-lg-8 form-group-sub">
-                                    <div class="row">
-                                        <div class="col-md-4" ng-repeat="im in newAlbum.AlbumFiles " ng-hide="im.State==state.delete">
-                                            <div class="thumbnail">
-                                                    <img src="{{im.FileUrl}}" alt="Lights" style="width:100%">
-                                                    <div class="caption">
-                                                        <div class="kt-section__content kt-section__content--solid">
-                                                            <div class="kt-divider">
-                                                                <span></span>
-                                                                <span class="cursor-pointer kt-link kt-font-boldest     " ng-click="deleteImage($index)">@Token.Delete</span>
-                                                                <span></span>
+                                                    ></up-files>
+                                    </div>
+                                    <!--Images-->
+                                    <div class="col-lg-8 form-group-sub">
+                                        <div class="row">
+                                            <div class="col-md-4" ng-repeat="im in newAlbum.AlbumFiles " ng-hide="im.State==state.delete">
+                                                <div class="thumbnail">
+                                                        <img src="{{im.FileUrl}}" alt="Lights" style="width:100%">
+                                                        <div class="caption">
+                                                            <div class="kt-section__content kt-section__content--solid">
+                                                                <div class="kt-divider">
+                                                                    <span></span>
+                                                                    <span class="cursor-pointer kt-link kt-font-boldest     " ng-click="deleteImage($index)">@Token.Delete</span>
+                                                                    <span></span>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                               
-                                    </div>
-                                </div>
 
-                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>*@
                         </div>
 
                         <div class="kt-portlet__foot">
@@ -153,8 +153,7 @@
                                     @if (Priv.CanAdd)
                                     {
                                         <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"
-                                                ng-if="newAlbum.State==state.create"
-                                                >
+                                                ng-if="newAlbum.State==state.create">
                                             <i class="la la-save">@Token.Add</i>
                                         </button>
                                     }
@@ -162,8 +161,7 @@
                                     @if (Priv.CanAdd)
                                     {
                                         <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"
-                                                ng-if="newAlbum.State==state.update"
-                                                >
+                                                ng-if="newAlbum.State==state.update">
                                             <i class="la la-save">@Token.Update</i>
                                         </button>
                                     }
@@ -180,6 +178,10 @@
     </div>
 
 </div>
+
+
+
+
 @section scripts{
     <!--(ANageeb) link angualr files for thsis  view -->
     <script src="~/Scripts/angularJS/views/albums/addAndUpdate/service.js"></script>

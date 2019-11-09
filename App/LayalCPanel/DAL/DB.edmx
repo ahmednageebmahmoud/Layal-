@@ -753,29 +753,7 @@
           <Parameter Name="Package_Id" Type="int" Mode="In" />
           <Parameter Name="ValueAr" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="ValueEn" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="PackageInputId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="PackageInputTypes_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="PackageInputTypes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="bigint" Mode="In" />
-        </Function>
-        <Function Name="PackageInputTypes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="InOut" />
-          <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
-          <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="PackageInputTypes_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="PackageInputTypes_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Skip" Type="int" Mode="In" />
-          <Parameter Name="Take" Type="int" Mode="In" />
-        </Function>
-        <Function Name="PackageInputTypes_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="In" />
-          <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
-          <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
-          <Parameter Name="WordId" Type="bigint" Mode="In" />
+          <Parameter Name="StaticFieldId" Type="int" Mode="In" />
         </Function>
         <Function Name="Packages_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
@@ -867,6 +845,28 @@
           <Parameter Name="Take" Type="int" Mode="In" />
         </Function>
         <Function Name="SocialAccountTypes_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+          <Parameter Name="WordId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="StaticFields_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="StaticFields_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="StaticFields_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="InOut" />
+          <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="StaticFields_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="StaticFields_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Skip" Type="int" Mode="In" />
+          <Parameter Name="Take" Type="int" Mode="In" />
+        </Function>
+        <Function Name="StaticFields_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
           <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
@@ -1759,7 +1759,7 @@
             <Parameter Name="Package_Id" Mode="In" Type="Int32" />
             <Parameter Name="ValueAr" Mode="In" Type="String" />
             <Parameter Name="ValueEn" Mode="In" Type="String" />
-            <Parameter Name="PackageInputId" Mode="In" Type="Int32" />
+            <Parameter Name="StaticFieldId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PackageInputTypes_CheckIfUsed" ReturnType="Collection(Int32)">
           <Parameter Name="Id" Mode="In" Type="Int32" />
@@ -2097,6 +2097,28 @@
             <Parameter Name="WordId" Mode="In" Type="Int64" />
             <Parameter Name="WordDescriptionId" Mode="In" Type="Int64" />
             <Parameter Name="DeleteFilesIds" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="StaticFields_Delete">
+          <Parameter Name="Id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="StaticFields_Insert">
+            <Parameter Name="Id" Mode="InOut" Type="Int32" />
+            <Parameter Name="NameAr" Mode="In" Type="String" />
+            <Parameter Name="NameEn" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="StaticFields_SelectAll" ReturnType="Collection(LayanModel.StaticFields_SelectAll_Result)" />
+          <FunctionImport Name="StaticFields_SelectByFilter" ReturnType="Collection(LayanModel.StaticFields_SelectByFilter_Result)">
+            <Parameter Name="Skip" Mode="In" Type="Int32" />
+            <Parameter Name="Take" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="StaticFields_Update">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="NameAr" Mode="In" Type="String" />
+            <Parameter Name="NameEn" Mode="In" Type="String" />
+            <Parameter Name="WordId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="StaticFields_CheckIfUsed" ReturnType="Collection(Int32)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Branches_SelectByAll_Result">
@@ -3279,6 +3301,18 @@
           <Property Type="Int64" Name="AlbumFileId" Nullable="false" />
           <Property Type="String" Name="FileUrl" Nullable="false" MaxLength="Max" />
         </ComplexType>
+        <ComplexType Name="StaticFields_SelectAll_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+          <Property Type="String" Name="NameAr" Nullable="true" />
+          <Property Type="String" Name="NameEn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="StaticFields_SelectByFilter_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+          <Property Type="String" Name="NameAr" Nullable="true" />
+          <Property Type="String" Name="NameEn" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4288,30 +4322,6 @@
           <FunctionImportMapping FunctionImportName="PackageDetails_Delete" FunctionName="LayanModel.Store.PackageDetails_Delete" />
           <FunctionImportMapping FunctionImportName="PackageDetails_DeleteAllByPackageId" FunctionName="LayanModel.Store.PackageDetails_DeleteAllByPackageId" />
           <FunctionImportMapping FunctionImportName="PackageDetails_Insert" FunctionName="LayanModel.Store.PackageDetails_Insert" />
-          <FunctionImportMapping FunctionImportName="PackageInputTypes_CheckIfUsed" FunctionName="LayanModel.Store.PackageInputTypes_CheckIfUsed" />
-          <FunctionImportMapping FunctionImportName="PackageInputTypes_Delete" FunctionName="LayanModel.Store.PackageInputTypes_Delete" />
-          <FunctionImportMapping FunctionImportName="PackageInputTypes_Insert" FunctionName="LayanModel.Store.PackageInputTypes_Insert" />
-          <FunctionImportMapping FunctionImportName="PackageInputTypes_SelectAll" FunctionName="LayanModel.Store.PackageInputTypes_SelectAll">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.PackageInputTypes_SelectAll_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
-                <ScalarProperty Name="NameAr" ColumnName="NameAr" />
-                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="PackageInputTypes_SelectByFilter" FunctionName="LayanModel.Store.PackageInputTypes_SelectByFilter">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.PackageInputTypes_SelectByFilter_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
-                <ScalarProperty Name="NameAr" ColumnName="NameAr" />
-                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="PackageInputTypes_Update" FunctionName="LayanModel.Store.PackageInputTypes_Update" />
           <FunctionImportMapping FunctionImportName="Packages_Delete" FunctionName="LayanModel.Store.Packages_Delete" />
           <FunctionImportMapping FunctionImportName="Packages_Insert" FunctionName="LayanModel.Store.Packages_Insert">
             <ResultMapping>
@@ -4918,6 +4928,30 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Albums_Delete" FunctionName="LayanModel.Store.Albums_Delete" />
+          <FunctionImportMapping FunctionImportName="StaticFields_Delete" FunctionName="LayanModel.Store.StaticFields_Delete" />
+          <FunctionImportMapping FunctionImportName="StaticFields_Insert" FunctionName="LayanModel.Store.StaticFields_Insert" />
+          <FunctionImportMapping FunctionImportName="StaticFields_SelectAll" FunctionName="LayanModel.Store.StaticFields_SelectAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.StaticFields_SelectAll_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+                <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="StaticFields_SelectByFilter" FunctionName="LayanModel.Store.StaticFields_SelectByFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.StaticFields_SelectByFilter_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+                <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="StaticFields_Update" FunctionName="LayanModel.Store.StaticFields_Update" />
+          <FunctionImportMapping FunctionImportName="StaticFields_CheckIfUsed" FunctionName="LayanModel.Store.StaticFields_CheckIfUsed" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

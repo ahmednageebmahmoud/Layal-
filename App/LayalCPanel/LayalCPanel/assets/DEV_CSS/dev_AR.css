@@ -230,3 +230,9 @@ form-control:disabled, .form-control[readonly] {
             .blockUI{
             z-index:50000 !important
         }
+
+               .sms-table tbody tr:hover{
+           border-right: 2px solid #2a3450;
+   }
+
+ 

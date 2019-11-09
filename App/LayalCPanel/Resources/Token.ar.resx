@@ -663,8 +663,8 @@
   <data name="Albums" xml:space="preserve">
     <value>الالبومات</value>
   </data>
-  <data name="PackageInputTypes" xml:space="preserve">
-    <value>انواع مدخلات الباكيجات</value>
+  <data name="StaticFields" xml:space="preserve">
+    <value>الحقول الثابتة</value>
   </data>
   <data name="Packages" xml:space="preserve">
     <value>الباكيجات</value>
@@ -1166,5 +1166,11 @@
   </data>
   <data name="Upload" xml:space="preserve">
     <value>تحميل ملفات</value>
+  </data>
+  <data name="AddNewStaticField" xml:space="preserve">
+    <value>اضافة حقل ثابت جديد</value>
+  </data>
+  <data name="UpdateStaticField" xml:space="preserve">
+    <value>تحديث الحقل الثابت</value>
   </data>
 </root>

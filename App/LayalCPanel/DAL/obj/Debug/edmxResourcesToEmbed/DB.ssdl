@@ -748,29 +748,7 @@
     <Parameter Name="Package_Id" Type="int" Mode="In" />
     <Parameter Name="ValueAr" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="ValueEn" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="PackageInputId" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PackageInputTypes_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PackageInputTypes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Id" Type="bigint" Mode="In" />
-  </Function>
-  <Function Name="PackageInputTypes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Id" Type="int" Mode="InOut" />
-    <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
-    <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="PackageInputTypes_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="PackageInputTypes_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Skip" Type="int" Mode="In" />
-    <Parameter Name="Take" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PackageInputTypes_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Id" Type="int" Mode="In" />
-    <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
-    <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
-    <Parameter Name="WordId" Type="bigint" Mode="In" />
+    <Parameter Name="StaticFieldId" Type="int" Mode="In" />
   </Function>
   <Function Name="Packages_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="In" />
@@ -862,6 +840,28 @@
     <Parameter Name="Take" Type="int" Mode="In" />
   </Function>
   <Function Name="SocialAccountTypes_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+    <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+    <Parameter Name="WordId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="StaticFields_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="StaticFields_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="StaticFields_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="InOut" />
+    <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+    <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="StaticFields_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="StaticFields_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Skip" Type="int" Mode="In" />
+    <Parameter Name="Take" Type="int" Mode="In" />
+  </Function>
+  <Function Name="StaticFields_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="In" />
     <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
     <Parameter Name="NameEn" Type="nvarchar" Mode="In" />

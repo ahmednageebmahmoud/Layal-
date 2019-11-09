@@ -304,6 +304,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New Static Field.
+        /// </summary>
+        public static string AddNewStaticField {
+            get {
+                return ResourceManager.GetString("AddNewStaticField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New Status.
         /// </summary>
         public static string AddNewStatus {
@@ -2194,15 +2203,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Package Input Types.
-        /// </summary>
-        public static string PackageInputTypes {
-            get {
-                return ResourceManager.GetString("PackageInputTypes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Package Price.
         /// </summary>
         public static string PackagePrice {
@@ -2608,6 +2608,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Static Fields.
+        /// </summary>
+        public static string StaticFields {
+            get {
+                return ResourceManager.GetString("StaticFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         public static string Status {
@@ -2622,6 +2631,15 @@ namespace Resources {
         public static string String1 {
             get {
                 return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string String2 {
+            get {
+                return ResourceManager.GetString("String2", resourceCulture);
             }
         }
         
@@ -2919,6 +2937,15 @@ namespace Resources {
         public static string UpdatePackage {
             get {
                 return ResourceManager.GetString("UpdatePackage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Static Field.
+        /// </summary>
+        public static string UpdateStaticField {
+            get {
+                return ResourceManager.GetString("UpdateStaticField", resourceCulture);
             }
         }
         

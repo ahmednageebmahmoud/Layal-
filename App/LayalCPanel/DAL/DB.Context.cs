@@ -2340,7 +2340,7 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PackageDetails_DeleteAllByPackageId", packageIdParameter);
         }
     
-        public virtual int PackageDetails_Insert(ObjectParameter id, Nullable<int> package_Id, string valueAr, string valueEn, Nullable<int> packageInputId)
+        public virtual int PackageDetails_Insert(ObjectParameter id, Nullable<int> package_Id, string valueAr, string valueEn, Nullable<int> staticFieldId)
         {
             var package_IdParameter = package_Id.HasValue ?
                 new ObjectParameter("Package_Id", package_Id) :
@@ -2354,11 +2354,11 @@ namespace DAL
                 new ObjectParameter("ValueEn", valueEn) :
                 new ObjectParameter("ValueEn", typeof(string));
     
-            var packageInputIdParameter = packageInputId.HasValue ?
-                new ObjectParameter("PackageInputId", packageInputId) :
-                new ObjectParameter("PackageInputId", typeof(int));
+            var staticFieldIdParameter = staticFieldId.HasValue ?
+                new ObjectParameter("StaticFieldId", staticFieldId) :
+                new ObjectParameter("StaticFieldId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PackageDetails_Insert", id, package_IdParameter, valueArParameter, valueEnParameter, packageInputIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PackageDetails_Insert", id, package_IdParameter, valueArParameter, valueEnParameter, staticFieldIdParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> PackageInputTypes_CheckIfUsed(Nullable<int> id)
@@ -3501,6 +3501,76 @@ namespace DAL
                 new ObjectParameter("DeleteFilesIds", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Albums_Delete", idParameter, wordIdParameter, wordDescriptionIdParameter, deleteFilesIdsParameter);
+        }
+    
+        public virtual int StaticFields_Delete(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("StaticFields_Delete", idParameter);
+        }
+    
+        public virtual int StaticFields_Insert(ObjectParameter id, string nameAr, string nameEn)
+        {
+            var nameArParameter = nameAr != null ?
+                new ObjectParameter("NameAr", nameAr) :
+                new ObjectParameter("NameAr", typeof(string));
+    
+            var nameEnParameter = nameEn != null ?
+                new ObjectParameter("NameEn", nameEn) :
+                new ObjectParameter("NameEn", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("StaticFields_Insert", id, nameArParameter, nameEnParameter);
+        }
+    
+        public virtual ObjectResult<StaticFields_SelectAll_Result> StaticFields_SelectAll()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<StaticFields_SelectAll_Result>("StaticFields_SelectAll");
+        }
+    
+        public virtual ObjectResult<StaticFields_SelectByFilter_Result> StaticFields_SelectByFilter(Nullable<int> skip, Nullable<int> take)
+        {
+            var skipParameter = skip.HasValue ?
+                new ObjectParameter("Skip", skip) :
+                new ObjectParameter("Skip", typeof(int));
+    
+            var takeParameter = take.HasValue ?
+                new ObjectParameter("Take", take) :
+                new ObjectParameter("Take", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<StaticFields_SelectByFilter_Result>("StaticFields_SelectByFilter", skipParameter, takeParameter);
+        }
+    
+        public virtual int StaticFields_Update(Nullable<int> id, string nameAr, string nameEn, Nullable<long> wordId)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var nameArParameter = nameAr != null ?
+                new ObjectParameter("NameAr", nameAr) :
+                new ObjectParameter("NameAr", typeof(string));
+    
+            var nameEnParameter = nameEn != null ?
+                new ObjectParameter("NameEn", nameEn) :
+                new ObjectParameter("NameEn", typeof(string));
+    
+            var wordIdParameter = wordId.HasValue ?
+                new ObjectParameter("WordId", wordId) :
+                new ObjectParameter("WordId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("StaticFields_Update", idParameter, nameArParameter, nameEnParameter, wordIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> StaticFields_CheckIfUsed(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("StaticFields_CheckIfUsed", idParameter);
         }
     }
 }

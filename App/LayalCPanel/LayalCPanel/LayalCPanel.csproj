@@ -214,9 +214,10 @@
     <Compile Include="Controllers\EventSurveyQuestionsController.cs" />
     <Compile Include="Controllers\EventSurveyQuestionTypesController.cs" />
     <Compile Include="Controllers\FilesReceivedTypesController.cs" />
+    <Compile Include="Controllers\PhotographersRequestsController.cs" />
     <Compile Include="Controllers\UserPaymentsController.cs" />
     <Compile Include="Controllers\EnquiryPaymentsController.cs" />
-    <Compile Include="Controllers\PackageInputTypesController.cs" />
+    <Compile Include="Controllers\StaticFieldsController.cs" />
     <Compile Include="Controllers\BasicController.cs" />
     <Compile Include="Controllers\PackagesController.cs" />
     <Compile Include="Controllers\BranchesController.cs" />
@@ -243,7 +244,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\CheckIsEmilActivedAttribute .cs" />
-    <Compile Include="Models\PageForAdminAttribute.cs" />
+    <Compile Include="Models\PageForUserTypeAttribute.cs" />
     <Compile Include="Models\PagePrivilegeAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -2003,8 +2004,8 @@
     <Content Include="Scripts\angularJS\views\packages\addAndUpdate\service.js" />
     <Content Include="Scripts\angularJS\views\packages\index\contoller.js" />
     <Content Include="Scripts\angularJS\views\packages\index\service.js" />
-    <Content Include="Scripts\angularJS\views\packageInputTypes\index\contoller.js" />
-    <Content Include="Scripts\angularJS\views\packageInputTypes\index\service.js" />
+    <Content Include="Scripts\angularJS\views\staticFields\index\contoller.js" />
+    <Content Include="Scripts\angularJS\views\staticFields\index\service.js" />
     <Content Include="Scripts\angularJS\views\branches\addAndUpdate\contoller.js" />
     <Content Include="Scripts\angularJS\views\branches\addAndUpdate\service.js" />
     <Content Include="Scripts\angularJS\views\branches\index\contoller.js" />
@@ -2260,7 +2261,6 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\_references.js" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -2302,7 +2302,7 @@
     <Content Include="Views\Events\Index.cshtml" />
     <Content Include="Views\MyEvents\Index.cshtml" />
     <Content Include="Views\Albums\Index.cshtml" />
-    <Content Include="Views\PackageInputTypes\Index.cshtml" />
+    <Content Include="Views\StaticFields\Index.cshtml" />
     <Content Include="Views\Packages\AddAndUpdate.cshtml" />
     <Content Include="Views\Packages\Index.cshtml" />
     <Content Include="Views\Packages\PackageInformtion.cshtml" />
@@ -2338,6 +2338,7 @@
     <Content Include="Views\Shared\_EnquiryWorkFlow.cshtml" />
     <Content Include="Views\Shared\_Photographers.cshtml" />
     <Content Include="Views\Albums\AddAndUpdate.cshtml" />
+    <Content Include="Views\PhotographersRequests\Request.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

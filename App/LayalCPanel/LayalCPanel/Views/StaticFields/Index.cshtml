@@ -1,0 +1,188 @@
+﻿
+@{
+    ViewBag.Title = Token.StaticFields;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    UsersPrivilegeVM Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.StaticFields);
+}
+
+<!-- begin:: Content Head -->
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+
+        <span class="kt-subheader__separator kt-hidden"></span>
+        <div class="kt-subheader__breadcrumbs">
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link">
+                @Token.HomePage
+            </a>
+
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">
+                @Token.StaticFields
+            </a>
+
+            <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+        </div>
+    </div>
+
+</div>
+
+<!-- end:: Content Head -->
+<!--Page Body-->
+<div ng-controller="staticFieldsCtrl">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <!--Add-->
+        @if (Priv.CanAdd)
+        {
+
+            <div class="kt-portlet ">
+                <div class="kt-portlet__head kt-portlet__head--lg">
+                    <div class="kt-portlet__head-label">
+                        <span class="kt-portlet__head-icon">
+                            <i class="kt-font-brand flaticon-list-1"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-title" ng-if="newStaticField.State==state.create">@Token.AddNewStaticField</h3>
+                        <h3 class="kt-portlet__head-title" ng-if="newStaticField.State==state.update">@Token.UpdateStaticField</h3>
+                    </div>
+
+                </div>
+
+                <form novalidate name="addStaticFieldFrm"  class="kt-form kt-form--label-right " ng-submit="saveChange(addStaticFieldFrm)">
+                    <div class="kt-portlet__body">
+                        <!--R O W 1-->
+                        <div class="form-group  row">
+                            <!--NameAr-->
+                            <label class="col-lg-2 col-form-label">@Token.NameAr</label>
+                            <div class="col-lg-4 form-group-sub">
+                                <input type="text" class="form-control input-disabled"
+                                       name="nameAr"
+                                       ng-class="{'is-invalid':addStaticFieldFrm.nameAr.$invalid&&staticFieldFrmErrorSubmit}"
+                                       ng-model="newStaticField.NameAr"
+                                       ng-required="true" maxlength="50" ng-maxlength="50" />
+
+                                <!--Errors:NameAr-->
+                                <div class="error invalid-feedback" ng-if="addStaticFieldFrm.nameAr.$error.required&&staticFieldFrmErrorSubmit">@Token.FieldIsRequierd</div>
+                                <div class="error invalid-feedback" ng-if="addStaticFieldFrm.nameAr.$error.maxlength&&staticFieldFrmErrorSubmit">@Token.MaxLengthCharIs 50</div>
+                            </div>
+
+                            <!--NameEn-->
+                            <label class="col-lg-2 col-form-label">@Token.NameEn</label>
+                            <div class="col-lg-4 form-group-sub">
+                                <input type="text"
+                                       class="form-control input-disabled"
+                                       name="nameEn"
+                                       ng-class="{'is-invalid':addStaticFieldFrm.nameEn.$invalid&&staticFieldFrmErrorSubmit}"
+                                       ng-model="newStaticField.NameEn"
+                                       ng-required="true" maxlength="50" ng-maxlength="50" />
+                                <!--Errors:NameEn-->
+                                <div class="error invalid-feedback" ng-if="addStaticFieldFrm.nameEn.$error.required&&staticFieldFrmErrorSubmit">@Token.FieldIsRequierd</div>
+                                <div class="error invalid-feedback" ng-if="addStaticFieldFrm.nameEn.$error.maxlength&&staticFieldFrmErrorSubmit">@Token.MaxLengthCharIs 50</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="kt-portlet__foot">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 m--valign-middle">
+                            </div>
+                            <div class="col-lg-6 kt-align-right">
+                                @if (Priv.CanAdd)
+                                {
+                                    <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"
+                                        ng-if="newStaticField.State==state.create" 
+                                            >
+                                        <i class="la la-plus">@Token.Add</i>
+                                    </button>
+                                }
+                                @if (Priv.CanEdit)
+                                {
+                                    <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air"
+                                        ng-if="newStaticField.State==state.update" 
+                                            >
+                                        <i class="la la-save">@Token.Update</i>
+                                    </button>
+                                }
+                                <button class="btn btn-warning btn-elevate btn-elevate-air" 
+                                        ng-click="resetForm()"><i class="la la-file">@Token.Cancel</i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        }
+
+        <!--List-->
+        <div class="kt-portlet ">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon-list-1"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        @Token.StaticFields
+                    </h3>
+                </div>
+            </div>
+            <div class="kt-portlet__body">
+                @if (Priv.CanDisplay)
+                {
+                    <!--SMS Print,Excel,PDF,Search,....-->
+                    <sms-buttons-search ng-sms-tableid="ng_table_1" ng-sms-search-model="itemSearch"></sms-buttons-search>
+                    <table class="table sms-table table-hover table-hover table-hover" id="ng_table_1">
+                        <thead>
+                            <tr>
+                                <th class="th-40 ">
+                                    <sms-sort ng-sms-fop="staticFieldFOP"
+                                              ng-sms-field-name="NameAr"
+                                              ng-sms-resource="@Token.NameAr"></sms-sort>
+                                </th>
+                                <th class="th-45 ">
+                                    <sms-sort ng-sms-fop="staticFieldFOP"
+                                              ng-sms-field-name="NameEn"
+                                              ng-sms-resource="@Token.NameEn"></sms-sort>
+                                </th>
+                                <th class="th-15">
+                                    @Token.Operations
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr ng-repeat="x in staticFields|customFilter:itemSearch:staticFieldFOP:'staticFieldFOP':this |orderBy:staticFieldFOP.sort.propName:staticFieldFOP.sort.reverse | limitTo:staticFieldFOP.paging.pagingLimt.take:staticFieldFOP.paging.pagingLimt.skip track by $index"
+                                ng-class="{'table-warning':x.Id==newStaticField.Id}">
+
+                                <td><span>{{x.NameAr}}</span></td>
+                                <td><span>{{x.NameEn}}</span></td>
+                                <td>
+                                    <!--Btn:Edit-->
+                                    @if (Priv.CanEdit)
+                                    {
+                                                <!--Btn:Edit-->
+                                        <a href="javascript:void(0);" ng-click="update(x)" ng-hide="x.Id==newStaticField.Id" title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                    }
+                                    <!--Btn:Delete-->
+                                    @if (Priv.CanDelete)
+                                    {
+                                        <a href="javascript:void(0);" ng-click="delete(x)" ng-hide="x.Id==newStaticField.Id" title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                             <!--Paging -->
+                    <sms-paging-select ng-sms-fop="staticFieldFOP"></sms-paging-select>
+                    <sms-paging ng-sms-fop="staticFieldFOP" ng-sms-display-m-func="getStaticFields()"></sms-paging>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/staticFields/index/service.js"></script>
+    <script src="~/Scripts/angularJS/views/staticFields/index/contoller.js"></script>
+}
+

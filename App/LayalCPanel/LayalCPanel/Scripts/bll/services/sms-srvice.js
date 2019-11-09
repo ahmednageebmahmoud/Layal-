@@ -216,3 +216,10 @@ function checkInputRTL(s) {
 
     return rtlDirCheck.test(s);
 };
+
+
+
+function animatedElement(selctor,animatedClass)
+{
+    $(selctor).removeClass(animatedClass).addClass('animated').addClass(animatedClass);
+}

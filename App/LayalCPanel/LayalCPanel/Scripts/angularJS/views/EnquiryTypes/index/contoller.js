@@ -109,7 +109,7 @@
         });
     };
 
-    //============= E D I T I  =================
+    //============= U P D A T E  =================
     //change row for edit 
     s.changeEdit = enquiryType => {
         if (!enquiryType) return;

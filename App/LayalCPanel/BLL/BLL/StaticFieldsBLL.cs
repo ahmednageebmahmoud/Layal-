@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace BLL.BLL
 {
-    public class PackageInputTypesBLL : BasicBLL
+    public class StaticFieldsBLL : BasicBLL
     {
 
-        public object GetPackageInputTypes(int? skip, int? take)
+        public object GetStaticFields(int? skip, int? take)
 
         {
-            var PackageInputTypes = db.PackageInputTypes_SelectByFilter(skip, take).Select(c => new PackageInputTypeVM
+            var StaticFields = db.StaticFields_SelectByFilter(skip, take).Select(c => new StaticFieldVM
             {
                 Id = c.Id,
                 WordId = c.FKWord_Id,
@@ -25,7 +25,7 @@ namespace BLL.BLL
 
             }).ToList();
 
-            if (PackageInputTypes.Count == 0)
+            if (StaticFields.Count == 0)
             {
                 if (skip == 0)
                     return new ResponseVM(Enums.RequestTypeEnum.Info, Token.NoResult);
@@ -33,10 +33,10 @@ namespace BLL.BLL
                 return new ResponseVM(Enums.RequestTypeEnum.Info, Token.NoMoreResult);
             }
 
-            return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, PackageInputTypes);
+            return new ResponseVM(Enums.RequestTypeEnum.Success, Token.Success, StaticFields);
         }
 
-        public object SaveChange(PackageInputTypeVM c)
+        public object SaveChange(StaticFieldVM c)
         {
 
             using (var tranc = db.Database.BeginTransaction())
@@ -69,14 +69,14 @@ namespace BLL.BLL
             }
         }
 
-        private object Delete(PackageInputTypeVM c)
+        private object Delete(StaticFieldVM c)
         {
             try
             {
-                if (db.PackageInputTypes_CheckIfUsed(c.Id).First().Value > 0)
+                if (db.StaticFields_CheckIfUsed(c.Id).First().Value > 0)
                     return new ResponseVM(RequestTypeEnum.Success, Token.CanNotDeleteBecuseIsUsed);
 
-                db.PackageInputTypes_Delete(c.Id);
+                db.StaticFields_Delete(c.Id);
                 return new ResponseVM(RequestTypeEnum.Success, Token.Deleted, c);
             }
             catch (Exception ex)
@@ -85,11 +85,11 @@ namespace BLL.BLL
             }
         }
 
-        private object Update(PackageInputTypeVM c)
+        private object Update(StaticFieldVM c)
         {
             try
             {
-                db.PackageInputTypes_Update(c.Id, c.NameAr, c.NameEn, c.WordId);
+                db.StaticFields_Update(c.Id, c.NameAr, c.NameEn, c.WordId);
                 return new ResponseVM(RequestTypeEnum.Success, Token.Updated, c);
             }
             catch (Exception ex)
@@ -98,12 +98,12 @@ namespace BLL.BLL
             }
         }
 
-        private object Add(PackageInputTypeVM c)
+        private object Add(StaticFieldVM c)
         {
             try
             {
                 ObjectParameter ID = new ObjectParameter("Id", typeof(int));
-                db.PackageInputTypes_Insert(ID, c.NameAr, c.NameEn);
+                db.StaticFields_Insert(ID, c.NameAr, c.NameEn);
                 c.Id = (int)ID.Value;
                 return new ResponseVM(RequestTypeEnum.Success, Token.Added, c);
             }

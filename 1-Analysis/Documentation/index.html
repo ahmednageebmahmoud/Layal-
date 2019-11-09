@@ -7,8 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Layal Documentation</title>
 
-    <link rel="stylesheet" href="C:/Users/Sezer/Desktop/Analisys/scripts/bootstrap-rtl/bootstrap.min.css">
-    <link rel="stylesheet" href="C:/Users/Sezer/Desktop/Analisys/css/css.css">
+    <link rel="stylesheet"
+        href="G:/Projects/MyProjects/Projects/2019/layal/1-Analysis/Documentation/scripts/bootstrap-rtl/bootstrap.min.css">
+    <link rel="stylesheet" href="G:/Projects/MyProjects/Projects/2019/layal/1-Analysis/Documentation/css/css.css">
 </head>
 
 <body id="accordion">
@@ -16,6 +17,32 @@
         <!--Menu-->
         <div class="col-lg-2">
             <ul class="">
+                <!--settings-->
+                <li>
+                    <label data-toggle="collapse" data-target="#SharedUl">الاعدادات</label>
+                    <ul class="collapse " id="SharedUl">
+                        <!--Countries-->
+                        <li>
+                            <label data-toggle="collapse" data-target="#countryUl">الدول</label>
+                            <ul class="collapse " id="countryUl">
+                                <li><a href="#countries-add" data-toggle="collapse" data-target="#countries-add"
+                                        onclick="updateImage('/images/countries/add/0.jpg')">اضافة</a>
+                                </li>
+                                <li><a href="#countries-update" data-toggle="collapse" data-target="#countries-update"
+                                        onclick="updateImage('/images/countries/update/0.jpg')">تحديث</a>
+                                </li>
+                                <li><a href="#countries-list" data-toggle="collapse" data-target="#countries-list"
+                                        onclick="updateImage('/images/countries/list/0.jpg')">العرض</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--Static Fields-->
+                         <li><a href="#StaticFields" data-toggle="collapse" data-target="#StaticFields"
+                                onclick="updateImage('/images/settings/staticFields/0.jpg')">
+                                الحقول الثابتة </a></li>
+                    </ul>
+                </li>
+                <!--Users-->
                 <li class="active">
                     <label data-toggle="collapse" data-target="#userUl">المستخدمين</label>
                     <ul class="collapse " id="userUl">
@@ -37,20 +64,9 @@
                                 مدفوعات الموظفين </a></li>
                     </ul>
                 </li>
-                <li>
-                    <label data-toggle="collapse" data-target="#countryUl">الدول</label>
-                    <ul class="collapse " id="countryUl">
-                        <li><a href="#countries-add" data-toggle="collapse" data-target="#countries-add"
-                                onclick="updateImage('/images/countries/add/0.jpg')">اضافة</a>
-                        </li>
-                        <li><a href="#countries-update" data-toggle="collapse" data-target="#countries-update"
-                                onclick="updateImage('/images/countries/update/0.jpg')">تحديث</a>
-                        </li>
-                        <li><a href="#countries-list" data-toggle="collapse" data-target="#countries-list"
-                                onclick="updateImage('/images/countries/list/0.jpg')">العرض</a>
-                        </li>
-                    </ul>
-                </li>
+
+
+                <!--Branches-->
                 <li>
                     <label data-toggle="collapse" data-target="#branchUl">الفروع</label>
                     <ul class="collapse  " id="branchUl">
@@ -203,7 +219,9 @@
                         فى الفديو التالى عملية تسجيل الدخول لـ موظف او لـ عميل وسوف يتوضح بة عملية تفعيل الحساب والاميل
                         وخلافة
                         <br>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/XRy5kTylHZU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/XRy5kTylHZU" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </li>
                 </ul>
             </div>
@@ -512,7 +530,9 @@
                     <li>
                         فى الفديو التالى عملية اضافة الدفعات لـ الموظف المتعاون
                         <br>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/4oymCoxD3gE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/4oymCoxD3gE" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </li>
                 </ul>
             </div>
@@ -1367,26 +1387,30 @@
                         </a>
                         وفى الفديو التالى شرح تفصيلى للعميات التى تحدث مع الباكدجات
                         <br>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/_v5_eNFZoh0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/_v5_eNFZoh0" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </li>
                 </ul>
             </div>
-            <!--event package inputTypes-->
-            <div id="event-package-inputTypes" class="collapse" data-parent="#accordion">
+            <!--Static Fields-->
+            <div id="StaticFields" class="collapse" data-parent="#accordion">
                 <ul>
                     <li>
-                        تم انشاء هذا الجزاء من اجل عدم كتابة الانواع مرة آخرى عن اضافة باكج جديد وايضا للتوفير فى الوقت
-                        ويكون التفاصيل منسقة
+                        تم انشاء هذة الشاهة من اجل عدم كتابتة اسماء الحقول فى مرة وايضا لتفادى الاخطاء الاملائية بين كل
+                        حقل والاخر
                         <br>
-                        من يدخل الى صفحة انواع مدخلات الباكدجات يجب ان يكون لة
+                        من يدخل الى صفحة الحقول الثابتة يجب ان يكون لة
                         <a href="#users-privileges" target="_blank">
                             <u updae-image data-new-image="/users/privileges/3.JPG">
                                 صلاحيات الوصول
                             </u>
                         </a>
-                        وفى الفديو التالى شرح تفصيلى للعمليات التى تحدث مع انواع مدخلات الباكدجات
+                        وفى الفديو التالى شرح تفصيلى للعمليات التى تحدث مع الحقول الثابتة
                         <br>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/XloP_yILHzA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed//sELznc0aZ5k" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </li>
                 </ul>
             </div>
@@ -1406,7 +1430,9 @@
                         </a>
                         وفى الفديو التالى شرح تفصيلى للعمليات التى تحدث مع الالبومات
                         <br>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/KCu7U_O5mRE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/nN3A-UGVQXg" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </li>
                 </ul>
             </div>
@@ -1430,7 +1456,9 @@
                         </a>
                         وفى الفديو التالى شرح تفصيلى للعمليات التى تحدث مع انواع حفر الاسماء
                         <br>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/zbgpKxX6jzY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/zbgpKxX6jzY" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </li>
                 </ul>
             </div>
@@ -1455,7 +1483,9 @@
                     <li>
                         فى الفديو التالى شرح تفصيلى لـ عملية التحديث بـ الكامل
                         <br>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/nQQOF_V8iCU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/nQQOF_V8iCU" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </li>
                 </ul>
             </div>
@@ -1484,13 +1514,18 @@
 
                         فى الفديو التالى شرح تفصيلى لـ عملية الاصافة والتحديث بـ الكامل
                         <br>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/EXp_K9c_jB0 " frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/EXp_K9c_jB0 "
+                            frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </li>
 
                     <li>
                         وايضا شرح تفصيلى لـ الموظف المسوال عن الاعداد والتنسيق
                         <br>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/7LaQUDqUW5w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/7LaQUDqUW5w" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </li>
                 </ul>
             </div>
@@ -1510,7 +1545,9 @@
                     <li>
                         فى الفديو التالى شرح لـ عملية اختيار مصورين المناسبة
                         <br>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/XhSRQk4cnyE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/XhSRQk4cnyE" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </li>
                 </ul>
             </div>
@@ -1539,7 +1576,9 @@
                         فى الفديو التالى شرح لـ عملية
                         توزيع اومر العمل على الموظفين
                         <br>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/vxuppQI_zoE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/vxuppQI_zoE" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </li>
                 </ul>
             </div>
@@ -1558,7 +1597,9 @@
                         فى الفديو التالى شرح لـ عملية
                         التنفيذ من قبل موظف التنفيذ
                         <br>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/wrk7e_hCf_s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/wrk7e_hCf_s" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </li>
                 </ul>
             </div>
@@ -1582,7 +1623,10 @@
                         فى الفديو التالى شرح لـ عملية
                         التنفيذ من قبل موظف التنفيذ
                         <br>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed//Fog430ykKW8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed//Fog430ykKW8"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </li>
                 </ul>
             </div>
@@ -1599,12 +1643,15 @@
         </div>
 
 
-        <script src="C:/Users/Sezer/Desktop/Analisys//scripts/jquery-3.2.1.min.js"></script>
-        <script src="C:/Users/Sezer/Desktop/Analisys//scripts/bootstrap-rtl/bootstrap.js"></script>
+        <script
+            src="G:/Projects/MyProjects/Projects/2019/layal/1-Analysis/Documentation//scripts/jquery-3.2.1.min.js"></script>
+        <script
+            src="G:/Projects/MyProjects/Projects/2019/layal/1-Analysis/Documentation//scripts/bootstrap-rtl/bootstrap.js"></script>
 
 
 
-        <script src="C:/Users/Sezer/Desktop/Analisys//scripts/custom.scripts.js"></script>
+        <script
+            src="G:/Projects/MyProjects/Projects/2019/layal/1-Analysis/Documentation//scripts/custom.scripts.js"></script>
 </body>
 
 </html

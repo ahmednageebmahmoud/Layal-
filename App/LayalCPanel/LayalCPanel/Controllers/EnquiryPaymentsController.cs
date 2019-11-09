@@ -32,7 +32,8 @@ namespace UI.Controllers
         {
             return Json(EnquiryPaymentsBLL.GetPaymentsByEnqiryId(enquiryId), JsonRequestBehavior.AllowGet);
         }
-        [PageForAdmin()]
+
+        [PageForUserType(AccountTypeEnum.ProjectManager)]
         [HttpPost]
         public ActionResult AcceptFromManger(EnquiryPaymentVM c)
         {

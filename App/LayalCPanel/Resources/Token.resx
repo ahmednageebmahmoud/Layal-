@@ -645,8 +645,8 @@
   <data name="PackageInformation" xml:space="preserve">
     <value>Package Information</value>
   </data>
-  <data name="PackageInputTypes" xml:space="preserve">
-    <value>Package Input Types</value>
+  <data name="StaticFields" xml:space="preserve">
+    <value>Static Fields</value>
   </data>
   <data name="PackagePrice" xml:space="preserve">
     <value>Package Price</value>
@@ -1154,5 +1154,14 @@
   </data>
   <data name="Upload" xml:space="preserve">
     <value>Upload</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AddNewStaticField" xml:space="preserve">
+    <value>Add New Static Field</value>
+  </data>
+  <data name="UpdateStaticField" xml:space="preserve">
+    <value>Update Static Field</value>
   </data>
 </root>

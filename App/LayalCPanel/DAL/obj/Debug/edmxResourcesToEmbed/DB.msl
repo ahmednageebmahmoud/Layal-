@@ -1004,30 +1004,6 @@
     <FunctionImportMapping FunctionImportName="PackageDetails_Delete" FunctionName="LayanModel.Store.PackageDetails_Delete" />
     <FunctionImportMapping FunctionImportName="PackageDetails_DeleteAllByPackageId" FunctionName="LayanModel.Store.PackageDetails_DeleteAllByPackageId" />
     <FunctionImportMapping FunctionImportName="PackageDetails_Insert" FunctionName="LayanModel.Store.PackageDetails_Insert" />
-    <FunctionImportMapping FunctionImportName="PackageInputTypes_CheckIfUsed" FunctionName="LayanModel.Store.PackageInputTypes_CheckIfUsed" />
-    <FunctionImportMapping FunctionImportName="PackageInputTypes_Delete" FunctionName="LayanModel.Store.PackageInputTypes_Delete" />
-    <FunctionImportMapping FunctionImportName="PackageInputTypes_Insert" FunctionName="LayanModel.Store.PackageInputTypes_Insert" />
-    <FunctionImportMapping FunctionImportName="PackageInputTypes_SelectAll" FunctionName="LayanModel.Store.PackageInputTypes_SelectAll">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.PackageInputTypes_SelectAll_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
-          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
-          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="PackageInputTypes_SelectByFilter" FunctionName="LayanModel.Store.PackageInputTypes_SelectByFilter">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.PackageInputTypes_SelectByFilter_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
-          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
-          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="PackageInputTypes_Update" FunctionName="LayanModel.Store.PackageInputTypes_Update" />
     <FunctionImportMapping FunctionImportName="Packages_Delete" FunctionName="LayanModel.Store.Packages_Delete" />
     <FunctionImportMapping FunctionImportName="Packages_Insert" FunctionName="LayanModel.Store.Packages_Insert">
       <ResultMapping>
@@ -1634,5 +1610,29 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Albums_Delete" FunctionName="LayanModel.Store.Albums_Delete" />
+    <FunctionImportMapping FunctionImportName="StaticFields_Delete" FunctionName="LayanModel.Store.StaticFields_Delete" />
+    <FunctionImportMapping FunctionImportName="StaticFields_Insert" FunctionName="LayanModel.Store.StaticFields_Insert" />
+    <FunctionImportMapping FunctionImportName="StaticFields_SelectAll" FunctionName="LayanModel.Store.StaticFields_SelectAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.StaticFields_SelectAll_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="StaticFields_SelectByFilter" FunctionName="LayanModel.Store.StaticFields_SelectByFilter">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.StaticFields_SelectByFilter_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="StaticFields_Update" FunctionName="LayanModel.Store.StaticFields_Update" />
+    <FunctionImportMapping FunctionImportName="StaticFields_CheckIfUsed" FunctionName="LayanModel.Store.StaticFields_CheckIfUsed" />
   </EntityContainerMapping>
 </Mapping>
