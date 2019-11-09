@@ -794,6 +794,31 @@
     <Parameter Name="UserId" Type="bigint" Mode="In" />
     <Parameter Name="IsPublicMenus" Type="bit" Mode="In" />
   </Function>
+  <Function Name="Phot_ProductTypes_CheckIfUed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_ProductTypes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_ProductTypes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+    <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+    <Parameter Name="ImageUrl" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="Phot_ProductTypes_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Skip" Type="int" Mode="In" />
+    <Parameter Name="Take" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Phot_ProductTypes_SelectByPK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_ProductTypes_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="WordId" Type="bigint" Mode="In" />
+    <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+    <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+    <Parameter Name="ImageUrl" Type="nvarchar(max)" Mode="In" />
+  </Function>
   <Function Name="PrintNamesTypes_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
   </Function>

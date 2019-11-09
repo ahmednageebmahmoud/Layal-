@@ -210,6 +210,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ProductTypesController.cs" />
     <Compile Include="Controllers\EEWController.cs" />
     <Compile Include="Controllers\EventSurveyQuestionsController.cs" />
     <Compile Include="Controllers\EventSurveyQuestionTypesController.cs" />
@@ -1966,6 +1967,10 @@
     <Content Include="Scripts\angularJS\directives\upload-files.js" />
     <Content Include="Scripts\angularJS\filters\employeeWorkFilter.js" />
     <Content Include="Scripts\angularJS\filters\filterWithoutStaticItems.js" />
+    <Content Include="Scripts\angularJS\views\productTypes\addAndUpdate\contoller.js" />
+    <Content Include="Scripts\angularJS\views\productTypes\addAndUpdate\service.js" />
+    <Content Include="Scripts\angularJS\views\productTypes\index\contoller.js" />
+    <Content Include="Scripts\angularJS\views\productTypes\index\service.js" />
     <Content Include="Scripts\angularJS\views\albums\addAndUpdate\contoller.js" />
     <Content Include="Scripts\angularJS\views\albums\addAndUpdate\service.js" />
     <Content Include="Scripts\angularJS\views\eew\archivingAndSaveing\addAndUpdate\contoller.js" />
@@ -2339,6 +2344,8 @@
     <Content Include="Views\Shared\_Photographers.cshtml" />
     <Content Include="Views\Albums\AddAndUpdate.cshtml" />
     <Content Include="Views\PhotographersRequests\Request.cshtml" />
+    <Content Include="Views\ProductTypes\AddAndUpdate.cshtml" />
+    <Content Include="Views\ProductTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2346,6 +2353,7 @@
     <Folder Include="Files\Albums\" />
     <Folder Include="Files\Enquiries\Payments\" />
     <Folder Include="Files\Events\CustomLogos\" />
+    <Folder Include="Files\Products\Types\" />
     <Folder Include="Files\Users\Payments\" />
     <Folder Include="Views\LogOut\" />
   </ItemGroup>

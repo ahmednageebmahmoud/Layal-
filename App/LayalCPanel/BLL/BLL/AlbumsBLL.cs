@@ -147,6 +147,7 @@ namespace BLL.BLL
                                  FileUrl = b.FileUrl
                              }).ToList()
                          }).FirstOrDefault();
+
                 FileService.RemoveFiles(c.AlbumFiles.Where(v => v.State == StateEnum.Delete).Select(v => v.FileUrl).ToList());
                 return new ResponseVM(RequestTypeEnum.Success, Token.Updated, Object);
             }

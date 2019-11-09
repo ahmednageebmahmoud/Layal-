@@ -252,6 +252,15 @@
     <Compile Include="Pages_SelectAllForUserCanBeAccess_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Phot_ProductTypes_Insert_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Phot_ProductTypes_SelectByFilter_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Phot_ProductTypes_SelectByPK_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="PrintNamesTypes_SelectByFilter_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -259,6 +268,9 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="PrintNameTypes_SelectByPK_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductTypes_SelectByFilter_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

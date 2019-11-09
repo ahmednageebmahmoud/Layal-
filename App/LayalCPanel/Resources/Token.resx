@@ -1164,4 +1164,25 @@
   <data name="UpdateStaticField" xml:space="preserve">
     <value>Update Static Field</value>
   </data>
+  <data name="FileNotSaved" xml:space="preserve">
+    <value>File Not Saved</value>
+  </data>
+  <data name="AddNewProductType" xml:space="preserve">
+    <value>Add New Product Type</value>
+  </data>
+  <data name="AddOrUpdateProductType" xml:space="preserve">
+    <value>Add Or Update Product Type</value>
+  </data>
+  <data name="ProductType" xml:space="preserve">
+    <value>Product Type</value>
+  </data>
+  <data name="ProductTypes" xml:space="preserve">
+    <value>Product Types</value>
+  </data>
+  <data name="UpdateProductType" xml:space="preserve">
+    <value>Update Product Type</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
 </root>

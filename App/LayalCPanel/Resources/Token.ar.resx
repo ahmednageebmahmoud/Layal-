@@ -1173,4 +1173,25 @@
   <data name="UpdateStaticField" xml:space="preserve">
     <value>تحديث الحقل الثابت</value>
   </data>
+  <data name="FileNotSaved" xml:space="preserve">
+    <value>الملف لم يحفظ</value>
+  </data>
+  <data name="AddNewProductType" xml:space="preserve">
+    <value>اضافة فئة منتج جديد</value>
+  </data>
+  <data name="AddOrUpdateProductType" xml:space="preserve">
+    <value>اضافة او تحديث نوع المنتج</value>
+  </data>
+  <data name="ProductType" xml:space="preserve">
+    <value>نوع المنتج</value>
+  </data>
+  <data name="ProductTypes" xml:space="preserve">
+    <value>فئات المنتاجات</value>
+  </data>
+  <data name="UpdateProductType" xml:space="preserve">
+    <value>تحديث فئة المنتج</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
 </root>

@@ -799,6 +799,31 @@
           <Parameter Name="UserId" Type="bigint" Mode="In" />
           <Parameter Name="IsPublicMenus" Type="bit" Mode="In" />
         </Function>
+        <Function Name="Phot_ProductTypes_CheckIfUed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Phot_ProductTypes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Phot_ProductTypes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+          <Parameter Name="ImageUrl" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Phot_ProductTypes_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Skip" Type="int" Mode="In" />
+          <Parameter Name="Take" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Phot_ProductTypes_SelectByPK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Phot_ProductTypes_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="WordId" Type="bigint" Mode="In" />
+          <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
+          <Parameter Name="ImageUrl" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="PrintNamesTypes_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="bigint" Mode="In" />
         </Function>
@@ -2118,7 +2143,36 @@
             <Parameter Name="WordId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="StaticFields_CheckIfUsed" ReturnType="Collection(Int32)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProductTypes_SelectByFilter" ReturnType="Collection(LayanModel.ProductTypes_SelectByFilter_Result)">
+            <Parameter Name="Skip" Mode="In" Type="Int32" />
+            <Parameter Name="Take" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Phot_ProductTypes_CheckIfUed" ReturnType="Collection(Int32)">
+          <Parameter Name="Id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Phot_ProductTypes_Delete">
+          <Parameter Name="Id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Phot_ProductTypes_Update">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="WordId" Mode="In" Type="Int64" />
+            <Parameter Name="NameAr" Mode="In" Type="String" />
+            <Parameter Name="NameEn" Mode="In" Type="String" />
+            <Parameter Name="ImageUrl" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Phot_ProductTypes_SelectByFilter" ReturnType="Collection(LayanModel.Phot_ProductTypes_SelectByFilter_Result)">
+            <Parameter Name="Skip" Mode="In" Type="Int32" />
+            <Parameter Name="Take" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Phot_ProductTypes_SelectByPK" ReturnType="Collection(LayanModel.Phot_ProductTypes_SelectByPK_Result)">
+          <Parameter Name="id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Phot_ProductTypes_Insert" ReturnType="Collection(LayanModel.Phot_ProductTypes_Insert_Result)">
+            <Parameter Name="NameAr" Mode="In" Type="String" />
+            <Parameter Name="NameEn" Mode="In" Type="String" />
+            <Parameter Name="ImageUrl" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Branches_SelectByAll_Result">
@@ -3310,6 +3364,33 @@
         <ComplexType Name="StaticFields_SelectByFilter_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+          <Property Type="String" Name="NameAr" Nullable="true" />
+          <Property Type="String" Name="NameEn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ProductTypes_SelectByFilter_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Name_Id" Nullable="false" />
+          <Property Type="String" Name="Ar" Nullable="true" />
+          <Property Type="String" Name="En" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Phot_ProductTypes_SelectByFilter_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Name_Id" Nullable="false" />
+          <Property Type="String" Name="ImageUrl" Nullable="false" />
+          <Property Type="String" Name="NameAr" Nullable="true" />
+          <Property Type="String" Name="NameEn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Phot_ProductTypes_SelectByPK_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Name_Id" Nullable="false" />
+          <Property Type="String" Name="ImageUrl" Nullable="false" />
+          <Property Type="String" Name="NameAr" Nullable="true" />
+          <Property Type="String" Name="NameEn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Phot_ProductTypes_Insert_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Name_Id" Nullable="false" />
+          <Property Type="String" Name="ImageUrl" Nullable="false" />
           <Property Type="String" Name="NameAr" Nullable="true" />
           <Property Type="String" Name="NameEn" Nullable="true" />
         </ComplexType>
@@ -4952,6 +5033,42 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="StaticFields_Update" FunctionName="LayanModel.Store.StaticFields_Update" />
           <FunctionImportMapping FunctionImportName="StaticFields_CheckIfUsed" FunctionName="LayanModel.Store.StaticFields_CheckIfUsed" />
+          <FunctionImportMapping FunctionImportName="Phot_ProductTypes_CheckIfUed" FunctionName="LayanModel.Store.Phot_ProductTypes_CheckIfUed" />
+          <FunctionImportMapping FunctionImportName="Phot_ProductTypes_Delete" FunctionName="LayanModel.Store.Phot_ProductTypes_Delete" />
+          <FunctionImportMapping FunctionImportName="Phot_ProductTypes_Update" FunctionName="LayanModel.Store.Phot_ProductTypes_Update" />
+          <FunctionImportMapping FunctionImportName="Phot_ProductTypes_SelectByFilter" FunctionName="LayanModel.Store.Phot_ProductTypes_SelectByFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Phot_ProductTypes_SelectByFilter_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKWord_Name_Id" ColumnName="FKWord_Name_Id" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Phot_ProductTypes_SelectByPK" FunctionName="LayanModel.Store.Phot_ProductTypes_SelectByPK">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Phot_ProductTypes_SelectByPK_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKWord_Name_Id" ColumnName="FKWord_Name_Id" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Phot_ProductTypes_Insert" FunctionName="LayanModel.Store.Phot_ProductTypes_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Phot_ProductTypes_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKWord_Name_Id" ColumnName="FKWord_Name_Id" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

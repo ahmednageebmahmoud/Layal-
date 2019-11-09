@@ -3572,5 +3572,100 @@ namespace DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("StaticFields_CheckIfUsed", idParameter);
         }
+    
+        public virtual ObjectResult<ProductTypes_SelectByFilter_Result> ProductTypes_SelectByFilter(Nullable<int> skip, Nullable<int> take)
+        {
+            var skipParameter = skip.HasValue ?
+                new ObjectParameter("Skip", skip) :
+                new ObjectParameter("Skip", typeof(int));
+    
+            var takeParameter = take.HasValue ?
+                new ObjectParameter("Take", take) :
+                new ObjectParameter("Take", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductTypes_SelectByFilter_Result>("ProductTypes_SelectByFilter", skipParameter, takeParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Phot_ProductTypes_CheckIfUed(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Phot_ProductTypes_CheckIfUed", idParameter);
+        }
+    
+        public virtual int Phot_ProductTypes_Delete(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_ProductTypes_Delete", idParameter);
+        }
+    
+        public virtual int Phot_ProductTypes_Update(Nullable<long> id, Nullable<long> wordId, string nameAr, string nameEn, string imageUrl)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            var wordIdParameter = wordId.HasValue ?
+                new ObjectParameter("WordId", wordId) :
+                new ObjectParameter("WordId", typeof(long));
+    
+            var nameArParameter = nameAr != null ?
+                new ObjectParameter("NameAr", nameAr) :
+                new ObjectParameter("NameAr", typeof(string));
+    
+            var nameEnParameter = nameEn != null ?
+                new ObjectParameter("NameEn", nameEn) :
+                new ObjectParameter("NameEn", typeof(string));
+    
+            var imageUrlParameter = imageUrl != null ?
+                new ObjectParameter("ImageUrl", imageUrl) :
+                new ObjectParameter("ImageUrl", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_ProductTypes_Update", idParameter, wordIdParameter, nameArParameter, nameEnParameter, imageUrlParameter);
+        }
+    
+        public virtual ObjectResult<Phot_ProductTypes_SelectByFilter_Result> Phot_ProductTypes_SelectByFilter(Nullable<int> skip, Nullable<int> take)
+        {
+            var skipParameter = skip.HasValue ?
+                new ObjectParameter("Skip", skip) :
+                new ObjectParameter("Skip", typeof(int));
+    
+            var takeParameter = take.HasValue ?
+                new ObjectParameter("Take", take) :
+                new ObjectParameter("Take", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_ProductTypes_SelectByFilter_Result>("Phot_ProductTypes_SelectByFilter", skipParameter, takeParameter);
+        }
+    
+        public virtual ObjectResult<Phot_ProductTypes_SelectByPK_Result> Phot_ProductTypes_SelectByPK(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_ProductTypes_SelectByPK_Result>("Phot_ProductTypes_SelectByPK", idParameter);
+        }
+    
+        public virtual ObjectResult<Phot_ProductTypes_Insert_Result> Phot_ProductTypes_Insert(string nameAr, string nameEn, string imageUrl)
+        {
+            var nameArParameter = nameAr != null ?
+                new ObjectParameter("NameAr", nameAr) :
+                new ObjectParameter("NameAr", typeof(string));
+    
+            var nameEnParameter = nameEn != null ?
+                new ObjectParameter("NameEn", nameEn) :
+                new ObjectParameter("NameEn", typeof(string));
+    
+            var imageUrlParameter = imageUrl != null ?
+                new ObjectParameter("ImageUrl", imageUrl) :
+                new ObjectParameter("ImageUrl", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_ProductTypes_Insert_Result>("Phot_ProductTypes_Insert", nameArParameter, nameEnParameter, imageUrlParameter);
+        }
     }
 }

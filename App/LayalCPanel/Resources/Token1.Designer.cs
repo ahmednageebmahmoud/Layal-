@@ -304,6 +304,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New Product Type.
+        /// </summary>
+        public static string AddNewProductType {
+            get {
+                return ResourceManager.GetString("AddNewProductType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New Static Field.
         /// </summary>
         public static string AddNewStaticField {
@@ -345,6 +354,15 @@ namespace Resources {
         public static string AddOrUpdateAlbum {
             get {
                 return ResourceManager.GetString("AddOrUpdateAlbum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Or Update Product Type.
+        /// </summary>
+        public static string AddOrUpdateProductType {
+            get {
+                return ResourceManager.GetString("AddOrUpdateProductType", resourceCulture);
             }
         }
         
@@ -1312,6 +1330,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File Not Saved.
+        /// </summary>
+        public static string FileNotSaved {
+            get {
+                return ResourceManager.GetString("FileNotSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Files Received Types.
         /// </summary>
         public static string FilesReceivedTypes {
@@ -1506,6 +1533,15 @@ namespace Resources {
         public static string Id {
             get {
                 return ResourceManager.GetString("Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image.
+        /// </summary>
+        public static string Image {
+            get {
+                return ResourceManager.GetString("Image", resourceCulture);
             }
         }
         
@@ -2410,6 +2446,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Product Type.
+        /// </summary>
+        public static string ProductType {
+            get {
+                return ResourceManager.GetString("ProductType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Types.
+        /// </summary>
+        public static string ProductTypes {
+            get {
+                return ResourceManager.GetString("ProductTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profile Update.
         /// </summary>
         public static string ProfileUpdate {
@@ -2937,6 +2991,15 @@ namespace Resources {
         public static string UpdatePackage {
             get {
                 return ResourceManager.GetString("UpdatePackage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Product Type.
+        /// </summary>
+        public static string UpdateProductType {
+            get {
+                return ResourceManager.GetString("UpdateProductType", resourceCulture);
             }
         }
         

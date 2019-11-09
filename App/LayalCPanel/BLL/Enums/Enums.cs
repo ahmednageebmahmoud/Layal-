@@ -70,7 +70,8 @@ namespace BLL.Enums
         EnquiryPayments = 19,
         EventSurveyQuestionTypes = 20,
         EventSurveyQuestions = 21,
-        FilesReceivedTypes = 22
+        FilesReceivedTypes = 22,
+        ProductTypes=23
     }
 
 

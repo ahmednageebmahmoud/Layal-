@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = Token.ProductTypes;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    UsersPrivilegeVM Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.ProductTypes);
+}
+
+<!-- begin:: Content Head -->
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+
+        <span class="kt-subheader__separator kt-hidden"></span>
+        <div class="kt-subheader__breadcrumbs">
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link">
+                @Token.HomePage
+            </a>
+
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">
+                @Token.ProductTypes
+            </a>
+
+            <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+        </div>
+    </div>
+
+</div>
+
+<!-- end:: Content Head -->
+<!--Page Body-->
+<div ng-controller="productTypesCtrl">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon-list-1"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        @Token.ProductTypes
+                    </h3>
+                </div>
+                <div class="kt-portlet__head-toolbar">
+                    <div class="kt-portlet__head-wrapper">
+                        <div class="kt-portlet__head-actions">
+                            @if (Priv.CanAdd)
+                            {
+                                <a href="/ProductTypes/AddAndUpdate" class="btn btn-brand btn-elevate btn-icon-sm">
+                                    <i class="la la-plus"></i>@Token.AddNewProductType
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="kt-portlet__body">
+                <div class="kt-portlet__body">
+                    @if (Priv.CanDisplay)
+                    {
+                        <!--SMS Print,Excel,PDF,Search,....-->
+                    <sms-buttons-search ng-sms-tableid="ng_table_1" ng-sms-search-model="itemSearch"></sms-buttons-search>
+                    <table class="table sms-table table-hover " id="ng_table_1">
+                        <thead>
+                            <tr>
+                                <th class="th-30 ">
+                                    <sms-sort ng-sms-fop="productTypeFOP"
+                                              ng-sms-field-name="NameAr"
+                                              ng-sms-resource="@Token.NameAr"></sms-sort>
+                                </th>
+                                <th class="th-30 ">
+                                    <sms-sort ng-sms-fop="productTypeFOP"
+                                              ng-sms-field-name="NameEn"
+                                              ng-sms-resource="@Token.NameEn"></sms-sort>
+                                </th>
+                                <th class="th-30 ">
+                                    <sms-sort  
+                                              ng-sms-resource="@Token.Image"></sms-sort>
+                                </th>
+                                <th class="th-15">
+                                    @Token.Operations
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr ng-repeat="x in productTypes|customFilter:itemSearch:productTypeFOP:'productTypeFOP':this  |orderBy:productTypeFOP.sort.propName:productTypeFOP.sort.reverse | limitTo:productTypeFOP.paging.pagingLimt.take:productTypeFOP.paging.pagingLimt.skip track by $index"
+                                ng-class="{'kt-datatable__row--even':$index%2==0}">
+
+                                <td><span>{{x.NameAr}}</span></td>
+                                <td><span>{{x.NameEn}}</span></td>
+                                <td>
+                                    <img src="{{x.ImageUrl}}" class="img-circle" width="200" >
+                                </td>
+                                <td>
+                                    <!--Btn:Edit-->
+                                    @if (Priv.CanEdit)
+                                        {
+                                                <!--Btn:Edit-->
+                                        <a href="/productTypes/addandupdate?id={{x.Id}}"  title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                        }
+                                    <!--Btn:Delete-->
+                                    @if (Priv.CanDelete)
+                                        {
+                                        <a href="javascript:void(0);" ng-click="delete(x)"  title="@Token.Delete" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i> </a>
+                                        }
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+
+                             <!--Paging -->
+                    <sms-paging-select ng-sms-fop="productTypeFOP"></sms-paging-select>
+                    <sms-paging ng-sms-fop="productTypeFOP" ng-sms-display-m-func="getProductTypes()"></sms-paging>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/productTypes/index/service.js"></script>
+    <script src="~/Scripts/angularJS/views/productTypes/index/contoller.js"></script>
+}

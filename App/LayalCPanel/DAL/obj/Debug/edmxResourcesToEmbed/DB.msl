@@ -1634,5 +1634,41 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="StaticFields_Update" FunctionName="LayanModel.Store.StaticFields_Update" />
     <FunctionImportMapping FunctionImportName="StaticFields_CheckIfUsed" FunctionName="LayanModel.Store.StaticFields_CheckIfUsed" />
+    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_CheckIfUed" FunctionName="LayanModel.Store.Phot_ProductTypes_CheckIfUed" />
+    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_Delete" FunctionName="LayanModel.Store.Phot_ProductTypes_Delete" />
+    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_Update" FunctionName="LayanModel.Store.Phot_ProductTypes_Update" />
+    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_SelectByFilter" FunctionName="LayanModel.Store.Phot_ProductTypes_SelectByFilter">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Phot_ProductTypes_SelectByFilter_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Name_Id" ColumnName="FKWord_Name_Id" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_SelectByPK" FunctionName="LayanModel.Store.Phot_ProductTypes_SelectByPK">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Phot_ProductTypes_SelectByPK_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Name_Id" ColumnName="FKWord_Name_Id" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_Insert" FunctionName="LayanModel.Store.Phot_ProductTypes_Insert">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Phot_ProductTypes_Insert_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Name_Id" ColumnName="FKWord_Name_Id" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>
