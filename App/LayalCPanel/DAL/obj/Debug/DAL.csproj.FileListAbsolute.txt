@@ -5,6 +5,7 @@ G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\bin\Debug\EntityF
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\bin\Debug\EntityFramework.SqlServer.dll
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\bin\Debug\EntityFramework.xml
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\bin\Debug\EntityFramework.SqlServer.xml
-G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\obj\Debug\DAL.dll
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\obj\Debug\DAL.pdb
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\DAL\obj\Debug\DAL.csproj.CopyComplete

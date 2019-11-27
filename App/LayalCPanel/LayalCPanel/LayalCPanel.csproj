@@ -27,6 +27,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -210,12 +211,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\OrdersphotographersController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProductTypesController.cs" />
     <Compile Include="Controllers\EEWController.cs" />
     <Compile Include="Controllers\EventSurveyQuestionsController.cs" />
     <Compile Include="Controllers\EventSurveyQuestionTypesController.cs" />
     <Compile Include="Controllers\FilesReceivedTypesController.cs" />
     <Compile Include="Controllers\PhotographersRequestsController.cs" />
+    <Compile Include="Controllers\ShippingCategoriesController.cs" />
     <Compile Include="Controllers\UserPaymentsController.cs" />
     <Compile Include="Controllers\EnquiryPaymentsController.cs" />
     <Compile Include="Controllers\StaticFieldsController.cs" />
@@ -290,6 +294,8 @@
     <Content Include="assets\app\custom\login\login-general.min.js" />
     <Content Include="assets\app\custom\login\login-v4.default.css" />
     <Content Include="assets\app\custom\login\login-v4.default.min.css" />
+    <Content Include="assets\app\custom\wizard\wizard-v1.default.css" />
+    <Content Include="assets\app\custom\wizard\wizard-v1.js" />
     <Content Include="assets\demo\default\base\scripts.bundle.js" />
     <Content Include="assets\demo\default\base\scripts.bundle.min.js" />
     <Content Include="assets\demo\default\base\style.bundle.css" />
@@ -1957,7 +1963,7 @@
     <Content Include="Scripts\angularJS\directives\toolTip.js" />
     <Content Include="Scripts\angularJS\directives\models\add-new-element.js" />
     <Content Include="Scripts\angularJS\directives\models\sms-model.js" />
-    <Content Include="Scripts\angularJS\directives\alertInfo.js" />
+    <Content Include="Scripts\angularJS\directives\alerts.js" />
     <Content Include="Scripts\angularJS\directives\sms-checkbox.js" />
     <Content Include="Scripts\angularJS\directives\sms-document\sms-document-render-element.js" />
     <Content Include="Scripts\angularJS\directives\sms-draw-menu.js" />
@@ -1966,7 +1972,21 @@
     <Content Include="Scripts\angularJS\directives\sms-fop\sms-sort.js" />
     <Content Include="Scripts\angularJS\directives\upload-files.js" />
     <Content Include="Scripts\angularJS\filters\employeeWorkFilter.js" />
+    <Content Include="Scripts\angularJS\filters\FilterWithoutDelete.js" />
+    <Content Include="Scripts\angularJS\filters\spliting.js" />
     <Content Include="Scripts\angularJS\filters\filterWithoutStaticItems.js" />
+    <Content Include="Scripts\angularJS\views\ordersphotographers\update\contoller.js" />
+    <Content Include="Scripts\angularJS\views\ordersphotographers\update\service.js" />
+    <Content Include="Scripts\angularJS\views\ordersphotographers\create\contoller.js" />
+    <Content Include="Scripts\angularJS\views\ordersphotographers\create\service.js" />
+    <Content Include="Scripts\angularJS\views\ordersphotographers\myOrders\contoller.js" />
+    <Content Include="Scripts\angularJS\views\ordersphotographers\myOrders\service.js" />
+    <Content Include="Scripts\angularJS\views\shippingCategories\index\contoller.js" />
+    <Content Include="Scripts\angularJS\views\shippingCategories\index\service.js" />
+    <Content Include="Scripts\angularJS\views\products\addAndUpdate\contoller.js" />
+    <Content Include="Scripts\angularJS\views\products\addAndUpdate\service.js" />
+    <Content Include="Scripts\angularJS\views\products\index\contoller.js" />
+    <Content Include="Scripts\angularJS\views\products\index\service.js" />
     <Content Include="Scripts\angularJS\views\productTypes\addAndUpdate\contoller.js" />
     <Content Include="Scripts\angularJS\views\productTypes\addAndUpdate\service.js" />
     <Content Include="Scripts\angularJS\views\productTypes\index\contoller.js" />
@@ -2256,6 +2276,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-ui.1.12.1.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
@@ -2346,6 +2367,12 @@
     <Content Include="Views\PhotographersRequests\Request.cshtml" />
     <Content Include="Views\ProductTypes\AddAndUpdate.cshtml" />
     <Content Include="Views\ProductTypes\Index.cshtml" />
+    <Content Include="Views\Products\AddAndUpdate.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\ShippingCategories\Index.cshtml" />
+    <Content Include="Views\Ordersphotographers\Create.cshtml" />
+    <Content Include="Views\Ordersphotographers\MyOrders.cshtml" />
+    <Content Include="Views\Ordersphotographers\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

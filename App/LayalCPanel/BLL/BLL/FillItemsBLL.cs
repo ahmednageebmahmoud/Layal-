@@ -34,6 +34,41 @@ namespace BLL.BLL
             };
         }
 
+        public object GetProductsByProductTypeId(int productTypeId)
+        {
+            var Result = db.Phot_Products_SelectByProductId(productTypeId)
+                .GroupBy(c => new
+                {
+                    c.Id,
+                    c.NameAr,
+                    c.NameEn
+                })
+                .Select(c => new ProductVM
+                {
+                    Id=c.Key.Id,
+                    NameAr=c.Key.NameAr,
+                    NameEn=c.Key.NameEn,
+                    Images=c.Select(v=> new ProductImageVM
+                    {
+                        ImageUrl=v.ImageUrl
+                    }).ToList()
+                });
+            return Result;
+        }
+
+        public object GetCities(int countyId)
+        {
+            var Result = db.Cities_SelectByFilter(countyId).Select(c => new CityVM
+            {
+                Id = c.Id,
+                CountryId = c.FKCountry_Id,
+                NameAr = c.Ar,
+                NameEn = c.En,
+                ShippingPrice = c.ShippingPrice
+            });
+            return Result;
+        }
+
         public object GetEventSurveyQuestionTypes()
         {
             var Result = db.EventSurveyQuestionTypes_SelectAll().Select(c => new EventSurveyQuestionTypeVM
@@ -45,9 +80,21 @@ namespace BLL.BLL
             return Result;
         }
 
-        public object GetPackageInputTypes()
+        public object GetProductTypes()
         {
-            var Result = db.PackageInputTypes_SelectAll().Select(c => new StaticFieldVM
+            var Result = db.Phot_ProductTypes_SelectByAll().Select(c => new ProductTypeVM
+            {
+                Id = c.Id,
+                NameAr = c.NameAr,
+                NameEn = c.NameEn,
+                ImageUrl = c.ImageUrl
+            });
+            return Result;
+        }
+
+        public object GetStaticFields()
+        {
+            var Result = db.StaticFields_SelectAll().Select(c => new StaticFieldVM
             {
                 Id = c.Id,
                 NameAr = c.NameAr,
@@ -58,15 +105,15 @@ namespace BLL.BLL
 
         public object GetEventSurveiesChart(int year)
         {
-            var Result = db.EventSurveies_ChartByYear(year).Select(c => new  EventSurveyVM
+            var Result = db.EventSurveies_ChartByYear(year).Select(c => new EventSurveyVM
             {
-                CountIsSatisfied=c.CountIsSatisfied,
-                EventDateTime=c.EventDateTime,
+                CountIsSatisfied = c.CountIsSatisfied,
+                EventDateTime = c.EventDateTime,
 
             }).ToList();
             var EventSurveyChart = new EventSurveyChartVM
             {
-                CountEvents=db.Events_CountsByYear(year).First().Value,
+                CountEvents = db.Events_CountsByYear(year).First().Value,
                 Month1 = Result.Where(c => c.EventDateTime.Month == 1).Sum(v => v.CountIsSatisfied),
                 Month2 = Result.Where(c => c.EventDateTime.Month == 2).Sum(v => v.CountIsSatisfied),
                 Month3 = Result.Where(c => c.EventDateTime.Month == 3).Sum(v => v.CountIsSatisfied),
@@ -86,7 +133,7 @@ namespace BLL.BLL
 
         public object GetBranchesWithoutBranch(int branchId)
         {
-            var Result = db.Branches_SelectByAll().Where(c=> c.Id!= branchId).Select(c => new BranchVM
+            var Result = db.Branches_SelectByAll().Where(c => c.Id != branchId).Select(c => new BranchVM
             {
                 Id = c.Id,
                 NameAr = c.BranchNameAR,
@@ -124,13 +171,13 @@ namespace BLL.BLL
             var Result = db.EventSurveyQuestions_SelectAll().Select(c => new EventSurveyQuestionVM
             {
                 Id = c.Id,
-                IsActive=c.IsActive,
-                IsDefault=c.IsDefault,
-                SurveyQuestionTypeId=c.FKSurveyQuestionType_Id,
-                SurveyQuestion=new EventSurveyQuestionTypeVM
+                IsActive = c.IsActive,
+                IsDefault = c.IsDefault,
+                SurveyQuestionTypeId = c.FKSurveyQuestionType_Id,
+                SurveyQuestion = new EventSurveyQuestionTypeVM
                 {
-                    NameAr=c.SurveyQuestionNameAr,
-                    NameEn=c.SurveyQuestionNameEn,
+                    NameAr = c.SurveyQuestionNameAr,
+                    NameEn = c.SurveyQuestionNameEn,
                 }
             }).ToList();
             return Result;
@@ -138,7 +185,8 @@ namespace BLL.BLL
 
         public object GetAlbumsTypes()
         {
-            var Result = db.Albums_SelectAll().GroupBy(c => new {
+            var Result = db.Albums_SelectAll().GroupBy(c => new
+            {
                 c.Id,
                 c.DescriptionAr,
                 c.DescriptionEn,
@@ -151,9 +199,9 @@ namespace BLL.BLL
                 NameEn = c.Key.NameEn,
                 AlbumFiles = c.Where(e => !string.IsNullOrEmpty(e.FileUrl)).Select(v => new AlbumFileVM
                 {
-                    FileUrl= v.FileUrl
+                    FileUrl = v.FileUrl
                 }).ToList()
-            }).OrderBy(c=> c.NameAr).ToList();
+            }).OrderBy(c => c.NameAr).ToList();
             return Result;
         }
 
@@ -171,7 +219,7 @@ namespace BLL.BLL
                   UserName = c.Key.UserName,
                   WorkTypes = c.Select(v => new WorkTypeVM
                   {
-                      Id = v.FkWorkType_Id 
+                      Id = v.FkWorkType_Id
                   }).ToList()
               }).ToList();
 
@@ -191,21 +239,21 @@ namespace BLL.BLL
 
         public List<UserVM> UsersWithCurrentBranchWithWorkTypes(int branchId, AccountTypeEnum employee)
         {
-            var Result = db.Users_SelectByBranchId(branchId,(int)employee)
-                .GroupBy(c=>new
+            var Result = db.Users_SelectByBranchId(branchId, (int)employee)
+                .GroupBy(c => new
                 {
                     c.Id,
                     c.UserName
                 })
                 .Select(c => new UserVM
-            {
-                Id = c.Key.Id,
-                UserName=c.Key.UserName,
-                WorkTypes= c.Select(v=> new WorkTypeVM
                 {
-                    Id=v.FkWorkType_Id.HasValue?v.FkWorkType_Id.Value:0
-                }).ToList()
-            }).ToList();
+                    Id = c.Key.Id,
+                    UserName = c.Key.UserName,
+                    WorkTypes = c.Select(v => new WorkTypeVM
+                    {
+                        Id = v.FkWorkType_Id.HasValue ? v.FkWorkType_Id.Value : 0
+                    }).ToList()
+                }).ToList();
             return Result;
         }
 
@@ -216,7 +264,7 @@ namespace BLL.BLL
                 Id = c.Id,
                 NameAr = c.NameAr,
                 NameEn = c.NameEn,
-                Price=c.Price
+                Price = c.Price
             });
             return Result;
         }
@@ -229,26 +277,26 @@ namespace BLL.BLL
                 NameAr = c.NameAr,
                 NameEn = c.NameEn,
                 IsPrintNamesFree = c.IsPrintNamesFree,
-                Price=c.Price,
-                NamsArExtraPrice=c.NamsArExtraPrice
+                Price = c.Price,
+                NamsArExtraPrice = c.NamsArExtraPrice
             });
             return Result;
         }
 
         public List<PageVM> GetUserPages(Int64 UserId)
         {
-            if (this.UserLoggad.Id==AdminId)
+            if (this.UserLoggad.Id == AdminId)
                 UserId = 0;
-      return      db.Pages_SelectAllForUserCanBeAccess(UserId, this.UserLoggad.IsClinet)
-                    .Select(c => new PageVM
-                    {
-                        Id = c.Id,
-                        MenuId = c.FkMenu_Id,
-                        NameAr = c.PageNameAr,
-                        NameEn = c.PageNameEn,
-                        OrderByNumber = c.OrderByNumber,
-                        Url = c.Url
-                    }).ToList();
+            return db.Pages_SelectAllForUserCanBeAccess(UserId, this.UserLoggad.IsClinet)
+                          .Select(c => new PageVM
+                          {
+                              Id = c.Id,
+                              MenuId = c.FkMenu_Id,
+                              NameAr = c.PageNameAr,
+                              NameEn = c.PageNameEn,
+                              OrderByNumber = c.OrderByNumber,
+                              Url = c.Url
+                          }).ToList();
         }
 
         public object GetMenusWithPages()
@@ -292,9 +340,9 @@ namespace BLL.BLL
             var Result = db.Menus_SelectAll().Select(c => new MenuVM
             {
                 Id = c.Id,
-                NameAr=c.MenuNameAr,
-                NameEn=c.MenuNameEn,
-                OrderByNumber=c.OrderByNumber,
+                NameAr = c.MenuNameAr,
+                NameEn = c.MenuNameEn,
+                OrderByNumber = c.OrderByNumber,
             });
             return Result;
         }
@@ -303,20 +351,20 @@ namespace BLL.BLL
             var Result = db.EnquiryTypes_SelectAll().Select(c => new EnquiryTypeVM
             {
                 Id = c.Id,
-                NameAr = c. NameAr,
+                NameAr = c.NameAr,
                 NameEn = c.NameEn,
             }).ToList();
             return Result;
         }
 
-        public object GetBranches(int? branchId=null)
+        public object GetBranches(int? branchId = null)
         {
-            var Result = db.Branches_SelectByAll().Where(c=> !branchId.HasValue || c.Id!= branchId.Value).Select(c => new BranchVM
+            var Result = db.Branches_SelectByAll().Where(c => !branchId.HasValue || c.Id != branchId.Value).Select(c => new BranchVM
             {
                 Id = c.Id,
                 NameAr = c.BranchNameAR,
                 NameEn = c.BranchNameEn,
-                CityId=c.FKCity_Id
+                CityId = c.FKCity_Id
             });
             return Result;
         }
@@ -325,9 +373,9 @@ namespace BLL.BLL
             var Result = db.Cities_SelectAll().Select(c => new CityVM
             {
                 Id = c.Id,
-                CountryId=c.FKCountry_Id,
-                    NameAr = c.Ar,
-                    NameEn = c.En
+                CountryId = c.FKCountry_Id,
+                NameAr = c.Ar,
+                NameEn = c.En
             });
             return Result;
         }
@@ -337,9 +385,9 @@ namespace BLL.BLL
             var Result = db.Countries_SelectAll().Select(c => new CountryVM
             {
                 Id = c.Id,
-                    NameAr = c.Ar,
-                    NameEn = c.En,
-                    IsoCode=c.IsoCode
+                NameAr = c.Ar,
+                NameEn = c.En,
+                IsoCode = c.IsoCode
             });
             return Result;
         }
@@ -353,8 +401,8 @@ namespace BLL.BLL
                 AccountType = new AccountTypeVM
                 {
                     Id = c.FKAccountType_Id,
-                        NameAr = c.AccountTypeNameAr,
-                        NameEn = c.AccountTypeNameEn
+                    NameAr = c.AccountTypeNameAr,
+                    NameEn = c.AccountTypeNameEn
                 },
                 UserName = c.UserName
             });

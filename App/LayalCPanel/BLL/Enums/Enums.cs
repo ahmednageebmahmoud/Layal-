@@ -71,7 +71,9 @@ namespace BLL.Enums
         EventSurveyQuestionTypes = 20,
         EventSurveyQuestions = 21,
         FilesReceivedTypes = 22,
-        ProductTypes=23
+        ProductTypes=23,
+        Products=24,
+        ShippingCategories=25
     }
 
 

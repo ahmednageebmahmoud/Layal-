@@ -7,7 +7,6 @@
     <Parameter Name="Id" Type="bigint" Mode="In" />
     <Parameter Name="WordId" Type="bigint" Mode="In" />
     <Parameter Name="WordDescriptionId" Type="bigint" Mode="In" />
-    <Parameter Name="DeleteFilesIds" Type="nvarchar(max)" Mode="In" />
   </Function>
   <Function Name="Albums_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
@@ -99,6 +98,11 @@
     <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
     <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
     <Parameter Name="WordId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Cities_UpdatePrices" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Ids" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Prices" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="UpdatingCount" Type="int" Mode="In" />
   </Function>
   <Function Name="Countries_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
@@ -794,6 +798,118 @@
     <Parameter Name="UserId" Type="bigint" Mode="In" />
     <Parameter Name="IsPublicMenus" Type="bit" Mode="In" />
   </Function>
+  <Function Name="Phot_Orders_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProductTypeId" Type="bigint" Mode="In" />
+    <Parameter Name="ProductId" Type="bigint" Mode="In" />
+    <Parameter Name="UserCreated" Type="bigint" Mode="In" />
+    <Parameter Name="OptionsItems" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Delivery_IsReceiptFromTheBranch" Type="bit" Mode="In" />
+    <Parameter Name="Delivery_Address" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Delivery_FkCountry_Id" Type="int" Mode="In" />
+    <Parameter Name="Delivery_FKCity_Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Phot_Orders_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Skip" Type="int" Mode="In" />
+    <Parameter Name="Take" Type="int" Mode="In" />
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_Orders_SelectById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_Orders_UpdateDropboxFolderPath" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderId" Type="bigint" Mode="In" />
+    <Parameter Name="DropboxFolderPath" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="Phot_OrdersOptions_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderId" Type="bigint" Mode="In" />
+    <Parameter Name="OptionAndItem" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="Phot_Products_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_Products_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="WordNameId" Type="bigint" Mode="In" />
+    <Parameter Name="WordDescriptionId" Type="bigint" Mode="In" />
+    <Parameter Name="WordUplaodFileNotesId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_Products_Images_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProductId" Type="bigint" Mode="In" />
+    <Parameter Name="ImagesUrls" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="Phot_Products_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NameAr" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="NameEn" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="DescriptionAr" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="DescriptionEn" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="UplaodFileNotesAr" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="UplaodFileNotesEn" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Images" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProductTypeId" Type="bigint" Mode="In" />
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Phot_Products_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Skip" Type="int" Mode="In" />
+    <Parameter Name="Take" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Phot_Products_SelectByPK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_Products_SelectByProductId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProductTypeId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_Products_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="WordNameId" Type="bigint" Mode="In" />
+    <Parameter Name="WordDescriptionId" Type="bigint" Mode="In" />
+    <Parameter Name="WordUpdlodFileNotesId" Type="bigint" Mode="In" />
+    <Parameter Name="NameAr" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="NameEn" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="DescriptionAr" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="DescriptionEn" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="UplaodFileNotesAr" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="UplaodFileNotesEn" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Images" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ImageIdsDeleting" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProductTypeId" Type="bigint" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Phot_ProductsOptionItems_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OptionId" Type="bigint" Mode="In" />
+    <Parameter Name="ItemsNamesAr" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ItemsNamesEn" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ItemsPrices" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ItemsCount" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Phot_ProductsOptionItems_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OptionId" Type="bigint" Mode="In" />
+    <Parameter Name="ItemsIds" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ItemsNamesAr" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ItemsNamesEn" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ItemWordNamdsIds" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ItemsPrices" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ItemsCount" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Phot_ProductsOptions_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_ProductsOptions_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="StaticFieldId" Type="int" Mode="In" />
+    <Parameter Name="ProductId" Type="bigint" Mode="In" />
+    <Parameter Name="ItemsNamesAr" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ItemsNamesEn" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ItemsPrices" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ItemsCount" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Phot_ProductsOptions_SelectByProductId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProductId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_ProductsOptions_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="StaticFieldId" Type="int" Mode="In" />
+    <Parameter Name="IdDeleted" Type="nvarchar(max)" Mode="In" />
+  </Function>
   <Function Name="Phot_ProductTypes_CheckIfUed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
   </Function>
@@ -805,6 +921,7 @@
     <Parameter Name="NameEn" Type="nvarchar" Mode="In" />
     <Parameter Name="ImageUrl" Type="nvarchar(max)" Mode="In" />
   </Function>
+  <Function Name="Phot_ProductTypes_SelectByAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="Phot_ProductTypes_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Skip" Type="int" Mode="In" />
     <Parameter Name="Take" Type="int" Mode="In" />
@@ -1071,6 +1188,9 @@
   </Function>
   <Function Name="Words_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Words_DeleteList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Ids" Type="nvarchar(max)" Mode="In" />
   </Function>
   <Function Name="Words_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ar" Type="nvarchar(max)" Mode="In" />

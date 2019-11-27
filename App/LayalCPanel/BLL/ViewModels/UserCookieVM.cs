@@ -30,6 +30,8 @@ namespace BLL.ViewModels
         public bool IsActive { get;   set; }
         public bool IsPhotographerOrHelper =>
            CookieService.UserInfo.AccountTypeId == AccountTypeEnum.Photographer || CookieService.UserInfo.AccountTypeId == AccountTypeEnum.Helper;
+        public bool IsPhotographer=>
+                  CookieService.UserInfo.AccountTypeId == AccountTypeEnum.Photographer;
 
         //  public int? CountryId { get;   set; }
         //    public int? CityId { get;   set; }

@@ -28,6 +28,125 @@ namespace DAL
         }
     
     
+        public virtual ObjectResult<Nullable<int>> Albums_CheckIfUsed(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Albums_CheckIfUsed", idParameter);
+        }
+    
+        public virtual int Albums_Delete(Nullable<long> id, Nullable<long> wordId, Nullable<long> wordDescriptionId)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            var wordIdParameter = wordId.HasValue ?
+                new ObjectParameter("WordId", wordId) :
+                new ObjectParameter("WordId", typeof(long));
+    
+            var wordDescriptionIdParameter = wordDescriptionId.HasValue ?
+                new ObjectParameter("WordDescriptionId", wordDescriptionId) :
+                new ObjectParameter("WordDescriptionId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Albums_Delete", idParameter, wordIdParameter, wordDescriptionIdParameter);
+        }
+    
+        public virtual ObjectResult<Albums_Insert_Result> Albums_Insert(string nameAr, string nameEn, string descriptionAr, string descriptionEn, string files)
+        {
+            var nameArParameter = nameAr != null ?
+                new ObjectParameter("NameAr", nameAr) :
+                new ObjectParameter("NameAr", typeof(string));
+    
+            var nameEnParameter = nameEn != null ?
+                new ObjectParameter("NameEn", nameEn) :
+                new ObjectParameter("NameEn", typeof(string));
+    
+            var descriptionArParameter = descriptionAr != null ?
+                new ObjectParameter("DescriptionAr", descriptionAr) :
+                new ObjectParameter("DescriptionAr", typeof(string));
+    
+            var descriptionEnParameter = descriptionEn != null ?
+                new ObjectParameter("DescriptionEn", descriptionEn) :
+                new ObjectParameter("DescriptionEn", typeof(string));
+    
+            var filesParameter = files != null ?
+                new ObjectParameter("Files", files) :
+                new ObjectParameter("Files", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Albums_Insert_Result>("Albums_Insert", nameArParameter, nameEnParameter, descriptionArParameter, descriptionEnParameter, filesParameter);
+        }
+    
+        public virtual ObjectResult<Albums_SelectAll_Result> Albums_SelectAll()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Albums_SelectAll_Result>("Albums_SelectAll");
+        }
+    
+        public virtual ObjectResult<Albums_SelectByFilter_Result> Albums_SelectByFilter(Nullable<int> skip, Nullable<int> take)
+        {
+            var skipParameter = skip.HasValue ?
+                new ObjectParameter("Skip", skip) :
+                new ObjectParameter("Skip", typeof(int));
+    
+            var takeParameter = take.HasValue ?
+                new ObjectParameter("Take", take) :
+                new ObjectParameter("Take", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Albums_SelectByFilter_Result>("Albums_SelectByFilter", skipParameter, takeParameter);
+        }
+    
+        public virtual ObjectResult<Albums_SelectByPk_Result> Albums_SelectByPk(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Albums_SelectByPk_Result>("Albums_SelectByPk", idParameter);
+        }
+    
+        public virtual ObjectResult<Albums_Update_Result> Albums_Update(Nullable<int> id, string nameAr, string nameEn, Nullable<long> wordId, string descriptionAr, string descriptionEn, Nullable<long> wordDescriptionId, string newFiles, string deleteFilesIds)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var nameArParameter = nameAr != null ?
+                new ObjectParameter("NameAr", nameAr) :
+                new ObjectParameter("NameAr", typeof(string));
+    
+            var nameEnParameter = nameEn != null ?
+                new ObjectParameter("NameEn", nameEn) :
+                new ObjectParameter("NameEn", typeof(string));
+    
+            var wordIdParameter = wordId.HasValue ?
+                new ObjectParameter("WordId", wordId) :
+                new ObjectParameter("WordId", typeof(long));
+    
+            var descriptionArParameter = descriptionAr != null ?
+                new ObjectParameter("DescriptionAr", descriptionAr) :
+                new ObjectParameter("DescriptionAr", typeof(string));
+    
+            var descriptionEnParameter = descriptionEn != null ?
+                new ObjectParameter("DescriptionEn", descriptionEn) :
+                new ObjectParameter("DescriptionEn", typeof(string));
+    
+            var wordDescriptionIdParameter = wordDescriptionId.HasValue ?
+                new ObjectParameter("WordDescriptionId", wordDescriptionId) :
+                new ObjectParameter("WordDescriptionId", typeof(long));
+    
+            var newFilesParameter = newFiles != null ?
+                new ObjectParameter("NewFiles", newFiles) :
+                new ObjectParameter("NewFiles", typeof(string));
+    
+            var deleteFilesIdsParameter = deleteFilesIds != null ?
+                new ObjectParameter("DeleteFilesIds", deleteFilesIds) :
+                new ObjectParameter("DeleteFilesIds", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Albums_Update_Result>("Albums_Update", idParameter, nameArParameter, nameEnParameter, wordIdParameter, descriptionArParameter, descriptionEnParameter, wordDescriptionIdParameter, newFilesParameter, deleteFilesIdsParameter);
+        }
+    
         public virtual ObjectResult<Nullable<int>> Branches_CheckIfUsed(Nullable<long> id)
         {
             var idParameter = id.HasValue ?
@@ -212,15 +331,6 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Cities_SelectAll_Result>("Cities_SelectAll");
         }
     
-        public virtual ObjectResult<Cities_SelectByFilter_Result> Cities_SelectByFilter(Nullable<int> countryId)
-        {
-            var countryIdParameter = countryId.HasValue ?
-                new ObjectParameter("CountryId", countryId) :
-                new ObjectParameter("CountryId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Cities_SelectByFilter_Result>("Cities_SelectByFilter", countryIdParameter);
-        }
-    
         public virtual int Cities_Update(Nullable<int> id, string nameAr, string nameEn, Nullable<long> wordId)
         {
             var idParameter = id.HasValue ?
@@ -240,6 +350,23 @@ namespace DAL
                 new ObjectParameter("WordId", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Cities_Update", idParameter, nameArParameter, nameEnParameter, wordIdParameter);
+        }
+    
+        public virtual int Cities_UpdatePrices(string ids, string prices, Nullable<int> updatingCount)
+        {
+            var idsParameter = ids != null ?
+                new ObjectParameter("Ids", ids) :
+                new ObjectParameter("Ids", typeof(string));
+    
+            var pricesParameter = prices != null ?
+                new ObjectParameter("Prices", prices) :
+                new ObjectParameter("Prices", typeof(string));
+    
+            var updatingCountParameter = updatingCount.HasValue ?
+                new ObjectParameter("UpdatingCount", updatingCount) :
+                new ObjectParameter("UpdatingCount", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Cities_UpdatePrices", idsParameter, pricesParameter, updatingCountParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> Countries_CheckIfUsed(Nullable<long> id)
@@ -2361,76 +2488,6 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PackageDetails_Insert", id, package_IdParameter, valueArParameter, valueEnParameter, staticFieldIdParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> PackageInputTypes_CheckIfUsed(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("PackageInputTypes_CheckIfUsed", idParameter);
-        }
-    
-        public virtual int PackageInputTypes_Delete(Nullable<long> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PackageInputTypes_Delete", idParameter);
-        }
-    
-        public virtual int PackageInputTypes_Insert(ObjectParameter id, string nameAr, string nameEn)
-        {
-            var nameArParameter = nameAr != null ?
-                new ObjectParameter("NameAr", nameAr) :
-                new ObjectParameter("NameAr", typeof(string));
-    
-            var nameEnParameter = nameEn != null ?
-                new ObjectParameter("NameEn", nameEn) :
-                new ObjectParameter("NameEn", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PackageInputTypes_Insert", id, nameArParameter, nameEnParameter);
-        }
-    
-        public virtual ObjectResult<PackageInputTypes_SelectAll_Result> PackageInputTypes_SelectAll()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PackageInputTypes_SelectAll_Result>("PackageInputTypes_SelectAll");
-        }
-    
-        public virtual ObjectResult<PackageInputTypes_SelectByFilter_Result> PackageInputTypes_SelectByFilter(Nullable<int> skip, Nullable<int> take)
-        {
-            var skipParameter = skip.HasValue ?
-                new ObjectParameter("Skip", skip) :
-                new ObjectParameter("Skip", typeof(int));
-    
-            var takeParameter = take.HasValue ?
-                new ObjectParameter("Take", take) :
-                new ObjectParameter("Take", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PackageInputTypes_SelectByFilter_Result>("PackageInputTypes_SelectByFilter", skipParameter, takeParameter);
-        }
-    
-        public virtual int PackageInputTypes_Update(Nullable<int> id, string nameAr, string nameEn, Nullable<long> wordId)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            var nameArParameter = nameAr != null ?
-                new ObjectParameter("NameAr", nameAr) :
-                new ObjectParameter("NameAr", typeof(string));
-    
-            var nameEnParameter = nameEn != null ?
-                new ObjectParameter("NameEn", nameEn) :
-                new ObjectParameter("NameEn", typeof(string));
-    
-            var wordIdParameter = wordId.HasValue ?
-                new ObjectParameter("WordId", wordId) :
-                new ObjectParameter("WordId", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PackageInputTypes_Update", idParameter, nameArParameter, nameEnParameter, wordIdParameter);
-        }
-    
         public virtual int Packages_Delete(Nullable<int> id, Nullable<long> wordNameId, Nullable<long> wordDescriptionId)
         {
             var idParameter = id.HasValue ?
@@ -2570,17 +2627,406 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Pages_SelectAllByUser_Id", userIdParameter);
         }
     
-        public virtual ObjectResult<Pages_SelectAllForUserCanBeAccess_Result> Pages_SelectAllForUserCanBeAccess(Nullable<long> userId, Nullable<bool> isPublicMenus)
+        public virtual int Phot_OrdersOptions_Insert(Nullable<long> orderId, string optionAndItem)
         {
+            var orderIdParameter = orderId.HasValue ?
+                new ObjectParameter("OrderId", orderId) :
+                new ObjectParameter("OrderId", typeof(long));
+    
+            var optionAndItemParameter = optionAndItem != null ?
+                new ObjectParameter("OptionAndItem", optionAndItem) :
+                new ObjectParameter("OptionAndItem", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_OrdersOptions_Insert", orderIdParameter, optionAndItemParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Phot_Products_CheckIfUsed(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Phot_Products_CheckIfUsed", idParameter);
+        }
+    
+        public virtual int Phot_Products_Delete(Nullable<long> id, Nullable<long> wordNameId, Nullable<long> wordDescriptionId, Nullable<long> wordUplaodFileNotesId)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            var wordNameIdParameter = wordNameId.HasValue ?
+                new ObjectParameter("WordNameId", wordNameId) :
+                new ObjectParameter("WordNameId", typeof(long));
+    
+            var wordDescriptionIdParameter = wordDescriptionId.HasValue ?
+                new ObjectParameter("WordDescriptionId", wordDescriptionId) :
+                new ObjectParameter("WordDescriptionId", typeof(long));
+    
+            var wordUplaodFileNotesIdParameter = wordUplaodFileNotesId.HasValue ?
+                new ObjectParameter("WordUplaodFileNotesId", wordUplaodFileNotesId) :
+                new ObjectParameter("WordUplaodFileNotesId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_Products_Delete", idParameter, wordNameIdParameter, wordDescriptionIdParameter, wordUplaodFileNotesIdParameter);
+        }
+    
+        public virtual int Phot_Products_Images_Insert(Nullable<long> productId, string imagesUrls)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(long));
+    
+            var imagesUrlsParameter = imagesUrls != null ?
+                new ObjectParameter("ImagesUrls", imagesUrls) :
+                new ObjectParameter("ImagesUrls", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_Products_Images_Insert", productIdParameter, imagesUrlsParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<long>> Phot_Products_Insert(string nameAr, string nameEn, string descriptionAr, string descriptionEn, string uplaodFileNotesAr, string uplaodFileNotesEn, string images, Nullable<long> productTypeId, Nullable<long> userId, Nullable<bool> isActive)
+        {
+            var nameArParameter = nameAr != null ?
+                new ObjectParameter("NameAr", nameAr) :
+                new ObjectParameter("NameAr", typeof(string));
+    
+            var nameEnParameter = nameEn != null ?
+                new ObjectParameter("NameEn", nameEn) :
+                new ObjectParameter("NameEn", typeof(string));
+    
+            var descriptionArParameter = descriptionAr != null ?
+                new ObjectParameter("DescriptionAr", descriptionAr) :
+                new ObjectParameter("DescriptionAr", typeof(string));
+    
+            var descriptionEnParameter = descriptionEn != null ?
+                new ObjectParameter("DescriptionEn", descriptionEn) :
+                new ObjectParameter("DescriptionEn", typeof(string));
+    
+            var uplaodFileNotesArParameter = uplaodFileNotesAr != null ?
+                new ObjectParameter("UplaodFileNotesAr", uplaodFileNotesAr) :
+                new ObjectParameter("UplaodFileNotesAr", typeof(string));
+    
+            var uplaodFileNotesEnParameter = uplaodFileNotesEn != null ?
+                new ObjectParameter("UplaodFileNotesEn", uplaodFileNotesEn) :
+                new ObjectParameter("UplaodFileNotesEn", typeof(string));
+    
+            var imagesParameter = images != null ?
+                new ObjectParameter("Images", images) :
+                new ObjectParameter("Images", typeof(string));
+    
+            var productTypeIdParameter = productTypeId.HasValue ?
+                new ObjectParameter("ProductTypeId", productTypeId) :
+                new ObjectParameter("ProductTypeId", typeof(long));
+    
             var userIdParameter = userId.HasValue ?
                 new ObjectParameter("UserId", userId) :
                 new ObjectParameter("UserId", typeof(long));
     
-            var isPublicMenusParameter = isPublicMenus.HasValue ?
-                new ObjectParameter("IsPublicMenus", isPublicMenus) :
-                new ObjectParameter("IsPublicMenus", typeof(bool));
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Pages_SelectAllForUserCanBeAccess_Result>("Pages_SelectAllForUserCanBeAccess", userIdParameter, isPublicMenusParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("Phot_Products_Insert", nameArParameter, nameEnParameter, descriptionArParameter, descriptionEnParameter, uplaodFileNotesArParameter, uplaodFileNotesEnParameter, imagesParameter, productTypeIdParameter, userIdParameter, isActiveParameter);
+        }
+    
+        public virtual ObjectResult<Phot_Products_SelectByFilter_Result> Phot_Products_SelectByFilter(Nullable<int> skip, Nullable<int> take)
+        {
+            var skipParameter = skip.HasValue ?
+                new ObjectParameter("Skip", skip) :
+                new ObjectParameter("Skip", typeof(int));
+    
+            var takeParameter = take.HasValue ?
+                new ObjectParameter("Take", take) :
+                new ObjectParameter("Take", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_Products_SelectByFilter_Result>("Phot_Products_SelectByFilter", skipParameter, takeParameter);
+        }
+    
+        public virtual ObjectResult<Phot_Products_SelectByPK_Result> Phot_Products_SelectByPK(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_Products_SelectByPK_Result>("Phot_Products_SelectByPK", idParameter);
+        }
+    
+        public virtual ObjectResult<Phot_Products_SelectByProductId_Result> Phot_Products_SelectByProductId(Nullable<long> productTypeId)
+        {
+            var productTypeIdParameter = productTypeId.HasValue ?
+                new ObjectParameter("ProductTypeId", productTypeId) :
+                new ObjectParameter("ProductTypeId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_Products_SelectByProductId_Result>("Phot_Products_SelectByProductId", productTypeIdParameter);
+        }
+    
+        public virtual int Phot_Products_Update(Nullable<long> id, Nullable<long> wordNameId, Nullable<long> wordDescriptionId, Nullable<long> wordUpdlodFileNotesId, string nameAr, string nameEn, string descriptionAr, string descriptionEn, string uplaodFileNotesAr, string uplaodFileNotesEn, string images, string imageIdsDeleting, Nullable<long> productTypeId, Nullable<bool> isActive)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            var wordNameIdParameter = wordNameId.HasValue ?
+                new ObjectParameter("WordNameId", wordNameId) :
+                new ObjectParameter("WordNameId", typeof(long));
+    
+            var wordDescriptionIdParameter = wordDescriptionId.HasValue ?
+                new ObjectParameter("WordDescriptionId", wordDescriptionId) :
+                new ObjectParameter("WordDescriptionId", typeof(long));
+    
+            var wordUpdlodFileNotesIdParameter = wordUpdlodFileNotesId.HasValue ?
+                new ObjectParameter("WordUpdlodFileNotesId", wordUpdlodFileNotesId) :
+                new ObjectParameter("WordUpdlodFileNotesId", typeof(long));
+    
+            var nameArParameter = nameAr != null ?
+                new ObjectParameter("NameAr", nameAr) :
+                new ObjectParameter("NameAr", typeof(string));
+    
+            var nameEnParameter = nameEn != null ?
+                new ObjectParameter("NameEn", nameEn) :
+                new ObjectParameter("NameEn", typeof(string));
+    
+            var descriptionArParameter = descriptionAr != null ?
+                new ObjectParameter("DescriptionAr", descriptionAr) :
+                new ObjectParameter("DescriptionAr", typeof(string));
+    
+            var descriptionEnParameter = descriptionEn != null ?
+                new ObjectParameter("DescriptionEn", descriptionEn) :
+                new ObjectParameter("DescriptionEn", typeof(string));
+    
+            var uplaodFileNotesArParameter = uplaodFileNotesAr != null ?
+                new ObjectParameter("UplaodFileNotesAr", uplaodFileNotesAr) :
+                new ObjectParameter("UplaodFileNotesAr", typeof(string));
+    
+            var uplaodFileNotesEnParameter = uplaodFileNotesEn != null ?
+                new ObjectParameter("UplaodFileNotesEn", uplaodFileNotesEn) :
+                new ObjectParameter("UplaodFileNotesEn", typeof(string));
+    
+            var imagesParameter = images != null ?
+                new ObjectParameter("Images", images) :
+                new ObjectParameter("Images", typeof(string));
+    
+            var imageIdsDeletingParameter = imageIdsDeleting != null ?
+                new ObjectParameter("ImageIdsDeleting", imageIdsDeleting) :
+                new ObjectParameter("ImageIdsDeleting", typeof(string));
+    
+            var productTypeIdParameter = productTypeId.HasValue ?
+                new ObjectParameter("ProductTypeId", productTypeId) :
+                new ObjectParameter("ProductTypeId", typeof(long));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_Products_Update", idParameter, wordNameIdParameter, wordDescriptionIdParameter, wordUpdlodFileNotesIdParameter, nameArParameter, nameEnParameter, descriptionArParameter, descriptionEnParameter, uplaodFileNotesArParameter, uplaodFileNotesEnParameter, imagesParameter, imageIdsDeletingParameter, productTypeIdParameter, isActiveParameter);
+        }
+    
+        public virtual int Phot_ProductsOptionItems_Insert(Nullable<long> optionId, string itemsNamesAr, string itemsNamesEn, string itemsPrices, Nullable<int> itemsCount)
+        {
+            var optionIdParameter = optionId.HasValue ?
+                new ObjectParameter("OptionId", optionId) :
+                new ObjectParameter("OptionId", typeof(long));
+    
+            var itemsNamesArParameter = itemsNamesAr != null ?
+                new ObjectParameter("ItemsNamesAr", itemsNamesAr) :
+                new ObjectParameter("ItemsNamesAr", typeof(string));
+    
+            var itemsNamesEnParameter = itemsNamesEn != null ?
+                new ObjectParameter("ItemsNamesEn", itemsNamesEn) :
+                new ObjectParameter("ItemsNamesEn", typeof(string));
+    
+            var itemsPricesParameter = itemsPrices != null ?
+                new ObjectParameter("ItemsPrices", itemsPrices) :
+                new ObjectParameter("ItemsPrices", typeof(string));
+    
+            var itemsCountParameter = itemsCount.HasValue ?
+                new ObjectParameter("ItemsCount", itemsCount) :
+                new ObjectParameter("ItemsCount", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_ProductsOptionItems_Insert", optionIdParameter, itemsNamesArParameter, itemsNamesEnParameter, itemsPricesParameter, itemsCountParameter);
+        }
+    
+        public virtual int Phot_ProductsOptionItems_Update(Nullable<long> optionId, string itemsIds, string itemsNamesAr, string itemsNamesEn, string itemWordNamdsIds, string itemsPrices, Nullable<int> itemsCount)
+        {
+            var optionIdParameter = optionId.HasValue ?
+                new ObjectParameter("OptionId", optionId) :
+                new ObjectParameter("OptionId", typeof(long));
+    
+            var itemsIdsParameter = itemsIds != null ?
+                new ObjectParameter("ItemsIds", itemsIds) :
+                new ObjectParameter("ItemsIds", typeof(string));
+    
+            var itemsNamesArParameter = itemsNamesAr != null ?
+                new ObjectParameter("ItemsNamesAr", itemsNamesAr) :
+                new ObjectParameter("ItemsNamesAr", typeof(string));
+    
+            var itemsNamesEnParameter = itemsNamesEn != null ?
+                new ObjectParameter("ItemsNamesEn", itemsNamesEn) :
+                new ObjectParameter("ItemsNamesEn", typeof(string));
+    
+            var itemWordNamdsIdsParameter = itemWordNamdsIds != null ?
+                new ObjectParameter("ItemWordNamdsIds", itemWordNamdsIds) :
+                new ObjectParameter("ItemWordNamdsIds", typeof(string));
+    
+            var itemsPricesParameter = itemsPrices != null ?
+                new ObjectParameter("ItemsPrices", itemsPrices) :
+                new ObjectParameter("ItemsPrices", typeof(string));
+    
+            var itemsCountParameter = itemsCount.HasValue ?
+                new ObjectParameter("ItemsCount", itemsCount) :
+                new ObjectParameter("ItemsCount", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_ProductsOptionItems_Update", optionIdParameter, itemsIdsParameter, itemsNamesArParameter, itemsNamesEnParameter, itemWordNamdsIdsParameter, itemsPricesParameter, itemsCountParameter);
+        }
+    
+        public virtual int Phot_ProductsOptions_Delete(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_ProductsOptions_Delete", idParameter);
+        }
+    
+        public virtual int Phot_ProductsOptions_Insert(Nullable<int> staticFieldId, Nullable<long> productId, string itemsNamesAr, string itemsNamesEn, string itemsPrices, Nullable<int> itemsCount)
+        {
+            var staticFieldIdParameter = staticFieldId.HasValue ?
+                new ObjectParameter("StaticFieldId", staticFieldId) :
+                new ObjectParameter("StaticFieldId", typeof(int));
+    
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(long));
+    
+            var itemsNamesArParameter = itemsNamesAr != null ?
+                new ObjectParameter("ItemsNamesAr", itemsNamesAr) :
+                new ObjectParameter("ItemsNamesAr", typeof(string));
+    
+            var itemsNamesEnParameter = itemsNamesEn != null ?
+                new ObjectParameter("ItemsNamesEn", itemsNamesEn) :
+                new ObjectParameter("ItemsNamesEn", typeof(string));
+    
+            var itemsPricesParameter = itemsPrices != null ?
+                new ObjectParameter("ItemsPrices", itemsPrices) :
+                new ObjectParameter("ItemsPrices", typeof(string));
+    
+            var itemsCountParameter = itemsCount.HasValue ?
+                new ObjectParameter("ItemsCount", itemsCount) :
+                new ObjectParameter("ItemsCount", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_ProductsOptions_Insert", staticFieldIdParameter, productIdParameter, itemsNamesArParameter, itemsNamesEnParameter, itemsPricesParameter, itemsCountParameter);
+        }
+    
+        public virtual ObjectResult<Phot_ProductsOptions_SelectByProductId_Result> Phot_ProductsOptions_SelectByProductId(Nullable<long> productId)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_ProductsOptions_SelectByProductId_Result>("Phot_ProductsOptions_SelectByProductId", productIdParameter);
+        }
+    
+        public virtual int Phot_ProductsOptions_Update(Nullable<long> id, Nullable<int> staticFieldId, string idDeleted)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            var staticFieldIdParameter = staticFieldId.HasValue ?
+                new ObjectParameter("StaticFieldId", staticFieldId) :
+                new ObjectParameter("StaticFieldId", typeof(int));
+    
+            var idDeletedParameter = idDeleted != null ?
+                new ObjectParameter("IdDeleted", idDeleted) :
+                new ObjectParameter("IdDeleted", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_ProductsOptions_Update", idParameter, staticFieldIdParameter, idDeletedParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Phot_ProductTypes_CheckIfUed(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Phot_ProductTypes_CheckIfUed", idParameter);
+        }
+    
+        public virtual int Phot_ProductTypes_Delete(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_ProductTypes_Delete", idParameter);
+        }
+    
+        public virtual ObjectResult<Phot_ProductTypes_Insert_Result> Phot_ProductTypes_Insert(string nameAr, string nameEn, string imageUrl)
+        {
+            var nameArParameter = nameAr != null ?
+                new ObjectParameter("NameAr", nameAr) :
+                new ObjectParameter("NameAr", typeof(string));
+    
+            var nameEnParameter = nameEn != null ?
+                new ObjectParameter("NameEn", nameEn) :
+                new ObjectParameter("NameEn", typeof(string));
+    
+            var imageUrlParameter = imageUrl != null ?
+                new ObjectParameter("ImageUrl", imageUrl) :
+                new ObjectParameter("ImageUrl", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_ProductTypes_Insert_Result>("Phot_ProductTypes_Insert", nameArParameter, nameEnParameter, imageUrlParameter);
+        }
+    
+        public virtual ObjectResult<Phot_ProductTypes_SelectByAll_Result> Phot_ProductTypes_SelectByAll()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_ProductTypes_SelectByAll_Result>("Phot_ProductTypes_SelectByAll");
+        }
+    
+        public virtual ObjectResult<Phot_ProductTypes_SelectByFilter_Result> Phot_ProductTypes_SelectByFilter(Nullable<int> skip, Nullable<int> take)
+        {
+            var skipParameter = skip.HasValue ?
+                new ObjectParameter("Skip", skip) :
+                new ObjectParameter("Skip", typeof(int));
+    
+            var takeParameter = take.HasValue ?
+                new ObjectParameter("Take", take) :
+                new ObjectParameter("Take", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_ProductTypes_SelectByFilter_Result>("Phot_ProductTypes_SelectByFilter", skipParameter, takeParameter);
+        }
+    
+        public virtual ObjectResult<Phot_ProductTypes_SelectByPK_Result> Phot_ProductTypes_SelectByPK(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_ProductTypes_SelectByPK_Result>("Phot_ProductTypes_SelectByPK", idParameter);
+        }
+    
+        public virtual int Phot_ProductTypes_Update(Nullable<long> id, Nullable<long> wordId, string nameAr, string nameEn, string imageUrl)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            var wordIdParameter = wordId.HasValue ?
+                new ObjectParameter("WordId", wordId) :
+                new ObjectParameter("WordId", typeof(long));
+    
+            var nameArParameter = nameAr != null ?
+                new ObjectParameter("NameAr", nameAr) :
+                new ObjectParameter("NameAr", typeof(string));
+    
+            var nameEnParameter = nameEn != null ?
+                new ObjectParameter("NameEn", nameEn) :
+                new ObjectParameter("NameEn", typeof(string));
+    
+            var imageUrlParameter = imageUrl != null ?
+                new ObjectParameter("ImageUrl", imageUrl) :
+                new ObjectParameter("ImageUrl", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_ProductTypes_Update", idParameter, wordIdParameter, nameArParameter, nameEnParameter, imageUrlParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> PrintNamesTypes_CheckIfUsed(Nullable<long> id)
@@ -2746,6 +3192,76 @@ namespace DAL
                 new ObjectParameter("WordId", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SocialAccountTypes_Update", idParameter, nameArParameter, nameEnParameter, wordIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> StaticFields_CheckIfUsed(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("StaticFields_CheckIfUsed", idParameter);
+        }
+    
+        public virtual int StaticFields_Delete(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("StaticFields_Delete", idParameter);
+        }
+    
+        public virtual int StaticFields_Insert(ObjectParameter id, string nameAr, string nameEn)
+        {
+            var nameArParameter = nameAr != null ?
+                new ObjectParameter("NameAr", nameAr) :
+                new ObjectParameter("NameAr", typeof(string));
+    
+            var nameEnParameter = nameEn != null ?
+                new ObjectParameter("NameEn", nameEn) :
+                new ObjectParameter("NameEn", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("StaticFields_Insert", id, nameArParameter, nameEnParameter);
+        }
+    
+        public virtual ObjectResult<StaticFields_SelectAll_Result> StaticFields_SelectAll()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<StaticFields_SelectAll_Result>("StaticFields_SelectAll");
+        }
+    
+        public virtual ObjectResult<StaticFields_SelectByFilter_Result> StaticFields_SelectByFilter(Nullable<int> skip, Nullable<int> take)
+        {
+            var skipParameter = skip.HasValue ?
+                new ObjectParameter("Skip", skip) :
+                new ObjectParameter("Skip", typeof(int));
+    
+            var takeParameter = take.HasValue ?
+                new ObjectParameter("Take", take) :
+                new ObjectParameter("Take", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<StaticFields_SelectByFilter_Result>("StaticFields_SelectByFilter", skipParameter, takeParameter);
+        }
+    
+        public virtual int StaticFields_Update(Nullable<int> id, string nameAr, string nameEn, Nullable<long> wordId)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var nameArParameter = nameAr != null ?
+                new ObjectParameter("NameAr", nameAr) :
+                new ObjectParameter("NameAr", typeof(string));
+    
+            var nameEnParameter = nameEn != null ?
+                new ObjectParameter("NameEn", nameEn) :
+                new ObjectParameter("NameEn", typeof(string));
+    
+            var wordIdParameter = wordId.HasValue ?
+                new ObjectParameter("WordId", wordId) :
+                new ObjectParameter("WordId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("StaticFields_Update", idParameter, nameArParameter, nameEnParameter, wordIdParameter);
         }
     
         public virtual int UserPayments_Insert(ObjectParameter id, Nullable<decimal> amount, Nullable<System.DateTime> dateTime, Nullable<bool> isAcceptFromManger, Nullable<long> fKUserTo_Id, Nullable<long> fKUserFrom_Id, string notes, Nullable<bool> isBankTransfer, string paymentImage)
@@ -3350,6 +3866,15 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Words_Delete", idParameter);
         }
     
+        public virtual int Words_DeleteList(string ids)
+        {
+            var idsParameter = ids != null ?
+                new ObjectParameter("Ids", ids) :
+                new ObjectParameter("Ids", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Words_DeleteList", idsParameter);
+        }
+    
         public virtual int Words_Insert(string ar, string en)
         {
             var arParameter = ar != null ?
@@ -3380,46 +3905,20 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Words_Update", idParameter, arParameter, enParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> Albums_CheckIfUsed(Nullable<int> id)
+        public virtual int Phot_Orders_UpdateDropboxFolderPath(Nullable<long> orderId, string dropboxFolderPath)
         {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
+            var orderIdParameter = orderId.HasValue ?
+                new ObjectParameter("OrderId", orderId) :
+                new ObjectParameter("OrderId", typeof(long));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Albums_CheckIfUsed", idParameter);
+            var dropboxFolderPathParameter = dropboxFolderPath != null ?
+                new ObjectParameter("DropboxFolderPath", dropboxFolderPath) :
+                new ObjectParameter("DropboxFolderPath", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_Orders_UpdateDropboxFolderPath", orderIdParameter, dropboxFolderPathParameter);
         }
     
-        public virtual ObjectResult<Albums_Insert_Result> Albums_Insert(string nameAr, string nameEn, string descriptionAr, string descriptionEn, string files)
-        {
-            var nameArParameter = nameAr != null ?
-                new ObjectParameter("NameAr", nameAr) :
-                new ObjectParameter("NameAr", typeof(string));
-    
-            var nameEnParameter = nameEn != null ?
-                new ObjectParameter("NameEn", nameEn) :
-                new ObjectParameter("NameEn", typeof(string));
-    
-            var descriptionArParameter = descriptionAr != null ?
-                new ObjectParameter("DescriptionAr", descriptionAr) :
-                new ObjectParameter("DescriptionAr", typeof(string));
-    
-            var descriptionEnParameter = descriptionEn != null ?
-                new ObjectParameter("DescriptionEn", descriptionEn) :
-                new ObjectParameter("DescriptionEn", typeof(string));
-    
-            var filesParameter = files != null ?
-                new ObjectParameter("Files", files) :
-                new ObjectParameter("Files", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Albums_Insert_Result>("Albums_Insert", nameArParameter, nameEnParameter, descriptionArParameter, descriptionEnParameter, filesParameter);
-        }
-    
-        public virtual ObjectResult<Albums_SelectAll_Result> Albums_SelectAll()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Albums_SelectAll_Result>("Albums_SelectAll");
-        }
-    
-        public virtual ObjectResult<Albums_SelectByFilter_Result> Albums_SelectByFilter(Nullable<int> skip, Nullable<int> take)
+        public virtual ObjectResult<Phot_Orders_SelectByFilter_Result> Phot_Orders_SelectByFilter(Nullable<int> skip, Nullable<int> take, Nullable<long> userId)
         {
             var skipParameter = skip.HasValue ?
                 new ObjectParameter("Skip", skip) :
@@ -3429,243 +3928,92 @@ namespace DAL
                 new ObjectParameter("Take", take) :
                 new ObjectParameter("Take", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Albums_SelectByFilter_Result>("Albums_SelectByFilter", skipParameter, takeParameter);
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_Orders_SelectByFilter_Result>("Phot_Orders_SelectByFilter", skipParameter, takeParameter, userIdParameter);
         }
     
-        public virtual ObjectResult<Albums_SelectByPk_Result> Albums_SelectByPk(Nullable<int> id)
+        public virtual ObjectResult<Pages_SelectAllForUserCanBeAccess_Result> Pages_SelectAllForUserCanBeAccess(Nullable<long> userId, Nullable<bool> isPublicMenus)
         {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Albums_SelectByPk_Result>("Albums_SelectByPk", idParameter);
+            var isPublicMenusParameter = isPublicMenus.HasValue ?
+                new ObjectParameter("IsPublicMenus", isPublicMenus) :
+                new ObjectParameter("IsPublicMenus", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Pages_SelectAllForUserCanBeAccess_Result>("Pages_SelectAllForUserCanBeAccess", userIdParameter, isPublicMenusParameter);
         }
     
-        public virtual ObjectResult<Albums_Update_Result> Albums_Update(Nullable<int> id, string nameAr, string nameEn, Nullable<long> wordId, string descriptionAr, string descriptionEn, Nullable<long> wordDescriptionId, string newFiles, string deleteFilesIds)
+        public virtual ObjectResult<Cities_SelectByFilter_Result> Cities_SelectByFilter(Nullable<int> countryId)
         {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
+            var countryIdParameter = countryId.HasValue ?
+                new ObjectParameter("CountryId", countryId) :
+                new ObjectParameter("CountryId", typeof(int));
     
-            var nameArParameter = nameAr != null ?
-                new ObjectParameter("NameAr", nameAr) :
-                new ObjectParameter("NameAr", typeof(string));
-    
-            var nameEnParameter = nameEn != null ?
-                new ObjectParameter("NameEn", nameEn) :
-                new ObjectParameter("NameEn", typeof(string));
-    
-            var wordIdParameter = wordId.HasValue ?
-                new ObjectParameter("WordId", wordId) :
-                new ObjectParameter("WordId", typeof(long));
-    
-            var descriptionArParameter = descriptionAr != null ?
-                new ObjectParameter("DescriptionAr", descriptionAr) :
-                new ObjectParameter("DescriptionAr", typeof(string));
-    
-            var descriptionEnParameter = descriptionEn != null ?
-                new ObjectParameter("DescriptionEn", descriptionEn) :
-                new ObjectParameter("DescriptionEn", typeof(string));
-    
-            var wordDescriptionIdParameter = wordDescriptionId.HasValue ?
-                new ObjectParameter("WordDescriptionId", wordDescriptionId) :
-                new ObjectParameter("WordDescriptionId", typeof(long));
-    
-            var newFilesParameter = newFiles != null ?
-                new ObjectParameter("NewFiles", newFiles) :
-                new ObjectParameter("NewFiles", typeof(string));
-    
-            var deleteFilesIdsParameter = deleteFilesIds != null ?
-                new ObjectParameter("DeleteFilesIds", deleteFilesIds) :
-                new ObjectParameter("DeleteFilesIds", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Albums_Update_Result>("Albums_Update", idParameter, nameArParameter, nameEnParameter, wordIdParameter, descriptionArParameter, descriptionEnParameter, wordDescriptionIdParameter, newFilesParameter, deleteFilesIdsParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Cities_SelectByFilter_Result>("Cities_SelectByFilter", countryIdParameter);
         }
     
-        public virtual int Albums_Delete(Nullable<long> id, Nullable<long> wordId, Nullable<long> wordDescriptionId, string deleteFilesIds)
+        public virtual ObjectResult<Pages_SelectAllForUserCanBeAccess1_Result> Pages_SelectAllForUserCanBeAccess1(Nullable<long> userId, Nullable<bool> isPublicMenus)
         {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(long));
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
     
-            var wordIdParameter = wordId.HasValue ?
-                new ObjectParameter("WordId", wordId) :
-                new ObjectParameter("WordId", typeof(long));
+            var isPublicMenusParameter = isPublicMenus.HasValue ?
+                new ObjectParameter("IsPublicMenus", isPublicMenus) :
+                new ObjectParameter("IsPublicMenus", typeof(bool));
     
-            var wordDescriptionIdParameter = wordDescriptionId.HasValue ?
-                new ObjectParameter("WordDescriptionId", wordDescriptionId) :
-                new ObjectParameter("WordDescriptionId", typeof(long));
-    
-            var deleteFilesIdsParameter = deleteFilesIds != null ?
-                new ObjectParameter("DeleteFilesIds", deleteFilesIds) :
-                new ObjectParameter("DeleteFilesIds", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Albums_Delete", idParameter, wordIdParameter, wordDescriptionIdParameter, deleteFilesIdsParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Pages_SelectAllForUserCanBeAccess1_Result>("Pages_SelectAllForUserCanBeAccess1", userIdParameter, isPublicMenusParameter);
         }
     
-        public virtual int StaticFields_Delete(Nullable<long> id)
+        public virtual ObjectResult<Nullable<long>> Phot_Orders_Insert(Nullable<long> productTypeId, Nullable<long> productId, Nullable<long> userCreated, string optionsItems, Nullable<bool> delivery_IsReceiptFromTheBranch, string delivery_Address, Nullable<int> delivery_FkCountry_Id, Nullable<int> delivery_FKCity_Id)
         {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(long));
+            var productTypeIdParameter = productTypeId.HasValue ?
+                new ObjectParameter("ProductTypeId", productTypeId) :
+                new ObjectParameter("ProductTypeId", typeof(long));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("StaticFields_Delete", idParameter);
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(long));
+    
+            var userCreatedParameter = userCreated.HasValue ?
+                new ObjectParameter("UserCreated", userCreated) :
+                new ObjectParameter("UserCreated", typeof(long));
+    
+            var optionsItemsParameter = optionsItems != null ?
+                new ObjectParameter("OptionsItems", optionsItems) :
+                new ObjectParameter("OptionsItems", typeof(string));
+    
+            var delivery_IsReceiptFromTheBranchParameter = delivery_IsReceiptFromTheBranch.HasValue ?
+                new ObjectParameter("Delivery_IsReceiptFromTheBranch", delivery_IsReceiptFromTheBranch) :
+                new ObjectParameter("Delivery_IsReceiptFromTheBranch", typeof(bool));
+    
+            var delivery_AddressParameter = delivery_Address != null ?
+                new ObjectParameter("Delivery_Address", delivery_Address) :
+                new ObjectParameter("Delivery_Address", typeof(string));
+    
+            var delivery_FkCountry_IdParameter = delivery_FkCountry_Id.HasValue ?
+                new ObjectParameter("Delivery_FkCountry_Id", delivery_FkCountry_Id) :
+                new ObjectParameter("Delivery_FkCountry_Id", typeof(int));
+    
+            var delivery_FKCity_IdParameter = delivery_FKCity_Id.HasValue ?
+                new ObjectParameter("Delivery_FKCity_Id", delivery_FKCity_Id) :
+                new ObjectParameter("Delivery_FKCity_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("Phot_Orders_Insert", productTypeIdParameter, productIdParameter, userCreatedParameter, optionsItemsParameter, delivery_IsReceiptFromTheBranchParameter, delivery_AddressParameter, delivery_FkCountry_IdParameter, delivery_FKCity_IdParameter);
         }
     
-        public virtual int StaticFields_Insert(ObjectParameter id, string nameAr, string nameEn)
-        {
-            var nameArParameter = nameAr != null ?
-                new ObjectParameter("NameAr", nameAr) :
-                new ObjectParameter("NameAr", typeof(string));
-    
-            var nameEnParameter = nameEn != null ?
-                new ObjectParameter("NameEn", nameEn) :
-                new ObjectParameter("NameEn", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("StaticFields_Insert", id, nameArParameter, nameEnParameter);
-        }
-    
-        public virtual ObjectResult<StaticFields_SelectAll_Result> StaticFields_SelectAll()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<StaticFields_SelectAll_Result>("StaticFields_SelectAll");
-        }
-    
-        public virtual ObjectResult<StaticFields_SelectByFilter_Result> StaticFields_SelectByFilter(Nullable<int> skip, Nullable<int> take)
-        {
-            var skipParameter = skip.HasValue ?
-                new ObjectParameter("Skip", skip) :
-                new ObjectParameter("Skip", typeof(int));
-    
-            var takeParameter = take.HasValue ?
-                new ObjectParameter("Take", take) :
-                new ObjectParameter("Take", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<StaticFields_SelectByFilter_Result>("StaticFields_SelectByFilter", skipParameter, takeParameter);
-        }
-    
-        public virtual int StaticFields_Update(Nullable<int> id, string nameAr, string nameEn, Nullable<long> wordId)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            var nameArParameter = nameAr != null ?
-                new ObjectParameter("NameAr", nameAr) :
-                new ObjectParameter("NameAr", typeof(string));
-    
-            var nameEnParameter = nameEn != null ?
-                new ObjectParameter("NameEn", nameEn) :
-                new ObjectParameter("NameEn", typeof(string));
-    
-            var wordIdParameter = wordId.HasValue ?
-                new ObjectParameter("WordId", wordId) :
-                new ObjectParameter("WordId", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("StaticFields_Update", idParameter, nameArParameter, nameEnParameter, wordIdParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> StaticFields_CheckIfUsed(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("StaticFields_CheckIfUsed", idParameter);
-        }
-    
-        public virtual ObjectResult<ProductTypes_SelectByFilter_Result> ProductTypes_SelectByFilter(Nullable<int> skip, Nullable<int> take)
-        {
-            var skipParameter = skip.HasValue ?
-                new ObjectParameter("Skip", skip) :
-                new ObjectParameter("Skip", typeof(int));
-    
-            var takeParameter = take.HasValue ?
-                new ObjectParameter("Take", take) :
-                new ObjectParameter("Take", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductTypes_SelectByFilter_Result>("ProductTypes_SelectByFilter", skipParameter, takeParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> Phot_ProductTypes_CheckIfUed(Nullable<long> id)
+        public virtual ObjectResult<Phot_Orders_SelectById_Result> Phot_Orders_SelectById(Nullable<long> id)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
                 new ObjectParameter("Id", typeof(long));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Phot_ProductTypes_CheckIfUed", idParameter);
-        }
-    
-        public virtual int Phot_ProductTypes_Delete(Nullable<long> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_ProductTypes_Delete", idParameter);
-        }
-    
-        public virtual int Phot_ProductTypes_Update(Nullable<long> id, Nullable<long> wordId, string nameAr, string nameEn, string imageUrl)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(long));
-    
-            var wordIdParameter = wordId.HasValue ?
-                new ObjectParameter("WordId", wordId) :
-                new ObjectParameter("WordId", typeof(long));
-    
-            var nameArParameter = nameAr != null ?
-                new ObjectParameter("NameAr", nameAr) :
-                new ObjectParameter("NameAr", typeof(string));
-    
-            var nameEnParameter = nameEn != null ?
-                new ObjectParameter("NameEn", nameEn) :
-                new ObjectParameter("NameEn", typeof(string));
-    
-            var imageUrlParameter = imageUrl != null ?
-                new ObjectParameter("ImageUrl", imageUrl) :
-                new ObjectParameter("ImageUrl", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_ProductTypes_Update", idParameter, wordIdParameter, nameArParameter, nameEnParameter, imageUrlParameter);
-        }
-    
-        public virtual ObjectResult<Phot_ProductTypes_SelectByFilter_Result> Phot_ProductTypes_SelectByFilter(Nullable<int> skip, Nullable<int> take)
-        {
-            var skipParameter = skip.HasValue ?
-                new ObjectParameter("Skip", skip) :
-                new ObjectParameter("Skip", typeof(int));
-    
-            var takeParameter = take.HasValue ?
-                new ObjectParameter("Take", take) :
-                new ObjectParameter("Take", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_ProductTypes_SelectByFilter_Result>("Phot_ProductTypes_SelectByFilter", skipParameter, takeParameter);
-        }
-    
-        public virtual ObjectResult<Phot_ProductTypes_SelectByPK_Result> Phot_ProductTypes_SelectByPK(Nullable<long> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_ProductTypes_SelectByPK_Result>("Phot_ProductTypes_SelectByPK", idParameter);
-        }
-    
-        public virtual ObjectResult<Phot_ProductTypes_Insert_Result> Phot_ProductTypes_Insert(string nameAr, string nameEn, string imageUrl)
-        {
-            var nameArParameter = nameAr != null ?
-                new ObjectParameter("NameAr", nameAr) :
-                new ObjectParameter("NameAr", typeof(string));
-    
-            var nameEnParameter = nameEn != null ?
-                new ObjectParameter("NameEn", nameEn) :
-                new ObjectParameter("NameEn", typeof(string));
-    
-            var imageUrlParameter = imageUrl != null ?
-                new ObjectParameter("ImageUrl", imageUrl) :
-                new ObjectParameter("ImageUrl", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_ProductTypes_Insert_Result>("Phot_ProductTypes_Insert", nameArParameter, nameEnParameter, imageUrlParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_Orders_SelectById_Result>("Phot_Orders_SelectById", idParameter);
         }
     }
 }

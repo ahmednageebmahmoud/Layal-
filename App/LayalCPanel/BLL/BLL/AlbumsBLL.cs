@@ -103,7 +103,7 @@ namespace BLL.BLL
                     return new ResponseVM(RequestTypeEnum.Success, Token.CanNotDeleteBecuseIsUsed);
 
                 var Data = (AlbumVM)GetAlbumById(c.Id).Result;
-                db.Albums_Delete(c.Id, c.WordId, c.WordDescriptionId, string.Join(",",Data.AlbumFiles.Select(v=> v.Id).ToList()));
+                db.Albums_Delete(c.Id, c.WordId, c.WordDescriptionId);
 
                 //Remove Files From Server
                 FileService.RemoveFiles(Data.AlbumFiles.Select(b=> b.FileUrl).ToList());

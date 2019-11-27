@@ -1,0 +1,33 @@
+{
+    "Phot_Products": {
+        "Id": "bigint",
+        "FKWord_Name_Id": "bigint",
+        "FKWord_Description_Id": "bigint",
+        "FKProductType_Id": "bigint",
+        "FKWord_UplaodFilesNotes_Id": "bigint",
+        "FKUser_Id": "bigint",
+        "IsActive": "bit",
+        "CreateDateTime": "datetime"
+    },
+    "Phot_Products_Images": {
+        "Id": "bigint",
+        "ImageUrl": "nvarchar",
+        "FkProduct_Id": "bigint"
+    },
+    "Phot_ProductsOptions": {
+        "Id": "bigint",
+        "FKStaticField_Id": "int",
+        "FKProduct_Id": "bigint"
+    },
+    "Phot_ProductsOptionsItems": {
+        "Id": "bigint",
+        "FKWord_Value_Id": "bigint",
+        "Price": "decimal",
+        "FKProductOption_Id": "bigint"
+    },
+    "Phot_ProductTypes": {
+        "Id": "bigint",
+        "FKWord_Name_Id": "bigint",
+        "ImageUrl": "nvarchar"
+    }
+}

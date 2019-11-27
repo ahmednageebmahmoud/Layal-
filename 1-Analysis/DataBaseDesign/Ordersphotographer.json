@@ -1,0 +1,18 @@
+{
+    //طلبات المصورين
+    "Ordersphotographer": {
+        "Id": "bigint",
+        "FKProductType_Id": "bigint",
+        "FKProduct_Id": "bigint",
+        "CreateDateTime": "datetime",
+        "FKUserCreated": "bigint"
+    },
+
+    //خيارات طلبات المصورين
+    "OrdersphotographerOptions": {
+        "Id": "bigint",
+        "FKOrder_Id": "bigint",
+        "FKOption_Id": "bigint",
+        "FKItem_Id": "bigint"
+    }
+}

@@ -69,6 +69,41 @@ namespace BLL.BLL
             }
         }
 
+        public object SavePrices(List<CityVM> cities)
+        {
+            using (var tranc=db.Database.BeginTransaction())
+            {
+                try
+                {
+
+                    
+                    //Savw 500 City In Every Request To DataBase
+                    int SaveCount = 500,
+                        RequestsCount = cities.Count / SaveCount;
+                    if (RequestsCount == 0) RequestsCount = 1;
+                    for (int i = 0; i <= RequestsCount; i++)
+                    {
+                           var  CitiesTarget= cities.OrderBy(c => c.Id).Skip(i * SaveCount).Take(SaveCount).ToList();
+                        if(CitiesTarget.Count>0)
+                        {
+
+                        var CitiesIds = string.Join(",", CitiesTarget.Select(c=> c.Id));
+                        var CitiesPrices = string.Join(",", CitiesTarget.Select(c=> c.ShippingPrice));
+                        db.Cities_UpdatePrices(CitiesIds, CitiesPrices, CitiesTarget.Count);
+                        }
+                    }
+
+                    tranc.Commit();
+                    return ResponseVM.Success();
+                }
+                catch (Exception ex)
+                {
+                    tranc.Rollback();
+                    return ResponseVM.Error(Token.SomeErrorHasBeen);
+                }
+            }
+        }
+
         private object Delete(CityVM c)
         {
             //Check Befor Used

@@ -3,3 +3,36 @@
     overflow-y: scroll;
     overflow-x:hidden;
 }
+.error-color{
+    color:#fd397a
+}
+
+
+.cursor-pointer{
+    cursor:pointer
+}
+
+.padding-0{
+    padding:0px;
+}
+.card-success{
+    box-shadow: 5px 4px 5px 0px #00000036;
+}
+
+.card-success .card-header 
+{
+    background: #0abb87;
+    border: 1px solid #0abb87;
+    color: #ffffff;
+}
+
+.thumbnail-v1
+{
+    height:240px;
+    border:1px solid #000;
+    padding:2px;
+}
+    .thumbnail-v1 img {
+        width: 100%;
+        height: 93%;
+    }

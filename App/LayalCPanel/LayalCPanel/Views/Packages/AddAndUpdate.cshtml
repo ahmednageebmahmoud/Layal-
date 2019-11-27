@@ -251,7 +251,7 @@
                                                             name="albumTypeId"
                                                             ng-class="{'is-invalid':addPackageFrm.albumTypeId.$invalid&&packageFrmErrorSubmit}"
                                                             ng-model="packageDeail.PackageInputTypeId"
-                                                            ng-options="c.Id as c.PackageInputTypeName for c in packageInputTypes"
+                                                            ng-options="c.Id as c.StaticFieldName for c in packageInputTypes"
                                                             ng-required="true"></select>
                                                     <!--Errors-->
                                                     <small class="help-block" ng-if="packageDeail.PackageInputTypeIdIsRequired&&erroAddNewItem">@Token.FieldIsRequierd</small>

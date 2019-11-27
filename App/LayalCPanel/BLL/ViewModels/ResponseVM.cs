@@ -67,7 +67,18 @@ namespace BLL.ViewModels
                 DevInnerException = ex.InnerException == null ? null : ex.InnerException.Message,
             };
         }
-        internal static ResponseVM Success(object data)
+
+        public static ResponseVM Success(string message, object data)
+        {
+            return new ResponseVM
+            {
+                RequestType = RequestTypeEnum.Success,
+                Message = message,
+                Result = data
+            };
+        }
+
+        public static ResponseVM Success(object data)
         {
             return new ResponseVM
             {
@@ -76,6 +87,14 @@ namespace BLL.ViewModels
                 Result=data
             };
         }
-        
+
+        internal static object Success()
+        {
+            return new ResponseVM
+            {
+                RequestType = RequestTypeEnum.Success,
+                Message = Token.Success
+            };
+        }
     }
 }

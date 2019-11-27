@@ -43,7 +43,7 @@ namespace UI.Controllers
             return Json(new ResponseVM(RequestTypeEnum.Success, Token.Success, new
             {
                 AlbumsTypes = FillItems.GetAlbumsTypes(),
-                PackageInputTypes=FillItems.GetPackageInputTypes()
+                PackageInputTypes=FillItems.GetStaticFields()
             }), JsonRequestBehavior.AllowGet);
         }
 

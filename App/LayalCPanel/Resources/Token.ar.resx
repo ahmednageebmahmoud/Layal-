@@ -1194,4 +1194,124 @@
   <data name="Image" xml:space="preserve">
     <value>Image</value>
   </data>
+  <data name="ICantAdded" xml:space="preserve">
+    <value>لا يمكننى الاضافة </value>
+  </data>
+  <data name="AddNewProduct" xml:space="preserve">
+    <value>اضافة منتج جديد</value>
+  </data>
+  <data name="AddOrUpdateProduct" xml:space="preserve">
+    <value>اضافة او تحديث منتج</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>المنتاجات</value>
+  </data>
+  <data name="UpdateProduct" xml:space="preserve">
+    <value>تحديث المنتج</value>
+  </data>
+  <data name="BasicInformation" xml:space="preserve">
+    <value>المعلومات الاساسية</value>
+  </data>
+  <data name="UplaodFIleNotesAr" xml:space="preserve">
+    <value>ملحوظات رفع الصور بـ العربية</value>
+  </data>
+  <data name="UplaodFIleNotesEn" xml:space="preserve">
+    <value>ملحوظات رفع الصور بـ الانجليزية</value>
+  </data>
+  <data name="DeletedV1" xml:space="preserve">
+    <value>محذوفة</value>
+  </data>
+  <data name="OptionInformation" xml:space="preserve">
+    <value>معلومات الخيار</value>
+  </data>
+  <data name="OptionItems" xml:space="preserve">
+    <value>عناصر الخيار</value>
+  </data>
+  <data name="OptionName" xml:space="preserve">
+    <value>اسم الخيار</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>الخيارات</value>
+  </data>
+  <data name="OptionItemsCount" xml:space="preserve">
+    <value>عدد عناصر الخيار</value>
+  </data>
+  <data name="NextStep" xml:space="preserve">
+    <value>الخطوة التالية</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>السابق</value>
+  </data>
+  <data name="Product" xml:space="preserve">
+    <value>المنتج</value>
+  </data>
+  <data name="UpdatedAllWithoutOptions" xml:space="preserve">
+    <value>تم تحديث الكل ماعادا الخيارات لان هذا المنتج مستخدم بـ الفعل فى طلب ما</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>تحديد الكل</value>
+  </data>
+  <data name="ShippingCategories" xml:space="preserve">
+    <value>فئات الشحن</value>
+  </data>
+  <data name="CreateOrder" xml:space="preserve">
+    <value>انشاء الطلب</value>
+  </data>
+  <data name="MyOrders" xml:space="preserve">
+    <value>طلباتى</value>
+  </data>
+  <data name="ProductDescription" xml:space="preserve">
+    <value>وصف المنتج</value>
+  </data>
+  <data name="ProductDetails" xml:space="preserve">
+    <value>تفاصيل المنتج</value>
+  </data>
+  <data name="ProductImages" xml:space="preserve">
+    <value>صور المنتج</value>
+  </data>
+  <data name="ProductName" xml:space="preserve">
+    <value>اسم المنتج</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>الملفات</value>
+  </data>
+  <data name="UploadFileNotes" xml:space="preserve">
+    <value>ملحوظات قبل رفع الملفات </value>
+  </data>
+  <data name="YouMustbeChooseProduct" xml:space="preserve">
+    <value>يجب ان تختار المنتج</value>
+  </data>
+  <data name="YouMustbeChooseProductType" xml:space="preserve">
+    <value>يجب ان تختار نوع المنتج</value>
+  </data>
+  <data name="YouMustbeUplaodFiles" xml:space="preserve">
+    <value>يجب ان تقوم بتحميل الملفات</value>
+  </data>
+  <data name="OrderDateTime" xml:space="preserve">
+    <value>وقت وتاريخ الطلب</value>
+  </data>
+  <data name="AddBuWeHaveSomFilesNotSaved" xml:space="preserve">
+    <value>AddBuWeHaveSomFilesNotSaved</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>طلب</value>
+  </data>
+  <data name="UpdateOrder" xml:space="preserve">
+    <value>تحديث الطلب</value>
+  </data>
+  <data name="OrderId" xml:space="preserve">
+    <value>رقم الطلب</value>
+  </data>
+  <data name="YouMustbeChooseAllOptions" xml:space="preserve">
+    <value>يجب ان تحتار جميع الخيارات</value>
+  </data>
+  <data name="DeliveryInformation" xml:space="preserve">
+    <value>معلومات التوصيل</value>
+  </data>
+  <data name="ReceiptFromTheBranch" xml:space="preserve">
+    <value>الاستلام من الفرع مباشرة</value>
+  </data>
+  <data name="YouMustbeFillFields" xml:space="preserve">
+    <value>يجب عليك ملىء الحقول</value>
+  </data>
 </root>

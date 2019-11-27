@@ -14,7 +14,8 @@ namespace BLL.Services
         public static string Email => GetValue("Email");
         public static string Password => GetValue("Password");
         public static string     Smtp => GetValue("Smtp");
-
+        public static string Dropbox_AccessToken => GetValue("Dropbox.AccessToken");
+        
         internal static string GetValue(string key)
         {
             return WebConfigurationManager.AppSettings[key];

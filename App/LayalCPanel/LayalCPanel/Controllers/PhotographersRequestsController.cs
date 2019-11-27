@@ -12,17 +12,13 @@ namespace UI.Controllers
     public class PhotographersRequestsController : BasicController
     {
         // GET: PhotographersRequests
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View();
 
         //Request For  Photographer Only
         [PageForUserType(AccountTypeEnum.Photographer)]
-        public ActionResult Request()
-        {
-            return View();
-        }
+        public ActionResult Request()=>View();
+
+     
 
     }//End Class
 }

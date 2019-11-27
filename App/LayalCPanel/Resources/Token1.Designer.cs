@@ -19,7 +19,7 @@ namespace Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Token {
@@ -156,6 +156,15 @@ namespace Resources {
         public static string AddBasicInformation {
             get {
                 return ResourceManager.GetString("AddBasicInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add But We Hav eSom Files Not Uplaoded.
+        /// </summary>
+        public static string AddBuWeHaveSomFilesNotSaved {
+            get {
+                return ResourceManager.GetString("AddBuWeHaveSomFilesNotSaved", resourceCulture);
             }
         }
         
@@ -304,6 +313,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New Product.
+        /// </summary>
+        public static string AddNewProduct {
+            get {
+                return ResourceManager.GetString("AddNewProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New Product Type.
         /// </summary>
         public static string AddNewProductType {
@@ -354,6 +372,15 @@ namespace Resources {
         public static string AddOrUpdateAlbum {
             get {
                 return ResourceManager.GetString("AddOrUpdateAlbum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Or Update Product.
+        /// </summary>
+        public static string AddOrUpdateProduct {
+            get {
+                return ResourceManager.GetString("AddOrUpdateProduct", resourceCulture);
             }
         }
         
@@ -543,6 +570,15 @@ namespace Resources {
         public static string BasicBranchEmployee {
             get {
                 return ResourceManager.GetString("BasicBranchEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Basic Information.
+        /// </summary>
+        public static string BasicInformation {
+            get {
+                return ResourceManager.GetString("BasicInformation", resourceCulture);
             }
         }
         
@@ -898,6 +934,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create Order.
+        /// </summary>
+        public static string CreateOrder {
+            get {
+                return ResourceManager.GetString("CreateOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customers Satisfaction Statistics.
         /// </summary>
         public static string CustomersSatisfactionStatistics {
@@ -966,6 +1011,24 @@ namespace Resources {
         public static string Deleted {
             get {
                 return ResourceManager.GetString("Deleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleted .
+        /// </summary>
+        public static string DeletedV1 {
+            get {
+                return ResourceManager.GetString("DeletedV1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delivery Information.
+        /// </summary>
+        public static string DeliveryInformation {
+            get {
+                return ResourceManager.GetString("DeliveryInformation", resourceCulture);
             }
         }
         
@@ -1339,6 +1402,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Files.
+        /// </summary>
+        public static string Files {
+            get {
+                return ResourceManager.GetString("Files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Files Received Types.
         /// </summary>
         public static string FilesReceivedTypes {
@@ -1524,6 +1596,15 @@ namespace Resources {
         public static string Hours {
             get {
                 return ResourceManager.GetString("Hours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I Cant Added.
+        /// </summary>
+        public static string ICantAdded {
+            get {
+                return ResourceManager.GetString("ICantAdded", resourceCulture);
             }
         }
         
@@ -1933,6 +2014,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to My Orders.
+        /// </summary>
+        public static string MyOrders {
+            get {
+                return ResourceManager.GetString("MyOrders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My Payments.
         /// </summary>
         public static string MyPayments {
@@ -2046,6 +2136,15 @@ namespace Resources {
         public static string New {
             get {
                 return ResourceManager.GetString("New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next Step.
+        /// </summary>
+        public static string NextStep {
+            get {
+                return ResourceManager.GetString("NextStep", resourceCulture);
             }
         }
         
@@ -2208,6 +2307,78 @@ namespace Resources {
         public static string Operations {
             get {
                 return ResourceManager.GetString("Operations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Option Information.
+        /// </summary>
+        public static string OptionInformation {
+            get {
+                return ResourceManager.GetString("OptionInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Option Items.
+        /// </summary>
+        public static string OptionItems {
+            get {
+                return ResourceManager.GetString("OptionItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Option Items Count.
+        /// </summary>
+        public static string OptionItemsCount {
+            get {
+                return ResourceManager.GetString("OptionItemsCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Option Name.
+        /// </summary>
+        public static string OptionName {
+            get {
+                return ResourceManager.GetString("OptionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        public static string Options {
+            get {
+                return ResourceManager.GetString("Options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order.
+        /// </summary>
+        public static string Order {
+            get {
+                return ResourceManager.GetString("Order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order Date Time.
+        /// </summary>
+        public static string OrderDateTime {
+            get {
+                return ResourceManager.GetString("OrderDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order Id.
+        /// </summary>
+        public static string OrderId {
+            get {
+                return ResourceManager.GetString("OrderId", resourceCulture);
             }
         }
         
@@ -2392,6 +2563,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Previous.
+        /// </summary>
+        public static string Previous {
+            get {
+                return ResourceManager.GetString("Previous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Price.
         /// </summary>
         public static string Price {
@@ -2446,6 +2626,60 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Product.
+        /// </summary>
+        public static string Product {
+            get {
+                return ResourceManager.GetString("Product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Description.
+        /// </summary>
+        public static string ProductDescription {
+            get {
+                return ResourceManager.GetString("ProductDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Details.
+        /// </summary>
+        public static string ProductDetails {
+            get {
+                return ResourceManager.GetString("ProductDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Images.
+        /// </summary>
+        public static string ProductImages {
+            get {
+                return ResourceManager.GetString("ProductImages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Name.
+        /// </summary>
+        public static string ProductName {
+            get {
+                return ResourceManager.GetString("ProductName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Products.
+        /// </summary>
+        public static string Products {
+            get {
+                return ResourceManager.GetString("Products", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Product Type.
         /// </summary>
         public static string ProductType {
@@ -2487,6 +2721,15 @@ namespace Resources {
         public static string Readed {
             get {
                 return ResourceManager.GetString("Readed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receipt From The Branch.
+        /// </summary>
+        public static string ReceiptFromTheBranch {
+            get {
+                return ResourceManager.GetString("ReceiptFromTheBranch", resourceCulture);
             }
         }
         
@@ -2545,6 +2788,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select All.
+        /// </summary>
+        public static string SelectAll {
+            get {
+                return ResourceManager.GetString("SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Employee From Basic Branch.
         /// </summary>
         public static string SelectEmployeeFromBasicBranch {
@@ -2559,6 +2811,15 @@ namespace Resources {
         public static string SendActiveCodeToEmail {
             get {
                 return ResourceManager.GetString("SendActiveCodeToEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipping Categories.
+        /// </summary>
+        public static string ShippingCategories {
+            get {
+                return ResourceManager.GetString("ShippingCategories", resourceCulture);
             }
         }
         
@@ -2959,6 +3220,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Updated All Without Options Because It Is Already Used.
+        /// </summary>
+        public static string UpdatedAllWithoutOptions {
+            get {
+                return ResourceManager.GetString("UpdatedAllWithoutOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update Enquiry.
         /// </summary>
         public static string UpdateEnquiry {
@@ -2986,11 +3256,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update Order.
+        /// </summary>
+        public static string UpdateOrder {
+            get {
+                return ResourceManager.GetString("UpdateOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update Package.
         /// </summary>
         public static string UpdatePackage {
             get {
                 return ResourceManager.GetString("UpdatePackage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Product.
+        /// </summary>
+        public static string UpdateProduct {
+            get {
+                return ResourceManager.GetString("UpdateProduct", resourceCulture);
             }
         }
         
@@ -3022,11 +3310,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Arabic Uplaod FIle Notes.
+        /// </summary>
+        public static string UplaodFIleNotesAr {
+            get {
+                return ResourceManager.GetString("UplaodFIleNotesAr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English Uplaod FIle Notes.
+        /// </summary>
+        public static string UplaodFIleNotesEn {
+            get {
+                return ResourceManager.GetString("UplaodFIleNotesEn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upload.
         /// </summary>
         public static string Upload {
             get {
                 return ResourceManager.GetString("Upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload File Notes.
+        /// </summary>
+        public static string UploadFileNotes {
+            get {
+                return ResourceManager.GetString("UploadFileNotes", resourceCulture);
             }
         }
         
@@ -3243,6 +3558,51 @@ namespace Resources {
         public static string YouCanNotUpdate {
             get {
                 return ResourceManager.GetString("YouCanNotUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You Must be Choose All Options.
+        /// </summary>
+        public static string YouMustbeChooseAllOptions {
+            get {
+                return ResourceManager.GetString("YouMustbeChooseAllOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You Must be Choose Product .
+        /// </summary>
+        public static string YouMustbeChooseProduct {
+            get {
+                return ResourceManager.GetString("YouMustbeChooseProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You Must be Choose Product Type.
+        /// </summary>
+        public static string YouMustbeChooseProductType {
+            get {
+                return ResourceManager.GetString("YouMustbeChooseProductType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You Must be Fill Fields.
+        /// </summary>
+        public static string YouMustbeFillFields {
+            get {
+                return ResourceManager.GetString("YouMustbeFillFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You Must be Uplaod Files.
+        /// </summary>
+        public static string YouMustbeUplaodFiles {
+            get {
+                return ResourceManager.GetString("YouMustbeUplaodFiles", resourceCulture);
             }
         }
         

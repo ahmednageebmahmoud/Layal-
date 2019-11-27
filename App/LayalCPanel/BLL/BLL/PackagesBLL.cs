@@ -167,7 +167,7 @@ namespace BLL.BLL
                     Id = v.PackageDetailsId,
                     ValueAr = v.PackageDetailValueAr,
                     ValueEn = v.PackageDetailValueEn,
-                    PackageInputTypeId = v.FKPackageInputType_Id,
+                    PackageInputTypeId = v.FKStaticField_Id,
                     PackageInputType = new StaticFieldVM
                     {
                         NameAr = v.PackageInputTypeAr,
@@ -211,7 +211,7 @@ namespace BLL.BLL
                     Id = v.PackageDetailsId,
                     ValueAr = v.PackageDetailValueAr,
                     ValueEn = v.PackageDetailValueEn,
-                    PackageInputTypeId = v.FKPackageInputType_Id
+                    PackageInputTypeId = v.FKStaticField_Id
                 }).ToList()
 
             }).FirstOrDefault();

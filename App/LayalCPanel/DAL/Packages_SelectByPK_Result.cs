@@ -27,7 +27,7 @@ namespace DAL
         public Nullable<int> PackageDetailsId { get; set; }
         public string PackageDetailValueAr { get; set; }
         public string PackageDetailValueEn { get; set; }
-        public Nullable<int> FKPackageInputType_Id { get; set; }
+        public Nullable<int> FKStaticField_Id { get; set; }
         public string PackageInputTypeAr { get; set; }
         public string PackageInputTypeEn { get; set; }
         public string AlbumType_NameAr { get; set; }

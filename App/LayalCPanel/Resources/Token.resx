@@ -1185,4 +1185,124 @@
   <data name="Image" xml:space="preserve">
     <value>Image</value>
   </data>
+  <data name="ICantAdded" xml:space="preserve">
+    <value>I Cant Added</value>
+  </data>
+  <data name="AddNewProduct" xml:space="preserve">
+    <value>Add New Product</value>
+  </data>
+  <data name="AddOrUpdateProduct" xml:space="preserve">
+    <value>Add Or Update Product</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="UpdateProduct" xml:space="preserve">
+    <value>Update Product</value>
+  </data>
+  <data name="BasicInformation" xml:space="preserve">
+    <value>Basic Information</value>
+  </data>
+  <data name="UplaodFIleNotesAr" xml:space="preserve">
+    <value>Arabic Uplaod FIle Notes</value>
+  </data>
+  <data name="UplaodFIleNotesEn" xml:space="preserve">
+    <value>English Uplaod FIle Notes</value>
+  </data>
+  <data name="DeletedV1" xml:space="preserve">
+    <value>Deleted </value>
+  </data>
+  <data name="OptionInformation" xml:space="preserve">
+    <value>Option Information</value>
+  </data>
+  <data name="OptionItems" xml:space="preserve">
+    <value>Option Items</value>
+  </data>
+  <data name="OptionName" xml:space="preserve">
+    <value>Option Name</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="OptionItemsCount" xml:space="preserve">
+    <value>Option Items Count</value>
+  </data>
+  <data name="NextStep" xml:space="preserve">
+    <value>Next Step</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="Product" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="UpdatedAllWithoutOptions" xml:space="preserve">
+    <value>Updated All Without Options Because It Is Already Used</value>
+  </data>
+  <data name="ShippingCategories" xml:space="preserve">
+    <value>Shipping Categories</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="CreateOrder" xml:space="preserve">
+    <value>Create Order</value>
+  </data>
+  <data name="MyOrders" xml:space="preserve">
+    <value>My Orders</value>
+  </data>
+  <data name="ProductDescription" xml:space="preserve">
+    <value>Product Description</value>
+  </data>
+  <data name="ProductDetails" xml:space="preserve">
+    <value>Product Details</value>
+  </data>
+  <data name="ProductImages" xml:space="preserve">
+    <value>Product Images</value>
+  </data>
+  <data name="ProductName" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="UploadFileNotes" xml:space="preserve">
+    <value>Upload File Notes</value>
+  </data>
+  <data name="YouMustbeChooseProduct" xml:space="preserve">
+    <value>You Must be Choose Product </value>
+  </data>
+  <data name="YouMustbeChooseProductType" xml:space="preserve">
+    <value>You Must be Choose Product Type</value>
+  </data>
+  <data name="YouMustbeUplaodFiles" xml:space="preserve">
+    <value>You Must be Uplaod Files</value>
+  </data>
+  <data name="OrderDateTime" xml:space="preserve">
+    <value>Order Date Time</value>
+  </data>
+  <data name="AddBuWeHaveSomFilesNotSaved" xml:space="preserve">
+    <value>Add But We Hav eSom Files Not Uplaoded</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="UpdateOrder" xml:space="preserve">
+    <value>Update Order</value>
+  </data>
+  <data name="OrderId" xml:space="preserve">
+    <value>Order Id</value>
+  </data>
+  <data name="YouMustbeChooseAllOptions" xml:space="preserve">
+    <value>You Must be Choose All Options</value>
+  </data>
+  <data name="DeliveryInformation" xml:space="preserve">
+    <value>Delivery Information</value>
+  </data>
+  <data name="ReceiptFromTheBranch" xml:space="preserve">
+    <value>Receipt From The Branch</value>
+  </data>
+  <data name="YouMustbeFillFields" xml:space="preserve">
+    <value>You Must be Fill Fields</value>
+  </data>
 </root>

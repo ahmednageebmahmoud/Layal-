@@ -223,3 +223,9 @@ function animatedElement(selctor,animatedClass)
 {
     $(selctor).removeClass(animatedClass).addClass('animated').addClass(animatedClass);
 }
+
+function selectTo(timeOut) {
+    setTimeout(() => {
+        $("select[serchbale]").select2();
+    }, timeOut||1000)
+}

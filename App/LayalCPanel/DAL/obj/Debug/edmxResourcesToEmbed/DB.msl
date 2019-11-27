@@ -1,6 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="LayanModelStoreContainer" CdmEntityContainer="LayanEntities">
+    <FunctionImportMapping FunctionImportName="Albums_CheckIfUsed" FunctionName="LayanModel.Store.Albums_CheckIfUsed" />
+    <FunctionImportMapping FunctionImportName="Albums_Delete" FunctionName="LayanModel.Store.Albums_Delete" />
+    <FunctionImportMapping FunctionImportName="Albums_Insert" FunctionName="LayanModel.Store.Albums_Insert">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Albums_Insert_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+          <ScalarProperty Name="FKWord_Description_Id" ColumnName="FKWord_Description_Id" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+          <ScalarProperty Name="DescriptionAr" ColumnName="DescriptionAr" />
+          <ScalarProperty Name="DescriptionEn" ColumnName="DescriptionEn" />
+          <ScalarProperty Name="AlbumFileId" ColumnName="AlbumFileId" />
+          <ScalarProperty Name="FileUrl" ColumnName="FileUrl" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Albums_SelectAll" FunctionName="LayanModel.Store.Albums_SelectAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Albums_SelectAll_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+          <ScalarProperty Name="FKWord_Description_Id" ColumnName="FKWord_Description_Id" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+          <ScalarProperty Name="DescriptionAr" ColumnName="DescriptionAr" />
+          <ScalarProperty Name="DescriptionEn" ColumnName="DescriptionEn" />
+          <ScalarProperty Name="FileUrl" ColumnName="FileUrl" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Albums_SelectByFilter" FunctionName="LayanModel.Store.Albums_SelectByFilter">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Albums_SelectByFilter_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+          <ScalarProperty Name="FKWord_Description_Id" ColumnName="FKWord_Description_Id" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+          <ScalarProperty Name="DescriptionAr" ColumnName="DescriptionAr" />
+          <ScalarProperty Name="DescriptionEn" ColumnName="DescriptionEn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Albums_SelectByPk" FunctionName="LayanModel.Store.Albums_SelectByPk">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Albums_SelectByPk_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+          <ScalarProperty Name="FKWord_Description_Id" ColumnName="FKWord_Description_Id" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+          <ScalarProperty Name="DescriptionAr" ColumnName="DescriptionAr" />
+          <ScalarProperty Name="DescriptionEn" ColumnName="DescriptionEn" />
+          <ScalarProperty Name="AlbumFileId" ColumnName="AlbumFileId" />
+          <ScalarProperty Name="FileUrl" ColumnName="FileUrl" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Albums_Update" FunctionName="LayanModel.Store.Albums_Update">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Albums_Update_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+          <ScalarProperty Name="FKWord_Description_Id" ColumnName="FKWord_Description_Id" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+          <ScalarProperty Name="DescriptionAr" ColumnName="DescriptionAr" />
+          <ScalarProperty Name="DescriptionEn" ColumnName="DescriptionEn" />
+          <ScalarProperty Name="AlbumFileId" ColumnName="AlbumFileId" />
+          <ScalarProperty Name="FileUrl" ColumnName="FileUrl" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Branches_CheckIfUsed" FunctionName="LayanModel.Store.Branches_CheckIfUsed" />
     <FunctionImportMapping FunctionImportName="Branches_CheckIsBasicBranch" FunctionName="LayanModel.Store.Branches_CheckIsBasicBranch" />
     <FunctionImportMapping FunctionImportName="Branches_Delete" FunctionName="LayanModel.Store.Branches_Delete" />
@@ -81,23 +155,14 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
           <ScalarProperty Name="FKCountry_Id" ColumnName="FKCountry_Id" />
-          <ScalarProperty Name="Ar" ColumnName="Ar" />
-          <ScalarProperty Name="En" ColumnName="En" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Cities_SelectByFilter" FunctionName="LayanModel.Store.Cities_SelectByFilter">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.Cities_SelectByFilter_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
-          <ScalarProperty Name="FKCountry_Id" ColumnName="FKCountry_Id" />
+          <ScalarProperty Name="ShippingPrice" ColumnName="ShippingPrice" />
           <ScalarProperty Name="Ar" ColumnName="Ar" />
           <ScalarProperty Name="En" ColumnName="En" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Cities_Update" FunctionName="LayanModel.Store.Cities_Update" />
+    <FunctionImportMapping FunctionImportName="Cities_UpdatePrices" FunctionName="LayanModel.Store.Cities_UpdatePrices" />
     <FunctionImportMapping FunctionImportName="Countries_CheckIfUsed" FunctionName="LayanModel.Store.Countries_CheckIfUsed" />
     <FunctionImportMapping FunctionImportName="Countries_Delete" FunctionName="LayanModel.Store.Countries_Delete" />
     <FunctionImportMapping FunctionImportName="Countries_Insert" FunctionName="LayanModel.Store.Countries_Insert" />
@@ -1067,7 +1132,7 @@
           <ScalarProperty Name="PackageDetailsId" ColumnName="PackageDetailsId" />
           <ScalarProperty Name="PackageDetailValueAr" ColumnName="PackageDetailValueAr" />
           <ScalarProperty Name="PackageDetailValueEn" ColumnName="PackageDetailValueEn" />
-          <ScalarProperty Name="FKPackageInputType_Id" ColumnName="FKPackageInputType_Id" />
+          <ScalarProperty Name="FKStaticField_Id" ColumnName="FKStaticField_Id" />
           <ScalarProperty Name="PackageInputTypeAr" ColumnName="PackageInputTypeAr" />
           <ScalarProperty Name="PackageInputTypeEn" ColumnName="PackageInputTypeEn" />
           <ScalarProperty Name="AlbumType_NameAr" ColumnName="AlbumType_NameAr" />
@@ -1077,22 +1142,137 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Packages_Update" FunctionName="LayanModel.Store.Packages_Update" />
     <FunctionImportMapping FunctionImportName="Pages_SelectAllByUser_Id" FunctionName="LayanModel.Store.Pages_SelectAllByUser_Id" />
-    <FunctionImportMapping FunctionImportName="Pages_SelectAllForUserCanBeAccess" FunctionName="LayanModel.Store.Pages_SelectAllForUserCanBeAccess">
+    <FunctionImportMapping FunctionImportName="Phot_OrdersOptions_Insert" FunctionName="LayanModel.Store.Phot_OrdersOptions_Insert" />
+    <FunctionImportMapping FunctionImportName="Phot_Products_CheckIfUsed" FunctionName="LayanModel.Store.Phot_Products_CheckIfUsed" />
+    <FunctionImportMapping FunctionImportName="Phot_Products_Delete" FunctionName="LayanModel.Store.Phot_Products_Delete" />
+    <FunctionImportMapping FunctionImportName="Phot_Products_Images_Insert" FunctionName="LayanModel.Store.Phot_Products_Images_Insert" />
+    <FunctionImportMapping FunctionImportName="Phot_Products_Insert" FunctionName="LayanModel.Store.Phot_Products_Insert" />
+    <FunctionImportMapping FunctionImportName="Phot_Products_SelectByFilter" FunctionName="LayanModel.Store.Phot_Products_SelectByFilter">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.Pages_SelectAllForUserCanBeAccess_Result">
+        <ComplexTypeMapping TypeName="LayanModel.Phot_Products_SelectByFilter_Result">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
-          <ScalarProperty Name="Url" ColumnName="Url" />
-          <ScalarProperty Name="FkMenu_Id" ColumnName="FkMenu_Id" />
-          <ScalarProperty Name="OrderByNumber" ColumnName="OrderByNumber" />
-          <ScalarProperty Name="IsForClient" ColumnName="IsForClient" />
-          <ScalarProperty Name="IsForAdmin" ColumnName="IsForAdmin" />
-          <ScalarProperty Name="IsHide" ColumnName="IsHide" />
-          <ScalarProperty Name="PageNameAr" ColumnName="PageNameAr" />
-          <ScalarProperty Name="PageNameEn" ColumnName="PageNameEn" />
+          <ScalarProperty Name="FKWord_Name_Id" ColumnName="FKWord_Name_Id" />
+          <ScalarProperty Name="FKWord_Description_Id" ColumnName="FKWord_Description_Id" />
+          <ScalarProperty Name="FKProductType_Id" ColumnName="FKProductType_Id" />
+          <ScalarProperty Name="FKWord_UplaodFilesNotes_Id" ColumnName="FKWord_UplaodFilesNotes_Id" />
+          <ScalarProperty Name="FKUser_Id" ColumnName="FKUser_Id" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+          <ScalarProperty Name="ProductTypeNameAr" ColumnName="ProductTypeNameAr" />
+          <ScalarProperty Name="ProductTypeNameEn" ColumnName="ProductTypeNameEn" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Phot_Products_SelectByPK" FunctionName="LayanModel.Store.Phot_Products_SelectByPK">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Phot_Products_SelectByPK_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Name_Id" ColumnName="FKWord_Name_Id" />
+          <ScalarProperty Name="FKWord_Description_Id" ColumnName="FKWord_Description_Id" />
+          <ScalarProperty Name="FKProductType_Id" ColumnName="FKProductType_Id" />
+          <ScalarProperty Name="FKWord_UplaodFilesNotes_Id" ColumnName="FKWord_UplaodFilesNotes_Id" />
+          <ScalarProperty Name="FKUser_Id" ColumnName="FKUser_Id" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+          <ScalarProperty Name="DescriptionAr" ColumnName="DescriptionAr" />
+          <ScalarProperty Name="DescriptionEn" ColumnName="DescriptionEn" />
+          <ScalarProperty Name="UploadNotesAr" ColumnName="UploadNotesAr" />
+          <ScalarProperty Name="UploadNotesEn" ColumnName="UploadNotesEn" />
+          <ScalarProperty Name="ProductImageId" ColumnName="ProductImageId" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Phot_Products_SelectByProductId" FunctionName="LayanModel.Store.Phot_Products_SelectByProductId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Phot_Products_SelectByProductId_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Name_Id" ColumnName="FKWord_Name_Id" />
+          <ScalarProperty Name="FKWord_Description_Id" ColumnName="FKWord_Description_Id" />
+          <ScalarProperty Name="FKProductType_Id" ColumnName="FKProductType_Id" />
+          <ScalarProperty Name="FKWord_UplaodFilesNotes_Id" ColumnName="FKWord_UplaodFilesNotes_Id" />
+          <ScalarProperty Name="FKUser_Id" ColumnName="FKUser_Id" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Phot_Products_Update" FunctionName="LayanModel.Store.Phot_Products_Update" />
+    <FunctionImportMapping FunctionImportName="Phot_ProductsOptionItems_Insert" FunctionName="LayanModel.Store.Phot_ProductsOptionItems_Insert" />
+    <FunctionImportMapping FunctionImportName="Phot_ProductsOptionItems_Update" FunctionName="LayanModel.Store.Phot_ProductsOptionItems_Update" />
+    <FunctionImportMapping FunctionImportName="Phot_ProductsOptions_Delete" FunctionName="LayanModel.Store.Phot_ProductsOptions_Delete" />
+    <FunctionImportMapping FunctionImportName="Phot_ProductsOptions_Insert" FunctionName="LayanModel.Store.Phot_ProductsOptions_Insert" />
+    <FunctionImportMapping FunctionImportName="Phot_ProductsOptions_SelectByProductId" FunctionName="LayanModel.Store.Phot_ProductsOptions_SelectByProductId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Phot_ProductsOptions_SelectByProductId_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKStaticField_Id" ColumnName="FKStaticField_Id" />
+          <ScalarProperty Name="FKProduct_Id" ColumnName="FKProduct_Id" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+          <ScalarProperty Name="ValueAr" ColumnName="ValueAr" />
+          <ScalarProperty Name="ValueEn" ColumnName="ValueEn" />
+          <ScalarProperty Name="OptionItemId" ColumnName="OptionItemId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="FKWord_Value_Id" ColumnName="FKWord_Value_Id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Phot_ProductsOptions_Update" FunctionName="LayanModel.Store.Phot_ProductsOptions_Update" />
+    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_CheckIfUed" FunctionName="LayanModel.Store.Phot_ProductTypes_CheckIfUed" />
+    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_Delete" FunctionName="LayanModel.Store.Phot_ProductTypes_Delete" />
+    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_Insert" FunctionName="LayanModel.Store.Phot_ProductTypes_Insert">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Phot_ProductTypes_Insert_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Name_Id" ColumnName="FKWord_Name_Id" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_SelectByAll" FunctionName="LayanModel.Store.Phot_ProductTypes_SelectByAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Phot_ProductTypes_SelectByAll_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Name_Id" ColumnName="FKWord_Name_Id" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_SelectByFilter" FunctionName="LayanModel.Store.Phot_ProductTypes_SelectByFilter">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Phot_ProductTypes_SelectByFilter_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Name_Id" ColumnName="FKWord_Name_Id" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_SelectByPK" FunctionName="LayanModel.Store.Phot_ProductTypes_SelectByPK">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Phot_ProductTypes_SelectByPK_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Name_Id" ColumnName="FKWord_Name_Id" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_Update" FunctionName="LayanModel.Store.Phot_ProductTypes_Update" />
     <FunctionImportMapping FunctionImportName="PrintNamesTypes_CheckIfUsed" FunctionName="LayanModel.Store.PrintNamesTypes_CheckIfUsed" />
     <FunctionImportMapping FunctionImportName="PrintNamesTypes_Delete" FunctionName="LayanModel.Store.PrintNamesTypes_Delete" />
     <FunctionImportMapping FunctionImportName="PrintNamesTypes_Insert" FunctionName="LayanModel.Store.PrintNamesTypes_Insert" />
@@ -1152,6 +1332,30 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SocialAccountTypes_Update" FunctionName="LayanModel.Store.SocialAccountTypes_Update" />
+    <FunctionImportMapping FunctionImportName="StaticFields_CheckIfUsed" FunctionName="LayanModel.Store.StaticFields_CheckIfUsed" />
+    <FunctionImportMapping FunctionImportName="StaticFields_Delete" FunctionName="LayanModel.Store.StaticFields_Delete" />
+    <FunctionImportMapping FunctionImportName="StaticFields_Insert" FunctionName="LayanModel.Store.StaticFields_Insert" />
+    <FunctionImportMapping FunctionImportName="StaticFields_SelectAll" FunctionName="LayanModel.Store.StaticFields_SelectAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.StaticFields_SelectAll_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="StaticFields_SelectByFilter" FunctionName="LayanModel.Store.StaticFields_SelectByFilter">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.StaticFields_SelectByFilter_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="StaticFields_Update" FunctionName="LayanModel.Store.StaticFields_Update" />
     <FunctionImportMapping FunctionImportName="UserPayments_Insert" FunctionName="LayanModel.Store.UserPayments_Insert" />
     <FunctionImportMapping FunctionImportName="UserPayments_SelectByPK" FunctionName="LayanModel.Store.UserPayments_SelectByPK">
       <ResultMapping>
@@ -1534,139 +1738,79 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Words_Delete" FunctionName="LayanModel.Store.Words_Delete" />
+    <FunctionImportMapping FunctionImportName="Words_DeleteList" FunctionName="LayanModel.Store.Words_DeleteList" />
     <FunctionImportMapping FunctionImportName="Words_Insert" FunctionName="LayanModel.Store.Words_Insert" />
     <FunctionImportMapping FunctionImportName="Words_Update" FunctionName="LayanModel.Store.Words_Update" />
-    <FunctionImportMapping FunctionImportName="Albums_CheckIfUsed" FunctionName="LayanModel.Store.Albums_CheckIfUsed" />
-    <FunctionImportMapping FunctionImportName="Albums_Insert" FunctionName="LayanModel.Store.Albums_Insert">
+    <FunctionImportMapping FunctionImportName="Phot_Orders_UpdateDropboxFolderPath" FunctionName="LayanModel.Store.Phot_Orders_UpdateDropboxFolderPath" />
+    <FunctionImportMapping FunctionImportName="Phot_Orders_SelectByFilter" FunctionName="LayanModel.Store.Phot_Orders_SelectByFilter">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.Albums_Insert_Result">
+        <ComplexTypeMapping TypeName="LayanModel.Phot_Orders_SelectByFilter_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKProductType_Id" ColumnName="FKProductType_Id" />
+          <ScalarProperty Name="FKProduct_Id" ColumnName="FKProduct_Id" />
+          <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+          <ScalarProperty Name="FKUserCreated" ColumnName="FKUserCreated" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DropboxFolderPath" ColumnName="DropboxFolderPath" />
+          <ScalarProperty Name="ProductTypeNameAr" ColumnName="ProductTypeNameAr" />
+          <ScalarProperty Name="ProductTypeNameEn" ColumnName="ProductTypeNameEn" />
+          <ScalarProperty Name="ProductNameAr" ColumnName="ProductNameAr" />
+          <ScalarProperty Name="ProductNameEn" ColumnName="ProductNameEn" />
+          <ScalarProperty Name="UserCreated_UserName" ColumnName="UserCreated_UserName" />
+          <ScalarProperty Name="UserCreated_FullName" ColumnName="UserCreated_FullName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Cities_SelectByFilter" FunctionName="LayanModel.Store.Cities_SelectByFilter">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Cities_SelectByFilter_Result">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
-          <ScalarProperty Name="FKWord_Description_Id" ColumnName="FKWord_Description_Id" />
-          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
-          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
-          <ScalarProperty Name="DescriptionAr" ColumnName="DescriptionAr" />
-          <ScalarProperty Name="DescriptionEn" ColumnName="DescriptionEn" />
-          <ScalarProperty Name="AlbumFileId" ColumnName="AlbumFileId" />
-          <ScalarProperty Name="FileUrl" ColumnName="FileUrl" />
+          <ScalarProperty Name="FKCountry_Id" ColumnName="FKCountry_Id" />
+          <ScalarProperty Name="ShippingPrice" ColumnName="ShippingPrice" />
+          <ScalarProperty Name="Ar" ColumnName="Ar" />
+          <ScalarProperty Name="En" ColumnName="En" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Albums_SelectAll" FunctionName="LayanModel.Store.Albums_SelectAll">
+    <FunctionImportMapping FunctionImportName="Pages_SelectAllForUserCanBeAccess1" FunctionName="LayanModel.Store.Pages_SelectAllForUserCanBeAccess">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.Albums_SelectAll_Result">
+        <ComplexTypeMapping TypeName="LayanModel.Pages_SelectAllForUserCanBeAccess1_Result">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
-          <ScalarProperty Name="FKWord_Description_Id" ColumnName="FKWord_Description_Id" />
-          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
-          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
-          <ScalarProperty Name="DescriptionAr" ColumnName="DescriptionAr" />
-          <ScalarProperty Name="DescriptionEn" ColumnName="DescriptionEn" />
-          <ScalarProperty Name="FileUrl" ColumnName="FileUrl" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="FkMenu_Id" ColumnName="FkMenu_Id" />
+          <ScalarProperty Name="OrderByNumber" ColumnName="OrderByNumber" />
+          <ScalarProperty Name="IsForClient" ColumnName="IsForClient" />
+          <ScalarProperty Name="IsForAdmin" ColumnName="IsForAdmin" />
+          <ScalarProperty Name="IsHide" ColumnName="IsHide" />
+          <ScalarProperty Name="PageNameAr" ColumnName="PageNameAr" />
+          <ScalarProperty Name="PageNameEn" ColumnName="PageNameEn" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Albums_SelectByFilter" FunctionName="LayanModel.Store.Albums_SelectByFilter">
+    <FunctionImportMapping FunctionImportName="Phot_Orders_Insert" FunctionName="LayanModel.Store.Phot_Orders_Insert" />
+    <FunctionImportMapping FunctionImportName="Phot_Orders_SelectById" FunctionName="LayanModel.Store.Phot_Orders_SelectById">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.Albums_SelectByFilter_Result">
+        <ComplexTypeMapping TypeName="LayanModel.Phot_Orders_SelectById_Result">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
-          <ScalarProperty Name="FKWord_Description_Id" ColumnName="FKWord_Description_Id" />
-          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
-          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
-          <ScalarProperty Name="DescriptionAr" ColumnName="DescriptionAr" />
-          <ScalarProperty Name="DescriptionEn" ColumnName="DescriptionEn" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Albums_SelectByPk" FunctionName="LayanModel.Store.Albums_SelectByPk">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.Albums_SelectByPk_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
-          <ScalarProperty Name="FKWord_Description_Id" ColumnName="FKWord_Description_Id" />
-          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
-          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
-          <ScalarProperty Name="DescriptionAr" ColumnName="DescriptionAr" />
-          <ScalarProperty Name="DescriptionEn" ColumnName="DescriptionEn" />
-          <ScalarProperty Name="AlbumFileId" ColumnName="AlbumFileId" />
-          <ScalarProperty Name="FileUrl" ColumnName="FileUrl" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Albums_Update" FunctionName="LayanModel.Store.Albums_Update">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.Albums_Update_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
-          <ScalarProperty Name="FKWord_Description_Id" ColumnName="FKWord_Description_Id" />
-          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
-          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
-          <ScalarProperty Name="DescriptionAr" ColumnName="DescriptionAr" />
-          <ScalarProperty Name="DescriptionEn" ColumnName="DescriptionEn" />
-          <ScalarProperty Name="AlbumFileId" ColumnName="AlbumFileId" />
-          <ScalarProperty Name="FileUrl" ColumnName="FileUrl" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Albums_Delete" FunctionName="LayanModel.Store.Albums_Delete" />
-    <FunctionImportMapping FunctionImportName="StaticFields_Delete" FunctionName="LayanModel.Store.StaticFields_Delete" />
-    <FunctionImportMapping FunctionImportName="StaticFields_Insert" FunctionName="LayanModel.Store.StaticFields_Insert" />
-    <FunctionImportMapping FunctionImportName="StaticFields_SelectAll" FunctionName="LayanModel.Store.StaticFields_SelectAll">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.StaticFields_SelectAll_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
-          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
-          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="StaticFields_SelectByFilter" FunctionName="LayanModel.Store.StaticFields_SelectByFilter">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.StaticFields_SelectByFilter_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
-          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
-          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="StaticFields_Update" FunctionName="LayanModel.Store.StaticFields_Update" />
-    <FunctionImportMapping FunctionImportName="StaticFields_CheckIfUsed" FunctionName="LayanModel.Store.StaticFields_CheckIfUsed" />
-    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_CheckIfUed" FunctionName="LayanModel.Store.Phot_ProductTypes_CheckIfUed" />
-    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_Delete" FunctionName="LayanModel.Store.Phot_ProductTypes_Delete" />
-    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_Update" FunctionName="LayanModel.Store.Phot_ProductTypes_Update" />
-    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_SelectByFilter" FunctionName="LayanModel.Store.Phot_ProductTypes_SelectByFilter">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.Phot_ProductTypes_SelectByFilter_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FKWord_Name_Id" ColumnName="FKWord_Name_Id" />
-          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
-          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_SelectByPK" FunctionName="LayanModel.Store.Phot_ProductTypes_SelectByPK">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.Phot_ProductTypes_SelectByPK_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FKWord_Name_Id" ColumnName="FKWord_Name_Id" />
-          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
-          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Phot_ProductTypes_Insert" FunctionName="LayanModel.Store.Phot_ProductTypes_Insert">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.Phot_ProductTypes_Insert_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FKWord_Name_Id" ColumnName="FKWord_Name_Id" />
-          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
-          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+          <ScalarProperty Name="FKProductType_Id" ColumnName="FKProductType_Id" />
+          <ScalarProperty Name="FKProduct_Id" ColumnName="FKProduct_Id" />
+          <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+          <ScalarProperty Name="FKUserCreated" ColumnName="FKUserCreated" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DropboxFolderPath" ColumnName="DropboxFolderPath" />
+          <ScalarProperty Name="Delivery_IsReceiptFromTheBranch" ColumnName="Delivery_IsReceiptFromTheBranch" />
+          <ScalarProperty Name="Delivery_Address" ColumnName="Delivery_Address" />
+          <ScalarProperty Name="Delivery_FkCountry_Id" ColumnName="Delivery_FkCountry_Id" />
+          <ScalarProperty Name="Delivery_FKCity_Id" ColumnName="Delivery_FKCity_Id" />
+          <ScalarProperty Name="FKProdutOption_Id" ColumnName="FKProdutOption_Id" />
+          <ScalarProperty Name="FKProductOptionItem_Id" ColumnName="FKProductOptionItem_Id" />
+          <ScalarProperty Name="ProductTypeNameAr" ColumnName="ProductTypeNameAr" />
+          <ScalarProperty Name="ProductTypeNameEn" ColumnName="ProductTypeNameEn" />
+          <ScalarProperty Name="ProductTypeImage" ColumnName="ProductTypeImage" />
+          <ScalarProperty Name="UserCreated_UserName" ColumnName="UserCreated_UserName" />
+          <ScalarProperty Name="UserCreated_FullName" ColumnName="UserCreated_FullName" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

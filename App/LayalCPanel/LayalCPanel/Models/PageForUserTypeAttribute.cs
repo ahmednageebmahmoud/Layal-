@@ -14,7 +14,7 @@ namespace LayalCPanel.Models
         public AccountTypeEnum AccountType { get; set; }
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if(CookieService.UserInfo.AccountTypeId==AccountType)
+            if(CookieService.UserInfo.AccountTypeId!=AccountType)
                 filterContext.Result = new HttpNotFoundResult();
     }
 

@@ -50,6 +50,35 @@
         });
     }
 
+    /**
+     * Confirm Alert With Custom Btn Titles
+     * @param {any} message   Message
+     * @param {any} okTitle   Ok Title
+     * @param {any} cancelTitle  Cancel Title
+     * @param {any} okFunCallback  Ok Function
+     * @param {any} cancelFuncCallback Cancel Function
+     */
+    static confirmInfoV2(message,okTitle,cancelTitle, okFunCallback, cancelFuncCallback) {
+        new Audio('/assets/sound/sweetAlert.mp3').play();
+        swal.fire({
+            title: Token.success,
+            text: message,
+            type: 'success',
+            showCancelButton: true,
+            confirmButtonText: okTitle|| Token.ok,
+            cancelButtonText: cancelTitle||Token.cancel,
+            reverseButtons: true
+        }).then(function (result) {
+            if (result.value) {
+                okFunCallback();
+            } else if (result.dismiss === 'cancel') {
+                swal.fire(Token.cancelled, '', 'error');
+                if (cancelFuncCallback)
+                    cancelFuncCallback();
+            }
+        });
+    }
+
 
     static alert(message, requestType, callBack) {
         new Audio('/assets/sound/sweetAlert.mp3').play();

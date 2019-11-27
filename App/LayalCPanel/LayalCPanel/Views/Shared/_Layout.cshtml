@@ -1,4 +1,4 @@
-﻿
+﻿    
 @{
     bool LanguageIsEn = LanguageService.IsEn;
 }
@@ -215,6 +215,23 @@
                                     </span><span class="kt-menu__link-text">@Token.HomePage</span>
                                 </a>
                             </li>
+                            @if (CookieService.UserInfo.IsPhotographer)
+                            {
+                                    <li class="kt-menu__item @(Request.Url.AbsolutePath.Contains("/Ordersphotographers/Create")?"kt-menu__item--active":"")" aria-haspopup="true">
+                                    <a href="/Ordersphotographers/Create" class="kt-menu__link ">
+                                        <span class="kt-menu__link-icon">
+                                            <i class="la la-cart-plus"></i>
+                                        </span><span class="kt-menu__link-text">@Token.CreateOrder</span>
+                                    </a>
+                                </li>
+                                <li class="kt-menu__item @(Request.Url.AbsolutePath.Contains("/Ordersphotographers/MyOrders")?"kt-menu__item--active":"")"aria-haspopup="true">
+                                    <a href="/Ordersphotographers/MyOrders" class="kt-menu__link ">
+                                        <span class="kt-menu__link-icon">
+                                            <i class="fa fa-home"></i>
+                                        </span><span class="kt-menu__link-text">@Token.MyOrders</span>
+                                    </a>
+                                </li>
+                            }
                             <sms-draw-menu></sms-draw-menu>
 
                             <li class="kt-menu__item kt-menu__item--submenu" ng-show="false"
@@ -523,12 +540,12 @@
                 </div>
 
                 <!-- begin:: Footer -->
-                <div class="kt-footer kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop">
-                    <div class="kt-footer__copyright">
-                        @DateTime.Now.Year&nbsp;&copy;&nbsp;@Token.AppName
-                    </div>
+                @*<div class="kt-footer kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop">
+                        <div class="kt-footer__copyright">
+                            @DateTime.Now.Year&nbsp;&copy;&nbsp;@Token.AppName
+                        </div>
 
-                </div>
+                    </div>*@
 
                 <!-- end:: Footer -->
             </div>
@@ -684,6 +701,8 @@
     <script src="~/assets/app/bundle/app.bundle.js" type="text/javascript"></script>
 
 
+    <!--Jquery Ui-->
+    <script src="~/Scripts/jquery-ui.1.12.1.js"></script>
     <!--end::Global App Bundle -->
     <!--(ANageeb) Java Script Bll Files-->
     <script src="~/Scripts/bll/init.js"></script>
@@ -725,22 +744,23 @@
     <script src="~/Scripts/angularJS/directives/toolTip.js"></script>
     <script src="~/Scripts/angularJS/directives/alertInfo.js"></script>
     <script src="~/Scripts/angularJS/directives/upload-files.js"></script>
+    <script src="~/Scripts/angularJS/filters/spliting.js"></script>
+    <script src="~/Scripts/angularJS/directives/alerts.js"></script>
 
     <!--Ssignal AR-->
+    <script src="~/Scripts/angularJS/filters/FilterWithoutDelete.js"></script>
     <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src="~/signalr/hubs"></script>
     <script src="~/Scripts/bll/signalAr/main.js"></script>
 
     <!-- method that convert from Gregorian Date to Hijri Date-->
     <script>
-
-
         $(document).ready(function () {
             //Init Scripts
             setTimeout(()=>{
                 new initScripts();
-
             },1000)
+
             //Fill Current Date
             var currentDate=new Date();
             var currentMonth = currentDate.getMonth() + 1, currentYear = currentDate.getFullYear();
