@@ -605,7 +605,7 @@ namespace BLL.BLL
                     DescriptionEn = $"{Branch.NameEn} Branch Manger Has Been Created New Event",
                     DateTime = DateTime.Now,
                     TargetId = c.Id,
-                    PageId = (int)PagesEnum.Events,
+                    PageId = PagesEnum.Events,
                     RedirectUrl = $"/Enquires/EnquiryInformation?id={c.Id}&notifyId=",
                 };
                 NotificationsBLL.Add(Notify, this.AdminId);

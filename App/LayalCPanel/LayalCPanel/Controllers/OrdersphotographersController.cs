@@ -96,5 +96,13 @@ namespace LayalCPanel.Controllers
             return Json(Bll.GetOrdeById(id), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        [PageForUserTypeAttribute(AccountTypeEnum.Photographer)]
+        public JsonResult AddPaymentByClinet(OrderPaymentVM o)
+        {
+            return Json(new OrdersphotographerPaymentsBll().AddPaymentByClinet(o), JsonRequestBehavior.AllowGet);
+        }
+        
+
     }//End Class
 }

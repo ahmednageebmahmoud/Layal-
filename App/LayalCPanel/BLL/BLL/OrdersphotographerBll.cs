@@ -1,11 +1,15 @@
-﻿using BLL.Services;
+﻿using BLL.Enums;
+using BLL.Services;
+using BLL.SignalAr;
 using BLL.ViewModels;
 using Resources;
+using Resources.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace BLL.BLL
 {
@@ -18,17 +22,55 @@ namespace BLL.BLL
                 try
                 {
                     //Marge Options
-                    string OptionAndItems = "";
+                    string OptionAndItems = "",
+                      ItemsIds = "";
                     o.Options.Where(c => c.ProductOptionItemSelectedId.HasValue).ToList().ForEach(c =>
                     {
                         //OptionId:ItemIds
                         OptionAndItems += $"{c.Id}:{c.ProductOptionItemSelectedId},";
+                        ItemsIds += c.ProductOptionItemSelectedId + ",";
                     });
+                    ItemsIds = ItemsIds.Remove(ItemsIds.Length - 1);
+
+                    //Reset Vaules To Null
+                    if(o.Delivery_IsReceiptFromTheBranch)
+                    {
+                        o.Delivery_Address = null;
+                        o.Delivery_CityId = null;
+                        o.Delivery_CountryId = null;
+                    }
+
                     //Insert Order
                     var OrderId = db.Phot_Orders_Insert(o.ProductTypeId, o.ProductId, UserLoggad.Id, OptionAndItems, o.Delivery_IsReceiptFromTheBranch, o.Delivery_Address, o.Delivery_CountryId, o.Delivery_CityId).LastOrDefault();
 
+                    //Check If Not Inserted
                     if (OrderId == null)
                         return ResponseVM.Error(Token.ICantAdded);
+
+                    //بتم جلب آخر الاسعار اثناء الحفظ بحيثنكون متاكدينلان ممكن يكون المستخدم فاتح الصفحة من فترة
+                    //Refrash Prices Prices For Options Items
+                    var Prices = new JavaScriptSerializer().Serialize(db.Phot_ProductsOptionsItems_SelectByIds(ItemsIds).Select(c => new
+                    {
+                        WordId = c.FKWord_Value_Id,
+                        Price = c.Price
+                    }).ToList());
+                    //Insert Order Prices
+                    db.Phot_OrderServicePrices_Insert(OrderId, this.UserLoggad.Id, Prices);
+
+                    //Add Delvery Pric If Not ReceiptFromTheBranch
+                    if (!o.Delivery_IsReceiptFromTheBranch)
+                    {
+
+                    //Refrash City Price
+                    var DeliveryCity = db.Cities_SelectById(o.Delivery_CityId).FirstOrDefault();
+                    if (DeliveryCity == null)
+                    {
+                        tran.Rollback();
+                        return ResponseVM.Error($"{Token.DeliveryCity} : {Token.NotFound}");
+                    }
+                    //Add Delivery  City Price
+                    db.Phot_OrderServicePrices_InsertCustom(OrderId, this.UserLoggad.Id, DeliveryCity.ShippingPrice, TokenService.GetToken("DeliveryService",true), TokenService.GetToken("DeliveryService", false));
+                    }
 
                     //Uplaod Files To DropBox
                     using (var Drbox = new DropboxService())
@@ -42,9 +84,9 @@ namespace BLL.BLL
                     tran.Commit();
                     //Return Success
                     if (o.Files.Any(c => c.IsUplaoded == false))
-                        return ResponseVM.Success(Token.AddBuWeHaveSomFilesNotSaved);
+                        return ResponseVM.Success(Token.AddBuWeHaveSomFilesNotSaved, new { Id = OrderId });
 
-                    return ResponseVM.Success(Token.Add, new { Id = OrderId });
+                    return ResponseVM.Success(Token.Added, new { Id = OrderId });
                 }
                 catch (Exception ex)
                 {
@@ -53,7 +95,7 @@ namespace BLL.BLL
                 }
             }
         }
-
+        
         public object GetPhotographerOrders(int skip, int take)
         {
             var Result = db.Phot_Orders_SelectByFilter(skip, take, this.UserLoggad.Id).Select(c => new OrderphotographerVM
@@ -91,7 +133,6 @@ namespace BLL.BLL
 
         public object GetOrdeById(long id)
         {
-
             var Order = db.Phot_Orders_SelectById(id).GroupBy(c => new
             {
                 c.Id,
@@ -106,11 +147,10 @@ namespace BLL.BLL
                 c.ProductTypeNameAr,
                 c.ProductTypeNameEn,
                 c.ProductTypeImage,
-                c.Delivery_IsReceiptFromTheBranch  ,
-                c.Delivery_Address  ,
-                c.Delivery_FKCity_Id  ,
-                c.Delivery_FkCountry_Id  
-
+                c.Delivery_IsReceiptFromTheBranch,
+                c.Delivery_Address,
+                c.Delivery_FKCity_Id,
+                c.Delivery_FkCountry_Id
 
             }).Select(c => new OrderphotographerVM
             {
@@ -119,10 +159,10 @@ namespace BLL.BLL
                 IsActive = c.Key.IsActive,
                 UserCreatedId = c.Key.FKUserCreated,
                 ProductId = c.Key.FKProduct_Id,
-                Delivery_Address=c.Key.Delivery_Address,
-                Delivery_CityId=c.Key.Delivery_FKCity_Id,
-                Delivery_CountryId=c.Key.Delivery_FkCountry_Id,
-                Delivery_IsReceiptFromTheBranch=c.Key.Delivery_IsReceiptFromTheBranch,
+                Delivery_Address = c.Key.Delivery_Address,
+                Delivery_CityId = c.Key.Delivery_FKCity_Id,
+                Delivery_CountryId = c.Key.Delivery_FkCountry_Id,
+                Delivery_IsReceiptFromTheBranch = c.Key.Delivery_IsReceiptFromTheBranch,
                 UserCreated = new UserVM
                 {
                     UserName = c.Key.UserCreated_UserName,
@@ -140,18 +180,28 @@ namespace BLL.BLL
                     ImageUrl = c.Key.ProductTypeImage
                 },
                 Product = (ProductVM)new ProductsBLL().GetProductById(c.Key.FKProduct_Id).Result,
-                Files = GetDropboxFiles(c.Key.DropboxFolderPath)
+                Files = GetDropboxFiles(c.Key.DropboxFolderPath),
+                ServicePrices = db.Phot_OrderServicePrices_SelectByOrderId(c.Key.Id, c.Key.FKUserCreated).Select(b => new OrderPriceVM
+                {
+                    Price = b.Price,
+                    CreateDateTime = b.CreateDateTime,
+                    ServiceNameAr = b.ServiceNameAr,
+                    ServiceNameEn = b.ServiceNameEn,
+                }).ToList(),
+                Payments = new OrdersphotographerPaymentsBll().GetPaymentsByOrderId(c.Key.Id)
             }).FirstOrDefault();
 
 
             if (Order == null || Order.UserCreatedId != this.UserLoggad.Id)
                 return ResponseVM.Error($"{Token.Order} : {Token.NotFound}");
 
+            //Sum Total 
+            Order.TotalPrices = Order.ServicePrices.Sum(c => c.Price);
+            Order.TotalPayments = Order.Payments.Sum(c => c.Amount);
+
             return ResponseVM.Success(Order);
         }
-
-
-
+        
         private List<OrderFileVM> GetDropboxFiles(string dropboxFolderPath)
         {
             var Files = new List<OrderFileVM>();
@@ -168,6 +218,8 @@ namespace BLL.BLL
             }
             return Files;
         }
+
+   
 
     }//End Class
 }

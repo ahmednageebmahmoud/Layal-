@@ -29,7 +29,7 @@ namespace BLL.BLL
                 TitleEn = "New Payment Process",
                 DateTime = DateTime.Now,
                 TargetId = c.EnquiryId,
-                PageId = (int)PagesEnum.EnquiryPayments,
+                PageId = PagesEnum.EnquiryPayments,
                 RedirectUrl = $"/EnquiryPayments/Payments?id={c.EnquiryId}&notifyId=",
             };
 
@@ -57,7 +57,6 @@ namespace BLL.BLL
                     Notify.DescriptionEn = $"{this.UserLoggad.FullName } Has been Add Payment Process By Bank Transfer And It Is Valaue { c.Amount}";
                     NotificationsBLL.Add(Notify, this.AdminId);
                     new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { this.AdminId.ToString() }, Notify);
-
                 }
             }
             else

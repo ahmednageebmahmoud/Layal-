@@ -1,11 +1,12 @@
-﻿ngApp.controller('productsCtrl', ['$scope', '$http', 'productsServ', function (s, h, productsServ) {
+﻿ngApp.controller('productsCtrl', ['$scope', '$http', 'productsServ','$rootScope', function (s, h, productsServ,rs) {
     s.state = StateEnum;
     s.newOrder= {
         State: StateEnum.create,
     ProductTypeId:null,
     ProductId: null,
     Images: [],
-        Options:[]
+        Options: [],
+        TotalPrices:0
     };
     s.product = { Options:[] };
     s.newOptionItem = {};
@@ -133,7 +134,7 @@
     //============= Saves =================
 
     s.saveChange = (form) => {
-        if (!s.newOrder.ProductTypeId || s.newOrder.Images.filter(c=> c.State != StateEnum.delete).length == 0 || s.newOrder.Options.length < s.product.Options.length) {
+        if (form.$invalid || !s.newOrder.ProductTypeId || s.newOrder.Images.filter(c=> c.State != StateEnum.delete).length == 0 || s.newOrder.Options.length < s.product.Options.length) {
             s.productFrmErrorSubmit = true;
             return;
         }
@@ -149,7 +150,7 @@
                             LangIsEn ? "Create new order" : "انشاء طلب جديد",
                             () => {
                             //Go To Update Page
-                            window.location.href = `/Ordersphotographers/Update?id=${d.data.Result.Id}`;
+                                window.location.href = `/Ordersphotographers/Update?id=${d.data.Result.Id}&go=w_payment`;
                         }, () => {
                             //Refrash Page
                             window.location.reload();
@@ -178,9 +179,26 @@
     };
 
     //=+=+=+=+=+=+ Other =+=++=+=+=+==+=+=+
-    s.selectOptionItem = (option, item) => {
-        //Get Options Selectd
-        s.newOrder.Options = s.product.Options.filter(c => c.ProductOptionItemSelectedId);
+    //تحديث العناصر المختارة
+    s.selectOptionItem = () => {
+        //Fill Options And Item Selected
+        s.newOrder.Options = s.product.Options.filter(c => c.ProductOptionItemSelectedId).map(c => {
+            let optionTarget = angular.copy(c);
+            optionTarget.ItemSelected = c.Items.find(v => v.Id == optionTarget.ProductOptionItemSelectedId);
+            optionTarget.Items = [];
+            return optionTarget;
+        });
+        //Update Total Price
+        s.sumTotalPrices();
+    }
+
+    //تحديث مصاريف خدمة التوصيل
+    s.updateDeliveryServicePrice = cityId => {
+        let citySelected = s.cities.find(c => c.Id == cityId);
+        if (!citySelected) return;
+        s.newOrder.DeliveryServicePrice = citySelected.ShippingPrice;
+        //Update Total Price
+        s.sumTotalPrices();
     }
 
     //Uplaod Images
@@ -208,12 +226,23 @@
 
     }
 
+    //Sum Total Price For Order
+    s.sumTotalPrices = () => {
+        s.newOrder.TotalPrices = s.newOrder.DeliveryServicePrice||0;
+        s.newOrder.Options.forEach(o => {
+            s.newOrder.TotalPrices += o.ItemSelected.Price
+        });
+    }
+
+    //Cnahge  ReceiptFromTheBranch
     s.checkDelivery_IsReceiptFromTheBranch = () => {
         if (s.newOrder.Delivery_IsReceiptFromTheBranch) {
             s.newOrder.Delivery_CountryId = null;
             s.newOrder.Delivery_CityId = null;
             s.newOrder.Delivery_Address = null;
         }
+        //Update Total Price
+        s.sumTotalPrices();
     }
 
     s.autosize = () => {

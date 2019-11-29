@@ -81,6 +81,9 @@
     <Compile Include="Cities_SelectByFilter_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Cities_SelectById_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Countries_SelectAll_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -243,16 +246,22 @@
     <Compile Include="Packages_SelectByPK_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pages_SelectAllForUserCanBeAccess1_Result.cs">
+    <Compile Include="Pages_SelectAllForUserCanBeAccess_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pages_SelectAllForUserCanBeAccess_Result.cs">
+    <Compile Include="Phot_OrderPayments_SelectByOrderId_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Phot_OrderServicePrices_SelectByOrderId_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Phot_Orders_SelectByFilter_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Phot_Orders_SelectById_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Phot_ProductsOptionsItems_SelectByIds_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Phot_ProductsOptions_SelectByProductId_Result.cs">

@@ -20,6 +20,10 @@ namespace DAL
         public long FKUserCreated { get; set; }
         public bool IsActive { get; set; }
         public string DropboxFolderPath { get; set; }
+        public bool Delivery_IsReceiptFromTheBranch { get; set; }
+        public string Delivery_Address { get; set; }
+        public Nullable<int> Delivery_FkCountry_Id { get; set; }
+        public Nullable<int> Delivery_FKCity_Id { get; set; }
         public string ProductTypeNameAr { get; set; }
         public string ProductTypeNameEn { get; set; }
         public string ProductNameAr { get; set; }

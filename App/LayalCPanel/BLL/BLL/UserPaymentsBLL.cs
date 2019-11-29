@@ -65,7 +65,7 @@ namespace BLL.BLL
                     TitleEn = "New Payment Process Accepted",
                     DateTime = DateTime.Now,
                     TargetId = c.UserToId,
-                    PageId = (int)PagesEnum.UserPayments,
+                    PageId = PagesEnum.UserPayments,
                     RedirectUrl = $"/UserPayments/Payments?id={c.UserToId}&notifyId=",
                 };
 
@@ -190,7 +190,7 @@ namespace BLL.BLL
                 TitleEn = "New Payment Process",
                 DateTime = DateTime.Now,
                 TargetId = c.UserToId,
-                PageId = (int)PagesEnum.UserPayments,
+                PageId = PagesEnum.UserPayments,
                 RedirectUrl = $"/UserPayments/Payments?id={c.UserToId}&notifyId=",
             };
 

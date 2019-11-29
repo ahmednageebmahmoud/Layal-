@@ -11,17 +11,11 @@ namespace DAL
 {
     using System;
     
-    public partial class Pages_SelectAllForUserCanBeAccess1_Result
+    public partial class Cities_SelectById_Result
     {
         public int Id { get; set; }
         public long FKWord_Id { get; set; }
-        public string Url { get; set; }
-        public int FkMenu_Id { get; set; }
-        public int OrderByNumber { get; set; }
-        public Nullable<bool> IsForClient { get; set; }
-        public Nullable<bool> IsForAdmin { get; set; }
-        public bool IsHide { get; set; }
-        public string PageNameAr { get; set; }
-        public string PageNameEn { get; set; }
+        public int FKCountry_Id { get; set; }
+        public decimal ShippingPrice { get; set; }
     }
 }

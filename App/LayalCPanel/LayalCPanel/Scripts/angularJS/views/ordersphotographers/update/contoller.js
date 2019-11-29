@@ -1,4 +1,5 @@
-﻿ngApp.controller('productsCtrl', ['$scope', '$http', 'productsServ', function (s, h, productsServ) {
+﻿
+ngApp.controller('productsCtrl', ['$scope', '$http', 'productsServ', function (s, h, productsServ) {
     s.state = StateEnum;
     s.order = {
         Id: getQueryStringValue('id'),
@@ -6,7 +7,8 @@
 
 
 
-    
+
+
 
 
 
@@ -73,7 +75,7 @@
                 case RequestTypeEnum.sucess: {
                     s.order = d.data.Result;
                     s.order.Product.Options.forEach(c => {
-                        c.ProductOptionItemSelectedId = s.order.Options.find(o=> o.Id==c.Id)  .ProductOptionItemSelectedId ;
+                        c.ProductOptionItemSelectedId = s.order.Options.find(o => o.Id == c.Id).ProductOptionItemSelectedId;
                     });
                     s.getCities();
 
@@ -93,84 +95,77 @@
         })
     };
 
-   
-    
 
-    
+
+
+
     //============= Saves =================
 
-    s.saveChange = (form) => {
-        if (!s.order.ProductTypeId || s.order.Images.filter(c=> c.State != StateEnum.delete).length == 0 || s.order.Options.length < s.product.Options.length) {
-            s.productFrmErrorSubmit = true;
+
+
+    //Add New Payment
+    s.addNewPayment = form => {
+        if (form.$invalid || !s.newPayment.File) {
+            s.addPaymrntFrmSubmitErro = true;
             return;
         }
-        s.productFrmErrorSubmit = false;
-
-        BlockingService.block();
-        productsServ.saveChange(s.order).then(d => {
+        s.newPayment.OrderId = s.order.Id;
+        productsServ.addNewPayment(s.newPayment).then(d => {
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess:
                     {
-                        s.order = d.data.Result;
-                        s.order.State = StateEnum.update;
+                        s.order.Payments.unshift(d.data.Result);
+                        s.order.TotalPayments += s.newPayment.Amount;
+                        bootstrapModelHide("addNewPayment");
                     } break;
             }
             SMSSweet.alert(d.data.Message, d.data.RequestType);
-            co("P O S T - saveChange", d);
+            co("P O S T - addNewPayment", d);
             BlockingService.unBlock();
         }).catch(err => {
             BlockingService.unBlock();
             SMSSweet.alert(err.statusText, RequestTypeEnum.error);
-            co("E R R O R - saveChange", err);
+            co("E R R O R - addNewPayment", err);
         })
-    };
-
-    
-
-
-    //-+-+-+-+-+-+ Delete -+-+-+-++-+++-+-+
-    s.deleteImage = index => {
-            s.order.Images[index].State = StateEnum.delete;
-    };
-
-    //=+=+=+=+=+=+ Other =+=++=+=+=+==+=+=+
-    s.selectOptionItem = (option, item) => {
-        //Get Options Selectd
-        s.order.Options = s.product.Options.filter(c=> c.SelectedItem);
-    }
-
-    //Uplaod Images
-    s.uplaodImages = files => {
-        if (s.order.Images.length >= 10) {
-            SMSSweet.alert(LangIsEn ? "No more than 10 photos can be downloaded" : "لا يمكن تحميل اكثر من 10 صور", RequestTypeEnum.error);
-            return;
-        }
-
-        for (let i = 0; i <= files.length - 1; i++) {
-            var fileReaer = new FileReader();
-            fileReaer.readAsDataURL(files[i]);
-            let file = files[i];
-            fileReaer.onload = (d) => {
-                if (s.order.Images.length < 10) {
-                    s.order.Images.push({
-                        State: StateEnum.create,
-                        File: file,
-                        ImageUrl: d.target.result
-                    });
-                    s.$apply();
-                }
-            }
-        }
 
     }
 
- 
 
+    //+-+-+-+-+-+-+-+- Other -+-+-+-+-+-+-+-+-
     s.autosize = () => {
         var demo1 = $('[autosize]');
         autosize(demo1);
         autosize.update(demo1);
     };
+
+    //Show Model For Add New Payment
+    s.showAddNewPayment = () => {
+        s.newPayment = {};
+        s.addPaymrntFrmSubmitErro = false;
+        bootstrapModelShow("addNewPayment");
+    };
+
+    //رفع صورة الحوالة البنكية 
+    s.uplaodImages = file => {
+        if (!file || !file[0]) {
+            s.newPayment.File = null;
+            return;
+        }
+
+        s.newPayment.File = file[0];
+
+        var fileReaer = new FileReader();
+        fileReaer.readAsDataURL(file[0]);
+        fileReaer.onload = (d) => {
+            s.newPayment.BankTransferImage = d.target.result;
+            s.$apply();
+        }
+    };
+
+    //Go To Spcifc Tap 
+    $(document).ready(() => {
+        document.getElementById(getQueryStringValue("go").toLocaleLowerCase()).click();
+    });
 
     //Call Functions
     s.getItems();

@@ -24,7 +24,7 @@ namespace BLL.BLL
                 DescriptionAr = c.DescriptionAr,
                 DescriptionEn = c.DescriptionEn,
                 DateTime = c.DateTime,
-                PageId = c.FKPage_Id,
+                PageId = (PagesEnum)c.FKPage_Id,
                 RedirectUrl = c.RedirectUrl,
                 TargetId=c.Target_Id,
                 NotificationsCount=c.NotificationsCount,
@@ -52,8 +52,8 @@ namespace BLL.BLL
 
             ObjectParameter ID = new ObjectParameter("Id", typeof(Int64));
             if(this.UserLoggad.Id==0)
-            db.Notifications_Insert(ID,c.DateTime,c.TargetId,c.PageId,null, c.TitleAr, c.TitleEn, c.DescriptionAr,c.DescriptionEn,c.RedirectUrl, userTargrtId);
-          else  db.Notifications_Insert(ID, c.DateTime,c.TargetId,c.PageId, this.UserLoggad.Id, c.TitleAr, c.TitleEn, c.DescriptionAr,c.DescriptionEn,c.RedirectUrl, userTargrtId);
+            db.Notifications_Insert(ID,c.DateTime,c.TargetId,(int)c.PageId,null, c.TitleAr, c.TitleEn, c.DescriptionAr,c.DescriptionEn,c.RedirectUrl, userTargrtId);
+          else  db.Notifications_Insert(ID, c.DateTime,c.TargetId, (int)c.PageId, this.UserLoggad.Id, c.TitleAr, c.TitleEn, c.DescriptionAr,c.DescriptionEn,c.RedirectUrl, userTargrtId);
             c.Id = (Int64)ID.Value;
             return c.Id;
         }

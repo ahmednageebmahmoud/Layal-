@@ -1305,4 +1305,25 @@
   <data name="YouMustbeFillFields" xml:space="preserve">
     <value>You Must be Fill Fields</value>
   </data>
+  <data name="DeliveryService" xml:space="preserve">
+    <value>Delivery Service</value>
+  </data>
+  <data name="Now" xml:space="preserve">
+    <value>Now</value>
+  </data>
+  <data name="TheBill" xml:space="preserve">
+    <value>The Bill</value>
+  </data>
+  <data name="TheService" xml:space="preserve">
+    <value>The Service</value>
+  </data>
+  <data name="DeliveryCity" xml:space="preserve">
+    <value>Delivery City</value>
+  </data>
+  <data name="PayNow" xml:space="preserve">
+    <value>Pay Now</value>
+  </data>
+  <data name="RequiredPayment" xml:space="preserve">
+    <value>Required Payment</value>
+  </data>
 </root>

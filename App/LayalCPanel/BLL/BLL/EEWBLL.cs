@@ -275,7 +275,7 @@ namespace BLL.BLL
                 {
                     DateTime = DateTime.Now,
                     TargetId = eventId,
-                    PageId = (int)PagesEnum.Enquires,
+                    PageId = PagesEnum.Enquires,
                     RedirectUrl = $"/WorkFlow?id={eventId}&notifyId=",
                 };
 

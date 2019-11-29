@@ -25,5 +25,13 @@ namespace BLL.ViewModels
         public int? Delivery_CountryId { get; set; }
         public int? Delivery_CityId { get; set; }
         public string Delivery_Address { get; set; }
+
+
+        public  List<OrderPriceVM> ServicePrices { get; set; }
+        public decimal TotalPrices { get; internal set; }
+
+        public List<OrderPaymentVM> Payments { get; set; }
+        public decimal TotalPayments { get; internal set; }
+        
     }
 }//End CLass

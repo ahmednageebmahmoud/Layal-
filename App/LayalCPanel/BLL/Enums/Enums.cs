@@ -73,7 +73,8 @@ namespace BLL.Enums
         FilesReceivedTypes = 22,
         ProductTypes=23,
         Products=24,
-        ShippingCategories=25
+        ShippingCategories=25,
+        Orders=26
     }
 
 

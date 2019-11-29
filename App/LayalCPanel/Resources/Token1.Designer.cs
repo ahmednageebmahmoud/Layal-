@@ -1024,11 +1024,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delivery City.
+        /// </summary>
+        public static string DeliveryCity {
+            get {
+                return ResourceManager.GetString("DeliveryCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delivery Information.
         /// </summary>
         public static string DeliveryInformation {
             get {
                 return ResourceManager.GetString("DeliveryInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delivery Service.
+        /// </summary>
+        public static string DeliveryService {
+            get {
+                return ResourceManager.GetString("DeliveryService", resourceCulture);
             }
         }
         
@@ -2239,6 +2257,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Now.
+        /// </summary>
+        public static string Now {
+            get {
+                return ResourceManager.GetString("Now", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Number.
         /// </summary>
         public static string Number {
@@ -2478,6 +2505,15 @@ namespace Resources {
         public static string PaymentsInformations {
             get {
                 return ResourceManager.GetString("PaymentsInformations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pay Now.
+        /// </summary>
+        public static string PayNow {
+            get {
+                return ResourceManager.GetString("PayNow", resourceCulture);
             }
         }
         
@@ -2748,6 +2784,15 @@ namespace Resources {
         public static string RememberMe {
             get {
                 return ResourceManager.GetString("RememberMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required Payment.
+        /// </summary>
+        public static string RequiredPayment {
+            get {
+                return ResourceManager.GetString("RequiredPayment", resourceCulture);
             }
         }
         
@@ -3036,6 +3081,24 @@ namespace Resources {
         public static string Terms {
             get {
                 return ResourceManager.GetString("Terms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Bill.
+        /// </summary>
+        public static string TheBill {
+            get {
+                return ResourceManager.GetString("TheBill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Service.
+        /// </summary>
+        public static string TheService {
+            get {
+                return ResourceManager.GetString("TheService", resourceCulture);
             }
         }
         

@@ -98,6 +98,9 @@
         <Function Name="Cities_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CountryId" Type="int" Mode="In" />
         </Function>
+        <Function Name="Cities_SelectById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="Cities_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="NameAr" Type="nvarchar" Mode="In" />
@@ -803,6 +806,16 @@
           <Parameter Name="UserId" Type="bigint" Mode="In" />
           <Parameter Name="IsPublicMenus" Type="bit" Mode="In" />
         </Function>
+        <Function Name="Phot_OrderPayments_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderId" Type="bigint" Mode="In" />
+          <Parameter Name="Amount" Type="decimal" Mode="In" />
+          <Parameter Name="TransferImage" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="IsBankTransfer" Type="bit" Mode="In" />
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Phot_OrderPayments_SelectByOrderId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderId" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="Phot_Orders_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ProductTypeId" Type="bigint" Mode="In" />
           <Parameter Name="ProductId" Type="bigint" Mode="In" />
@@ -824,6 +837,22 @@
         <Function Name="Phot_Orders_UpdateDropboxFolderPath" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="OrderId" Type="bigint" Mode="In" />
           <Parameter Name="DropboxFolderPath" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Phot_OrderServicePrices_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderId" Type="bigint" Mode="In" />
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+          <Parameter Name="WordAndPricesJson" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Phot_OrderServicePrices_InsertCustom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderId" Type="bigint" Mode="In" />
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+          <Parameter Name="Price" Type="decimal" Mode="In" />
+          <Parameter Name="NameEn" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="NameAr" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Phot_OrderServicePrices_SelectByOrderId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderId" Type="bigint" Mode="In" />
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
         </Function>
         <Function Name="Phot_OrdersOptions_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="OrderId" Type="bigint" Mode="In" />
@@ -914,6 +943,9 @@
           <Parameter Name="Id" Type="bigint" Mode="In" />
           <Parameter Name="StaticFieldId" Type="int" Mode="In" />
           <Parameter Name="IdDeleted" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Phot_ProductsOptionsItems_SelectByIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Ids" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="Phot_ProductTypes_CheckIfUed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="bigint" Mode="In" />
@@ -1302,6 +1334,12 @@
             <Parameter Name="CountryId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Cities_SelectAll" ReturnType="Collection(LayanModel.Cities_SelectAll_Result)" />
+          <FunctionImport Name="Cities_SelectByFilter" ReturnType="Collection(LayanModel.Cities_SelectByFilter_Result)">
+          <Parameter Name="CountryId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Cities_SelectById" ReturnType="Collection(LayanModel.Cities_SelectById_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="Cities_Update">
             <Parameter Name="Id" Mode="In" Type="Int32" />
             <Parameter Name="NameAr" Mode="In" Type="String" />
@@ -1982,6 +2020,45 @@
           <FunctionImport Name="Pages_SelectAllByUser_Id">
           <Parameter Name="UserId" Mode="In" Type="Int64" />
           </FunctionImport>
+          <FunctionImport Name="Pages_SelectAllForUserCanBeAccess" ReturnType="Collection(LayanModel.Pages_SelectAllForUserCanBeAccess_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+            <Parameter Name="IsPublicMenus" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Phot_Orders_Insert" ReturnType="Collection(Int64)">
+            <Parameter Name="ProductTypeId" Mode="In" Type="Int64" />
+            <Parameter Name="ProductId" Mode="In" Type="Int64" />
+            <Parameter Name="UserCreated" Mode="In" Type="Int64" />
+            <Parameter Name="OptionsItems" Mode="In" Type="String" />
+            <Parameter Name="Delivery_IsReceiptFromTheBranch" Mode="In" Type="Boolean" />
+            <Parameter Name="Delivery_Address" Mode="In" Type="String" />
+            <Parameter Name="Delivery_FkCountry_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Delivery_FKCity_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Phot_Orders_SelectByFilter" ReturnType="Collection(LayanModel.Phot_Orders_SelectByFilter_Result)">
+            <Parameter Name="Skip" Mode="In" Type="Int32" />
+            <Parameter Name="Take" Mode="In" Type="Int32" />
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Phot_Orders_UpdateDropboxFolderPath">
+            <Parameter Name="OrderId" Mode="In" Type="Int64" />
+            <Parameter Name="DropboxFolderPath" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Phot_OrderServicePrices_Insert">
+            <Parameter Name="OrderId" Mode="In" Type="Int64" />
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+            <Parameter Name="WordAndPricesJson" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Phot_OrderServicePrices_InsertCustom">
+            <Parameter Name="OrderId" Mode="In" Type="Int64" />
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+            <Parameter Name="Price" Mode="In" Type="Decimal" />
+            <Parameter Name="NameEn" Mode="In" Type="String" />
+            <Parameter Name="NameAr" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Phot_OrderServicePrices_SelectByOrderId" ReturnType="Collection(LayanModel.Phot_OrderServicePrices_SelectByOrderId_Result)">
+            <Parameter Name="OrderId" Mode="In" Type="Int64" />
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+          </FunctionImport>
           <FunctionImport Name="Phot_OrdersOptions_Insert">
             <Parameter Name="OrderId" Mode="In" Type="Int64" />
             <Parameter Name="OptionAndItem" Mode="In" Type="String" />
@@ -2071,6 +2148,9 @@
             <Parameter Name="Id" Mode="In" Type="Int64" />
             <Parameter Name="StaticFieldId" Mode="In" Type="Int32" />
             <Parameter Name="IdDeleted" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Phot_ProductsOptionsItems_SelectByIds" ReturnType="Collection(LayanModel.Phot_ProductsOptionsItems_SelectByIds_Result)">
+          <Parameter Name="Ids" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Phot_ProductTypes_CheckIfUed" ReturnType="Collection(Int32)">
           <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -2359,38 +2439,25 @@
             <Parameter Name="Ar" Mode="In" Type="String" />
             <Parameter Name="En" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="Phot_Orders_UpdateDropboxFolderPath">
+          <FunctionImport Name="OrderPayments_Insert" ReturnType="Collection(Int64)">
             <Parameter Name="OrderId" Mode="In" Type="Int64" />
-            <Parameter Name="DropboxFolderPath" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="Phot_Orders_SelectByFilter" ReturnType="Collection(LayanModel.Phot_Orders_SelectByFilter_Result)">
-            <Parameter Name="Skip" Mode="In" Type="Int32" />
-            <Parameter Name="Take" Mode="In" Type="Int32" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+            <Parameter Name="TransferImage" Mode="In" Type="String" />
+            <Parameter Name="IsBankTransfer" Mode="In" Type="Boolean" />
             <Parameter Name="UserId" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="Pages_SelectAllForUserCanBeAccess" ReturnType="Collection(LayanModel.Pages_SelectAllForUserCanBeAccess_Result)">
+          <FunctionImport Name="Phot_OrderPayments_Insert" ReturnType="Collection(Int64)">
+            <Parameter Name="OrderId" Mode="In" Type="Int64" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+            <Parameter Name="TransferImage" Mode="In" Type="String" />
+            <Parameter Name="IsBankTransfer" Mode="In" Type="Boolean" />
             <Parameter Name="UserId" Mode="In" Type="Int64" />
-            <Parameter Name="IsPublicMenus" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="Cities_SelectByFilter" ReturnType="Collection(LayanModel.Cities_SelectByFilter_Result)">
-          <Parameter Name="CountryId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Pages_SelectAllForUserCanBeAccess1" ReturnType="Collection(LayanModel.Pages_SelectAllForUserCanBeAccess1_Result)">
-            <Parameter Name="UserId" Mode="In" Type="Int64" />
-            <Parameter Name="IsPublicMenus" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="Phot_Orders_Insert" ReturnType="Collection(Int64)">
-            <Parameter Name="ProductTypeId" Mode="In" Type="Int64" />
-            <Parameter Name="ProductId" Mode="In" Type="Int64" />
-            <Parameter Name="UserCreated" Mode="In" Type="Int64" />
-            <Parameter Name="OptionsItems" Mode="In" Type="String" />
-            <Parameter Name="Delivery_IsReceiptFromTheBranch" Mode="In" Type="Boolean" />
-            <Parameter Name="Delivery_Address" Mode="In" Type="String" />
-            <Parameter Name="Delivery_FkCountry_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Delivery_FKCity_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Phot_Orders_SelectById" ReturnType="Collection(LayanModel.Phot_Orders_SelectById_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int64" />
+          <Parameter Name="Id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Phot_OrderPayments_SelectByOrderId" ReturnType="Collection(LayanModel.Phot_OrderPayments_SelectByOrderId_Result)">
+            <Parameter Name="OrderId" Mode="In" Type="Int64" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Albums_Insert_Result">
@@ -2503,9 +2570,23 @@
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
           <Property Type="Int32" Name="FKCountry_Id" Nullable="false" />
-          <Property Type="Decimal" Name="ShippingPrice" Nullable="true" Precision="18" Scale="12" />
+          <Property Type="Decimal" Name="ShippingPrice" Nullable="false" Precision="18" Scale="12" />
           <Property Type="String" Name="Ar" Nullable="true" />
           <Property Type="String" Name="En" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Cities_SelectByFilter_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+          <Property Type="Int32" Name="FKCountry_Id" Nullable="false" />
+          <Property Type="Decimal" Name="ShippingPrice" Nullable="false" Precision="18" Scale="12" />
+          <Property Type="String" Name="Ar" Nullable="true" />
+          <Property Type="String" Name="En" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Cities_SelectById_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+          <Property Type="Int32" Name="FKCountry_Id" Nullable="false" />
+          <Property Type="Decimal" Name="ShippingPrice" Nullable="false" Precision="18" Scale="12" />
         </ComplexType>
         <ComplexType Name="Countries_SelectAll_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -3209,6 +3290,47 @@
           <Property Type="String" Name="AlbumType_NameAr" Nullable="true" />
           <Property Type="String" Name="AlbumType_NameEn" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="Pages_SelectAllForUserCanBeAccess_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+          <Property Type="String" Name="Url" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="FkMenu_Id" Nullable="false" />
+          <Property Type="Int32" Name="OrderByNumber" Nullable="false" />
+          <Property Type="Boolean" Name="IsForClient" Nullable="true" />
+          <Property Type="Boolean" Name="IsForAdmin" Nullable="true" />
+          <Property Type="Boolean" Name="IsHide" Nullable="false" />
+          <Property Type="String" Name="PageNameAr" Nullable="true" />
+          <Property Type="String" Name="PageNameEn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Phot_Orders_SelectByFilter_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKProductType_Id" Nullable="false" />
+          <Property Type="Int64" Name="FKProduct_Id" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+          <Property Type="Int64" Name="FKUserCreated" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="DropboxFolderPath" Nullable="true" />
+          <Property Type="Boolean" Name="Delivery_IsReceiptFromTheBranch" Nullable="false" />
+          <Property Type="String" Name="Delivery_Address" Nullable="true" />
+          <Property Type="Int32" Name="Delivery_FkCountry_Id" Nullable="true" />
+          <Property Type="Int32" Name="Delivery_FKCity_Id" Nullable="true" />
+          <Property Type="String" Name="ProductTypeNameAr" Nullable="true" />
+          <Property Type="String" Name="ProductTypeNameEn" Nullable="true" />
+          <Property Type="String" Name="ProductNameAr" Nullable="true" />
+          <Property Type="String" Name="ProductNameEn" Nullable="true" />
+          <Property Type="String" Name="UserCreated_UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="UserCreated_FullName" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="Phot_OrderServicePrices_SelectByOrderId_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FkOrder_Id" Nullable="false" />
+          <Property Type="Int64" Name="FkUser_Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ServiceNameAr" Nullable="true" />
+          <Property Type="String" Name="ServiceNameEn" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="Phot_Products_SelectByFilter_Result">
           <Property Type="Int64" Name="Id" Nullable="false" />
           <Property Type="Int64" Name="FKWord_Name_Id" Nullable="false" />
@@ -3265,6 +3387,12 @@
           <Property Type="Int64" Name="OptionItemId" Nullable="true" />
           <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="2" />
           <Property Type="Int64" Name="FKWord_Value_Id" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Phot_ProductsOptionsItems_SelectByIds_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FKWord_Value_Id" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int64" Name="FKProductOption_Id" Nullable="false" />
         </ComplexType>
         <ComplexType Name="Phot_ProductTypes_Insert_Result">
           <Property Type="Int64" Name="Id" Nullable="false" />
@@ -3640,53 +3768,6 @@
           <Property Type="Boolean" Name="UsersPrivileges_CanDisplay" Nullable="true" />
           <Property Type="Boolean" Name="UsersPrivileges_CanEdit" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="Phot_Orders_SelectByFilter_Result">
-          <Property Type="Int64" Name="Id" Nullable="false" />
-          <Property Type="Int64" Name="FKProductType_Id" Nullable="false" />
-          <Property Type="Int64" Name="FKProduct_Id" Nullable="false" />
-          <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
-          <Property Type="Int64" Name="FKUserCreated" Nullable="false" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <Property Type="String" Name="DropboxFolderPath" Nullable="true" />
-          <Property Type="String" Name="ProductTypeNameAr" Nullable="true" />
-          <Property Type="String" Name="ProductTypeNameEn" Nullable="true" />
-          <Property Type="String" Name="ProductNameAr" Nullable="true" />
-          <Property Type="String" Name="ProductNameEn" Nullable="true" />
-          <Property Type="String" Name="UserCreated_UserName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="UserCreated_FullName" Nullable="true" MaxLength="150" />
-        </ComplexType>
-        <ComplexType Name="Pages_SelectAllForUserCanBeAccess_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
-          <Property Type="String" Name="Url" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="FkMenu_Id" Nullable="false" />
-          <Property Type="Int32" Name="OrderByNumber" Nullable="false" />
-          <Property Type="Boolean" Name="IsForClient" Nullable="true" />
-          <Property Type="Boolean" Name="IsForAdmin" Nullable="true" />
-          <Property Type="Boolean" Name="IsHide" Nullable="false" />
-          <Property Type="String" Name="PageNameAr" Nullable="true" />
-          <Property Type="String" Name="PageNameEn" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="Cities_SelectByFilter_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
-          <Property Type="Int32" Name="FKCountry_Id" Nullable="false" />
-          <Property Type="Decimal" Name="ShippingPrice" Nullable="false" Precision="18" Scale="12" />
-          <Property Type="String" Name="Ar" Nullable="true" />
-          <Property Type="String" Name="En" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="Pages_SelectAllForUserCanBeAccess1_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
-          <Property Type="String" Name="Url" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="FkMenu_Id" Nullable="false" />
-          <Property Type="Int32" Name="OrderByNumber" Nullable="false" />
-          <Property Type="Boolean" Name="IsForClient" Nullable="true" />
-          <Property Type="Boolean" Name="IsForAdmin" Nullable="true" />
-          <Property Type="Boolean" Name="IsHide" Nullable="false" />
-          <Property Type="String" Name="PageNameAr" Nullable="true" />
-          <Property Type="String" Name="PageNameEn" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="Phot_Orders_SelectById_Result">
           <Property Type="Int64" Name="Id" Nullable="false" />
           <Property Type="Int64" Name="FKProductType_Id" Nullable="false" />
@@ -3706,6 +3787,16 @@
           <Property Type="String" Name="ProductTypeImage" Nullable="false" />
           <Property Type="String" Name="UserCreated_UserName" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="UserCreated_FullName" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="Phot_OrderPayments_SelectByOrderId_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="FkOrder_Id" Nullable="false" />
+          <Property Type="DateTime" Name="PaymentDateTime" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="IsBankTransfer" Nullable="false" />
+          <Property Type="Boolean" Name="IsAcceptFromManger" Nullable="false" />
+          <Property Type="Int64" Name="FKUserCreated_Id" Nullable="false" />
+          <Property Type="Decimal" Name="Amount" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="TransferImage" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3870,6 +3961,28 @@
                 <ScalarProperty Name="ShippingPrice" ColumnName="ShippingPrice" />
                 <ScalarProperty Name="Ar" ColumnName="Ar" />
                 <ScalarProperty Name="En" ColumnName="En" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Cities_SelectByFilter" FunctionName="LayanModel.Store.Cities_SelectByFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Cities_SelectByFilter_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+                <ScalarProperty Name="FKCountry_Id" ColumnName="FKCountry_Id" />
+                <ScalarProperty Name="ShippingPrice" ColumnName="ShippingPrice" />
+                <ScalarProperty Name="Ar" ColumnName="Ar" />
+                <ScalarProperty Name="En" ColumnName="En" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Cities_SelectById" FunctionName="LayanModel.Store.Cities_SelectById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Cities_SelectById_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+                <ScalarProperty Name="FKCountry_Id" ColumnName="FKCountry_Id" />
+                <ScalarProperty Name="ShippingPrice" ColumnName="ShippingPrice" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -4854,6 +4967,63 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Packages_Update" FunctionName="LayanModel.Store.Packages_Update" />
           <FunctionImportMapping FunctionImportName="Pages_SelectAllByUser_Id" FunctionName="LayanModel.Store.Pages_SelectAllByUser_Id" />
+          <FunctionImportMapping FunctionImportName="Pages_SelectAllForUserCanBeAccess" FunctionName="LayanModel.Store.Pages_SelectAllForUserCanBeAccess">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Pages_SelectAllForUserCanBeAccess_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="FkMenu_Id" ColumnName="FkMenu_Id" />
+                <ScalarProperty Name="OrderByNumber" ColumnName="OrderByNumber" />
+                <ScalarProperty Name="IsForClient" ColumnName="IsForClient" />
+                <ScalarProperty Name="IsForAdmin" ColumnName="IsForAdmin" />
+                <ScalarProperty Name="IsHide" ColumnName="IsHide" />
+                <ScalarProperty Name="PageNameAr" ColumnName="PageNameAr" />
+                <ScalarProperty Name="PageNameEn" ColumnName="PageNameEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Phot_Orders_Insert" FunctionName="LayanModel.Store.Phot_Orders_Insert" />
+          <FunctionImportMapping FunctionImportName="Phot_Orders_SelectByFilter" FunctionName="LayanModel.Store.Phot_Orders_SelectByFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Phot_Orders_SelectByFilter_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKProductType_Id" ColumnName="FKProductType_Id" />
+                <ScalarProperty Name="FKProduct_Id" ColumnName="FKProduct_Id" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="FKUserCreated" ColumnName="FKUserCreated" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DropboxFolderPath" ColumnName="DropboxFolderPath" />
+                <ScalarProperty Name="Delivery_IsReceiptFromTheBranch" ColumnName="Delivery_IsReceiptFromTheBranch" />
+                <ScalarProperty Name="Delivery_Address" ColumnName="Delivery_Address" />
+                <ScalarProperty Name="Delivery_FkCountry_Id" ColumnName="Delivery_FkCountry_Id" />
+                <ScalarProperty Name="Delivery_FKCity_Id" ColumnName="Delivery_FKCity_Id" />
+                <ScalarProperty Name="ProductTypeNameAr" ColumnName="ProductTypeNameAr" />
+                <ScalarProperty Name="ProductTypeNameEn" ColumnName="ProductTypeNameEn" />
+                <ScalarProperty Name="ProductNameAr" ColumnName="ProductNameAr" />
+                <ScalarProperty Name="ProductNameEn" ColumnName="ProductNameEn" />
+                <ScalarProperty Name="UserCreated_UserName" ColumnName="UserCreated_UserName" />
+                <ScalarProperty Name="UserCreated_FullName" ColumnName="UserCreated_FullName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Phot_Orders_UpdateDropboxFolderPath" FunctionName="LayanModel.Store.Phot_Orders_UpdateDropboxFolderPath" />
+          <FunctionImportMapping FunctionImportName="Phot_OrderServicePrices_Insert" FunctionName="LayanModel.Store.Phot_OrderServicePrices_Insert" />
+          <FunctionImportMapping FunctionImportName="Phot_OrderServicePrices_InsertCustom" FunctionName="LayanModel.Store.Phot_OrderServicePrices_InsertCustom" />
+          <FunctionImportMapping FunctionImportName="Phot_OrderServicePrices_SelectByOrderId" FunctionName="LayanModel.Store.Phot_OrderServicePrices_SelectByOrderId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Phot_OrderServicePrices_SelectByOrderId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FkOrder_Id" ColumnName="FkOrder_Id" />
+                <ScalarProperty Name="FkUser_Id" ColumnName="FkUser_Id" />
+                <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="ServiceNameAr" ColumnName="ServiceNameAr" />
+                <ScalarProperty Name="ServiceNameEn" ColumnName="ServiceNameEn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Phot_OrdersOptions_Insert" FunctionName="LayanModel.Store.Phot_OrdersOptions_Insert" />
           <FunctionImportMapping FunctionImportName="Phot_Products_CheckIfUsed" FunctionName="LayanModel.Store.Phot_Products_CheckIfUsed" />
           <FunctionImportMapping FunctionImportName="Phot_Products_Delete" FunctionName="LayanModel.Store.Phot_Products_Delete" />
@@ -4938,6 +5108,16 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Phot_ProductsOptions_Update" FunctionName="LayanModel.Store.Phot_ProductsOptions_Update" />
+          <FunctionImportMapping FunctionImportName="Phot_ProductsOptionsItems_SelectByIds" FunctionName="LayanModel.Store.Phot_ProductsOptionsItems_SelectByIds">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Phot_ProductsOptionsItems_SelectByIds_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FKWord_Value_Id" ColumnName="FKWord_Value_Id" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="FKProductOption_Id" ColumnName="FKProductOption_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Phot_ProductTypes_CheckIfUed" FunctionName="LayanModel.Store.Phot_ProductTypes_CheckIfUed" />
           <FunctionImportMapping FunctionImportName="Phot_ProductTypes_Delete" FunctionName="LayanModel.Store.Phot_ProductTypes_Delete" />
           <FunctionImportMapping FunctionImportName="Phot_ProductTypes_Insert" FunctionName="LayanModel.Store.Phot_ProductTypes_Insert">
@@ -5453,55 +5633,7 @@
           <FunctionImportMapping FunctionImportName="Words_DeleteList" FunctionName="LayanModel.Store.Words_DeleteList" />
           <FunctionImportMapping FunctionImportName="Words_Insert" FunctionName="LayanModel.Store.Words_Insert" />
           <FunctionImportMapping FunctionImportName="Words_Update" FunctionName="LayanModel.Store.Words_Update" />
-          <FunctionImportMapping FunctionImportName="Phot_Orders_UpdateDropboxFolderPath" FunctionName="LayanModel.Store.Phot_Orders_UpdateDropboxFolderPath" />
-          <FunctionImportMapping FunctionImportName="Phot_Orders_SelectByFilter" FunctionName="LayanModel.Store.Phot_Orders_SelectByFilter">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.Phot_Orders_SelectByFilter_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FKProductType_Id" ColumnName="FKProductType_Id" />
-                <ScalarProperty Name="FKProduct_Id" ColumnName="FKProduct_Id" />
-                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
-                <ScalarProperty Name="FKUserCreated" ColumnName="FKUserCreated" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="DropboxFolderPath" ColumnName="DropboxFolderPath" />
-                <ScalarProperty Name="ProductTypeNameAr" ColumnName="ProductTypeNameAr" />
-                <ScalarProperty Name="ProductTypeNameEn" ColumnName="ProductTypeNameEn" />
-                <ScalarProperty Name="ProductNameAr" ColumnName="ProductNameAr" />
-                <ScalarProperty Name="ProductNameEn" ColumnName="ProductNameEn" />
-                <ScalarProperty Name="UserCreated_UserName" ColumnName="UserCreated_UserName" />
-                <ScalarProperty Name="UserCreated_FullName" ColumnName="UserCreated_FullName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Cities_SelectByFilter" FunctionName="LayanModel.Store.Cities_SelectByFilter">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.Cities_SelectByFilter_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
-                <ScalarProperty Name="FKCountry_Id" ColumnName="FKCountry_Id" />
-                <ScalarProperty Name="ShippingPrice" ColumnName="ShippingPrice" />
-                <ScalarProperty Name="Ar" ColumnName="Ar" />
-                <ScalarProperty Name="En" ColumnName="En" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Pages_SelectAllForUserCanBeAccess1" FunctionName="LayanModel.Store.Pages_SelectAllForUserCanBeAccess">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LayanModel.Pages_SelectAllForUserCanBeAccess1_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FKWord_Id" ColumnName="FKWord_Id" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="FkMenu_Id" ColumnName="FkMenu_Id" />
-                <ScalarProperty Name="OrderByNumber" ColumnName="OrderByNumber" />
-                <ScalarProperty Name="IsForClient" ColumnName="IsForClient" />
-                <ScalarProperty Name="IsForAdmin" ColumnName="IsForAdmin" />
-                <ScalarProperty Name="IsHide" ColumnName="IsHide" />
-                <ScalarProperty Name="PageNameAr" ColumnName="PageNameAr" />
-                <ScalarProperty Name="PageNameEn" ColumnName="PageNameEn" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Phot_Orders_Insert" FunctionName="LayanModel.Store.Phot_Orders_Insert" />
+          <FunctionImportMapping FunctionImportName="Phot_OrderPayments_Insert" FunctionName="LayanModel.Store.Phot_OrderPayments_Insert" />
           <FunctionImportMapping FunctionImportName="Phot_Orders_SelectById" FunctionName="LayanModel.Store.Phot_Orders_SelectById">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LayanModel.Phot_Orders_SelectById_Result">
@@ -5523,6 +5655,20 @@
                 <ScalarProperty Name="ProductTypeImage" ColumnName="ProductTypeImage" />
                 <ScalarProperty Name="UserCreated_UserName" ColumnName="UserCreated_UserName" />
                 <ScalarProperty Name="UserCreated_FullName" ColumnName="UserCreated_FullName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Phot_OrderPayments_SelectByOrderId" FunctionName="LayanModel.Store.Phot_OrderPayments_SelectByOrderId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LayanModel.Phot_OrderPayments_SelectByOrderId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FkOrder_Id" ColumnName="FkOrder_Id" />
+                <ScalarProperty Name="PaymentDateTime" ColumnName="PaymentDateTime" />
+                <ScalarProperty Name="IsBankTransfer" ColumnName="IsBankTransfer" />
+                <ScalarProperty Name="IsAcceptFromManger" ColumnName="IsAcceptFromManger" />
+                <ScalarProperty Name="FKUserCreated_Id" ColumnName="FKUserCreated_Id" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TransferImage" ColumnName="TransferImage" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

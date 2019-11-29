@@ -10,7 +10,7 @@
 
                                      s.currentControler = getcurrentController()
                                      s.currentUserInfromation = Auth.userInfromation;
-
+                                     s.priceCurrencyCode =LangIsEn?"SAR":"ر.س.";
                                      /*
                                      التحقق ان المستخدم الحالى حسابة مفعل
                                      */

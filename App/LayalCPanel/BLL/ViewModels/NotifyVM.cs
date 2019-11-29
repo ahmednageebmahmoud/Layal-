@@ -1,4 +1,5 @@
-﻿using BLL.Services;
+﻿using BLL.Enums;
+using BLL.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace BLL.ViewModels
         public string DateTimeDisplay => DateService.GetDateTimeAr(this.DateTime);
         public string DateTimeSince => DateService.GetDateTimeSince(this.DateTime);
         public Int64? TargetId { get; set; }
-        public int PageId { get; set; }
+        public PagesEnum PageId { get; set; }
         public string RedirectUrl { get; set; }
         public string FullRedirectUrl => this.RedirectUrl + this.Id.ToString();
         public List<NotificationsUserVM> NotificationsUser { get; set; }

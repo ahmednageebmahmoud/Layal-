@@ -59,13 +59,13 @@
                                     </div>
                                 </a>
                                 <a class="kt-wizard-v1__nav-item" href="javascript:void()" data-ktwizard-type="step"
-                                   onclick="selectTo()">
+                                   onclick="selectTo(1)">
                                     <div class="kt-wizard-v1__nav-body">
                                         <div class="kt-wizard-v1__nav-icon">
                                             <i class="flaticon-list"></i>
                                         </div>
                                         <div class="kt-wizard-v1__nav-label">
-                                            4) @Token.Options
+                                            3) @Token.Options
                                         </div>
                                     </div>
                                 </a>
@@ -76,7 +76,7 @@
                                             <i class="fas fa-file-archive"></i>
                                         </div>
                                         <div class="kt-wizard-v1__nav-label">
-                                            5) @Token.Files
+                                            4) @Token.Files
                                         </div>
                                     </div>
                                 </a>
@@ -88,11 +88,34 @@
                                             <i class="flaticon-truck"></i>
                                         </div>
                                         <div class="kt-wizard-v1__nav-label">
-                                            6) @Token.DeliveryInformation
+                                            5) @Token.DeliveryInformation
                                         </div>
                                     </div>
                                 </a>
 
+                                <a class="kt-wizard-v1__nav-item" href="javascript:void()" data-ktwizard-type="step"
+                                   onclick="selectTo(1)">
+                                    <div class="kt-wizard-v1__nav-body">
+                                        <div class="kt-wizard-v1__nav-icon">
+                                            <i class="fas fa-file-invoice-dollar"></i>
+                                        </div>
+                                        <div class="kt-wizard-v1__nav-label">
+                                            6) @Token.TheBill
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <a id="w_payment" class="kt-wizard-v1__nav-item" href="javascript:void()" data-ktwizard-type="step"
+                                   onclick="selectTo(1)">
+                                    <div class="kt-wizard-v1__nav-body">
+                                        <div class="kt-wizard-v1__nav-icon">
+                                            <i class="fas fa-file-invoice-dollar"></i>
+                                        </div>
+                                        <div class="kt-wizard-v1__nav-label">
+                                            7) @Token.Payments
+                                        </div>
+                                    </div>
+                                </a>
 
                             </div>
                         </div>
@@ -124,7 +147,6 @@
                                 </div>
                             </div>
 
-
                             <!--begin: Form Wizard Step 2 Product Details-->
                             <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
                                 <div class="kt-heading kt-heading--md">@Token.Product :</div>
@@ -151,7 +173,7 @@
                                 </div>
                             </div>
 
-                            <!--begin: Form Wizard Step 4 Options-->
+                            <!--begin: Form Wizard Step 3 Options-->
                             <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
                                 <div class="kt-heading kt-heading--md">@Token.Options :</div>
                                 <div class="kt-form__section kt-form__section--first">
@@ -162,6 +184,7 @@
                                             <div class="form-group col-11">
                                                 <select class="form-control"
                                                         serchbale
+                                                        disabled
                                                         ng-options="i.Id as i.Id for i in im.Items "
                                                         ng-model="im.ProductOptionItemSelectedId" ng-change="selectOptionItem()"></select>
                                                 <!--Error Requierd-->
@@ -172,7 +195,7 @@
                                 </div>
                             </div>
 
-                            <!--begin: Form Wizard Step 5 === Files-->
+                            <!--begin: Form Wizard Step 4 === Files-->
                             <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
                                 <div class="kt-heading kt-heading--md">@Token.Files :</div>
                                 <div class="kt-form__section kt-form__section--first">
@@ -205,12 +228,12 @@
                                 </div>
                             </div>
 
-                            <!--begin: Form Wizard Step 6 === Delivery Information-->
+                            <!--begin: Form Wizard Step 5 === Delivery Information-->
                             <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
                                 <div class="kt-heading kt-heading--md">@Token.DeliveryInformation :</div>
                                 <div class="kt-form__section kt-form__section--first">
                                     <div class="kt-wizard-v1__form">
-                                            <!--Receipt from the branch-->
+                                        <!--Receipt from the branch-->
                                         <div class="form-group row">
                                             <label class="col-form-label col-lg-2">@Token.ReceiptFromTheBranch :</label>
                                             <div class="form-group-sub col-lg-10 ">
@@ -223,7 +246,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                            <!--Country-->
+                                        <!--Country-->
                                         <div class="form-group row">
                                             <label class="col-form-label col-lg-2">@Token.Country :</label>
                                             <div class="form-group-sub col-lg-10 ">
@@ -236,30 +259,135 @@
                                             </div>
                                         </div>
 
-                                                <!--City-->
-                                            <div class="form-group row">
-                                                <label class="col-form-label col-lg-2">@Token.City :</label>
-                                                <div class="form-group-sub col-lg-10 ">
-                                                    <select class="form-control"
-                                                            serchbale
-                                                            name="city"
-                                                            disabled
-                                                            ng-model="order.Delivery_CityId"
-                                                            ng-options="c.Id as c.CityNameWithShippingPrice for c in cities|orderBy :'CityNameWithShippingPrice'"></select>
-                                                </div>
+                                        <!--City-->
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-lg-2">@Token.City :</label>
+                                            <div class="form-group-sub col-lg-10 ">
+                                                <select class="form-control"
+                                                        serchbale
+                                                        name="city"
+                                                        disabled
+                                                        ng-model="order.Delivery_CityId"
+                                                        ng-options="c.Id as c.CityNameWithShippingPrice for c in cities|orderBy :'CityNameWithShippingPrice'"></select>
                                             </div>
-                                                <!--Address-->
-                                            <div class="form-group row">
-                                                <label class="col-form-label col-lg-2">@Token.Address :</label>
-                                                <div class="form-group-sub col-lg-10 ">
-                                                    <textarea class="form-control"
-                                                              serchbale
-                                                              name="address"
-                                                              disabled
-                                                              ng-model="order.Delivery_Address"
-                                                              maxlength="1000"></textarea>
-                                                </div>
+                                        </div>
+                                        <!--Address-->
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-lg-2">@Token.Address :</label>
+                                            <div class="form-group-sub col-lg-10 ">
+                                                <textarea class="form-control"
+                                                          serchbale
+                                                          name="address"
+                                                          disabled
+                                                          ng-model="order.Delivery_Address"
+                                                          maxlength="1000"></textarea>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--begin: Form Wizard Step 6 === Bill-->
+                            <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
+                                <div class="kt-heading kt-heading--md">@Token.TheBill :</div>
+                                <div class="kt-form__section kt-form__section--first">
+                                    <div class="kt-wizard-v1__form">
+                                        <div class="form-group row">
+                                            <table class="table table-hover ">
+                                                <thead class="">
+                                                    <tr>
+                                                        <th><span class="sms-sort-field">@Token.TheService</span></th>
+                                                        <th><span class="sms-sort-field">@Token.CreateDateTime</span></th>
+                                                        <th><span class="sms-sort-field">@Token.Price</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="x in order.ServicePrices">
+                                                        <td><span>{{x.ServiceName}}</span></td>
+                                                        <td><span>{{x.CreateDateTime_Display}}</span></td>
+                                                        <td><span>{{x.Price}}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td colspan="2" class="text-end">
+                                                            @Token.TotalPrice :
+                                                        </td>
+                                                        <td>{{order.TotalPrices|currency:''}}{{priceCurrencyCode}}</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--begin: Form Wizard Step 7 === Payments-->
+                            <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
+                                <div class="kt-heading kt-heading--md">@Token.TheBill :</div>
+                                <div class="kt-form__section kt-form__section--first">
+                                    <div class="kt-wizard-v1__form">
+
+
+                                        <div class="form-group row">
+                                            <table class="table sms-table table-hover " id="ng_table_1">
+                                                <thead class="">
+                                                    <tr class="">
+                                                        <th class="th-10">
+                                                            <sms-sort ng-sms-resource="@Token.CreateDateTime"></sms-sort>
+                                                        </th>
+                                                        <th class="th-10">
+                                                            <sms-sort ng-sms-resource="@Token.Amount"></sms-sort>
+                                                        </th>
+                                                        <th class="th-10">
+                                                            <sms-sort ng-sms-resource="@Token.IsBankTransfer"></sms-sort>
+                                                        </th>
+                                                        <th class="th-10">
+                                                            <sms-sort ng-sms-resource="@Token.BankTransferPhoto"></sms-sort>
+                                                        </th>
+                                                        <th class="th-10">
+                                                            <sms-sort ng-sms-resource="@Token.IsAcceptFromManger"></sms-sort>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="x in order.Payments">
+                                                        <td><span>{{x.CreateDateTime_Display}}</span></td>
+                                                        <td>{{x.Amount}}</td>
+                                                        <td><i class="fas " ng-class="{'fa-check':x.IsBankTransfer}"></i></td>
+                                                        <td>
+                                                            <a class="kt-link kt-font-boldest" href="{{x.TransferImageUrl}}" target="_blank" ng-show="x.IsBankTransfer">
+                                                                <img class="figure-img img-thumbnail" src="{{x.TransferImageUrl}}" width="100" height="100" />
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <i class="fas " ng-class="{'fa-check':x.IsAcceptFromManger}"></i>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td>
+                                                            <span>@Token.TotalPayments :</span>
+                                                        </td>
+                                                        <td>
+                                                            <span>{{order.TotalPayments|currency:''}}{{priceCurrencyCode}}</span>
+                                                        </td>
+                                                        <td  >
+                                                            <span>@Token.RequiredPayment :</span>
+                                                        </td>
+                                                        <td  >
+                                                            <span>{{order.TotalPrices-order.TotalPayments|currency:''}}{{priceCurrencyCode}}</span>
+                                                        </td>
+                                                        <td>
+                                                            <a href="javascript:void(0)" class="btn btn-brand btn-elevate btn-icon-sm" ng-click="showAddNewPayment()">
+                                                                <i class="la la-dollar"></i>@Token.PayNow
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                </tfoot>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -292,8 +420,55 @@
         </div>
     </div>
 
+    <!--Add New Payment-->
+    <div id="addNewPayment"
+         class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form novalidate name="addPaymrntFrm" class="kt-form kt-form--label-right" ng-submit="addNewPayment(addPaymrntFrm)">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">@Token.AddNewStatus</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!--bankTransfer Deposit-->
+                        <div class="form-group  row">
+                            <!--Amount-->
+                            <label class="col-lg-2 col-form-label">@Token.Amount</label>
+                            <div class="col-lg-4 form-group-sub">
+                                <input type="number"
+                                       name="amount"
+                                       class="form-control"
+                                       ng-class="{'is-invalid':addPaymrntFrm.amount.$invalid&&addPaymrntFrmSubmitErro}"
+                                       ng-model="newPayment.Amount"
+                                       ng-required="true" />
+                                <!--Errors-->
+                                <small class="error " ng-if="addPaymrntFrm.amount.$error.required&&addPaymrntFrmSubmitErro">@Token.FieldIsRequierd</small>
+                            </div>
+
+                            <!--Upload BankTransferImage -->
+                            <label class="col-lg-2 col-form-label">@Token.BankTransferPhoto </label>
+                            <div class="col-lg-4 form-group-sub">
+                                <up-files text="@Token.Upload"
+                                          accept="image/*"></up-files>
+
+                                <img class="figure-img img-thumbnail" src="{{newPayment.BankTransferImage}}" width="100" height="100" />
+                                <small class="error invalid-feedback" ng-if="!newPayment.File&&addPaymrntFrmSubmitErro">@Token.FieldIsRequierd</small>
+                            </div>
+                        </div>
 
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                            <i class="la la-plus">@Token.Add</i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@Token.Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </div>
 
@@ -310,6 +485,10 @@
     <script src="~/Scripts/angularJS/views/ordersphotographers/update/contoller.js"></script>
 
     <style>
+        .kt-wizard-v1 .kt-wizard-v1__nav .kt-wizard-v1__nav-items .kt-wizard-v1__nav-item {
+            flex: 0 0 14%;
+        }
+
         .form-control:disabled {
             background-color: #fff !important;
         }

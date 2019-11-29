@@ -256,7 +256,7 @@ namespace BLL.BLL
                     DescriptionEn = $"Manger Has been Convert New Enqiry For You",
                     DateTime = DateTime.Now,
                     TargetId = c.Id,
-                    PageId = (int)PagesEnum.Enquires,
+                    PageId = PagesEnum.Enquires,
                     RedirectUrl = $"/Enquires/EnquiryInformation?id={c.Id}&notifyId=",
                 };
 
@@ -294,7 +294,7 @@ namespace BLL.BLL
                 TitleEn = "New Enquiry",
                 DateTime = DateTime.Now,
                 TargetId = c.Id,
-                PageId = (int)PagesEnum.Enquires,
+                PageId = PagesEnum.Enquires,
                 RedirectUrl = $"/Enquires/EnquiryInformation?id={c.Id}&notifyId=",
             };
             if (UserMangerBranch != null)
@@ -517,7 +517,7 @@ namespace BLL.BLL
                 DescriptionEn = $"{ UserName} Has Been Add New Status",
                 DateTime = DateTime.Now,
                 TargetId = targetId,
-                PageId = (int)PagesEnum.Enquires,
+                PageId = PagesEnum.Enquires,
                 RedirectUrl = $"/Enquires/EnquiryInformation?id={targetId}&notifyId=",
             };
             NotificationsBLL.Add(Notify, userTargetId);

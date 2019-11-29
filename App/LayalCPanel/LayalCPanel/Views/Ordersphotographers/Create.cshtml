@@ -82,7 +82,7 @@
                                     </div>
                                 </a>
 
-                                <a class="kt-wizard-v1__nav-item" href="javascript:void()" data-ktwizard-type="step">
+                                <a class="kt-wizard-v1__nav-item" href="javascript:void()" data-ktwizard-type="step" ng-click="autosize()">
                                     <div class="kt-wizard-v1__nav-body">
                                         <div class="kt-wizard-v1__nav-icon">
                                             <i class="fas fa-file-archive" ng-class="{'error-color': newOrder.Images.length==0&&productFrmErrorSubmit}"></i>
@@ -109,6 +109,17 @@
                                     </div>
                                 </a>
 
+                                <a class="kt-wizard-v1__nav-item" href="javascript:void()" data-ktwizard-type="step"
+                                   onclick="selectTo(1)">
+                                    <div class="kt-wizard-v1__nav-body">
+                                        <div class="kt-wizard-v1__nav-icon">
+                                            <i class="fas fa-file-invoice-dollar"></i>
+                                        </div>
+                                        <div class="kt-wizard-v1__nav-label">
+                                            7) @Token.TheBill
+                                        </div>
+                                    </div>
+                                </a>
 
                             </div>
                         </div>
@@ -213,10 +224,11 @@
                                             <div class="form-group col-11">
                                                 <select class="form-control"
                                                         serchbale
+                                                        ng-model="im.ProductOptionItemSelectedId" 
                                                         ng-options="i.Id as i.Id for i in im.Items "
-                                                        ng-model="im.ProductOptionItemSelectedId" ng-change="selectOptionItem()"></select>
+                                                        ng-change="selectOptionItem()"></select>
                                                 <!--Error Requierd-->
-                                                <small class="error" ng-if="!im.SelectedItem&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                                <small class="error" ng-if="!im.ProductOptionItemSelectedId &&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
                                             </div>
                                         </div>
                                     </div>
@@ -320,7 +332,9 @@
                                                         ng-required="!newOrder.Delivery_IsReceiptFromTheBranch"
                                                         ng-class="{'is-invalid':addOrderForm.city.$invalid&&productFrmErrorSubmit}"
                                                         ng-model="newOrder.Delivery_CityId"
-                                                        ng-options="c.Id as c.CityNameWithShippingPrice for c in cities|orderBy :'CityNameWithShippingPrice'"></select>
+                                                        ng-options="c.Id as c.CityNameWithShippingPrice for c in cities|orderBy :'CityNameWithShippingPrice'"
+                                                        ng-change="updateDeliveryServicePrice(newOrder.Delivery_CityId)"
+                                                        ></select>
                                                 <!--Errors:-->
                                                 <small class="error " ng-if="addOrderForm.city.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
                                             </div>
@@ -340,12 +354,51 @@
                                                 <!--Errors:-->
                                                 <small class="error " ng-if="addOrderForm.address.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <!--begin: Form Wizard Step 7 === Bill-->
+                            <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
+                                <div class="kt-heading kt-heading--md">@Token.TheBill :</div>
+                                <div class="kt-form__section kt-form__section--first">
+                                    <div class="kt-wizard-v1__form">
+                                        <div class="form-group row">
+                                            <table class="table sms-table table-hover ">
+                                                <thead class="">
+                                                    <tr>
+                                                        <th><span class="sms-sort-field">@Token.TheService</span></th>
+                                                        <th><span class="sms-sort-field">@Token.CreateDateTime</span></th>
+                                                        <th><span class="sms-sort-field">@Token.Price</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="x in newOrder.Options">
+                                                        <td><span>{{x.StaticField.StaticFieldName}}</span></td>
+                                                        <td><span>@Token.Now</span></td>
+                                                        <td><span>{{x.ItemSelected.Price}}</span></td>
+                                                    </tr>
+                                                    <tr ng-if="newOrder.Delivery_CityId">
+                                                        <td><span>@Token.DeliveryService</span></td>
+                                                        <td><span>@Token.Now</span></td>
+                                                        <td><span>{{newOrder.DeliveryServicePrice|currency:''}}{{priceCurrencyCode}}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td colspan="2" class="text-end">
+                                                            @Token.TotalPrice :
+                                                        </td>
+                                                        <td>{{newOrder.TotalPrices|currency:''}}{{priceCurrencyCode}}</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
 
                             <!--begin: Form Actions -->
                             <div class="kt-form__actions">
@@ -392,7 +445,7 @@
 
     <style>
         .kt-wizard-v1 .kt-wizard-v1__nav .kt-wizard-v1__nav-items .kt-wizard-v1__nav-item {
-            flex: 0 0 17%;
+            flex: 0 0 14%;
         }
 
         .form-control:disabled {

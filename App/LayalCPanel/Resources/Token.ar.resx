@@ -1291,7 +1291,7 @@
     <value>وقت وتاريخ الطلب</value>
   </data>
   <data name="AddBuWeHaveSomFilesNotSaved" xml:space="preserve">
-    <value>AddBuWeHaveSomFilesNotSaved</value>
+    <value>تم الاضافة ولاكن هناك بحض الملفات لم نتمكن من حفظها</value>
   </data>
   <data name="Order" xml:space="preserve">
     <value>طلب</value>
@@ -1313,5 +1313,26 @@
   </data>
   <data name="YouMustbeFillFields" xml:space="preserve">
     <value>يجب عليك ملىء الحقول</value>
+  </data>
+  <data name="DeliveryService" xml:space="preserve">
+    <value>خدمة التوصيل</value>
+  </data>
+  <data name="Now" xml:space="preserve">
+    <value>الان</value>
+  </data>
+  <data name="TheBill" xml:space="preserve">
+    <value>الفاتورة</value>
+  </data>
+  <data name="TheService" xml:space="preserve">
+    <value>الخدمة</value>
+  </data>
+  <data name="DeliveryCity" xml:space="preserve">
+    <value>مدينة التوصيل</value>
+  </data>
+  <data name="PayNow" xml:space="preserve">
+    <value>ادفع الآن</value>
+  </data>
+  <data name="RequiredPayment" xml:space="preserve">
+    <value>المطلوب دفعة</value>
   </data>
 </root>

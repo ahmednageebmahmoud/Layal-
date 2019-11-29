@@ -123,6 +123,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\OrdersphotographerPaymentsBll.cs" />
     <Compile Include="BLL\OrdersphotographerBll.cs" />
     <Compile Include="BLL\ProductsBLL.cs" />
     <Compile Include="BLL\CRMBLL.cs" />
@@ -176,7 +177,9 @@
     <Compile Include="ViewModels\AlbumFileVM.cs" />
     <Compile Include="ViewModels\DropboxThumbnailVM.cs" />
     <Compile Include="ViewModels\OrderFileVM.cs" />
+    <Compile Include="ViewModels\OrderPaymentVM.cs" />
     <Compile Include="ViewModels\OrderphotographerVM.cs" />
+    <Compile Include="ViewModels\OrderPriceVM.cs" />
     <Compile Include="ViewModels\ProductImageVM.cs" />
     <Compile Include="ViewModels\ProductOptionItemVM.cs" />
     <Compile Include="ViewModels\ProductOptionVM.cs" />

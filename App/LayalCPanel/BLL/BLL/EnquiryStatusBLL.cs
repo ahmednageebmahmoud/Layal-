@@ -273,7 +273,7 @@ namespace BLL.BLL
             {
                 DateTime = DateTime.Now,
                 TargetId = targetId,
-                PageId = (int)PagesEnum.Enquires,
+                PageId = PagesEnum.Enquires,
                 RedirectUrl = $"/Enquires/EnquiryInformation?id={targetId}&notifyId=",
             };
 

@@ -2380,6 +2380,7 @@
     <Folder Include="Files\Albums\" />
     <Folder Include="Files\Enquiries\Payments\" />
     <Folder Include="Files\Events\CustomLogos\" />
+    <Folder Include="Files\Orders\Payments\" />
     <Folder Include="Files\Products\Types\" />
     <Folder Include="Files\Users\Payments\" />
     <Folder Include="Views\LogOut\" />
