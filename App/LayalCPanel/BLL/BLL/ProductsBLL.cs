@@ -4,6 +4,7 @@ using BLL.ViewModels;
 using Resources;
 using System;
 using System.Linq;
+using System.Web.Script.Serialization;
 
 namespace BLL.BLL
 {
@@ -20,6 +21,7 @@ namespace BLL.BLL
                 WordId = c.FKWord_Name_Id,
                 WordDescriptionId = c.FKWord_Description_Id,
                 IsActive = c.IsActive,
+                Version = c.Version,
 
                 ProductType = new ProductTypeVM { NameAr = c.ProductTypeNameAr, NameEn = c.ProductTypeNameEn },
                 WordUploadFileNotesId = c.FKWord_UplaodFilesNotes_Id,
@@ -50,7 +52,8 @@ namespace BLL.BLL
                 v.IsActive,
                 v.FKWord_Name_Id,
                 v.FKWord_Description_Id,
-                v.FKWord_UplaodFilesNotes_Id
+                v.FKWord_UplaodFilesNotes_Id,
+                v.Version
             }).Select(v => new ProductVM
             {
                 Id = v.Key.Id,
@@ -65,6 +68,7 @@ namespace BLL.BLL
                 WordDescriptionId = v.Key.FKWord_Description_Id,
                 WordUploadFileNotesId = v.Key.FKWord_UplaodFilesNotes_Id,
                 IsActive = v.Key.IsActive,
+                Version = v.Key.Version,
                 Images = v.Where(e => e.ProductImageId.HasValue).Select(b => new ProductImageVM
                 {
                     Id = b.ProductImageId.Value,
@@ -89,7 +93,7 @@ namespace BLL.BLL
                     Items = c.Where(b => b.OptionItemId.HasValue).Select(b => new ProductOptionItemVM
                     {
                         Id = b.OptionItemId.Value,
-                        WordValueId=b.FKWord_Value_Id.Value,
+                        WordValueId = b.FKWord_Value_Id.Value,
                         Price = b.Price,
                         ValueAr = b.ValueAr,
                         ValueEn = b.ValueEn
@@ -101,6 +105,8 @@ namespace BLL.BLL
                 return ResponseVM.Error($"{Token.Product} : {Token.NotFound}");
             return ResponseVM.Success(Data);
         }
+
+
 
         public object SaveChange(ProductVM c)
         {
@@ -139,8 +145,9 @@ namespace BLL.BLL
             {
                 try
                 {
+                    //Can Not Delete If Thie Is Used
                     if (db.Phot_Products_CheckIfUsed(c.Id).First().Value > 0)
-                        return new ResponseVM(RequestTypeEnum.Success, Token.CanNotDeleteBecuseIsUsed);
+                        return ResponseVM.Error(Token.CanNotDeleteBecuseIsUsedBuUCanDisActiveThis);
 
                     var Data = (ProductVM)GetProductById(c.Id).Result;
                     db.Phot_Products_Delete(c.Id, c.WordId, c.WordDescriptionId, c.WordUploadFileNotesId);
@@ -160,10 +167,19 @@ namespace BLL.BLL
 
         private object Update(ProductVM c)
         {
-            using (var tranc=db.Database.BeginTransaction())
+            ProductOptionBLL OBLL = new ProductOptionBLL();
+
+            using (var tranc = db.Database.BeginTransaction())
             {
                 try
                 {
+
+                    //Can Not Delete If Thie Is Used
+                    if (db.Phot_Products_CheckIfUsed(c.Id).First().Value > 0)
+                        return ResponseVM.Error(Token.CanNotUpdateBecuseIsUsedBuUCanDisActiveThis);
+
+
+
                     bool IsUsed = false;
                     //فى حالة اذا كان الطلب مستخدم لا يمكن تحديث سوى المعلومات الاساسية بدون فئة الطلب والصور فقط
                     if (db.Phot_Products_CheckIfUsed(c.Id).First().Value > 0)
@@ -177,153 +193,132 @@ namespace BLL.BLL
                         return ResponseVM.Error(Token.SomFilesNotSaved);
                     var NewFilesPathes = string.Join(",", c.Images.Where(v => v.State == StateEnum.Create && !string.IsNullOrEmpty(v.ImageUrl)).Select(v => v.ImageUrl));
                     var DeleteFilesIds = string.Join(",", c.Images.Where(v => v.State == StateEnum.Delete).Select(v => v.Id));
-                     db.Phot_Products_Update(c.Id, c.WordId, c.WordDescriptionId, c.WordUploadFileNotesId, c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.UplaodFileNotesAr, c.UplaodFileNotesEn,
-                       NewFilesPathes, DeleteFilesIds, c.ProductTypeId, c.IsActive);
+                    db.Phot_Products_Update(c.Id, c.WordId, c.WordDescriptionId, c.WordUploadFileNotesId, c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.UplaodFileNotesAr, c.UplaodFileNotesEn,
+                      NewFilesPathes, DeleteFilesIds, c.ProductTypeId, c.IsActive);
 
 
                     //Update Options
                     if (!IsUsed)
-                        c.Options.ForEach(op =>
+                        foreach (var op in c.Options)
                         {
                             switch (op.State)
                             {
                                 case StateEnum.Create:
-                                    AddNewOption(op, c.Id);
+                                    OBLL.Add(op, c.Id, db);
                                     break;
                                 case StateEnum.Update:
-                                    UpdatewOption(op);
+                                    {
+                                        var Res = OBLL.Update(op, db);
+                                        if (Res != null) return Res;
+                                    }
                                     break;
                                 case StateEnum.Delete:
-                                    db.Phot_ProductsOptions_Delete(op.Id);
+                                    {
+                                        //Check If This Item If Not Used
+                                        var Res = OBLL.Delete(op, db);
+                                        if (Res != null) return Res;
+                                    }
+                            break;
+                            default:
                                     break;
-                                default:
-                                    break;
-                            }
+                        }
 
-                        });
+                }
 
 
                     FileService.RemoveFiles(c.Images.Where(v => v.State == StateEnum.Delete).Select(v => v.ImageUrl).ToList());
-                    tranc.Commit();
-                    var Data = (ProductVM)GetProductById(c.Id).Result;
+                tranc.Commit();
+                var Data = (ProductVM)GetProductById(c.Id).Result;
 
-                    if (IsUsed)
+                if (IsUsed)
                     return new ResponseVM(RequestTypeEnum.Success, Token.UpdatedAllWithoutOptions, Data);
-                    else
-                        return new ResponseVM(RequestTypeEnum.Success, Token.Updated, Data);
+                else
+                    return new ResponseVM(RequestTypeEnum.Success, Token.Updated, Data);
 
-                }
+            }
                 catch (Exception ex)
-                {
-                    tranc.Rollback();
-                    FileService.RemoveFiles(c.Images.Where(v => v.State == StateEnum.Create).Select(v => v.ImageUrl).ToList());
-                    return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
-                } 
-            }
-
-        }
-
-        private void UpdatewOption(ProductOptionVM op)
-        {
-            //Update Option And Delete Items
-            var ItemsIdsDelete = string.Join(",", op.Items.Where(c => c.State == StateEnum.Delete).Select(c => c.Id));
-            db.Phot_ProductsOptions_Update(op.Id, op.StaticFieldId, ItemsIdsDelete);
-
-            //Create Items
-            var ItemsCreating = op.Items.Where(c => c.State == StateEnum.Create);
-            if(ItemsCreating.Count()>0)
             {
-            string ItemsNamesAr = string.Join(",", ItemsCreating.Select(v => v.ValueAr));
-            string ItemsNamesEn = string.Join(",", ItemsCreating.Select(v => v.ValueEn));
-            string ItemsPrice = string.Join(",", ItemsCreating.Select(v => v.Price));
-
-            db.Phot_ProductsOptionItems_Insert(op.Id, ItemsNamesAr, ItemsNamesEn, ItemsPrice, ItemsCreating.Count());
+                tranc.Rollback();
+                FileService.RemoveFiles(c.Images.Where(v => v.State == StateEnum.Create).Select(v => v.ImageUrl).ToList());
+                return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
             }
+        }
 
-            //Update Items
-            var ItemsUpdating = op.Items.Where(c => c.State == StateEnum.Update);
-            if (ItemsUpdating.Count() > 0)
+    }
+
+        public object ProductDisactive(long id,bool isActive)
+        {
+                db.Products_Disactive(id, isActive);
+            return ResponseVM.Success();
+        }
+
+    /// <summary>
+    /// Add Product
+    /// </summary>
+    /// <param name="c"></param>
+    /// <returns></returns>
+    private object Add(ProductVM c)
+    {
+        ProductOptionBLL OBLL = new ProductOptionBLL();
+        using (var tranc = db.Database.BeginTransaction())
+        {
+
+            try
             {
+                //Disapled Another Product With The Thame Parent 
+                if (c.ProductParentId.HasValue)
+                    db.Products_DisActiveParentAndChildren(c.ProductParentId);
 
-                string ItemsIds = string.Join(",", ItemsUpdating.Select(v => v.Id));
-            string ItemsWordIds = string.Join(",", ItemsUpdating.Select(v => v.WordValueId));
-            string ItemsNamesAr = string.Join(",", ItemsUpdating.Select(v => v.ValueAr));
-            string ItemsNamesEn = string.Join(",", ItemsUpdating.Select(v => v.ValueEn));
-            string ItemsPrice = string.Join(",", ItemsUpdating.Select(v => v.Price));
-            db.Phot_ProductsOptionItems_Update(op.Id, ItemsIds, ItemsNamesAr, ItemsNamesEn, ItemsWordIds, ItemsPrice, ItemsUpdating.Count());
+                //Save Files In Server
+                if (!SaveFiles(c))
+                    return ResponseVM.Error(Token.SomFilesNotSaved);
+
+                var ProductId = db.Phot_Products_Insert(c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.UplaodFileNotesAr, c.UplaodFileNotesEn, string.Join(",", c.Images.Where(v => v.ImageUrl != null).Select(v => v.ImageUrl)), c.ProductTypeId,
+                    this.UserLoggad.Id, c.IsActive, c.Version, c.ProductParentId)
+                        .FirstOrDefault();
+
+                //Return If Not Add  Product
+                if (ProductId == null || ProductId <= 0)
+                    throw new Exception(Token.ICantAdded);
+
+                //Add Options
+                OBLL.AddList(c.Options, ProductId.Value, db);
+                var Data = (ProductVM)GetProductById(ProductId.Value).Result;
+                tranc.Commit();
+                return new ResponseVM(RequestTypeEnum.Success, Token.Added, Data);
             }
-        }
-
-        private object Add(ProductVM c)
-        {
-            using (var tranc = db.Database.BeginTransaction())
+            catch (Exception ex)
             {
-
-                try
-                {
-                    //Save Files In Server
-                    if (!SaveFiles(c))
-                        return ResponseVM.Error(Token.SomFilesNotSaved);
-
-                    var ProductId = db.Phot_Products_Insert(c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.UplaodFileNotesAr, c.UplaodFileNotesEn, string.Join(",", c.Images.Where(v => v.ImageUrl != null).Select(v => v.ImageUrl)), c.ProductTypeId,
-                        this.UserLoggad.Id, c.IsActive)
-                            .FirstOrDefault();
-
-                    //Return If Not Add  Product
-                    if (ProductId == null || ProductId <= 0)
-                        throw new Exception(Token.ICantAdded);
-
-                    //Add Options
-                    c.Options.ForEach(op =>
-                    {
-                        AddNewOption(op, ProductId.Value);
-                    });
-
-                    var Data = (ProductVM)GetProductById(ProductId.Value).Result;
-
-                    tranc.Commit();
-                    return new ResponseVM(RequestTypeEnum.Success, Token.Added, Data);
-                }
-                catch (Exception ex)
-                {
-                    tranc.Rollback();
-                    FileService.RemoveFiles(c.Images.Select(v => v.ImageUrl).ToList());
-                    return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
-                }
+                tranc.Rollback();
+                FileService.RemoveFiles(c.Images.Select(v => v.ImageUrl).ToList());
+                return new ResponseVM(RequestTypeEnum.Error, Token.SomeErrorHasBeen, ex);
             }
         }
+    }
 
-        private void AddNewOption(ProductOptionVM op, long productId)
-        {
-            string ItemsNamesAr = string.Join(",", op.Items.Select(v => v.ValueAr));
-            string ItemsNamesEn = string.Join(",", op.Items.Select(v => v.ValueEn));
-            string ItemsPriceAr = string.Join(",", op.Items.Select(v => v.Price));
-            db.Phot_ProductsOptions_Insert(op.StaticFieldId, productId, ItemsNamesAr, ItemsNamesEn, ItemsPriceAr, op.Items.Count);
 
-        }
+    private bool SaveFiles(ProductVM c)
+    {
+        bool SavedAll = true;
 
-        private bool SaveFiles(ProductVM c)
-        {
-            bool SavedAll = true;
-
-            c.Images.Where(v => v.State == StateEnum.Create).ToList().ForEach(a =>
-               {
+        c.Images.Where(v => v.State == StateEnum.Create).ToList().ForEach(a =>
+           {
                    //Save Image In server
                    if (a.File != null && SavedAll == true)
+               {
+                   var FileSave = FileService.SaveFileHttpBase(new FileSaveVM
                    {
-                       var FileSave = FileService.SaveFileHttpBase(new FileSaveVM
-                       {
-                           File = a.File,
-                           ServerPathSave = "/Files/Products/"
-                       });
+                       File = a.File,
+                       ServerPathSave = "/Files/Products/"
+                   });
 
-                       if (!FileSave.IsSaved)
-                           SavedAll = false;
-                       a.ImageUrl = FileSave.SavedPath;
-                   }
-               });
-            return SavedAll;
-        }
+                   if (!FileSave.IsSaved)
+                       SavedAll = false;
+                   a.ImageUrl = FileSave.SavedPath;
+               }
+           });
+        return SavedAll;
+    }
 
-    }//End Class
+}//End Class
 }

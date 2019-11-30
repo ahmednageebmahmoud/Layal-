@@ -15,6 +15,13 @@
             });
         };
 
+        changeActive(id, isActive) {
+            return h({
+                url: `${this.basePath}ProductDisactive?id=${id}&isActive=${isActive}`,
+                method: 'get',
+            });
+        };
+
      
 
 		//save product  

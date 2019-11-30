@@ -53,5 +53,14 @@ namespace UI.Controllers
             return Json(ProductTypesBLL.SaveChange(product), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        [PagePrivilege(PagesEnum.Products, false, false, false, true)]
+        public JsonResult ProductDisactive(long id,bool isActive)
+        {
+            return Json(ProductTypesBLL.ProductDisactive(id, isActive), JsonRequestBehavior.AllowGet);
+        }
+
+        
+
     }//end class
 }

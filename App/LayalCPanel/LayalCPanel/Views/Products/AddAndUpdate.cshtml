@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     UsersPrivilegeVM Priv =
         new UsersPrivilegesBLL().SelectByUserId(PagesEnum.Products);
-     }
+}
 
 <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" ng-controller="productsCtrl">
     <!-- begin:: Subheader -->
@@ -30,8 +30,6 @@
 
     </div>
     <!-- end:: Subheader -->
-     
-
     <!--Wizerd-->
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
         <div class="kt-portlet">
@@ -83,10 +81,10 @@
                                     <div class="kt-wizard-v1__nav-body">
                                         <div class="kt-wizard-v1__nav-icon">
                                             <i class="flaticon2-image-file"
-                                            ng-class="{'error-color':(newProduct.Images|FilterWithoutDelete).length==0&&productFrmErrorSubmit}"></i>
+                                               ng-class="{'error-color':(newProduct.Images|FilterWithoutDelete).length==0&&productFrmErrorSubmit}"></i>
                                         </div>
                                         <div class="kt-wizard-v1__nav-label"
-                                            ng-class="{'error-color':(newProduct.Images|FilterWithoutDelete).length==0&&productFrmErrorSubmit}">
+                                             ng-class="{'error-color':(newProduct.Images|FilterWithoutDelete).length==0&&productFrmErrorSubmit}">
                                             3) @Token.Images
                                         </div>
                                     </div>
@@ -106,110 +104,126 @@
                                 <div class="kt-heading kt-heading--md">@Token.BasicInformation :</div>
                                 <div class="kt-form__section kt-form__section--first">
                                     <div class="kt-wizard-v1__form">
-                                        <div class="form-group ">
-
-
+                                        <div class="form-group row">
                                             <!--NameAr-->
-                                            <label class="col-form-label">@Token.NameAr</label>
-                                            <div class="form-group-sub">
-                                                <input type="text" class="form-control input-disabled"
-                                                       name="nameAr"
-                                                       ng-class="{'is-invalid':addProductFrm.nameAr.$invalid&&productFrmErrorSubmit}"
-                                                       ng-model="newProduct.NameAr"
-                                                       required maxlength="50" ng-maxlength="50" />
-                                                <!--Errors:NameAr-->
-                                                <small class="error " ng-if="addProductFrm.nameAr.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                            <div class="col-6">
+                                                <label class="col-form-label">@Token.NameAr</label>
+                                                <div class="form-group-sub">
+                                                    <input type="text" class="form-control input-disabled"
+                                                           name="nameAr"
+                                                           ng-class="{'is-invalid':addProductFrm.nameAr.$invalid&&productFrmErrorSubmit}"
+                                                           ng-model="newProduct.NameAr"
+                                                           required maxlength="50" ng-maxlength="50" />
+                                                    <!--Errors:NameAr-->
+                                                    <small class="error " ng-if="addProductFrm.nameAr.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                                </div>
                                             </div>
-
                                             <!--NameEn-->
-                                            <label class="col-form-label">@Token.NameEn</label>
-                                            <div class="form-group-sub">
-                                                <input type="text"
-                                                       class="form-control input-disabled"
-                                                       name="nameEn"
-                                                       ng-class="{'is-invalid':addProductFrm.nameEn.$invalid&&productFrmErrorSubmit}"
-                                                       ng-model="newProduct.NameEn"
-                                                       required maxlength="50" ng-maxlength="50" />
-                                                <!--Errors:NameEn-->
-                                                <small class="error " ng-if="addProductFrm.nameEn.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                            <div class="col-6">
+                                                <label class="col-form-label">@Token.NameEn</label>
+                                                <div class="form-group-sub">
+                                                    <input type="text"
+                                                           class="form-control input-disabled"
+                                                           name="nameEn"
+                                                           ng-class="{'is-invalid':addProductFrm.nameEn.$invalid&&productFrmErrorSubmit}"
+                                                           ng-model="newProduct.NameEn"
+                                                           required maxlength="50" ng-maxlength="50" />
+                                                    <!--Errors:NameEn-->
+                                                    <small class="error " ng-if="addProductFrm.nameEn.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                                </div>
                                             </div>
-
                                             <!--DescriptionAr-->
-                                            <label class="col-form-label">@Token.DescriptionAr</label>
-                                            <div class="form-group-sub">
-                                                <textarea class="form-control input-disabled"
-                                                          rows="3"
-                                                          name="descriptionAr"
-                                                          ng-class="{'is-invalid':addProductFrm.descriptionAr.$invalid&&productFrmErrorSubmit}"
-                                                          ng-model="newProduct.DescriptionAr"
-                                                          required maxlength="500"></textarea>
-                                                <!--Errors:DescriptionAr-->
-                                                <small class="error " ng-if="addProductFrm.descriptionAr.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                            <div class="col-6">
+                                                <label class="col-form-label">@Token.DescriptionAr</label>
+                                                <div class="form-group-sub">
+                                                    <textarea class="form-control input-disabled"
+                                                              rows="3"
+                                                              name="descriptionAr"
+                                                              ng-class="{'is-invalid':addProductFrm.descriptionAr.$invalid&&productFrmErrorSubmit}"
+                                                              ng-model="newProduct.DescriptionAr"
+                                                              required maxlength="500"></textarea>
+                                                    <!--Errors:DescriptionAr-->
+                                                    <small class="error " ng-if="addProductFrm.descriptionAr.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                                </div>
                                             </div>
-
                                             <!--DescriptionEn-->
-                                            <label class="col-form-label">@Token.DescriptionEn</label>
-                                            <div class="form-group-sub">
-                                                <textarea class="form-control input-disabled"
-                                                          rows="3"
-                                                          name="descriptionEn"
-                                                          ng-class="{'is-invalid':addProductFrm.descriptionEn.$invalid&&productFrmErrorSubmit}"
-                                                          ng-model="newProduct.DescriptionEn"
-                                                          required maxlength="500"></textarea>
-                                                <!--Errors:DescriptionEn-->
-                                                <small class="error " ng-if="addProductFrm.descriptionEn.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                            <div class="col-6">
+                                                <label class="col-form-label">@Token.DescriptionEn</label>
+                                                <div class="form-group-sub">
+                                                    <textarea class="form-control input-disabled"
+                                                              rows="3"
+                                                              name="descriptionEn"
+                                                              ng-class="{'is-invalid':addProductFrm.descriptionEn.$invalid&&productFrmErrorSubmit}"
+                                                              ng-model="newProduct.DescriptionEn"
+                                                              required maxlength="500"></textarea>
+                                                    <!--Errors:DescriptionEn-->
+                                                    <small class="error " ng-if="addProductFrm.descriptionEn.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                                </div>
                                             </div>
-
                                             <!--UplaodFIleNotesAr-->
-                                            <label class="col-form-label">@Token.UplaodFIleNotesAr</label>
-                                            <div class="form-group-sub">
-                                                <textarea class="form-control input-disabled"
-                                                          rows="3"
-                                                          name="uplaodFIleNotesAr"
-                                                          ng-class="{'is-invalid':addProductFrm.uplaodFIleNotesAr.$invalid&&productFrmErrorSubmit}"
-                                                          ng-model="newProduct.UplaodFileNotesAr"
-                                                          required maxlength="500"></textarea>
-                                                <!--Errors:UplaodFIleNotesAr-->
-                                                <small class="error " ng-if="addProductFrm.uplaodFIleNotesAr.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                            <div class="col-6">
+                                                <label class="col-form-label">@Token.UplaodFIleNotesAr</label>
+                                                <div class="form-group-sub">
+                                                    <textarea class="form-control input-disabled"
+                                                              rows="3"
+                                                              name="uplaodFIleNotesAr"
+                                                              ng-class="{'is-invalid':addProductFrm.uplaodFIleNotesAr.$invalid&&productFrmErrorSubmit}"
+                                                              ng-model="newProduct.UplaodFileNotesAr"
+                                                              required maxlength="500"></textarea>
+                                                    <!--Errors:UplaodFIleNotesAr-->
+                                                    <small class="error " ng-if="addProductFrm.uplaodFIleNotesAr.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                                </div>
                                             </div>
-
                                             <!--UplaodFIleNotesEn-->
-                                            <label class="col-form-label">@Token.UplaodFIleNotesEn</label>
-                                            <div class="form-group-sub">
-                                                <textarea class="form-control input-disabled"
-                                                          rows="3"
-                                                          name="uplaodFIleNotesEn"
-                                                          ng-class="{'is-invalid':addProductFrm.uplaodFIleNotesEn.$invalid&&productFrmErrorSubmit}"
-                                                          ng-model="newProduct.UplaodFileNotesEn"
-                                                          required maxlength="500"></textarea>
-                                                <!--Errors:UplaodFIleNotesEn-->
-                                                <small class="error " ng-if="addProductFrm.uplaodFIleNotesEn.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                            <div class="col-6">
+                                                <label class="col-form-label">@Token.UplaodFIleNotesEn</label>
+                                                <div class="form-group-sub">
+                                                    <textarea class="form-control input-disabled"
+                                                              rows="3"
+                                                              name="uplaodFIleNotesEn"
+                                                              ng-class="{'is-invalid':addProductFrm.uplaodFIleNotesEn.$invalid&&productFrmErrorSubmit}"
+                                                              ng-model="newProduct.UplaodFileNotesEn"
+                                                              required maxlength="500"></textarea>
+                                                    <!--Errors:UplaodFIleNotesEn-->
+                                                    <small class="error " ng-if="addProductFrm.uplaodFIleNotesEn.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                                </div>
                                             </div>
-
                                             <!--Product Type-->
-                                            <label class="col-form-label">@Token.ProductType</label>
-                                            <div class="form-group-sub">
-                                                <select class="form-control"
-                                                        serchbale
-                                                        name="productTypeid"
-                                                        ng-class="{'is-invalid':addProductFrm.productTypeid.$invalid&&productFrmErrorSubmit}"
-                                                        ng-model="newProduct.ProductTypeId"
-                                                        ng-options="c.Id as c.ProductTypeName for c in productTypes"
-                                                        ng-required="true"></select>
+                                            <div class="col-6">
+                                                <label class="col-form-label">@Token.ProductType</label>
+                                                <div class="form-group-sub">
+                                                    <select class="form-control"
+                                                            serchbale
+                                                            name="productTypeid"
+                                                            ng-class="{'is-invalid':addProductFrm.productTypeid.$invalid&&productFrmErrorSubmit}"
+                                                            ng-model="newProduct.ProductTypeId"
+                                                            ng-options="c.Id as c.ProductTypeName for c in productTypes"
+                                                            ng-required="true"></select>
 
-                                                <!--Errors:ProductType-->
-                                                <small class="error " ng-if="addProductFrm.productTypeid.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                                    <!--Errors:ProductType-->
+                                                    <small class="error " ng-if="addProductFrm.productTypeid.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                                </div>
                                             </div>
-
                                             <!--IsActive-->
-                                            <label class="col-form-label">@Token.IsActive</label>
-                                            <div class="form-group-sub">
-                                                <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
-                                                    <label>
-                                                        <input type="checkbox" checked="checked"  ng-model="newProduct.IsActive" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
-                                                        <span></span>
-                                                    </label>
-                                                </span>
+                                            <div class="col-6">
+                                                <label class="col-form-label ">@Token.IsActive</label>
+                                                <div class="form-groups">
+                                                    <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                                        <label>
+                                                            <input type="checkbox" checked="checked" ng-model="newProduct.IsActive" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                                            <span></span>
+                                                        </label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <!--Version-->
+                                            <div class="col-6">
+
+                                                <!--IsActive-->
+                                                <label class="col-form-label ">@Token.Version </label>
+                                                <div class="form-group">
+                                                    <input type="number" class="form-control " ng-model="newProduct.Version" disabled />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -238,7 +252,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat="c in newProduct.Options"  ng-hide="c.State==state.delete">
+                                                <tr ng-repeat="c in newProduct.Options" ng-hide="c.State==state.delete">
                                                     <td><span>{{c.StaticField.StaticFieldName}}</span></td>
                                                     <td><span>{{c.Items.length}}</span></td>
                                                     <td>
@@ -273,17 +287,17 @@
                                     <div class="kt-wizard-v1__form">
                                         <div class="form-group">
                                             <!--Images-->
-                                                <up-files text="@Token.Upload"
-                                                          accept="image/*"
-                                                          count="10"></up-files>
+                                            <up-files text="@Token.Upload"
+                                                      accept="image/*"
+                                                      count="10"></up-files>
                                             <br />
                                             <br />
                                             <!--Images-->
                                             <div class="form-group-sub">
                                                 <div class="row">
-                                                    <div class="col-md-4" ng-repeat="im in newProduct.Images " ng-hide="im.State==state.delete">
-                                                        <div class="thumbnail">
-                                                            <img src="{{im.ImageUrl}}" alt="Lights" style="width:100%">
+                                                    <div class="col-4 padding-0" ng-repeat="im in newProduct.Images " ng-hide="im.State==state.delete">
+                                                        <div class="thumbnail thumbnail-v1">
+                                                            <img src="{{im.ImageUrl}}" alt="@Token.Image">
                                                             <div class="caption">
                                                                 <div class="kt-section__content kt-section__content--solid">
                                                                     <div class="kt-divider">
@@ -306,8 +320,6 @@
                                 </div>
                             </div>
 
-                           
-                            <!--end: Form Wizard Step 4-->
                             <!--begin: Form Actions -->
                             <div class="kt-form__actions">
                                 <div class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold "
@@ -317,7 +329,7 @@
                                 <button type="submit" href="javascript:void()" ng-if="newProduct.State==state.create"
                                         class="btn  btn-elevate btn-elevate-air btn-brand  btn-icon-sm  btn-md btn-tall btn-wide kt-font-bold "
                                         data-ktwizard-type="action-submit">
-                                    <i class="la la-plus"></i>@Token.Add 
+                                    <i class="la la-plus"></i>@Token.Add
                                 </button>
                                 <button type="submit" href="javascript:void()" ng-if="newProduct.State==state.update"
                                         class="btn  btn-elevate btn-elevate-air btn-brand  btn-icon-sm  btn-md btn-tall btn-wide kt-font-bold "
@@ -408,26 +420,26 @@
                                                     </a>
                                                 </td>
                                             </tr>
-                                            <tr ng-repeat="c in newOption.Items"  ng-hide="c.State==state.delete">
+                                            <tr ng-repeat="c in newOption.Items" ng-hide="c.State==state.delete">
                                                 <td>
                                                     <input type="text" class="form-control" ng-model="c.ValueAr" maxlength="50" ng-class="{'is-invalid':(!c.ValueAr)}" ng-disabled="c.State==state.delete" />
                                                     <small class="error " ng-if="!c.ValueAr">@Token.FieldIsRequierd</small>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" ng-model="c.ValueEn" maxlength="50" ng-class="{'is-invalid':(!c.ValueEn)}"  ng-disabled="c.State==state.delete"  />
+                                                    <input type="text" class="form-control" ng-model="c.ValueEn" maxlength="50" ng-class="{'is-invalid':(!c.ValueEn)}" ng-disabled="c.State==state.delete" />
                                                     <small class="error " ng-if="!c.ValueEn">@Token.FieldIsRequierd</small>
                                                 </td>
                                                 <td>
-                                                    <input type="number" class="form-control" ng-model="c.Price" step=".5" ng-class="{'is-invalid':(!c.Price)}"  ng-disabled="c.State==state.delete" s />
+                                                    <input type="number" class="form-control" ng-model="c.Price" step=".5" ng-class="{'is-invalid':(!c.Price)}" ng-disabled="c.State==state.delete" s />
                                                     <small class="error " ng-if="!c.Price">@Token.FieldIsRequierd</small>
                                                 </td>
                                                 <td>
                                                     <!--Delete-->
-                                                    <a href="javascript:void(0)" title="@Token.Delete" ng-click="deleteOptionItem($index)"  ng-if="c.State!=state.delete" 
+                                                    <a href="javascript:void(0)" title="@Token.Delete" ng-click="deleteOptionItem($index)" ng-if="c.State!=state.delete"
                                                        class="btn btn-sm btn-clean btn-icon btn-icon-md cursor-pointer">
                                                         <i class="la la-trash"></i>
                                                     </a>
-                                                    
+
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -454,7 +466,7 @@
 
 @section scriptsInHeader{
     <link href="~/assets/app/custom/wizard/wizard-v1.default.css" rel="stylesheet" />
-    }
+}
 
 @section scripts{
     <script src="~/assets/app/custom/wizard/wizard-v1.js"></script>

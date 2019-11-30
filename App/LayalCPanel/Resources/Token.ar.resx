@@ -1335,4 +1335,19 @@
   <data name="RequiredPayment" xml:space="preserve">
     <value>المطلوب دفعة</value>
   </data>
+  <data name="CanNotDeleteBecuseIsUsedBuUCanDisActiveThis" xml:space="preserve">
+    <value>لا يمكنك الحذف لان هذا المنتج مستخدم من قبل ولاكن يمكنك الغاء تفعيلة وانشاء واحد جديد</value>
+  </data>
+  <data name="ThisProductIsNotAllowd" xml:space="preserve">
+    <value>هذا المنتج لم يعد متاح ... يمكنك اختيار منتج آخر</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>الاصدار</value>
+  </data>
+  <data name="ProductCopy" xml:space="preserve">
+    <value>نسخ المنتج</value>
+  </data>
+  <data name="CanNotUpdateBecuseIsUsedBuUCanDisActiveThis" xml:space="preserve">
+    <value>لا يمكن التحديث لانة مستخدم منم قبل ولاكن يمكن الغاء تفعيلة وانشاء ومنتج جديدة بواسطة النسخ</value>
+  </data>
 </root>

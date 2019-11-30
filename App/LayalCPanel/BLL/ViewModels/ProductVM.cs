@@ -26,5 +26,7 @@ namespace BLL.ViewModels
         public bool IsActive { get; set; }
         public ProductTypeVM ProductType { get; internal set; }
         public long WordUploadFileNotesId { get; internal set; }
+        public int Version { get; set; }
+        public long? ProductParentId { get; set; }
     }
 }

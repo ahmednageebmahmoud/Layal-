@@ -21,6 +21,10 @@ namespace BLL.BLL
             {
                 try
                 {
+                    //Check Ig This Product Is Active 
+                    if (db.Phot_Products_CheckIfActive(o.ProductId).Any(c=> c.Value))
+                        return ResponseVM.Error(Token.ThisProductIsNotAllowd);
+
                     //Marge Options
                     string OptionAndItems = "",
                       ItemsIds = "";

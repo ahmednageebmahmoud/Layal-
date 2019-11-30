@@ -125,6 +125,7 @@
   <ItemGroup>
     <Compile Include="BLL\OrdersphotographerPaymentsBll.cs" />
     <Compile Include="BLL\OrdersphotographerBll.cs" />
+    <Compile Include="BLL\ProductOptionBLL.cs" />
     <Compile Include="BLL\ProductsBLL.cs" />
     <Compile Include="BLL\CRMBLL.cs" />
     <Compile Include="BLL\EEWBLL.cs" />

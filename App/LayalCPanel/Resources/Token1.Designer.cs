@@ -664,6 +664,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can not delete because this product is used before but you can cancel it and create a new one.
+        /// </summary>
+        public static string CanNotDeleteBecuseIsUsedBuUCanDisActiveThis {
+            get {
+                return ResourceManager.GetString("CanNotDeleteBecuseIsUsedBuUCanDisActiveThis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can Not Do Any Thing Becuse This Enquiry Converted To Event.
         /// </summary>
         public static string CanNotDoAnyThingBecuseThisEnquiryConvertedToEvent {
@@ -759,6 +768,15 @@ namespace Resources {
         public static string CanNotUpdateBecuseClinetIsFillSurvey {
             get {
                 return ResourceManager.GetString("CanNotUpdateBecuseClinetIsFillSurvey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can Not Update Becuse It Is Used But You Can Disactive And Create New Prodct By Copy.
+        /// </summary>
+        public static string CanNotUpdateBecuseIsUsedBuUCanDisActiveThis {
+            get {
+                return ResourceManager.GetString("CanNotUpdateBecuseIsUsedBuUCanDisActiveThis", resourceCulture);
             }
         }
         
@@ -2671,6 +2689,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Product Copy.
+        /// </summary>
+        public static string ProductCopy {
+            get {
+                return ResourceManager.GetString("ProductCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Product Description.
         /// </summary>
         public static string ProductDescription {
@@ -3139,6 +3166,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This product is no longer available ... You can choose another product.
+        /// </summary>
+        public static string ThisProductIsNotAllowd {
+            get {
+                return ResourceManager.GetString("ThisProductIsNotAllowd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This Task Is Finshed.
         /// </summary>
         public static string ThisTaskIsFinshed {
@@ -3504,6 +3540,15 @@ namespace Resources {
         public static string ValueEn {
             get {
                 return ResourceManager.GetString("ValueEn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        public static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
             }
         }
         

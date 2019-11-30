@@ -62,7 +62,25 @@
 
     //============= Saves =================
 
-    
+    s.changeActive = product => {
+        //show confirm 
+        SMSSweet.delete(() => {
+            //Yes 
+            BlockingService.block();
+            productsServ.changeActive(product.Id, product.IsActive).then(d => {
+                BlockingService.unBlock();
+                switch (d.data.RequestType) {
+                    case RequestTypeEnum.sucess:
+                        {
+                            product.IsActive = product.IsActive
+                          
+                        } break;
+                }
+                SMSSweet.alert(d.data.Message, d.data.RequestType);
+                co('res-changeActive', d.data);
+            });
+        }, () => { }, LangIsEn?"Are You Shure From This":"هل انت متاك من ذالك؟");
+    };
 
     //============= Delete ================
     s.delete = product => {

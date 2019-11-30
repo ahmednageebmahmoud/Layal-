@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="LayanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <Function Name="f_Phot_ProductsOptions_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName=".Phot_ProductsOptions_CheckIfUsed">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
   <Function Name="Albums_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="In" />
   </Function>
@@ -853,6 +856,9 @@
     <Parameter Name="OrderId" Type="bigint" Mode="In" />
     <Parameter Name="OptionAndItem" Type="nvarchar(max)" Mode="In" />
   </Function>
+  <Function Name="Phot_Products_CheckIfActive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
   <Function Name="Phot_Products_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
   </Function>
@@ -877,6 +883,8 @@
     <Parameter Name="ProductTypeId" Type="bigint" Mode="In" />
     <Parameter Name="UserId" Type="bigint" Mode="In" />
     <Parameter Name="IsActive" Type="bit" Mode="In" />
+    <Parameter Name="Version" Type="int" Mode="In" />
+    <Parameter Name="ProductParentId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="Phot_Products_SelectByFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Skip" Type="int" Mode="In" />
@@ -904,6 +912,9 @@
     <Parameter Name="ProductTypeId" Type="bigint" Mode="In" />
     <Parameter Name="IsActive" Type="bit" Mode="In" />
   </Function>
+  <Function Name="Phot_ProductsOptionItems_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ItemId" Type="bigint" Mode="In" />
+  </Function>
   <Function Name="Phot_ProductsOptionItems_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="OptionId" Type="bigint" Mode="In" />
     <Parameter Name="ItemsNamesAr" Type="nvarchar(max)" Mode="In" />
@@ -926,10 +937,7 @@
   <Function Name="Phot_ProductsOptions_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="StaticFieldId" Type="int" Mode="In" />
     <Parameter Name="ProductId" Type="bigint" Mode="In" />
-    <Parameter Name="ItemsNamesAr" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="ItemsNamesEn" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="ItemsPrices" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="ItemsCount" Type="int" Mode="In" />
+    <Parameter Name="ItemsJson" Type="nvarchar(max)" Mode="In" />
   </Function>
   <Function Name="Phot_ProductsOptions_SelectByProductId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ProductId" Type="bigint" Mode="In" />
@@ -995,6 +1003,13 @@
   <Function Name="PrintNameTypes_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="PrintNameTypes_SelectByPK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Products_Disactive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Products_DisActiveParentAndChildren" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProductId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="SocialAccountTypes_CheckIfUsed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="In" />

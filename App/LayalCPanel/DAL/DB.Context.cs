@@ -28,6 +28,15 @@ namespace DAL
         }
     
     
+        public virtual ObjectResult<Nullable<int>> f_Phot_ProductsOptions_CheckIfUsed(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f_Phot_ProductsOptions_CheckIfUsed", idParameter);
+        }
+    
         public virtual ObjectResult<Nullable<int>> Albums_CheckIfUsed(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
@@ -2658,6 +2667,40 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Pages_SelectAllForUserCanBeAccess_Result>("Pages_SelectAllForUserCanBeAccess", userIdParameter, isPublicMenusParameter);
         }
     
+        public virtual ObjectResult<Nullable<long>> Phot_OrderPayments_Insert(Nullable<long> orderId, Nullable<decimal> amount, string transferImage, Nullable<bool> isBankTransfer, Nullable<long> userId)
+        {
+            var orderIdParameter = orderId.HasValue ?
+                new ObjectParameter("OrderId", orderId) :
+                new ObjectParameter("OrderId", typeof(long));
+    
+            var amountParameter = amount.HasValue ?
+                new ObjectParameter("Amount", amount) :
+                new ObjectParameter("Amount", typeof(decimal));
+    
+            var transferImageParameter = transferImage != null ?
+                new ObjectParameter("TransferImage", transferImage) :
+                new ObjectParameter("TransferImage", typeof(string));
+    
+            var isBankTransferParameter = isBankTransfer.HasValue ?
+                new ObjectParameter("IsBankTransfer", isBankTransfer) :
+                new ObjectParameter("IsBankTransfer", typeof(bool));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("Phot_OrderPayments_Insert", orderIdParameter, amountParameter, transferImageParameter, isBankTransferParameter, userIdParameter);
+        }
+    
+        public virtual ObjectResult<Phot_OrderPayments_SelectByOrderId_Result> Phot_OrderPayments_SelectByOrderId(Nullable<long> orderId)
+        {
+            var orderIdParameter = orderId.HasValue ?
+                new ObjectParameter("OrderId", orderId) :
+                new ObjectParameter("OrderId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_OrderPayments_SelectByOrderId_Result>("Phot_OrderPayments_SelectByOrderId", orderIdParameter);
+        }
+    
         public virtual ObjectResult<Nullable<long>> Phot_Orders_Insert(Nullable<long> productTypeId, Nullable<long> productId, Nullable<long> userCreated, string optionsItems, Nullable<bool> delivery_IsReceiptFromTheBranch, string delivery_Address, Nullable<int> delivery_FkCountry_Id, Nullable<int> delivery_FKCity_Id)
         {
             var productTypeIdParameter = productTypeId.HasValue ?
@@ -2710,6 +2753,15 @@ namespace DAL
                 new ObjectParameter("UserId", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_Orders_SelectByFilter_Result>("Phot_Orders_SelectByFilter", skipParameter, takeParameter, userIdParameter);
+        }
+    
+        public virtual ObjectResult<Phot_Orders_SelectById_Result> Phot_Orders_SelectById(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_Orders_SelectById_Result>("Phot_Orders_SelectById", idParameter);
         }
     
         public virtual int Phot_Orders_UpdateDropboxFolderPath(Nullable<long> orderId, string dropboxFolderPath)
@@ -2793,6 +2845,15 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_OrdersOptions_Insert", orderIdParameter, optionAndItemParameter);
         }
     
+        public virtual ObjectResult<Nullable<bool>> Phot_Products_CheckIfActive(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("Phot_Products_CheckIfActive", idParameter);
+        }
+    
         public virtual ObjectResult<Nullable<int>> Phot_Products_CheckIfUsed(Nullable<long> id)
         {
             var idParameter = id.HasValue ?
@@ -2836,7 +2897,7 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_Products_Images_Insert", productIdParameter, imagesUrlsParameter);
         }
     
-        public virtual ObjectResult<Nullable<long>> Phot_Products_Insert(string nameAr, string nameEn, string descriptionAr, string descriptionEn, string uplaodFileNotesAr, string uplaodFileNotesEn, string images, Nullable<long> productTypeId, Nullable<long> userId, Nullable<bool> isActive)
+        public virtual ObjectResult<Nullable<long>> Phot_Products_Insert(string nameAr, string nameEn, string descriptionAr, string descriptionEn, string uplaodFileNotesAr, string uplaodFileNotesEn, string images, Nullable<long> productTypeId, Nullable<long> userId, Nullable<bool> isActive, Nullable<int> version, Nullable<long> productParentId)
         {
             var nameArParameter = nameAr != null ?
                 new ObjectParameter("NameAr", nameAr) :
@@ -2878,7 +2939,15 @@ namespace DAL
                 new ObjectParameter("IsActive", isActive) :
                 new ObjectParameter("IsActive", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("Phot_Products_Insert", nameArParameter, nameEnParameter, descriptionArParameter, descriptionEnParameter, uplaodFileNotesArParameter, uplaodFileNotesEnParameter, imagesParameter, productTypeIdParameter, userIdParameter, isActiveParameter);
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("Version", version) :
+                new ObjectParameter("Version", typeof(int));
+    
+            var productParentIdParameter = productParentId.HasValue ?
+                new ObjectParameter("ProductParentId", productParentId) :
+                new ObjectParameter("ProductParentId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("Phot_Products_Insert", nameArParameter, nameEnParameter, descriptionArParameter, descriptionEnParameter, uplaodFileNotesArParameter, uplaodFileNotesEnParameter, imagesParameter, productTypeIdParameter, userIdParameter, isActiveParameter, versionParameter, productParentIdParameter);
         }
     
         public virtual ObjectResult<Phot_Products_SelectByFilter_Result> Phot_Products_SelectByFilter(Nullable<int> skip, Nullable<int> take)
@@ -2973,6 +3042,15 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_Products_Update", idParameter, wordNameIdParameter, wordDescriptionIdParameter, wordUpdlodFileNotesIdParameter, nameArParameter, nameEnParameter, descriptionArParameter, descriptionEnParameter, uplaodFileNotesArParameter, uplaodFileNotesEnParameter, imagesParameter, imageIdsDeletingParameter, productTypeIdParameter, isActiveParameter);
         }
     
+        public virtual ObjectResult<Nullable<int>> Phot_ProductsOptionItems_CheckIfUsed(Nullable<long> itemId)
+        {
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Phot_ProductsOptionItems_CheckIfUsed", itemIdParameter);
+        }
+    
         public virtual int Phot_ProductsOptionItems_Insert(Nullable<long> optionId, string itemsNamesAr, string itemsNamesEn, string itemsPrices, Nullable<int> itemsCount)
         {
             var optionIdParameter = optionId.HasValue ?
@@ -3040,7 +3118,7 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_ProductsOptions_Delete", idParameter);
         }
     
-        public virtual int Phot_ProductsOptions_Insert(Nullable<int> staticFieldId, Nullable<long> productId, string itemsNamesAr, string itemsNamesEn, string itemsPrices, Nullable<int> itemsCount)
+        public virtual int Phot_ProductsOptions_Insert(Nullable<int> staticFieldId, Nullable<long> productId, string itemsJson)
         {
             var staticFieldIdParameter = staticFieldId.HasValue ?
                 new ObjectParameter("StaticFieldId", staticFieldId) :
@@ -3050,23 +3128,11 @@ namespace DAL
                 new ObjectParameter("ProductId", productId) :
                 new ObjectParameter("ProductId", typeof(long));
     
-            var itemsNamesArParameter = itemsNamesAr != null ?
-                new ObjectParameter("ItemsNamesAr", itemsNamesAr) :
-                new ObjectParameter("ItemsNamesAr", typeof(string));
+            var itemsJsonParameter = itemsJson != null ?
+                new ObjectParameter("ItemsJson", itemsJson) :
+                new ObjectParameter("ItemsJson", typeof(string));
     
-            var itemsNamesEnParameter = itemsNamesEn != null ?
-                new ObjectParameter("ItemsNamesEn", itemsNamesEn) :
-                new ObjectParameter("ItemsNamesEn", typeof(string));
-    
-            var itemsPricesParameter = itemsPrices != null ?
-                new ObjectParameter("ItemsPrices", itemsPrices) :
-                new ObjectParameter("ItemsPrices", typeof(string));
-    
-            var itemsCountParameter = itemsCount.HasValue ?
-                new ObjectParameter("ItemsCount", itemsCount) :
-                new ObjectParameter("ItemsCount", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_ProductsOptions_Insert", staticFieldIdParameter, productIdParameter, itemsNamesArParameter, itemsNamesEnParameter, itemsPricesParameter, itemsCountParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_ProductsOptions_Insert", staticFieldIdParameter, productIdParameter, itemsJsonParameter);
         }
     
         public virtual ObjectResult<Phot_ProductsOptions_SelectByProductId_Result> Phot_ProductsOptions_SelectByProductId(Nullable<long> productId)
@@ -3280,6 +3346,15 @@ namespace DAL
                 new ObjectParameter("Id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PrintNameTypes_SelectByPK_Result>("PrintNameTypes_SelectByPK", idParameter);
+        }
+    
+        public virtual int Products_DisActiveParentAndChildren(Nullable<long> productId)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Products_DisActiveParentAndChildren", productIdParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> SocialAccountTypes_CheckIfUsed(Nullable<int> id)
@@ -4067,72 +4142,17 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Words_Update", idParameter, arParameter, enParameter);
         }
     
-        public virtual ObjectResult<Nullable<long>> OrderPayments_Insert(Nullable<long> orderId, Nullable<decimal> amount, string transferImage, Nullable<bool> isBankTransfer, Nullable<long> userId)
-        {
-            var orderIdParameter = orderId.HasValue ?
-                new ObjectParameter("OrderId", orderId) :
-                new ObjectParameter("OrderId", typeof(long));
-    
-            var amountParameter = amount.HasValue ?
-                new ObjectParameter("Amount", amount) :
-                new ObjectParameter("Amount", typeof(decimal));
-    
-            var transferImageParameter = transferImage != null ?
-                new ObjectParameter("TransferImage", transferImage) :
-                new ObjectParameter("TransferImage", typeof(string));
-    
-            var isBankTransferParameter = isBankTransfer.HasValue ?
-                new ObjectParameter("IsBankTransfer", isBankTransfer) :
-                new ObjectParameter("IsBankTransfer", typeof(bool));
-    
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("OrderPayments_Insert", orderIdParameter, amountParameter, transferImageParameter, isBankTransferParameter, userIdParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<long>> Phot_OrderPayments_Insert(Nullable<long> orderId, Nullable<decimal> amount, string transferImage, Nullable<bool> isBankTransfer, Nullable<long> userId)
-        {
-            var orderIdParameter = orderId.HasValue ?
-                new ObjectParameter("OrderId", orderId) :
-                new ObjectParameter("OrderId", typeof(long));
-    
-            var amountParameter = amount.HasValue ?
-                new ObjectParameter("Amount", amount) :
-                new ObjectParameter("Amount", typeof(decimal));
-    
-            var transferImageParameter = transferImage != null ?
-                new ObjectParameter("TransferImage", transferImage) :
-                new ObjectParameter("TransferImage", typeof(string));
-    
-            var isBankTransferParameter = isBankTransfer.HasValue ?
-                new ObjectParameter("IsBankTransfer", isBankTransfer) :
-                new ObjectParameter("IsBankTransfer", typeof(bool));
-    
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("Phot_OrderPayments_Insert", orderIdParameter, amountParameter, transferImageParameter, isBankTransferParameter, userIdParameter);
-        }
-    
-        public virtual ObjectResult<Phot_Orders_SelectById_Result> Phot_Orders_SelectById(Nullable<long> id)
+        public virtual int Products_Disactive(Nullable<long> id, Nullable<bool> isActive)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
                 new ObjectParameter("Id", typeof(long));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_Orders_SelectById_Result>("Phot_Orders_SelectById", idParameter);
-        }
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
     
-        public virtual ObjectResult<Phot_OrderPayments_SelectByOrderId_Result> Phot_OrderPayments_SelectByOrderId(Nullable<long> orderId)
-        {
-            var orderIdParameter = orderId.HasValue ?
-                new ObjectParameter("OrderId", orderId) :
-                new ObjectParameter("OrderId", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_OrderPayments_SelectByOrderId_Result>("Phot_OrderPayments_SelectByOrderId", orderIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Products_Disactive", idParameter, isActiveParameter);
         }
     }
 }

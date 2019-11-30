@@ -1,8 +1,10 @@
-﻿ngApp.controller('productsCtrl', ['$scope', '$http', 'productsServ', function (s, h, productsServ) {
+﻿
+ngApp.controller('productsCtrl', ['$scope', '$http', 'productsServ', function (s, h, productsServ) {
     s.state = StateEnum;
+    s.isCopyProduct = getQueryStringValue("copy");
     s.newOption = {
         Items: [],
-        State: StateEnum.create
+        State: StateEnum.create,
     };
     s.newOptionItem = {};
 
@@ -21,6 +23,8 @@
         Images: [],
         Options:[],
         State: StateEnum.create,
+        Version: 1
+
     }
 
 
@@ -37,6 +41,12 @@
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
                     s.newProduct = d.data.Result;
+                    if (s.isCopyProduct) {
+                        s.newProduct.State = StateEnum.create;
+                        s.newProduct.ProductParentId = s.newProduct.Id;
+                        s.newProduct.Version++;
+                        s.newProduct.Images=[];
+                    } else
                     s.newProduct.State = StateEnum.update;
                 } break;
                 case RequestTypeEnum.error:
@@ -90,6 +100,8 @@
         }
         s.productFrmErrorSubmit = false;
         BlockingService.block();
+
+       
         productsServ.saveChange(s.newProduct).then(d => {
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess:

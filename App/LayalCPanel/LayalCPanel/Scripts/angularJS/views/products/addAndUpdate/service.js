@@ -22,6 +22,8 @@
                 method: 'get',
             });
         };
+        
+    
 
         //save product  
         saveChange(product) {
@@ -31,6 +33,8 @@
             data.append("product.WordId", product.WordId);
             data.append("product.WordDescriptionId", product.WordDescriptionId);
             data.append("product.WordUploadFileNotesId", product.WordUploadFileNotesId);
+            data.append("product.ProductParentId", product.ProductParentId);
+            data.append("product.Version", product.Version);
 
             data.append("product.NameAr", product.NameAr);
             data.append("product.NameEn", product.NameEn);

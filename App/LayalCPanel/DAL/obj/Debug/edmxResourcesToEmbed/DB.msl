@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="LayanModelStoreContainer" CdmEntityContainer="LayanEntities">
+    <FunctionImportMapping FunctionImportName="f_Phot_ProductsOptions_CheckIfUsed" FunctionName="LayanModel.Store.f_Phot_ProductsOptions_CheckIfUsed" />
     <FunctionImportMapping FunctionImportName="Albums_CheckIfUsed" FunctionName="LayanModel.Store.Albums_CheckIfUsed" />
     <FunctionImportMapping FunctionImportName="Albums_Delete" FunctionName="LayanModel.Store.Albums_Delete" />
     <FunctionImportMapping FunctionImportName="Albums_Insert" FunctionName="LayanModel.Store.Albums_Insert">
@@ -1180,6 +1181,21 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Phot_OrderPayments_Insert" FunctionName="LayanModel.Store.Phot_OrderPayments_Insert" />
+    <FunctionImportMapping FunctionImportName="Phot_OrderPayments_SelectByOrderId" FunctionName="LayanModel.Store.Phot_OrderPayments_SelectByOrderId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Phot_OrderPayments_SelectByOrderId_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FkOrder_Id" ColumnName="FkOrder_Id" />
+          <ScalarProperty Name="PaymentDateTime" ColumnName="PaymentDateTime" />
+          <ScalarProperty Name="IsBankTransfer" ColumnName="IsBankTransfer" />
+          <ScalarProperty Name="IsAcceptFromManger" ColumnName="IsAcceptFromManger" />
+          <ScalarProperty Name="FKUserCreated_Id" ColumnName="FKUserCreated_Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="TransferImage" ColumnName="TransferImage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Phot_Orders_Insert" FunctionName="LayanModel.Store.Phot_Orders_Insert" />
     <FunctionImportMapping FunctionImportName="Phot_Orders_SelectByFilter" FunctionName="LayanModel.Store.Phot_Orders_SelectByFilter">
       <ResultMapping>
@@ -1204,6 +1220,30 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Phot_Orders_SelectById" FunctionName="LayanModel.Store.Phot_Orders_SelectById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Phot_Orders_SelectById_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FKProductType_Id" ColumnName="FKProductType_Id" />
+          <ScalarProperty Name="FKProduct_Id" ColumnName="FKProduct_Id" />
+          <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+          <ScalarProperty Name="FKUserCreated" ColumnName="FKUserCreated" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DropboxFolderPath" ColumnName="DropboxFolderPath" />
+          <ScalarProperty Name="Delivery_IsReceiptFromTheBranch" ColumnName="Delivery_IsReceiptFromTheBranch" />
+          <ScalarProperty Name="Delivery_Address" ColumnName="Delivery_Address" />
+          <ScalarProperty Name="Delivery_FkCountry_Id" ColumnName="Delivery_FkCountry_Id" />
+          <ScalarProperty Name="Delivery_FKCity_Id" ColumnName="Delivery_FKCity_Id" />
+          <ScalarProperty Name="FKProdutOption_Id" ColumnName="FKProdutOption_Id" />
+          <ScalarProperty Name="FKProductOptionItem_Id" ColumnName="FKProductOptionItem_Id" />
+          <ScalarProperty Name="ProductTypeNameAr" ColumnName="ProductTypeNameAr" />
+          <ScalarProperty Name="ProductTypeNameEn" ColumnName="ProductTypeNameEn" />
+          <ScalarProperty Name="ProductTypeImage" ColumnName="ProductTypeImage" />
+          <ScalarProperty Name="UserCreated_UserName" ColumnName="UserCreated_UserName" />
+          <ScalarProperty Name="UserCreated_FullName" ColumnName="UserCreated_FullName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Phot_Orders_UpdateDropboxFolderPath" FunctionName="LayanModel.Store.Phot_Orders_UpdateDropboxFolderPath" />
     <FunctionImportMapping FunctionImportName="Phot_OrderServicePrices_Insert" FunctionName="LayanModel.Store.Phot_OrderServicePrices_Insert" />
     <FunctionImportMapping FunctionImportName="Phot_OrderServicePrices_InsertCustom" FunctionName="LayanModel.Store.Phot_OrderServicePrices_InsertCustom" />
@@ -1222,6 +1262,7 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Phot_OrdersOptions_Insert" FunctionName="LayanModel.Store.Phot_OrdersOptions_Insert" />
+    <FunctionImportMapping FunctionImportName="Phot_Products_CheckIfActive" FunctionName="LayanModel.Store.Phot_Products_CheckIfActive" />
     <FunctionImportMapping FunctionImportName="Phot_Products_CheckIfUsed" FunctionName="LayanModel.Store.Phot_Products_CheckIfUsed" />
     <FunctionImportMapping FunctionImportName="Phot_Products_Delete" FunctionName="LayanModel.Store.Phot_Products_Delete" />
     <FunctionImportMapping FunctionImportName="Phot_Products_Images_Insert" FunctionName="LayanModel.Store.Phot_Products_Images_Insert" />
@@ -1237,6 +1278,8 @@
           <ScalarProperty Name="FKUser_Id" ColumnName="FKUser_Id" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="FkProductParent_Id" ColumnName="FkProductParent_Id" />
           <ScalarProperty Name="NameAr" ColumnName="NameAr" />
           <ScalarProperty Name="NameEn" ColumnName="NameEn" />
           <ScalarProperty Name="ProductTypeNameAr" ColumnName="ProductTypeNameAr" />
@@ -1255,6 +1298,8 @@
           <ScalarProperty Name="FKUser_Id" ColumnName="FKUser_Id" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="FkProductParent_Id" ColumnName="FkProductParent_Id" />
           <ScalarProperty Name="NameAr" ColumnName="NameAr" />
           <ScalarProperty Name="NameEn" ColumnName="NameEn" />
           <ScalarProperty Name="DescriptionAr" ColumnName="DescriptionAr" />
@@ -1277,6 +1322,8 @@
           <ScalarProperty Name="FKUser_Id" ColumnName="FKUser_Id" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="FkProductParent_Id" ColumnName="FkProductParent_Id" />
           <ScalarProperty Name="NameAr" ColumnName="NameAr" />
           <ScalarProperty Name="NameEn" ColumnName="NameEn" />
           <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
@@ -1284,6 +1331,7 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Phot_Products_Update" FunctionName="LayanModel.Store.Phot_Products_Update" />
+    <FunctionImportMapping FunctionImportName="Phot_ProductsOptionItems_CheckIfUsed" FunctionName="LayanModel.Store.Phot_ProductsOptionItems_CheckIfUsed" />
     <FunctionImportMapping FunctionImportName="Phot_ProductsOptionItems_Insert" FunctionName="LayanModel.Store.Phot_ProductsOptionItems_Insert" />
     <FunctionImportMapping FunctionImportName="Phot_ProductsOptionItems_Update" FunctionName="LayanModel.Store.Phot_ProductsOptionItems_Update" />
     <FunctionImportMapping FunctionImportName="Phot_ProductsOptions_Delete" FunctionName="LayanModel.Store.Phot_ProductsOptions_Delete" />
@@ -1397,6 +1445,7 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Products_DisActiveParentAndChildren" FunctionName="LayanModel.Store.Products_DisActiveParentAndChildren" />
     <FunctionImportMapping FunctionImportName="SocialAccountTypes_CheckIfUsed" FunctionName="LayanModel.Store.SocialAccountTypes_CheckIfUsed" />
     <FunctionImportMapping FunctionImportName="SocialAccountTypes_Delete" FunctionName="LayanModel.Store.SocialAccountTypes_Delete" />
     <FunctionImportMapping FunctionImportName="SocialAccountTypes_Insert" FunctionName="LayanModel.Store.SocialAccountTypes_Insert" />
@@ -1830,44 +1879,6 @@
     <FunctionImportMapping FunctionImportName="Words_DeleteList" FunctionName="LayanModel.Store.Words_DeleteList" />
     <FunctionImportMapping FunctionImportName="Words_Insert" FunctionName="LayanModel.Store.Words_Insert" />
     <FunctionImportMapping FunctionImportName="Words_Update" FunctionName="LayanModel.Store.Words_Update" />
-    <FunctionImportMapping FunctionImportName="Phot_OrderPayments_Insert" FunctionName="LayanModel.Store.Phot_OrderPayments_Insert" />
-    <FunctionImportMapping FunctionImportName="Phot_Orders_SelectById" FunctionName="LayanModel.Store.Phot_Orders_SelectById">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.Phot_Orders_SelectById_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FKProductType_Id" ColumnName="FKProductType_Id" />
-          <ScalarProperty Name="FKProduct_Id" ColumnName="FKProduct_Id" />
-          <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
-          <ScalarProperty Name="FKUserCreated" ColumnName="FKUserCreated" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="DropboxFolderPath" ColumnName="DropboxFolderPath" />
-          <ScalarProperty Name="Delivery_IsReceiptFromTheBranch" ColumnName="Delivery_IsReceiptFromTheBranch" />
-          <ScalarProperty Name="Delivery_Address" ColumnName="Delivery_Address" />
-          <ScalarProperty Name="Delivery_FkCountry_Id" ColumnName="Delivery_FkCountry_Id" />
-          <ScalarProperty Name="Delivery_FKCity_Id" ColumnName="Delivery_FKCity_Id" />
-          <ScalarProperty Name="FKProdutOption_Id" ColumnName="FKProdutOption_Id" />
-          <ScalarProperty Name="FKProductOptionItem_Id" ColumnName="FKProductOptionItem_Id" />
-          <ScalarProperty Name="ProductTypeNameAr" ColumnName="ProductTypeNameAr" />
-          <ScalarProperty Name="ProductTypeNameEn" ColumnName="ProductTypeNameEn" />
-          <ScalarProperty Name="ProductTypeImage" ColumnName="ProductTypeImage" />
-          <ScalarProperty Name="UserCreated_UserName" ColumnName="UserCreated_UserName" />
-          <ScalarProperty Name="UserCreated_FullName" ColumnName="UserCreated_FullName" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Phot_OrderPayments_SelectByOrderId" FunctionName="LayanModel.Store.Phot_OrderPayments_SelectByOrderId">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.Phot_OrderPayments_SelectByOrderId_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FkOrder_Id" ColumnName="FkOrder_Id" />
-          <ScalarProperty Name="PaymentDateTime" ColumnName="PaymentDateTime" />
-          <ScalarProperty Name="IsBankTransfer" ColumnName="IsBankTransfer" />
-          <ScalarProperty Name="IsAcceptFromManger" ColumnName="IsAcceptFromManger" />
-          <ScalarProperty Name="FKUserCreated_Id" ColumnName="FKUserCreated_Id" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="TransferImage" ColumnName="TransferImage" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Products_Disactive" FunctionName="LayanModel.Store.Products_Disactive" />
   </EntityContainerMapping>
 </Mapping>

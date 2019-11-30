@@ -1326,4 +1326,19 @@
   <data name="RequiredPayment" xml:space="preserve">
     <value>Required Payment</value>
   </data>
+  <data name="CanNotDeleteBecuseIsUsedBuUCanDisActiveThis" xml:space="preserve">
+    <value>You can not delete because this product is used before but you can cancel it and create a new one</value>
+  </data>
+  <data name="ThisProductIsNotAllowd" xml:space="preserve">
+    <value>This product is no longer available ... You can choose another product</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="ProductCopy" xml:space="preserve">
+    <value>Product Copy</value>
+  </data>
+  <data name="CanNotUpdateBecuseIsUsedBuUCanDisActiveThis" xml:space="preserve">
+    <value>Can Not Update Becuse It Is Used But You Can Disactive And Create New Prodct By Copy</value>
+  </data>
 </root>
