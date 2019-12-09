@@ -12,40 +12,37 @@ using UI.Controllers;
 namespace LayalCPanel.Controllers
 {
     [Authorize]
-    public class OrdersphotographersController : BasicController
+        [PageForUserTypeAttribute(AccountTypeEnum.Photographer)]
+    public class PhotoOrdersController : BasicController
     {
-        OrdersphotographerBll Bll = new OrdersphotographerBll();
+        PhotoOrdersBll Bll = new PhotoOrdersBll();
 
-        // GET: Orders Photographers
         public ActionResult Index()
         {
             return View();
         }
 
-        //Create Request By Photographer
-        [PageForUserTypeAttribute(AccountTypeEnum.Photographer)]
         public ActionResult Create()
         {
             return View();
         }
 
-        //Create Request By Photographer
-        [PageForUserTypeAttribute(AccountTypeEnum.Photographer)]
         public ActionResult Update(long id)
         {
 
             return View();
         }
+        public ActionResult Details(long id)
+        {
+
+            return View();
+        }
         
-        //Photographer Orders
-        [PageForUserTypeAttribute(AccountTypeEnum.Photographer)]
         public ActionResult MyOrders()
         {
             return View();
         }
 
-        //Get Photographer Orders
-        [PageForUserTypeAttribute(AccountTypeEnum.Photographer)]
         public ActionResult GetMyOrders(int skip,int take)
         {
             return Json(Bll.GetPhotographerOrders(skip,take), JsonRequestBehavior.AllowGet);
@@ -83,24 +80,33 @@ namespace LayalCPanel.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveChange(OrderphotographerVM order)
+        public JsonResult SaveChange(PhotoOrderVM order)
         {
             return Json(Bll.Add(order), JsonRequestBehavior.AllowGet);
         }
 
 
         [HttpGet]
-        [PageForUserTypeAttribute(AccountTypeEnum.Photographer)]
         public JsonResult GetOrderById(long id)
         {
             return Json(Bll.GetOrdeById(id), JsonRequestBehavior.AllowGet);
         }
+        [HttpGet]
+        public JsonResult GetOrderFullDetailsById(long id)
+        {
+            return Json(Bll.GetOrderFullDetailsById(id), JsonRequestBehavior.AllowGet);
+        }
+        
 
         [HttpPost]
-        [PageForUserTypeAttribute(AccountTypeEnum.Photographer)]
-        public JsonResult AddPaymentByClinet(OrderPaymentVM o)
+        public JsonResult AddPayment(OrderPaymentVM o)
         {
-            return Json(new OrdersphotographerPaymentsBll().AddPaymentByClinet(o), JsonRequestBehavior.AllowGet);
+            return Json(new PhotoOrdersPaymentsBll().AddPaymentByClinet(o), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Cancel(long id)
+        {
+            return Json(Bll.Cancel(id), JsonRequestBehavior.AllowGet);
         }
         
 

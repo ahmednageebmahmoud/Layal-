@@ -16,7 +16,13 @@
         };
 
      
-
+        
+        cancel(order) {
+            return h({
+                url: `${this.basePath}cancelbyClinet?id=${order.Id}`,
+                method: 'get',
+            });
+        };
 		//save package  
         saveChange(packag) {
 

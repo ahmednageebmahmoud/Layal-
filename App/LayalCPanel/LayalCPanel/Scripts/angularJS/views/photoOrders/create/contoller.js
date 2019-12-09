@@ -2,19 +2,19 @@
     s.state = StateEnum;
     s.newOrder= {
         State: StateEnum.create,
-    ProductTypeId:null,
-    ProductId: null,
-    Images: [],
+        ProductTypeId:null,
+        ProductId: null,
+        Images: [],
         Options: [],
-        TotalPrices:0
+        TotalPrices: 0,
+        Delivery_CountryId: null,
+        Delivery_CityId:null
+
     };
     s.product = { Options:[] };
     s.newOptionItem = {};
-
-
-
-    
-
+    s.cities = [{ Id: null, CityNameWithShippingPrice: Token.select }];
+    s.countries = [{ Id: null, CountryName: Token.select }];
 
 
 
@@ -49,6 +49,7 @@
     };
 
     s.getItems = reset => {
+        
         let loading = BlockingService.generateLoding();
         loading.show();
         productsServ.getItems( ).then(d => {
@@ -56,7 +57,7 @@
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
                     s.productTypes = d.data.Result.ProductTypes;
-                    s.countries = d.data.Result.Countries;
+                    s.countries = [...s.countries,... d.data.Result.Countries];
                     selectTo(1500);
                 } break;
                 case RequestTypeEnum.error:
@@ -74,7 +75,8 @@
     };
 
     s.getCities = () => {
-        s.cities = []; 
+        s.cities = [{ Id: null, CityNameWithShippingPrice: Token.select }];
+        s.newOrder.Delivery_CityId = null;
         if (!s.newOrder.Delivery_CountryId) return;
         let loading = BlockingService.generateLoding();
         loading.show();
@@ -82,7 +84,7 @@
             loading.hide();
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
-                    s.cities = d.data.Result.Cities;
+                    s.cities = [...s.cities,...d.data.Result.Cities];
                     selectTo();
                 } break;
                 case RequestTypeEnum.error:
@@ -110,10 +112,18 @@
                 case RequestTypeEnum.sucess: {
                     s.product = d.data.Result;
 
+                    //Add New 'Select' Option
+                    if (s.product.Options) {
+                        s.product.Options.forEach(op => {
+                            if (op.Items)
+                                op.Items.push({ Id: null, Value: Token.select });
+                        });
+                    }
+
                     setTimeout(() => {
                         s.autosize();
-                        selectTo(2000);
-                    },500)
+                    }, 3000)
+                        selectTo();
                 } break;
                 case RequestTypeEnum.error:
                 case RequestTypeEnum.warning:
@@ -150,7 +160,7 @@
                             LangIsEn ? "Create new order" : "انشاء طلب جديد",
                             () => {
                             //Go To Update Page
-                                window.location.href = `/Ordersphotographers/Update?id=${d.data.Result.Id}&go=w_payment`;
+                                window.location.href = `/PhotoOrders/Update?id=${d.data.Result.Id}&go=w_payment`;
                         }, () => {
                             //Refrash Page
                             window.location.reload();
@@ -241,6 +251,8 @@
             s.newOrder.Delivery_CityId = null;
             s.newOrder.Delivery_Address = null;
         }
+        else
+            s.newOrder.TotalPrices = 0;
         //Update Total Price
         s.sumTotalPrices();
     }
@@ -251,8 +263,12 @@
         autosize.update(demo1);
     };
 
+    s.redesign=()=>{
+        selectTo();
+        s.autosize();
+    }
+
     //Call Functions
     
     s.getItems();
-    s.autosize();
 }]);

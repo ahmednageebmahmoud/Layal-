@@ -40,3 +40,7 @@
 .text-end {
     text-align: end;
 }
+
+.per-wrap {
+    white-space: pre-wrap;
+}

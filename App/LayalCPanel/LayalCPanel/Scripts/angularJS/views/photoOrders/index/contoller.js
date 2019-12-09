@@ -86,6 +86,25 @@
     };
 
     //============= U P D A T E  =================
+    s.cancel = order => {
+        //show confirm cancele
+        SMSSweet.confirmInfo(Token.areYouSureCancel, () => {
+            //Yes Delete
+            BlockingService.block();
+            ordersServ.cancel(order.Id).then(d => {
+                BlockingService.unBlock();
+                switch (d.data.RequestType) {
+                    case RequestTypeEnum.sucess:
+                        {
+                            order.IsActive = 0;
+                        } break;
+                }
+                SMSSweet.alert(d.data.Message, d.data.RequestType);
+                co('res-savechnage-cancel', d.data);
+            });
+        });
+
+    };
     
  
  

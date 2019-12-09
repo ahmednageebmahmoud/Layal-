@@ -22,3 +22,7 @@ ul.myCollapes{
 display: block;
  }
  
+ ul{
+    list-style: arabic-indic;
+
+ }

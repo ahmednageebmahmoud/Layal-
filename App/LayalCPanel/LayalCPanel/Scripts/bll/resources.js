@@ -37,44 +37,7 @@
     
     
     Token.deleteMessageConfirmation = LangIsEn ? 'Are You Shure Delete This Item ?' : 'هل انت مناكد من انك تريد حذف هذا العنصر ؟';
-    Token.digitsOnly = LangIsEn ? '' : '';
     Token.projectName = LangIsEn ? 'layal' : 'ليال';
-    Token.deleted = LangIsEn ? '' : '';
-    Token.countries = LangIsEn ? '' : '';
-    Token.cities = LangIsEn ? '' : '';
-    Token.jobs = LangIsEn ? '' : '';
-    Token.roles = LangIsEn ? '' : '';
-    Token.nationalities = LangIsEn ? '' : '';
-    Token.coursesType = LangIsEn ? '' : '';
-    Token.courses = LangIsEn ? '' : '';
-    Token.departments = LangIsEn ? '' : '';
-    Token.quafilications = LangIsEn ? '' : '';
-    Token.employees = LangIsEn ? '' : '';
-    Token.employeeStatus = LangIsEn ? '' : '';
-    Token.deductionreasons = LangIsEn ? '' : '';
-    Token.deductions = LangIsEn ? '' : '';
-    Token.incentiveTypes = LangIsEn ? '' : '';
-    Token.incentives = LangIsEn ? '' : '';
-    Token.templates = LangIsEn ? '' : '';
-    Token.groups = LangIsEn ? '' : '';
-    Token.documentsReports = LangIsEn ? '' : '';
-    Token.usersPagesPrivileges = LangIsEn ? '' : '';
-    Token.languages = LangIsEn ? '' : '';
-    Token.languageSkills = LangIsEn ? '' : '';
-    Token.managments = LangIsEn ? '' : '';
-    Token.organizationStructural = LangIsEn ? '' : '';
-    Token.vacationTypes = LangIsEn ? '' : '';
-    Token.vacations = LangIsEn ? '' : '';
-    Token.insurancecategories = LangIsEn ? '' : '';
-    Token.relationTypes = LangIsEn ? '' : '';
-    Token.documents = LangIsEn ? '' : '';
-    Token.employeePermissions = LangIsEn ? '' : '';
-    Token.employeeQuite = LangIsEn ? '' : '';
-    Token.vacationSettings = LangIsEn ? '' : '';
-    Token.grades = LangIsEn ? '' : '';
-    Token.skills = LangIsEn ? '' : '';
-    Token.yourFiles = LangIsEn ? '' : '';
-    Token.decision = LangIsEn ? '' : '';
     Token.checked = LangIsEn ? 'Checked' : 'محدد';
     Token.unChecked = LangIsEn ? 'Un Checked' : 'غير محدد';
     
@@ -98,4 +61,6 @@
 
     Token.notFinshed = LangIsEn ? 'Not Finshed' : 'لم يتم الانتهاء';
     Token.finshed = LangIsEn ? 'Finshed' : 'تم الانتهاء';
+Token.areYouSureCancel = LangIsEn ?'Are You Sure Cancel ?': 'هل انت متاكد من الإلفاء؟' ;
+
 

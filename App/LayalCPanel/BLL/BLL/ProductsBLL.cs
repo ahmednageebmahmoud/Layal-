@@ -37,7 +37,7 @@ namespace BLL.BLL
         }
 
 
-        public ResponseVM GetProductById(long id)
+        public ResponseVM GetProductById(long id,bool fillOptions=true)
         {
             var Data = db.Phot_Products_SelectByPK(id).GroupBy(v => new
             {
@@ -74,7 +74,7 @@ namespace BLL.BLL
                     Id = b.ProductImageId.Value,
                     ImageUrl = b.ImageUrl
                 }).ToList(),
-                Options = db.Phot_ProductsOptions_SelectByProductId(v.Key.Id).GroupBy(c => new
+                Options = fillOptions? db.Phot_ProductsOptions_SelectByProductId(v.Key.Id).GroupBy(c => new
                 {
                     c.Id,
                     c.FKStaticField_Id,
@@ -98,8 +98,7 @@ namespace BLL.BLL
                         ValueAr = b.ValueAr,
                         ValueEn = b.ValueEn
                     }).ToList()
-
-                }).ToList()
+                }).ToList():null
             }).FirstOrDefault();
             if (Data == null)
                 return ResponseVM.Error($"{Token.Product} : {Token.NotFound}");

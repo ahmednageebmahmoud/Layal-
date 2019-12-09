@@ -10,6 +10,7 @@
     <link rel="stylesheet"
         href="G:/Projects/MyProjects/Projects/2019/layal/1-Analysis/Documentation/scripts/bootstrap-rtl/bootstrap.min.css">
     <link rel="stylesheet" href="G:/Projects/MyProjects/Projects/2019/layal/1-Analysis/Documentation/css/css.css">
+
 </head>
 
 <body id="accordion">
@@ -37,7 +38,7 @@
                             </ul>
                         </li>
                         <!--Static Fields-->
-                         <li><a href="#StaticFields" data-toggle="collapse" data-target="#StaticFields"
+                        <li><a href="#StaticFields" data-toggle="collapse" data-target="#StaticFields"
                                 onclick="updateImage('/images/settings/staticFields/0.jpg')">
                                 الحقول الثابتة </a></li>
                     </ul>
@@ -84,8 +85,8 @@
                     <ul class="collapse" id="enquiryUl">
                         <!--انواع الاستفسارات-->
                         <li>
-                            <label data-toggle="collapse" data-target="enquiryTypeUl">انواع الاستفسارات</label>
-                            <ul>
+                            <label data-toggle="collapse" data-target="#enquiryTypeUl">انواع الاستفسارات</label>
+                            <ul class="collapse" id="enquiryTypeUl">
                                 <li><a href="#enquiry-type-add" data-toggle="collapse" data-target="#enquiry-type-add"
                                         onclick="updateImage('/images/enquires/enquiryTypes/add/0.jpg')">اضافة</a></li>
                                 <li><a href="#enquiry-type-update" data-toggle="collapse"
@@ -179,6 +180,30 @@
                         </a>
                     </li>
                 </ul>
+            </li>
+            <!--المصورين-->
+            <li>
+                <label data-toggle="collapse" data-target="#photograpgersUl">المصورين</label>
+                <ul class="collapse" id="photograpgersUl">
+                    <!--المنتاجات-->
+                    <li>
+                        <label data-toggle="collapse" data-target="#productsUl">المنتاجات</label>
+                        <ul class="collapse" id="productsUl">
+                            <!--انواع المنتاجات-->
+                            <li><a href="#prodyct-types" data-toggle="collapse" data-target="#Product-types-mangment"
+                                    onclick="updateImage('/images/photographers/productTypes/0.png')">انواع
+                                    المنتاجات</a>
+                            </li>
+                            <li><a href="#shipping-categories" data-toggle="collapse" data-target="#shipping-categories"
+                                    onclick="updateImage('/images/photographers/sheppingCategories/0.png')">فئات
+                                    الشحن</a></li>
+                            <li><a href="#products-mangment" data-toggle="collapse" data-target="#products-mangment"
+                                    onclick="updateImage('/images/photographers/products/0.jpg')">آدارة المنتاجات</a>
+                            </li>
+                        </ul>
+                    </li>
+            </li>
+            </ul>
             </li>
             </ul>
         </div>
@@ -1408,7 +1433,8 @@
                         </a>
                         وفى الفديو التالى شرح تفصيلى للعمليات التى تحدث مع الحقول الثابتة
                         <br>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed//sELznc0aZ5k" frameborder="0"
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed//sELznc0aZ5k"
+                            frameborder="0"
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe>
                     </li>
@@ -1538,7 +1564,7 @@
                         وايضا تكون الحسابات مفعلة ولا يمكن تحديث المصورين بعد تخطى تاريخ المناسبة
                         <br>
                         ويمكن تحديث مصورين المناسبة عبر النقر على
-                        <u updae-image data-new-image="/events/tasks\photographers\1.JPG">
+                        <u updae-image data-new-image="/events/tasks/photographers/1.JPG">
                             ايقونة مصورين المناسبة
                         </u>
                     </li>
@@ -1621,7 +1647,7 @@
                     </li>
                     <li>
                         فى الفديو التالى شرح لـ عملية
-                        التنفيذ من قبل موظف التنفيذ
+                        الارشفة من قبل موظف الارشفة
                         <br>
                         <iframe width="560" height="315" src="https://www.youtube.com/embed//Fog430ykKW8"
                             frameborder="0"
@@ -1632,6 +1658,91 @@
             </div>
 
 
+            <!--Product Types-->
+            <div id="Product-types-mangment" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        انواع المنتاجات : يتم اضافتها من اجل تقسيم كل مجموعة منتاجت اسفل نوع معين .. وهى اول شىء يتم
+                        اختيارة عند
+                        <a href="/photographers/orders/Create" target="_blank">
+                            <u updae-image data-new-image="/photographers/orders/create/0.png">
+                                انشاء طلب
+                            </u>
+                        </a>
+                        من قبل المصور
+                    </li>
+
+                    <li>
+                        فى الفديو التالى شرح لـ عملية
+                        
+                        <br>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/Z_nsrh_6JB4" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </li>
+                </ul>
+            </div>
+
+            <!--Shipping Categories-->
+            <div id="shipping-categories" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+                        فئات الشحن : وهنا يتم تحديد سعر الشحن لـ كل بلد عندما يختارها المصور عند
+                        <a href="/photographers/orders/Create" target="_blank">
+                            <u updae-image data-new-image="/photographers/orders/create/0.png">
+                                انشاء طلب
+                            </u>
+                        </a>
+                        فى الجزاء الخاص بـ
+                        <a href="/photographers/orders/Create" target="_blank">
+                            <u updae-image data-new-image="/photographers/orders/create/1.png">
+                                التوصيل
+                            </u>
+                        </a>
+                        ويتم اضافة مع كل بلد سعر وعند تحديد البلد يتم اضافة السعر فى بند التوصيل فى الفاتورة
+
+                    </li>
+
+                    <li>
+                        فى الفديو التالى شرح لـ عملية
+                        
+                        <br>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/_5ydsddTiTk" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </li>
+                </ul>
+            </div>
+
+              <!--Products Mangment-->
+              <div id="products-mangment" class="collapse" data-parent="#accordion">
+                <ul>
+                    <li>
+المنتاجات : هنا يتم اضافة المنتاجات التى يمككن للمصور       
+                        <a href="/photographers/orders/Create" target="_blank">
+                            <u updae-image data-new-image="/photographers/orders/create/0.png">
+                                انشاء بها طلب
+                            </u>
+                        </a>
+                    </li>
+                    <li>
+                        ولا يمكن تعديل او حذف المنتاجات اذا هناك طلب ما يستخدمها ولاكن يمكن الغاء تفعيلها لحين انشاء منتج جديد بنفس المواصفات او يمكن استنساخ المنتاج واضافة لهه الصور الجديدة وتلقائيا يتم الغاء تفعيل المنتج الاساسى ليبقى المنتج المستنسخ فقط عهوا المتاح لـ الاستخدام 
+
+                    </li>
+
+                    <li>
+                        فى الفديو التالى شرح لـ عملية آدارة المنتاجات
+                        
+                        <br>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/y-ebE-hB3tA" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </li>
+                </ul>
+            </div>
+            
+
+<!--End Content-->
         </div>
 
 

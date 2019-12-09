@@ -1341,4 +1341,13 @@
   <data name="CanNotUpdateBecuseIsUsedBuUCanDisActiveThis" xml:space="preserve">
     <value>Can Not Update Becuse It Is Used But You Can Disactive And Create New Prodct By Copy</value>
   </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
+  <data name="OrderCancel" xml:space="preserve">
+    <value>Order Cancel</value>
+  </data>
+  <data name="OrderDetails" xml:space="preserve">
+    <value>Order Details</value>
+  </data>
 </root>

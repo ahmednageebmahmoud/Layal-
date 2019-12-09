@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BLL.ViewModels
 {
-    public class OrderphotographerVM : BasicVM
+    public class PhotoOrderVM : BasicVM
     {
         public long Id { get; set; }
         public long ProductTypeId { get; set; }
@@ -32,6 +32,7 @@ namespace BLL.ViewModels
 
         public List<OrderPaymentVM> Payments { get; set; }
         public decimal TotalPayments { get; internal set; }
-        
+        public CityVM DeliveryCity { get; internal set; }
+        public CountryVM DeliveryCountry { get; internal set; }
     }
 }//End CLass

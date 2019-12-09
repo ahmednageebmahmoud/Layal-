@@ -1,7 +1,7 @@
 ﻿class initScripts {
 
      static  initTooltip  (el) {
-        var skin = el.data('skin') ? 'tooltip-' + el.data('skin') : '';
+         var skin = 'tooltip-dark';
         var width = el.data('width') == 'auto' ? 'tooltop-auto-width' : '';
         var triggerValue = el.data('trigger') ? el.data('trigger') : 'hover';
         var placement = el.data('placement') ? el.data('placement') : 'left';
@@ -17,13 +17,17 @@
 
       initTooltips() {
         // init bootstrap tooltips
-          document.querySelectorAll('[data-toggle="kt-tooltip"]').forEach(elm=> {
-              initScripts.initTooltip($(elm));
-          })
+              document.querySelectorAll('[title]').forEach(elm => {
+                  elm.setAttribute('data-skin', 'dark');
+                  elm.setAttribute('data-toggle', 'kt-tooltip');
+                  elm.setAttribute('data-placement', 'top');
+                  initScripts.initTooltip($(elm));
+              })
+         
         }
 
     constructor() {
-        this.initTooltips();
+      //  this.initTooltips();
     }
 }
  

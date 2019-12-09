@@ -1,6 +1,10 @@
 ﻿@{
+    /*
+     هذة الصفحة خاصة بـ عرض الطلبات الذى طلبها المصور
+     */
     ViewBag.Title = Token.MyOrders;
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <!-- begin:: Content Head -->
@@ -90,16 +94,31 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="x in orders|customFilter:itemSearch:orderFOP:'orderFOP':this |orderBy:orderFOP.sort.propName:orderFOP.sort.reverse | limitTo:orderFOP.paging.pagingLimt.take:orderFOP.paging.pagingLimt.skip track by $index">
-                                <td>{{x.Id}}</td>
-                                <td>{{x.ProductType.ProductTypeName}}</td>
-                                <td>{{x.Product.ProductName}}</td>
-                                <td>{{x.CreateDateTime_Display}}</td>
-                                <td><i class="fas " ng-class="{'fa-check':x.IsActive}"></i></td>
+                                <td><span>{{x.Id}}</span></td>
+                                <td><span>{{x.ProductType.ProductTypeName}}</span></td>
+                                <td><span>{{x.Product.ProductName}}</span></td>
+                                <td><span>{{x.CreateDateTime_Display}}</span></td>
+                                <td><span>
+                                <i class="fas " ng-class="{'fa-check':x.IsActive}"></i>
+                                    </span>
+                                </td>
                                 <td>
-                                    <!--Btn:Edit-->
-                                    <a href="/Ordersphotographers/Update?id={{x.Id}}"
-                                       ng-if="!x.IsAllowSurvey"
-                                        title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                    <!--Btn:Information-->
+                                    <a href="/PhotoOrders/Details?id={{x.Id}}"
+                                       title="@Token.Details" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-search-plus"></i></a>
+
+                                    <!--Btn:Edit
+    <a href="/PhotoOrders/Update?id={{x.Id}}"
+       ng-if="x.IsActive"
+       title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+    -->
+                                    <!--Btn:Cancel-->
+                                    <a href="javascript:void()"
+                                       ng-if="x.IsActive"
+                                       ng-click="cancel(x)"
+                                       title="@Token.OrderCancel" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fas fa-power-off"></i></a>
+
+
                                 </td>
                             </tr>
                         </tbody>
@@ -118,6 +137,6 @@
 @section scripts{
 
     <!--(ANageeb) link angualr files for thsis  view -->
-<script src="~/Scripts/angularJS/views/ordersphotographers/myOrders/service.js"></script>
-    <script src="~/Scripts/angularJS/views/ordersphotographers/myOrders/contoller.js"></script>
+<script src="~/Scripts/angularJS/views/photoOrders/index/service.js"></script>
+    <script src="~/Scripts/angularJS/views/photoOrders/index/contoller.js"></script>
 }

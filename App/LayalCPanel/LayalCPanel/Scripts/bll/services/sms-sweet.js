@@ -32,9 +32,9 @@
 
                
         swal.fire({
-            title:Token.success,
+            title:'',
             text: message ,
-            type: 'success',
+            type: 'warning',
             showCancelButton: true,
             confirmButtonText: Token.ok,
             cancelButtonText: Token.cancel,

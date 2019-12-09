@@ -217,15 +217,15 @@
                             </li>
                             @if (CookieService.UserInfo.IsPhotographer)
                             {
-                                    <li class="kt-menu__item @(Request.Url.AbsolutePath.Contains("/Ordersphotographers/Create")?"kt-menu__item--active":"")" aria-haspopup="true">
-                                    <a href="/Ordersphotographers/Create" class="kt-menu__link ">
+                                    <li class="kt-menu__item @(Request.Url.AbsolutePath.Contains("/PhotoOrders/Create")?"kt-menu__item--active":"")" aria-haspopup="true">
+                                    <a href="/PhotoOrders/Create" class="kt-menu__link ">
                                         <span class="kt-menu__link-icon">
                                             <i class="la la-cart-plus"></i>
                                         </span><span class="kt-menu__link-text">@Token.CreateOrder</span>
                                     </a>
                                 </li>
-                                <li class="kt-menu__item @(Request.Url.AbsolutePath.Contains("/Ordersphotographers/MyOrders")?"kt-menu__item--active":"")"aria-haspopup="true">
-                                    <a href="/Ordersphotographers/MyOrders" class="kt-menu__link ">
+                                <li class="kt-menu__item @(Request.Url.AbsolutePath.Contains("/PhotoOrders")?"kt-menu__item--active":"")"aria-haspopup="true">
+                                    <a href="/PhotoOrders" class="kt-menu__link ">
                                         <span class="kt-menu__link-icon">
                                             <i class="fa fa-home"></i>
                                         </span><span class="kt-menu__link-text">@Token.MyOrders</span>
@@ -742,10 +742,11 @@
     <script src="~/Scripts/bll/fop/angularClass/filters/customFilter.js"></script>
     <script src="~/Scripts/bll/fop/jsClass/sort.js"></script>
     <script src="~/Scripts/angularJS/directives/toolTip.js"></script>
-    <script src="~/Scripts/angularJS/directives/alertInfo.js"></script>
     <script src="~/Scripts/angularJS/directives/upload-files.js"></script>
     <script src="~/Scripts/angularJS/filters/spliting.js"></script>
     <script src="~/Scripts/angularJS/directives/alerts.js"></script>
+
+
 
     <!--Ssignal AR-->
     <script src="~/Scripts/angularJS/filters/FilterWithoutDelete.js"></script>

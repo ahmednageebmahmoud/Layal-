@@ -3,32 +3,21 @@
     class funcs {
 
         //Getter
-        get basePath() { return '/Ordersphotographers/' };
+        get basePath() { return '/PhotoOrders/' };
 
 
 
         //Methods
         getOrder(id) {
             return h({
-                url: `${this.basePath}getOrderById?id=${id}`,
+                url: `${this.basePath}getOrderFullDetailsById?id=${id}`,
                 method: 'get',
             });
         };
 
-        getCities(id) {
-            return h({
-                url: `${this.basePath}getCities?countryId=${id}`,
-                method: 'get',
-            });
-        };
-
-        //Get Items
-        getItems() {
-            return h({
-                url: `${this.basePath}getItems`,
-                method: 'get',
-            });
-        };
+    
+      
+      
 
         //save payment
         addNewPayment(payment) {
@@ -39,7 +28,7 @@
             data.append("File", payment.File);
 
             return h({
-                url: `${this.basePath}AddPaymentByClinet`,
+                url: `${this.basePath}AddPayment`,
                 method: 'post',
                 data: data,
                 headers: { 'Content-Type': angular.undefined }

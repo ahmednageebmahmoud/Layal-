@@ -211,7 +211,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\OrdersphotographersController.cs" />
+    <Compile Include="Controllers\PhotoOrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProductTypesController.cs" />
     <Compile Include="Controllers\EEWController.cs" />
@@ -337,6 +337,9 @@
     <Content Include="assets\DEV_CSS\dev_AR.css" />
     <Content Include="assets\DEV_CSS\dev_EN.css" />
     <Content Include="assets\DEV_CSS\dev_shared.css" />
+    <Content Include="assets\DEV_CSS\wizard-1\wizard.css" />
+    <Content Include="assets\DEV_CSS\wizard-1\wizard.en.css" />
+    <Content Include="assets\DEV_CSS\wizard-1\wizard.ar.css" />
     <Content Include="assets\media\bg\300.jpg" />
     <Content Include="assets\media\bg\350.jpg" />
     <Content Include="assets\media\bg\400.jpg" />
@@ -1960,7 +1963,6 @@
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\angularJS\angularJS.js" />
-    <Content Include="Scripts\angularJS\directives\toolTip.js" />
     <Content Include="Scripts\angularJS\directives\models\add-new-element.js" />
     <Content Include="Scripts\angularJS\directives\models\sms-model.js" />
     <Content Include="Scripts\angularJS\directives\alerts.js" />
@@ -1975,12 +1977,14 @@
     <Content Include="Scripts\angularJS\filters\FilterWithoutDelete.js" />
     <Content Include="Scripts\angularJS\filters\spliting.js" />
     <Content Include="Scripts\angularJS\filters\filterWithoutStaticItems.js" />
-    <Content Include="Scripts\angularJS\views\ordersphotographers\update\contoller.js" />
-    <Content Include="Scripts\angularJS\views\ordersphotographers\update\service.js" />
-    <Content Include="Scripts\angularJS\views\ordersphotographers\create\contoller.js" />
-    <Content Include="Scripts\angularJS\views\ordersphotographers\create\service.js" />
-    <Content Include="Scripts\angularJS\views\ordersphotographers\myOrders\contoller.js" />
-    <Content Include="Scripts\angularJS\views\ordersphotographers\myOrders\service.js" />
+    <Content Include="Scripts\angularJS\views\photoOrders\details\contoller.js" />
+    <Content Include="Scripts\angularJS\views\photoOrders\details\service.js" />
+    <Content Include="Scripts\angularJS\views\photoOrders\update\contoller.js" />
+    <Content Include="Scripts\angularJS\views\photoOrders\update\service.js" />
+    <Content Include="Scripts\angularJS\views\photoOrders\create\contoller.js" />
+    <Content Include="Scripts\angularJS\views\photoOrders\create\service.js" />
+    <Content Include="Scripts\angularJS\views\photoOrders\index\contoller.js" />
+    <Content Include="Scripts\angularJS\views\photoOrders\index\service.js" />
     <Content Include="Scripts\angularJS\views\shippingCategories\index\contoller.js" />
     <Content Include="Scripts\angularJS\views\shippingCategories\index\service.js" />
     <Content Include="Scripts\angularJS\views\products\addAndUpdate\contoller.js" />
@@ -2370,9 +2374,10 @@
     <Content Include="Views\Products\AddAndUpdate.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\ShippingCategories\Index.cshtml" />
-    <Content Include="Views\Ordersphotographers\Create.cshtml" />
-    <Content Include="Views\Ordersphotographers\MyOrders.cshtml" />
-    <Content Include="Views\Ordersphotographers\Update.cshtml" />
+    <Content Include="Views\PhotoOrders\Create.cshtml" />
+    <Content Include="Views\PhotoOrders\Index.cshtml" />
+    <Content Include="Views\PhotoOrders\Update.cshtml" />
+    <Content Include="Views\PhotoOrders\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

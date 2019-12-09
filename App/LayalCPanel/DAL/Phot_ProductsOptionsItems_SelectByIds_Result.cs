@@ -17,5 +17,6 @@ namespace DAL
         public long FKWord_Value_Id { get; set; }
         public decimal Price { get; set; }
         public long FKProductOption_Id { get; set; }
+        public long StaticFieldWordId { get; set; }
     }
 }

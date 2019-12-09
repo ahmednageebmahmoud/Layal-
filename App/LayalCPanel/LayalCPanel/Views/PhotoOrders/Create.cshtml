@@ -15,7 +15,7 @@
                 <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link"> @Token.HomePage </a>
 
                 <span class="kt-subheader__breadcrumbs-separator"></span>
-                <a href="/Ordersphotographers/MyOrders" class="kt-subheader__breadcrumbs-link"> @Token.MyOrders </a>
+                <a href="/PhotoOrders" class="kt-subheader__breadcrumbs-link"> @Token.MyOrders </a>
 
                 <span class="kt-subheader__breadcrumbs-separator"></span>
                 <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" ng-if="newOrder.State!=state.update">@Token.CreateOrder</a>
@@ -81,7 +81,7 @@
                                     </div>
                                 </a>
 
-                                <a class="kt-wizard-v1__nav-item" href="javascript:void()" data-ktwizard-type="step" ng-click="autosize()">
+                                <a class="kt-wizard-v1__nav-item" href="javascript:void()" data-ktwizard-type="step" ng-click="redesign()">
                                     <div class="kt-wizard-v1__nav-body">
                                         <div class="kt-wizard-v1__nav-icon">
                                             <i class="fas fa-file-archive" ng-class="{'error-color': newOrder.Images.length==0&&productFrmErrorSubmit}"></i>
@@ -194,7 +194,7 @@
                                             </div>
                                             <label class="col-form-label col-1 ">@Token.ProductDescription : </label>
                                             <div class="form-group col-11">
-                                                <textarea class="form-control " autosize disabled>{{product.Description}}</textarea>
+                                                <P class="per-wrap form-control" style="height:auto" ng-bind="product.Description"></P>
                                             </div>
 
                                             <label class="col-form-label col-1  ">@Token.ProductImages: </label>
@@ -212,19 +212,19 @@
                             <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
                                 <div class="kt-heading kt-heading--md">@Token.Options :</div>
                                 <div class="kt-form__section kt-form__section--first">
-                                    <div class="kt-wizard-v1__form">
+                                    <div class="kt-wizard-v1__form  ">
                                         <!--Error-->
-                                        <div class="form-group-sub col-12">
+                                        <div class="form-group row col-12">
                                             <alert-error class=" " is-text="true" model="@Token.YouMustbeChooseAllOptions"
                                                          ng-if="newOrder.Options.length<product.Options.length&&productFrmErrorSubmit"></alert-error>
                                         </div>
-                                        <div class="form-group row" ng-repeat="im in product.Options">
+                                        <div class="row" ng-repeat="im in product.Options">
                                             <label class="col-form-label col-1 padding-0">{{im.StaticField.StaticFieldName}} : </label>
                                             <div class="form-group col-11">
                                                 <select class="form-control"
                                                         serchbale
-                                                        ng-model="im.ProductOptionItemSelectedId" 
-                                                        ng-options="i.Id as i.Id for i in im.Items "
+                                                        ng-model="im.ProductOptionItemSelectedId"
+                                                        ng-options="i.Id as i.Value for i in im.Items "
                                                         ng-change="selectOptionItem()"></select>
                                                 <!--Error Requierd-->
                                                 <small class="error" ng-if="!im.ProductOptionItemSelectedId &&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
@@ -247,7 +247,7 @@
                                             <!--Uplaod File Notes-->
                                             <label class="col-form-label col-3  ">@Token.UploadFileNotes: </label>
                                             <div class="form-group-sub col-9">
-                                                <textarea class="form-control " autosize disabled>{{product.UplaodFileNote}}</textarea>
+                                                <P class="per-wrap form-control" style="height:auto" ng-bind="product.UplaodFileNote"></P>
                                             </div>
                                             <!--Upload Images-->
                                             <up-files text="@Token.Upload"
@@ -332,8 +332,7 @@
                                                         ng-class="{'is-invalid':addOrderForm.city.$invalid&&productFrmErrorSubmit}"
                                                         ng-model="newOrder.Delivery_CityId"
                                                         ng-options="c.Id as c.CityNameWithShippingPrice for c in cities|orderBy :'CityNameWithShippingPrice'"
-                                                        ng-change="updateDeliveryServicePrice(newOrder.Delivery_CityId)"
-                                                        ></select>
+                                                        ng-change="updateDeliveryServicePrice(newOrder.Delivery_CityId)"></select>
                                                 <!--Errors:-->
                                                 <small class="error " ng-if="addOrderForm.city.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
                                             </div>
@@ -433,14 +432,15 @@
 
 @section scriptsInHeader{
     <link href="~/assets/app/custom/wizard/wizard-v1.default.css" rel="stylesheet" />
+    <link href="~/assets/DEV_CSS/wizard-1/wizard.ar.css" rel="stylesheet" />
 }
 
 @section scripts{
     <script src="~/assets/app/custom/wizard/wizard-v1.js"></script>
 
     <!--(ANageeb) link angualr files for thsis  view -->
-    <script src="~/Scripts/angularJS/views/ordersphotographers/create/service.js"></script>
-    <script src="~/Scripts/angularJS/views/ordersphotographers/create/contoller.js"></script>
+    <script src="~/Scripts/angularJS/views/photoOrders/create/service.js"></script>
+    <script src="~/Scripts/angularJS/views/photoOrders/create/contoller.js"></script>
 
     <style>
         .kt-wizard-v1 .kt-wizard-v1__nav .kt-wizard-v1__nav-items .kt-wizard-v1__nav-item {

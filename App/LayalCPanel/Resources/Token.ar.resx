@@ -1192,7 +1192,7 @@
     <value>تحديث فئة المنتج</value>
   </data>
   <data name="Image" xml:space="preserve">
-    <value>Image</value>
+    <value>الصورة</value>
   </data>
   <data name="ICantAdded" xml:space="preserve">
     <value>لا يمكننى الاضافة </value>
@@ -1349,5 +1349,14 @@
   </data>
   <data name="CanNotUpdateBecuseIsUsedBuUCanDisActiveThis" xml:space="preserve">
     <value>لا يمكن التحديث لانة مستخدم منم قبل ولاكن يمكن الغاء تفعيلة وانشاء ومنتج جديدة بواسطة النسخ</value>
+  </data>
+  <data name="OrderCancel" xml:space="preserve">
+    <value>الغاء الطلب</value>
+  </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>تم الالغاء</value>
+  </data>
+  <data name="OrderDetails" xml:space="preserve">
+    <value>تفاصيل الطلب</value>
   </data>
 </root>

@@ -814,6 +814,10 @@
   <Function Name="Phot_OrderPayments_SelectByOrderId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="OrderId" Type="bigint" Mode="In" />
   </Function>
+  <Function Name="Phot_Orders_Cancel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="bigint" Mode="In" />
+    <Parameter Name="CurretnUserId" Type="bigint" Mode="In" />
+  </Function>
   <Function Name="Phot_Orders_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ProductTypeId" Type="bigint" Mode="In" />
     <Parameter Name="ProductId" Type="bigint" Mode="In" />
@@ -830,6 +834,9 @@
     <Parameter Name="UserId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="Phot_Orders_SelectById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_Orders_SelectFullDetailsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
   </Function>
   <Function Name="Phot_Orders_UpdateDropboxFolderPath" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = Token.UpdateOrder;
+    ViewBag.Title = Token.OrderDetails;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,11 +15,11 @@
                 <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link"> @Token.HomePage </a>
 
                 <span class="kt-subheader__breadcrumbs-separator"></span>
-                <a href="/Ordersphotographers/MyOrders" class="kt-subheader__breadcrumbs-link"> @Token.MyOrders </a>
+                <a href="/PhotoOrders" class="kt-subheader__breadcrumbs-link"> @Token.OrderDetails </a>
 
 
                 <span class="kt-subheader__breadcrumbs-separator"></span>
-                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" ng-if="order.State!=state.update">@Token.UpdateOrder</a>
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" >@Token.OrderDetails</a>
 
                 <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
             </div>
@@ -141,7 +141,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -178,17 +177,10 @@
                                 <div class="kt-heading kt-heading--md">@Token.Options :</div>
                                 <div class="kt-form__section kt-form__section--first">
                                     <div class="kt-wizard-v1__form">
-
-                                        <div class="form-group row" ng-repeat="im in order.Product.Options">
+                                        <div class="row" ng-repeat="im in order.Options">
                                             <label class="col-form-label col-1 padding-0">{{im.StaticField.StaticFieldName}} : </label>
                                             <div class="form-group col-11">
-                                                <select class="form-control"
-                                                        serchbale
-                                                        disabled
-                                                        ng-options="i.Id as i.Id for i in im.Items "
-                                                        ng-model="im.ProductOptionItemSelectedId" ng-change="selectOptionItem()"></select>
-                                                <!--Error Requierd-->
-                                                <small class="error" ng-if="!im.SelectedItem&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                                <input class="form-control" disabled ng-model="im.ItemSelected.Value" />
                                             </div>
                                         </div>
                                     </div>
@@ -207,20 +199,8 @@
                                                     <div class="col-4 padding-0" ng-repeat="im in order.Files" ng-hide="im.State==state.delete">
                                                         <div class="thumbnail thumbnail-v1">
                                                             <img src="{{im.DropboxThumbnailPath}}" alt="@Token.Image">
-                                                            <div class="caption">
-                                                                <div class="kt-section__content kt-section__content--solid">
-                                                                    <div class="kt-divider">
-                                                                        <span></span>
-                                                                        <!--
-                                                                        <span class="cursor-pointer kt-link kt-font-boldest     " ng-click="deleteImage($index)">@Token.Delete</span>
-                                                                        -->
-                                                                        <span></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -234,45 +214,36 @@
                                 <div class="kt-form__section kt-form__section--first">
                                     <div class="kt-wizard-v1__form">
                                         <!--Receipt from the branch-->
-                                        <div class="form-group row">
-                                            <label class="col-form-label col-lg-2">@Token.ReceiptFromTheBranch :</label>
+                                        <div class="form-group row" ng-if="order.Delivery_IsReceiptFromTheBranch">
+                                            <label class="col-form-label col-lg-2" >@Token.ReceiptFromTheBranch :</label>
                                             <div class="form-group-sub col-lg-10 ">
                                                 <span class="kt-switch kt-switch--icon">
                                                     <label>
                                                         <input type="checkbox" checked="checked" disabled
-                                                               ng-model="newOrder.Delivery_IsReceiptFromTheBranch" ng-change="checkDelivery_IsReceiptFromTheBranch()">
+                                                               ng-model="order.Delivery_IsReceiptFromTheBranch" >
                                                         <span></span>
                                                     </label>
                                                 </span>
                                             </div>
                                         </div>
                                         <!--Country-->
-                                        <div class="form-group row">
+                                        <div class="form-group row" ng-if="!order.Delivery_IsReceiptFromTheBranch">
                                             <label class="col-form-label col-lg-2">@Token.Country :</label>
                                             <div class="form-group-sub col-lg-10 ">
-                                                <select class="form-control"
-                                                        serchbale
-                                                        name="country"
-                                                        disabled
-                                                        ng-model="order.Delivery_CountryId"
-                                                        ng-options="c.Id as c.CountryName for c in countries"></select>
+                                                <input class="form-control" disabled ng-model="order.DeliveryCountry.CountryName" />
                                             </div>
                                         </div>
 
                                         <!--City-->
-                                        <div class="form-group row">
+                                        <div class="form-group row"  ng-if="!order.Delivery_IsReceiptFromTheBranch">
                                             <label class="col-form-label col-lg-2">@Token.City :</label>
                                             <div class="form-group-sub col-lg-10 ">
-                                                <select class="form-control"
-                                                        serchbale
-                                                        name="city"
-                                                        disabled
-                                                        ng-model="order.Delivery_CityId"
-                                                        ng-options="c.Id as c.CityNameWithShippingPrice for c in cities|orderBy :'CityNameWithShippingPrice'"></select>
+                                                <input class="form-control" disabled ng-model="order.DeliveryCity.CityName" />
                                             </div>
                                         </div>
+
                                         <!--Address-->
-                                        <div class="form-group row">
+                                        <div class="form-group row"  ng-if="!order.Delivery_IsReceiptFromTheBranch">
                                             <label class="col-form-label col-lg-2">@Token.Address :</label>
                                             <div class="form-group-sub col-lg-10 ">
                                                 <textarea class="form-control"
@@ -327,8 +298,6 @@
                                 <div class="kt-heading kt-heading--md">@Token.TheBill :</div>
                                 <div class="kt-form__section kt-form__section--first">
                                     <div class="kt-wizard-v1__form">
-
-
                                         <div class="form-group row">
                                             <table class="table sms-table table-hover " id="ng_table_1">
                                                 <thead class="">
@@ -373,19 +342,13 @@
                                                         <td>
                                                             <span>{{order.TotalPayments|currency:''}}{{priceCurrencyCode}}</span>
                                                         </td>
-                                                        <td  >
+                                                        <td>
                                                             <span>@Token.RequiredPayment :</span>
                                                         </td>
-                                                        <td  >
+                                                        <td colspan="2">
                                                             <span>{{order.TotalPrices-order.TotalPayments|currency:''}}{{priceCurrencyCode}}</span>
                                                         </td>
-                                                        <td>
-                                                            <a href="javascript:void(0)" class="btn btn-brand btn-elevate btn-icon-sm" ng-click="showAddNewPayment()">
-                                                                <i class="la la-dollar"></i>@Token.PayNow
-                                                            </a>
-                                                        </td>
                                                     </tr>
-                                                    
                                                 </tfoot>
                                             </table>
                                         </div>
@@ -419,70 +382,20 @@
             </div>
         </div>
     </div>
-
-    <!--Add New Payment-->
-    <div id="addNewPayment"
-         class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <form novalidate name="addPaymrntFrm" class="kt-form kt-form--label-right" ng-submit="addNewPayment(addPaymrntFrm)">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">@Token.AddNewStatus</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!--bankTransfer Deposit-->
-                        <div class="form-group  row">
-                            <!--Amount-->
-                            <label class="col-lg-2 col-form-label">@Token.Amount</label>
-                            <div class="col-lg-4 form-group-sub">
-                                <input type="number"
-                                       name="amount"
-                                       class="form-control"
-                                       ng-class="{'is-invalid':addPaymrntFrm.amount.$invalid&&addPaymrntFrmSubmitErro}"
-                                       ng-model="newPayment.Amount"
-                                       ng-required="true" />
-                                <!--Errors-->
-                                <small class="error " ng-if="addPaymrntFrm.amount.$error.required&&addPaymrntFrmSubmitErro">@Token.FieldIsRequierd</small>
-                            </div>
-
-                            <!--Upload BankTransferImage -->
-                            <label class="col-lg-2 col-form-label">@Token.BankTransferPhoto </label>
-                            <div class="col-lg-4 form-group-sub">
-                                <up-files text="@Token.Upload"
-                                          accept="image/*"></up-files>
-
-                                <img class="figure-img img-thumbnail" src="{{newPayment.BankTransferImage}}" width="100" height="100" />
-                                <small class="error invalid-feedback" ng-if="!newPayment.File&&addPaymrntFrmSubmitErro">@Token.FieldIsRequierd</small>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
-                            <i class="la la-plus">@Token.Add</i>
-                        </button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@Token.Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
 </div>
 
 
 @section scriptsInHeader{
     <link href="~/assets/app/custom/wizard/wizard-v1.default.css" rel="stylesheet" />
+    <link href="~/assets/DEV_CSS/wizard-1/wizard.ar.css" rel="stylesheet" />
 }
 
 @section scripts{
     <script src="~/assets/app/custom/wizard/wizard-v1.js"></script>
 
     <!--(ANageeb) link angualr files for thsis  view -->
-    <script src="~/Scripts/angularJS/views/ordersphotographers/update/service.js"></script>
-    <script src="~/Scripts/angularJS/views/ordersphotographers/update/contoller.js"></script>
+    <script src="~/Scripts/angularJS/views/photoOrders/details/service.js"></script>
+    <script src="~/Scripts/angularJS/views/photoOrders/details/contoller.js"></script>
 
     <style>
         .kt-wizard-v1 .kt-wizard-v1__nav .kt-wizard-v1__nav-items .kt-wizard-v1__nav-item {

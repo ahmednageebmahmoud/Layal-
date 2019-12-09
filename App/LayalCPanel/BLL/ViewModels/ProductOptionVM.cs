@@ -14,5 +14,6 @@ namespace BLL.ViewModels
         public StaticFieldVM StaticField { get; internal set; }
 
         public long? ProductOptionItemSelectedId { get;   set; }
+        public ProductOptionItemVM ItemSelected { get; internal set; }
     }//End Class
 }

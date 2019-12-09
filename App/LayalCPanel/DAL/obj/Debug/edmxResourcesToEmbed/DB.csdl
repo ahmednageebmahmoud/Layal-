@@ -927,9 +927,6 @@
       <Parameter Name="StaticFieldId" Mode="In" Type="Int32" />
       <Parameter Name="IdDeleted" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="Phot_ProductsOptionsItems_SelectByIds" ReturnType="Collection(LayanModel.Phot_ProductsOptionsItems_SelectByIds_Result)">
-      <Parameter Name="Ids" Mode="In" Type="String" />
-    </FunctionImport>
     <FunctionImport Name="Phot_ProductTypes_CheckIfUed" ReturnType="Collection(Int32)">
       <Parameter Name="Id" Mode="In" Type="Int64" />
     </FunctionImport>
@@ -1223,6 +1220,16 @@
     <FunctionImport Name="Products_Disactive">
       <Parameter Name="Id" Mode="In" Type="Int64" />
       <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Orders_Cancel">
+      <Parameter Name="id" Mode="In" Type="Int64" />
+      <Parameter Name="CurretnUserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Orders_SelectFullDetailsById" ReturnType="Collection(LayanModel.Phot_Orders_SelectFullDetailsById_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_ProductsOptionsItems_SelectByIds" ReturnType="Collection(LayanModel.Phot_ProductsOptionsItems_SelectByIds_Result)">
+      <Parameter Name="Ids" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Albums_Insert_Result">
@@ -2189,12 +2196,6 @@
     <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="2" />
     <Property Type="Int64" Name="FKWord_Value_Id" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="Phot_ProductsOptionsItems_SelectByIds_Result">
-    <Property Type="Int64" Name="Id" Nullable="false" />
-    <Property Type="Int64" Name="FKWord_Value_Id" Nullable="false" />
-    <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="2" />
-    <Property Type="Int64" Name="FKProductOption_Id" Nullable="false" />
-  </ComplexType>
   <ComplexType Name="Phot_ProductTypes_Insert_Result">
     <Property Type="Int64" Name="Id" Nullable="false" />
     <Property Type="Int64" Name="FKWord_Name_Id" Nullable="false" />
@@ -2568,5 +2569,40 @@
     <Property Type="Boolean" Name="UsersPrivileges_CanDelete" Nullable="true" />
     <Property Type="Boolean" Name="UsersPrivileges_CanDisplay" Nullable="true" />
     <Property Type="Boolean" Name="UsersPrivileges_CanEdit" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Phot_Orders_SelectFullDetailsById_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKProductType_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKProduct_Id" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="FKUserCreated" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="String" Name="DropboxFolderPath" Nullable="true" />
+    <Property Type="Boolean" Name="Delivery_IsReceiptFromTheBranch" Nullable="false" />
+    <Property Type="String" Name="Delivery_Address" Nullable="true" />
+    <Property Type="Int32" Name="Delivery_FkCountry_Id" Nullable="true" />
+    <Property Type="Int32" Name="Delivery_FKCity_Id" Nullable="true" />
+    <Property Type="DateTime" Name="DateTimeCancel" Nullable="true" Precision="23" />
+    <Property Type="Int64" Name="FkUserCancel_Id" Nullable="true" />
+    <Property Type="String" Name="ProductTypeNameAr" Nullable="true" />
+    <Property Type="String" Name="ProductTypeNameEn" Nullable="true" />
+    <Property Type="String" Name="ProductTypeImage" Nullable="false" />
+    <Property Type="String" Name="UserCreated_UserName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="UserCreated_FullName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="OptionNameAr" Nullable="true" />
+    <Property Type="String" Name="OptionNameEn" Nullable="true" />
+    <Property Type="String" Name="OptionItemValueAr" Nullable="true" />
+    <Property Type="String" Name="OptionItemValueEn" Nullable="true" />
+    <Property Type="String" Name="Delivery_CountryNameAr" Nullable="true" />
+    <Property Type="String" Name="Delivery_CountryNameEn" Nullable="true" />
+    <Property Type="String" Name="Delivery_CityNameAr" Nullable="true" />
+    <Property Type="String" Name="Delivery_CityNameEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Phot_ProductsOptionsItems_SelectByIds_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Value_Id" Nullable="false" />
+    <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Int64" Name="FKProductOption_Id" Nullable="false" />
+    <Property Type="Int64" Name="StaticFieldWordId" Nullable="false" />
   </ComplexType>
 </Schema>

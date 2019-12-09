@@ -3,7 +3,7 @@
     class funcs {
 
         //Getter
-        get basePath() { return '/Ordersphotographers/' };
+        get basePath() { return '/PhotoOrders/' };
 
 
 

@@ -261,6 +261,9 @@
     <Compile Include="Phot_Orders_SelectById_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Phot_Orders_SelectFullDetailsById_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Phot_ProductsOptionsItems_SelectByIds_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>

@@ -628,6 +628,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Canceled.
+        /// </summary>
+        public static string Canceled {
+            get {
+                return ResourceManager.GetString("Canceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can Delete.
         /// </summary>
         public static string CanDelete {
@@ -2410,11 +2419,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Order Cancel.
+        /// </summary>
+        public static string OrderCancel {
+            get {
+                return ResourceManager.GetString("OrderCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Order Date Time.
         /// </summary>
         public static string OrderDateTime {
             get {
                 return ResourceManager.GetString("OrderDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order Details.
+        /// </summary>
+        public static string OrderDetails {
+            get {
+                return ResourceManager.GetString("OrderDetails", resourceCulture);
             }
         }
         

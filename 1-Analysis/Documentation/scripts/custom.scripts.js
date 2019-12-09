@@ -28,7 +28,7 @@ if (window.location.hash) {
         if (!e.target.dataset.newImage)
             return;
         //Update Image
-        $('#imageReview').attr('src', 'C:/Users/Sezer/Desktop/Analisys/images' + e.target.dataset.newImage);
+        $('#imageReview').attr('src', 'G:/Projects/MyProjects/Projects/2019/layal/1-Analysis/Documentation/images' + e.target.dataset.newImage);
     });
     //Update Image If Mouse Level
     $('[updae-image]').on('mouseout', (e) => {
@@ -41,7 +41,7 @@ if (window.location.hash) {
 })();
 
 function updateImage(src) {
-    src = "C:/Users/Sezer/Desktop/Analisys" + src;
+    src ="G:/Projects/MyProjects/Projects/2019/layal/1-Analysis/Documentation" + src;
     $('#imageReview').attr('src', src)
         .attr('data-base-src', src);
 

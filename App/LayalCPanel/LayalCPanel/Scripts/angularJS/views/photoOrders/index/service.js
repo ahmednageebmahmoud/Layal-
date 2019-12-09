@@ -3,7 +3,7 @@
 	class funcs {
 
 		//Getter
-	    get basePath() { return '/Ordersphotographers/' };
+        get basePath() { return '/PhotoOrders/' };
 
 
 
@@ -16,6 +16,12 @@
         };
 
      
+        cancel(id) {
+            return h({
+                url: `${this.basePath}cancel?id=${id}`,
+                method: 'get',
+            });
+        };
 
 		//save order  
         saveChange(order) {

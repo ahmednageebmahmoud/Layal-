@@ -59,7 +59,6 @@ namespace UI.Controllers
         {
             return Json(ProductTypesBLL.ProductDisactive(id, isActive), JsonRequestBehavior.AllowGet);
         }
-
         
 
     }//end class

@@ -92,7 +92,7 @@ namespace BLL.BLL
             try
             {
                 if (db.Phot_ProductTypes_CheckIfUed(c.Id).First().Value > 0)
-                    return new ResponseVM(RequestTypeEnum.Success, Token.CanNotDeleteBecuseIsUsed);
+                    return ResponseVM.Error(Token.CanNotDeleteBecuseIsUsed);
 
                 db.Phot_ProductTypes_Delete(c.Id);
                 FileService.RemoveFile(c.ImageUrl);

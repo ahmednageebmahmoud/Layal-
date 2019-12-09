@@ -13,7 +13,7 @@ using System.Web.Script.Serialization;
 
 namespace BLL.BLL
 {
-    public class OrdersphotographerPaymentsBll : BasicBLL
+    public class PhotoOrdersPaymentsBll : BasicBLL
     {
         public object AddPaymentByClinet(OrderPaymentVM o)
         {

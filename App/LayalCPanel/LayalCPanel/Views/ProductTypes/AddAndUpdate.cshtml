@@ -3,10 +3,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     UsersPrivilegeVM Priv =
         new UsersPrivilegesBLL().SelectByUserId(PagesEnum.ProductTypes);
-
-
-    string Description = LanguageService.IsEn ? "The event will be sent automatically as soon as its data is completed" : "سوف يتم ارسال الحدث تلقائيا فور استكمال بياناتها",
-        DescriptionDisapled = LanguageService.IsEn ? "Basic information cannot be updated if this branch is used by" : "لا يمكن تحديث المعلومات الاساسية اذا كان هذا الفرع مستخدم من قبل";
 }
 
 <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" ng-controller="productTypesCtrl">
@@ -25,8 +21,8 @@
 
 
                 <span class="kt-subheader__breadcrumbs-separator"></span>
-                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" ng-if="branch.State!=state.update">@Token.AddNewProductType</a>
-                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" ng-if="branch.State==state.update">@Token.UpdateProductType</a>
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" ng-if="newProductType.State!=state.update">@Token.AddNewProductType</a>
+                <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link" ng-if="newProductType.State==state.update">@Token.UpdateProductType</a>
 
                 <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
             </div>
@@ -44,8 +40,8 @@
                             <span class="kt-portlet__head-icon">
                                 <i class="kt-font-brand flaticon-add"></i>
                             </span>
-                            <h3 class="kt-portlet__head-title" ng-if="branch.State!=state.update">@Token.AddNewProductType</h3>
-                            <h3 class="kt-portlet__head-title" ng-if="branch.State==state.update">@Token.UpdateProductType</h3>
+                            <h3 class="kt-portlet__head-title" ng-if="newProductType.State!=state.update">@Token.AddNewProductType</h3>
+                            <h3 class="kt-portlet__head-title" ng-if="newProductType.State==state.update">@Token.UpdateProductType</h3>
                         </div>
 
                     </div>

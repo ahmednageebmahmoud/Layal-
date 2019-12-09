@@ -63,23 +63,26 @@
     //============= Saves =================
 
     s.changeActive = product => {
+        //Save Boll Value
+        let changeTo = product.IsActive;
+        //Reset To First Value
+        product.IsActive = !product.IsActive;
+
         //show confirm 
         SMSSweet.delete(() => {
             //Yes 
             BlockingService.block();
             productsServ.changeActive(product.Id, product.IsActive).then(d => {
                 BlockingService.unBlock();
-                switch (d.data.RequestType) {
-                    case RequestTypeEnum.sucess:
-                        {
-                            product.IsActive = product.IsActive
-                          
-                        } break;
-                }
+                //اذا تمات العميلة بنجاح فـ الان فقط نحولة الى القيمة الذى كان يردها
+                if (d.data.RequestType == RequestTypeEnum.sucess)
+                    product.IsActive = changeTo;
                 SMSSweet.alert(d.data.Message, d.data.RequestType);
                 co('res-changeActive', d.data);
+            }).catch(() => {
             });
-        }, () => { }, LangIsEn?"Are You Shure From This":"هل انت متاك من ذالك؟");
+        }, () => {
+        }, LangIsEn ? "Are You Shure From This" : "هل انت متاك من ذالك؟");
     };
 
     //============= Delete ================

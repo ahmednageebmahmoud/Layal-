@@ -3161,15 +3161,6 @@ namespace DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_ProductsOptions_Update", idParameter, staticFieldIdParameter, idDeletedParameter);
         }
     
-        public virtual ObjectResult<Phot_ProductsOptionsItems_SelectByIds_Result> Phot_ProductsOptionsItems_SelectByIds(string ids)
-        {
-            var idsParameter = ids != null ?
-                new ObjectParameter("Ids", ids) :
-                new ObjectParameter("Ids", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_ProductsOptionsItems_SelectByIds_Result>("Phot_ProductsOptionsItems_SelectByIds", idsParameter);
-        }
-    
         public virtual ObjectResult<Nullable<int>> Phot_ProductTypes_CheckIfUed(Nullable<long> id)
         {
             var idParameter = id.HasValue ?
@@ -4153,6 +4144,37 @@ namespace DAL
                 new ObjectParameter("IsActive", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Products_Disactive", idParameter, isActiveParameter);
+        }
+    
+        public virtual int Phot_Orders_Cancel(Nullable<long> id, Nullable<long> curretnUserId)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(long));
+    
+            var curretnUserIdParameter = curretnUserId.HasValue ?
+                new ObjectParameter("CurretnUserId", curretnUserId) :
+                new ObjectParameter("CurretnUserId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Phot_Orders_Cancel", idParameter, curretnUserIdParameter);
+        }
+    
+        public virtual ObjectResult<Phot_Orders_SelectFullDetailsById_Result> Phot_Orders_SelectFullDetailsById(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_Orders_SelectFullDetailsById_Result>("Phot_Orders_SelectFullDetailsById", idParameter);
+        }
+    
+        public virtual ObjectResult<Phot_ProductsOptionsItems_SelectByIds_Result> Phot_ProductsOptionsItems_SelectByIds(string ids)
+        {
+            var idsParameter = ids != null ?
+                new ObjectParameter("Ids", ids) :
+                new ObjectParameter("Ids", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phot_ProductsOptionsItems_SelectByIds_Result>("Phot_ProductsOptionsItems_SelectByIds", idsParameter);
         }
     }
 }

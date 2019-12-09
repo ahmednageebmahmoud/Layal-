@@ -1,0 +1,14 @@
+﻿ 
+
+.kt-wizard-v1 .kt-wizard-v1__nav .kt-wizard-v1__nav-items .kt-wizard-v1__nav-item:after {
+    content: "\f104";
+}
+
+.kt-wizard-v1 .kt-wizard-v1__wrapper .kt-form .kt-form__actions [data-ktwizard-type="action-prev"] {
+    margin: auto 0 auto auto;
+}
+
+.kt-wizard-v1 .kt-wizard-v1__wrapper .kt-form .kt-form__actions [data-ktwizard-type="action-next"] {
+    margin: auto auto auto 0;
+}
+
