@@ -57,6 +57,15 @@ namespace BLL.ViewModels
             };
         }
 
+        static public ResponseVM Info(string message)
+        {
+            return new ResponseVM
+            {
+                RequestType = RequestTypeEnum.Info,
+                Message = message,
+            };
+        }
+        
         internal static ResponseVM Error(string message, Exception ex)
         {
             return new ResponseVM

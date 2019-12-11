@@ -158,19 +158,8 @@
 }
 
 
-*.input-disabled:disabled {
-    background: none !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    cursor: auto;
-}
+ 
 
-select.input-disabled:disabled {
-    cursor: default;
-    -webkit-appearance: none;
-    appearance: none;
-}
 
 
 .sms-table {

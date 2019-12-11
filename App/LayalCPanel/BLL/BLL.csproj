@@ -123,6 +123,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\PhotoOrdersMangmentBll.cs" />
     <Compile Include="BLL\PhotoOrdersPaymentsBll.cs" />
     <Compile Include="BLL\PhotoOrdersBll.cs" />
     <Compile Include="BLL\ProductOptionBLL.cs" />

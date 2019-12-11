@@ -1,0 +1,239 @@
+﻿@{
+    /*
+     هذة الصفحة خاصة بـ عرض الطلبات الذى طلبها المصور
+     */
+    ViewBag.Title = Token.TheOrders;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    UsersPrivilegeVM Priv = new UsersPrivilegesBLL().SelectByUserId(PagesEnum.PhotoOrdersMangment);
+}
+
+<!-- begin:: Content Head -->
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+
+        <span class="kt-subheader__separator kt-hidden"></span>
+        <div class="kt-subheader__breadcrumbs">
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-home"><i class="flaticon-home"></i></a>
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link">
+                @Token.HomePage
+            </a>
+
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">
+                @Token.TheOrders
+            </a>
+
+            <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+        </div>
+    </div>
+
+</div>
+
+<!-- end:: Content Head -->
+<!--Page Body-->
+
+<div ng-controller="ordersCtrl">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        @Token.Filter
+                    </h3>
+                </div>
+            </div>
+
+            <form class="kt-form kt-form--label-right" novalidate name="userFrm" ng-submit="getOrders(true)">
+                <div class="kt-portlet__body">
+
+                    <div class="row">
+                        <!--ProductType-->
+                        <div class="form-group col-4">
+                            <label class="control-label ">@Token.ProductType :</label>
+                            <select class="form-control"
+                                    serchbale
+                                    ng-options="i.Id as i.ProductTypeName for i in productTypes "
+                                    ng-model="orderFilter.productTypeId" ng-change="getProductsByProductTypeId(orderFilter.productTypeId);orders=[]"></select>
+                        </div>
+                        <!--Product-->
+                        <div class="form-group col-4">
+                            <label class="control-label ">@Token.Product :</label>
+                            <select class="form-control"
+                                    serchbale
+                                    ng-options="i.Id as i.ProductName for i in products "
+                                    ng-model="orderFilter.productId" ng-change="orders=[]"></select>
+                        </div>
+
+                        <!--UserCreated-->
+                        <div class="form-group col-4">
+                            <label class="control-label ">@Token.UserCreated :</label>
+                            <select class="form-control"
+                                    serchbale
+                                    ng-options="i.Id as i.Name for i in photographers "
+                                    ng-model="orderFilter.userCreatedId" ng-change="orders=[]"></select>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <label class="control-label ">@Token.IsActive :</label>
+                            <select class="form-control"
+                                    serchbale
+                                    ng-options="i.Id as i.Name for i in statusList "
+                                    ng-model="orderFilter.isActive" ng-change="orders=[]"></select>
+                        </div>
+                        <!--CreateDateFroms-->
+                        <div class="form-group col-4">
+                            <label class="control-label ">@Token.CreateDateFrom :</label>
+                            <input type="date"
+                                   class="form-control"
+                                   id="createDateTo"
+                                   ng-model="orderFilter.createDateFrom"
+                                   ng-change="orders=[]" />
+                        </div>
+                        <!--CreateDateTo-->
+                        <div class="form-group col-4">
+                            <label class="control-label ">@Token.CreateDateTo :</label>
+                            <input type="date"
+                                   class="form-control"
+                                   id="createDateTo"
+                                   ng-model="orderFilter.createDateTo"
+                                   ng-change="orders=[]" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="kt-portlet__foot">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 m--valign-middle">
+                        </div>
+                        <div class="col-lg-6 kt-align-right">
+                            <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                                <i class="la la-search">@Token.Show</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        @Token.TheOrders
+                    </h3>
+                </div>
+            </div>
+
+
+            <div class="kt-portlet__body">
+                <!--SMS Print,Excel,PDF,Search,....-->
+                <sms-buttons-search ng-sms-tableid="ng_table_1" ng-sms-search-model="itemSearch"></sms-buttons-search>
+                <table class="table sms-table table-hover " id="ng_table_1">
+                    <thead class="">
+                        <tr class="">
+                            <th class="th-10">
+                                <sms-sort ng-sms-fop="orderFOP"
+                                          ng-sms-field-name="Id"
+                                          ng-sms-resource="@Token.OrderId"></sms-sort>
+                            </th>
+                            <th class="th-10">
+                                <sms-sort ng-sms-fop="orderFOP"
+                                          ng-sms-field-name="Name"
+                                          ng-sms-resource="@Token.UserCreated"></sms-sort>
+                            </th>
+                            <th class="th-10">
+                                <sms-sort ng-sms-fop="orderFOP"
+                                          ng-sms-field-name="ProductTypeName"
+                                          ng-sms-resource="@Token.ProductType"></sms-sort>
+                            </th>
+                            <th class="th-10">
+                                <sms-sort ng-sms-fop="orderFOP"
+                                          ng-sms-field-name="ProductName"
+                                          ng-sms-resource="@Token.Product"></sms-sort>
+                            </th>
+                            <th class="th-10">
+                                <sms-sort ng-sms-fop="orderFOP"
+                                          ng-sms-field-name="CreateDateTime_Display"
+                                          ng-sms-resource="@Token.OrderDateTime"></sms-sort>
+                            </th>
+                            <th class="th-10">
+                                <sms-sort ng-sms-fop="orderFOP"
+                                          ng-sms-field-name="IsActive"
+                                          ng-sms-resource="@Token.IsActive  "></sms-sort>
+                            </th>
+                            <th class="th-10">
+                                @Token.Operations
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in orders|customFilter:itemSearch:orderFOP:'orderFOP':this |orderBy:orderFOP.sort.propName:orderFOP.sort.reverse | limitTo:orderFOP.paging.pagingLimt.take:orderFOP.paging.pagingLimt.skip track by $index">
+                            <td><span>{{x.Id}}</span></td>
+                            <td>
+                                <p><a href="/Users/UserInformation?id={{x.UserCreatedId}}" class="kt-link kt-font-boldest">{{x.UserCreated.Name}}</a></p>
+                            </td>
+                            <td><span>{{x.ProductType.ProductTypeName}}</span></td>
+                            <td><span>{{x.Product.ProductName}}</span></td>
+                            <td><span>{{x.CreateDateTime_Display}}</span></td>
+                            <td>
+                                <span>
+                                    <i class="fas " ng-class="{'fa-check':x.IsActive}"></i>
+                                </span>
+                                <span ng-if="!x.IsActive">
+                                    <p>@Token.UserCancled  :<a href="/Users/UserInformation?id={{x.UserCancleddId}}" class="kt-link kt-font-boldest">{{x.UserCancled.Name}}</a></p>
+                                </span>
+                                <span ng-if="!x.IsActive">
+                                    @Token.CancledDateTime  : <br /> {{x.CancledDateTime_Display}}
+                                </span>
+
+                            </td>
+                            <td>
+
+                                <!--Btn:Information-->
+                                <a href="/PhotoOrdersMangment/Details?id={{x.Id}}"
+                                   title="@Token.Details" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-search-plus"></i></a>
+
+                                <!--Btn:Edit
+                                <a href="/PhotoOrders/Update?id={{x.Id}}"
+                                   ng-if="x.IsActive"
+                                   title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                -->
+                                @if (Priv.CanDelete)
+                                {
+                                    <!--Btn:Cancel-->
+                                    <a href="javascript:void()"
+                                       ng-if="x.IsActive"
+                                       ng-click="cancel(x)"
+                                       title="@Token.OrderCancel" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fas fa-power-off"></i></a>
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--Paging -->
+                <sms-paging ng-sms-fop="orderFOP" ng-sms-display-m-func="getOrders()"></sms-paging>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+@section scripts{
+
+    <!--(ANageeb) link angualr files for thsis  view -->
+    <script src="~/Scripts/angularJS/views/photoOrdersMangment/index/service.js"></script>
+    <script src="~/Scripts/angularJS/views/photoOrdersMangment/index/contoller.js"></script>
+}

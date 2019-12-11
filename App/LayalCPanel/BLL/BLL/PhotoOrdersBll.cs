@@ -86,9 +86,33 @@ namespace BLL.BLL
                     }
 
                     tran.Commit();
+                  
                     //Return Success
                     if (o.Files.Any(c => c.IsUplaoded == false))
                         return ResponseVM.Success(Token.AddBuWeHaveSomFilesNotSaved, new { Id = OrderId });
+
+
+                    //اضافة اشعار لـ المدير
+
+                    //Save And Sent Notification
+                    NotificationsBLL NotificationsBLL = new NotificationsBLL();
+                    var Notify = new NotifyVM
+                    {
+                        TitleAr = string.Format("لقم تم انشاء طلب جديد رقم {0}", OrderId),
+                        TitleEn = string.Format("A new order has been created no {0}", OrderId),
+                        DescriptionAr = string.Format("لقد قام العميل {0} بانشاء طلب جديد ", this.UserLoggad.FullName),
+                        DescriptionEn = string.Format("The customer {0} has xreated new order", this.UserLoggad.FullName),
+                        DateTime = DateTime.Now,
+                        TargetId = OrderId,
+                        PageId = PagesEnum.PhotoOrdersMangment,
+                        RedirectUrl = $"/PhotoOrdersMangment/Details?id={OrderId}",
+                    };
+
+                    //Send Notification To Manger
+                    NotificationsBLL.Add(Notify, this.AdminId);
+                    new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { this.AdminId.ToString() }, Notify);
+
+
 
                     return ResponseVM.Success(Token.Added, new { Id = OrderId });
                 }
@@ -141,8 +165,8 @@ namespace BLL.BLL
             if (Result.Count == 0)
             {
                 if (skip == 0)
-                    return ResponseVM.Error(Token.NoResult);
-                return ResponseVM.Error(Token.NoMoreResult);
+                    return ResponseVM.Info(Token.NoResult);
+                return ResponseVM.Info(Token.NoMoreResult);
             }
 
             return ResponseVM.Success(Result);
@@ -215,6 +239,7 @@ namespace BLL.BLL
             //Sum Total 
             Order.TotalPrices = Order.ServicePrices.Sum(c => c.Price);
             Order.TotalPayments = Order.Payments.Sum(c => c.Amount);
+            Order.TotalPaymentsAccepted = Order.Payments.Where(c => c.IsAcceptFromManger.HasValue && c.IsAcceptFromManger.Value).Sum(c => c.Amount);
 
             return ResponseVM.Success(Order);
         }
@@ -298,6 +323,7 @@ namespace BLL.BLL
             //Sum Total 
             Order.TotalPrices = Order.ServicePrices.Sum(c => c.Price);
             Order.TotalPayments = Order.Payments.Sum(c => c.Amount);
+            Order.TotalPaymentsAccepted = Order.Payments.Where(c => c.IsAcceptFromManger.HasValue && c.IsAcceptFromManger.Value).Sum(c => c.Amount);
 
             return ResponseVM.Success(Order);
         }

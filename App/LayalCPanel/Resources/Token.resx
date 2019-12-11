@@ -1350,4 +1350,37 @@
   <data name="OrderDetails" xml:space="preserve">
     <value>Order Details</value>
   </data>
+  <data name="TheOrders" xml:space="preserve">
+    <value>The Orders</value>
+  </data>
+  <data name="CancledDateTime" xml:space="preserve">
+    <value>Cancled Date Time</value>
+  </data>
+  <data name="UserCancled" xml:space="preserve">
+    <value>User Cancled</value>
+  </data>
+  <data name="AcceptTransfare" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="By" xml:space="preserve">
+    <value>By</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>Saved</value>
+  </data>
+  <data name="AcceptDateTime" xml:space="preserve">
+    <value>Accept Date Time</value>
+  </data>
+  <data name="AcceptNotes" xml:space="preserve">
+    <value>Accept Notes</value>
+  </data>
+  <data name="TotalPaymentsAccepted" xml:space="preserve">
+    <value>Total Payments Accepted</value>
+  </data>
+  <data name="OrderIsCancledMessage" xml:space="preserve">
+    <value>Can Not Do This Becuse It's Order Is Cancled</value>
+  </data>
 </root>

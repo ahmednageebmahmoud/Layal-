@@ -1359,4 +1359,40 @@
   <data name="OrderDetails" xml:space="preserve">
     <value>تفاصيل الطلب</value>
   </data>
+  <data name="TheOrders" xml:space="preserve">
+    <value>الطلبات</value>
+  </data>
+  <data name="CancledDateTime" xml:space="preserve">
+    <value>وقت وتاريخ الالغاء</value>
+  </data>
+  <data name="UserCancled" xml:space="preserve">
+    <value>المستخدم الذى الغى</value>
+  </data>
+  <data name="AcceptTransfare" xml:space="preserve">
+    <value>اعتماد</value>
+  </data>
+  <data name="By" xml:space="preserve">
+    <value>بواسطة</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>التالى</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>تم الحفظ</value>
+  </data>
+  <data name="AcceptDateTime" xml:space="preserve">
+    <value>وقت وتاريخ الموافقة</value>
+  </data>
+  <data name="AcceptNotes" xml:space="preserve">
+    <value>ملحوظات الاعتماد</value>
+  </data>
+  <data name="TotalPaymentsAccepted" xml:space="preserve">
+    <value> اجمالى المدفوعات المعتمدة</value>
+  </data>
+  <data name="OrderIsCancledMessage" xml:space="preserve">
+    <value>لا يمكن اتمام العملية وذالك لانة قد تم الغاء الطلب من قبل</value>
+  </data>
 </root>

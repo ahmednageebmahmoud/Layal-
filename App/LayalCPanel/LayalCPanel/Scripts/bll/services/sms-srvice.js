@@ -191,8 +191,8 @@ function getFileBase64(file) {
 function convertDateTimeToString(dateTime) {
     if (!dateTime)
         return "";
-    var myDateTime = new Date(dateTime);
-    return `${myDateTime.getDay()}/${myDateTime.getMonth()}/${myDateTime.getFullYear()}`;
+    //  var myDateTime = new Date(dateTime);
+    return `${dateTime.getMonth() + 1}/${dateTime.getDate()}/${dateTime.getFullYear()}`;
 }
 
 
@@ -228,4 +228,13 @@ function selectTo(timeOut) {
     setTimeout(() => {
         $("select[serchbale]").select2();
     }, timeOut||1000)
+}
+
+function myAutoSize() {
+    setTimeout(() => {
+
+    var demo1 = $('[autosize]');
+    autosize(demo1);
+    autosize.update(demo1);
+    },1000)
 }

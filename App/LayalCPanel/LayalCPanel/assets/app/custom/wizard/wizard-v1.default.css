@@ -136,8 +136,9 @@ $kt-media-breakpoints: (
     justify-content: center;
     background-color: #f9fafc; }
     .kt-wizard-v1 .kt-wizard-v1__wrapper .kt-form {
-      width: 60%;
-      padding: 4rem 0 5rem; }
+        width: 80%;
+        padding: 4rem 0 5rem;
+    }
       .kt-wizard-v1 .kt-wizard-v1__wrapper .kt-form .kt-wizard-v1__content {
         padding-bottom: 2rem;
         margin-bottom: 2rem;

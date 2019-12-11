@@ -47,9 +47,9 @@
                 <div class="kt-portlet__head-toolbar">
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
-                                <a href="/Ordersphotographers/Create" class="btn btn-brand btn-elevate btn-icon-sm">
-                                    <i class="la la-plus"></i>@Token.CreateOrder
-                                </a>
+                            <a href="/PhotoOrders/Create" class="btn btn-brand btn-elevate btn-icon-sm">
+                                <i class="la la-plus"></i>@Token.CreateOrder
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -62,29 +62,29 @@
                     <table class="table sms-table table-hover " id="ng_table_1">
                         <thead class="">
                             <tr class="">
-                                  <th class="th-10">
+                                <th class="th-10">
                                     <sms-sort ng-sms-fop="orderFOP"
                                               ng-sms-field-name="Id"
                                               ng-sms-resource="@Token.OrderId"></sms-sort>
                                 </th>
                                 <th class="th-10">
                                     <sms-sort ng-sms-fop="orderFOP"
-                                              ng-sms-field-name="NameGroom"
+                                              ng-sms-field-name="ProductTypeName"
                                               ng-sms-resource="@Token.ProductType"></sms-sort>
                                 </th>
                                 <th class="th-10">
                                     <sms-sort ng-sms-fop="orderFOP"
-                                              ng-sms-field-name="NameGroom"
+                                              ng-sms-field-name="ProductName"
                                               ng-sms-resource="@Token.Product"></sms-sort>
                                 </th>
                                 <th class="th-10">
                                     <sms-sort ng-sms-fop="orderFOP"
-                                              ng-sms-field-name="IsClinetCustomLogo"
+                                              ng-sms-field-name="CreateDateTime_Display"
                                               ng-sms-resource="@Token.OrderDateTime"></sms-sort>
                                 </th>
                                 <th class="th-10">
                                     <sms-sort ng-sms-fop="orderFOP"
-                                              ng-sms-field-name="CreateDateTimeDisplay"
+                                              ng-sms-field-name="IsActive"
                                               ng-sms-resource="@Token.IsActive  "></sms-sort>
                                 </th>
                                 <th class="th-10">
@@ -98,8 +98,9 @@
                                 <td><span>{{x.ProductType.ProductTypeName}}</span></td>
                                 <td><span>{{x.Product.ProductName}}</span></td>
                                 <td><span>{{x.CreateDateTime_Display}}</span></td>
-                                <td><span>
-                                <i class="fas " ng-class="{'fa-check':x.IsActive}"></i>
+                                <td>
+                                    <span>
+                                        <i class="fas " ng-class="{'fa-check':x.IsActive}"></i>
                                     </span>
                                 </td>
                                 <td>
@@ -107,18 +108,16 @@
                                     <a href="/PhotoOrders/Details?id={{x.Id}}"
                                        title="@Token.Details" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-search-plus"></i></a>
 
-                                    <!--Btn:Edit
-    <a href="/PhotoOrders/Update?id={{x.Id}}"
-       ng-if="x.IsActive"
-       title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
-    -->
+                                    <!--Btn:Edit-->
+                                    <a href="/PhotoOrders/Update?id={{x.Id}}"
+                                       ng-if="x.IsActive"
+                                       title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                   
                                     <!--Btn:Cancel-->
                                     <a href="javascript:void()"
                                        ng-if="x.IsActive"
                                        ng-click="cancel(x)"
                                        title="@Token.OrderCancel" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fas fa-power-off"></i></a>
-
-
                                 </td>
                             </tr>
                         </tbody>
@@ -137,6 +136,6 @@
 @section scripts{
 
     <!--(ANageeb) link angualr files for thsis  view -->
-<script src="~/Scripts/angularJS/views/photoOrders/index/service.js"></script>
+    <script src="~/Scripts/angularJS/views/photoOrders/index/service.js"></script>
     <script src="~/Scripts/angularJS/views/photoOrders/index/contoller.js"></script>
 }

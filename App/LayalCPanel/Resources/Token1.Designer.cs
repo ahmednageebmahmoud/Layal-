@@ -61,6 +61,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accept Date Time.
+        /// </summary>
+        public static string AcceptDateTime {
+            get {
+                return ResourceManager.GetString("AcceptDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accept Notes.
+        /// </summary>
+        public static string AcceptNotes {
+            get {
+                return ResourceManager.GetString("AcceptNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accept.
+        /// </summary>
+        public static string AcceptTransfare {
+            get {
+                return ResourceManager.GetString("AcceptTransfare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account Type.
         /// </summary>
         public static string AccountType {
@@ -610,6 +637,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to By.
+        /// </summary>
+        public static string By {
+            get {
+                return ResourceManager.GetString("By", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can Add.
         /// </summary>
         public static string CanAdd {
@@ -633,6 +669,15 @@ namespace Resources {
         public static string Canceled {
             get {
                 return ResourceManager.GetString("Canceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancled Date Time.
+        /// </summary>
+        public static string CancledDateTime {
+            get {
+                return ResourceManager.GetString("CancledDateTime", resourceCulture);
             }
         }
         
@@ -2185,6 +2230,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        public static string Next {
+            get {
+                return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Next Step.
         /// </summary>
         public static string NextStep {
@@ -2451,6 +2505,15 @@ namespace Resources {
         public static string OrderId {
             get {
                 return ResourceManager.GetString("OrderId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can Not Do This Becuse It&apos;s Order Is Cancled.
+        /// </summary>
+        public static string OrderIsCancledMessage {
+            get {
+                return ResourceManager.GetString("OrderIsCancledMessage", resourceCulture);
             }
         }
         
@@ -2869,6 +2932,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saved.
+        /// </summary>
+        public static string Saved {
+            get {
+                return ResourceManager.GetString("Saved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search In Photographers.
         /// </summary>
         public static string SearchInPhotographers {
@@ -3148,6 +3220,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Orders.
+        /// </summary>
+        public static string TheOrders {
+            get {
+                return ResourceManager.GetString("TheOrders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Service.
         /// </summary>
         public static string TheService {
@@ -3225,6 +3306,15 @@ namespace Resources {
         public static string TotalPayments {
             get {
                 return ResourceManager.GetString("TotalPayments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Payments Accepted.
+        /// </summary>
+        public static string TotalPaymentsAccepted {
+            get {
+                return ResourceManager.GetString("TotalPaymentsAccepted", resourceCulture);
             }
         }
         
@@ -3486,6 +3576,15 @@ namespace Resources {
         public static string User {
             get {
                 return ResourceManager.GetString("User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Cancled.
+        /// </summary>
+        public static string UserCancled {
+            get {
+                return ResourceManager.GetString("UserCancled", resourceCulture);
             }
         }
         

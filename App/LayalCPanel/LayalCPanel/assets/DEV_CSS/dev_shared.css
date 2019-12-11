@@ -7,6 +7,26 @@
     color:#fd397a
 }
 
+*.input-disabled:disabled {
+    background: none !important;
+    cursor: auto;
+    cursor: default;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+select.input-disabled:disabled {
+    cursor: default;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+select.input-disabled:disabled {
+    cursor: default;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
 
 .cursor-pointer{
     cursor:pointer
@@ -43,4 +63,17 @@
 
 .per-wrap {
     white-space: pre-wrap;
+}
+
+.card-grand,.card  {
+    min-height: 250px;
+    max-height: 250px;
+}
+
+.card-header {
+text-align:center;
+}
+.card {
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
 }

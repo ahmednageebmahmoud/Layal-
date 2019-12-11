@@ -154,22 +154,6 @@ div#ng_table_1_filter {
     float: left;
 }
 
-*.input-disabled:disabled {
-    background: none !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    cursor: auto;
-     cursor: default;
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-select.input-disabled:disabled {
-    cursor: default;
-    -webkit-appearance: none;
-    appearance: none;
-}
 
 .help-block {
     color: red

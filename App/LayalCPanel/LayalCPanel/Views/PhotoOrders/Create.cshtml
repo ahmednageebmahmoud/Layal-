@@ -141,14 +141,12 @@
                                                 <alert-error class="animated flash" is-text="true" model="@Token.YouMustbeChooseProductType"
                                                              ng-if="!newOrder.ProductTypeId&&productFrmErrorSubmit"></alert-error>
                                             </div>
-                                            <div class="col-4 form-group-sub cursor-pointer"
-                                                 ng-repeat="p in productTypes"
-                                                 ng-click="newOrder.ProductTypeId=p.Id;getProductsByProductTypeId(p.Id)">
-                                                <div class="card  padding-0" ng-class="{'card-success':newOrder.ProductTypeId==p.Id}">
+                                            <div class="col-4 form-group     cursor-pointer"
+                                                     ng-repeat="p in productTypes">
+                                                <div class="card  " ng-class="{'card-success':newOrder.ProductTypeId==p.Id}"
+                                                     ng-click="newOrder.ProductTypeId=p.Id;getProductsByProductTypeId(p.Id)"
+                                                     style="background: url({{p.ImageUrl}})">
                                                     <div class="card-header">{{p.ProductTypeName}}</div>
-                                                    <div class="card-body padding-0">
-                                                        <img src="{{p.ImageUrl}}" class="col padding-0" />
-                                                    </div>
                                                 </div>
                                             </div>
 
@@ -167,14 +165,22 @@
                                             <alert-error class="animated flash" is-text="true" model="@Token.YouMustbeChooseProduct"
                                                          ng-if="!newOrder.ProductId&&productFrmErrorSubmit"></alert-error>
                                         </div>
-                                        <div class="col-4 form-group-sub cursor-pointer"
+
+                                        <div class="col-4 form-group     cursor-pointer"
+                                             ng-repeat="p in productTypes">
+                                            <div class="card  " ng-class="{'card-success':newOrder.ProductTypeId==p.Id}"
+                                                 ng-click="newOrder.ProductTypeId=p.Id;getProductsByProductTypeId(p.Id)"
+                                                 style="background: url({{p.ImageUrl}})">
+                                                <div class="card-header">{{p.ProductTypeName}}</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-4 form-group cursor-pointer"
                                              ng-repeat="p in products"
                                              ng-click="newOrder.ProductId=p.Id;getProductDetails(p.Id)">
-                                            <div class="card  padding-0" ng-class="{'card-success':newOrder.ProductId==p.Id}">
+                                            <div class="card" ng-class="{'card-success':newOrder.ProductId==p.Id}"
+                                                 style="background: url({{p.Images[0].ImageUrl}})">
                                                 <div class="card-header">{{p.ProductName}}</div>
-                                                <div class="card-body padding-0">
-                                                    <img src="{{p.Images[0].ImageUrl}}" class="col padding-0" />
-                                                </div>
                                             </div>
                                         </div>
 
@@ -189,17 +195,17 @@
                                     <div class="kt-wizard-v1__form">
                                         <div class="form-group row">
                                             <label class="col-form-label col-1  ">@Token.ProductName :  </label>
-                                            <div class="form-group col-11">
+                                            <div class="form-group col-5">
                                                 <input class="form-control" disabled ng-model="product.ProductName" />
                                             </div>
                                             <label class="col-form-label col-1 ">@Token.ProductDescription : </label>
-                                            <div class="form-group col-11">
+                                            <div class="form-group col-5">
                                                 <P class="per-wrap form-control" style="height:auto" ng-bind="product.Description"></P>
                                             </div>
 
                                             <label class="col-form-label col-1  ">@Token.ProductImages: </label>
                                             <div class="form-group col-11 row">
-                                                <div class="col-4" ng-repeat="im in product.Images ">
+                                                <div class="col-3" ng-repeat="im in product.Images ">
                                                     <img src="{{im.ImageUrl}}" class="peoduct-image">
                                                 </div>
                                             </div>
@@ -212,15 +218,15 @@
                             <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
                                 <div class="kt-heading kt-heading--md">@Token.Options :</div>
                                 <div class="kt-form__section kt-form__section--first">
-                                    <div class="kt-wizard-v1__form  ">
+                                    <div class="kt-wizard-v1__form  row">
                                         <!--Error-->
-                                        <div class="form-group row col-12">
+                                        <div class="form-group   col-12">
                                             <alert-error class=" " is-text="true" model="@Token.YouMustbeChooseAllOptions"
                                                          ng-if="newOrder.Options.length<product.Options.length&&productFrmErrorSubmit"></alert-error>
                                         </div>
-                                        <div class="row" ng-repeat="im in product.Options">
-                                            <label class="col-form-label col-1 padding-0">{{im.StaticField.StaticFieldName}} : </label>
-                                            <div class="form-group col-11">
+                                        <div class="col-6 row" ng-repeat="im in product.Options">
+                                            <label class="col-form-label col-2 ">{{im.StaticField.StaticFieldName}} : </label>
+                                            <div class="form-group col-10">
                                                 <select class="form-control"
                                                         serchbale
                                                         ng-model="im.ProductOptionItemSelectedId"
@@ -293,8 +299,8 @@
                                         </div>
                                         <!--Receipt from the branch-->
                                         <div class="form-group row">
-                                            <label class="col-form-label col-lg-2">@Token.ReceiptFromTheBranch :</label>
-                                            <div class="form-group-sub col-lg-10 ">
+                                            <label class="col-form-label col-1">@Token.ReceiptFromTheBranch :</label>
+                                            <div class="form-group-sub col-11 ">
                                                 <span class="kt-switch kt-switch--icon">
                                                     <label>
                                                         <input type="checkbox" checked="checked" ng-model="newOrder.Delivery_IsReceiptFromTheBranch" ng-change="checkDelivery_IsReceiptFromTheBranch()">
@@ -305,8 +311,8 @@
                                         </div>
                                         <!--Country-->
                                         <div class="form-group row">
-                                            <label class="col-form-label col-lg-2">@Token.Country :</label>
-                                            <div class="form-group-sub col-lg-10 ">
+                                            <label class="col-form-label col-lg-1">@Token.Country :</label>
+                                            <div class="form-group-sub col-lg-5 ">
                                                 <select class="form-control"
                                                         serchbale
                                                         name="country"
@@ -319,11 +325,9 @@
                                                 <!--Errors:-->
                                                 <small class="error " ng-if="addOrderForm.country.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
                                             </div>
-                                        </div>
-                                        <!--City-->
-                                        <div class="form-group row">
-                                            <label class="col-form-label col-lg-2">@Token.City :</label>
-                                            <div class="form-group-sub col-lg-10 ">
+                                            <!--City-->
+                                            <label class="col-form-label col-lg-1">@Token.City :</label>
+                                            <div class="form-group-sub col-lg-5 ">
                                                 <select class="form-control"
                                                         serchbale
                                                         name="city"
@@ -339,8 +343,8 @@
                                         </div>
                                         <!--Address-->
                                         <div class="form-group row">
-                                            <label class="col-form-label col-lg-2">@Token.Address :</label>
-                                            <div class="form-group-sub col-lg-10 ">
+                                            <label class="col-form-label col-lg-1">@Token.Address :</label>
+                                            <div class="form-group-sub col-lg-11 ">
                                                 <textarea class="form-control"
                                                           serchbale
                                                           name="address"

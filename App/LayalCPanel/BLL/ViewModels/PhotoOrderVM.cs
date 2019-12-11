@@ -15,6 +15,7 @@ namespace BLL.ViewModels
         public List<ProductOptionVM> Options { get; set; }
         public DateTime CreateDateTime { get; set; }
         public string CreateDateTime_Display => DateService.GetDateTimeAr(this.CreateDateTime);
+        public string CancledDateTime_Display => DateService.GetDateTimeAr(this.CancledDateTime);
         public ProductVM Product { get; set; }
         public ProductTypeVM ProductType { get; set; }
         public UserVM UserCreated { get; set; }
@@ -34,5 +35,9 @@ namespace BLL.ViewModels
         public decimal TotalPayments { get; internal set; }
         public CityVM DeliveryCity { get; internal set; }
         public CountryVM DeliveryCountry { get; internal set; }
+        public DateTime? CancledDateTime { get;   set; }
+        public UserVM UserCancled { get; internal set; }
+        public long? UserCancleddId { get; internal set; }
+        public decimal TotalPaymentsAccepted { get; internal set; }
     }
 }//End CLass

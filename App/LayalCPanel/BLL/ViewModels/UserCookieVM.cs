@@ -26,6 +26,7 @@ namespace BLL.ViewModels
         public bool IsAnonymous { get; set; }
        public string UserName { get;   set; }
         public string FullName { get;   set; }
+        public string Name => string.IsNullOrEmpty(this.FullName) ? this.UserName : this.FullName;
         public int BrId { get; set; }
         public bool IsActive { get;   set; }
         public bool IsPhotographerOrHelper =>

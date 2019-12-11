@@ -211,6 +211,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\MangmentPhotoOrdersController.cs" />
+    <Compile Include="Controllers\PhotoOrdersMangmentController.cs" />
     <Compile Include="Controllers\PhotoOrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProductTypesController.cs" />
@@ -1977,6 +1979,10 @@
     <Content Include="Scripts\angularJS\filters\FilterWithoutDelete.js" />
     <Content Include="Scripts\angularJS\filters\spliting.js" />
     <Content Include="Scripts\angularJS\filters\filterWithoutStaticItems.js" />
+    <Content Include="Scripts\angularJS\views\photoOrdersMangment\details\contoller.js" />
+    <Content Include="Scripts\angularJS\views\photoOrdersMangment\details\service.js" />
+    <Content Include="Scripts\angularJS\views\photoOrdersMangment\index\contoller.js" />
+    <Content Include="Scripts\angularJS\views\photoOrdersMangment\index\service.js" />
     <Content Include="Scripts\angularJS\views\photoOrders\details\contoller.js" />
     <Content Include="Scripts\angularJS\views\photoOrders\details\service.js" />
     <Content Include="Scripts\angularJS\views\photoOrders\update\contoller.js" />
@@ -2378,6 +2384,8 @@
     <Content Include="Views\PhotoOrders\Index.cshtml" />
     <Content Include="Views\PhotoOrders\Update.cshtml" />
     <Content Include="Views\PhotoOrders\Details.cshtml" />
+    <Content Include="Views\PhotoOrdersMangment\Details.cshtml" />
+    <Content Include="Views\PhotoOrdersMangment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

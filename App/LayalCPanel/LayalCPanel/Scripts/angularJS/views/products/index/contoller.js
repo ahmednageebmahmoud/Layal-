@@ -72,7 +72,7 @@
         SMSSweet.delete(() => {
             //Yes 
             BlockingService.block();
-            productsServ.changeActive(product.Id, product.IsActive).then(d => {
+            productsServ.changeActive(product.Id, changeTo).then(d => {
                 BlockingService.unBlock();
                 //اذا تمات العميلة بنجاح فـ الان فقط نحولة الى القيمة الذى كان يردها
                 if (d.data.RequestType == RequestTypeEnum.sucess)

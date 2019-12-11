@@ -45,14 +45,25 @@ namespace BLL.BLL
                 })
                 .Select(c => new ProductVM
                 {
-                    Id=c.Key.Id,
-                    NameAr=c.Key.NameAr,
-                    NameEn=c.Key.NameEn,
-                    Images=c.Select(v=> new ProductImageVM
+                    Id = c.Key.Id,
+                    NameAr = c.Key.NameAr,
+                    NameEn = c.Key.NameEn,
+                    Images = c.Select(v => new ProductImageVM
                     {
-                        ImageUrl=v.ImageUrl
+                        ImageUrl = v.ImageUrl
                     }).ToList()
                 });
+            return Result;
+        }
+
+        public object GetUsers(AccountTypeEnum accountType)
+        {
+            var Result = db.Users_SelectByAccountType((int)accountType).Select(c => new UserVM
+            {
+                Id = c.Id,
+                UserName = c.UserName,
+                FullName = c.UserName
+            });
             return Result;
         }
 

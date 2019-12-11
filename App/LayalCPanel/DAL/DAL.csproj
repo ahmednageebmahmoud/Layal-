@@ -255,6 +255,9 @@
     <Compile Include="Phot_OrderServicePrices_SelectByOrderId_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Phot_Orders_SelectByFilterV2_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Phot_Orders_SelectByFilter_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -335,6 +338,9 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Users_SelectAllForUsersPrivileges_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Users_SelectByAccountType_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Users_SelectByBaicBranchWithWorkTypes_Result.cs">
