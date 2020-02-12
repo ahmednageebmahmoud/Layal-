@@ -1395,4 +1395,22 @@
   <data name="OrderIsCancledMessage" xml:space="preserve">
     <value>لا يمكن اتمام العملية وذالك لانة قد تم الغاء الطلب من قبل</value>
   </data>
+  <data name="Stock" xml:space="preserve">
+    <value>المخزون</value>
+  </data>
+  <data name="CanNotDelete" xml:space="preserve">
+    <value>لا يمكنك الحذف</value>
+  </data>
+  <data name="PaymentType" xml:space="preserve">
+    <value>طريقة الدفع</value>
+  </data>
+  <data name="PayNowForOrderNumber" xml:space="preserve">
+    <value>ادفع الان للطلب رقم </value>
+  </data>
+  <data name="Cash" xml:space="preserve">
+    <value>دفع نقدى</value>
+  </data>
+  <data name="PointsSale" xml:space="preserve">
+    <value>نقاط بيع</value>
+  </data>
 </root>

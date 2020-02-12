@@ -23,6 +23,7 @@ namespace DAL
         public System.DateTime CreateDateTime { get; set; }
         public int Version { get; set; }
         public Nullable<long> FkProductParent_Id { get; set; }
+        public int Stock { get; set; }
         public string NameAr { get; set; }
         public string NameEn { get; set; }
         public string ImageUrl { get; set; }

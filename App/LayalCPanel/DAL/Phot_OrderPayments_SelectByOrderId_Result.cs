@@ -16,12 +16,14 @@ namespace DAL
         public long Id { get; set; }
         public long FkOrder_Id { get; set; }
         public System.DateTime PaymentDateTime { get; set; }
-        public bool IsBankTransfer { get; set; }
         public Nullable<bool> IsAcceptFromManger { get; set; }
         public long FKUserCreated_Id { get; set; }
         public decimal Amount { get; set; }
         public string TransferImage { get; set; }
         public string AcceptNotes { get; set; }
         public Nullable<System.DateTime> AcceptDateTime { get; set; }
+        public int FKPaymentType_Id { get; set; }
+        public string PaymentType_NameAr { get; set; }
+        public string PaymentType_NameEn { get; set; }
     }
 }

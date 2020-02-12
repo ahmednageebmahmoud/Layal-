@@ -27,5 +27,6 @@ namespace BLL.ViewModels
         /// Dropbox File Upaloded Path
         /// </summary>
         public string DropboxThumbnailPath { get;   set; }
+        public string Path { get;   set; }
     }//End CLass
 }

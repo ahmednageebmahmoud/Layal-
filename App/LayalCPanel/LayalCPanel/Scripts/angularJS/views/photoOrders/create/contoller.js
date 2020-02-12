@@ -4,14 +4,16 @@
         State: StateEnum.create,
         ProductTypeId:null,
         ProductId: null,
-        Images: [],
+        Files: [],
         Options: [],
         TotalPrices: 0,
         Delivery_CountryId: null,
-        Delivery_CityId:null
+        Delivery_CityId: null,
+       DeliveryServicePrice : 0,
+
+    Product : { Options:[] }
 
     };
-    s.product = { Options:[] };
     s.newOptionItem = {};
     s.cities = [{ Id: null, CityNameWithShippingPrice: Token.select }];
     s.countries = [{ Id: null, CountryName: Token.select }];
@@ -104,17 +106,18 @@
     s.getProductDetails = productId => {
         //Got To Next Step
         $('[data-ktwizard-type="action-next"]').click();
+        s.newOrder.Product = {};
         let loading = BlockingService.generateLoding();
         loading.show();
         productsServ.getProductDetails(productId).then(d => {
             loading.hide();
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
-                    s.product = d.data.Result;
+                    s.newOrder.Product = d.data.Result;
 
                     //Add New 'Select' Option
-                    if (s.product.Options) {
-                        s.product.Options.forEach(op => {
+                    if (s.newOrder.Product.Options) {
+                        s.newOrder.Product.Options.forEach(op => {
                             if (op.Items)
                                 op.Items.push({ Id: null, Value: Token.select });
                         });
@@ -144,7 +147,7 @@
     //============= Saves =================
 
     s.saveChange = (form) => {
-        if (form.$invalid || !s.newOrder.ProductTypeId || s.newOrder.Images.filter(c=> c.State != StateEnum.delete).length == 0 || s.newOrder.Options.length < s.product.Options.length) {
+        if (form.$invalid || !s.newOrder.ProductTypeId || s.newOrder.Files.filter(c => c.State != StateEnum.delete).length == 0 || s.newOrder.Options.length < s.newOrder.Product.Options.length) {
             s.productFrmErrorSubmit = true;
             return;
         }
@@ -160,7 +163,7 @@
                             LangIsEn ? "Create new order" : "انشاء طلب جديد",
                             () => {
                             //Go To Update Page
-                                window.location.href = `/PhotoOrders/Update?id=${d.data.Result.Id}&go=w_payment`;
+                                window.location.href = `/PhotoOrders/Update?id=${d.data.Result.Id}`;
                         }, () => {
                             //Refrash Page
                             window.location.reload();
@@ -184,47 +187,71 @@
 
 
     //-+-+-+-+-+-+ Delete -+-+-+-++-+++-+-+
-    s.deleteImage = index => {
-            s.newOrder.Images.splice(index, 1)
+    s.deleteFile = index => {
+            s.newOrder.Files.splice(index, 1)
     };
 
     //=+=+=+=+=+=+ Other =+=++=+=+=+==+=+=+
     //تحديث العناصر المختارة
     s.selectOptionItem = () => {
         //Fill Options And Item Selected
-        s.newOrder.Options = s.product.Options.filter(c => c.ProductOptionItemSelectedId).map(c => {
+        s.newOrder.Options = s.newOrder.Product.Options.filter(c => c.ProductOptionItemSelectedId).map(c => {
             let optionTarget = angular.copy(c);
             optionTarget.ItemSelected = c.Items.find(v => v.Id == optionTarget.ProductOptionItemSelectedId);
             optionTarget.Items = [];
             return optionTarget;
         });
-        //Update Total Price
-        s.sumTotalPrices();
+        //Updatet Service Prices
+        s.updateServicePrices();
     }
 
     //تحديث مصاريف خدمة التوصيل
     s.updateDeliveryServicePrice = cityId => {
         let citySelected = s.cities.find(c => c.Id == cityId);
-        if (!citySelected) return;
+        if (!citySelected) {
+            s.newOrder.DeliveryServicePrice = 0;
+        return;
+        }
         s.newOrder.DeliveryServicePrice = citySelected.ShippingPrice;
+
+        //Updatet Service Prices
+        s.updateServicePrices();
+    }
+
+    //Updatet Service Prices
+    s.updateServicePrices = () => {
+
+        //Rest Prices
+        s.newOrder.ServicePrices = [];
+        //Add Options Prices
+        s.newOrder.Options.forEach(option => {
+            s.newOrder.ServicePrices.push({
+                ServiceName: option.ItemSelected.Value,
+                Price: option.ItemSelected.Price,
+                CreateDateTime_Display: Token.now
+            });
+        });
+
+        //Add   Delivery Service  Price
+        s.newOrder.ServicePrices.push({
+            ServiceName: Token.deliveryService,
+            Price: s.newOrder.DeliveryServicePrice,
+            CreateDateTime_Display: Token.now
+        });
+
         //Update Total Price
         s.sumTotalPrices();
-    }
+    };
 
     //Uplaod Images
     s.uplaodImages = files => {
-        if (s.newOrder.Images.length >= 10) {
-            SMSSweet.alert(LangIsEn ? "No more than 10 photos can be downloaded" : "لا يمكن تحميل اكثر من 10 صور", RequestTypeEnum.error);
-            return;
-        }
-
         for (let i = 0; i <= files.length - 1; i++) {
             var fileReaer = new FileReader();
             fileReaer.readAsDataURL(files[i]);
             let file = files[i];
             fileReaer.onload = (d) => {
-                if (s.newOrder.Images.length < 10) {
-                    s.newOrder.Images.push({
+                if (s.newOrder.Files.length < 10) {
+                    s.newOrder.Files.push({
                         State: StateEnum.create,
                         File: file,
                         ImageUrl: d.target.result
@@ -238,9 +265,9 @@
 
     //Sum Total Price For Order
     s.sumTotalPrices = () => {
-        s.newOrder.TotalPrices = s.newOrder.DeliveryServicePrice||0;
-        s.newOrder.Options.forEach(o => {
-            s.newOrder.TotalPrices += o.ItemSelected.Price
+        s.newOrder.TotalPrices = 0;
+        s.newOrder.ServicePrices.forEach(o => {
+            s.newOrder.TotalPrices += o.Price;
         });
     }
 
@@ -250,11 +277,15 @@
             s.newOrder.Delivery_CountryId = null;
             s.newOrder.Delivery_CityId = null;
             s.newOrder.Delivery_Address = null;
+        s.newOrder.DeliveryServicePrice = 0;
         }
         else
             s.newOrder.TotalPrices = 0;
-        //Update Total Price
-        s.sumTotalPrices();
+
+        //Reselect
+        selectTo();
+        //Update Service Prices
+        s.updateServicePrices();
     }
 
     s.autosize = () => {

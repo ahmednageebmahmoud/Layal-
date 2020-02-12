@@ -16,13 +16,21 @@
         };
 
      
-        cancel(id) {
+        //save payment
+        addNewPayment(payment) {
+            let data = new FormData();
+
+            data.append("Amount", payment.Amount);
+            data.append("OrderId", payment.OrderId);
+            data.append("File", payment.File);
+
             return h({
-                url: `${this.basePath}cancel?id=${id}`,
-                method: 'get',
+                url: `${this.basePath}AddPayment`,
+                method: 'post',
+                data: data,
+                headers: { 'Content-Type': angular.undefined }
             });
         };
-
 		//save order  
         saveChange(order) {
 
@@ -32,7 +40,6 @@
 				data:order
 			});
 		};
-
 
 
 	};

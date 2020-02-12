@@ -40,7 +40,7 @@ namespace BLL.ViewModels
         public string DateOfBirthDisplay => DateService.GetDateAr(this.DateOfBirth);
         
         public LanguageEnum _Language { get; set; }
-        public int BranchId { get; set; }
+        public int? BranchId { get; set; }
         public Int64? EnquiryId { get; set; }
         public AccountTypeVM AccountType { get; set; }
         public CountryVM Country { get; set; }

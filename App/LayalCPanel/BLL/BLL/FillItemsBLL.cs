@@ -34,9 +34,9 @@ namespace BLL.BLL
             };
         }
 
-        public object GetProductsByProductTypeId(int productTypeId)
+        public object GetProductsByProductTypeId(int productTypeId,bool? stock)
         {
-            var Result = db.Phot_Products_SelectByProductId(productTypeId)
+            var Result = db.Phot_Products_SelectByProductId(productTypeId, stock)
                 .GroupBy(c => new
                 {
                     c.Id,

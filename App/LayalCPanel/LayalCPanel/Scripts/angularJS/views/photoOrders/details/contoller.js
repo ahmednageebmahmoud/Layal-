@@ -26,11 +26,11 @@ ngApp.controller('productsCtrl', ['$scope', '$http', 'productsServ', function (s
                     SMSSweet.alert(d.data.Message, d.data.RequestType);
                     break;
             }
-            co("G E T - getProductsByProductTypeId", d);
+            co("G E T - getOrder", d);
         }).catch(err => {
             loading.hide();
             SMSSweet.alert(err.statusText, RequestTypeEnum.error);
-            co("E R R O R - getProductsByProductTypeId", err);
+            co("E R R O R - getOrder", err);
         })
     };
 

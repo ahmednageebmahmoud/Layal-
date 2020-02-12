@@ -77,3 +77,12 @@ text-align:center;
     background-repeat: no-repeat !important;
     background-size: cover !important;
 }
+
+.peoduct-image {
+    width: 100%;
+    border: 1px solid #a6a6a6;
+    max-height: 250px;
+    margin: 5px;
+    box-shadow: 2px 2px 5px 1px #0000003b;
+}
+

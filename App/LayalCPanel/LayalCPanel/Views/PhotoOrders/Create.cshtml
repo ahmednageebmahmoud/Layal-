@@ -142,7 +142,7 @@
                                                              ng-if="!newOrder.ProductTypeId&&productFrmErrorSubmit"></alert-error>
                                             </div>
                                             <div class="col-4 form-group     cursor-pointer"
-                                                     ng-repeat="p in productTypes">
+                                                 ng-repeat="p in productTypes">
                                                 <div class="card  " ng-class="{'card-success':newOrder.ProductTypeId==p.Id}"
                                                      ng-click="newOrder.ProductTypeId=p.Id;getProductsByProductTypeId(p.Id)"
                                                      style="background: url({{p.ImageUrl}})">
@@ -166,14 +166,14 @@
                                                          ng-if="!newOrder.ProductId&&productFrmErrorSubmit"></alert-error>
                                         </div>
 
-                                        <div class="col-4 form-group     cursor-pointer"
-                                             ng-repeat="p in productTypes">
-                                            <div class="card  " ng-class="{'card-success':newOrder.ProductTypeId==p.Id}"
-                                                 ng-click="newOrder.ProductTypeId=p.Id;getProductsByProductTypeId(p.Id)"
-                                                 style="background: url({{p.ImageUrl}})">
-                                                <div class="card-header">{{p.ProductTypeName}}</div>
-                                            </div>
-                                        </div>
+                                        @*<div class="col-4 form-group     cursor-pointer"
+                                                 ng-repeat="p in productTypes">
+                                                <div class="card  " ng-class="{'card-success':newOrder.ProductTypeId==p.Id}"
+                                                     ng-click="newOrder.ProductTypeId=p.Id;getProductsByProductTypeId(p.Id)"
+                                                     style="background: url({{p.ImageUrl}})">
+                                                    <div class="card-header">{{p.ProductTypeName}}</div>
+                                                </div>
+                                            </div>*@
 
                                         <div class="col-4 form-group cursor-pointer"
                                              ng-repeat="p in products"
@@ -196,16 +196,16 @@
                                         <div class="form-group row">
                                             <label class="col-form-label col-1  ">@Token.ProductName :  </label>
                                             <div class="form-group col-5">
-                                                <input class="form-control" disabled ng-model="product.ProductName" />
+                                                <input class="form-control" disabled ng-model="newOrder.Product.ProductName" />
                                             </div>
                                             <label class="col-form-label col-1 ">@Token.ProductDescription : </label>
                                             <div class="form-group col-5">
-                                                <P class="per-wrap form-control" style="height:auto" ng-bind="product.Description"></P>
+                                                <P class="per-wrap form-control" style="height:auto" ng-bind="newOrder.Product.Description"></P>
                                             </div>
 
                                             <label class="col-form-label col-1  ">@Token.ProductImages: </label>
                                             <div class="form-group col-11 row">
-                                                <div class="col-3" ng-repeat="im in product.Images ">
+                                                <div class="col-3" ng-repeat="im in newOrder.Product.Images ">
                                                     <img src="{{im.ImageUrl}}" class="peoduct-image">
                                                 </div>
                                             </div>
@@ -224,7 +224,7 @@
                                             <alert-error class=" " is-text="true" model="@Token.YouMustbeChooseAllOptions"
                                                          ng-if="newOrder.Options.length<product.Options.length&&productFrmErrorSubmit"></alert-error>
                                         </div>
-                                        <div class="col-6 row" ng-repeat="im in product.Options">
+                                        <div class="col-6 row" ng-repeat="im in newOrder.Product.Options">
                                             <label class="col-form-label col-2 ">{{im.StaticField.StaticFieldName}} : </label>
                                             <div class="form-group col-10">
                                                 <select class="form-control"
@@ -253,7 +253,7 @@
                                             <!--Uplaod File Notes-->
                                             <label class="col-form-label col-3  ">@Token.UploadFileNotes: </label>
                                             <div class="form-group-sub col-9">
-                                                <P class="per-wrap form-control" style="height:auto" ng-bind="product.UplaodFileNote"></P>
+                                                <P class="per-wrap form-control" style="height:auto" ng-bind="newOrder.Product.UplaodFileNote"></P>
                                             </div>
                                             <!--Upload Images-->
                                             <up-files text="@Token.Upload"
@@ -264,14 +264,14 @@
                                             <!--Images-->
                                             <div class="form-group-sub">
                                                 <div class="row">
-                                                    <div class="col-4 padding-0" ng-repeat="im in newOrder.Images" ng-hide="im.State==state.delete">
+                                                    <div class="col-4 padding-0" ng-repeat="im in newOrder.Files" ng-hide="im.State==state.delete">
                                                         <div class="thumbnail thumbnail-v1">
                                                             <img src="{{im.ImageUrl}}" alt="@Token.Image">
                                                             <div class="caption">
                                                                 <div class="kt-section__content kt-section__content--solid">
                                                                     <div class="kt-divider">
                                                                         <span></span>
-                                                                        <span class="cursor-pointer kt-link kt-font-boldest     " ng-click="deleteImage($index)">@Token.Delete</span>
+                                                                        <span class="cursor-pointer kt-link kt-font-boldest     " ng-click="deleteFile($index)">@Token.Delete</span>
                                                                         <span></span>
                                                                     </div>
                                                                 </div>
@@ -376,15 +376,10 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr ng-repeat="x in newOrder.Options">
-                                                        <td><span>{{x.StaticField.StaticFieldName}}</span></td>
-                                                        <td><span>@Token.Now</span></td>
-                                                        <td><span>{{x.ItemSelected.Price}}</span></td>
-                                                    </tr>
-                                                    <tr ng-if="newOrder.Delivery_CityId">
-                                                        <td><span>@Token.DeliveryService</span></td>
-                                                        <td><span>@Token.Now</span></td>
-                                                        <td><span>{{newOrder.DeliveryServicePrice|currency:''}}{{priceCurrencyCode}}</span></td>
+                                                    <tr ng-repeat="x in newOrder.ServicePrices">
+                                                        <td><span>{{x.ServiceName}}</span></td>
+                                                         <td><span>@Token.Now</span></td>
+                                                        <td><span>{{x.Price}}</span></td>
                                                     </tr>
                                                 </tbody>
                                                 <tfoot>
@@ -436,7 +431,11 @@
 
 @section scriptsInHeader{
     <link href="~/assets/app/custom/wizard/wizard-v1.default.css" rel="stylesheet" />
-    <link href="~/assets/DEV_CSS/wizard-1/wizard.ar.css" rel="stylesheet" />
+    @if (!LanguageService.IsEn)
+    {
+
+        <link href="~/assets/DEV_CSS/wizard-1/wizard.ar.css" rel="stylesheet" />
+    }
 }
 
 @section scripts{

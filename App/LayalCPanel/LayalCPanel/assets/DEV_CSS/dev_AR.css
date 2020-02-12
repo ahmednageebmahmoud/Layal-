@@ -219,11 +219,3 @@ form-control:disabled, .form-control[readonly] {
            border-right: 2px solid #2a3450;
    }
 
-.peoduct-image{
-    width: 100%;
-    border: 1px solid #a6a6a6;
-    max-height: 250px;
-    margin: 5px;
-    box-shadow: 2px 2px 5px 1px #0000003b;
-}
-

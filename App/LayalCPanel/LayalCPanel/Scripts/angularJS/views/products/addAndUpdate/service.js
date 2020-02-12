@@ -35,7 +35,8 @@
             data.append("product.WordUploadFileNotesId", product.WordUploadFileNotesId);
             data.append("product.ProductParentId", product.ProductParentId);
             data.append("product.Version", product.Version);
-
+            data.append("product.Stock", product.Stock);
+            
             data.append("product.NameAr", product.NameAr);
             data.append("product.NameEn", product.NameEn);
             data.append("product.DescriptionAr", product.DescriptionAr);

@@ -386,7 +386,7 @@ namespace BLL.BLL
                 IsActive = c.IsActive,
                 FullName = c.FullName,
                 WebSite = c.WebSite,
-                BranchId=c.FKPranch_Id.Value,
+                BranchId=c.FKPranch_Id,
                 NationalityNumber = c.NationalityNumber,
 
                 City = new CityVM

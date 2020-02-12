@@ -5,8 +5,7 @@ class StateEnum {
     static get create() { return 1; };
     static get update() { return 2; };
     static get delete () { return 3; };
-    static get approve() { return 4; };
-    static get cancel() { return 5; };
+    static get cancel() { return 4; };
 }
 
 

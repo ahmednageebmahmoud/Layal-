@@ -61,6 +61,10 @@
 
     Token.notFinshed = LangIsEn ? 'Not Finshed' : 'لم يتم الانتهاء';
     Token.finshed = LangIsEn ? 'Finshed' : 'تم الانتهاء';
-Token.areYouSureCancel = LangIsEn ?'Are You Sure Cancel ?': 'هل انت متاكد من الإلفاء؟' ;
+Token.areYouSureCancel = LangIsEn ? 'Are You Sure Cancel ?' : 'هل انت متاكد من الإلفاء؟';
+
+Token.deliveryService = LangIsEn ? 'Delivery Service' : 'الآن';
+Token.now = LangIsEn ? 'Now' : 'الآن';
+
 
 

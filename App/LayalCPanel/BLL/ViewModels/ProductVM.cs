@@ -28,5 +28,7 @@ namespace BLL.ViewModels
         public long WordUploadFileNotesId { get; internal set; }
         public int Version { get; set; }
         public long? ProductParentId { get; set; }
+
+        public int Stock { get; set; }
     }
 }

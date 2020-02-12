@@ -82,7 +82,8 @@ namespace BLL.Enums
     {
         Create = 1,
         Update = 2,
-        Delete = 3
+        Delete = 3,
+        Cancel=4
     }
 
     public enum EnquiryStatusTypesEnum
@@ -125,7 +126,22 @@ namespace BLL.Enums
         Archiving = 14,
     }
 
+    /// <summary>
+    /// هنا الاسماء او الكلامات التى لايمكن حذفها لاننا نستخدمها مع اكثر من شىء
+    /// </summary>
+    public enum WordsEnum
+    {
+        DeliveryService= 40823
+    }
 
-
+    /// <summary>
+    /// انوع عمليات الدفع التى يمكن ان يقوم بها المستخدم
+    /// </summary>
+    public enum PaymentTypeEnum
+    {
+        BankTransfer=1,
+        Cash=2,
+        PointsSale=3
+    }
 
 }//end class

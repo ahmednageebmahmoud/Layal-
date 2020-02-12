@@ -31,10 +31,15 @@
             });
         };
      
-        cancel(id) {
+      
+        //save payment
+        addNewPayment(payment) {
+             
+
             return h({
-                url: `${this.basePath}cancel?id=${id}`,
-                method: 'get',
+                url: `${this.basePath}AddPayment`,
+                method: 'post',
+                data: payment,
             });
         };
 

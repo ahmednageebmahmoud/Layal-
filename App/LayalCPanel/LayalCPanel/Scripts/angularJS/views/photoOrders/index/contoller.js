@@ -63,35 +63,39 @@
 
     
 
-    //============= Delete ================
-    s.delete = order => {
-        //show confirm delete
-        SMSSweet.delete(() => {
-            //Yes Delete
-            order.State = StateEnum.delete;
-            BlockingService.block();
-            ordersServ.saveChange(order).then(d => {
-                BlockingService.unBlock();
-                switch (d.data.RequestType) {
-                    case RequestTypeEnum.sucess:
-                        {
-                            s.orders.splice(s.orders.findIndex(c => c.Id == order.Id), 1)
-                            s.reFop(s.orders.length);
-                        } break;
-                }
-                SMSSweet.alert(d.data.Message, d.data.RequestType);
-                co('res-savechnage-del', d.data);
-            });
-        });
-    };
+    //Add New Payment
+    s.addNewPayment = form => {
+        if (form.$invalid || !s.newPayment.File) {
+            s.addPaymrntFrmSubmitErro = true;
+            return;
+        }
+        
+        ordersServ.addNewPayment(s.newPayment).then(d => {
+            switch (d.data.RequestType) {
+                case RequestTypeEnum.sucess:
+                    {
+                        
+                        bootstrapModelHide("addNewPayment");
+                    } break;
+            }
+            SMSSweet.alert(d.data.Message, d.data.RequestType);
+            co("P O S T - addNewPayment", d);
+            BlockingService.unBlock();
+        }).catch(err => {
+            BlockingService.unBlock();
+            SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+            co("E R R O R - addNewPayment", err);
+        })
 
+    }
     //============= U P D A T E  =================
     s.cancel = order => {
         //show confirm cancele
         SMSSweet.confirmInfo(Token.areYouSureCancel, () => {
             //Yes Delete
+            order.State = StateEnum.cancel;
             BlockingService.block();
-            ordersServ.cancel(order.Id).then(d => {
+            ordersServ.saveChange(order).then(d => {
                 BlockingService.unBlock();
                 switch (d.data.RequestType) {
                     case RequestTypeEnum.sucess:
@@ -105,6 +109,32 @@
         });
 
     };
+    //============= Delete ================
+
+    s.delete = order => {
+        //show confirm delete
+        SMSSweet.delete(() => {
+            //Yes Delete
+            order.State = StateEnum.delete;
+            BlockingService.block();
+            ordersServ.saveChange(order).then(d => {
+                BlockingService.unBlock();
+                switch (d.data.RequestType) {
+                    case RequestTypeEnum.sucess:
+                        {
+                            s.orders.splice(s.orders.findIndex(c => c.Id == order.Id), 1);
+                            s.reFop(s.orders.length);
+
+                        } break;
+                }
+                SMSSweet.alert(d.data.Message, d.data.RequestType);
+                co('res-savechnage-Delete', d.data);
+            });
+        });
+
+    };
+
+    
     
  
  
@@ -112,26 +142,34 @@
 
 
     //============= Other =================
+
+    //رفع صورة الحوالة البنكية 
+    s.uplaodImages = file => {
+        if (!file || !file[0]) {
+            s.newPayment.File = null;
+            return;
+        }
+
+        s.newPayment.File = file[0];
+
+        var fileReaer = new FileReader();
+        fileReaer.readAsDataURL(file[0]);
+        fileReaer.onload = (d) => {
+            s.newPayment.BankTransferImage = d.target.result;
+            s.$apply();
+        }
+    };
+
+    //Show Model For Add New Payment
+    s.showAddNewPayment = orderId => {
+        s.newPayment = { OrderId:orderId};
+
+        s.addPaymrntFrmSubmitErro = false;
+        bootstrapModelShow("addNewPayment");
+    };
+
     s.reFop = length => {
         s.orderFOP.reFop(length);
-    };
-
-    s.checkAllowDisplay = (priv) => {
-        if (!priv.CanEdit && !priv.CanDelete)
-            priv.CanDisplay = false;
-        else
-            priv.CanDisplay = true;
-    };
-    
-    //للتحقق القيم المطلوبة
-    s.propertyIsFalthy = (prop, propChange) => {
-        return prop ? false : true;
-
-    }
-    //للتحقق من عدد القيم المدخلة 
-    s.propertyIsMaxLength = (prop, mxLength) => {
-        if (!prop) return false;
-        return prop.length > mxLength;
     };
 
     //Call Functions

@@ -51,6 +51,7 @@
                                             addProductFrm.descriptionEn.$invalid ||
                                             addProductFrm.uplaodFIleNotesAr.$invalid ||
                                             addProductFrm.uplaodFIleNotesEn.$invalid||
+                                            addProductFrm.stock.$invalid||
                                             addProductFrm.productTypeid.$invalid)&&productFrmErrorSubmit
                                         }"></i>
                                         </div>
@@ -202,6 +203,19 @@
 
                                                     <!--Errors:ProductType-->
                                                     <small class="error " ng-if="addProductFrm.productTypeid.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                                </div>
+                                            </div>
+                                            <!--Stock-->
+                                            <div class="col-6">
+                                                <!--Stock-->
+                                                <label class="col-form-label ">@Token.Stock </label>
+                                                <div class="form-group">
+                                                    <input type="number" class="form-control " name="stock" 
+                                                            ng-class="{'is-invalid':addProductFrm.stock.$invalid&&productFrmErrorSubmit}"
+                                                           ng-model="newProduct.Stock" required min="0" />
+                                                    <!--Errors:Stock-->
+                                                    <small class="error " ng-if="addProductFrm.stock.$error.required&&productFrmErrorSubmit">@Token.FieldIsRequierd</small>
+                                                    <small class="error " ng-if="addProductFrm.stock.$error.min&&productFrmErrorSubmit">@Token.MinNumberIs 0</small>
                                                 </div>
                                             </div>
                                             <!--IsActive-->

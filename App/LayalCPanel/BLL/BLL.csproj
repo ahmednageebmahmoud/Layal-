@@ -123,9 +123,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\PhotoOrdersMangmentBll.cs" />
-    <Compile Include="BLL\PhotoOrdersPaymentsBll.cs" />
-    <Compile Include="BLL\PhotoOrdersBll.cs" />
+    <Compile Include="BLL\OrdersMangmentBll.cs" />
+    <Compile Include="BLL\OrdersPaymentsBll.cs" />
+    <Compile Include="BLL\OrdersBll.cs" />
     <Compile Include="BLL\ProductOptionBLL.cs" />
     <Compile Include="BLL\ProductsBLL.cs" />
     <Compile Include="BLL\CRMBLL.cs" />
@@ -180,7 +180,9 @@
     <Compile Include="ViewModels\DropboxThumbnailVM.cs" />
     <Compile Include="ViewModels\OrderFileVM.cs" />
     <Compile Include="ViewModels\OrderPaymentVM.cs" />
-    <Compile Include="ViewModels\PhotoOrderVM.cs" />
+    <Compile Include="ViewModels\OrderServicePriceVM.cs" />
+    <Compile Include="ViewModels\PaymentTypeVM.cs" />
+    <Compile Include="ViewModels\OrderVM.cs" />
     <Compile Include="ViewModels\OrderPriceVM.cs" />
     <Compile Include="ViewModels\ProductImageVM.cs" />
     <Compile Include="ViewModels\ProductOptionItemVM.cs" />

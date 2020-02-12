@@ -121,7 +121,30 @@ ngApp.controller('ordersCtrl', ['$scope', '$http', 'ordersServ', function (s, h,
 
     //============= Saves =================
 
-    
+    //Add New Payment
+    s.addNewPayment = form => {
+        if (form.$invalid) {
+            s.addPaymrntFrmSubmitErro = true;
+            return;
+        }
+
+        ordersServ.addNewPayment(s.newPayment).then(d => {
+            switch (d.data.RequestType) {
+                case RequestTypeEnum.sucess:
+                    {
+                        bootstrapModelHide("addNewPayment");
+                    } break;
+            }
+            SMSSweet.alert(d.data.Message, d.data.RequestType);
+            co("P O S T - addNewPayment", d);
+            BlockingService.unBlock();
+        }).catch(err => {
+            BlockingService.unBlock();
+            SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+            co("E R R O R - addNewPayment", err);
+        })
+
+    }
 
     //============= Delete ================
     s.delete = order => {
@@ -149,9 +172,11 @@ ngApp.controller('ordersCtrl', ['$scope', '$http', 'ordersServ', function (s, h,
     s.cancel = order => {
         //show confirm cancele
         SMSSweet.confirmInfo(Token.areYouSureCancel, () => {
-            //Yes Delete
+            //Yes Cancel
+            order.State = StateEnum.cancel;
+
             BlockingService.block();
-            ordersServ.cancel(order.Id).then(d => {
+            ordersServ.saveChange(order).then(d => {
                 BlockingService.unBlock();
                 switch (d.data.RequestType) {
                     case RequestTypeEnum.sucess:
@@ -159,7 +184,7 @@ ngApp.controller('ordersCtrl', ['$scope', '$http', 'ordersServ', function (s, h,
                             order.IsActive = 0;
                             order.UserCancleddId = d.data.Result.UserId;
                             order.UserCancled.Name = d.data.Result.UserName;
-                            order.UserCancled.CancledDateTime_Display = d.data.Result.DateTime;
+                            order.UserCancled.CancledDateTime_Display = d.data.Result.CancledDateTime_Display;
                         } break;
                 }
                 SMSSweet.alert(d.data.Message, d.data.RequestType);
@@ -179,23 +204,15 @@ ngApp.controller('ordersCtrl', ['$scope', '$http', 'ordersServ', function (s, h,
         s.orderFOP.reFop(length);
     };
 
-    s.checkAllowDisplay = (priv) => {
-        if (!priv.CanEdit && !priv.CanDelete)
-            priv.CanDisplay = false;
-        else
-            priv.CanDisplay = true;
-    };
-    
-    //للتحقق القيم المطلوبة
-    s.propertyIsFalthy = (prop, propChange) => {
-        return prop ? false : true;
 
-    }
-    //للتحقق من عدد القيم المدخلة 
-    s.propertyIsMaxLength = (prop, mxLength) => {
-        if (!prop) return false;
-        return prop.length > mxLength;
+    //Show Model For Add New Payment
+    s.showAddNewPayment = orderId => {
+        s.newPayment = { OrderId: orderId };
+
+        s.addPaymrntFrmSubmitErro = false;
+        bootstrapModelShow("addNewPayment");
     };
+
 
     //Call Functions
     s.getOrders();

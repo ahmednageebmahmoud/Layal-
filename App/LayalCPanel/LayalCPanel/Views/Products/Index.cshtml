@@ -81,6 +81,12 @@
                                                   ng-sms-field-name="ProductTypeName"
                                                   ng-sms-resource="@Token.ProductType"></sms-sort>
                                     </th>
+                                    
+                                    <th class="th-10 ">
+                                        <sms-sort ng-sms-fop="productFOP"
+                                                  ng-sms-field-name="Stock"
+                                                  ng-sms-resource="@Token.Stock"></sms-sort>
+                                    </th>
                                     <th class="th-10 ">
                                         <sms-sort ng-sms-fop="productFOP"
                                                   ng-sms-field-name="IsActive"
@@ -103,13 +109,15 @@
                                     <td><span>{{x.NameAr}}</span> </td>
                                     <td><span>{{x.NameEn}}</span> </td>
                                     <td><span>{{x.ProductType.ProductTypeName}}</span> </td>
+                                    <td><span>{{x.Stock}}</span> </td>
+                                    
                                     <td>
                                         <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
                                             <label>
                                                 <input type="checkbox"
                                                        checked="checked"
                                                        ng-change="changeActive(x)"
-                                                       ng-model="x.IsActive" name="" >
+                                                       ng-model="x.IsActive" name="">
                                                 <span></span>
                                             </label>
                                         </span>
@@ -118,7 +126,7 @@
                                         </span>
                                     </td>
                                     <td><span>{{x.Version}}</span></td>
-                                    
+
                                     <td>
                                         <!--Btn:Copy-->
                                         @if (Priv.CanEdit)

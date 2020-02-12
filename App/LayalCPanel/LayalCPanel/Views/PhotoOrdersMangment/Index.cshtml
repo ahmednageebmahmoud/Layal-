@@ -196,19 +196,19 @@
                                 <span ng-if="!x.IsActive">
                                     @Token.CancledDateTime  : <br /> {{x.CancledDateTime_Display}}
                                 </span>
-
                             </td>
                             <td>
-
                                 <!--Btn:Information-->
                                 <a href="/PhotoOrdersMangment/Details?id={{x.Id}}"
                                    title="@Token.Details" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-search-plus"></i></a>
 
-                                <!--Btn:Edit
-                                <a href="/PhotoOrders/Update?id={{x.Id}}"
+                                <!-- Btn:Edit-->
+                                <a href="/PhotoOrdersMangment/Update?id={{x.Id}}"
                                    ng-if="x.IsActive"
                                    title="@Token.Update" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
-                                -->
+
+
+
                                 @if (Priv.CanDelete)
                                 {
                                     <!--Btn:Cancel-->
@@ -217,12 +217,93 @@
                                        ng-click="cancel(x)"
                                        title="@Token.OrderCancel" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fas fa-power-off"></i></a>
                                 }
+
+                                <br />
+                                <!--Btn:PayNow-->
+                                <a href="javascript:void(0)" class="btn btn-success btn-elevate btn-icon-sm" ng-click="showAddNewPayment(x.Id)">
+                                    <i class="la la-dollar"></i>@Token.PayNow
+                                </a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <!--Paging -->
                 <sms-paging ng-sms-fop="orderFOP" ng-sms-display-m-func="getOrders()"></sms-paging>
+            </div>
+        </div>
+    </div>
+    <!--Add New Payment-->
+    <div id="addNewPayment"
+         class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form novalidate name="addPaymrntFrm" class="kt-form kt-form--label-right" ng-submit="addNewPayment(addPaymrntFrm)">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">@Token.PayNowForOrderNumber {{newPayment.OrderId}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!--Row 1-->
+                        <div class="form-group  row">
+                            <!--Payment Type -->
+                            <label class="col-lg-2 col-form-label">@Token.PaymentType </label>
+                            <div class="col-lg-4 form-group-sub">
+                                <select class="form-control"
+                                        name="paymentTypeId"
+                                        ng-class="{'is-invalid':addPaymrntFrm.paymentTypeId.$invalid&&addPaymrntFrmSubmitErro}"
+                                        ng-model="newPayment.PaymentTypeId">
+                                    <option value="@Convert.ToInt32(PaymentTypeEnum.Cash)"> @Token.Cash </option>
+                                    <option value="@Convert.ToInt32(PaymentTypeEnum.PointsSale)">@Token.PointsSale </option>
+                                </select>
+                                <small class="error " ng-if="addPaymrntFrm.paymentTypeId.$error.required&&addPaymrntFrmSubmitErro">@Token.FieldIsRequierd</small>
+                            </div>
+                            <!--Amount-->
+                            <label class="col-lg-2 col-form-label">@Token.Amount</label>
+                            <div class="col-lg-4 form-group-sub">
+                                <input type="number"
+                                       name="amount"
+                                       class="form-control"
+                                       ng-class="{'is-invalid':addPaymrntFrm.amount.$invalid&&addPaymrntFrmSubmitErro}"
+                                       ng-model="newPayment.Amount"
+                                       ng-required="true" />
+                                <!--Errors-->
+                                <small class="error " ng-if="addPaymrntFrm.amount.$error.required&&addPaymrntFrmSubmitErro">@Token.FieldIsRequierd</small>
+                            </div>
+                        </div>
+                        <!--Row 2-->
+                        @if (CookieService.UserInfo.IsAdmin)
+                        {
+                            <div class="form-group  row">
+                                <!--Is Accept -->
+                                <label class="col-lg-2 col-form-label">@Token.Accept </label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                        <label>
+                                            <input type="checkbox" checked="checked" ng-model="newPayment.IsAcceptFromManger" name="" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                            <span></span>
+                                        </label>
+                                    </span>
+                                </div>
+
+                                <!--Accept Notes-->
+                                <label class="col-lg-2 col-form-label">@Token.AcceptNotes</label>
+                                <div class="col-lg-4 form-group-sub">
+                                    <textarea name="amount"
+                                              class="form-control"
+                                              ng-model="newPayment.AcceptNotes"
+                                              maxlength="500"></textarea>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                            <i class="la la-plus">@Token.Add</i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@Token.Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

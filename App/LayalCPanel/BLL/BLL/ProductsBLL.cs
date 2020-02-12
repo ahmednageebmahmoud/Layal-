@@ -22,6 +22,7 @@ namespace BLL.BLL
                 WordDescriptionId = c.FKWord_Description_Id,
                 IsActive = c.IsActive,
                 Version = c.Version,
+                Stock=c.Stock,
 
                 ProductType = new ProductTypeVM { NameAr = c.ProductTypeNameAr, NameEn = c.ProductTypeNameEn },
                 WordUploadFileNotesId = c.FKWord_UplaodFilesNotes_Id,
@@ -53,7 +54,8 @@ namespace BLL.BLL
                 v.FKWord_Name_Id,
                 v.FKWord_Description_Id,
                 v.FKWord_UplaodFilesNotes_Id,
-                v.Version
+                v.Version,
+                v.Stock
             }).Select(v => new ProductVM
             {
                 Id = v.Key.Id,
@@ -69,6 +71,7 @@ namespace BLL.BLL
                 WordUploadFileNotesId = v.Key.FKWord_UplaodFilesNotes_Id,
                 IsActive = v.Key.IsActive,
                 Version = v.Key.Version,
+                Stock=v.Key.Stock,
                 Images = v.Where(e => e.ProductImageId.HasValue).Select(b => new ProductImageVM
                 {
                     Id = b.ProductImageId.Value,
@@ -193,7 +196,7 @@ namespace BLL.BLL
                     var NewFilesPathes = string.Join(",", c.Images.Where(v => v.State == StateEnum.Create && !string.IsNullOrEmpty(v.ImageUrl)).Select(v => v.ImageUrl));
                     var DeleteFilesIds = string.Join(",", c.Images.Where(v => v.State == StateEnum.Delete).Select(v => v.Id));
                     db.Phot_Products_Update(c.Id, c.WordId, c.WordDescriptionId, c.WordUploadFileNotesId, c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.UplaodFileNotesAr, c.UplaodFileNotesEn,
-                      NewFilesPathes, DeleteFilesIds, c.ProductTypeId, c.IsActive);
+                      NewFilesPathes, DeleteFilesIds, c.ProductTypeId, c.IsActive,c.Stock);
 
 
                     //Update Options
@@ -261,7 +264,6 @@ namespace BLL.BLL
         ProductOptionBLL OBLL = new ProductOptionBLL();
         using (var tranc = db.Database.BeginTransaction())
         {
-
             try
             {
                 //Disapled Another Product With The Thame Parent 
@@ -273,7 +275,7 @@ namespace BLL.BLL
                     return ResponseVM.Error(Token.SomFilesNotSaved);
 
                 var ProductId = db.Phot_Products_Insert(c.NameAr, c.NameEn, c.DescriptionAr, c.DescriptionEn, c.UplaodFileNotesAr, c.UplaodFileNotesEn, string.Join(",", c.Images.Where(v => v.ImageUrl != null).Select(v => v.ImageUrl)), c.ProductTypeId,
-                    this.UserLoggad.Id, c.IsActive, c.Version, c.ProductParentId)
+                    this.UserLoggad.Id, c.IsActive, c.Version, c.ProductParentId,c.Stock)
                         .FirstOrDefault();
 
                 //Return If Not Add  Product

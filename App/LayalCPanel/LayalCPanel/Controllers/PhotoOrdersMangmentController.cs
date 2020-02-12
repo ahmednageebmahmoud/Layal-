@@ -12,10 +12,14 @@ using UI.Models;
 
 namespace LayalCPanel.Controllers
 {
+    /// <summary>
+    /// For Admin
+    /// </summary>
     [Authorize]
     public class PhotoOrdersMangmentController : BasicController
     {
-        PhotoOrdersMangmentBll Bll = new PhotoOrdersMangmentBll();
+        OrdersMangmentBll Bll = new OrdersMangmentBll();
+        OrdersBll ClinetBll = new OrdersBll();
 
         [PagePrivilege(PagesEnum.PhotoOrdersMangment, true, true, false, true)]
         public ActionResult Index()
@@ -29,9 +33,13 @@ namespace LayalCPanel.Controllers
         {
             return View();
         }
+        public ActionResult Update(long id)
+        {
+            return View();
+        }
 
 
-     
+
         public ActionResult GetOrders(int skip, int take,int? productTypeId, long? productId,
             long? userCreatedId,DateTime? createDateFrom,DateTime? createDateTo,bool? isActive)
         {
@@ -46,13 +54,28 @@ namespace LayalCPanel.Controllers
                 Photographers = FillItems.GetUsers(AccountTypeEnum.Photographer),
             }), JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetItemsV2()
+        {
+            return Json(ResponseVM.Success(new
+            {
+                ProductTypes = FillItems.GetProductTypes(),
+                Countries = FillItems.GetCountries()
+            }), JsonRequestBehavior.AllowGet);
+        }
+        
 
         public JsonResult GetProductsByProductTypeId(int productTypeId)
         {
             return Json(ResponseVM.Success(new
             {
-                Products = FillItems.GetProductsByProductTypeId(productTypeId)
+                Products = FillItems.GetProductsByProductTypeId(productTypeId,true)
             }), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetProductDetails(int productId)
+        {
+            ProductsBLL Pro = new ProductsBLL();
+            return Json(Pro.GetProductById(productId), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -65,15 +88,31 @@ namespace LayalCPanel.Controllers
         [PageForUserType(AccountTypeEnum.ProjectManager)]
         public JsonResult AcceptTransfare(OrderPaymentVM payment)
         {
-            return Json(new PhotoOrdersPaymentsBll(). AcceptTransfare(payment), JsonRequestBehavior.AllowGet);
+            return Json(new OrdersPaymentsBll(). AcceptTransfare(payment), JsonRequestBehavior.AllowGet);
         }
+
+
+        [HttpGet]
+        public JsonResult GetOrderById(long id)
+        {
+            return Json(Bll.GetOrdeById(id), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult SaveChange(OrderVM order)
+        {
+            return Json(ClinetBll.SaveChange(order), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult AddPayment(OrderPaymentVM o)
+        {
+            return Json(new OrdersPaymentsBll().AddPaymentByAdmin(o), JsonRequestBehavior.AllowGet);
+        }
+
         
 
 
-        public JsonResult Cancel(long id)
-        {
-            return Json(Bll.Cancel(id), JsonRequestBehavior.AllowGet);
-        }
 
 
     }//End Class

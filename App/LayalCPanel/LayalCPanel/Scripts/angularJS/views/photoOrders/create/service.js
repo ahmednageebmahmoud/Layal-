@@ -43,6 +43,7 @@
         saveChange(product) {
             let data = new FormData();
 
+            data.append("order.State", product.State);
             data.append("order.ProductTypeId", product.ProductTypeId);
             data.append("order.ProductId", product.ProductId);
             data.append("order.Delivery_IsReceiptFromTheBranch", product.Delivery_IsReceiptFromTheBranch);
@@ -58,8 +59,8 @@
                 });
 
             //Images
-            if (product.Images)
-                product.Images.forEach((f, index) => {
+            if (product.Files)
+                product.Files.forEach((f, index) => {
                     data.append(`order.Files[${index}].File`, f.File);
                 });
 

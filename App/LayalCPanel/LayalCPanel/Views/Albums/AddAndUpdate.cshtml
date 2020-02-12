@@ -108,41 +108,6 @@
                                     <small class="error " ng-if="addAlbumFrm.descriptionEn.$error.required&&albumFrmErrorSubmit">@Token.FieldIsRequierd</small>
                                 </div>
                             </div>
-                            @*
-                                <!--R O W 3-->
-                                <div class="form-group row" >
-                                    <!--Images-->
-                                    <label class="col-lg-2 col-form-label">@Token.Images</label>
-                                    <div class="col-lg-2 form-group-sub">
-                                      <up-files
-                                                    text="@Token.Upload"
-                                                    accept="image/*"
-                                                    count="10"
-
-                                                    ></up-files>
-                                    </div>
-                                    <!--Images-->
-                                    <div class="col-lg-8 form-group-sub">
-                                        <div class="row">
-                                            <div class="col-md-4" ng-repeat="im in newAlbum.AlbumFiles " ng-hide="im.State==state.delete">
-                                                <div class="thumbnail">
-                                                        <img src="{{im.FileUrl}}" alt="Lights" style="width:100%">
-                                                        <div class="caption">
-                                                            <div class="kt-section__content kt-section__content--solid">
-                                                                <div class="kt-divider">
-                                                                    <span></span>
-                                                                    <span class="cursor-pointer kt-link kt-font-boldest     " ng-click="deleteImage($index)">@Token.Delete</span>
-                                                                    <span></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>*@
                         </div>
 
                         <div class="kt-portlet__foot">
@@ -165,7 +130,7 @@
                                             <i class="la la-save">@Token.Update</i>
                                         </button>
                                     }
-                                    <button type="reset" class="btn btn-warning btn-elevate btn-elevate-air" ng-if="enquiry.State!=state.update" ng-click="reSelect()"><i class="la la-file">@Token.Cancel</i></button>
+                                    <button type="reset" class="btn btn-warning btn-elevate btn-elevate-air" ng-if="newAlbum.State!=state.update" ng-click="reSelect()"><i class="la la-file">@Token.Cancel</i></button>
                                 </div>
                             </div>
                         </div>

@@ -1,31 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="LayanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="LayanEntities" annotation:LazyLoadingEnabled="true">
-    <FunctionImport Name="AlbumTypes_CheckIfUsed" ReturnType="Collection(Int32)">
+    <FunctionImport Name="f_Phot_ProductsOptions_CheckIfUsed" ReturnType="Collection(Int32)">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Albums_CheckIfUsed" ReturnType="Collection(Int32)">
       <Parameter Name="Id" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="AlbumTypes_Delete">
+    <FunctionImport Name="Albums_Delete">
       <Parameter Name="Id" Mode="In" Type="Int64" />
       <Parameter Name="WordId" Mode="In" Type="Int64" />
+      <Parameter Name="WordDescriptionId" Mode="In" Type="Int64" />
     </FunctionImport>
-    <FunctionImport Name="AlbumTypes_Insert">
-      <Parameter Name="Id" Mode="InOut" Type="Int32" />
+    <FunctionImport Name="Albums_Insert" ReturnType="Collection(LayanModel.Albums_Insert_Result)">
       <Parameter Name="NameAr" Mode="In" Type="String" />
       <Parameter Name="NameEn" Mode="In" Type="String" />
+      <Parameter Name="DescriptionAr" Mode="In" Type="String" />
+      <Parameter Name="DescriptionEn" Mode="In" Type="String" />
+      <Parameter Name="Files" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="AlbumTypes_SelectAll" ReturnType="Collection(LayanModel.AlbumTypes_SelectAll_Result)" />
-    <FunctionImport Name="AlbumTypes_SelectByFilter" ReturnType="Collection(LayanModel.AlbumTypes_SelectByFilter_Result)">
+    <FunctionImport Name="Albums_SelectAll" ReturnType="Collection(LayanModel.Albums_SelectAll_Result)" />
+    <FunctionImport Name="Albums_SelectByFilter" ReturnType="Collection(LayanModel.Albums_SelectByFilter_Result)">
       <Parameter Name="Skip" Mode="In" Type="Int32" />
       <Parameter Name="Take" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="AlbumTypes_Update">
+    <FunctionImport Name="Albums_SelectByPk" ReturnType="Collection(LayanModel.Albums_SelectByPk_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Albums_Update" ReturnType="Collection(LayanModel.Albums_Update_Result)">
       <Parameter Name="Id" Mode="In" Type="Int32" />
       <Parameter Name="NameAr" Mode="In" Type="String" />
       <Parameter Name="NameEn" Mode="In" Type="String" />
       <Parameter Name="WordId" Mode="In" Type="Int64" />
+      <Parameter Name="DescriptionAr" Mode="In" Type="String" />
+      <Parameter Name="DescriptionEn" Mode="In" Type="String" />
+      <Parameter Name="WordDescriptionId" Mode="In" Type="Int64" />
+      <Parameter Name="NewFiles" Mode="In" Type="String" />
+      <Parameter Name="DeleteFilesIds" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="Branches_CheckIfUsed" ReturnType="Collection(Int32)">
       <Parameter Name="Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Branches_CheckIsBasicBranch" ReturnType="Collection(Int32)">
+      <Parameter Name="BranchId" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="Branches_Delete">
       <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -39,6 +56,7 @@
       <Parameter Name="CountryId" Mode="In" Type="Int32" />
       <Parameter Name="CityId" Mode="In" Type="Int32" />
       <Parameter Name="WordId" Mode="InOut" Type="Int32" />
+      <Parameter Name="IsBasic" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="Branches_SelectByAll" ReturnType="Collection(LayanModel.Branches_SelectByAll_Result)" />
     <FunctionImport Name="Branches_SelectByFilter" ReturnType="Collection(LayanModel.Branches_SelectByFilter_Result)">
@@ -48,7 +66,7 @@
     <FunctionImport Name="Branches_SelectByPk" ReturnType="Collection(LayanModel.Branches_SelectByPk_Result)">
       <Parameter Name="Id" Mode="In" Type="Int64" />
     </FunctionImport>
-    <FunctionImport Name="Branches_Update">
+    <FunctionImport Name="Branches_Update" ReturnType="Collection(Int32)">
       <Parameter Name="Id" Mode="In" Type="Int32" />
       <Parameter Name="NameAr" Mode="In" Type="String" />
       <Parameter Name="NameEn" Mode="In" Type="String" />
@@ -57,6 +75,11 @@
       <Parameter Name="CountryId" Mode="In" Type="Int32" />
       <Parameter Name="CityId" Mode="In" Type="Int32" />
       <Parameter Name="WordId" Mode="In" Type="Int64" />
+      <Parameter Name="IsBasic" Mode="In" Type="Boolean" />
+      <Parameter Name="FKArchivingAndSaveingEmployee_Id" Mode="In" Type="Int64" />
+      <Parameter Name="FKImplementationEmployeeId_Id" Mode="In" Type="Int64" />
+      <Parameter Name="FKCoordinationEmployee_Id" Mode="In" Type="Int64" />
+      <Parameter Name="FKArchivingAndSaveingAnotherBranch_Id" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="Cities_CheckIfUsed" ReturnType="Collection(Int32)">
       <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -74,11 +97,19 @@
     <FunctionImport Name="Cities_SelectByFilter" ReturnType="Collection(LayanModel.Cities_SelectByFilter_Result)">
       <Parameter Name="CountryId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="Cities_SelectById" ReturnType="Collection(LayanModel.Cities_SelectById_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="Cities_Update">
       <Parameter Name="Id" Mode="In" Type="Int32" />
       <Parameter Name="NameAr" Mode="In" Type="String" />
       <Parameter Name="NameEn" Mode="In" Type="String" />
       <Parameter Name="WordId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Cities_UpdatePrices">
+      <Parameter Name="Ids" Mode="In" Type="String" />
+      <Parameter Name="Prices" Mode="In" Type="String" />
+      <Parameter Name="UpdatingCount" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="Countries_CheckIfUsed" ReturnType="Collection(Int32)">
       <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -111,21 +142,33 @@
       <Parameter Name="IsoCode" Mode="In" Type="String" />
       <Parameter Name="WordId" Mode="In" Type="Int64" />
     </FunctionImport>
-    <FunctionImport Name="EmployeeDistributionWorks_CheckIfInserted" ReturnType="Collection(Int32)">
-      <Parameter Name="WorkTypeId" Mode="In" Type="Int32" />
-      <Parameter Name="EmployeeId" Mode="In" Type="Int64" />
-      <Parameter Name="EventId" Mode="In" Type="Int64" />
+    <FunctionImport Name="CRM_EnquiryPayments" ReturnType="Collection(LayanModel.CRM_EnquiryPayments_Result)">
+      <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
     </FunctionImport>
-    <FunctionImport Name="EmployeeDistributionWorks_Delete">
+    <FunctionImport Name="CRM_EnquiryStatus" ReturnType="Collection(LayanModel.CRM_EnquiryStatus_Result)">
+      <Parameter Name="EnquiyId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="CRM_EventTaskStatusHistories" ReturnType="Collection(LayanModel.CRM_EventTaskStatusHistories_Result)">
+      <Parameter Name="eventId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="EmployeeDistributionTasks_CheckIfInserted" ReturnType="Collection(Int32)">
+      <Parameter Name="WorkTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="EventId" Mode="In" Type="Int64" />
+      <Parameter Name="BranchId" Mode="In" Type="Int32" />
+      <Parameter Name="IsAnotherBranch" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="EmployeeDistributionTasks_Delete">
       <Parameter Name="Id" Mode="In" Type="Int64" />
     </FunctionImport>
-    <FunctionImport Name="EmployeeDistributionWorks_Insert">
+    <FunctionImport Name="EmployeeDistributionTasks_Insert" ReturnType="Collection(LayanModel.EmployeeDistributionTasks_Insert_Result)">
       <Parameter Name="Id" Mode="InOut" Type="Int64" />
       <Parameter Name="WorkTypeId" Mode="In" Type="Int32" />
       <Parameter Name="EmployeeId" Mode="In" Type="Int64" />
       <Parameter Name="EventId" Mode="In" Type="Int64" />
+      <Parameter Name="IsAnotherBranch" Mode="In" Type="Boolean" />
+      <Parameter Name="BranchId" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="EmployeeDistributionWorks_SelectByEventId" ReturnType="Collection(LayanModel.EmployeeDistributionWorks_SelectByEventId_Result)">
+    <FunctionImport Name="EmployeeDistributionTasks_SelectByEventId" ReturnType="Collection(LayanModel.EmployeeDistributionTasks_SelectByEventId_Result)">
       <Parameter Name="EventId" Mode="In" Type="Int64" />
     </FunctionImport>
     <FunctionImport Name="Employees_CheckAllowAccessToEventForUpdateWorks" ReturnType="Collection(Int32)">
@@ -185,7 +228,6 @@
       <Parameter Name="FKUserCreated_Id" Mode="In" Type="Int64" />
       <Parameter Name="Clinet_Id" Mode="In" Type="Int64" />
       <Parameter Name="CreateDateTime" Mode="In" Type="DateTime" />
-      <Parameter Name="Notes" Mode="In" Type="String" />
       <Parameter Name="BranchId" Mode="In" Type="Int32" />
       <Parameter Name="IsLinkedClinet" Mode="In" Type="Boolean" />
       <Parameter Name="IFWithBranch" Mode="In" Type="Boolean" />
@@ -231,7 +273,6 @@
       <Parameter Name="FkCountry_Id" Mode="In" Type="Int32" />
       <Parameter Name="FkCity_Id" Mode="In" Type="Int32" />
       <Parameter Name="FKEnquiryType_Id" Mode="In" Type="Int32" />
-      <Parameter Name="Notes" Mode="In" Type="String" />
       <Parameter Name="NotesCreateDateTime" Mode="In" Type="DateTime" />
       <Parameter Name="NotesFkUsereCreatedId" Mode="In" Type="Int64" />
       <Parameter Name="BranchId" Mode="In" Type="Int32" />
@@ -240,15 +281,6 @@
     <FunctionImport Name="Enquiries_ChangeCreateEventState">
       <Parameter Name="Id" Mode="In" Type="Int64" />
       <Parameter Name="IsCreatedEvent" Mode="In" Type="Boolean" />
-    </FunctionImport>
-    <FunctionImport Name="EnquiryNote_Insert">
-      <Parameter Name="Notes" Mode="In" Type="String" />
-      <Parameter Name="CreateDateTime" Mode="In" Type="DateTime" />
-      <Parameter Name="FKEnquiryForm_Id" Mode="In" Type="Int64" />
-      <Parameter Name="FKUserCreated_Id" Mode="In" Type="Int64" />
-    </FunctionImport>
-    <FunctionImport Name="EnquiryNotes_SelectByEnquiryId" ReturnType="Collection(LayanModel.EnquiryNotes_SelectByEnquiryId_Result)">
-      <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
     </FunctionImport>
     <FunctionImport Name="EnquiryPayments_AcceptFromManger">
       <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -285,6 +317,9 @@
     <FunctionImport Name="EnquiryStatus_ResetClendersIdsToNull">
       <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
     </FunctionImport>
+    <FunctionImport Name="EnquiryStatus_SelectByEnquiryId" ReturnType="Collection(LayanModel.EnquiryStatus_SelectByEnquiryId_Result)">
+      <Parameter Name="EnquiyId" Mode="In" Type="Int64" />
+    </FunctionImport>
     <FunctionImport Name="EnquiryStatus_SelectByFilter" ReturnType="Collection(LayanModel.EnquiryStatus_SelectByFilter_Result)">
       <Parameter Name="EnquiryId" Mode="In" Type="Int64" />
       <Parameter Name="StatusId" Mode="In" Type="Int32" />
@@ -293,8 +328,8 @@
       <Parameter Name="Id" Mode="In" Type="Int64" />
       <Parameter Name="ScheduleVisitDateClendarEventId" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="EnquiryStatusTypes_SelectByEnquiryId" ReturnType="Collection(LayanModel.EnquiryStatusTypes_SelectByEnquiryId_Result)">
-      <Parameter Name="EnquiyId" Mode="In" Type="Int64" />
+    <FunctionImport Name="EnquiryStatusTypes_SelectByPK" ReturnType="Collection(LayanModel.EnquiryStatusTypes_SelectByPK_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="EnquiryTypes_CheckIfUsed" ReturnType="Collection(Int32)">
       <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -319,6 +354,41 @@
       <Parameter Name="NameEn" Mode="In" Type="String" />
       <Parameter Name="WordId" Mode="In" Type="Int64" />
     </FunctionImport>
+    <FunctionImport Name="EventArchives_Insert">
+      <Parameter Name="Id" Mode="InOut" Type="Int64" />
+      <Parameter Name="FKEvent_Id" Mode="In" Type="Int64" />
+      <Parameter Name="HDNumber" Mode="In" Type="String" />
+      <Parameter Name="FolderName" Mode="In" Type="String" />
+      <Parameter Name="DateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="EventArchives_SelectAll" ReturnType="Collection(LayanModel.EventArchives_SelectAll_Result)">
+      <Parameter Name="EventId" Mode="In" Type="Int64" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="EventArchives_Update">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="FKEvent_Id" Mode="In" Type="Int64" />
+      <Parameter Name="HDNumber" Mode="In" Type="String" />
+      <Parameter Name="FolderName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EventArchivesDetails_Delete">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+      <Parameter Name="EventId" Mode="In" Type="Int64" />
+      <Parameter Name="EventArchifId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EventArchivesDetails_Inserrt">
+      <Parameter Name="Id" Mode="InOut" Type="Int64" />
+      <Parameter Name="EventId" Mode="In" Type="Int64" />
+      <Parameter Name="EventArchiveId" Mode="In" Type="Int32" />
+      <Parameter Name="MemoryId" Mode="In" Type="String" />
+      <Parameter Name="MemoryType" Mode="In" Type="String" />
+      <Parameter Name="PhotoStartName" Mode="In" Type="String" />
+      <Parameter Name="PhotoNumberFrom" Mode="In" Type="Int32" />
+      <Parameter Name="PhotoNumberTo" Mode="In" Type="Int32" />
+      <Parameter Name="Notes" Mode="In" Type="String" />
+      <Parameter Name="DateTime" Mode="In" Type="DateTime" />
+    </FunctionImport>
     <FunctionImport Name="EventCoordinations_Delete">
       <Parameter Name="Id" Mode="In" Type="Int64" />
     </FunctionImport>
@@ -337,9 +407,47 @@
     <FunctionImport Name="EventCoordinations_SelectTasksNumber" ReturnType="Collection(Int32)">
       <Parameter Name="EventId" Mode="In" Type="Int64" />
     </FunctionImport>
+    <FunctionImport Name="EventPhotographers_CheckCanBeAccess" ReturnType="Collection(Int32)">
+      <Parameter Name="UsereId" Mode="In" Type="Int64" />
+      <Parameter Name="EventId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="EventPhotographers_Delete">
+      <Parameter Name="FKEvent_Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="EventPhotographers_Insert">
+      <Parameter Name="Id" Mode="InOut" Type="Int64" />
+      <Parameter Name="FKEvent_Id" Mode="In" Type="Int64" />
+      <Parameter Name="FkUser_Id" Mode="In" Type="Int64" />
+      <Parameter Name="CreateDateTime" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="EventPhotographers_SelectAll" ReturnType="Collection(LayanModel.EventPhotographers_SelectAll_Result)">
+      <Parameter Name="EventId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="EventPhotographers_SelectAllByEventId" ReturnType="Collection(LayanModel.EventPhotographers_SelectAllByEventId_Result)">
+      <Parameter Name="FKEvent_Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="EventPhotographers_SelectAllUsers" ReturnType="Collection(LayanModel.EventPhotographers_SelectAllUsers_Result)">
+      <Parameter Name="FKEvent_Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="EventPhotographers_SelectEventsByFilter" ReturnType="Collection(LayanModel.EventPhotographers_SelectEventsByFilter_Result)">
+      <Parameter Name="Skip" Mode="In" Type="Int32" />
+      <Parameter Name="Take" Mode="In" Type="Int32" />
+      <Parameter Name="IsClinetCustomLogo" Mode="In" Type="Boolean" />
+      <Parameter Name="IsNamesAr" Mode="In" Type="Boolean" />
+      <Parameter Name="NameGroom" Mode="In" Type="String" />
+      <Parameter Name="NameBride" Mode="In" Type="String" />
+      <Parameter Name="EventDateTimeTo" Mode="In" Type="DateTime" />
+      <Parameter Name="EventDateTimeFrom" Mode="In" Type="DateTime" />
+      <Parameter Name="FKPackage_Id" Mode="In" Type="Int32" />
+      <Parameter Name="EmplolyeeId" Mode="In" Type="Int64" />
+    </FunctionImport>
     <FunctionImport Name="Events_CheckFromDateEventIsFinshed" ReturnType="Collection(Int32)">
       <Parameter Name="EventId" Mode="In" Type="Int64" />
       <Parameter Name="DateTime" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="Events_CheckFromDateEventIsFinshedBranchId" ReturnType="Collection(Int32)">
+      <Parameter Name="EventId" Mode="In" Type="Int64" />
+      <Parameter Name="BranchId" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="Events_CountsByYear" ReturnType="Collection(Int32)">
       <Parameter Name="Year" Mode="In" Type="Int32" />
@@ -526,26 +634,33 @@
       <Parameter Name="WordId" Mode="In" Type="Int64" />
       <Parameter Name="InputType" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="EventWorksStatusHistory_Insert">
+    <FunctionImport Name="EventTaskStatusHistories_CheckIfTaskFinshedWithBranch" ReturnType="Collection(Boolean)">
+      <Parameter Name="EventId" Mode="In" Type="Int64" />
+      <Parameter Name="BranchId" Mode="In" Type="Int32" />
+      <Parameter Name="WorkTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="ForIsCurrentBranch" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="EventTaskStatusHistories_Insert">
       <Parameter Name="IsFinshed" Mode="In" Type="Boolean" />
       <Parameter Name="DateTime" Mode="In" Type="DateTime" />
       <Parameter Name="FKEvent_Id" Mode="In" Type="Int64" />
       <Parameter Name="FKWorkType_Id" Mode="In" Type="Int32" />
       <Parameter Name="FKUsre_Id" Mode="In" Type="Int64" />
       <Parameter Name="FKAccountType_Id" Mode="In" Type="Int32" />
+      <Parameter Name="BranchId" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="EventWorksStatusHistory_SelectByEventId" ReturnType="Collection(LayanModel.EventWorksStatusHistory_SelectByEventId_Result)">
+    <FunctionImport Name="EventTaskStatusHistories_SelectByEventId" ReturnType="Collection(LayanModel.EventTaskStatusHistories_SelectByEventId_Result)">
       <Parameter Name="eventId" Mode="In" Type="Int64" />
     </FunctionImport>
-    <FunctionImport Name="EventWorksStatusHistory_SelectLast" ReturnType="Collection(LayanModel.EventWorksStatusHistory_SelectLast_Result)">
+    <FunctionImport Name="EventTaskStatusHistories_SelectLast" ReturnType="Collection(LayanModel.EventTaskStatusHistories_SelectLast_Result)">
       <Parameter Name="eventId" Mode="In" Type="Int64" />
       <Parameter Name="WorkTypeId" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="EventWorksStatusIsFinsed_CheckIfFinshed" ReturnType="Collection(Boolean)">
+    <FunctionImport Name="EventTaskStatusIsFinsed_CheckIfFinshed" ReturnType="Collection(Boolean)">
       <Parameter Name="eventId" Mode="In" Type="Int64" />
       <Parameter Name="workTypeId" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="EventWorksStatusIsFinshed_Update">
+    <FunctionImport Name="EventTaskStatusIsFinshed_Update">
       <Parameter Name="EventId" Mode="In" Type="Int64" />
       <Parameter Name="IsFinshed" Mode="In" Type="Boolean" />
       <Parameter Name="WorkTypeId" Mode="In" Type="Int32" />
@@ -623,36 +738,14 @@
       <Parameter Name="Package_Id" Mode="In" Type="Int32" />
       <Parameter Name="ValueAr" Mode="In" Type="String" />
       <Parameter Name="ValueEn" Mode="In" Type="String" />
-      <Parameter Name="PackageInputId" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="PackageInputTypes_CheckIfUsed" ReturnType="Collection(Int32)">
-      <Parameter Name="Id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="PackageInputTypes_Delete">
-      <Parameter Name="Id" Mode="In" Type="Int64" />
-    </FunctionImport>
-    <FunctionImport Name="PackageInputTypes_Insert">
-      <Parameter Name="Id" Mode="InOut" Type="Int32" />
-      <Parameter Name="NameAr" Mode="In" Type="String" />
-      <Parameter Name="NameEn" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="PackageInputTypes_SelectAll" ReturnType="Collection(LayanModel.PackageInputTypes_SelectAll_Result)" />
-    <FunctionImport Name="PackageInputTypes_SelectByFilter" ReturnType="Collection(LayanModel.PackageInputTypes_SelectByFilter_Result)">
-      <Parameter Name="Skip" Mode="In" Type="Int32" />
-      <Parameter Name="Take" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="PackageInputTypes_Update">
-      <Parameter Name="Id" Mode="In" Type="Int32" />
-      <Parameter Name="NameAr" Mode="In" Type="String" />
-      <Parameter Name="NameEn" Mode="In" Type="String" />
-      <Parameter Name="WordId" Mode="In" Type="Int64" />
+      <Parameter Name="StaticFieldId" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="Packages_Delete">
       <Parameter Name="Id" Mode="In" Type="Int32" />
       <Parameter Name="WordNameId" Mode="In" Type="Int64" />
       <Parameter Name="WordDescriptionId" Mode="In" Type="Int64" />
     </FunctionImport>
-    <FunctionImport Name="Packages_Insert">
+    <FunctionImport Name="Packages_Insert" ReturnType="Collection(LayanModel.Packages_Insert_Result)">
       <Parameter Name="Id" Mode="InOut" Type="Int32" />
       <Parameter Name="NameAr" Mode="In" Type="String" />
       <Parameter Name="NameEn" Mode="In" Type="String" />
@@ -691,6 +784,165 @@
       <Parameter Name="UserId" Mode="In" Type="Int64" />
       <Parameter Name="IsPublicMenus" Mode="In" Type="Boolean" />
     </FunctionImport>
+    <FunctionImport Name="Phot_Orders_Insert" ReturnType="Collection(Int64)">
+      <Parameter Name="ProductTypeId" Mode="In" Type="Int64" />
+      <Parameter Name="ProductId" Mode="In" Type="Int64" />
+      <Parameter Name="UserCreated" Mode="In" Type="Int64" />
+      <Parameter Name="OptionsItems" Mode="In" Type="String" />
+      <Parameter Name="Delivery_IsReceiptFromTheBranch" Mode="In" Type="Boolean" />
+      <Parameter Name="Delivery_Address" Mode="In" Type="String" />
+      <Parameter Name="Delivery_FkCountry_Id" Mode="In" Type="Int32" />
+      <Parameter Name="Delivery_FKCity_Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Orders_SelectByFilter" ReturnType="Collection(LayanModel.Phot_Orders_SelectByFilter_Result)">
+      <Parameter Name="Skip" Mode="In" Type="Int32" />
+      <Parameter Name="Take" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Orders_SelectById" ReturnType="Collection(LayanModel.Phot_Orders_SelectById_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Orders_UpdateDropboxFolderPath">
+      <Parameter Name="OrderId" Mode="In" Type="Int64" />
+      <Parameter Name="DropboxFolderPath" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_OrderServicePrices_Insert">
+      <Parameter Name="OrderId" Mode="In" Type="Int64" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="WordAndPricesJson" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_OrderServicePrices_InsertCustom">
+      <Parameter Name="OrderId" Mode="In" Type="Int64" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Price" Mode="In" Type="Decimal" />
+      <Parameter Name="NameEn" Mode="In" Type="String" />
+      <Parameter Name="NameAr" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_OrderServicePrices_SelectByOrderId" ReturnType="Collection(LayanModel.Phot_OrderServicePrices_SelectByOrderId_Result)">
+      <Parameter Name="OrderId" Mode="In" Type="Int64" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_OrdersOptions_Insert">
+      <Parameter Name="OrderId" Mode="In" Type="Int64" />
+      <Parameter Name="OptionAndItem" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Products_CheckIfActive" ReturnType="Collection(Boolean)">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Products_CheckIfUsed" ReturnType="Collection(Int32)">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Products_Delete">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+      <Parameter Name="WordNameId" Mode="In" Type="Int64" />
+      <Parameter Name="WordDescriptionId" Mode="In" Type="Int64" />
+      <Parameter Name="WordUplaodFileNotesId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Products_Images_Insert">
+      <Parameter Name="ProductId" Mode="In" Type="Int64" />
+      <Parameter Name="ImagesUrls" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Products_Insert" ReturnType="Collection(Int64)">
+      <Parameter Name="NameAr" Mode="In" Type="String" />
+      <Parameter Name="NameEn" Mode="In" Type="String" />
+      <Parameter Name="DescriptionAr" Mode="In" Type="String" />
+      <Parameter Name="DescriptionEn" Mode="In" Type="String" />
+      <Parameter Name="UplaodFileNotesAr" Mode="In" Type="String" />
+      <Parameter Name="UplaodFileNotesEn" Mode="In" Type="String" />
+      <Parameter Name="Images" Mode="In" Type="String" />
+      <Parameter Name="ProductTypeId" Mode="In" Type="Int64" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+      <Parameter Name="Version" Mode="In" Type="Int32" />
+      <Parameter Name="ProductParentId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Products_SelectByFilter" ReturnType="Collection(LayanModel.Phot_Products_SelectByFilter_Result)">
+      <Parameter Name="Skip" Mode="In" Type="Int32" />
+      <Parameter Name="Take" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Products_SelectByPK" ReturnType="Collection(LayanModel.Phot_Products_SelectByPK_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Products_SelectByProductId" ReturnType="Collection(LayanModel.Phot_Products_SelectByProductId_Result)">
+      <Parameter Name="ProductTypeId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Products_Update">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+      <Parameter Name="WordNameId" Mode="In" Type="Int64" />
+      <Parameter Name="WordDescriptionId" Mode="In" Type="Int64" />
+      <Parameter Name="WordUpdlodFileNotesId" Mode="In" Type="Int64" />
+      <Parameter Name="NameAr" Mode="In" Type="String" />
+      <Parameter Name="NameEn" Mode="In" Type="String" />
+      <Parameter Name="DescriptionAr" Mode="In" Type="String" />
+      <Parameter Name="DescriptionEn" Mode="In" Type="String" />
+      <Parameter Name="UplaodFileNotesAr" Mode="In" Type="String" />
+      <Parameter Name="UplaodFileNotesEn" Mode="In" Type="String" />
+      <Parameter Name="Images" Mode="In" Type="String" />
+      <Parameter Name="ImageIdsDeleting" Mode="In" Type="String" />
+      <Parameter Name="ProductTypeId" Mode="In" Type="Int64" />
+      <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_ProductsOptionItems_CheckIfUsed" ReturnType="Collection(Int32)">
+      <Parameter Name="ItemId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_ProductsOptionItems_Insert">
+      <Parameter Name="OptionId" Mode="In" Type="Int64" />
+      <Parameter Name="ItemsNamesAr" Mode="In" Type="String" />
+      <Parameter Name="ItemsNamesEn" Mode="In" Type="String" />
+      <Parameter Name="ItemsPrices" Mode="In" Type="String" />
+      <Parameter Name="ItemsCount" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_ProductsOptionItems_Update">
+      <Parameter Name="OptionId" Mode="In" Type="Int64" />
+      <Parameter Name="ItemsIds" Mode="In" Type="String" />
+      <Parameter Name="ItemsNamesAr" Mode="In" Type="String" />
+      <Parameter Name="ItemsNamesEn" Mode="In" Type="String" />
+      <Parameter Name="ItemWordNamdsIds" Mode="In" Type="String" />
+      <Parameter Name="ItemsPrices" Mode="In" Type="String" />
+      <Parameter Name="ItemsCount" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_ProductsOptions_Delete">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_ProductsOptions_Insert">
+      <Parameter Name="StaticFieldId" Mode="In" Type="Int32" />
+      <Parameter Name="ProductId" Mode="In" Type="Int64" />
+      <Parameter Name="ItemsJson" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_ProductsOptions_SelectByProductId" ReturnType="Collection(LayanModel.Phot_ProductsOptions_SelectByProductId_Result)">
+      <Parameter Name="ProductId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_ProductsOptions_Update">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+      <Parameter Name="StaticFieldId" Mode="In" Type="Int32" />
+      <Parameter Name="IdDeleted" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_ProductTypes_CheckIfUed" ReturnType="Collection(Int32)">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_ProductTypes_Delete">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_ProductTypes_Insert" ReturnType="Collection(LayanModel.Phot_ProductTypes_Insert_Result)">
+      <Parameter Name="NameAr" Mode="In" Type="String" />
+      <Parameter Name="NameEn" Mode="In" Type="String" />
+      <Parameter Name="ImageUrl" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_ProductTypes_SelectByAll" ReturnType="Collection(LayanModel.Phot_ProductTypes_SelectByAll_Result)" />
+    <FunctionImport Name="Phot_ProductTypes_SelectByFilter" ReturnType="Collection(LayanModel.Phot_ProductTypes_SelectByFilter_Result)">
+      <Parameter Name="Skip" Mode="In" Type="Int32" />
+      <Parameter Name="Take" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_ProductTypes_SelectByPK" ReturnType="Collection(LayanModel.Phot_ProductTypes_SelectByPK_Result)">
+      <Parameter Name="id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_ProductTypes_Update">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+      <Parameter Name="WordId" Mode="In" Type="Int64" />
+      <Parameter Name="NameAr" Mode="In" Type="String" />
+      <Parameter Name="NameEn" Mode="In" Type="String" />
+      <Parameter Name="ImageUrl" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="PrintNamesTypes_CheckIfUsed" ReturnType="Collection(Int32)">
       <Parameter Name="Id" Mode="In" Type="Int64" />
     </FunctionImport>
@@ -719,6 +971,9 @@
     <FunctionImport Name="PrintNameTypes_SelectByPK" ReturnType="Collection(LayanModel.PrintNameTypes_SelectByPK_Result)">
       <Parameter Name="Id" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="Products_DisActiveParentAndChildren">
+      <Parameter Name="ProductId" Mode="In" Type="Int64" />
+    </FunctionImport>
     <FunctionImport Name="SocialAccountTypes_CheckIfUsed" ReturnType="Collection(Int32)">
       <Parameter Name="Id" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -742,6 +997,28 @@
       <Parameter Name="NameEn" Mode="In" Type="String" />
       <Parameter Name="WordId" Mode="In" Type="Int64" />
     </FunctionImport>
+    <FunctionImport Name="StaticFields_CheckIfUsed" ReturnType="Collection(Int32)">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="StaticFields_Delete">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="StaticFields_Insert">
+      <Parameter Name="Id" Mode="InOut" Type="Int32" />
+      <Parameter Name="NameAr" Mode="In" Type="String" />
+      <Parameter Name="NameEn" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="StaticFields_SelectAll" ReturnType="Collection(LayanModel.StaticFields_SelectAll_Result)" />
+    <FunctionImport Name="StaticFields_SelectByFilter" ReturnType="Collection(LayanModel.StaticFields_SelectByFilter_Result)">
+      <Parameter Name="Skip" Mode="In" Type="Int32" />
+      <Parameter Name="Take" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="StaticFields_Update">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="NameAr" Mode="In" Type="String" />
+      <Parameter Name="NameEn" Mode="In" Type="String" />
+      <Parameter Name="WordId" Mode="In" Type="Int64" />
+    </FunctionImport>
     <FunctionImport Name="UserPayments_Insert">
       <Parameter Name="Id" Mode="InOut" Type="Int64" />
       <Parameter Name="Amount" Mode="In" Type="Decimal" />
@@ -752,6 +1029,9 @@
       <Parameter Name="Notes" Mode="In" Type="String" />
       <Parameter Name="IsBankTransfer" Mode="In" Type="Boolean" />
       <Parameter Name="PaymentImage" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UserPayments_SelectByPK" ReturnType="Collection(LayanModel.UserPayments_SelectByPK_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
     </FunctionImport>
     <FunctionImport Name="UserPayments_SelectByUserToId" ReturnType="Collection(LayanModel.UserPayments_SelectByUserToId_Result)">
       <Parameter Name="Id" Mode="In" Type="Int64" />
@@ -834,6 +1114,7 @@
     </FunctionImport>
     <FunctionImport Name="Users_SelectAllEmployees" ReturnType="Collection(LayanModel.Users_SelectAllEmployees_Result)" />
     <FunctionImport Name="Users_SelectAllForUsersPrivileges" ReturnType="Collection(LayanModel.Users_SelectAllForUsersPrivileges_Result)" />
+    <FunctionImport Name="Users_SelectByBaicBranchWithWorkTypes" ReturnType="Collection(LayanModel.Users_SelectByBaicBranchWithWorkTypes_Result)" />
     <FunctionImport Name="Users_SelectByBranchId" ReturnType="Collection(LayanModel.Users_SelectByBranchId_Result)">
       <Parameter Name="BranchId" Mode="In" Type="Int32" />
       <Parameter Name="AccountTypeId" Mode="In" Type="Int32" />
@@ -914,6 +1195,9 @@
     <FunctionImport Name="Words_Delete">
       <Parameter Name="Id" Mode="In" Type="Int64" />
     </FunctionImport>
+    <FunctionImport Name="Words_DeleteList">
+      <Parameter Name="Ids" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="Words_Insert">
       <Parameter Name="ar" Mode="In" Type="String" />
       <Parameter Name="en" Mode="In" Type="String" />
@@ -923,18 +1207,104 @@
       <Parameter Name="Ar" Mode="In" Type="String" />
       <Parameter Name="En" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="Products_Disactive">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+      <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Orders_Cancel">
+      <Parameter Name="id" Mode="In" Type="Int64" />
+      <Parameter Name="CurretnUserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Orders_SelectFullDetailsById" ReturnType="Collection(LayanModel.Phot_Orders_SelectFullDetailsById_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_ProductsOptionsItems_SelectByIds" ReturnType="Collection(LayanModel.Phot_ProductsOptionsItems_SelectByIds_Result)">
+      <Parameter Name="Ids" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Users_SelectByAccountType" ReturnType="Collection(LayanModel.Users_SelectByAccountType_Result)">
+      <Parameter Name="AccountTypeId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Orders_SelectByFilterV2" ReturnType="Collection(LayanModel.Phot_Orders_SelectByFilterV2_Result)">
+      <Parameter Name="Skip" Mode="In" Type="Int32" />
+      <Parameter Name="Take" Mode="In" Type="Int32" />
+      <Parameter Name="productTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="productId" Mode="In" Type="Int64" />
+      <Parameter Name="userCreatedId" Mode="In" Type="Int64" />
+      <Parameter Name="createDateFrom" Mode="In" Type="DateTime" />
+      <Parameter Name="createDateTo" Mode="In" Type="DateTime" />
+      <Parameter Name="isActive" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_OrderPayments_Accept">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+      <Parameter Name="OrderId" Mode="In" Type="Int64" />
+      <Parameter Name="IsAcceptFromManger" Mode="In" Type="Boolean" />
+      <Parameter Name="Notes" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_OrderPayments_Insert" ReturnType="Collection(Int64)">
+      <Parameter Name="OrderId" Mode="In" Type="Int64" />
+      <Parameter Name="Amount" Mode="In" Type="Decimal" />
+      <Parameter Name="TransferImage" Mode="In" Type="String" />
+      <Parameter Name="IsBankTransfer" Mode="In" Type="Boolean" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_OrderPayments_SelectByOrderId" ReturnType="Collection(LayanModel.Phot_OrderPayments_SelectByOrderId_Result)">
+      <Parameter Name="OrderId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_Orders_CheckIfCancled" ReturnType="Collection(Boolean)">
+      <Parameter Name="OrderId" Mode="In" Type="Int64" />
+    </FunctionImport>
   </EntityContainer>
-  <ComplexType Name="AlbumTypes_SelectAll_Result">
+  <ComplexType Name="Albums_Insert_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
     <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Description_Id" Nullable="false" />
     <Property Type="String" Name="NameAr" Nullable="true" />
     <Property Type="String" Name="NameEn" Nullable="true" />
+    <Property Type="String" Name="DescriptionAr" Nullable="true" />
+    <Property Type="String" Name="DescriptionEn" Nullable="true" />
+    <Property Type="Int64" Name="AlbumFileId" Nullable="false" />
+    <Property Type="String" Name="FileUrl" Nullable="true" MaxLength="Max" />
   </ComplexType>
-  <ComplexType Name="AlbumTypes_SelectByFilter_Result">
+  <ComplexType Name="Albums_SelectAll_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
     <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Description_Id" Nullable="false" />
     <Property Type="String" Name="NameAr" Nullable="true" />
     <Property Type="String" Name="NameEn" Nullable="true" />
+    <Property Type="String" Name="DescriptionAr" Nullable="true" />
+    <Property Type="String" Name="DescriptionEn" Nullable="true" />
+    <Property Type="String" Name="FileUrl" Nullable="false" MaxLength="Max" />
+  </ComplexType>
+  <ComplexType Name="Albums_SelectByFilter_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Description_Id" Nullable="false" />
+    <Property Type="String" Name="NameAr" Nullable="true" />
+    <Property Type="String" Name="NameEn" Nullable="true" />
+    <Property Type="String" Name="DescriptionAr" Nullable="true" />
+    <Property Type="String" Name="DescriptionEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Albums_SelectByPk_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Description_Id" Nullable="false" />
+    <Property Type="String" Name="NameAr" Nullable="true" />
+    <Property Type="String" Name="NameEn" Nullable="true" />
+    <Property Type="String" Name="DescriptionAr" Nullable="true" />
+    <Property Type="String" Name="DescriptionEn" Nullable="true" />
+    <Property Type="Int64" Name="AlbumFileId" Nullable="false" />
+    <Property Type="String" Name="FileUrl" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+  <ComplexType Name="Albums_Update_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Description_Id" Nullable="false" />
+    <Property Type="String" Name="NameAr" Nullable="true" />
+    <Property Type="String" Name="NameEn" Nullable="true" />
+    <Property Type="String" Name="DescriptionAr" Nullable="true" />
+    <Property Type="String" Name="DescriptionEn" Nullable="true" />
+    <Property Type="Int64" Name="AlbumFileId" Nullable="false" />
+    <Property Type="String" Name="FileUrl" Nullable="true" MaxLength="Max" />
   </ComplexType>
   <ComplexType Name="Branches_SelectByAll_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -943,6 +1313,11 @@
     <Property Type="Int32" Name="FkCountry_Id" Nullable="false" />
     <Property Type="Int32" Name="FKCity_Id" Nullable="false" />
     <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsBasic" Nullable="false" />
+    <Property Type="Int64" Name="FKArchivingAndSaveingEmployee_Id" Nullable="true" />
+    <Property Type="Int64" Name="FKImplementationEmployeeId_Id" Nullable="true" />
+    <Property Type="Int64" Name="FKCoordinationEmployee_Id" Nullable="true" />
+    <Property Type="Int32" Name="FKArchivingAndSaveingAnotherBranch_Id" Nullable="true" />
     <Property Type="String" Name="BranchNameAR" Nullable="true" />
     <Property Type="String" Name="BranchNameEn" Nullable="true" />
   </ComplexType>
@@ -953,6 +1328,11 @@
     <Property Type="Int32" Name="FkCountry_Id" Nullable="false" />
     <Property Type="Int32" Name="FKCity_Id" Nullable="false" />
     <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsBasic" Nullable="false" />
+    <Property Type="Int64" Name="FKArchivingAndSaveingEmployee_Id" Nullable="true" />
+    <Property Type="Int64" Name="FKImplementationEmployeeId_Id" Nullable="true" />
+    <Property Type="Int64" Name="FKCoordinationEmployee_Id" Nullable="true" />
+    <Property Type="Int32" Name="FKArchivingAndSaveingAnotherBranch_Id" Nullable="true" />
     <Property Type="String" Name="CountryNameAr" Nullable="true" />
     <Property Type="String" Name="CountryNameEn" Nullable="true" />
     <Property Type="String" Name="CityNameAr" Nullable="true" />
@@ -968,6 +1348,11 @@
     <Property Type="Int32" Name="FkCountry_Id" Nullable="false" />
     <Property Type="Int32" Name="FKCity_Id" Nullable="false" />
     <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsBasic" Nullable="false" />
+    <Property Type="Int64" Name="FKArchivingAndSaveingEmployee_Id" Nullable="true" />
+    <Property Type="Int64" Name="FKImplementationEmployeeId_Id" Nullable="true" />
+    <Property Type="Int64" Name="FKCoordinationEmployee_Id" Nullable="true" />
+    <Property Type="Int32" Name="FKArchivingAndSaveingAnotherBranch_Id" Nullable="true" />
     <Property Type="String" Name="CountryNameAr" Nullable="true" />
     <Property Type="String" Name="CountryNameEn" Nullable="true" />
     <Property Type="String" Name="CityNameAr" Nullable="true" />
@@ -979,6 +1364,7 @@
     <Property Type="Int32" Name="Id" Nullable="false" />
     <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
     <Property Type="Int32" Name="FKCountry_Id" Nullable="false" />
+    <Property Type="Decimal" Name="ShippingPrice" Nullable="false" Precision="18" Scale="12" />
     <Property Type="String" Name="Ar" Nullable="true" />
     <Property Type="String" Name="En" Nullable="true" />
   </ComplexType>
@@ -986,8 +1372,15 @@
     <Property Type="Int32" Name="Id" Nullable="false" />
     <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
     <Property Type="Int32" Name="FKCountry_Id" Nullable="false" />
+    <Property Type="Decimal" Name="ShippingPrice" Nullable="false" Precision="18" Scale="12" />
     <Property Type="String" Name="Ar" Nullable="true" />
     <Property Type="String" Name="En" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Cities_SelectById_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+    <Property Type="Int32" Name="FKCountry_Id" Nullable="false" />
+    <Property Type="Decimal" Name="ShippingPrice" Nullable="false" Precision="18" Scale="12" />
   </ComplexType>
   <ComplexType Name="Countries_SelectAll_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1014,14 +1407,65 @@
     <Property Type="String" Name="CityNameAr" Nullable="true" />
     <Property Type="String" Name="CityNameEn" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="EmployeeDistributionWorks_SelectByEventId_Result">
+  <ComplexType Name="CRM_EnquiryPayments_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Decimal" Name="Amount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Boolean" Name="IsDeposit" Nullable="false" />
+    <Property Type="Boolean" Name="IsBankTransfer" Nullable="false" />
+    <Property Type="String" Name="TransferImage" Nullable="true" />
+    <Property Type="Boolean" Name="IsAcceptFromManger" Nullable="true" />
+    <Property Type="DateTime" Name="DateTime" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="FKEnquiry_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKUserCreated_Id" Nullable="false" />
+    <Property Type="String" Name="UserCreatedName" Nullable="true" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="CRM_EnquiryStatus_Result">
+    <Property Type="Int32" Name="EnquiryStatusId" Nullable="false" />
+    <Property Type="String" Name="Status_NameAr" Nullable="true" />
+    <Property Type="String" Name="Status_NameEn" Nullable="true" />
+    <Property Type="DateTime" Name="Status_CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="Status_UserCreatedId" Nullable="true" />
+    <Property Type="String" Name="Status_CreatedUserNameAr" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Status_CreatedUserNameEn" Nullable="false" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="CRM_EventTaskStatusHistories_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsFinshed" Nullable="false" />
+    <Property Type="DateTime" Name="DateTime" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="FKEvent_Id" Nullable="false" />
+    <Property Type="Int32" Name="FKWorkType_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKUsre_Id" Nullable="false" />
+    <Property Type="Int32" Name="FKAccountType_Id" Nullable="false" />
+    <Property Type="Int32" Name="FKBranch_Id" Nullable="false" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="WorkTypeNameAr" Nullable="true" />
+    <Property Type="String" Name="WorkTypeNameEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="EmployeeDistributionTasks_Insert_Result">
     <Property Type="Int64" Name="Id" Nullable="false" />
     <Property Type="Int32" Name="FKWorkType_Id" Nullable="false" />
     <Property Type="Int64" Name="FKEmployee_Id" Nullable="false" />
     <Property Type="Int64" Name="FKEvent_Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsAnotherBranch" Nullable="false" />
+    <Property Type="Int32" Name="FKBranch_Id" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="FKAccountType_Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsFinshed" Nullable="true" />
+    <Property Type="String" Name="BranchNameAr" Nullable="true" />
+    <Property Type="String" Name="BranchNameEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="EmployeeDistributionTasks_SelectByEventId_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="FKWorkType_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKEmployee_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKEvent_Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsAnotherBranch" Nullable="false" />
+    <Property Type="Int32" Name="FKBranch_Id" Nullable="false" />
     <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
     <Property Type="Int32" Name="FKAccountType_Id" Nullable="false" />
     <Property Type="Boolean" Name="IsFinshed" Nullable="false" />
+    <Property Type="String" Name="BranchNameAr" Nullable="true" />
+    <Property Type="String" Name="BranchNameEn" Nullable="true" />
   </ComplexType>
   <ComplexType Name="Employees_SelectWorks_Result">
     <Property Type="Int64" Name="Id" Nullable="false" />
@@ -1131,14 +1575,6 @@
     <Property Type="Int32" Name="FKPhoneCountry_Id" Nullable="false" />
     <Property Type="Boolean" Name="IsDepositPaymented" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="EnquiryNotes_SelectByEnquiryId_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="String" Name="Notes" Nullable="false" />
-    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
-    <Property Type="Int64" Name="FKEnquiryForm_Id" Nullable="false" />
-    <Property Type="Int64" Name="FKUserCreated_Id" Nullable="false" />
-    <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
-  </ComplexType>
   <ComplexType Name="EnquiryPayments_SelectByEnquiryId_Result">
     <Property Type="Int64" Name="Id" Nullable="false" />
     <Property Type="Decimal" Name="Amount" Nullable="false" Precision="18" Scale="2" />
@@ -1149,7 +1585,20 @@
     <Property Type="DateTime" Name="DateTime" Nullable="false" Precision="23" />
     <Property Type="Int64" Name="FKEnquiry_Id" Nullable="false" />
     <Property Type="Int64" Name="FKUserCreated_Id" Nullable="false" />
-    <Property Type="String" Name="UserCreatedName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="UserCreatedName" Nullable="true" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="EnquiryStatus_SelectByEnquiryId_Result">
+    <Property Type="Int64" Name="Status_Id" Nullable="false" />
+    <Property Type="String" Name="Status_NameAr" Nullable="true" />
+    <Property Type="String" Name="Status_NameEn" Nullable="true" />
+    <Property Type="String" Name="Status_Notes" Nullable="true" />
+    <Property Type="DateTime" Name="Status_CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="Status_ScheduleVisitDateTime" Nullable="true" Precision="23" />
+    <Property Type="Int64" Name="Status_UserCreatedId" Nullable="true" />
+    <Property Type="Int64" Name="Status_EnquiryPaymentId" Nullable="true" />
+    <Property Type="Decimal" Name="Amount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="Status_CreatedUserNameAr" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Status_CreatedUserNameEn" Nullable="false" MaxLength="150" />
   </ComplexType>
   <ComplexType Name="EnquiryStatus_SelectByFilter_Result">
     <Property Type="Int64" Name="Id" Nullable="false" />
@@ -1158,21 +1607,13 @@
     <Property Type="DateTime" Name="ScheduleVisitDateTime" Nullable="true" Precision="23" />
     <Property Type="Int64" Name="FKEnquiry_Id" Nullable="false" />
     <Property Type="Int32" Name="FKEnquiryStatus_Id" Nullable="false" />
-    <Property Type="Int64" Name="FKUserCreated_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKUserCreated_Id" Nullable="true" />
     <Property Type="Int64" Name="FKEnquiryPayment_Id" Nullable="true" />
     <Property Type="String" Name="ScheduleVisitDateClendarEventId" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="EnquiryStatusTypes_SelectByEnquiryId_Result">
-    <Property Type="Int64" Name="Status_Id" Nullable="false" />
-    <Property Type="String" Name="Status_NameAr" Nullable="true" />
-    <Property Type="String" Name="Status_NameEn" Nullable="true" />
-    <Property Type="String" Name="Status_Notes" Nullable="true" />
-    <Property Type="DateTime" Name="Status_CreateDateTime" Nullable="false" Precision="23" />
-    <Property Type="DateTime" Name="Status_ScheduleVisitDateTime" Nullable="true" Precision="23" />
-    <Property Type="Int64" Name="Status_UserCreatedId" Nullable="false" />
-    <Property Type="Int64" Name="Status_EnquiryPaymentId" Nullable="true" />
-    <Property Type="Decimal" Name="Amount" Nullable="true" Precision="18" Scale="2" />
-    <Property Type="String" Name="Status_CreatedUserName" Nullable="false" MaxLength="50" />
+  <ComplexType Name="EnquiryStatusTypes_SelectByPK_Result">
+    <Property Type="String" Name="Ar" Nullable="true" />
+    <Property Type="String" Name="En" Nullable="true" />
   </ComplexType>
   <ComplexType Name="EnquiryTypes_SelectAll_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1185,6 +1626,22 @@
     <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
     <Property Type="String" Name="NameAr" Nullable="true" />
     <Property Type="String" Name="NameEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="EventArchives_SelectAll_Result">
+    <Property Type="Int32" Name="EV_Id" Nullable="false" />
+    <Property Type="Int64" Name="EV_EventId" Nullable="false" />
+    <Property Type="Int64" Name="EV_UserId" Nullable="false" />
+    <Property Type="String" Name="EV_FolderName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="EV_HardDiskName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="EV_DateTime" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="EVD_Id" Nullable="true" />
+    <Property Type="DateTime" Name="EVD_DateTime" Nullable="true" Precision="23" />
+    <Property Type="String" Name="EVD_MemoryId" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EVD_MemoryType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EVD_Notes" Nullable="true" />
+    <Property Type="Int32" Name="EVD_PhotoNumberFrom" Nullable="true" />
+    <Property Type="Int32" Name="EVD_PhotoNumberTo" Nullable="true" />
+    <Property Type="String" Name="EVD_PhotoStartName" Nullable="true" MaxLength="50" />
   </ComplexType>
   <ComplexType Name="EventCoordinations_SelectByEventId_Result">
     <Property Type="Int64" Name="Id" Nullable="false" />
@@ -1202,8 +1659,8 @@
     <Property Type="Boolean" Name="Coordination" Nullable="true" />
     <Property Type="Boolean" Name="Implementation" Nullable="true" />
     <Property Type="Boolean" Name="ArchivingAndSaveing" Nullable="true" />
-    <Property Type="Boolean" Name="ProductProcessing" Nullable="true" />
-    <Property Type="Boolean" Name="Chooseing" Nullable="true" />
+    <Property Type="Boolean" Name="ProcessingProducts" Nullable="true" />
+    <Property Type="Boolean" Name="Choosing" Nullable="true" />
     <Property Type="Boolean" Name="DigitalProcessing" Nullable="true" />
     <Property Type="Boolean" Name="PreparingForPrinting" Nullable="true" />
     <Property Type="Boolean" Name="Manufacturing" Nullable="true" />
@@ -1211,6 +1668,90 @@
     <Property Type="Boolean" Name="Packaging" Nullable="true" />
     <Property Type="Boolean" Name="TransmissionAndDelivery" Nullable="true" />
     <Property Type="Boolean" Name="Archiving" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="EventPhotographers_SelectAll_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="FKUser_Id" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="AccountTypeNameId" Nullable="false" />
+    <Property Type="String" Name="AccountTypeNameAr" Nullable="true" />
+    <Property Type="String" Name="AccountTypeNameEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="EventPhotographers_SelectAllByEventId_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKEvent_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKUser_Id" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="EventPhotographers_SelectAllUsers_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PhoneNo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ActiveCode" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="FKAccountType_Id" Nullable="false" />
+    <Property Type="Int32" Name="FkCountry_Id" Nullable="true" />
+    <Property Type="Int32" Name="FkCity_Id" Nullable="true" />
+    <Property Type="Int32" Name="FKLanguage_Id" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="FKPranch_Id" Nullable="true" />
+    <Property Type="Boolean" Name="IsActiveEmail" Nullable="false" />
+    <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="NationalityNumber" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="WebSite" Nullable="true" MaxLength="500" />
+    <Property Type="DateTime" Name="EveCreateDateTime" Nullable="true" Precision="23" />
+    <Property Type="Int64" Name="EveId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="EventPhotographers_SelectEventsByFilter_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsClinetCustomLogo" Nullable="true" />
+    <Property Type="String" Name="LogoFilePath" Nullable="true" />
+    <Property Type="Boolean" Name="IsNamesAr" Nullable="true" />
+    <Property Type="String" Name="NameGroom" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="NameBride" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="FKPrintNameType_Id" Nullable="true" />
+    <Property Type="DateTime" Name="EventDateTime" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="FKPackage_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKClinet_Id" Nullable="false" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="Int64" Name="FKUserCreaed_Id" Nullable="false" />
+    <Property Type="Int32" Name="FKBranch_Id" Nullable="false" />
+    <Property Type="String" Name="ClendarEventId" Nullable="true" />
+    <Property Type="Decimal" Name="PackagePrice" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="PackageNamsArExtraPrice" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="DateTime" Name="VistToCoordinationDateTime" Nullable="true" Precision="23" />
+    <Property Type="String" Name="VistToCoordinationClendarEventId" Nullable="true" />
+    <Property Type="Decimal" Name="NamesPrintingPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int64" Name="EventId" Nullable="false" />
+    <Property Type="Boolean" Name="Booking" Nullable="true" />
+    <Property Type="Boolean" Name="DataPerfection" Nullable="true" />
+    <Property Type="Boolean" Name="Coordination" Nullable="true" />
+    <Property Type="Boolean" Name="Implementation" Nullable="true" />
+    <Property Type="Boolean" Name="ArchivingAndSaveing" Nullable="true" />
+    <Property Type="Boolean" Name="ProcessingProducts" Nullable="true" />
+    <Property Type="Boolean" Name="Choosing" Nullable="true" />
+    <Property Type="Boolean" Name="DigitalProcessing" Nullable="true" />
+    <Property Type="Boolean" Name="PreparingForPrinting" Nullable="true" />
+    <Property Type="Boolean" Name="Manufacturing" Nullable="true" />
+    <Property Type="Boolean" Name="QualityAndReview" Nullable="true" />
+    <Property Type="Boolean" Name="Packaging" Nullable="true" />
+    <Property Type="Boolean" Name="TransmissionAndDelivery" Nullable="true" />
+    <Property Type="Boolean" Name="Archiving" Nullable="true" />
+    <Property Type="String" Name="EnquiryName" Nullable="false" MaxLength="101" />
+    <Property Type="Boolean" Name="IsClosed" Nullable="true" />
+    <Property Type="String" Name="Branch_NameAr" Nullable="true" />
+    <Property Type="String" Name="Branch_NameEn" Nullable="true" />
+    <Property Type="String" Name="Package_NameAr" Nullable="true" />
+    <Property Type="String" Name="Package_NameEn" Nullable="true" />
+    <Property Type="String" Name="WordPrintNamesType_NameAr" Nullable="true" />
+    <Property Type="String" Name="WordPrintNamesType_NameEn" Nullable="true" />
   </ComplexType>
   <ComplexType Name="Events_SelectByFilter_Result">
     <Property Type="Int64" Name="Id" Nullable="false" />
@@ -1242,6 +1783,8 @@
     <Property Type="String" Name="WordPrintNamesType_NameAr" Nullable="true" />
     <Property Type="String" Name="WordPrintNamesType_NameEn" Nullable="true" />
     <Property Type="Boolean" Name="IsDepositPaymented" Nullable="true" />
+    <Property Type="Decimal" Name="TotalPaymentsActivated" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Boolean" Name="EventTaskStatusIsFinshed_DataPerfection" Nullable="true" />
   </ComplexType>
   <ComplexType Name="Events_SelectByFilterForEmployee_Result">
     <Property Type="Int64" Name="Id" Nullable="false" />
@@ -1270,8 +1813,8 @@
     <Property Type="Boolean" Name="Coordination" Nullable="true" />
     <Property Type="Boolean" Name="Implementation" Nullable="true" />
     <Property Type="Boolean" Name="ArchivingAndSaveing" Nullable="true" />
-    <Property Type="Boolean" Name="ProductProcessing" Nullable="true" />
-    <Property Type="Boolean" Name="Chooseing" Nullable="true" />
+    <Property Type="Boolean" Name="ProcessingProducts" Nullable="true" />
+    <Property Type="Boolean" Name="Choosing" Nullable="true" />
     <Property Type="Boolean" Name="DigitalProcessing" Nullable="true" />
     <Property Type="Boolean" Name="PreparingForPrinting" Nullable="true" />
     <Property Type="Boolean" Name="Manufacturing" Nullable="true" />
@@ -1339,8 +1882,8 @@
     <Property Type="Boolean" Name="Coordination" Nullable="true" />
     <Property Type="Boolean" Name="Implementation" Nullable="true" />
     <Property Type="Boolean" Name="ArchivingAndSaveing" Nullable="true" />
-    <Property Type="Boolean" Name="ProductProcessing" Nullable="true" />
-    <Property Type="Boolean" Name="Chooseing" Nullable="true" />
+    <Property Type="Boolean" Name="ProcessingProducts" Nullable="true" />
+    <Property Type="Boolean" Name="Choosing" Nullable="true" />
     <Property Type="Boolean" Name="DigitalProcessing" Nullable="true" />
     <Property Type="Boolean" Name="PreparingForPrinting" Nullable="true" />
     <Property Type="Boolean" Name="Manufacturing" Nullable="true" />
@@ -1417,7 +1960,7 @@
     <Property Type="String" Name="NameAr" Nullable="true" />
     <Property Type="String" Name="NameEn" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="EventWorksStatusHistory_SelectByEventId_Result">
+  <ComplexType Name="EventTaskStatusHistories_SelectByEventId_Result">
     <Property Type="Int64" Name="Id" Nullable="false" />
     <Property Type="Boolean" Name="IsFinshed" Nullable="false" />
     <Property Type="DateTime" Name="DateTime" Nullable="false" Precision="23" />
@@ -1425,11 +1968,12 @@
     <Property Type="Int32" Name="FKWorkType_Id" Nullable="false" />
     <Property Type="Int64" Name="FKUsre_Id" Nullable="false" />
     <Property Type="Int32" Name="FKAccountType_Id" Nullable="false" />
-    <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="FKBranch_Id" Nullable="false" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
     <Property Type="String" Name="AccountTypeAr" Nullable="true" />
     <Property Type="String" Name="AccountTypeEn" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="EventWorksStatusHistory_SelectLast_Result">
+  <ComplexType Name="EventTaskStatusHistories_SelectLast_Result">
     <Property Type="Int64" Name="Id" Nullable="false" />
     <Property Type="Boolean" Name="IsFinshed" Nullable="false" />
     <Property Type="DateTime" Name="DateTime" Nullable="false" Precision="23" />
@@ -1437,6 +1981,7 @@
     <Property Type="Int32" Name="FKWorkType_Id" Nullable="false" />
     <Property Type="Int64" Name="FKUsre_Id" Nullable="false" />
     <Property Type="Int32" Name="FKAccountType_Id" Nullable="false" />
+    <Property Type="Int32" Name="FKBranch_Id" Nullable="false" />
     <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
   </ComplexType>
   <ComplexType Name="FilesReceivedTypes_SelectAll_Result">
@@ -1485,17 +2030,14 @@
     <Property Type="Int32" Name="NotificationsCount" Nullable="true" />
     <Property Type="Boolean" Name="IsRead" Nullable="false" />
   </ComplexType>
-  <ComplexType Name="PackageInputTypes_SelectAll_Result">
+  <ComplexType Name="Packages_Insert_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
-    <Property Type="String" Name="NameAr" Nullable="true" />
-    <Property Type="String" Name="NameEn" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="PackageInputTypes_SelectByFilter_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
-    <Property Type="String" Name="NameAr" Nullable="true" />
-    <Property Type="String" Name="NameEn" Nullable="true" />
+    <Property Type="Int64" Name="FkWordName_Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsPrintNamesFree" Nullable="false" />
+    <Property Type="Int64" Name="FkWordDescription_Id" Nullable="false" />
+    <Property Type="Int32" Name="FKAlbumType_Id" Nullable="false" />
+    <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NamsArExtraPrice" Nullable="false" Precision="18" Scale="2" />
   </ComplexType>
   <ComplexType Name="Packages_SelectAll_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1536,7 +2078,7 @@
     <Property Type="Int32" Name="PackageDetailsId" Nullable="true" />
     <Property Type="String" Name="PackageDetailValueAr" Nullable="true" />
     <Property Type="String" Name="PackageDetailValueEn" Nullable="true" />
-    <Property Type="Int32" Name="FKPackageInputType_Id" Nullable="true" />
+    <Property Type="Int32" Name="FKStaticField_Id" Nullable="true" />
     <Property Type="String" Name="PackageInputTypeAr" Nullable="true" />
     <Property Type="String" Name="PackageInputTypeEn" Nullable="true" />
     <Property Type="String" Name="AlbumType_NameAr" Nullable="true" />
@@ -1553,6 +2095,146 @@
     <Property Type="Boolean" Name="IsHide" Nullable="false" />
     <Property Type="String" Name="PageNameAr" Nullable="true" />
     <Property Type="String" Name="PageNameEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Phot_Orders_SelectByFilter_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKProductType_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKProduct_Id" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="FKUserCreated" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="String" Name="DropboxFolderPath" Nullable="true" />
+    <Property Type="Boolean" Name="Delivery_IsReceiptFromTheBranch" Nullable="false" />
+    <Property Type="String" Name="Delivery_Address" Nullable="true" />
+    <Property Type="Int32" Name="Delivery_FkCountry_Id" Nullable="true" />
+    <Property Type="Int32" Name="Delivery_FKCity_Id" Nullable="true" />
+    <Property Type="String" Name="ProductTypeNameAr" Nullable="true" />
+    <Property Type="String" Name="ProductTypeNameEn" Nullable="true" />
+    <Property Type="String" Name="ProductNameAr" Nullable="true" />
+    <Property Type="String" Name="ProductNameEn" Nullable="true" />
+    <Property Type="String" Name="UserCreated_UserName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="UserCreated_FullName" Nullable="true" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="Phot_Orders_SelectById_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKProductType_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKProduct_Id" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="FKUserCreated" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="String" Name="DropboxFolderPath" Nullable="true" />
+    <Property Type="Boolean" Name="Delivery_IsReceiptFromTheBranch" Nullable="false" />
+    <Property Type="String" Name="Delivery_Address" Nullable="true" />
+    <Property Type="Int32" Name="Delivery_FkCountry_Id" Nullable="true" />
+    <Property Type="Int32" Name="Delivery_FKCity_Id" Nullable="true" />
+    <Property Type="Int64" Name="FKProdutOption_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKProductOptionItem_Id" Nullable="false" />
+    <Property Type="String" Name="ProductTypeNameAr" Nullable="true" />
+    <Property Type="String" Name="ProductTypeNameEn" Nullable="true" />
+    <Property Type="String" Name="ProductTypeImage" Nullable="false" />
+    <Property Type="String" Name="UserCreated_UserName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="UserCreated_FullName" Nullable="true" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="Phot_OrderServicePrices_SelectByOrderId_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FkOrder_Id" Nullable="false" />
+    <Property Type="Int64" Name="FkUser_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+    <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="String" Name="ServiceNameAr" Nullable="true" />
+    <Property Type="String" Name="ServiceNameEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Phot_Products_SelectByFilter_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Name_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Description_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKProductType_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_UplaodFilesNotes_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKUser_Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="Version" Nullable="false" />
+    <Property Type="Int64" Name="FkProductParent_Id" Nullable="true" />
+    <Property Type="String" Name="NameAr" Nullable="true" />
+    <Property Type="String" Name="NameEn" Nullable="true" />
+    <Property Type="String" Name="ProductTypeNameAr" Nullable="true" />
+    <Property Type="String" Name="ProductTypeNameEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Phot_Products_SelectByPK_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Name_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Description_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKProductType_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_UplaodFilesNotes_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKUser_Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="Version" Nullable="false" />
+    <Property Type="Int64" Name="FkProductParent_Id" Nullable="true" />
+    <Property Type="String" Name="NameAr" Nullable="true" />
+    <Property Type="String" Name="NameEn" Nullable="true" />
+    <Property Type="String" Name="DescriptionAr" Nullable="true" />
+    <Property Type="String" Name="DescriptionEn" Nullable="true" />
+    <Property Type="String" Name="UploadNotesAr" Nullable="true" />
+    <Property Type="String" Name="UploadNotesEn" Nullable="true" />
+    <Property Type="Int64" Name="ProductImageId" Nullable="true" />
+    <Property Type="String" Name="ImageUrl" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Phot_Products_SelectByProductId_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Name_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Description_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKProductType_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_UplaodFilesNotes_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKUser_Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="Version" Nullable="false" />
+    <Property Type="Int64" Name="FkProductParent_Id" Nullable="true" />
+    <Property Type="String" Name="NameAr" Nullable="true" />
+    <Property Type="String" Name="NameEn" Nullable="true" />
+    <Property Type="String" Name="ImageUrl" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Phot_ProductsOptions_SelectByProductId_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="FKStaticField_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKProduct_Id" Nullable="false" />
+    <Property Type="String" Name="NameAr" Nullable="true" />
+    <Property Type="String" Name="NameEn" Nullable="true" />
+    <Property Type="String" Name="ValueAr" Nullable="true" />
+    <Property Type="String" Name="ValueEn" Nullable="true" />
+    <Property Type="Int64" Name="OptionItemId" Nullable="true" />
+    <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Int64" Name="FKWord_Value_Id" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Phot_ProductTypes_Insert_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Name_Id" Nullable="false" />
+    <Property Type="String" Name="ImageUrl" Nullable="false" />
+    <Property Type="String" Name="NameAr" Nullable="true" />
+    <Property Type="String" Name="NameEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Phot_ProductTypes_SelectByAll_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Name_Id" Nullable="false" />
+    <Property Type="String" Name="ImageUrl" Nullable="false" />
+    <Property Type="String" Name="NameAr" Nullable="true" />
+    <Property Type="String" Name="NameEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Phot_ProductTypes_SelectByFilter_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Name_Id" Nullable="false" />
+    <Property Type="String" Name="ImageUrl" Nullable="false" />
+    <Property Type="String" Name="NameAr" Nullable="true" />
+    <Property Type="String" Name="NameEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Phot_ProductTypes_SelectByPK_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Name_Id" Nullable="false" />
+    <Property Type="String" Name="ImageUrl" Nullable="false" />
+    <Property Type="String" Name="NameAr" Nullable="true" />
+    <Property Type="String" Name="NameEn" Nullable="true" />
   </ComplexType>
   <ComplexType Name="PrintNamesTypes_SelectByFilter_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1584,6 +2266,29 @@
     <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
     <Property Type="String" Name="NameAr" Nullable="true" />
     <Property Type="String" Name="NameEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="StaticFields_SelectAll_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+    <Property Type="String" Name="NameAr" Nullable="true" />
+    <Property Type="String" Name="NameEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="StaticFields_SelectByFilter_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Id" Nullable="false" />
+    <Property Type="String" Name="NameAr" Nullable="true" />
+    <Property Type="String" Name="NameEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="UserPayments_SelectByPK_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Decimal" Name="Amount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="DateTime" Name="DateTime" Nullable="false" Precision="23" />
+    <Property Type="Boolean" Name="IsAcceptFromManger" Nullable="true" />
+    <Property Type="Int64" Name="FKUserTo_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKUserFrom_Id" Nullable="false" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="String" Name="PaymentImage" Nullable="true" />
+    <Property Type="Boolean" Name="IsBankTransfer" Nullable="true" />
   </ComplexType>
   <ComplexType Name="UserPayments_SelectByUserToId_Result">
     <Property Type="Int64" Name="Id" Nullable="false" />
@@ -1681,6 +2386,29 @@
     <Property Type="String" Name="CountryNameEn" Nullable="true" />
     <Property Type="String" Name="CityNameAr" Nullable="true" />
     <Property Type="String" Name="CityNameEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Users_SelectByBaicBranchWithWorkTypes_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PhoneNo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ActiveCode" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="FKAccountType_Id" Nullable="false" />
+    <Property Type="Int32" Name="FkCountry_Id" Nullable="true" />
+    <Property Type="Int32" Name="FkCity_Id" Nullable="true" />
+    <Property Type="Int32" Name="FKLanguage_Id" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="FKPranch_Id" Nullable="true" />
+    <Property Type="Boolean" Name="IsActiveEmail" Nullable="false" />
+    <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="NationalityNumber" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="WebSite" Nullable="true" MaxLength="500" />
+    <Property Type="Int32" Name="FkWorkType_Id" Nullable="false" />
+    <Property Type="Boolean" Name="IsBasic" Nullable="false" />
   </ComplexType>
   <ComplexType Name="Users_SelectByBranchId_Result">
     <Property Type="Int64" Name="Id" Nullable="false" />
@@ -1853,5 +2581,96 @@
     <Property Type="Boolean" Name="UsersPrivileges_CanDelete" Nullable="true" />
     <Property Type="Boolean" Name="UsersPrivileges_CanDisplay" Nullable="true" />
     <Property Type="Boolean" Name="UsersPrivileges_CanEdit" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Phot_Orders_SelectFullDetailsById_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKProductType_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKProduct_Id" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="FKUserCreated" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="String" Name="DropboxFolderPath" Nullable="true" />
+    <Property Type="Boolean" Name="Delivery_IsReceiptFromTheBranch" Nullable="false" />
+    <Property Type="String" Name="Delivery_Address" Nullable="true" />
+    <Property Type="Int32" Name="Delivery_FkCountry_Id" Nullable="true" />
+    <Property Type="Int32" Name="Delivery_FKCity_Id" Nullable="true" />
+    <Property Type="DateTime" Name="DateTimeCancel" Nullable="true" Precision="23" />
+    <Property Type="Int64" Name="FkUserCancel_Id" Nullable="true" />
+    <Property Type="String" Name="ProductTypeNameAr" Nullable="true" />
+    <Property Type="String" Name="ProductTypeNameEn" Nullable="true" />
+    <Property Type="String" Name="ProductTypeImage" Nullable="false" />
+    <Property Type="String" Name="UserCreated_UserName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="UserCreated_FullName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="OptionNameAr" Nullable="true" />
+    <Property Type="String" Name="OptionNameEn" Nullable="true" />
+    <Property Type="String" Name="OptionItemValueAr" Nullable="true" />
+    <Property Type="String" Name="OptionItemValueEn" Nullable="true" />
+    <Property Type="String" Name="Delivery_CountryNameAr" Nullable="true" />
+    <Property Type="String" Name="Delivery_CountryNameEn" Nullable="true" />
+    <Property Type="String" Name="Delivery_CityNameAr" Nullable="true" />
+    <Property Type="String" Name="Delivery_CityNameEn" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Phot_ProductsOptionsItems_SelectByIds_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKWord_Value_Id" Nullable="false" />
+    <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Int64" Name="FKProductOption_Id" Nullable="false" />
+    <Property Type="Int64" Name="StaticFieldWordId" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Users_SelectByAccountType_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PhoneNo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ActiveCode" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="FKAccountType_Id" Nullable="false" />
+    <Property Type="Int32" Name="FkCountry_Id" Nullable="true" />
+    <Property Type="Int32" Name="FkCity_Id" Nullable="true" />
+    <Property Type="Int32" Name="FKLanguage_Id" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="FKPranch_Id" Nullable="true" />
+    <Property Type="Boolean" Name="IsActiveEmail" Nullable="false" />
+    <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="NationalityNumber" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="WebSite" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="Phot_Orders_SelectByFilterV2_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FKProductType_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKProduct_Id" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="FKUserCreated" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="String" Name="DropboxFolderPath" Nullable="true" />
+    <Property Type="Boolean" Name="Delivery_IsReceiptFromTheBranch" Nullable="false" />
+    <Property Type="String" Name="Delivery_Address" Nullable="true" />
+    <Property Type="Int32" Name="Delivery_FkCountry_Id" Nullable="true" />
+    <Property Type="Int32" Name="Delivery_FKCity_Id" Nullable="true" />
+    <Property Type="DateTime" Name="DateTimeCancel" Nullable="true" Precision="23" />
+    <Property Type="Int64" Name="FkUserCancel_Id" Nullable="true" />
+    <Property Type="String" Name="ProductTypeNameAr" Nullable="true" />
+    <Property Type="String" Name="ProductTypeNameEn" Nullable="true" />
+    <Property Type="String" Name="ProductNameAr" Nullable="true" />
+    <Property Type="String" Name="ProductNameEn" Nullable="true" />
+    <Property Type="String" Name="UserCreated_UserName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="UserCreated_FullName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="UserCancled_UserName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="UserCancled_FullName" Nullable="true" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="Phot_OrderPayments_SelectByOrderId_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="FkOrder_Id" Nullable="false" />
+    <Property Type="DateTime" Name="PaymentDateTime" Nullable="false" Precision="23" />
+    <Property Type="Boolean" Name="IsBankTransfer" Nullable="false" />
+    <Property Type="Boolean" Name="IsAcceptFromManger" Nullable="true" />
+    <Property Type="Int64" Name="FKUserCreated_Id" Nullable="false" />
+    <Property Type="Decimal" Name="Amount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="String" Name="TransferImage" Nullable="false" />
+    <Property Type="String" Name="AcceptNotes" Nullable="true" />
+    <Property Type="DateTime" Name="AcceptDateTime" Nullable="true" Precision="23" />
   </ComplexType>
 </Schema>

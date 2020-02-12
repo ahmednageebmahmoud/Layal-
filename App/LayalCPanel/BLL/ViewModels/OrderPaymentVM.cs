@@ -23,5 +23,7 @@ namespace BLL.ViewModels
         public string AcceptNotes { get; set; }
         public DateTime? AcceptDateTime { get; set; }
         public string AcceptDateTime_Display => DateService.GetDateTimeAr(this.AcceptDateTime);
+        public PaymentTypeVM PaymentType { get;   set; }
+        public int PaymentTypeId { get;   set; }
     }//End Class
 }

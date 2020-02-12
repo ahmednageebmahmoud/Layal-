@@ -15,7 +15,7 @@
                 <a href="~/Home/Index" class="kt-subheader__breadcrumbs-link"> @Token.HomePage </a>
 
                 <span class="kt-subheader__breadcrumbs-separator"></span>
-                <a href="/PhotoOrders" class="kt-subheader__breadcrumbs-link"> @Token.OrderDetails </a>
+                <a href="/PhotoOrders" class="kt-subheader__breadcrumbs-link"> @Token.MyOrders </a>
 
 
                 <span class="kt-subheader__breadcrumbs-separator"></span>
@@ -300,15 +300,16 @@
                                             <table class="table sms-table table-hover " id="ng_table_1">
                                                 <thead class="">
                                                     <tr class="">
+                                                        <th class="th-15">
+                                                            <sms-sort ng-sms-resource="@Token.PaymentType"></sms-sort>
+                                                        </th>
                                                         <th class="th-10">
                                                             <sms-sort ng-sms-resource="@Token.CreateDateTime"></sms-sort>
                                                         </th>
                                                         <th class="th-5">
                                                             <sms-sort ng-sms-resource="@Token.Amount"></sms-sort>
                                                         </th>
-                                                        <th class="th-5">
-                                                            <sms-sort ng-sms-resource="@Token.IsBankTransfer"></sms-sort>
-                                                        </th>
+
                                                         <th class="th-10">
                                                             <sms-sort ng-sms-resource="@Token.BankTransferPhoto"></sms-sort>
                                                         </th>
@@ -319,16 +320,16 @@
                                                         <th class="th-20">
                                                             <sms-sort ng-sms-resource="@Token.AcceptNotes"></sms-sort>
                                                         </th>
-                                                        <th class="th-10">
+                                                        <th class="th-5">
                                                             <sms-sort ng-sms-resource="@Token.IsAcceptFromManger"></sms-sort>
                                                         </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr ng-repeat="x in order.Payments">
+                                                        <td><span>{{x.PaymentType.Name}}</span></td>
                                                         <td><span>{{x.CreateDateTime_Display}}</span></td>
                                                         <td>{{x.Amount}}</td>
-                                                        <td class="text-center"><i class="fas " ng-class="{'fa-check':x.IsBankTransfer}"></i></td>
                                                         <td>
                                                             <a class="kt-link kt-font-boldest" href="{{x.TransferImageUrl}}" target="_blank" ng-show="x.IsBankTransfer">
                                                                 <img class="figure-img img-thumbnail" src="{{x.TransferImageUrl}}" width="100" height="100" />

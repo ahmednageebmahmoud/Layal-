@@ -1979,6 +1979,8 @@
     <Content Include="Scripts\angularJS\filters\FilterWithoutDelete.js" />
     <Content Include="Scripts\angularJS\filters\spliting.js" />
     <Content Include="Scripts\angularJS\filters\filterWithoutStaticItems.js" />
+    <Content Include="Scripts\angularJS\views\photoOrdersMangment\update\contoller.js" />
+    <Content Include="Scripts\angularJS\views\photoOrdersMangment\update\service.js" />
     <Content Include="Scripts\angularJS\views\photoOrdersMangment\details\contoller.js" />
     <Content Include="Scripts\angularJS\views\photoOrdersMangment\details\service.js" />
     <Content Include="Scripts\angularJS\views\photoOrdersMangment\index\contoller.js" />
@@ -2386,6 +2388,7 @@
     <Content Include="Views\PhotoOrders\Details.cshtml" />
     <Content Include="Views\PhotoOrdersMangment\Details.cshtml" />
     <Content Include="Views\PhotoOrdersMangment\Index.cshtml" />
+    <Content Include="Views\PhotoOrdersMangment\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

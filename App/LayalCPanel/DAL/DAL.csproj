@@ -261,6 +261,9 @@
     <Compile Include="Phot_Orders_SelectByFilter_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Phot_Orders_SelectByIdV2_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Phot_Orders_SelectById_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -280,6 +283,9 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Phot_Products_SelectByProductId_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Phot_Products_SelectByProductId_Simple_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Phot_ProductTypes_Insert_Result.cs">

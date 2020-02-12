@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accept.
+        /// </summary>
+        public static string Accept {
+            get {
+                return ResourceManager.GetString("Accept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accept Date Time.
         /// </summary>
         public static string AcceptDateTime {
@@ -709,6 +718,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You Can&apos;t Delete.
+        /// </summary>
+        public static string CanNotDelete {
+            get {
+                return ResourceManager.GetString("CanNotDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can Not Delete him Becuse It Is Used.
         /// </summary>
         public static string CanNotDeleteBecuseIsUsed {
@@ -840,6 +858,15 @@ namespace Resources {
         public static string CanNotUpdateEventDateLessThanOrEquleCurrentDate {
             get {
                 return ResourceManager.GetString("CanNotUpdateEventDateLessThanOrEquleCurrentDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cash.
+        /// </summary>
+        public static string Cash {
+            get {
+                return ResourceManager.GetString("Cash", resourceCulture);
             }
         }
         
@@ -2617,11 +2644,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payment Type.
+        /// </summary>
+        public static string PaymentType {
+            get {
+                return ResourceManager.GetString("PaymentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pay Now.
         /// </summary>
         public static string PayNow {
             get {
                 return ResourceManager.GetString("PayNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pay Now For Order Number.
+        /// </summary>
+        public static string PayNowForOrderNumber {
+            get {
+                return ResourceManager.GetString("PayNowForOrderNumber", resourceCulture);
             }
         }
         
@@ -2685,6 +2730,15 @@ namespace Resources {
         public static string PleaseCopyThisCode {
             get {
                 return ResourceManager.GetString("PleaseCopyThisCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Points Sale.
+        /// </summary>
+        public static string PointsSale {
+            get {
+                return ResourceManager.GetString("PointsSale", resourceCulture);
             }
         }
         
@@ -3108,6 +3162,15 @@ namespace Resources {
         public static string Status {
             get {
                 return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stock.
+        /// </summary>
+        public static string Stock {
+            get {
+                return ResourceManager.GetString("Stock", resourceCulture);
             }
         }
         

@@ -10,5 +10,6 @@ namespace BLL.ViewModels
     {
         public string Id { get; set; }
         public string Thumbnail { get;   set; }
+        public string Path { get;   set; }
     }//End Class
 }

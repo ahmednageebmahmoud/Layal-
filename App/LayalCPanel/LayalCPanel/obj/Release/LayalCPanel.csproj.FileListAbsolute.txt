@@ -11,7 +11,6 @@ G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\rosly
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\roslyn\vbc.exe
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\roslyn\VBCSCompiler.exe
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\roslyn\VBCSCompiler.exe.config
-G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\credentials.json
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\LayalCPanel.dll.config
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\LayalCPanel.dll
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\LayalCPanel.pdb
@@ -103,6 +102,11 @@ G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\Googl
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\Google.Apis.Core.pdb
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\Google.Apis.Core.xml
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\ar\Resources.resources.dll
-G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\obj\Release\LayalCPanel.csprojResolveAssemblyReference.cache
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\obj\Release\LayalCPanel.dll
 G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\obj\Release\LayalCPanel.pdb
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\Dropbox.Api.dll
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\BLL.dll.config
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\DAL.dll.config
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\bin\Dropbox.Api.xml
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\obj\Release\LayalCPanel.csprojAssemblyReference.cache
+G:\Projects\MyProjects\Projects\2019\layal\App\LayalCPanel\LayalCPanel\obj\Release\LayalCPanel.csproj.CopyComplete
