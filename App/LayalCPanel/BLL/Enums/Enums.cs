@@ -75,6 +75,7 @@ namespace BLL.Enums
         Products=24,
         ShippingCategories=25,
         PhotoOrdersMangment = 26,
+        PhotoOrders=27
     }
 
 

@@ -28,18 +28,30 @@ namespace BLL.ViewModels
         public string Delivery_Address { get; set; }
 
 
-        public  List<OrderPriceVM> ServicePrices { get; set; }
+        public List<OrderPriceVM> ServicePrices { get; set; }
         public decimal TotalPrices { get; internal set; }
 
         public List<OrderPaymentVM> Payments { get; set; }
         public decimal TotalPayments { get; internal set; }
         public CityVM DeliveryCity { get; internal set; }
         public CountryVM DeliveryCountry { get; internal set; }
-        public DateTime? CancledDateTime { get;   set; }
+        public DateTime? CancledDateTime { get; set; }
         public UserVM UserCancled { get; internal set; }
         public long? UserCancleddId { get; internal set; }
         public decimal TotalPaymentsAccepted { get; internal set; }
         public string DropboxFolderPath { get; internal set; }
         public bool IsCanUpdate { get; internal set; }
+        public bool? IsCancledWaiting { get; internal set; }
+        public bool? IsCancled { get; internal set; }
+        public bool AllowCancle
+        {
+            get
+            {
+                if (this.IsCancled == true || this.IsCancledWaiting == true || this.IsActive == false) return false;
+                return true;
+            }
+        }
+
+        public List<OrderCancleRequestVM> CancleRequests { get; internal set; }
     }
 }//End CLass

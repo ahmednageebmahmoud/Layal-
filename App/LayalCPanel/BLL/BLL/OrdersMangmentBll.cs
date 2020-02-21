@@ -13,18 +13,39 @@ namespace BLL.BLL
 {
     public class OrdersMangmentBll : BasicBLL
     {
-        public object Cancel(long id)
+        public object Cancel(OrderCancleRequestVM c)
         {
             try
             {
-                db.Phot_Orders_Cancel(id, this.UserLoggad.Id);
-                return ResponseVM.Success(Token.Canceled, new
-                {
-                    UserId = this.UserLoggad.Id,
-                    UserName = this.UserLoggad.Name,
-                    DateTime = DateService.GetDateAr(DateTime.Now)
+                //التحقق انة لا يوجد هناك طلبات الغاء منتظرة او حتى متوافق عليها 
+                if (db.Phot_OrderCancleRequests_CheckIfCanBeCancled(c.OrderId).Any(v => v.Value > 0))
+                    return ResponseVM.Error(Token.CanNotCancleNow);
 
-                });
+                //Cancle Now
+                long? CancleId = this.db.Phot_OrderCancleRequests_Insert(c.Description, c.RemainingAmounts, c.IsRemainingAmountsForCustomer, this.UserLoggad.Id, c.OrderId)
+                      .Select(v => v.Value).FirstOrDefault();
+
+                //Check If Not Added
+                if (!CancleId.HasValue)
+                    return ResponseVM.Error(Token.ICantAdded);
+
+                //Send Notification To Clinet
+                NotifyVM Notify = new NotifyVM()
+                {
+                    TitleAr = "إلغاء الطلب",
+                    TitleEn = "Cancle Order",
+                    DescriptionAr = string.Format("طلب الغاء جديد على طلبك رقم {0}",c.OrderId),
+                    DescriptionEn = string.Format("New Cancle Request On Youre Order No {0}",c.OrderId),
+                    DateTime = DateTime.Now,
+                    TargetId = CancleId.Value,
+                    PageId = PagesEnum.PhotoOrders,
+                    RedirectUrl = $"/PhotoOrders/Details?id={c.OrderId}&go=cancelRequests&notifyId=",
+                };
+
+                new NotificationsBLL().Add(Notify, c.UserCreatedOrderId);
+                new NotificationHub().SendNotificationToSpcifcUsers(c.UserCreatedOrderId, Notify);
+
+                return ResponseVM.Success(Token.Added);
             }
             catch (Exception ex)
             {
@@ -34,35 +55,31 @@ namespace BLL.BLL
         public object GetPhotographerOrders(int skip, int take, int? productTypeId, long? productId,
             long? userCreatedId, DateTime? createDateFrom, DateTime? createDateTo, bool? isActive)
         {
-            var Result = db.Phot_Orders_SelectByFilterV2(skip, take, productTypeId, productId, userCreatedId, createDateFrom, createDateTo, isActive).Select(c => new OrderVM
-            {
-                Id = c.Id,
-                CreateDateTime = c.CreateDateTime,
-                CancledDateTime = c.DateTimeCancel,
-                UserCreatedId = c.FKUserCreated,
-                UserCancleddId = c.FkUserCancel_Id,
-                IsActive = c.IsActive,
-                Product = new ProductVM
+            var Result = db.Phot_Orders_SelectByFilterV2(skip, take, productTypeId, productId, userCreatedId, createDateFrom, createDateTo, isActive)
+                .Select(c => new OrderVM
                 {
-                    NameAr = c.ProductNameAr,
-                    NameEn = c.ProductNameEn
-                },
-                ProductType = new ProductTypeVM
-                {
-                    NameAr = c.ProductTypeNameAr,
-                    NameEn = c.ProductTypeNameEn
-                },
-                UserCreated = new UserVM
-                {
-                    UserName = c.UserCreated_UserName,
-                    FullName = c.UserCreated_FullName,
-                },
-                UserCancled = new UserVM
-                {
-                    UserName = c.UserCancled_UserName,
-                    FullName = c.UserCancled_FullName,
-                }
-            }).ToList();
+                    Id = c.Id,
+                    CreateDateTime = c.CreateDateTime,
+                    UserCreatedId = c.FKUserCreated,
+                    IsActive = c.IsActive,
+                    IsCancledWaiting = c.IsCancledWaiting,
+                    IsCancled = c.IsCancled,
+                    Product = new ProductVM
+                    {
+                        NameAr = c.ProductNameAr,
+                        NameEn = c.ProductNameEn
+                    },
+                    ProductType = new ProductTypeVM
+                    {
+                        NameAr = c.ProductTypeNameAr,
+                        NameEn = c.ProductTypeNameEn
+                    },
+                    UserCreated = new UserVM
+                    {
+                        UserName = c.UserCreated_UserName,
+                        FullName = c.UserCreated_FullName,
+                    },
+                }).ToList();
 
             if (Result.Count == 0)
             {
@@ -78,91 +95,76 @@ namespace BLL.BLL
             return new OrdersBll().GetOrdeById(id, true);
         }
 
-        public object GetOrderFullDetailsById(long id)
+        public object CancleRequestPaymentImage(OrderCancleRequestVM o)
         {
-            var Order = db.Phot_Orders_SelectFullDetailsById(id).GroupBy(c => new
+            try
             {
-                c.Id,
-                c.CreateDateTime,
-                c.IsActive,
-                c.FKUserCreated,
-                c.UserCreated_UserName,
-                c.UserCreated_FullName,
-                c.FKProduct_Id,
-                c.FKProductType_Id,
-                c.DropboxFolderPath,
-                c.ProductTypeNameAr,
-                c.ProductTypeNameEn,
-                c.ProductTypeImage,
-                c.Delivery_IsReceiptFromTheBranch,
-                c.Delivery_Address,
-                c.Delivery_FKCity_Id,
-                c.Delivery_FkCountry_Id,
-                c.Delivery_CountryNameAr,
-                c.Delivery_CountryNameEn,
-                c.Delivery_CityNameAr,
-                c.Delivery_CityNameEn
 
-            }).Select(c => new OrderVM
-            {
-                Id = c.Key.Id,
-                CreateDateTime = c.Key.CreateDateTime,
-                UserCreatedId = c.Key.FKUserCreated,
-                IsActive = c.Key.IsActive,
-                Delivery_Address = c.Key.Delivery_Address,
-                Delivery_IsReceiptFromTheBranch = c.Key.Delivery_IsReceiptFromTheBranch,
-                DeliveryCountry = new CountryVM { NameAr = c.Key.Delivery_CountryNameAr, NameEn = c.Key.Delivery_CountryNameEn },
-                DeliveryCity = new CityVM { NameAr = c.Key.Delivery_CityNameAr, NameEn = c.Key.Delivery_CityNameEn },
-                UserCreated = new UserVM
+                //Get Cancle Request Information
+                var CancleInfo = db.Phot_OrderCancleRequests_SelectPK(o.Id).Select(c => new OrderCancleRequestVM
                 {
-                    UserName = c.Key.UserCreated_UserName,
-                    FullName = c.Key.UserCreated_FullName,
-                },
-                Options = c.Select(v => new ProductOptionVM
-                {
-                    StaticField = new StaticFieldVM
+                    Id = c.Id,
+                    CreateDateTime = c.CreateDateTime,
+                    IsRemainingAmountsForCustomer = c.IsRemainingAmountsForCustomer,
+                    RemainingAmounts = c.RemainingAmounts,
+                    OrderId = c.FKOrder_Id,
+                    Description = c.Description,
+                    FkUserCancled_Id = c.FkUserCancled_Id,
+                    UserCreatedOrderId=c.FKUserCreated,
+                    Customer_ReasonCanceling = c.Customer_ReasonCanceling,
+                    Customer_BankAccountName = c.Customer_BankAccountName,
+                    Customer_BankAccountNumber = c.Customer_BankAccountNumber,
+                    Customer_BankName = c.Customer_BankName,
+                    Customer_IsAccepted = c.Customer_IsAccepted,
+                    Customer_AcceptedDateTime = c.Customer_AcceptedDateTime,
+                }).FirstOrDefault();
+
+                if (CancleInfo == null)
+                    return ResponseVM.Error($"{Token.CancleRequest} : {Token.NotFound}");
+
+                //Save Image In Server
+                if (CancleInfo.IsRemainingAmountsForCustomer && CancleInfo.Customer_IsAccepted.Value)
+                    if (o.TransfaerAmpuntImageFile == null)
+                        return ResponseVM.Error($"{Token.BankTransferPhoto} {Token.NotFound}");
+                    else
                     {
-                        NameAr = v.OptionNameAr,
-                        NameEn = v.OptionNameEn,
-                    },
-                    ItemSelected = new ProductOptionItemVM
-                    {
-                        ValueAr = v.OptionItemValueAr,
-                        ValueEn = v.OptionItemValueEn
+                        var FileSave = FileService.SaveFileHttpBase(new FileSaveVM
+                        {
+                            File = o.TransfaerAmpuntImageFile,
+                            ServerPathSave = "/Files/Orders/Cancle/"
+                        });
+
+                        if (!FileSave.IsSaved)
+                            return ResponseVM.Error(Token.CanNotSaveBankTransferPhoto);
+                        CancleInfo.TransfaerAmpuntImage = FileSave.SavedPath;
                     }
-                }).ToList(),
-                ProductType = new ProductTypeVM
+
+                //Save Now And Disactive Order If Clinet Accepted
+                db.Phot_OrderCancleRequests_UpdateV2(CancleInfo.Id,CancleInfo.TransfaerAmpuntImage);
+
+                //Send Notification Manger
+                NotifyVM Notify = new NotifyVM()
                 {
-                    NameAr = c.Key.ProductTypeNameAr,
-                    NameEn = c.Key.ProductTypeNameEn,
-                    ImageUrl = c.Key.ProductTypeImage
-                },
-                Product = (ProductVM)new ProductsBLL().GetProductById(c.Key.FKProduct_Id, false).Result,
-                Files = GetDropboxFiles(c.Key.DropboxFolderPath),
-                ServicePrices = db.Phot_OrderServicePrices_SelectByOrderId(c.Key.Id, c.Key.FKUserCreated).Select(b => new OrderPriceVM
-                {
-                    Price = b.Price,
-                    CreateDateTime = b.CreateDateTime,
-                    ServiceNameAr = b.ServiceNameAr,
-                    ServiceNameEn = b.ServiceNameEn,
-                }).ToList(),
-                Payments = new OrdersPaymentsBll().GetPaymentsByOrderId(c.Key.Id)
-            }).FirstOrDefault();
+                    TitleAr = "تحويل مبلغ مالى",
+                    TitleEn = "Transfer of money",
+                    DescriptionAr = string.Format("تم تحويل مبلغ مالى بناء على الغاء الطلب رقم {0}", CancleInfo.OrderId),
+                    DescriptionEn = string.Format("A sum of money was transferred based on the cancellation of order {0}",  CancleInfo.OrderId),
+                    DateTime = DateTime.Now,
+                    TargetId = CancleInfo.Id,
+                    PageId = PagesEnum.PhotoOrders,
+                    RedirectUrl = $"/PhotoOrders/Details?id={CancleInfo.OrderId}&go=cancelRequests&notifyId=",
+                };
+                new NotificationsBLL().Add(Notify, CancleInfo.UserCreatedOrderId);
+                new NotificationHub().SendNotificationToSpcifcUsers(CancleInfo.UserCreatedOrderId, Notify);
 
-
-            if (Order == null)
-                return ResponseVM.Error($"{Token.Order} : {Token.NotFound}");
-
-            //Sum Total 
-            Order.TotalPrices = Order.ServicePrices.Sum(c => c.Price);
-            Order.TotalPayments = Order.Payments.Sum(c => c.Amount);
-            Order.TotalPaymentsAccepted = Order.Payments.Where(c => c.IsAcceptFromManger.HasValue && c.IsAcceptFromManger.Value).Sum(c => c.Amount);
-
-            return ResponseVM.Success(Order);
+                return ResponseVM.Success(CancleInfo);
+            }
+            catch (Exception ex)
+            {
+                return ResponseVM.Error(Token.SomeErrorHasBeen, ex);
+            }
         }
 
-    
-   
         private List<OrderFileVM> GetDropboxFiles(string dropboxFolderPath)
         {
             var Files = new List<OrderFileVM>();

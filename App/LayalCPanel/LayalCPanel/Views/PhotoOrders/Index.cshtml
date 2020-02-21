@@ -99,9 +99,9 @@
                                 <td><span>{{x.Product.ProductName}}</span></td>
                                 <td><span>{{x.CreateDateTime_Display}}</span></td>
                                 <td>
-                                    <span>
-                                        <i class="fas " ng-class="{'fa-check':x.IsActive}"></i>
-                                    </span>
+                                <td>
+                                    <span ng-if="x.IsActive">✔</span>
+                                    <span ng-if="!x.IsActive">✖</span>
                                 </td>
                                 <td>
                                     <!--Btn:Information-->
@@ -121,9 +121,9 @@
 
                                     <!--Btn:Cancel-->
                                     @*<a href="javascript:void()"
-                                       ng-if="x.IsActive"
-                                       ng-click="cancel(x)"
-                                       title="@Token.OrderCancel" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fas fa-power-off"></i></a>*@
+                                        ng-if="x.IsActive"
+                                        ng-click="cancel(x)"
+                                        title="@Token.OrderCancel" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fas fa-power-off"></i></a>*@
 
                                     <br />
                                     <!--Btn:PayNow-->
@@ -190,6 +190,7 @@
             </div>
         </div>
     </div>
+
 
 
 </div>

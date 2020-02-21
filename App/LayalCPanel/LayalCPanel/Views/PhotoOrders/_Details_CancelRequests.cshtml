@@ -1,0 +1,79 @@
+﻿<table class="table table-bordered table-hover sms-table">
+    <thead>
+        <tr>
+            <th class="th-20">@Token.CreateDateTime</th>
+            <th class="th-65">@Token.Details</th>
+            <th class="th-15">@Token.Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="x in order.CancleRequests">
+            <td><span>{{x.CreateDateTime_Display}}</span></td>
+            <td>
+                <button type="button" class="btn btn-outline-hover-info btn-elevate btn-square animated fadeIn" ng-show="!x.ShowDetails" ng-click="x.ShowDetails=true">@Token.ShowDetails</button>
+                <button type="button" class="btn btn-outline-hover-info btn-elevate btn-square animated fadeIn" ng-show="x.ShowDetails" ng-click="x.ShowDetails=false">@Token.HideDetails</button>
+                <table class="table  animated fadeIn" ng-show="x.ShowDetails">
+                    <tbody>
+                        <tr>
+                            <td class="th-15">@Token.Description</td>
+                            <td class="th-50"><textarea class="input-disabled" disabled style="width:100%;max-height:200px;height:100px;border:none">{{x.Description}}</textarea></td>
+                            <td class="th-15">@Token.RemainingAmounts</td>
+                            <td class="th-20"><span>{{x.RemainingAmounts}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>@Token.IsRemainingAmountsForCustomer</td>
+                            <td>
+                                <span ng-if="x.IsRemainingAmountsForCustomer">✔</span>
+                                <span ng-if="!x.IsRemainingAmountsForCustomer">✖</span>
+                            </td>
+                            <td>@Token.BankTransferPhoto</td>
+                            <td><img src="{{x.TransfaerAmpuntImage}}" width="100" /></td>
+                        </tr>
+                        <tr>
+                            <td>@Token.ReasonCanceling</td>
+                            <td><textarea class="input-disabled" disabled style="width:100%;max-height:200px;height:100px;border:none">{{x.Customer_ReasonCanceling}}</textarea></td>
+                            <td>@Token.ClientDecision</td>
+                            <td>
+                                <span ng-if="x.Customer_IsAccepted==true"> @Token.Accepted</span>
+                                <span ng-if="x.Customer_IsAccepted==false">@Token.Rejected</span>
+                                <span ng-if="x.Customer_IsAccepted==null"> @Token.NoDecision</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@Token.AcceptedDateTime</td>
+                            <td><span>{{x.Customer_AcceptedDateTime_Display}}</span></td>
+                            <td>@Token.BankAccountNumber</td>
+                            <td><span>{{x.Customer_BankAccountNumber}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>@Token.BankAccountName</td>
+                            <td><span>{{x.Customer_BankAccountName}}</span></td>
+                            <td>@Token.BankName</td>
+                            <td><span>{{x.Customer_BankName}}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                @if (CookieService.UserInfo.IsPhotographer)
+                {
+                    <button type="button" class="btn btn-success btn-elevate btn-icon-sm" ng-show="$first&&x.Customer_IsAccepted==null"
+                            ng-click="showCancleRequestDecision(x)">
+                        <i class="la la-check"></i>@Token.AcceptCancle
+                    </button>
+                }
+                else if (CookieService.UserInfo.IsAdmin)
+                {
+                    /*
+                     ارفاق مستند دفع المبالغ المتبقة للعميل
+                     */
+                    <button type="button" class="btn btn-success btn-elevate btn-icon-sm" ng-show="$first&&x.Customer_IsAccepted!=null&&!x.TransfaerAmpuntImage"
+                            ng-click="showCancleRequestPaymentImage(x)">
+                        <i class="la la-check"></i>@Token.PaymentRemainingAmounts
+                    </button>
+                }
+            </td>
+        </tr>
+    </tbody>
+</table>
+

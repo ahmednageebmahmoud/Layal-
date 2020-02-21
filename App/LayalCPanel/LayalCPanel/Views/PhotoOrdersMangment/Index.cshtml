@@ -187,15 +187,8 @@
                             <td><span>{{x.Product.ProductName}}</span></td>
                             <td><span>{{x.CreateDateTime_Display}}</span></td>
                             <td>
-                                <span>
-                                    <i class="fas " ng-class="{'fa-check':x.IsActive}"></i>
-                                </span>
-                                <span ng-if="!x.IsActive">
-                                    <p>@Token.UserCancled  :<a href="/Users/UserInformation?id={{x.UserCancleddId}}" class="kt-link kt-font-boldest">{{x.UserCancled.Name}}</a></p>
-                                </span>
-                                <span ng-if="!x.IsActive">
-                                    @Token.CancledDateTime  : <br /> {{x.CancledDateTime_Display}}
-                                </span>
+                                <span ng-if="x.IsActive">✔</span>
+                                <span ng-if="!x.IsActive">✖</span>
                             </td>
                             <td>
                                 <!--Btn:Information-->
@@ -213,14 +206,16 @@
                                 {
                                     <!--Btn:Cancel-->
                                     <a href="javascript:void()"
-                                       ng-if="x.IsActive"
-                                       ng-click="cancel(x)"
+                                       ng-if="x.AllowCancle"
+                                       ng-click="showAddNewCancleRequest(x.Id,x.UserCreatedId)"
                                        title="@Token.OrderCancel" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="fas fa-power-off"></i></a>
                                 }
 
                                 <br />
                                 <!--Btn:PayNow-->
-                                <a href="javascript:void(0)" class="btn btn-success btn-elevate btn-icon-sm" ng-click="showAddNewPayment(x.Id)">
+                                <a href="javascript:void(0)" class="btn btn-success btn-elevate btn-icon-sm"
+                                   ng-if="x.IsActive"
+                                   ng-click="showAddNewPayment(x.Id)">
                                     <i class="la la-dollar"></i>@Token.PayNow
                                 </a>
                             </td>
@@ -232,6 +227,7 @@
             </div>
         </div>
     </div>
+   
     <!--Add New Payment-->
     <div id="addNewPayment"
          class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -308,6 +304,65 @@
         </div>
     </div>
 
+    <!--Add New Cancled Request-->
+    <div id="addCancleRequest"
+         class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form novalidate name="addCancleRequestFrm" class="kt-form kt-form--label-right" ng-submit="addNewCancleRequest(addCancleRequestFrm)">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">@Token.AddNewCancleRequestFor {{newCancleRequest.OrderId}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!--RemainingAmounts-->
+                        <div class="form-group  row">
+                            <label class="col-md-2 col-form-label">@Token.RemainingAmounts</label>
+                            <div class="col-md-10 form-group-sub">
+                                <input type="number"
+                                       name="remainingAmounts"
+                                       class="form-control"
+                                       ng-class="{'is-invalid':addCancleRequestFrm.remainingAmounts.$invalid&&addCancleRequestFrmSubmitErro}"
+                                       ng-model="newCancleRequest.RemainingAmounts"
+                                       ng-required="true" />
+                                <!--Errors-->
+                                <small class="error " ng-if="addCancleRequestFrm.remainingAmounts.$error.required&&addCancleRequestFrmSubmitErro">@Token.FieldIsRequierd</small>
+                            </div>
+                        </div>
+
+                        <!--Description -->
+                        <div class="form-group  row">
+                            <label class="col-md-2 col-form-label">@Token.Description </label>
+                            <div class="col-md-10 form-group-sub">
+                                <textarea class="form-control" ng-model="newCancleRequest.Description" maxlength="4000"></textarea>
+                            </div>
+                        </div>
+
+                        <!--IsRemainingAmountsForCustomer -->
+                        <div class="form-group  row">
+                            <label class="col-md-3 col-form-label">@Token.IsRemainingAmountsForCustomer </label>
+                            <div class="col-md-8 form-group-sub">
+                                <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
+                                    <label>
+                                        <input type="checkbox" checked="checked"
+                                               ng-model="newCancleRequest.IsRemainingAmountsForCustomer" name=""  >
+                                        <span></span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                            <i class="la la-plus">@Token.Add</i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@Token.Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </div>
 

@@ -282,7 +282,7 @@ namespace BLL.BLL
             Notify.DescriptionAr = string.Format("لقد تم اضافة حالة {0} على استفسار {1} {2}", Status.Ar, enq.FirstName, enq.LastName);
             Notify.DescriptionEn = string.Format("Ahmed has been adde status {0} on enquiry {1} {2}", Status.En, enq.FirstName, enq.LastName);
             NotificationsBLL.Add(Notify, userTargetId);
-            new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { userTargetId.ToString() }, Notify);
+            new NotificationHub().SendNotificationToSpcifcUsers(  userTargetId , Notify);
         }
 
     }//end class

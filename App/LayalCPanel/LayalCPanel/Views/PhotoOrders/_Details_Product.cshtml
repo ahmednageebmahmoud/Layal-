@@ -1,0 +1,34 @@
+﻿<table class="table table-hover table-bordered sms-table">
+    <thead>
+        <tr>
+            <th class="th-10"></th>
+            <th class="th-90"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Token.ProductType </td>
+            <td><span>{{order.ProductType.ProductTypeName}}</span></td>
+        </tr>
+        <tr>
+            <td>@Token.ProductTypeImage</td>
+            <td><img src="{{order.ProductType.ImageUrl}}" width="200" /></td>
+        </tr>
+        <tr>
+            <td>@Token.ProductName</td>
+            <td><span>{{order.Product.ProductName}}</span></td>
+        </tr>
+        <tr>
+            <td>@Token.ProductDescription</td>
+            <td><span>{{order.Product.Description}}</span></td>
+        </tr>
+        <tr>
+            <td>@Token.ProductImages</td>
+            <td>
+                <div class="col-3" ng-repeat="im in order.Product.Images ">
+                    <img src="{{im.ImageUrl}}" width="200">
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

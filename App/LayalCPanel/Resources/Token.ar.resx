@@ -1378,7 +1378,7 @@
     <value>التالى</value>
   </data>
   <data name="Accept" xml:space="preserve">
-    <value />
+    <value>إعتماد</value>
   </data>
   <data name="Saved" xml:space="preserve">
     <value>تم الحفظ</value>
@@ -1412,5 +1412,80 @@
   </data>
   <data name="PointsSale" xml:space="preserve">
     <value>نقاط بيع</value>
+  </data>
+  <data name="AddNewCancleRequestFor" xml:space="preserve">
+    <value>اضافة طلب الغاء جديد للطلب رقم</value>
+  </data>
+  <data name="CanNotCancleNow" xml:space="preserve">
+    <value>لا يمكن الغاء الطلب الآن</value>
+  </data>
+  <data name="IsRemainingAmountsForCustomer" xml:space="preserve">
+    <value>اذا كان المبلغ المتبقى لصالح العميل</value>
+  </data>
+  <data name="RemainingAmounts" xml:space="preserve">
+    <value>المبلغ المتبقى</value>
+  </data>
+  <data name="CancelRequests" xml:space="preserve">
+    <value>طلابات الالغاء</value>
+  </data>
+  <data name="ProductTypeImage" xml:space="preserve">
+    <value>صورة نوع المنتج</value>
+  </data>
+  <data name="AcceptedDateTime" xml:space="preserve">
+    <value>وقت وتاريخ الموافقة</value>
+  </data>
+  <data name="BankAccountName" xml:space="preserve">
+    <value>اسم صاحب الحساب البنكى</value>
+  </data>
+  <data name="BankAccountNumber" xml:space="preserve">
+    <value>رقم الحساب البنكى</value>
+  </data>
+  <data name="BankName" xml:space="preserve">
+    <value>اسم البنك</value>
+  </data>
+  <data name="HideDetails" xml:space="preserve">
+    <value>اخفاء التفاصيل</value>
+  </data>
+  <data name="IsAccepted" xml:space="preserve">
+    <value>تم الموافقة</value>
+  </data>
+  <data name="ReasonCanceling" xml:space="preserve">
+    <value>سبب الإلغاء</value>
+  </data>
+  <data name="YoureDecision" xml:space="preserve">
+    <value>قرارك</value>
+  </data>
+  <data name="AcceptCancle" xml:space="preserve">
+    <value>اعتماد الالغاء</value>
+  </data>
+  <data name="IsRemainingAmountsForYou" xml:space="preserve">
+    <value>اذا كان المبلغ المتبقى سوف يحول لك</value>
+  </data>
+  <data name="TheAmountThatWillBeRefundedToYou" xml:space="preserve">
+    <value>المبلغ الذى سوف يرد لك</value>
+  </data>
+  <data name="TheRequiredAmountOfPayment" xml:space="preserve">
+    <value>المبلغ المطلوب دفعة</value>
+  </data>
+  <data name="CancleRequest" xml:space="preserve">
+    <value>طلب الالغاء</value>
+  </data>
+  <data name="Accepted" xml:space="preserve">
+    <value>تمت الموافقة</value>
+  </data>
+  <data name="ClientDecision" xml:space="preserve">
+    <value>قرار العميل</value>
+  </data>
+  <data name="NoDecision" xml:space="preserve">
+    <value>لا يوجد قرار</value>
+  </data>
+  <data name="PaymentRemainingAmounts" xml:space="preserve">
+    <value>دفع المبلغ المتبقى</value>
+  </data>
+  <data name="Rejected" xml:space="preserve">
+    <value>تم الرفض</value>
+  </data>
+  <data name="NotActivate" xml:space="preserve">
+    <value>غير مفعل</value>
   </data>
 </root>

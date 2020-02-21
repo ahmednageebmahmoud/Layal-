@@ -168,6 +168,8 @@
         bootstrapModelShow("addNewPayment");
     };
 
+    
+
     s.reFop = length => {
         s.orderFOP.reFop(length);
     };

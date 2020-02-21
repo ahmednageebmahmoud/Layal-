@@ -27,7 +27,7 @@ namespace BLL.SignalAr
         /// </summary>
         /// <param name="userIds"></param>
         /// <param name="notify"></param>
-        public void SendNotificationToSpcifcUsers(List<string> userIds, NotifyVM notify)
+        public void SendNotificationToSpcifcUsers(List<long> userIds, NotifyVM notify)
         {
             try
             {
@@ -36,14 +36,14 @@ namespace BLL.SignalAr
                 UserHub receiver;
                 userIds.ForEach(usId =>
                 {
-                    if (Users.TryGetValue(usId, out receiver))
+                    if (Users.TryGetValue(usId.ToString(), out receiver))
                     {
                         var cid = receiver.ConnectionIds.ToList();
                         var context = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
                         if (cid.Count() > 0)
                         {
                             foreach (var connection in cid)
-                                context.Clients.Client(connection).showNotify( notify);
+                                context.Clients.Client(connection).showNotify(notify);
                         }
                     }
                 });
@@ -54,7 +54,35 @@ namespace BLL.SignalAr
             }
         }
 
+        /// <summary>
+        /// (ANageeb) 
+        /// Send One Notification To Spcifc User
+        /// </summary>
+        /// <param name="userIds"></param>
+        /// <param name="notify"></param>
+        public void SendNotificationToSpcifcUsers(long userId, NotifyVM notify)
+        {
+            try
+            {
 
+                //Send To
+                UserHub receiver;
+                    if (Users.TryGetValue(userId.ToString(), out receiver))
+                    {
+                        var cid = receiver.ConnectionIds.ToList();
+                        var context = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                        if (cid.Count() > 0)
+                        {
+                            foreach (var connection in cid)
+                                context.Clients.Client(connection).showNotify(notify);
+                        }
+                    }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+            }
+        }
 
         public override Task OnConnected()
         {

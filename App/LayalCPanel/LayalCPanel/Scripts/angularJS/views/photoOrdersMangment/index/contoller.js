@@ -146,6 +146,34 @@ ngApp.controller('ordersCtrl', ['$scope', '$http', 'ordersServ', function (s, h,
 
     }
 
+    //Add New Cancle Request
+    s.addNewCancleRequest = form => {
+        if (form.$invalid) {
+            s.addCancleRequestFrmSubmitErro = true;
+            return;
+        }
+
+        ordersServ.addNewCancleRequest(s.newCancleRequest).then(d => {
+            BlockingService.block();
+            switch (d.data.RequestType) {
+                case RequestTypeEnum.sucess:
+                    {
+                        s.AllowCancle = false;
+                        s.orders[s.orders.findIndex(c => c.Id == s.newCancleRequest.OrderId)];
+                        bootstrapModelHide("addCancleRequest");
+                    } break;
+            }
+            SMSSweet.alert(d.data.Message, d.data.RequestType);
+            co("P O S T - addNewCancleRequest", d);
+            BlockingService.unBlock();
+        }).catch(err => {
+            BlockingService.unBlock();
+            SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+            co("E R R O R - addNewCancleRequest", err);
+        })
+
+    }
+
     //============= Delete ================
     s.delete = order => {
         //show confirm delete
@@ -168,32 +196,6 @@ ngApp.controller('ordersCtrl', ['$scope', '$http', 'ordersServ', function (s, h,
         });
     };
 
-    //============= U P D A T E  =================
-    s.cancel = order => {
-        //show confirm cancele
-        SMSSweet.confirmInfo(Token.areYouSureCancel, () => {
-            //Yes Cancel
-            order.State = StateEnum.cancel;
-
-            BlockingService.block();
-            ordersServ.saveChange(order).then(d => {
-                BlockingService.unBlock();
-                switch (d.data.RequestType) {
-                    case RequestTypeEnum.sucess:
-                        {
-                            order.IsActive = 0;
-                            order.UserCancleddId = d.data.Result.UserId;
-                            order.UserCancled.Name = d.data.Result.UserName;
-                            order.UserCancled.CancledDateTime_Display = d.data.Result.CancledDateTime_Display;
-                        } break;
-                }
-                SMSSweet.alert(d.data.Message, d.data.RequestType);
-                co('res-savechnage-cancel', d.data);
-            });
-        });
-
-    };
-    
  
  
 
@@ -206,11 +208,19 @@ ngApp.controller('ordersCtrl', ['$scope', '$http', 'ordersServ', function (s, h,
 
 
     //Show Model For Add New Payment
-    s.showAddNewPayment = orderId => {
+    s.showAddNewPayment = (orderId) => {
         s.newPayment = { OrderId: orderId };
 
         s.addPaymrntFrmSubmitErro = false;
         bootstrapModelShow("addNewPayment");
+    };
+
+    //Show Model For Add New Cancle Request
+    s.showAddNewCancleRequest = (orderId, userCreatedId) => {
+        s.newCancleRequest = { OrderId: orderId, UserCreatedOrderId: userCreatedId };
+
+        s.addCancleRequestFrmSubmitErro = false;
+        bootstrapModelShow("addCancleRequest");
     };
 
 

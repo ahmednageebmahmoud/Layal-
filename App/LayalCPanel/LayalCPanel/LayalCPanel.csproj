@@ -2386,9 +2386,16 @@
     <Content Include="Views\PhotoOrders\Index.cshtml" />
     <Content Include="Views\PhotoOrders\Update.cshtml" />
     <Content Include="Views\PhotoOrders\Details.cshtml" />
-    <Content Include="Views\PhotoOrdersMangment\Details.cshtml" />
     <Content Include="Views\PhotoOrdersMangment\Index.cshtml" />
     <Content Include="Views\PhotoOrdersMangment\Update.cshtml" />
+    <Content Include="Views\PhotoOrders\_Details_Product.cshtml" />
+    <Content Include="Views\PhotoOrders\_Details_Options.cshtml" />
+    <Content Include="Views\PhotoOrders\_Details_TheBill.cshtml" />
+    <Content Include="Views\PhotoOrders\_Details_Payments.cshtml" />
+    <Content Include="Views\PhotoOrders\_Details_DeliveryInformation.cshtml" />
+    <Content Include="Views\PhotoOrders\_Details_Files.cshtml" />
+    <Content Include="Views\PhotoOrders\_Details_CancelRequests.cshtml" />
+    <Content Include="Views\PhotoOrdersMangment\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2396,6 +2403,7 @@
     <Folder Include="Files\Albums\" />
     <Folder Include="Files\Enquiries\Payments\" />
     <Folder Include="Files\Events\CustomLogos\" />
+    <Folder Include="Files\Orders\Cancle\" />
     <Folder Include="Files\Orders\Payments\" />
     <Folder Include="Files\Products\Types\" />
     <Folder Include="Files\Users\Payments\" />

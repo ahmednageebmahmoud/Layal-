@@ -47,7 +47,7 @@ namespace BLL.BLL
                     if (UserBrranchManger != null)
                     {
                         NotificationsBLL.Add(Notify, UserBrranchManger.Id);
-                        new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserBrranchManger.Id.ToString() }, Notify);
+                        new NotificationHub().SendNotificationToSpcifcUsers(UserBrranchManger.Id, Notify);
                     }
                 }
                 else
@@ -56,7 +56,7 @@ namespace BLL.BLL
                     Notify.DescriptionAr = $"لقد قام الموظف   {this.UserLoggad.FullName } باضافة عملية دفع عن طريق حولة بنكية وقيمتها { c.Amount}";
                     Notify.DescriptionEn = $"{this.UserLoggad.FullName } Has been Add Payment Process By Bank Transfer And It Is Valaue { c.Amount}";
                     NotificationsBLL.Add(Notify, this.AdminId);
-                    new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { this.AdminId.ToString() }, Notify);
+                    new NotificationHub().SendNotificationToSpcifcUsers(this.AdminId, Notify);
                 }
             }
             else
@@ -71,7 +71,7 @@ namespace BLL.BLL
                     if (UserBrranchManger != null)
                     {
                         NotificationsBLL.Add(Notify, UserBrranchManger.Id);
-                        new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserBrranchManger.Id.ToString() }, Notify);
+                        new NotificationHub().SendNotificationToSpcifcUsers(UserBrranchManger.Id, Notify);
                     }
                 }
                 else
@@ -80,7 +80,7 @@ namespace BLL.BLL
                     Notify.DescriptionAr = $"لقد قام الموظف   {this.UserLoggad.FullName } باضافة عملية دفع عن طريق دفع نقدا وقيمتها { c.Amount}";
                     Notify.DescriptionEn = $"{this.UserLoggad.FullName} Has been Add Payment Process By Cash Payment And It Is Valaue { c.Amount}";
                     NotificationsBLL.Add(Notify, this.AdminId);
-                    new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { this.AdminId.ToString() }, Notify);
+                    new NotificationHub().SendNotificationToSpcifcUsers(this.AdminId, Notify);
                 }
             }
             return (long)ID.Value;

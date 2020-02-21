@@ -28,8 +28,22 @@
             });
         };
 
+        //cancle Request Payment Image
+        cancleRequestPaymentImage(cancleRequestDecision) {
+            let data = new FormData();
 
+            data.append("Id", cancleRequestDecision.Id);
+            data.append("TransfaerAmpuntImageFile", cancleRequestDecision.TransfaerAmpuntImageFile);
 
+            return h({
+                url: `${this.basePath}cancleRequestPaymentImage`,
+                method: 'post',
+                data: data,
+                headers: { 'Content-Type': angular.undefined }
+            });
+        };
+
+        
     };
     return new funcs();
 }]);

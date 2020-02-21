@@ -21,382 +21,91 @@
                     <span class="kt-subheader__breadcrumbs-separator"></span>
                     <a href="javascript:void(0)" class="kt-subheader__breadcrumbs-link">@Token.OrderDetails</a>
 
-                    <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+                    <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--">Active link</span> -->
                 </div>
             </div>
 
         </div>
         <!-- end:: Subheader -->
-        <!--Wizerd-->
-        <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
-            <div class="kt-portlet">
-                <div class="kt-portlet__body kt-portlet__body--fit">
-                    <div class="kt-grid  kt-wizard-v1 kt-wizard-v1--white" id="kt_wizard_v1" data-ktwizard-state="step-first">
-                        <div class="kt-grid__item">
+        <div class="kt-content  kt-grid__item kt-grid__item--fluid">
+            <div class="row">
+                <div class="col-lg-12">
 
-                            <!--begin: Form Wizard Nav -->
-                            <div class="kt-wizard-v1__nav">
-                                <div class="kt-wizard-v1__nav-items">
-                                    <a class="kt-wizard-v1__nav-item" href="javascript:void()" data-ktwizard-type="step"
-                                       data-ktwizard-state="current">
-                                        <div class="kt-wizard-v1__nav-body">
-                                            <div class="kt-wizard-v1__nav-icon">
-                                                <i class="flaticon-medal"></i>
-                                            </div>
-                                            <div class="kt-wizard-v1__nav-label">
-                                                1) @Token.ProductType
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="kt-wizard-v1__nav-item" href="javascript:void()" data-ktwizard-type="step">
-                                        <div class="kt-wizard-v1__nav-body">
-                                            <div class="kt-wizard-v1__nav-icon">
-                                                <i class="flaticon2-shopping-cart-1"></i>
-                                            </div>
-                                            <div class="kt-wizard-v1__nav-label">
-                                                2) @Token.Product
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="kt-wizard-v1__nav-item" href="javascript:void()" data-ktwizard-type="step"
-                                       >
-                                        <div class="kt-wizard-v1__nav-body">
-                                            <div class="kt-wizard-v1__nav-icon">
-                                                <i class="flaticon-list"></i>
-                                            </div>
-                                            <div class="kt-wizard-v1__nav-label">
-                                                3) @Token.Options
-                                            </div>
-                                        </div>
-                                    </a>
+                    <div class="kt-portlet kt-portlet--tabs">
+                        <div class="kt-portlet">
+                            <div class="kt-portlet__head">
+                                <div class="kt-portlet__head-label">
+                                    <span class="kt-portlet__head-icon">
+                                        <i class="kt-font-brand fab fa-wpforms"></i>
+                                    </span>
+                                    <h3 class="kt-portlet__head-title">@Token.EnquiryInformation</h3>
+                                </div>
+                                <div class="kt-portlet__head-toolbar">
+                                    <ul class="nav nav-tabs nav-tabs-line nav-tabs-line-brand nav-tabs-line-2x nav-tabs-line-right nav-tabs-bold" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active " data-toggle="tab" href="#Product" role="tab">
+                                                @Token.Product
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#Options" role="tab">
+                                                @Token.Options
+                                            </a>
+                                        </li>
 
-                                    <a class="kt-wizard-v1__nav-item" href="javascript:void()" data-ktwizard-type="step">
-                                        <div class="kt-wizard-v1__nav-body">
-                                            <div class="kt-wizard-v1__nav-icon">
-                                                <i class="fas fa-file-archive"></i>
-                                            </div>
-                                            <div class="kt-wizard-v1__nav-label">
-                                                4) @Token.Files
-                                            </div>
-                                        </div>
-                                    </a>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#Files" role="tab">
+                                                @Token.Files
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#DeliveryInformation" role="tab">
+                                                @Token.DeliveryInformation
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#TheBill" role="tab">
+                                                @Token.TheBill
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#Payments" role="tab">
+                                                @Token.Payments
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="cancelrequests" data-toggle="tab" href="#CancelRequests" role="tab" id="cancelRequests">
+                                                @Token.CancelRequests
+                                            </a>
+                                        </li>
 
-                                    <a class="kt-wizard-v1__nav-item" href="javascript:void()" data-ktwizard-type="step"
-                                       >
-                                        <div class="kt-wizard-v1__nav-body">
-                                            <div class="kt-wizard-v1__nav-icon">
-                                                <i class="flaticon-truck"></i>
-                                            </div>
-                                            <div class="kt-wizard-v1__nav-label">
-                                                5) @Token.DeliveryInformation
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <a class="kt-wizard-v1__nav-item" href="javascript:void()" data-ktwizard-type="step"
-                                       >
-                                        <div class="kt-wizard-v1__nav-body">
-                                            <div class="kt-wizard-v1__nav-icon">
-                                                <i class="fas fa-file-invoice-dollar"></i>
-                                            </div>
-                                            <div class="kt-wizard-v1__nav-label">
-                                                6) @Token.TheBill
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <a id="w_payment" class="kt-wizard-v1__nav-item" href="javascript:void()" data-ktwizard-type="step"
-                                       onclick="myAutoSize()">
-                                        <div class="kt-wizard-v1__nav-body">
-                                            <div class="kt-wizard-v1__nav-icon">
-                                                <i class="fab fa-cc-visa"></i>
-                                            </div>
-                                            <div class="kt-wizard-v1__nav-label">
-                                                7) @Token.Payments
-                                            </div>
-                                        </div>
-                                    </a>
-
+                                    </ul>
                                 </div>
                             </div>
-
-                            <!--end: Form Wizard Nav -->
-                        </div>
-                        <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v1__wrapper">
-
-                            <!--begin: Form Wizard Form-->
-                            <form class="kt-form" id="kt_form" name="addOrderForm" ng-submit="saveChange(addOrderForm)" novalidate>
-                                <!--begin: Form Wizard Step 1 Product Type-->
-                                <div class="kt-wizard-v1__content" data-ktwizard-type="step-content"
-                                     data-ktwizard-state="current">
-                                    <div class="kt-heading kt-heading--md">@Token.ProductType :</div>
-                                    <div class="kt-form__section kt-form__section--first">
-                                        <div class="kt-wizard-v1__form">
-                                            <div class="form-group row">
-                                                <div class="col-4 form-group-sub cursor-pointer">
-                                                    <div class="card  padding-0">
-                                                        <div class="card-header">{{order.ProductType.ProductTypeName}}</div>
-                                                        <div class="card-body padding-0">
-                                                            <img src="{{order.ProductType.ImageUrl}}" class="col padding-0" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="kt-portlet__body">
+                                <div class="tab-content">
+                                    <!--Product-->
+                                    <div class="tab-pane active" id="Product">@Html.Partial("~/Views/PhotoOrders/_Details_Product.cshtml")</div>
+                                    <!--Options-->
+                                    <div class="tab-pane " id="Options">@Html.Partial("~/Views/PhotoOrders/_Details_Options.cshtml")</div>
+                                    <!--Files-->
+                                    <div class="tab-pane " id="Files">@Html.Partial("~/Views/PhotoOrders/_Details_Files.cshtml")</div>
+                                    <!--DeliveryInformation-->
+                                    <div class="tab-pane " id="DeliveryInformation">@Html.Partial("~/Views/PhotoOrders/_Details_DeliveryInformation.cshtml")</div>
+                                    <!--TheBill-->
+                                    <div class="tab-pane " id="TheBill">@Html.Partial("~/Views/PhotoOrders/_Details_TheBill.cshtml")</div>
+                                    <!--Payments-->
+                                    <div class="tab-pane " id="Payments">@Html.Partial("~/Views/PhotoOrders/_Details_Payments.cshtml")</div>
+                                    <!--Cancel Requests-->
+                                    <div class="tab-pane " id="CancelRequests">@Html.Partial("~/Views/PhotoOrders/_Details_CancelRequests.cshtml")</div>
                                 </div>
-
-                                <!--begin: Form Wizard Step 2 Product Details-->
-                                <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
-                                    <div class="kt-heading kt-heading--md">@Token.Product :</div>
-                                    <div class="kt-form__section kt-form__section--first">
-                                        <div class="kt-wizard-v1__form">
-                                            <div class="form-group row">
-                                                <label class="col-form-label col-1  ">@Token.ProductName :  </label>
-                                                <div class="form-group col-5">
-                                                    <input class="form-control" disabled ng-model="order.Product.ProductName" />
-                                                </div>
-                                                <label class="col-form-label col-1 ">@Token.ProductDescription : </label>
-                                                <div class="form-group col-5">
-                                                    <textarea class="form-control " autosize disabled>{{order.Product.Description}}</textarea>
-                                                </div>
-
-                                                <label class="col-form-label col-1  ">@Token.ProductImages: </label>
-                                                <div class="form-group col-11 row">
-                                                    <div class="col-3" ng-repeat="im in order.Product.Images ">
-                                                        <img src="{{im.ImageUrl}}" class="peoduct-image">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!--begin: Form Wizard Step 3 Options-->
-                                <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
-                                    <div class="kt-heading kt-heading--md">@Token.Options :</div>
-                                    <div class="kt-form__section kt-form__section--first">
-                                        <div class="kt-wizard-v1__form row">
-                                            <div class="col-6 row" ng-repeat="im in order.Options">
-                                                <label class="col-form-label col-2 ">{{im.StaticField.StaticFieldName}} : </label>
-                                                <div class="form-group col-10">
-                                                    <input class="form-control" disabled ng-model="im.ItemSelected.Value" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!--begin: Form Wizard Step 4 === Files-->
-                                <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
-                                    <div class="kt-heading kt-heading--md">@Token.Files :</div>
-                                    <div class="kt-form__section kt-form__section--first">
-                                        <div class="kt-wizard-v1__form">
-                                            <div class="form-group">
-                                                <!--Images-->
-                                                <div class="form-group-sub">
-                                                    <div class="row">
-                                                        <div class="col-4 padding-0" ng-repeat="im in order.Files" ng-hide="im.State==state.delete">
-                                                            <div class="thumbnail thumbnail-v1">
-                                                                <img src="{{im.DropboxThumbnailPath}}" alt="@Token.Image">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!--begin: Form Wizard Step 5 === Delivery Information-->
-                                <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
-                                    <div class="kt-heading kt-heading--md">@Token.DeliveryInformation :</div>
-                                    <div class="kt-form__section kt-form__section--first">
-                                        <div class="kt-wizard-v1__form">
-                                            <!--Receipt from the branch-->
-                                            <div class="form-group row" ng-if="order.Delivery_IsReceiptFromTheBranch">
-                                                <label class="col-form-label col-lg-2">@Token.ReceiptFromTheBranch :</label>
-                                                <div class="form-group-sub col-lg-10 ">
-                                                    <span class="kt-switch kt-switch--icon">
-                                                        <label>
-                                                            <input type="checkbox" checked="checked" disabled
-                                                                   ng-model="order.Delivery_IsReceiptFromTheBranch">
-                                                            <span></span>
-                                                        </label>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <!--Country-->
-                                            <div class="form-group row" ng-if="!order.Delivery_IsReceiptFromTheBranch">
-                                                <label class="col-form-label col-1">@Token.Country :</label>
-                                                <div class="form-group-sub col-5 ">
-                                                    <input class="form-control" disabled ng-model="order.DeliveryCountry.CountryName" />
-                                                </div>
-
-                                            <!--City-->
-                                                <label class="col-form-label col-1">@Token.City :</label>
-                                                <div class="form-group-sub col-5 ">
-                                                    <input class="form-control" disabled ng-model="order.DeliveryCity.CityName" />
-                                                </div>
-                                            </div>
-
-                                            <!--Address-->
-                                            <div class="form-group row" ng-if="!order.Delivery_IsReceiptFromTheBranch">
-                                                <label class="col-form-label col-lg-1">@Token.Address :</label>
-                                                <div class="form-group-sub col-lg-11 ">
-                                                    <textarea class="form-control"
-                                                              serchbale
-                                                              name="address"
-                                                              disabled
-                                                              ng-model="order.Delivery_Address"
-                                                              maxlength="1000"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!--begin: Form Wizard Step 6 === Bill-->
-                                <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
-                                    <div class="kt-heading kt-heading--md">@Token.TheBill :</div>
-                                    <div class="kt-form__section kt-form__section--first">
-                                        <div class="kt-wizard-v1__form">
-                                            <div class="form-group row">
-                                                <table class="table table-hover ">
-                                                    <thead class="">
-                                                        <tr>
-                                                            <th><span class="sms-sort-field">@Token.TheService</span></th>
-                                                            <th><span class="sms-sort-field">@Token.CreateDateTime</span></th>
-                                                            <th><span class="sms-sort-field">@Token.Price</span></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr ng-repeat="x in order.ServicePrices">
-                                                            <td><span>{{x.ServiceName}}</span></td>
-                                                            <td><span>{{x.CreateDateTime_Display}}</span></td>
-                                                            <td><span>{{x.Price}}</span></td>
-                                                        </tr>
-                                                    </tbody>
-                                                    <tfoot>
-                                                        <tr>
-                                                            <td colspan="2" class="text-end">
-                                                                @Token.TotalPrice :
-                                                            </td>
-                                                            <td>{{order.TotalPrices|currency:''}}{{priceCurrencyCode}}</td>
-                                                        </tr>
-                                                    </tfoot>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!--begin: Form Wizard Step 7 === Payments-->
-                                <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
-                                    <div class="kt-heading kt-heading--md">@Token.Payments :</div>
-                                    <div class="kt-form__section kt-form__section--first">
-                                        <div class="kt-wizard-v1__form">
-                                            <div class="form-group row">
-                                                <table class="table sms-table table-hover " id="ng_table_1">
-                                                    <thead class="">
-                                                        <tr class="">
-                                                            <th class="th-15">
-                                                                <sms-sort ng-sms-resource="@Token.PaymentType"></sms-sort>
-                                                            </th>
-                                                            <th class="th-10">
-                                                                <sms-sort ng-sms-resource="@Token.CreateDateTime"></sms-sort>
-                                                            </th>
-                                                            <th class="th-5">
-                                                                <sms-sort ng-sms-resource="@Token.Amount"></sms-sort>
-                                                            </th>
-
-                                                            <th class="th-10">
-                                                                <sms-sort ng-sms-resource="@Token.BankTransferPhoto"></sms-sort>
-                                                            </th>
-
-                                                            <th class="th-10">
-                                                                <sms-sort ng-sms-resource="@Token.AcceptDateTime"></sms-sort>
-                                                            </th>
-                                                            <th class="th-20">
-                                                                <sms-sort ng-sms-resource="@Token.AcceptNotes"></sms-sort>
-                                                            </th>
-                                                            <th class="th-5">
-                                                                <sms-sort ng-sms-resource="@Token.IsAcceptFromManger"></sms-sort>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr ng-repeat="x in order.Payments">
-                                                            <td><span>{{x.PaymentType.Name}}</span></td>
-                                                            <td><span>{{x.CreateDateTime_Display}}</span></td>
-                                                            <td>{{x.Amount}}</td>
-                                                            <td>
-                                                                <a class="kt-link kt-font-boldest" href="{{x.TransferImageUrl}}" target="_blank" ng-show="x.IsBankTransfer">
-                                                                    <img class="figure-img img-thumbnail" src="{{x.TransferImageUrl}}" width="100" height="100" />
-                                                                </a>
-                                                            </td>
-                                                            <td><span>{{x.AcceptDateTime_Display}}</span></td>
-                                                            <td>
-                                                                <textarea class="form-control " autosize disabled>{{x.AcceptNotes}}</textarea>
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <i class="fas " ng-class="{'fa-check':x.IsAcceptFromManger==true}"></i>
-                                                                <i class="fas " ng-class="{'fa-times':x.IsAcceptFromManger==false}"></i>
-
-                                                                @if (CookieService.UserInfo.IsAdmin)
-                                                                {
-                                                                    <button type="submit" class="btn btn-success btn-elevate btn-elevate-air"
-                                                                            ng-if="x.IsAcceptFromManger==null&&x.IsBankTransfer"
-                                                                            ng-click="showAcceptTransfare(x,$index)">
-                                                                        <i class="la la-check">@Token.AcceptTransfare</i>
-                                                                    </button>
-                                                                }
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-
-                                                    <tfoot>
-                                                        <tr>
-                                                            <td colspan="1"><span>@Token.TotalPayments :</span></td>
-                                                            <td colspan="6"><span>{{order.TotalPayments|currency:''}}{{priceCurrencyCode}}</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="1"><span>@Token.TotalPaymentsAccepted :</span></td>
-                                                            <td colspan="6"><span>{{order.TotalPaymentsAccepted|currency:''}}{{priceCurrencyCode}}</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="1"><span>@Token.RequiredPayment :</span></td>
-                                                            <td colspan="6"><span>{{order.TotalPrices-order.TotalPaymentsAccepted|currency:''}}{{priceCurrencyCode}}</span></td>
-                                                        </tr>
-                                                    </tfoot>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <!--begin: Form Actions -->
-                                <div class="kt-form__actions">
-                                    <div class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold "
-                                         data-ktwizard-type="action-prev">
-                                        @Token.Previous
-                                    </div>
-
-                                    <div class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold "
-                                         data-ktwizard-type="action-next"
-                                         onclick="selectTo()">
-                                        @Token.Next
-                                    </div>
-                                </div>
-                                <!--end: Form Actions -->
-                            </form>
-                            <!--end: Form Wizard Form-->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
 
         <!--Accept Transfare-->
         @if (CookieService.UserInfo.IsAdmin)
@@ -462,6 +171,49 @@
                     </div>
                 </div>
             </div>
+
+            <div id="cancleRequestPaymentImage"
+                 class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <form novalidate name="cancleRequestDecisionFrm" class="kt-form kt-form--label-right" ng-submit="cancleRequestPaymentImageSave(cancleRequestDecisionFrm)">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">@Token.BankTransferPhoto</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!--RemainingAmounts-->
+                                <div class="form-group  row">
+                                    <label class="col-lg-2 col-form-label" >@Token.TheRequiredAmountOfPayment</label>
+                                    <div class="col-lg-4 form-group-sub">
+                                        <input type="number"
+                                               name="amount"
+                                               class="form-control"
+                                               disabled
+                                               ng-model="cancleRequestPaymentImage.RemainingAmounts" />
+                                    </div>
+
+                                    <!--BankTransferImage -->
+                                    <label class="col-lg-2 col-form-label" >@Token.BankTransferPhoto </label>
+                                    <div class="col-lg-4 form-group-sub"  >
+                                        <up-files text="@Token.Upload"
+                                                  accept="image/*"
+                                                  count="1"
+                                                  fun-load="cancleRequestPaymentUploadImage"></up-files>
+                                        <img class="figure-img img-thumbnail" src="{{cancleRequestPaymentImage.TransfaerAmpuntImage}}" width="150" height="150" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
+                                    <i class="la la-save">@Token.Save</i>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">@Token.Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         }
 
     </div>
@@ -482,10 +234,6 @@
     <style>
         .kt-wizard-v1 .kt-wizard-v1__nav .kt-wizard-v1__nav-items .kt-wizard-v1__nav-item {
             flex: 0 0 14%;
-        }
-
-        .form-control:disabled {
-            background-color: #fff !important;
         }
     </style>
 }

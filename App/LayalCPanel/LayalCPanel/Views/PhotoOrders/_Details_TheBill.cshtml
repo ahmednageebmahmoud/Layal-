@@ -1,0 +1,25 @@
+﻿
+    <table class="table table-hover sms-table ">
+        <thead class="">
+            <tr>
+                <th><span class="sms-sort-field">@Token.TheService</span></th>
+                <th><span class="sms-sort-field">@Token.CreateDateTime</span></th>
+                <th><span class="sms-sort-field">@Token.Price</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in order.ServicePrices">
+                <td><span>{{x.ServiceName}}</span></td>
+                <td><span>{{x.CreateDateTime_Display}}</span></td>
+                <td><span>{{x.Price}}</span></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2" class="text-end">
+                    @Token.TotalPrice :
+                </td>
+                <td>{{order.TotalPrices|currency:''}}{{priceCurrencyCode}}</td>
+            </tr>
+        </tfoot>
+    </table>

@@ -6,7 +6,7 @@ ngApp.controller('productsCtrl', ['$scope', '$http', 'productsServ', function (s
     };
 
     //============= G E T =================
-  
+
     s.getOrder = () => {
         if (!s.order.Id)
             return;
@@ -18,6 +18,8 @@ ngApp.controller('productsCtrl', ['$scope', '$http', 'productsServ', function (s
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
                     s.order = d.data.Result;
+                    if (s.order.CancleRequests.length > 0)
+                        s.order.CancleRequests[s.order.CancleRequests.length - 1].ShowDetails = true;
                     s.autosize();
                 } break;
                 case RequestTypeEnum.error:
@@ -49,6 +51,7 @@ ngApp.controller('productsCtrl', ['$scope', '$http', 'productsServ', function (s
             return;
         }
         s.newPayment.OrderId = s.order.Id;
+            BlockingService.block();
         productsServ.addNewPayment(s.newPayment).then(d => {
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess:
@@ -69,6 +72,44 @@ ngApp.controller('productsCtrl', ['$scope', '$http', 'productsServ', function (s
 
     }
 
+    //Cancle Request Decision
+    s.cancleRequestDecisionSave = form => {
+        if (form.$invalid) {
+            s.cancleRequestDecisionFrmSubmitErro = true;
+            return;
+        }
+
+        //التحقق من رفع الصورة
+        if (!s.cancleRequestDecision.IsRemainingAmountsForCustomer &&
+            s.cancleRequestDecision.Customer_IsAccepted &&
+            !s.cancleRequestDecision.TransfaerAmpuntImageFile) {
+
+            SMSSweet.alert(
+                LangIsEn ?"Please transfer and upload the bank transfer photo":"الرجاء التحويل ورفع صورة الحوالة البنكية"
+                , RequestTypeEnum.error);
+            return;
+        }
+
+        BlockingService.block();
+        productsServ.cancleRequestDecision(s.cancleRequestDecision).then(d => {
+            switch (d.data.RequestType) {
+                case RequestTypeEnum.sucess:
+                    {
+                        d.data.Result.ShowDetails = true;
+                        s.order.CancleRequests[s.order.CancleRequests.findIndex(c => c.Id == s.cancleRequestDecision.Id)] = d.data.Result;
+                        bootstrapModelHide("cancleRequestDecision");
+                    } break;
+            }
+            SMSSweet.alert(d.data.Message, d.data.RequestType);
+            co("P O S T - cancleRequestDecisionSave", d);
+            BlockingService.unBlock();
+        }).catch(err => {
+            BlockingService.unBlock();
+            SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+            co("E R R O R - cancleRequestDecisionSave", err);
+        })
+
+    };
 
     //+-+-+-+-+-+-+-+- Other -+-+-+-+-+-+-+-+-
     s.autosize = () => {
@@ -82,6 +123,13 @@ ngApp.controller('productsCtrl', ['$scope', '$http', 'productsServ', function (s
         s.newPayment = {};
         s.addPaymrntFrmSubmitErro = false;
         bootstrapModelShow("addNewPayment");
+    };
+
+    //Show Make Decision On Cancle Request
+    s.showCancleRequestDecision = cancleRequest => {
+        s.cancleRequestDecision = { ...cancleRequest };
+        s.cancleRequestDecisionFrmSubmitErro = false;
+        bootstrapModelShow("cancleRequestDecision");
     };
 
     //رفع صورة الحوالة البنكية 
@@ -101,11 +149,23 @@ ngApp.controller('productsCtrl', ['$scope', '$http', 'productsServ', function (s
         }
     };
 
+    //Uplaod For Accept Cancle Request
+    s.cancleRequestDecisionImage = files => {
+        var fileReaer = new FileReader();
+        let file = files[0];
+        fileReaer.readAsDataURL(file);
+        fileReaer.onload = (d) => {
+            s.cancleRequestDecision.TransfaerAmpuntImage = d.target.result;
+            s.cancleRequestDecision.TransfaerAmpuntImageFile = file;
+            s.$apply();
+        }
+    }
+
     //Go To Spcifc Tap 
     $(document).ready(() => {
-        document.getElementById(getQueryStringValue("go").toLocaleLowerCase()).click();
-    });
+    document.getElementById(getQueryStringValue("go").toLocaleLowerCase()).click();
+});
 
-    //Call Functions
-    s.getOrder();
+//Call Functions
+s.getOrder();
 }]);

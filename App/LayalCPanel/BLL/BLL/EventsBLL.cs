@@ -613,7 +613,7 @@ namespace BLL.BLL
                 //نقوم بتوزيع اومر العمل على الموظفين
                 this.DistributionWorkOrderToDefaultEmployees(c.Id, c.BranchId.Value);
 
-                new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { this.AdminId.ToString() }, Notify);
+                new NotificationHub().SendNotificationToSpcifcUsers(this.AdminId, Notify);
             }
 
             return new ResponseVM(RequestTypeEnum.Success, Token.Added, c);

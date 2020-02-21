@@ -81,7 +81,7 @@ namespace LayalCPanel.Controllers
         [HttpGet]
         public JsonResult GetOrderFullDetailsById(long id)
         {
-            return Json(Bll.GetOrderFullDetailsById(id), JsonRequestBehavior.AllowGet);
+            return Json(ClinetBll.GetOrderFullDetailsById(id), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -110,9 +110,20 @@ namespace LayalCPanel.Controllers
             return Json(new OrdersPaymentsBll().AddPaymentByAdmin(o), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult AddNewCancleRequest(OrderCancleRequestVM o)
+        {
+            return Json(Bll.Cancel(o), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult CancleRequestPaymentImage(OrderCancleRequestVM o)
+        {
+            return Json(Bll.CancleRequestPaymentImage(o), JsonRequestBehavior.AllowGet);
+        }
+
+
         
-
-
 
 
     }//End Class

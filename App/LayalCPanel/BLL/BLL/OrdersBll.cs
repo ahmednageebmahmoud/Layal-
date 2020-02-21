@@ -129,7 +129,7 @@ namespace BLL.BLL
 
                     //Send Notification To Manger
                     NotificationsBLL.Add(Notify, this.AdminId);
-                    new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { this.AdminId.ToString() }, Notify);
+                    new NotificationHub().SendNotificationToSpcifcUsers(this.AdminId, Notify);
 
 
                     tran.Commit();
@@ -146,6 +146,89 @@ namespace BLL.BLL
                     tran.Rollback();
                     return ResponseVM.Error(Token.SomeErrorHasBeen);
                 }
+            }
+        }
+
+        /// <summary>
+        /// قرار العميل للموافقة على طلب الالغاء
+        /// </summary>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        public object CancleRequestDecision(OrderCancleRequestVM o)
+        {
+            try
+            {
+                //Get Cancle Request Information
+                var CancleInfo = db.Phot_OrderCancleRequests_SelectPK(o.Id).Select(c => new OrderCancleRequestVM
+                {
+                    Id = c.Id,
+                    CreateDateTime = c.CreateDateTime,
+                    IsRemainingAmountsForCustomer = c.IsRemainingAmountsForCustomer,
+                    RemainingAmounts = c.RemainingAmounts,
+                    OrderId = c.FKOrder_Id,
+                    Description = c.Description,
+                    FkUserCancled_Id = c.FkUserCancled_Id,
+
+                    Customer_ReasonCanceling = o.Customer_ReasonCanceling,
+                    Customer_BankAccountName = o.Customer_BankAccountName,
+                    Customer_BankAccountNumber = o.Customer_BankAccountNumber,
+                    Customer_BankName = o.Customer_BankName,
+                    Customer_IsAccepted = o.Customer_IsAccepted,
+                    Customer_AcceptedDateTime = DateTime.Now,
+                }).FirstOrDefault();
+
+                if (CancleInfo == null)
+                    return ResponseVM.Error($"{Token.CancleRequest} : {Token.NotFound}");
+
+                //Save Image In Server
+                if (!CancleInfo.IsRemainingAmountsForCustomer && o.Customer_IsAccepted.Value)
+                    if (o.TransfaerAmpuntImageFile == null)
+                        return ResponseVM.Error($"{Token.BankTransferPhoto} {Token.NotFound}");
+                    else
+                    {
+                        var FileSave = FileService.SaveFileHttpBase(new FileSaveVM
+                        {
+                            File = o.TransfaerAmpuntImageFile,
+                            ServerPathSave = "/Files/Orders/Cancle/"
+                        });
+
+                        if (!FileSave.IsSaved)
+                            return ResponseVM.Error(Token.CanNotSaveBankTransferPhoto);
+                        CancleInfo.TransfaerAmpuntImage = FileSave.SavedPath;
+                    }
+
+                //Save Now And Disactive Order If Clinet Accepted
+                db.Phot_OrderCancleRequests_Update(CancleInfo.Id,
+                        CancleInfo.OrderId,
+                        CancleInfo.Customer_ReasonCanceling,
+                        CancleInfo.Customer_IsAccepted,
+                        CancleInfo.Customer_BankAccountNumber,
+                        CancleInfo.Customer_BankName,
+                        CancleInfo.Customer_BankAccountName,
+                        CancleInfo.TransfaerAmpuntImage
+                        );
+
+                //Send Notification Manger
+                NotifyVM Notify = new NotifyVM()
+                {
+                    TitleAr = "اتخاذ قرار على الغاء الطلب",
+                    TitleEn = "Decision to cancel the order",
+                    DescriptionAr = string.Format("لقد قام الموظف {0} بـ {1} على طلب الالغاء لـ الطلب رقم {2}", this.UserLoggad.FullName, CancleInfo.Customer_IsAccepted.Value ? "الموافقة" : "الرفض", CancleInfo.OrderId),
+                    DescriptionEn = string.Format("{0} Has Been {1} On Cancle Request For Order No {2}", this.UserLoggad.FullName, CancleInfo.Customer_IsAccepted.Value ? "Acepted" : "Rejected", CancleInfo.OrderId),
+                    DateTime = DateTime.Now,
+                    TargetId = CancleInfo.Id,
+                    PageId = PagesEnum.PhotoOrders,
+                    RedirectUrl = $"/PhotoOrdersMangment/Details?id={CancleInfo.OrderId}&go=cancelRequests&notifyId=",
+                };
+                new NotificationsBLL().Add(Notify, CancleInfo.FkUserCancled_Id);
+                new NotificationHub().SendNotificationToSpcifcUsers(CancleInfo.FkUserCancled_Id, Notify);
+
+
+                return ResponseVM.Success(CancleInfo);
+            }
+            catch (Exception ex)
+            {
+                return ResponseVM.Error(Token.SomeErrorHasBeen, ex);
             }
         }
 
@@ -317,7 +400,7 @@ namespace BLL.BLL
 
                     //Send Notification To Manger
                     NotificationsBLL.Add(Notify, UserId);
-                    new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserId.ToString() }, Notify);
+                    new NotificationHub().SendNotificationToSpcifcUsers(UserId, Notify);
 
 
                     tran.Commit();
@@ -384,7 +467,7 @@ namespace BLL.BLL
                 db.Phot_Orders_Cancel(order.Id, this.UserLoggad.Id);
 
 
-                    //ارسال اشعار للمدير 
+                //ارسال اشعار للمدير 
                 string RedirectUrl = $"/PhotoOrdersMangment/Details?id={order.Id}";
                 long UserNotififyTragetId = this.AdminId;
                 if (!this.UserLoggad.IsPhotographer)
@@ -407,7 +490,7 @@ namespace BLL.BLL
 
                 //Send Notification To Manger
                 NotificationsBLL.Add(Notify, UserNotififyTragetId);
-                new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserNotififyTragetId.ToString() }, Notify);
+                new NotificationHub().SendNotificationToSpcifcUsers(UserNotififyTragetId, Notify);
 
                 return ResponseVM.Success(Token.Canceled);
             }
@@ -596,11 +679,26 @@ namespace BLL.BLL
                     ServiceNameAr = b.ServiceNameAr,
                     ServiceNameEn = b.ServiceNameEn,
                 }).ToList(),
-                Payments = new OrdersPaymentsBll().GetPaymentsByOrderId(c.Key.Id)
+                Payments = new OrdersPaymentsBll().GetPaymentsByOrderId(c.Key.Id),
+                CancleRequests = db.Phot_OrderCancleRequests_SelectByOrderId(c.Key.Id).Select(v => new OrderCancleRequestVM
+                {
+                    CreateDateTime = v.CreateDateTime,
+                    Customer_AcceptedDateTime = v.Customer_AcceptedDateTime,
+                    Id = v.Id,
+                    Customer_BankAccountName = v.Customer_BankAccountName,
+                    Customer_BankAccountNumber = v.Customer_BankAccountNumber,
+                    Customer_BankName = v.Customer_BankName,
+                    Customer_IsAccepted = v.Customer_IsAccepted,
+                    Customer_ReasonCanceling = v.Customer_ReasonCanceling,
+                    Description = v.Description,
+                    IsRemainingAmountsForCustomer = v.IsRemainingAmountsForCustomer,
+                    RemainingAmounts = v.RemainingAmounts,
+                    TransfaerAmpuntImage = v.TransfaerAmpuntImage
+                }).ToList()
             }).FirstOrDefault();
 
 
-            if (Order == null || Order.UserCreatedId != this.UserLoggad.Id)
+            if (Order == null)
                 return ResponseVM.Error($"{Token.Order} : {Token.NotFound}");
 
             //Sum Total 

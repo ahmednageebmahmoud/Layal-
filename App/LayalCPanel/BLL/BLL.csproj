@@ -178,6 +178,7 @@
     <Compile Include="ViewModels\AccountTypeVM.cs" />
     <Compile Include="ViewModels\AlbumFileVM.cs" />
     <Compile Include="ViewModels\DropboxThumbnailVM.cs" />
+    <Compile Include="ViewModels\OrderCancleRequestVM.cs" />
     <Compile Include="ViewModels\OrderFileVM.cs" />
     <Compile Include="ViewModels\OrderPaymentVM.cs" />
     <Compile Include="ViewModels\OrderServicePriceVM.cs" />

@@ -265,7 +265,7 @@ namespace BLL.BLL
                 if (UserMangerBranch != null)
                 {
                     NotificationsBLL.Add(Notify, UserMangerBranch.Id);
-                    new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserMangerBranch.Id.ToString() }, Notify);
+                    new NotificationHub().SendNotificationToSpcifcUsers( UserMangerBranch.Id, Notify);
                 }
             }
 
@@ -309,7 +309,7 @@ namespace BLL.BLL
                 else if (this.UserLoggad.IsClinet)
                 {
                     Notify.DescriptionAr = $"لقد قام العميل {this.UserLoggad.FullName}  بـ انشاء استفسار جديد";
-                    Notify.DescriptionEn = $"{this.UserLoggad.FullName} Has been created new enqiry";
+                    Notify.DescriptionEn = $"{this.UserLoggad.FullName} Has been created new .Idenqiry";
                 }
                 else if (this.UserLoggad.IsAdmin)
                 {
@@ -320,7 +320,7 @@ namespace BLL.BLL
                 if (this.UserLoggad.Id != UserMangerBranch.Id)
                 {
                     NotificationsBLL.Add(Notify, UserMangerBranch.Id);
-                    new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserMangerBranch.Id.ToString() }, Notify);
+                    new NotificationHub().SendNotificationToSpcifcUsers( UserMangerBranch.Id, Notify);
                 }
             }
 
@@ -521,7 +521,7 @@ namespace BLL.BLL
                 RedirectUrl = $"/Enquires/EnquiryInformation?id={targetId}&notifyId=",
             };
             NotificationsBLL.Add(Notify, userTargetId);
-            new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { userTargetId.ToString() }, Notify);
+            new NotificationHub().SendNotificationToSpcifcUsers( userTargetId, Notify);
         }
 
 

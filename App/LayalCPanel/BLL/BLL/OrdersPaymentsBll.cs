@@ -61,7 +61,7 @@ namespace BLL.BLL
 
                     //Send Notification To Manger
                     NotificationsBLL.Add(Notify, this.AdminId);
-                    new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { this.AdminId.ToString() }, Notify);
+                    new NotificationHub().SendNotificationToSpcifcUsers(this.AdminId, Notify);
 
                     o.Id = PaymentId;
                     o.IsBankTransfer = true;
@@ -85,6 +85,9 @@ namespace BLL.BLL
             {
                 try
                 {
+                    if (db.Phot_Orders_CheckIfActive(o.OrderId).Any(c => c.Value > 0))
+                        return ResponseVM.Error($"{Token.Order} {Token.NotActivate}");
+
                     var UserCreatedOrderId = db.Phot_OrderPayments_InsertV2(o.OrderId, o.Amount,  this.UserLoggad.Id,
                         o.PaymentTypeId,o.IsAcceptFromManger,o.AcceptNotes, DateTime.Now).FirstOrDefault();
 
@@ -110,7 +113,7 @@ namespace BLL.BLL
 
                     //Send Notification To Manger
                     NotificationsBLL.Add(Notify, UserCreatedOrderId.Value);
-                    new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserCreatedOrderId.Value.ToString() }, Notify);
+                    new NotificationHub().SendNotificationToSpcifcUsers( UserCreatedOrderId.Value, Notify);
 
                     tran.Commit();
                     return ResponseVM.Success(Token.Add);
@@ -164,7 +167,7 @@ namespace BLL.BLL
 
                 //Send Notification To Manger
                 NotificationsBLL.Add(Notify, payment.UsereCreatedId);
-                new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { payment.UsereCreatedId.ToString() }, Notify);
+                new NotificationHub().SendNotificationToSpcifcUsers( payment.UsereCreatedId, Notify);
 
                 payment.AcceptDateTime = DateTime.Now;
                 return ResponseVM.Success(Token.Saved, payment);

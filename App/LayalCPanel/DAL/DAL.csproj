@@ -249,6 +249,12 @@
     <Compile Include="Pages_SelectAllForUserCanBeAccess_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Phot_OrderCancleRequests_SelectByOrderId_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Phot_OrderCancleRequests_SelectPK_Result.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Phot_OrderPayments_SelectByOrderId_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>

@@ -1,0 +1,15 @@
+﻿
+    <table class="table table-hover table-bordered sms-table">
+        <thead>
+            <tr>
+                <th class="th-10"></th>
+                <th class="th-90"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="im in order.Options">
+                <td>{{im.StaticField.StaticFieldName}}</td>
+                <td><span>{{im.ItemSelected.Value}}</span></td>
+            </tr>
+        </tbody>
+    </table>

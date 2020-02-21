@@ -804,6 +804,42 @@
     <Parameter Name="UserId" Type="bigint" Mode="In" />
     <Parameter Name="IsPublicMenus" Type="bit" Mode="In" />
   </Function>
+  <Function Name="Phot_OrderCancleRequests_CheckIfCanBeCancled" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_OrderCancleRequests_CheckIfCancled" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+    <Parameter Name="Order" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_OrderCancleRequests_CheckIfInWating" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+    <Parameter Name="Order" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_OrderCancleRequests_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="RemainingAmounts" Type="decimal" Mode="In" />
+    <Parameter Name="IsRemainingAmountsForCustomer" Type="bit" Mode="In" />
+    <Parameter Name="UserCancled_Id" Type="bigint" Mode="In" />
+    <Parameter Name="Order_Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_OrderCancleRequests_SelectByOrderId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_OrderCancleRequests_SelectPK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Phot_OrderCancleRequests_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="OrderId" Type="bigint" Mode="In" />
+    <Parameter Name="Customer_ReasonCanceling" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Customer_IsAccepted" Type="bit" Mode="In" />
+    <Parameter Name="Customer_BankAccountNumber" Type="int" Mode="In" />
+    <Parameter Name="Customer_BankName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Customer_BankAccountName" Type="nvarchar" Mode="In" />
+    <Parameter Name="TransfaerAmpuntImage" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Phot_OrderCancleRequests_UpdateV2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="TransfaerAmpuntImage" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="Phot_OrderPayments_Accept" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="bigint" Mode="In" />
     <Parameter Name="OrderId" Type="bigint" Mode="In" />
@@ -829,17 +865,12 @@
   <Function Name="Phot_OrderPayments_SelectByOrderId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="OrderId" Type="bigint" Mode="In" />
   </Function>
-  <Function Name="Phot_Orders_Cancel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="id" Type="bigint" Mode="In" />
-    <Parameter Name="CurretnUserId" Type="bigint" Mode="In" />
-  </Function>
   <Function Name="Phot_Orders_CheckCanBeDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="OrderId" Type="bigint" Mode="In" />
     <Parameter Name="UserId" Type="bigint" Mode="In" />
   </Function>
-  <Function Name="Phot_Orders_CheckIfCanBeCancled" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="Phot_Orders_CheckIfActive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="OrderId" Type="bigint" Mode="In" />
-    <Parameter Name="UserId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="Phot_Orders_CheckIfCancled" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="OrderId" Type="bigint" Mode="In" />

@@ -1,0 +1,8 @@
+﻿
+    <div class="row">
+        <div class="col-4 padding-0" ng-repeat="im in order.Files" ng-hide="im.State==state.delete">
+            <div class="thumbnail thumbnail-v1">
+                <img src="{{im.DropboxThumbnailPath}}" alt="@Token.Image">
+            </div>
+        </div>
+    </div>

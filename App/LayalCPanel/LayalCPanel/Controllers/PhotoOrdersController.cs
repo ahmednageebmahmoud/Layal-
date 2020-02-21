@@ -105,7 +105,13 @@ namespace LayalCPanel.Controllers
             return Json(new OrdersPaymentsBll().AddPaymentByClinet(o), JsonRequestBehavior.AllowGet);
         }
 
-         
+
+        [HttpPost]
+        public JsonResult CancleRequestDecision(OrderCancleRequestVM o)
+        {
+            return Json(Bll.CancleRequestDecision(o), JsonRequestBehavior.AllowGet);
+        }
+
         
 
     }//End Class

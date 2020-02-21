@@ -34,10 +34,18 @@
       
         //save payment
         addNewPayment(payment) {
-             
-
             return h({
                 url: `${this.basePath}AddPayment`,
+                method: 'post',
+                data: payment,
+            });
+        };
+
+        //Add New Cancle Request
+        
+        addNewCancleRequest(payment) {
+            return h({
+                url: `${this.basePath}addNewCancleRequest`,
                 method: 'post',
                 data: payment,
             });

@@ -6,10 +6,11 @@
             element.html(`<button type="button" class="btn btn-outline-brand" onclick="document.getElementById('customFile').click()">
                                         <i class ="fa fa-upload"></i> ${attrs.text}
                                     </button>
-                                        <input type="file" class ="custom-file-input" id="customFile" name="images" accept="${attrs.accept}"  ${attrs.count > 1 ? `multiple`: ``}  hidden
-                                        onchange="angular.element(this).scope().uplaodImages(this.files);this.value=null"/>
+                                        <input type="file" class ="custom-file-input" id="customFile" name="images" accept="${attrs.accept}"  ${attrs.count > 1 ? `multiple` : ``}  hidden
+                                        onchange="angular.element(this).scope().${attrs.funLoad ? attrs.funLoad : `uplaodImages`}(this.files);this.value=null"/>
                 `);
 
+            
             //الان نقوم نعطى امر للـ الانجلر لـ عمل كومبيل بشكل يدوى 
             $compile(element.contents())($scope)
         },

@@ -18,6 +18,8 @@ ngApp.controller('productsCtrl', ['$scope', '$http', 'productsServ', function (s
             switch (d.data.RequestType) {
                 case RequestTypeEnum.sucess: {
                     s.order = d.data.Result;
+                    if (s.order.CancleRequests.length > 0)
+                        s.order.CancleRequests[s.order.CancleRequests.length - 1].ShowDetails= true;
                     myAutoSize();
                 } break;
                 case RequestTypeEnum.error:
@@ -67,6 +69,42 @@ ngApp.controller('productsCtrl', ['$scope', '$http', 'productsServ', function (s
 
     }
 
+    s.cancleRequestPaymentImageSave = form => {
+        if (form.$invalid) {
+            s.cancleRequestDecisionFrmSubmitErro = true;
+            return;
+        }
+
+        //التحقق من رفع الصورة
+        if (!s.cancleRequestPaymentImage.TransfaerAmpuntImageFile) {
+
+            SMSSweet.alert(
+                LangIsEn ? "Please transfer and upload the bank transfer photo" : "الرجاء التحويل ورفع صورة الحوالة البنكية"
+                , RequestTypeEnum.error);
+            return;
+        }
+
+        BlockingService.block();
+        productsServ.cancleRequestPaymentImage(s.cancleRequestPaymentImage).then(d => {
+            switch (d.data.RequestType) {
+                case RequestTypeEnum.sucess:
+                    {
+                        d.data.Result.ShowDetails = true;
+                        s.order.CancleRequests[s.order.CancleRequests.findIndex(c => c.Id == s.cancleRequestPaymentImage.Id)] = d.data.Result;
+                        bootstrapModelHide("cancleRequestPaymentImage");
+                    } break;
+            }
+            SMSSweet.alert(d.data.Message, d.data.RequestType);
+            co("P O S T - cancleRequestPaymentImageSave", d);
+            BlockingService.unBlock();
+        }).catch(err => {
+            BlockingService.unBlock();
+            SMSSweet.alert(err.statusText, RequestTypeEnum.error);
+            co("E R R O R - cancleRequestPaymentImageSave", err);
+        })
+
+    };
+
 
     //+-+-+-+-+-+-+-+- Other -+-+-+-+-+-+-+-+-
   
@@ -80,7 +118,24 @@ ngApp.controller('productsCtrl', ['$scope', '$http', 'productsServ', function (s
         bootstrapModelShow("acceptTransfare");
     };
 
-     
+    //Show Payment Cancle Request Remaining Amounts
+    s.showCancleRequestPaymentImage = cancleRequest => {
+        s.cancleRequestPaymentImage= { ...cancleRequest };
+        s.cancleRequestPaymentImageFrmSubmitErro = false;
+        bootstrapModelShow("cancleRequestPaymentImage");
+    };
+
+    //Uplaod For Accept Cancle Request
+    s.cancleRequestPaymentUploadImage = files => {
+        var fileReaer = new FileReader();
+        let file = files[0];
+        fileReaer.readAsDataURL(file);
+        fileReaer.onload = (d) => {
+            s.cancleRequestPaymentImage.TransfaerAmpuntImage = d.target.result;
+            s.cancleRequestPaymentImage.TransfaerAmpuntImageFile = file;
+            s.$apply();
+        }
+    }
 
     //Go To Spcifc Tap 
     $(document).ready(() => {

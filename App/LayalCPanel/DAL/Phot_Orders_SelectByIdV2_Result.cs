@@ -24,8 +24,6 @@ namespace DAL
         public string Delivery_Address { get; set; }
         public Nullable<int> Delivery_FkCountry_Id { get; set; }
         public Nullable<int> Delivery_FKCity_Id { get; set; }
-        public Nullable<System.DateTime> DateTimeCancel { get; set; }
-        public Nullable<long> FkUserCancel_Id { get; set; }
         public decimal OrderService_Price { get; set; }
         public long OrderService_WordId { get; set; }
         public long FKProdutOption_Id { get; set; }

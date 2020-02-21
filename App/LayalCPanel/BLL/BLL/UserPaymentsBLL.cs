@@ -87,7 +87,7 @@ namespace BLL.BLL
                         }
                         Notify.RedirectUrl = $"/UserPayments/MyPayments?notifyId=";
                         NotificationsBLL.Add(Notify, UserTo.Id);
-                        new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserTo.Id.ToString() }, Notify);
+                        new NotificationHub().SendNotificationToSpcifcUsers(UserTo.Id, Notify);
                     }
 
 
@@ -108,7 +108,7 @@ namespace BLL.BLL
                         Notify.RedirectUrl = $"/UserPayments/MyPayments?notifyId=";
 
                         NotificationsBLL.Add(Notify, BranchManger.Id);
-                        new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { BranchManger.Id.ToString() }, Notify);
+                        new NotificationHub().SendNotificationToSpcifcUsers(BranchManger.Id, Notify);
                     }
                 }
                 else
@@ -133,7 +133,7 @@ namespace BLL.BLL
                             }
                             Notify.RedirectUrl = $"/UserPayments/MyPayments?notifyId=";
                             NotificationsBLL.Add(Notify, UserTo.Id);
-                            new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserTo.Id.ToString() }, Notify);
+                            new NotificationHub().SendNotificationToSpcifcUsers(UserTo.Id, Notify);
                         }
 
 
@@ -154,7 +154,7 @@ namespace BLL.BLL
                             Notify.RedirectUrl = $"/UserPayments/MyPayments?notifyId=";
 
                             NotificationsBLL.Add(Notify, BranchManger.Id);
-                            new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { BranchManger.Id.ToString() }, Notify);
+                            new NotificationHub().SendNotificationToSpcifcUsers(BranchManger.Id, Notify);
                         }
                     }
                 }
@@ -200,7 +200,7 @@ namespace BLL.BLL
                 Notify.DescriptionAr = $"لقد قام الموظف   {this.UserLoggad.FullName } باضافة عملية دفع لـ الموظف {  UserTo.UserName} وقيمتها { c.Amount}";
                 Notify.DescriptionEn = $"{this.UserLoggad.FullName} Has been Add Payment Process Fro { UserTo.UserName} Employee And It Is Valaue { c.Amount}";
                 NotificationsBLL.Add(Notify, this.AdminId);
-                new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { this.AdminId.ToString() }, Notify);
+                new NotificationHub().SendNotificationToSpcifcUsers(this.AdminId, Notify);
             }
             else if (c.IsAcceptFromManger == true && c.IsBankTransfer == false || !c.IsBankTransfer.HasValue)
             {
@@ -209,7 +209,7 @@ namespace BLL.BLL
                 Notify.DescriptionAr = $"هناك عملية دفع للموظف {  UserTo.UserName} وقيمتها { c.Amount} ريال";
                 Notify.DescriptionEn = $"you have new paymetn to {  UserTo.UserName} employee and it is value { c.Amount}  ";
                 NotificationsBLL.Add(Notify, BranchManger.Id);
-                new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { BranchManger.Id.ToString() }, Notify);
+                new NotificationHub().SendNotificationToSpcifcUsers(BranchManger.Id, Notify);
             }
             else if (c.IsAcceptFromManger == true && c.IsBankTransfer == true && !string.IsNullOrEmpty(c.PaymentImage))
             {
@@ -220,7 +220,7 @@ namespace BLL.BLL
                 Notify.RedirectUrl = $"/UserPayments/MyPayments?notifyId=";
 
                 NotificationsBLL.Add(Notify, c.UserToId);
-                new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { c.UserToId.ToString() }, Notify);
+                new NotificationHub().SendNotificationToSpcifcUsers(c.UserToId, Notify);
             }
 
             c.Id = (long)ID.Value;

@@ -24,15 +24,13 @@ namespace DAL
         public string Delivery_Address { get; set; }
         public Nullable<int> Delivery_FkCountry_Id { get; set; }
         public Nullable<int> Delivery_FKCity_Id { get; set; }
-        public Nullable<System.DateTime> DateTimeCancel { get; set; }
-        public Nullable<long> FkUserCancel_Id { get; set; }
         public string ProductTypeNameAr { get; set; }
         public string ProductTypeNameEn { get; set; }
         public string ProductNameAr { get; set; }
         public string ProductNameEn { get; set; }
         public string UserCreated_UserName { get; set; }
         public string UserCreated_FullName { get; set; }
-        public string UserCancled_UserName { get; set; }
-        public string UserCancled_FullName { get; set; }
+        public Nullable<bool> IsCancled { get; set; }
+        public Nullable<bool> IsCancledWaiting { get; set; }
     }
 }

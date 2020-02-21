@@ -1,0 +1,73 @@
+﻿<table class="table sms-table table-hover " id="ng_table_1">
+    <thead class="">
+        <tr class="">
+            <th class="th-15">
+                <sms-sort ng-sms-resource="@Token.PaymentType"></sms-sort>
+            </th>
+            <th class="th-10">
+                <sms-sort ng-sms-resource="@Token.CreateDateTime"></sms-sort>
+            </th>
+            <th class="th-5">
+                <sms-sort ng-sms-resource="@Token.Amount"></sms-sort>
+            </th>
+
+            <th class="th-10">
+                <sms-sort ng-sms-resource="@Token.BankTransferPhoto"></sms-sort>
+            </th>
+
+            <th class="th-10">
+                <sms-sort ng-sms-resource="@Token.AcceptDateTime"></sms-sort>
+            </th>
+            <th class="th-20">
+                <sms-sort ng-sms-resource="@Token.AcceptNotes"></sms-sort>
+            </th>
+            <th class="th-5">
+                <sms-sort ng-sms-resource="@Token.IsAcceptFromManger"></sms-sort>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="x in order.Payments">
+            <td><span>{{x.PaymentType.Name}}</span></td>
+            <td><span>{{x.CreateDateTime_Display}}</span></td>
+            <td>{{x.Amount}}</td>
+            <td>
+                <a class="kt-link kt-font-boldest" href="{{x.TransferImageUrl}}" target="_blank" ng-show="x.IsBankTransfer">
+                    <img class="figure-img img-thumbnail" src="{{x.TransferImageUrl}}" width="100" height="100" />
+                </a>
+            </td>
+            <td><span>{{x.AcceptDateTime_Display}}</span></td>
+            <td>
+                <textarea class="form-control " autosize disabled>{{x.AcceptNotes}}</textarea>
+            </td>
+            <td class="text-center">
+                <i class="fas " ng-class="{'fa-check':x.IsAcceptFromManger==true}"></i>
+                <i class="fas " ng-class="{'fa-times':x.IsAcceptFromManger==false}"></i>
+
+                @if (CookieService.UserInfo.IsAdmin)
+                {
+                    <button type="submit" class="btn btn-success btn-elevate btn-elevate-air"
+                            ng-if="x.IsAcceptFromManger==null&&x.IsBankTransfer"
+                            ng-click="showAcceptTransfare(x,$index)">
+                        <i class="la la-check">@Token.AcceptTransfare</i>
+                    </button>
+                }
+            </td>
+        </tr>
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="1"><span>@Token.TotalPayments :</span></td>
+            <td colspan="6"><span>{{order.TotalPayments|currency:''}}{{priceCurrencyCode}}</span></td>
+        </tr>
+        <tr>
+            <td colspan="1"><span>@Token.TotalPaymentsAccepted :</span></td>
+            <td colspan="6"><span>{{order.TotalPaymentsAccepted|currency:''}}{{priceCurrencyCode}}</span></td>
+        </tr>
+        <tr>
+            <td colspan="1"><span>@Token.RequiredPayment :</span></td>
+            <td colspan="6"><span>{{order.TotalPrices-order.TotalPaymentsAccepted|currency:''}}{{priceCurrencyCode}}</span></td>
+        </tr>
+    </tfoot>
+</table>

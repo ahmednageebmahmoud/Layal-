@@ -324,7 +324,7 @@ namespace BLL.BLL
                 if (UserMangerBranch != null)
                 {
                     NotificationsBLL.Add(Notify, UserMangerBranch.Id);
-                    new NotificationHub().SendNotificationToSpcifcUsers(new List<string> { UserMangerBranch.Id.ToString() }, Notify);
+                    new NotificationHub().SendNotificationToSpcifcUsers( UserMangerBranch.Id, Notify);
                 }
             }
         }

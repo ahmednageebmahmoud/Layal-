@@ -1,0 +1,38 @@
+﻿   <!--Receipt from the branch-->
+<div class="form-group row" ng-if="order.Delivery_IsReceiptFromTheBranch">
+    <label class="col-form-label col-lg-2">@Token.ReceiptFromTheBranch :</label>
+    <div class="form-group-sub col-lg-10 ">
+        <span class="kt-switch kt-switch--icon">
+            <label>
+                <input type="checkbox" checked="checked" disabled
+                       ng-model="order.Delivery_IsReceiptFromTheBranch">
+                <span></span>
+            </label>
+        </span>
+    </div>
+</div>
+<!--Country-->
+<div class="form-group row" ng-if="!order.Delivery_IsReceiptFromTheBranch">
+    <label class="col-form-label col-1">@Token.Country :</label>
+    <div class="form-group-sub col-5 ">
+        <input class="form-control" disabled ng-model="order.DeliveryCountry.CountryName" />
+    </div>
+
+    <!--City-->
+    <label class="col-form-label col-1">@Token.City :</label>
+    <div class="form-group-sub col-5 ">
+        <input class="form-control" disabled ng-model="order.DeliveryCity.CityName" />
+    </div>
+</div>
+<!--Address-->
+<div class="form-group row" ng-if="!order.Delivery_IsReceiptFromTheBranch">
+    <label class="col-form-label col-lg-1">@Token.Address :</label>
+    <div class="form-group-sub col-lg-11 ">
+        <textarea class="form-control"
+                  serchbale
+                  name="address"
+                  disabled
+                  ng-model="order.Delivery_Address"
+                  maxlength="1000"></textarea>
+    </div>
+</div>

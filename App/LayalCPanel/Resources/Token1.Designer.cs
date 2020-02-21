@@ -70,11 +70,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accept Cancle.
+        /// </summary>
+        public static string AcceptCancle {
+            get {
+                return ResourceManager.GetString("AcceptCancle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accept Date Time.
         /// </summary>
         public static string AcceptDateTime {
             get {
                 return ResourceManager.GetString("AcceptDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accepted.
+        /// </summary>
+        public static string Accepted {
+            get {
+                return ResourceManager.GetString("Accepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accepted Date Time.
+        /// </summary>
+        public static string AcceptedDateTime {
+            get {
+                return ResourceManager.GetString("AcceptedDateTime", resourceCulture);
             }
         }
         
@@ -282,6 +309,15 @@ namespace Resources {
         public static string AddNewBranch {
             get {
                 return ResourceManager.GetString("AddNewBranch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Cancle Request For Order Number.
+        /// </summary>
+        public static string AddNewCancleRequestFor {
+            get {
+                return ResourceManager.GetString("AddNewCancleRequestFor", resourceCulture);
             }
         }
         
@@ -583,6 +619,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bank Account Name.
+        /// </summary>
+        public static string BankAccountName {
+            get {
+                return ResourceManager.GetString("BankAccountName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank Account Number.
+        /// </summary>
+        public static string BankAccountNumber {
+            get {
+                return ResourceManager.GetString("BankAccountNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank Name.
+        /// </summary>
+        public static string BankName {
+            get {
+                return ResourceManager.GetString("BankName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bank Transfer Deposit.
         /// </summary>
         public static string BankTransferDeposit {
@@ -682,11 +745,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel Requests.
+        /// </summary>
+        public static string CancelRequests {
+            get {
+                return ResourceManager.GetString("CancelRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancled Date Time.
         /// </summary>
         public static string CancledDateTime {
             get {
                 return ResourceManager.GetString("CancledDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancle Request.
+        /// </summary>
+        public static string CancleRequest {
+            get {
+                return ResourceManager.GetString("CancleRequest", resourceCulture);
             }
         }
         
@@ -714,6 +795,15 @@ namespace Resources {
         public static string CanEdit {
             get {
                 return ResourceManager.GetString("CanEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can Not Cancle Now.
+        /// </summary>
+        public static string CanNotCancleNow {
+            get {
+                return ResourceManager.GetString("CanNotCancleNow", resourceCulture);
             }
         }
         
@@ -894,6 +984,15 @@ namespace Resources {
         public static string City {
             get {
                 return ResourceManager.GetString("City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client Decision.
+        /// </summary>
+        public static string ClientDecision {
+            get {
+                return ResourceManager.GetString("ClientDecision", resourceCulture);
             }
         }
         
@@ -1690,6 +1789,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hide Details.
+        /// </summary>
+        public static string HideDetails {
+            get {
+                return ResourceManager.GetString("HideDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home Page.
         /// </summary>
         public static string HomePage {
@@ -1807,6 +1915,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accepted.
+        /// </summary>
+        public static string IsAccepted {
+            get {
+                return ResourceManager.GetString("IsAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accept From Manger.
         /// </summary>
         public static string IsAcceptFromManger {
@@ -1920,6 +2037,24 @@ namespace Resources {
         public static string IsoCode {
             get {
                 return ResourceManager.GetString("IsoCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remaining Amounts For Customer.
+        /// </summary>
+        public static string IsRemainingAmountsForCustomer {
+            get {
+                return ResourceManager.GetString("IsRemainingAmountsForCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is Remaining Amounts For You.
+        /// </summary>
+        public static string IsRemainingAmountsForYou {
+            get {
+                return ResourceManager.GetString("IsRemainingAmountsForYou", resourceCulture);
             }
         }
         
@@ -2284,6 +2419,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Decision.
+        /// </summary>
+        public static string NoDecision {
+            get {
+                return ResourceManager.GetString("NoDecision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No More Result.
         /// </summary>
         public static string NoMoreResult {
@@ -2307,6 +2451,15 @@ namespace Resources {
         public static string NoResult {
             get {
                 return ResourceManager.GetString("NoResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not Activate.
+        /// </summary>
+        public static string NotActivate {
+            get {
+                return ResourceManager.GetString("NotActivate", resourceCulture);
             }
         }
         
@@ -2626,6 +2779,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payment Remaining Amounts.
+        /// </summary>
+        public static string PaymentRemainingAmounts {
+            get {
+                return ResourceManager.GetString("PaymentRemainingAmounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payments.
         /// </summary>
         public static string Payments {
@@ -2896,6 +3058,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Product  Type Image.
+        /// </summary>
+        public static string ProductTypeImage {
+            get {
+                return ResourceManager.GetString("ProductTypeImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Product Types.
         /// </summary>
         public static string ProductTypes {
@@ -2932,6 +3103,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reason Canceling.
+        /// </summary>
+        public static string ReasonCanceling {
+            get {
+                return ResourceManager.GetString("ReasonCanceling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Receipt From The Branch.
         /// </summary>
         public static string ReceiptFromTheBranch {
@@ -2941,11 +3121,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rejected.
+        /// </summary>
+        public static string Rejected {
+            get {
+                return ResourceManager.GetString("Rejected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remaining Amount.
         /// </summary>
         public static string RemainingAmount {
             get {
                 return ResourceManager.GetString("RemainingAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remaining Amounts.
+        /// </summary>
+        public static string RemainingAmounts {
+            get {
+                return ResourceManager.GetString("RemainingAmounts", resourceCulture);
             }
         }
         
@@ -3274,6 +3472,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The amount that will be refunded to you.
+        /// </summary>
+        public static string TheAmountThatWillBeRefundedToYou {
+            get {
+                return ResourceManager.GetString("TheAmountThatWillBeRefundedToYou", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Bill.
         /// </summary>
         public static string TheBill {
@@ -3288,6 +3495,15 @@ namespace Resources {
         public static string TheOrders {
             get {
                 return ResourceManager.GetString("TheOrders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The required amount of payment.
+        /// </summary>
+        public static string TheRequiredAmountOfPayment {
+            get {
+                return ResourceManager.GetString("TheRequiredAmountOfPayment", resourceCulture);
             }
         }
         
@@ -3918,6 +4134,15 @@ namespace Resources {
         public static string YourAnswerer {
             get {
                 return ResourceManager.GetString("YourAnswerer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Youre Decision.
+        /// </summary>
+        public static string YoureDecision {
+            get {
+                return ResourceManager.GetString("YoureDecision", resourceCulture);
             }
         }
     }
