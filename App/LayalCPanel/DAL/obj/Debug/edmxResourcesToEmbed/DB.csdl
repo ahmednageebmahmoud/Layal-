@@ -784,6 +784,9 @@
       <Parameter Name="UserId" Mode="In" Type="Int64" />
       <Parameter Name="IsPublicMenus" Mode="In" Type="Boolean" />
     </FunctionImport>
+    <FunctionImport Name="Phot_OrderCancleRequests_CheckIfCanBeCancled" ReturnType="Collection(Int32)">
+      <Parameter Name="OrderId" Mode="In" Type="Int64" />
+    </FunctionImport>
     <FunctionImport Name="Phot_OrderCancleRequests_Insert" ReturnType="Collection(Int64)">
       <Parameter Name="Description" Mode="In" Type="String" />
       <Parameter Name="RemainingAmounts" Mode="In" Type="Decimal" />
@@ -791,10 +794,31 @@
       <Parameter Name="UserCancled_Id" Mode="In" Type="Int64" />
       <Parameter Name="Order_Id" Mode="In" Type="Int64" />
     </FunctionImport>
+    <FunctionImport Name="Phot_OrderCancleRequests_SelectByOrderId" ReturnType="Collection(LayanModel.Phot_OrderCancleRequests_SelectByOrderId_Result)">
+      <Parameter Name="OrderId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_OrderCancleRequests_SelectPK" ReturnType="Collection(LayanModel.Phot_OrderCancleRequests_SelectPK_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_OrderCancleRequests_Update">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+      <Parameter Name="OrderId" Mode="In" Type="Int64" />
+      <Parameter Name="Customer_ReasonCanceling" Mode="In" Type="String" />
+      <Parameter Name="Customer_IsAccepted" Mode="In" Type="Boolean" />
+      <Parameter Name="Customer_BankAccountNumber" Mode="In" Type="Int32" />
+      <Parameter Name="Customer_BankName" Mode="In" Type="String" />
+      <Parameter Name="Customer_BankAccountName" Mode="In" Type="String" />
+      <Parameter Name="TransfaerAmpuntImage" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Phot_OrderCancleRequests_UpdateV2">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+      <Parameter Name="TransfaerAmpuntImage" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="Phot_OrderPayments_Accept">
       <Parameter Name="Id" Mode="In" Type="Int64" />
       <Parameter Name="OrderId" Mode="In" Type="Int64" />
       <Parameter Name="IsAcceptFromManger" Mode="In" Type="Boolean" />
+      <Parameter Name="RecivedAmount" Mode="In" Type="Decimal" />
       <Parameter Name="Notes" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="Phot_OrderPayments_Insert" ReturnType="Collection(Int64)">
@@ -812,21 +836,17 @@
       <Parameter Name="IsAccepted" Mode="In" Type="Boolean" />
       <Parameter Name="AcceptedNotes" Mode="In" Type="String" />
       <Parameter Name="AcceptedDatetime" Mode="In" Type="DateTime" />
+      <Parameter Name="RecivedAmount" Mode="In" Type="Decimal" />
     </FunctionImport>
     <FunctionImport Name="Phot_OrderPayments_SelectByOrderId" ReturnType="Collection(LayanModel.Phot_OrderPayments_SelectByOrderId_Result)">
       <Parameter Name="OrderId" Mode="In" Type="Int64" />
-    </FunctionImport>
-    <FunctionImport Name="Phot_Orders_Cancel">
-      <Parameter Name="id" Mode="In" Type="Int64" />
-      <Parameter Name="CurretnUserId" Mode="In" Type="Int64" />
     </FunctionImport>
     <FunctionImport Name="Phot_Orders_CheckCanBeDelete" ReturnType="Collection(Int32)">
       <Parameter Name="OrderId" Mode="In" Type="Int64" />
       <Parameter Name="UserId" Mode="In" Type="Int64" />
     </FunctionImport>
-    <FunctionImport Name="Phot_Orders_CheckIfCanBeCancled" ReturnType="Collection(Int32)">
+    <FunctionImport Name="Phot_Orders_CheckIfActive" ReturnType="Collection(Int32)">
       <Parameter Name="OrderId" Mode="In" Type="Int64" />
-      <Parameter Name="UserId" Mode="In" Type="Int64" />
     </FunctionImport>
     <FunctionImport Name="Phot_Orders_CheckIfCancled" ReturnType="Collection(Boolean)">
       <Parameter Name="OrderId" Mode="In" Type="Int64" />
@@ -1302,32 +1322,6 @@
       <Parameter Name="Id" Mode="In" Type="Int64" />
       <Parameter Name="Ar" Mode="In" Type="String" />
       <Parameter Name="En" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="Phot_OrderCancleRequests_CheckIfCanBeCancled" ReturnType="Collection(Int32)">
-      <Parameter Name="OrderId" Mode="In" Type="Int64" />
-    </FunctionImport>
-    <FunctionImport Name="Phot_OrderCancleRequests_SelectByOrderId" ReturnType="Collection(LayanModel.Phot_OrderCancleRequests_SelectByOrderId_Result)">
-      <Parameter Name="OrderId" Mode="In" Type="Int64" />
-    </FunctionImport>
-    <FunctionImport Name="Phot_OrderCancleRequests_Update">
-      <Parameter Name="Id" Mode="In" Type="Int64" />
-      <Parameter Name="OrderId" Mode="In" Type="Int64" />
-      <Parameter Name="Customer_ReasonCanceling" Mode="In" Type="String" />
-      <Parameter Name="Customer_IsAccepted" Mode="In" Type="Boolean" />
-      <Parameter Name="Customer_BankAccountNumber" Mode="In" Type="Int32" />
-      <Parameter Name="Customer_BankName" Mode="In" Type="String" />
-      <Parameter Name="Customer_BankAccountName" Mode="In" Type="String" />
-      <Parameter Name="TransfaerAmpuntImage" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="Phot_OrderCancleRequests_UpdateV2">
-      <Parameter Name="Id" Mode="In" Type="Int64" />
-      <Parameter Name="TransfaerAmpuntImage" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="Phot_OrderCancleRequests_SelectPK" ReturnType="Collection(LayanModel.Phot_OrderCancleRequests_SelectPK_Result)">
-      <Parameter Name="Id" Mode="In" Type="Int64" />
-    </FunctionImport>
-    <FunctionImport Name="Phot_Orders_CheckIfActive" ReturnType="Collection(Int32)">
-      <Parameter Name="OrderId" Mode="In" Type="Int64" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Albums_Insert_Result">
@@ -2172,6 +2166,39 @@
     <Property Type="String" Name="PageNameAr" Nullable="true" />
     <Property Type="String" Name="PageNameEn" Nullable="true" />
   </ComplexType>
+  <ComplexType Name="Phot_OrderCancleRequests_SelectByOrderId_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="String" Name="Customer_ReasonCanceling" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Boolean" Name="Customer_IsAccepted" Nullable="true" />
+    <Property Type="DateTime" Name="Customer_AcceptedDateTime" Nullable="true" Precision="23" />
+    <Property Type="Decimal" Name="RemainingAmounts" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Boolean" Name="IsRemainingAmountsForCustomer" Nullable="false" />
+    <Property Type="Int32" Name="Customer_BankAccountNumber" Nullable="true" />
+    <Property Type="String" Name="Customer_BankName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Customer_BankAccountName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="TransfaerAmpuntImage" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="FkUserCancled_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKOrder_Id" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Phot_OrderCancleRequests_SelectPK_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="String" Name="Customer_ReasonCanceling" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
+    <Property Type="Boolean" Name="Customer_IsAccepted" Nullable="true" />
+    <Property Type="DateTime" Name="Customer_AcceptedDateTime" Nullable="true" Precision="23" />
+    <Property Type="Decimal" Name="RemainingAmounts" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Boolean" Name="IsRemainingAmountsForCustomer" Nullable="false" />
+    <Property Type="Int32" Name="Customer_BankAccountNumber" Nullable="true" />
+    <Property Type="String" Name="Customer_BankName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Customer_BankAccountName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="TransfaerAmpuntImage" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="FkUserCancled_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKOrder_Id" Nullable="false" />
+    <Property Type="Int64" Name="FKUserCreated" Nullable="false" />
+  </ComplexType>
   <ComplexType Name="Phot_OrderPayments_SelectByOrderId_Result">
     <Property Type="Int64" Name="Id" Nullable="false" />
     <Property Type="Int64" Name="FkOrder_Id" Nullable="false" />
@@ -2183,6 +2210,7 @@
     <Property Type="String" Name="AcceptNotes" Nullable="true" />
     <Property Type="DateTime" Name="AcceptDateTime" Nullable="true" Precision="23" />
     <Property Type="Int32" Name="FKPaymentType_Id" Nullable="false" />
+    <Property Type="Decimal" Name="RecivedAmount" Nullable="false" Precision="18" Scale="2" />
     <Property Type="String" Name="PaymentType_NameAr" Nullable="true" />
     <Property Type="String" Name="PaymentType_NameEn" Nullable="true" />
   </ComplexType>
@@ -2780,38 +2808,5 @@
     <Property Type="Boolean" Name="UsersPrivileges_CanDelete" Nullable="true" />
     <Property Type="Boolean" Name="UsersPrivileges_CanDisplay" Nullable="true" />
     <Property Type="Boolean" Name="UsersPrivileges_CanEdit" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="Phot_OrderCancleRequests_SelectByOrderId_Result">
-    <Property Type="Int64" Name="Id" Nullable="false" />
-    <Property Type="String" Name="Description" Nullable="true" />
-    <Property Type="String" Name="Customer_ReasonCanceling" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
-    <Property Type="Boolean" Name="Customer_IsAccepted" Nullable="true" />
-    <Property Type="DateTime" Name="Customer_AcceptedDateTime" Nullable="true" Precision="23" />
-    <Property Type="Decimal" Name="RemainingAmounts" Nullable="false" Precision="18" Scale="2" />
-    <Property Type="Boolean" Name="IsRemainingAmountsForCustomer" Nullable="false" />
-    <Property Type="Int32" Name="Customer_BankAccountNumber" Nullable="true" />
-    <Property Type="String" Name="Customer_BankName" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="Customer_BankAccountName" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="TransfaerAmpuntImage" Nullable="true" MaxLength="200" />
-    <Property Type="Int64" Name="FkUserCancled_Id" Nullable="false" />
-    <Property Type="Int64" Name="FKOrder_Id" Nullable="false" />
-  </ComplexType>
-  <ComplexType Name="Phot_OrderCancleRequests_SelectPK_Result">
-    <Property Type="Int64" Name="Id" Nullable="false" />
-    <Property Type="String" Name="Description" Nullable="true" />
-    <Property Type="String" Name="Customer_ReasonCanceling" Nullable="true" />
-    <Property Type="DateTime" Name="CreateDateTime" Nullable="false" Precision="23" />
-    <Property Type="Boolean" Name="Customer_IsAccepted" Nullable="true" />
-    <Property Type="DateTime" Name="Customer_AcceptedDateTime" Nullable="true" Precision="23" />
-    <Property Type="Decimal" Name="RemainingAmounts" Nullable="false" Precision="18" Scale="2" />
-    <Property Type="Boolean" Name="IsRemainingAmountsForCustomer" Nullable="false" />
-    <Property Type="Int32" Name="Customer_BankAccountNumber" Nullable="true" />
-    <Property Type="String" Name="Customer_BankName" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="Customer_BankAccountName" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="TransfaerAmpuntImage" Nullable="true" MaxLength="200" />
-    <Property Type="Int64" Name="FkUserCancled_Id" Nullable="false" />
-    <Property Type="Int64" Name="FKOrder_Id" Nullable="false" />
-    <Property Type="Int64" Name="FKUserCreated" Nullable="false" />
   </ComplexType>
 </Schema>

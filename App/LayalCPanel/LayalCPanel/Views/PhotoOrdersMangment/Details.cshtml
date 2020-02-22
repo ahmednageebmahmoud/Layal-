@@ -69,7 +69,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#Payments" role="tab">
+                                            <a class="nav-link" id="w_payment" data-toggle="tab" href="#Payments" role="tab">
                                                 @Token.Payments
                                             </a>
                                         </li>
@@ -151,16 +151,26 @@
                                                disabled
                                                ng-model="payment.Amount" />
                                     </div>
-
-                                    <!--BankTransferImage -->
-                                    <label class="col-lg-2 col-form-label">@Token.BankTransferPhoto </label>
+                                    <!--RecivedAmount-->
+                                    <label class="col-lg-2 col-form-label">@Token.RecivedAmount</label>
                                     <div class="col-lg-4 form-group-sub">
-                                        <img class="figure-img img-thumbnail" src="{{payment.TransferImageUrl}}" width="150" height="150" />
+                                        <input type="number"
+                                               name="amount"
+                                               class="form-control"
+                                               ng-model="payment.RecivedAmount" />
                                     </div>
                                 </div>
 
+                                    <div class="form-group  row">
+                                        <!--BankTransferImage -->
+                                        <label class="col-lg-2 col-form-label">@Token.BankTransferPhoto </label>
+                                        <div class="col-lg-4 form-group-sub">
+                                            <img class="figure-img img-thumbnail" src="{{payment.TransferImageUrl}}" width="150" height="150" />
+                                        </div>
+                                    </div>
 
-                            </div>
+
+                                </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-brand btn-elevate btn-elevate-air">
                                     <i class="la la-save">@Token.AcceptTransfare</i>

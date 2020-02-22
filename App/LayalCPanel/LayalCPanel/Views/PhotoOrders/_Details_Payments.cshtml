@@ -10,7 +10,9 @@
             <th class="th-5">
                 <sms-sort ng-sms-resource="@Token.Amount"></sms-sort>
             </th>
-
+            <th class="th-5">
+                <sms-sort ng-sms-resource="@Token.RecivedAmount"></sms-sort>
+            </th>
             <th class="th-10">
                 <sms-sort ng-sms-resource="@Token.BankTransferPhoto"></sms-sort>
             </th>
@@ -31,6 +33,7 @@
             <td><span>{{x.PaymentType.Name}}</span></td>
             <td><span>{{x.CreateDateTime_Display}}</span></td>
             <td>{{x.Amount}}</td>
+            <td>{{x.RecivedAmount}}</td>
             <td>
                 <a class="kt-link kt-font-boldest" href="{{x.TransferImageUrl}}" target="_blank" ng-show="x.IsBankTransfer">
                     <img class="figure-img img-thumbnail" src="{{x.TransferImageUrl}}" width="100" height="100" />

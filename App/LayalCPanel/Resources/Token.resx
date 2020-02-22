@@ -1479,4 +1479,7 @@
   <data name="NotActivate" xml:space="preserve">
     <value>Not Activate</value>
   </data>
+  <data name="RecivedAmount" xml:space="preserve">
+    <value>Recived Amount</value>
+  </data>
 </root>

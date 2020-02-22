@@ -23,6 +23,7 @@ namespace DAL
         public string AcceptNotes { get; set; }
         public Nullable<System.DateTime> AcceptDateTime { get; set; }
         public int FKPaymentType_Id { get; set; }
+        public decimal RecivedAmount { get; set; }
         public string PaymentType_NameAr { get; set; }
         public string PaymentType_NameEn { get; set; }
     }

@@ -99,7 +99,6 @@
                                 <td><span>{{x.Product.ProductName}}</span></td>
                                 <td><span>{{x.CreateDateTime_Display}}</span></td>
                                 <td>
-                                <td>
                                     <span ng-if="x.IsActive">✔</span>
                                     <span ng-if="!x.IsActive">✖</span>
                                 </td>
@@ -127,7 +126,9 @@
 
                                     <br />
                                     <!--Btn:PayNow-->
-                                    <a href="javascript:void(0)" class="btn btn-success btn-elevate btn-icon-sm" ng-click="showAddNewPayment(x.Id)">
+                                    <a href="javascript:void(0)" class="btn btn-success btn-elevate btn-icon-sm" ng-click="showAddNewPayment(x.Id)"
+                                       ng-if="x.IsActive"
+                                       >
                                         <i class="la la-dollar"></i>@Token.PayNow
                                     </a>
                                 </td>

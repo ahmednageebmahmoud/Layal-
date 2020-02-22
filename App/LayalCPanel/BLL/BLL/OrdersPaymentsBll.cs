@@ -28,6 +28,10 @@ namespace BLL.BLL
             {
                 try
                 {
+                    if (!db.Phot_Orders_CheckIfActive(o.OrderId).Any(c => c.Value > 0))
+                        return ResponseVM.Error($"{Token.Order} {Token.NotActivate}");
+
+
                     //اذا هى عملية حجز عن طريق حوالة بنكية
 
                     var FileSave = FileService.SaveFileHttpBase(new FileSaveVM
@@ -39,7 +43,7 @@ namespace BLL.BLL
                         return ResponseVM.Error(Token.CanNotSaveBankTransferPhoto);
                     o.TransferImageUrl = FileSave.SavedPath;
 
-                    long? PaymentId = db.Phot_OrderPayments_Insert(o.OrderId, o.Amount, o.TransferImageUrl,  this.UserLoggad.Id, (int)PaymentTypeEnum.BankTransfer).FirstOrDefault();
+                    long? PaymentId = db.Phot_OrderPayments_Insert(o.OrderId, o.Amount, o.TransferImageUrl, this.UserLoggad.Id, (int)PaymentTypeEnum.BankTransfer).FirstOrDefault();
 
                     //Check If Inserted
                     if (!PaymentId.HasValue)
@@ -64,7 +68,7 @@ namespace BLL.BLL
                     new NotificationHub().SendNotificationToSpcifcUsers(this.AdminId, Notify);
 
                     o.Id = PaymentId;
-                    o.IsBankTransfer = true;
+                    o.PaymentTypeId = (int)PaymentTypeEnum.BankTransfer;
                     o.CreateDateTime = DateTime.Now;
                     o.File = null;
                     tran.Commit();
@@ -85,11 +89,11 @@ namespace BLL.BLL
             {
                 try
                 {
-                    if (db.Phot_Orders_CheckIfActive(o.OrderId).Any(c => c.Value > 0))
+                    if (!db.Phot_Orders_CheckIfActive(o.OrderId).Any(c => c.Value > 0))
                         return ResponseVM.Error($"{Token.Order} {Token.NotActivate}");
 
-                    var UserCreatedOrderId = db.Phot_OrderPayments_InsertV2(o.OrderId, o.Amount,  this.UserLoggad.Id,
-                        o.PaymentTypeId,o.IsAcceptFromManger,o.AcceptNotes, DateTime.Now).FirstOrDefault();
+                    var UserCreatedOrderId = db.Phot_OrderPayments_InsertV2(o.OrderId, o.Amount, this.UserLoggad.Id,
+                        o.PaymentTypeId, o.IsAcceptFromManger, o.AcceptNotes, DateTime.Now, o.Amount).FirstOrDefault();
 
                     //Check If Inserted
                     if (!UserCreatedOrderId.HasValue)
@@ -113,7 +117,7 @@ namespace BLL.BLL
 
                     //Send Notification To Manger
                     NotificationsBLL.Add(Notify, UserCreatedOrderId.Value);
-                    new NotificationHub().SendNotificationToSpcifcUsers( UserCreatedOrderId.Value, Notify);
+                    new NotificationHub().SendNotificationToSpcifcUsers(UserCreatedOrderId.Value, Notify);
 
                     tran.Commit();
                     return ResponseVM.Success(Token.Add);
@@ -136,7 +140,7 @@ namespace BLL.BLL
                 /*
                  عمليات الموافقة تكون على التحويلات البنكير فقط
                  */
-                db.Phot_OrderPayments_Accept(payment.Id, payment.OrderId, payment.IsAcceptFromManger, payment.AcceptNotes);
+                db.Phot_OrderPayments_Accept(payment.Id, payment.OrderId, payment.IsAcceptFromManger, payment.RecivedAmount, payment.AcceptNotes);
 
                 //Send Notification To Clinet
                 NotificationsBLL NotificationsBLL = new NotificationsBLL();
@@ -167,7 +171,7 @@ namespace BLL.BLL
 
                 //Send Notification To Manger
                 NotificationsBLL.Add(Notify, payment.UsereCreatedId);
-                new NotificationHub().SendNotificationToSpcifcUsers( payment.UsereCreatedId, Notify);
+                new NotificationHub().SendNotificationToSpcifcUsers(payment.UsereCreatedId, Notify);
 
                 payment.AcceptDateTime = DateTime.Now;
                 return ResponseVM.Success(Token.Saved, payment);
@@ -189,11 +193,14 @@ namespace BLL.BLL
                 OrderId = c.FkOrder_Id,
                 TransferImageUrl = c.TransferImage,
                 AcceptNotes = c.AcceptNotes,
-                UsereCreatedId=c.FKUserCreated_Id,
+                UsereCreatedId = c.FKUserCreated_Id,
                 AcceptDateTime = c.AcceptDateTime,
-                PaymentType=new PaymentTypeVM {
-                NameAr=c.PaymentType_NameAr,
-                NameEn=c.PaymentType_NameEn,
+                PaymentTypeId = c.FKPaymentType_Id,
+                RecivedAmount=c.RecivedAmount,
+                PaymentType = new PaymentTypeVM
+                {
+                    NameAr = c.PaymentType_NameAr,
+                    NameEn = c.PaymentType_NameEn,
                 }
             }).ToList();
         }

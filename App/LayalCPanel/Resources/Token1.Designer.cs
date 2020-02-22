@@ -3121,6 +3121,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recived Amount.
+        /// </summary>
+        public static string RecivedAmount {
+            get {
+                return ResourceManager.GetString("RecivedAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rejected.
         /// </summary>
         public static string Rejected {

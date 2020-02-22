@@ -1181,7 +1181,51 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Phot_OrderCancleRequests_CheckIfCanBeCancled" FunctionName="LayanModel.Store.Phot_OrderCancleRequests_CheckIfCanBeCancled" />
     <FunctionImportMapping FunctionImportName="Phot_OrderCancleRequests_Insert" FunctionName="LayanModel.Store.Phot_OrderCancleRequests_Insert" />
+    <FunctionImportMapping FunctionImportName="Phot_OrderCancleRequests_SelectByOrderId" FunctionName="LayanModel.Store.Phot_OrderCancleRequests_SelectByOrderId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Phot_OrderCancleRequests_SelectByOrderId_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Customer_ReasonCanceling" ColumnName="Customer_ReasonCanceling" />
+          <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+          <ScalarProperty Name="Customer_IsAccepted" ColumnName="Customer_IsAccepted" />
+          <ScalarProperty Name="Customer_AcceptedDateTime" ColumnName="Customer_AcceptedDateTime" />
+          <ScalarProperty Name="RemainingAmounts" ColumnName="RemainingAmounts" />
+          <ScalarProperty Name="IsRemainingAmountsForCustomer" ColumnName="IsRemainingAmountsForCustomer" />
+          <ScalarProperty Name="Customer_BankAccountNumber" ColumnName="Customer_BankAccountNumber" />
+          <ScalarProperty Name="Customer_BankName" ColumnName="Customer_BankName" />
+          <ScalarProperty Name="Customer_BankAccountName" ColumnName="Customer_BankAccountName" />
+          <ScalarProperty Name="TransfaerAmpuntImage" ColumnName="TransfaerAmpuntImage" />
+          <ScalarProperty Name="FkUserCancled_Id" ColumnName="FkUserCancled_Id" />
+          <ScalarProperty Name="FKOrder_Id" ColumnName="FKOrder_Id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Phot_OrderCancleRequests_SelectPK" FunctionName="LayanModel.Store.Phot_OrderCancleRequests_SelectPK">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LayanModel.Phot_OrderCancleRequests_SelectPK_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Customer_ReasonCanceling" ColumnName="Customer_ReasonCanceling" />
+          <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+          <ScalarProperty Name="Customer_IsAccepted" ColumnName="Customer_IsAccepted" />
+          <ScalarProperty Name="Customer_AcceptedDateTime" ColumnName="Customer_AcceptedDateTime" />
+          <ScalarProperty Name="RemainingAmounts" ColumnName="RemainingAmounts" />
+          <ScalarProperty Name="IsRemainingAmountsForCustomer" ColumnName="IsRemainingAmountsForCustomer" />
+          <ScalarProperty Name="Customer_BankAccountNumber" ColumnName="Customer_BankAccountNumber" />
+          <ScalarProperty Name="Customer_BankName" ColumnName="Customer_BankName" />
+          <ScalarProperty Name="Customer_BankAccountName" ColumnName="Customer_BankAccountName" />
+          <ScalarProperty Name="TransfaerAmpuntImage" ColumnName="TransfaerAmpuntImage" />
+          <ScalarProperty Name="FkUserCancled_Id" ColumnName="FkUserCancled_Id" />
+          <ScalarProperty Name="FKOrder_Id" ColumnName="FKOrder_Id" />
+          <ScalarProperty Name="FKUserCreated" ColumnName="FKUserCreated" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Phot_OrderCancleRequests_Update" FunctionName="LayanModel.Store.Phot_OrderCancleRequests_Update" />
+    <FunctionImportMapping FunctionImportName="Phot_OrderCancleRequests_UpdateV2" FunctionName="LayanModel.Store.Phot_OrderCancleRequests_UpdateV2" />
     <FunctionImportMapping FunctionImportName="Phot_OrderPayments_Accept" FunctionName="LayanModel.Store.Phot_OrderPayments_Accept" />
     <FunctionImportMapping FunctionImportName="Phot_OrderPayments_Insert" FunctionName="LayanModel.Store.Phot_OrderPayments_Insert" />
     <FunctionImportMapping FunctionImportName="Phot_OrderPayments_InsertV2" FunctionName="LayanModel.Store.Phot_OrderPayments_InsertV2" />
@@ -1198,12 +1242,14 @@
           <ScalarProperty Name="AcceptNotes" ColumnName="AcceptNotes" />
           <ScalarProperty Name="AcceptDateTime" ColumnName="AcceptDateTime" />
           <ScalarProperty Name="FKPaymentType_Id" ColumnName="FKPaymentType_Id" />
+          <ScalarProperty Name="RecivedAmount" ColumnName="RecivedAmount" />
           <ScalarProperty Name="PaymentType_NameAr" ColumnName="PaymentType_NameAr" />
           <ScalarProperty Name="PaymentType_NameEn" ColumnName="PaymentType_NameEn" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Phot_Orders_CheckCanBeDelete" FunctionName="LayanModel.Store.Phot_Orders_CheckCanBeDelete" />
+    <FunctionImportMapping FunctionImportName="Phot_Orders_CheckIfActive" FunctionName="LayanModel.Store.Phot_Orders_CheckIfActive" />
     <FunctionImportMapping FunctionImportName="Phot_Orders_CheckIfCancled" FunctionName="LayanModel.Store.Phot_Orders_CheckIfCancled" />
     <FunctionImportMapping FunctionImportName="Phot_Orders_Delete" FunctionName="LayanModel.Store.Phot_Orders_Delete" />
     <FunctionImportMapping FunctionImportName="Phot_Orders_Insert" FunctionName="LayanModel.Store.Phot_Orders_Insert" />
@@ -2015,50 +2061,5 @@
     <FunctionImportMapping FunctionImportName="Words_DeleteList" FunctionName="LayanModel.Store.Words_DeleteList" />
     <FunctionImportMapping FunctionImportName="Words_Insert" FunctionName="LayanModel.Store.Words_Insert" />
     <FunctionImportMapping FunctionImportName="Words_Update" FunctionName="LayanModel.Store.Words_Update" />
-    <FunctionImportMapping FunctionImportName="Phot_OrderCancleRequests_CheckIfCanBeCancled" FunctionName="LayanModel.Store.Phot_OrderCancleRequests_CheckIfCanBeCancled" />
-    <FunctionImportMapping FunctionImportName="Phot_OrderCancleRequests_SelectByOrderId" FunctionName="LayanModel.Store.Phot_OrderCancleRequests_SelectByOrderId">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.Phot_OrderCancleRequests_SelectByOrderId_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Customer_ReasonCanceling" ColumnName="Customer_ReasonCanceling" />
-          <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
-          <ScalarProperty Name="Customer_IsAccepted" ColumnName="Customer_IsAccepted" />
-          <ScalarProperty Name="Customer_AcceptedDateTime" ColumnName="Customer_AcceptedDateTime" />
-          <ScalarProperty Name="RemainingAmounts" ColumnName="RemainingAmounts" />
-          <ScalarProperty Name="IsRemainingAmountsForCustomer" ColumnName="IsRemainingAmountsForCustomer" />
-          <ScalarProperty Name="Customer_BankAccountNumber" ColumnName="Customer_BankAccountNumber" />
-          <ScalarProperty Name="Customer_BankName" ColumnName="Customer_BankName" />
-          <ScalarProperty Name="Customer_BankAccountName" ColumnName="Customer_BankAccountName" />
-          <ScalarProperty Name="TransfaerAmpuntImage" ColumnName="TransfaerAmpuntImage" />
-          <ScalarProperty Name="FkUserCancled_Id" ColumnName="FkUserCancled_Id" />
-          <ScalarProperty Name="FKOrder_Id" ColumnName="FKOrder_Id" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Phot_OrderCancleRequests_Update" FunctionName="LayanModel.Store.Phot_OrderCancleRequests_Update" />
-    <FunctionImportMapping FunctionImportName="Phot_OrderCancleRequests_UpdateV2" FunctionName="LayanModel.Store.Phot_OrderCancleRequests_UpdateV2" />
-    <FunctionImportMapping FunctionImportName="Phot_OrderCancleRequests_SelectPK" FunctionName="LayanModel.Store.Phot_OrderCancleRequests_SelectPK">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LayanModel.Phot_OrderCancleRequests_SelectPK_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Customer_ReasonCanceling" ColumnName="Customer_ReasonCanceling" />
-          <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
-          <ScalarProperty Name="Customer_IsAccepted" ColumnName="Customer_IsAccepted" />
-          <ScalarProperty Name="Customer_AcceptedDateTime" ColumnName="Customer_AcceptedDateTime" />
-          <ScalarProperty Name="RemainingAmounts" ColumnName="RemainingAmounts" />
-          <ScalarProperty Name="IsRemainingAmountsForCustomer" ColumnName="IsRemainingAmountsForCustomer" />
-          <ScalarProperty Name="Customer_BankAccountNumber" ColumnName="Customer_BankAccountNumber" />
-          <ScalarProperty Name="Customer_BankName" ColumnName="Customer_BankName" />
-          <ScalarProperty Name="Customer_BankAccountName" ColumnName="Customer_BankAccountName" />
-          <ScalarProperty Name="TransfaerAmpuntImage" ColumnName="TransfaerAmpuntImage" />
-          <ScalarProperty Name="FkUserCancled_Id" ColumnName="FkUserCancled_Id" />
-          <ScalarProperty Name="FKOrder_Id" ColumnName="FKOrder_Id" />
-          <ScalarProperty Name="FKUserCreated" ColumnName="FKUserCreated" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Phot_Orders_CheckIfActive" FunctionName="LayanModel.Store.Phot_Orders_CheckIfActive" />
   </EntityContainerMapping>
 </Mapping>

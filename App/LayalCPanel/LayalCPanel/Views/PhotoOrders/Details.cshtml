@@ -67,7 +67,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#Payments" role="tab">
+                                        <a class="nav-link" id="w_payment" data-toggle="tab" href="#Payments" role="tab">
                                             @Token.Payments
                                         </a>
                                     </li>
@@ -93,7 +93,7 @@
                                 <!--TheBill-->
                                 <div class="tab-pane " id="TheBill">@Html.Partial("~/Views/PhotoOrders/_Details_TheBill.cshtml")</div>
                                 <!--Payments-->
-                                <div class="tab-pane " id="Payments">@Html.Partial("~/Views/PhotoOrders/_Details_Payments.cshtml")</div>
+                                <div class="tab-pane "  id="Payments">@Html.Partial("~/Views/PhotoOrders/_Details_Payments.cshtml")</div>
                                 <!--Cancel Requests-->
                                 <div class="tab-pane " id="CancelRequests">@Html.Partial("~/Views/PhotoOrders/_Details_CancelRequests.cshtml")</div>
                             </div>

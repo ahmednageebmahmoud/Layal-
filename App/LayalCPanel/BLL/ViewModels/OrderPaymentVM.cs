@@ -1,4 +1,5 @@
-﻿using BLL.Services;
+﻿using BLL.Enums;
+using BLL.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace BLL.ViewModels
         public long UsereCreatedId { get; set; }
         public decimal Amount { get; set; }
         public string TransferImageUrl { get; set; }
-        public bool IsBankTransfer { get; set; }
+        public bool IsBankTransfer => this.PaymentTypeId == (int)PaymentTypeEnum.BankTransfer;
         public bool? IsAcceptFromManger { get; set; }
         public DateTime CreateDateTime { get; set; }
         public string CreateDateTime_Display => DateService.GetDateTimeAr(this.CreateDateTime);
@@ -25,5 +26,6 @@ namespace BLL.ViewModels
         public string AcceptDateTime_Display => DateService.GetDateTimeAr(this.AcceptDateTime);
         public PaymentTypeVM PaymentType { get;   set; }
         public int PaymentTypeId { get;   set; }
+        public decimal RecivedAmount { get;   set; }
     }//End Class
 }

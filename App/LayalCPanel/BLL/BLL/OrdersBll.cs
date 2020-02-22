@@ -242,8 +242,6 @@ namespace BLL.BLL
                     return Update(order);
                 case StateEnum.Delete:
                     return Delete(order);
-                case StateEnum.Cancel:
-                    return Cancel(order);
             }
             return ResponseVM.Error(Token.StateNotFound);
         }
@@ -457,49 +455,7 @@ namespace BLL.BLL
         }
 
 
-        public object Cancel(OrderVM order)
-        {
-            try
-            {
-                if (!this.UserLoggad.IsAdmin && db.Phot_Orders_CheckIfCanBeCancled(order.Id, this.UserLoggad.Id).Any(c => c.Value > 0))
-                    return ResponseVM.Error($"{Token.Order} {Token.NotFound}");
-
-                db.Phot_Orders_Cancel(order.Id, this.UserLoggad.Id);
-
-
-                //ارسال اشعار للمدير 
-                string RedirectUrl = $"/PhotoOrdersMangment/Details?id={order.Id}";
-                long UserNotififyTragetId = this.AdminId;
-                if (!this.UserLoggad.IsPhotographer)
-                {
-                    //ارسال اشعار لمنشىء الطلب
-                }
-                //Save And Sent Notification
-                NotificationsBLL NotificationsBLL = new NotificationsBLL();
-                var Notify = new NotifyVM
-                {
-                    TitleAr = string.Format("لقم تم الغاء لطلب رقم {0}", order.Id),
-                    TitleEn = string.Format("order has been cancled no {0}", order.Id),
-                    DescriptionAr = string.Format("لقد قام العميل {0} بانشاء طلب جديد ", this.UserLoggad.FullName),
-                    DescriptionEn = string.Format("The customer {0} has xreated new order", this.UserLoggad.FullName),
-                    DateTime = DateTime.Now,
-                    TargetId = order.Id,
-                    PageId = PagesEnum.PhotoOrdersMangment,
-                    RedirectUrl = RedirectUrl,
-                };
-
-                //Send Notification To Manger
-                NotificationsBLL.Add(Notify, UserNotififyTragetId);
-                new NotificationHub().SendNotificationToSpcifcUsers(UserNotififyTragetId, Notify);
-
-                return ResponseVM.Success(Token.Canceled);
-            }
-            catch (Exception ex)
-            {
-                return ResponseVM.Error(Token.SomeErrorHasBeen);
-            }
-        }
-
+    
         public object GetPhotographerOrders(int skip, int take)
         {
             var Result = db.Phot_Orders_SelectByFilter(skip, take, this.UserLoggad.Id).Select(c => new OrderVM
@@ -604,8 +560,8 @@ namespace BLL.BLL
 
             //Sum Total 
             Order.TotalPrices = Order.ServicePrices.Sum(c => c.Price);
-            Order.TotalPayments = Order.Payments.Sum(c => c.Amount);
-            Order.TotalPaymentsAccepted = Order.Payments.Where(c => c.IsAcceptFromManger.HasValue && c.IsAcceptFromManger.Value).Sum(c => c.Amount);
+            Order.TotalPayments = Order.Payments.Sum(c => c.RecivedAmount);
+            Order.TotalPaymentsAccepted = Order.Payments.Where(c => c.IsAcceptFromManger.HasValue && c.IsAcceptFromManger.Value).Sum(c => c.RecivedAmount);
 
             return ResponseVM.Success(Order);
         }
@@ -703,8 +659,8 @@ namespace BLL.BLL
 
             //Sum Total 
             Order.TotalPrices = Order.ServicePrices.Sum(c => c.Price);
-            Order.TotalPayments = Order.Payments.Sum(c => c.Amount);
-            Order.TotalPaymentsAccepted = Order.Payments.Where(c => c.IsAcceptFromManger.HasValue && c.IsAcceptFromManger.Value).Sum(c => c.Amount);
+            Order.TotalPayments = Order.Payments.Sum(c => c.RecivedAmount);
+            Order.TotalPaymentsAccepted = Order.Payments.Where(c => c.IsAcceptFromManger.HasValue && c.IsAcceptFromManger.Value).Sum(c => c.RecivedAmount);
 
             return ResponseVM.Success(Order);
         }
